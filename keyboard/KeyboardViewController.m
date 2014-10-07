@@ -22,6 +22,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	self.traitCollection.verticalSizeClass;
+	self.traitCollection.horizontalSizeClass;
     
     // Perform custom UI setup here
     self.nextKeyboardButton = [UIButton buttonWithType:UIButtonTypeSystem];

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14B73C6219E3C76D0031DCB6 /* AAKCategorySelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B73C6119E3C76D0031DCB6 /* AAKCategorySelectViewController.m */; };
+		14B73C6519E3C7CA0031DCB6 /* AAKCategoryCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B73C6419E3C7CA0031DCB6 /* AAKCategoryCollectionViewCell.m */; };
+		14B73C6619E3C9010031DCB6 /* AAKCategorySelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B73C6119E3C76D0031DCB6 /* AAKCategorySelectViewController.m */; };
+		14B73C6719E3C9060031DCB6 /* AAKCategoryCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B73C6419E3C7CA0031DCB6 /* AAKCategoryCollectionViewCell.m */; };
 		14FBD3A919E21213005FC38B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 14FBD3A819E21213005FC38B /* main.m */; };
 		14FBD3AC19E21213005FC38B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14FBD3AB19E21213005FC38B /* AppDelegate.m */; };
 		14FBD3AF19E21213005FC38B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14FBD3AE19E21213005FC38B /* ViewController.m */; };
@@ -50,6 +54,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		14B73C6019E3C76D0031DCB6 /* AAKCategorySelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKCategorySelectViewController.h; sourceTree = "<group>"; };
+		14B73C6119E3C76D0031DCB6 /* AAKCategorySelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKCategorySelectViewController.m; sourceTree = "<group>"; };
+		14B73C6319E3C7CA0031DCB6 /* AAKCategoryCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKCategoryCollectionViewCell.h; sourceTree = "<group>"; };
+		14B73C6419E3C7CA0031DCB6 /* AAKCategoryCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKCategoryCollectionViewCell.m; sourceTree = "<group>"; };
 		14FBD3A319E21213005FC38B /* AAKeyboardApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AAKeyboardApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14FBD3A719E21213005FC38B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14FBD3A819E21213005FC38B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -158,6 +166,10 @@
 		14FBD3D119E21263005FC38B /* keyboard */ = {
 			isa = PBXGroup;
 			children = (
+				14B73C6019E3C76D0031DCB6 /* AAKCategorySelectViewController.h */,
+				14B73C6119E3C76D0031DCB6 /* AAKCategorySelectViewController.m */,
+				14B73C6319E3C7CA0031DCB6 /* AAKCategoryCollectionViewCell.h */,
+				14B73C6419E3C7CA0031DCB6 /* AAKCategoryCollectionViewCell.m */,
 				14FBD3D419E21263005FC38B /* KeyboardViewController.h */,
 				14FBD3D519E21263005FC38B /* KeyboardViewController.m */,
 				14FBD3D219E21263005FC38B /* Supporting Files */,
@@ -303,8 +315,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14B73C6719E3C9060031DCB6 /* AAKCategoryCollectionViewCell.m in Sources */,
 				14FBD3AF19E21213005FC38B /* ViewController.m in Sources */,
 				14FBD3AC19E21213005FC38B /* AppDelegate.m in Sources */,
+				14B73C6619E3C9010031DCB6 /* AAKCategorySelectViewController.m in Sources */,
 				14FBD3A919E21213005FC38B /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -321,6 +335,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14B73C6519E3C7CA0031DCB6 /* AAKCategoryCollectionViewCell.m in Sources */,
+				14B73C6219E3C76D0031DCB6 /* AAKCategorySelectViewController.m in Sources */,
 				14FBD3D619E21263005FC38B /* KeyboardViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
