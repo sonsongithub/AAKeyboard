@@ -21,7 +21,8 @@
 }
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
+	[super viewDidLoad];
+	NSLog(@"%@", self.traitCollection);
 	
 	self.traitCollection.verticalSizeClass;
 	self.traitCollection.horizontalSizeClass;

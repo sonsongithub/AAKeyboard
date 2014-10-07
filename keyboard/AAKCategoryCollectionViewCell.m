@@ -16,6 +16,7 @@
 	_label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
 	_label.backgroundColor = [UIColor clearColor];
 	_label.textColor = [UIColor colorWithRed:0 green:120.0/255.0f blue:255.0/255.0f alpha:1];
+	_label.textColor = [UIColor blackColor];
 	[_label setFont:[UIFont systemFontOfSize:18]];
 	[self.contentView addSubview:_label];
 	_label.translatesAutoresizingMaskIntoConstraints = NO;

@@ -13,13 +13,51 @@
 	UICollectionView	*_collectionView;
 	NSArray *_categories;
 	NSArray *_sizeOfCategories;
+	UIButton	*_earthKey;
+	UIButton	*_deleteKey;
 }
 @end
 
 @implementation AAKCategorySelectViewController
 
+- (IBAction)pushEarthKey:(id)sender {
+	NSLog(@"pushEarthKey");
+}
+
+- (IBAction)pushDeleteKey:(id)sender {
+	NSLog(@"pushDeleteKey");
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	
+	NSLog(@"%@", self.traitCollection);
+}
+
+- (void)prepareButton {
+	_earthKey = [[UIButton alloc] initWithFrame:CGRectZero];
+	[_earthKey setImage:[UIImage imageNamed:@"earth"] forState:UIControlStateNormal];
+	_earthKey.backgroundColor = [UIColor colorWithRed:203/255.0f green:203/255.0f blue:203/255.0f alpha:1];
+	[_earthKey addTarget:self action:@selector(pushEarthKey:) forControlEvents:UIControlEventTouchUpInside];
+	// set background image for normal state
+	// set background image for highlighted state
+	// set image for highlighted state
+	
+	_deleteKey = [[UIButton alloc] initWithFrame:CGRectZero];
+	[_deleteKey setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
+	_deleteKey.backgroundColor = [UIColor colorWithRed:203/255.0f green:203/255.0f blue:203/255.0f alpha:1];
+	[_deleteKey addTarget:self action:@selector(pushDeleteKey:) forControlEvents:UIControlEventTouchUpInside];
+	// set background image for normal state
+	// set background image for highlighted state
+	// set image for highlighted state
+}
+
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	
+	NSLog(@"%@", self.traitCollection);
+	
+	[self prepareButton];
 	
 	UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
 	layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
@@ -31,28 +69,58 @@
 	[_collectionView registerClass:[AAKCategoryCollectionViewCell class] forCellWithReuseIdentifier:@"AAKCategoryCollectionViewCell"];
 	_collectionView.delegate = self;
 	_collectionView.dataSource = self;
-	//_collectionView.contentInset = UIEdgeInsetsMake(0, 44, 0, 0);
+	
 	[self.view addSubview:_collectionView];
+	[self.view addSubview:_earthKey];
+	[self.view addSubview:_deleteKey];
+	
 	_collectionView.translatesAutoresizingMaskIntoConstraints = NO;
-	NSDictionary *views = NSDictionaryOfVariableBindings(_collectionView);
-	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_collectionView(>=0)]-(==0)-|"
+	_earthKey.translatesAutoresizingMaskIntoConstraints = NO;
+	_deleteKey.translatesAutoresizingMaskIntoConstraints = NO;
+	
+	NSDictionary *views = NSDictionaryOfVariableBindings(_collectionView, _earthKey, _deleteKey);
+
+	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_earthKey(==48)]-0-[_collectionView(>=0)]-0-[_deleteKey(==48)]-(==0)-|"
 																		 options:0 metrics:0 views:views]];
 	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_collectionView(>=0)]-(==0)-|"
+																		 options:0 metrics:0 views:views]];
+	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_earthKey(>=0)]-(==0)-|"
+																		 options:0 metrics:0 views:views]];
+	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_deleteKey(>=0)]-(==0)-|"
 																		 options:0 metrics:0 views:views]];
 	[self.view updateConstraints];
 }
 
-- (void)setCategories:(NSArray*)categories {
-	_categories = [NSArray arrayWithArray:categories];
+- (void)update {
 	NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:18]};
 	NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[_categories count]];
+	CGFloat sumation = 0;
 	for (NSString *string in _categories) {
 		CGSize s = [string sizeWithAttributes:attributes];
 		s.width = floor(s.width) + 20;
-		s.height = 40;
+		sumation += s.width;
+		s.height = 48;// self.view.frame.size.height;
 		[buf addObject:[NSValue valueWithCGSize:s]];
 	}
+	if (sumation < _collectionView.frame.size.width) {
+		for (int i = 0; i < buf.count; i++) {
+			CGSize s = [[buf objectAtIndex:i] CGSizeValue];
+			s.width = floor(_collectionView.frame.size.width / buf.count);
+			[buf replaceObjectAtIndex:i withObject:[NSValue valueWithCGSize:s]];
+		}
+	}
 	_sizeOfCategories = [NSArray arrayWithArray:buf];
+}
+
+- (void)setCategories:(NSArray*)categories {
+	_categories = [NSArray arrayWithArray:categories];
+	[self update];
+	[_collectionView reloadData];
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+	NSLog(@"%fx%f", size.width, size.height);
+	[self update];
 	[_collectionView reloadData];
 }
 
@@ -70,8 +138,6 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 	[collectionView deselectItemAtIndexPath:indexPath animated:YES];
-//	if ([self.delegate respondsToSelector:@selector(inputCandidateAccessory:selectedString:)])
-//		[self.delegate inputCandidateAccessory:self selectedString:[_titleList objectAtIndex:indexPath.item]];
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
