@@ -8,30 +8,65 @@
 
 #import "DummyKeyboardViewController.h"
 
-@interface DummyKeyboardViewController ()
+#import "AAKCategorySelectViewController.h"
 
+@interface DummyKeyboardViewController () {
+	AAKCategorySelectViewController *_categorySelectViewController;
+}
 @end
 
 @implementation DummyKeyboardViewController
 
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	UIView *selfView = self.view;
+	NSDictionary *views = NSDictionaryOfVariableBindings(selfView);
+	self.view.translatesAutoresizingMaskIntoConstraints = NO;
+	[self.view.superview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[selfView]-(==0)-|"
+																		 options:0 metrics:0 views:views]];
+	[self.view.superview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=0)-[selfView]-(==0)-|"
+																				options:0 metrics:0 views:views]];
+	[self.view.superview addConstraint:[NSLayoutConstraint constraintWithItem:selfView
+														  attribute:NSLayoutAttributeHeight
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:nil
+														  attribute:NSLayoutAttributeNotAnAttribute
+														 multiplier:1
+														   constant:216]];
+	[self updateViewConstraints];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+	
+	self.view.backgroundColor = [UIColor lightGrayColor];
+	
+	// Do any additional setup after loading the view, typically from a nib.
+	_categorySelectViewController = [[AAKCategorySelectViewController alloc] init];
+	[self.view addSubview:_categorySelectViewController.view];
+	
+	[self addChildViewController:_categorySelectViewController];
+	
+	UIView *categorySelectView = _categorySelectViewController.view;
+	categorySelectView.translatesAutoresizingMaskIntoConstraints = NO;
+	NSDictionary *views = NSDictionaryOfVariableBindings(categorySelectView);
+	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[categorySelectView]-(==0)-|"
+																		 options:0 metrics:0 views:views]];
+	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=0)-[categorySelectView]-(==0)-|"
+																		 options:0 metrics:0 views:views]];
+	
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:categorySelectView
+														  attribute:NSLayoutAttributeHeight
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:nil
+														  attribute:NSLayoutAttributeNotAnAttribute
+														 multiplier:1
+														   constant:80]];
+	[self.view updateConstraints];
+	
+	// remained 216 - 48 = 168
+	
+	[_categorySelectViewController setCategories:@[@"hoge", @"hoooo",@"hoge", @"hoooo",@"hoge", @"hoooo",@"hoge"]];
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

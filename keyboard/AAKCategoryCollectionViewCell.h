@@ -12,4 +12,5 @@
 	IBOutlet UILabel *_label;
 }
 @property (nonatomic, readonly) UILabel *label;
+@property (nonatomic, assign) BOOL isHead;
 @end

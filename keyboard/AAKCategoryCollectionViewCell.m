@@ -30,6 +30,7 @@
 - (void)prepareForReuse {
 	[super prepareForReuse];
 	[self setNeedsDisplay];
+	self.isHead = NO;
 }
 
 - (id)initWithFrame:(CGRect)frame {
@@ -48,9 +49,11 @@
 	[[UIColor colorWithRed:254.0/255.0f green:254.0/255.0f blue:254.0/255.0f alpha:1] setFill];
 	CGContextFillRect(context, rect);
 	[[UIColor colorWithRed:203.0/255.0f green:203.0/255.0f blue:203.0/255.0f alpha:1] setFill];
-	CGContextFillRect(context, CGRectMake(0, 0, rect.size.width, 0.5));
+//	CGContextFillRect(context, CGRectMake(0, 0, rect.size.width, 0.5));
 	CGContextFillRect(context, CGRectMake(rect.size.width - 0.5, 0, 0.5, rect.size.height));
-	CGContextFillRect(context, CGRectMake(0, rect.size.height - 0.5, rect.size.width, 0.5));
+	if (self.isHead)
+		CGContextFillRect(context, CGRectMake(0, 0, 0.5, rect.size.height));
+//	CGContextFillRect(context, CGRectMake(0, rect.size.height - 0.5, rect.size.width, 0.5));
 }
 
 @end

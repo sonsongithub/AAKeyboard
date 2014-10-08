@@ -45,23 +45,20 @@
 	[_earthKey addTarget:self action:@selector(pushEarthKey:) forControlEvents:UIControlEventTouchUpInside];
 	[_earthKey setBackgroundImage:[UIImage imageNamed:@"buttonBackHighlightedState"] forState:UIControlStateHighlighted];
 	 [_earthKey setBackgroundImage:[UIImage imageNamed:@"buttonBackNormalState"] forState:UIControlStateNormal];
-	// set background image for normal state
-	// set background image for highlighted state
-	// set image for highlighted state
 	
 	_deleteKey = [[UIButton alloc] initWithFrame:CGRectZero];
 	[_deleteKey setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
 	_deleteKey.backgroundColor = [UIColor colorWithRed:203/255.0f green:203/255.0f blue:203/255.0f alpha:1];
 	[_deleteKey addTarget:self action:@selector(pushDeleteKey:) forControlEvents:UIControlEventTouchUpInside];
+	[_deleteKey setBackgroundImage:[UIImage imageNamed:@"buttonBackHighlightedState"] forState:UIControlStateHighlighted];
+	[_deleteKey setBackgroundImage:[UIImage imageNamed:@"buttonBackNormalState"] forState:UIControlStateNormal];
 	
 	_historyKey = [[UIButton alloc] initWithFrame:CGRectZero];
 	[_historyKey setImage:[UIImage imageNamed:@"history"] forState:UIControlStateNormal];
 	_historyKey.backgroundColor = [UIColor colorWithRed:203/255.0f green:203/255.0f blue:203/255.0f alpha:1];
 	[_historyKey addTarget:self action:@selector(pushHistoryKey:) forControlEvents:UIControlEventTouchUpInside];
-	
-	// set background image for normal state
-	// set background image for highlighted state
-	// set image for highlighted state
+	[_historyKey setBackgroundImage:[UIImage imageNamed:@"buttonBackHighlightedState"] forState:UIControlStateHighlighted];
+	[_historyKey setBackgroundImage:[UIImage imageNamed:@"buttonBackNormalState"] forState:UIControlStateNormal];
 }
 
 - (void)viewDidLoad {
@@ -77,7 +74,8 @@
 	_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, 320, 40) collectionViewLayout:layout];
 	_collectionView.alwaysBounceHorizontal = YES;
 	_collectionView.showsHorizontalScrollIndicator = NO;
-	_collectionView.backgroundColor = [UIColor colorWithRed:203/255.0f green:203/255.0f blue:203/255.0f alpha:1];
+	_collectionView.backgroundColor = [UIColor colorWithRed:254.0/255.0f green:254.0/255.0f blue:254.0/255.0f alpha:1];
+//	_collectionView.backgroundColor = [UIColor colorWithRed:203/255.0f green:203/255.0f blue:203/255.0f alpha:1];
 	[_collectionView registerClass:[AAKCategoryCollectionViewCell class] forCellWithReuseIdentifier:@"AAKCategoryCollectionViewCell"];
 	_collectionView.delegate = self;
 	_collectionView.dataSource = self;
@@ -93,8 +91,30 @@
 	_historyKey.translatesAutoresizingMaskIntoConstraints = NO;
 	
 	NSDictionary *views = NSDictionaryOfVariableBindings(_collectionView, _earthKey, _deleteKey, _historyKey);
+	
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:_earthKey
+								 attribute:NSLayoutAttributeWidth
+								 relatedBy:NSLayoutRelationEqual
+									toItem:nil
+								 attribute:NSLayoutAttributeNotAnAttribute
+								multiplier:1
+														   constant:48]];
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:_deleteKey
+														  attribute:NSLayoutAttributeWidth
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:nil
+														  attribute:NSLayoutAttributeNotAnAttribute
+														 multiplier:1
+														   constant:48]];
+	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:_historyKey
+														  attribute:NSLayoutAttributeWidth
+														  relatedBy:NSLayoutRelationEqual
+															 toItem:nil
+														  attribute:NSLayoutAttributeNotAnAttribute
+														 multiplier:1
+														   constant:48]];
 
-	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_earthKey(==48)]-0-[_historyKey(==48)]-0-[_collectionView(>=0)]-0-[_deleteKey(==48)]-(==0)-|"
+	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_earthKey]-0-[_historyKey]-0-[_collectionView(>=0)]-0-[_deleteKey]-(==0)-|"
 																		 options:0 metrics:0 views:views]];
 	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_collectionView(>=0)]-(==0)-|"
 																		 options:0 metrics:0 views:views]];
@@ -115,13 +135,24 @@
 		CGSize s = [string sizeWithAttributes:attributes];
 		s.width = floor(s.width) + 20;
 		sumation += s.width;
-		s.height = 48;// self.view.frame.size.height;
+		s.height = self.view.frame.size.height;
 		[buf addObject:[NSValue valueWithCGSize:s]];
 	}
+	_collectionView.alwaysBounceHorizontal = YES;
+	NSLog(@"%f", _collectionView.frame.size.width);
 	if (sumation < _collectionView.frame.size.width) {
+		CGFloat sumation = 0;
+		_collectionView.alwaysBounceHorizontal = NO;
 		for (int i = 0; i < buf.count; i++) {
 			CGSize s = [[buf objectAtIndex:i] CGSizeValue];
-			s.width = floor(_collectionView.frame.size.width / buf.count);
+			
+			if (i == buf.count - 1) {
+				s.width = _collectionView.frame.size.width - sumation;
+			}
+			else {
+				s.width = floor(_collectionView.frame.size.width / buf.count);
+				sumation += s.width;
+			}
 			[buf replaceObjectAtIndex:i withObject:[NSValue valueWithCGSize:s]];
 		}
 	}
@@ -135,9 +166,13 @@
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
-	NSLog(@"%fx%f", size.width, size.height);
-	[self update];
-	[_collectionView reloadData];
+	
+	[coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {
+	}
+								 completion:^(id<UIViewControllerTransitionCoordinatorContext> context) {
+									 [self update];
+									 [_collectionView reloadData];
+								 }];
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
@@ -172,6 +207,7 @@
 	AAKCategoryCollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"AAKCategoryCollectionViewCell" forIndexPath:indexPath];
 	cell.label.text = [_categories objectAtIndex:indexPath.item];
 	cell.label.backgroundColor = [UIColor clearColor];
+	cell.isHead = (indexPath.item == 0);
 	return cell;
 }
 
