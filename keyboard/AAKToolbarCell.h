@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AAKCategoryCollectionViewCell : UICollectionViewCell {
+@interface AAKToolbarCell : UICollectionViewCell {
 	IBOutlet UILabel *_label;
 }
 @property (nonatomic, readonly) UILabel *label;

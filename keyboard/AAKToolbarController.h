@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AAKCategorySelectViewController : UIViewController
+@interface AAKToolbarController : UIViewController
 - (void)setCategories:(NSArray*)categories;
 @end

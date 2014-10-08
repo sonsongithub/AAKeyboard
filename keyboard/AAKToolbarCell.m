@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 sonson. All rights reserved.
 //
 
-#import "AAKCategoryCollectionViewCell.h"
+#import "AAKToolbarCell.h"
 
-@implementation AAKCategoryCollectionViewCell
+@implementation AAKToolbarCell
 
 - (void)privateInit {
 	self.backgroundColor = [UIColor clearColor];

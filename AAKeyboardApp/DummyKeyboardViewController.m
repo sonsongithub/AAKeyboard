@@ -8,10 +8,10 @@
 
 #import "DummyKeyboardViewController.h"
 
-#import "AAKCategorySelectViewController.h"
+#import "AAKBaseViewController.h"
 
 @interface DummyKeyboardViewController () {
-	AAKCategorySelectViewController *_categorySelectViewController;
+	AAKBaseViewController *_baseViewController;
 }
 @end
 
@@ -19,6 +19,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
+	
 	UIView *selfView = self.view;
 	NSDictionary *views = NSDictionaryOfVariableBindings(selfView);
 	self.view.translatesAutoresizingMaskIntoConstraints = NO;
@@ -38,35 +39,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	_baseViewController = [[AAKBaseViewController alloc] init];
+	[self.view addSubview:_baseViewController.view];
+	[self addChildViewController:_baseViewController];
+
+	UIView *baseView = _baseViewController.view;
 	
-	self.view.backgroundColor = [UIColor lightGrayColor];
+	baseView.translatesAutoresizingMaskIntoConstraints = NO;
+	NSDictionary *views = NSDictionaryOfVariableBindings(baseView);
+	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[baseView]-(==0)-|"
+																				options:0 metrics:0 views:views]];
+	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[baseView]-(==0)-|"
+																				options:0 metrics:0 views:views]];
 	
-	// Do any additional setup after loading the view, typically from a nib.
-	_categorySelectViewController = [[AAKCategorySelectViewController alloc] init];
-	[self.view addSubview:_categorySelectViewController.view];
-	
-	[self addChildViewController:_categorySelectViewController];
-	
-	UIView *categorySelectView = _categorySelectViewController.view;
-	categorySelectView.translatesAutoresizingMaskIntoConstraints = NO;
-	NSDictionary *views = NSDictionaryOfVariableBindings(categorySelectView);
-	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[categorySelectView]-(==0)-|"
-																		 options:0 metrics:0 views:views]];
-	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=0)-[categorySelectView]-(==0)-|"
-																		 options:0 metrics:0 views:views]];
-	
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:categorySelectView
-														  attribute:NSLayoutAttributeHeight
-														  relatedBy:NSLayoutRelationEqual
-															 toItem:nil
-														  attribute:NSLayoutAttributeNotAnAttribute
-														 multiplier:1
-														   constant:80]];
-	[self.view updateConstraints];
-	
-	// remained 216 - 48 = 168
-	
-	[_categorySelectViewController setCategories:@[@"hoge", @"hoooo",@"hoge", @"hoooo",@"hoge", @"hoooo",@"hoge"]];
+	[self updateViewConstraints];
 }
 
 @end

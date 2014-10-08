@@ -6,10 +6,10 @@
 //  Copyright (c) 2014年 sonson. All rights reserved.
 //
 
-#import "AAKCategorySelectViewController.h"
-#import "AAKCategoryCollectionViewCell.h"
+#import "AAKToolbarController.h"
+#import "AAKToolbarCell.h"
 
-@interface AAKCategorySelectViewController () <UICollectionViewDataSource, UICollectionViewDelegate> {
+@interface AAKToolbarController () <UICollectionViewDataSource, UICollectionViewDelegate> {
 	UICollectionView	*_collectionView;
 	NSArray *_categories;
 	NSArray *_sizeOfCategories;
@@ -19,7 +19,7 @@
 }
 @end
 
-@implementation AAKCategorySelectViewController
+@implementation AAKToolbarController
 
 - (IBAction)pushEarthKey:(id)sender {
 	NSLog(@"pushEarthKey");
@@ -76,7 +76,7 @@
 	_collectionView.showsHorizontalScrollIndicator = NO;
 	_collectionView.backgroundColor = [UIColor colorWithRed:254.0/255.0f green:254.0/255.0f blue:254.0/255.0f alpha:1];
 //	_collectionView.backgroundColor = [UIColor colorWithRed:203/255.0f green:203/255.0f blue:203/255.0f alpha:1];
-	[_collectionView registerClass:[AAKCategoryCollectionViewCell class] forCellWithReuseIdentifier:@"AAKCategoryCollectionViewCell"];
+	[_collectionView registerClass:[AAKToolbarCell class] forCellWithReuseIdentifier:@"AAKCategoryCollectionViewCell"];
 	_collectionView.delegate = self;
 	_collectionView.dataSource = self;
 	
@@ -204,7 +204,7 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath; {
-	AAKCategoryCollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"AAKCategoryCollectionViewCell" forIndexPath:indexPath];
+	AAKToolbarCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"AAKCategoryCollectionViewCell" forIndexPath:indexPath];
 	cell.label.text = [_categories objectAtIndex:indexPath.item];
 	cell.label.backgroundColor = [UIColor clearColor];
 	cell.isHead = (indexPath.item == 0);

@@ -10,10 +10,14 @@
 		145A376219E4316200BE34BE /* DummyKeyboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 145A376119E4316200BE34BE /* DummyKeyboardViewController.m */; };
 		1491181319E42AA80039488F /* UITraitCollection+keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 1491181219E42AA80039488F /* UITraitCollection+keyboard.m */; };
 		1491181419E42AA80039488F /* UITraitCollection+keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 1491181219E42AA80039488F /* UITraitCollection+keyboard.m */; };
-		14B73C6219E3C76D0031DCB6 /* AAKCategorySelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B73C6119E3C76D0031DCB6 /* AAKCategorySelectViewController.m */; };
-		14B73C6519E3C7CA0031DCB6 /* AAKCategoryCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B73C6419E3C7CA0031DCB6 /* AAKCategoryCollectionViewCell.m */; };
-		14B73C6619E3C9010031DCB6 /* AAKCategorySelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B73C6119E3C76D0031DCB6 /* AAKCategorySelectViewController.m */; };
-		14B73C6719E3C9060031DCB6 /* AAKCategoryCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B73C6419E3C7CA0031DCB6 /* AAKCategoryCollectionViewCell.m */; };
+		14B73C6219E3C76D0031DCB6 /* AAKToolbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B73C6119E3C76D0031DCB6 /* AAKToolbarController.m */; };
+		14B73C6519E3C7CA0031DCB6 /* AAKToolbarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B73C6419E3C7CA0031DCB6 /* AAKToolbarCell.m */; };
+		14B73C6619E3C9010031DCB6 /* AAKToolbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B73C6119E3C76D0031DCB6 /* AAKToolbarController.m */; };
+		14B73C6719E3C9060031DCB6 /* AAKToolbarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B73C6419E3C7CA0031DCB6 /* AAKToolbarCell.m */; };
+		14F43E8D19E54FE100BF2D98 /* AAKBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F43E8C19E54FE100BF2D98 /* AAKBaseViewController.m */; };
+		14F43E9019E54FF000BF2D98 /* AAKContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F43E8F19E54FF000BF2D98 /* AAKContentViewController.m */; };
+		14F43E9119E551BD00BF2D98 /* AAKContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F43E8F19E54FF000BF2D98 /* AAKContentViewController.m */; };
+		14F43E9219E551C000BF2D98 /* AAKBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F43E8C19E54FE100BF2D98 /* AAKBaseViewController.m */; };
 		14FBD3A919E21213005FC38B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 14FBD3A819E21213005FC38B /* main.m */; };
 		14FBD3AC19E21213005FC38B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14FBD3AB19E21213005FC38B /* AppDelegate.m */; };
 		14FBD3AF19E21213005FC38B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14FBD3AE19E21213005FC38B /* ViewController.m */; };
@@ -61,10 +65,14 @@
 		145A376119E4316200BE34BE /* DummyKeyboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DummyKeyboardViewController.m; sourceTree = "<group>"; };
 		1491181119E42AA80039488F /* UITraitCollection+keyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITraitCollection+keyboard.h"; sourceTree = "<group>"; };
 		1491181219E42AA80039488F /* UITraitCollection+keyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITraitCollection+keyboard.m"; sourceTree = "<group>"; };
-		14B73C6019E3C76D0031DCB6 /* AAKCategorySelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKCategorySelectViewController.h; sourceTree = "<group>"; };
-		14B73C6119E3C76D0031DCB6 /* AAKCategorySelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKCategorySelectViewController.m; sourceTree = "<group>"; };
-		14B73C6319E3C7CA0031DCB6 /* AAKCategoryCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKCategoryCollectionViewCell.h; sourceTree = "<group>"; };
-		14B73C6419E3C7CA0031DCB6 /* AAKCategoryCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKCategoryCollectionViewCell.m; sourceTree = "<group>"; };
+		14B73C6019E3C76D0031DCB6 /* AAKToolbarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKToolbarController.h; sourceTree = "<group>"; };
+		14B73C6119E3C76D0031DCB6 /* AAKToolbarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKToolbarController.m; sourceTree = "<group>"; };
+		14B73C6319E3C7CA0031DCB6 /* AAKToolbarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKToolbarCell.h; sourceTree = "<group>"; };
+		14B73C6419E3C7CA0031DCB6 /* AAKToolbarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKToolbarCell.m; sourceTree = "<group>"; };
+		14F43E8B19E54FE100BF2D98 /* AAKBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKBaseViewController.h; sourceTree = "<group>"; };
+		14F43E8C19E54FE100BF2D98 /* AAKBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKBaseViewController.m; sourceTree = "<group>"; };
+		14F43E8E19E54FF000BF2D98 /* AAKContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKContentViewController.h; sourceTree = "<group>"; };
+		14F43E8F19E54FF000BF2D98 /* AAKContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKContentViewController.m; sourceTree = "<group>"; };
 		14FBD3A319E21213005FC38B /* AAKeyboardApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AAKeyboardApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14FBD3A719E21213005FC38B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14FBD3A819E21213005FC38B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -177,10 +185,14 @@
 			children = (
 				1491181119E42AA80039488F /* UITraitCollection+keyboard.h */,
 				1491181219E42AA80039488F /* UITraitCollection+keyboard.m */,
-				14B73C6019E3C76D0031DCB6 /* AAKCategorySelectViewController.h */,
-				14B73C6119E3C76D0031DCB6 /* AAKCategorySelectViewController.m */,
-				14B73C6319E3C7CA0031DCB6 /* AAKCategoryCollectionViewCell.h */,
-				14B73C6419E3C7CA0031DCB6 /* AAKCategoryCollectionViewCell.m */,
+				14F43E8E19E54FF000BF2D98 /* AAKContentViewController.h */,
+				14F43E8F19E54FF000BF2D98 /* AAKContentViewController.m */,
+				14F43E8B19E54FE100BF2D98 /* AAKBaseViewController.h */,
+				14F43E8C19E54FE100BF2D98 /* AAKBaseViewController.m */,
+				14B73C6019E3C76D0031DCB6 /* AAKToolbarController.h */,
+				14B73C6119E3C76D0031DCB6 /* AAKToolbarController.m */,
+				14B73C6319E3C7CA0031DCB6 /* AAKToolbarCell.h */,
+				14B73C6419E3C7CA0031DCB6 /* AAKToolbarCell.m */,
 				14FBD3D419E21263005FC38B /* KeyboardViewController.h */,
 				14FBD3D519E21263005FC38B /* KeyboardViewController.m */,
 				14FBD3D219E21263005FC38B /* Supporting Files */,
@@ -326,10 +338,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14B73C6719E3C9060031DCB6 /* AAKCategoryCollectionViewCell.m in Sources */,
+				14B73C6719E3C9060031DCB6 /* AAKToolbarCell.m in Sources */,
 				14FBD3AF19E21213005FC38B /* ViewController.m in Sources */,
 				14FBD3AC19E21213005FC38B /* AppDelegate.m in Sources */,
-				14B73C6619E3C9010031DCB6 /* AAKCategorySelectViewController.m in Sources */,
+				14B73C6619E3C9010031DCB6 /* AAKToolbarController.m in Sources */,
+				14F43E9219E551C000BF2D98 /* AAKBaseViewController.m in Sources */,
+				14F43E9119E551BD00BF2D98 /* AAKContentViewController.m in Sources */,
 				14FBD3A919E21213005FC38B /* main.m in Sources */,
 				1491181319E42AA80039488F /* UITraitCollection+keyboard.m in Sources */,
 				145A376219E4316200BE34BE /* DummyKeyboardViewController.m in Sources */,
@@ -348,9 +362,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14B73C6519E3C7CA0031DCB6 /* AAKCategoryCollectionViewCell.m in Sources */,
+				14B73C6519E3C7CA0031DCB6 /* AAKToolbarCell.m in Sources */,
+				14F43E8D19E54FE100BF2D98 /* AAKBaseViewController.m in Sources */,
 				1491181419E42AA80039488F /* UITraitCollection+keyboard.m in Sources */,
-				14B73C6219E3C76D0031DCB6 /* AAKCategorySelectViewController.m in Sources */,
+				14B73C6219E3C76D0031DCB6 /* AAKToolbarController.m in Sources */,
+				14F43E9019E54FF000BF2D98 /* AAKContentViewController.m in Sources */,
 				14FBD3D619E21263005FC38B /* KeyboardViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
