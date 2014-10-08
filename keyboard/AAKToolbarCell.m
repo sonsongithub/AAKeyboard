@@ -11,20 +11,32 @@
 @implementation AAKToolbarCell
 
 - (void)privateInit {
-	self.backgroundColor = [UIColor clearColor];
+	self.backgroundColor = [UIColor blueColor];
 	self.contentView.backgroundColor = [UIColor clearColor];
 	_label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-	_label.backgroundColor = [UIColor clearColor];
+//	_label.backgroundColor = [UIColor redColor];
 	_label.textColor = [UIColor colorWithRed:0 green:120.0/255.0f blue:255.0/255.0f alpha:1];
 	_label.textColor = [UIColor blackColor];
-	[_label setFont:[UIFont systemFontOfSize:18]];
+	_label.textAlignment = NSTextAlignmentCenter;
+	_label.adjustsFontSizeToFitWidth = NO;
+	_label.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
+	[_label setFont:[UIFont systemFontOfSize:16]];
 	[self.contentView addSubview:_label];
+	
+	_label.translatesAutoresizingMaskIntoConstraints = NO;
+	
 	_label.translatesAutoresizingMaskIntoConstraints = NO;
 	[self.contentView addConstraint: [NSLayoutConstraint constraintWithItem:_label  attribute:NSLayoutAttributeCenterX  relatedBy:NSLayoutRelationEqual  toItem:self.contentView  attribute:NSLayoutAttributeCenterX  multiplier:1  constant:0 ] ] ;
 	[self.contentView addConstraint: [NSLayoutConstraint constraintWithItem:_label  attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual  toItem:self.contentView  attribute:NSLayoutAttributeCenterY multiplier:1  constant:0 ] ] ;
 	[self.contentView updateConstraints];
+	
 	self.selectedBackgroundView = [[UIView alloc] initWithFrame:self.frame];
 	self.selectedBackgroundView.backgroundColor = [UIColor colorWithRed:222/255.0f green:222/255.0f blue:227/255.0f alpha:1];
+
+}
+
+- (void)updateConstraints {
+	[super updateConstraints];
 }
 
 - (void)prepareForReuse {

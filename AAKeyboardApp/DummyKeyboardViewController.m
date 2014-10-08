@@ -17,6 +17,10 @@
 
 @implementation DummyKeyboardViewController
 
+- (UITraitCollection *)overrideTraitCollectionForChildViewController:(UIViewController *)childViewController {
+	return self.traitCollection;
+}
+
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	

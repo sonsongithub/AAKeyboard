@@ -16,6 +16,11 @@
 	UIButton	*_earthKey;
 	UIButton	*_historyKey;
 	UIButton	*_deleteKey;
+	
+	NSLayoutConstraint *_earthKeyWidthConstraint;
+	NSLayoutConstraint *_historyKeyWidthConstraint;
+	NSLayoutConstraint *_deleteKeyWidthConstraint;
+	NSLayoutConstraint *_heightConstraint;
 }
 @end
 
@@ -33,11 +38,6 @@
 	NSLog(@"pushHistoryKey");
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-	[super viewDidAppear:animated];
-	
-	NSLog(@"%@", self.traitCollection);
-}
 
 - (void)prepareButton {
 	_earthKey = [[UIButton alloc] initWithFrame:CGRectZero];
@@ -61,21 +61,49 @@
 	[_historyKey setBackgroundImage:[UIImage imageNamed:@"buttonBackNormalState"] forState:UIControlStateNormal];
 }
 
+- (CGFloat)toolbarHeight {
+	NSLog(@"%@", self.traitCollection);
+	if (self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassCompact)
+		return 60;
+	else if (self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassRegular)
+		return 60;
+	else
+		return 60;
+}
+
+- (CGFloat)buttonWidth {
+	if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact)
+		return 48;
+	else if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular)
+		return 80;
+	else
+		return 48;
+}
+
+
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
+	
 	NSLog(@"%@", self.traitCollection);
+	
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
 	
 	[self prepareButton];
 	
 	UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
 	layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
 	layout.minimumLineSpacing = 0;
-	_collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, 320, 40) collectionViewLayout:layout];
+	layout.minimumInteritemSpacing = 0;
+	layout.sectionInset = UIEdgeInsetsZero;
+	_collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
 	_collectionView.alwaysBounceHorizontal = YES;
 	_collectionView.showsHorizontalScrollIndicator = NO;
 	_collectionView.backgroundColor = [UIColor colorWithRed:254.0/255.0f green:254.0/255.0f blue:254.0/255.0f alpha:1];
-//	_collectionView.backgroundColor = [UIColor colorWithRed:203/255.0f green:203/255.0f blue:203/255.0f alpha:1];
+	//	_collectionView.backgroundColor = [UIColor colorWithRed:203/255.0f green:203/255.0f blue:203/255.0f alpha:1];
 	[_collectionView registerClass:[AAKToolbarCell class] forCellWithReuseIdentifier:@"AAKCategoryCollectionViewCell"];
 	_collectionView.delegate = self;
 	_collectionView.dataSource = self;
@@ -92,28 +120,31 @@
 	
 	NSDictionary *views = NSDictionaryOfVariableBindings(_collectionView, _earthKey, _deleteKey, _historyKey);
 	
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:_earthKey
-								 attribute:NSLayoutAttributeWidth
-								 relatedBy:NSLayoutRelationEqual
-									toItem:nil
-								 attribute:NSLayoutAttributeNotAnAttribute
-								multiplier:1
-														   constant:48]];
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:_deleteKey
+	_earthKeyWidthConstraint = [NSLayoutConstraint constraintWithItem:_earthKey
+															attribute:NSLayoutAttributeWidth
+															relatedBy:NSLayoutRelationEqual
+															   toItem:nil
+															attribute:NSLayoutAttributeNotAnAttribute
+														   multiplier:1
+															 constant:[self buttonWidth]];
+	[self.view addConstraint:_earthKeyWidthConstraint];
+	_deleteKeyWidthConstraint = [NSLayoutConstraint constraintWithItem:_deleteKey
 														  attribute:NSLayoutAttributeWidth
 														  relatedBy:NSLayoutRelationEqual
 															 toItem:nil
 														  attribute:NSLayoutAttributeNotAnAttribute
 														 multiplier:1
-														   constant:48]];
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:_historyKey
-														  attribute:NSLayoutAttributeWidth
-														  relatedBy:NSLayoutRelationEqual
-															 toItem:nil
-														  attribute:NSLayoutAttributeNotAnAttribute
-														 multiplier:1
-														   constant:48]];
-
+														   constant:[self buttonWidth]];
+	[self.view addConstraint:_deleteKeyWidthConstraint];
+	_historyKeyWidthConstraint = [NSLayoutConstraint constraintWithItem:_historyKey
+															  attribute:NSLayoutAttributeWidth
+															  relatedBy:NSLayoutRelationEqual
+																 toItem:nil
+															  attribute:NSLayoutAttributeNotAnAttribute
+															 multiplier:1
+															   constant:[self buttonWidth]];
+	[self.view addConstraint:_historyKeyWidthConstraint];
+	
 	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_earthKey]-0-[_historyKey]-0-[_collectionView(>=0)]-0-[_deleteKey]-(==0)-|"
 																		 options:0 metrics:0 views:views]];
 	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_collectionView(>=0)]-(==0)-|"
@@ -124,10 +155,24 @@
 																		 options:0 metrics:0 views:views]];
 	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_historyKey(>=0)]-(==0)-|"
 																		 options:0 metrics:0 views:views]];
-	[self.view updateConstraints];
+	_heightConstraint = [NSLayoutConstraint constraintWithItem:self.view
+													 attribute:NSLayoutAttributeHeight
+													 relatedBy:NSLayoutRelationEqual
+														toItem:nil
+													 attribute:NSLayoutAttributeNotAnAttribute
+													multiplier:1
+													  constant:[self toolbarHeight]];
+	[self.view.superview addConstraint:_heightConstraint];
+	[self updateViewConstraints];
+	
+	NSLog(@">>>>>>>>>>>>>>>>>>>>>>%f", self.view.frame.size.width);
+	
+	[self updateWithWidth:self.view.frame.size.width];
+	[_collectionView reloadData];
 }
 
-- (void)update {
+- (void)updateWithWidth:(CGFloat)width {
+	CGFloat parentWidth = width - [self buttonWidth] * 3;
 	NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:18]};
 	NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[_categories count]];
 	CGFloat sumation = 0;
@@ -135,22 +180,23 @@
 		CGSize s = [string sizeWithAttributes:attributes];
 		s.width = floor(s.width) + 20;
 		sumation += s.width;
-		s.height = self.view.frame.size.height;
+		s.height = [self toolbarHeight];
 		[buf addObject:[NSValue valueWithCGSize:s]];
 	}
 	_collectionView.alwaysBounceHorizontal = YES;
-	NSLog(@"%f", _collectionView.frame.size.width);
-	if (sumation < _collectionView.frame.size.width) {
+	NSLog(@"----%f", _collectionView.frame.size.width);
+//	NSLog(@"%f", self.view.frame.size.width);
+	if (sumation < parentWidth) {
 		CGFloat sumation = 0;
 		_collectionView.alwaysBounceHorizontal = NO;
 		for (int i = 0; i < buf.count; i++) {
 			CGSize s = [[buf objectAtIndex:i] CGSizeValue];
 			
 			if (i == buf.count - 1) {
-				s.width = _collectionView.frame.size.width - sumation;
+				s.width = parentWidth - sumation;
 			}
 			else {
-				s.width = floor(_collectionView.frame.size.width / buf.count);
+				s.width = floor(parentWidth / buf.count);
 				sumation += s.width;
 			}
 			[buf replaceObjectAtIndex:i withObject:[NSValue valueWithCGSize:s]];
@@ -161,18 +207,27 @@
 
 - (void)setCategories:(NSArray*)categories {
 	_categories = [NSArray arrayWithArray:categories];
-	[self update];
-	[_collectionView reloadData];
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
-	
+	NSLog(@"%fx%f", size.width, size.height);
 	[coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {
 	}
 								 completion:^(id<UIViewControllerTransitionCoordinatorContext> context) {
-									 [self update];
+									 _earthKeyWidthConstraint.constant = [self buttonWidth];
+									 _deleteKeyWidthConstraint.constant = [self buttonWidth];
+									 _historyKeyWidthConstraint.constant = [self buttonWidth];
+									 _heightConstraint.constant = [self toolbarHeight];
+									 [self.view updateConstraints];
+									 [self.view.superview updateConstraints];
+									 [self updateWithWidth:size.width];
 									 [_collectionView reloadData];
 								 }];
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+	return UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
@@ -206,8 +261,10 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath; {
 	AAKToolbarCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"AAKCategoryCollectionViewCell" forIndexPath:indexPath];
 	cell.label.text = [_categories objectAtIndex:indexPath.item];
-	cell.label.backgroundColor = [UIColor clearColor];
 	cell.isHead = (indexPath.item == 0);
+//	NSLog(@"%fx%f", cell.contentView.frame.size.width, cell.contentView.frame.size.height);
+//	cell.label.frame = CGRectMake(0, 0, cell.contentView.frame.size.width, cell.contentView.frame.size.height);
+//	[cell layoutIfNeeded];
 	return cell;
 }
 

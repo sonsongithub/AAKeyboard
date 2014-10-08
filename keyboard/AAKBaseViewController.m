@@ -19,6 +19,10 @@
 
 @implementation AAKBaseViewController
 
+- (UITraitCollection *)overrideTraitCollectionForChildViewController:(UIViewController *)childViewController {
+	return self.traitCollection;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
@@ -45,17 +49,11 @@
 																		 options:0 metrics:0 views:views]];
 	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-1-[contentView]-0-[toolbar]-(==0)-|"
 																		 options:0 metrics:0 views:views]];
-	[self.view addConstraint:[NSLayoutConstraint constraintWithItem:toolbar
-														  attribute:NSLayoutAttributeHeight
-														  relatedBy:NSLayoutRelationEqual
-															 toItem:nil
-														  attribute:NSLayoutAttributeNotAnAttribute
-														 multiplier:1
-														   constant:80]];
 	
 	[self.view updateConstraints];
 	
-	[_toolbarController setCategories:@[@"hoge", @"hoooo",@"hoge", @"hoooo",@"hoge", @"hoooo",@"hoge"]];
+//	[_toolbarController setCategories:@[@"hoge", @"hoooo"]];
+	[_toolbarController setCategories:@[@"hoge", @"hoooo",@"hoge", @"hoooo",@"hoge", @"hoooo"]];
 }
 
 @end

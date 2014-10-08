@@ -185,10 +185,10 @@
 			children = (
 				1491181119E42AA80039488F /* UITraitCollection+keyboard.h */,
 				1491181219E42AA80039488F /* UITraitCollection+keyboard.m */,
-				14F43E8E19E54FF000BF2D98 /* AAKContentViewController.h */,
-				14F43E8F19E54FF000BF2D98 /* AAKContentViewController.m */,
 				14F43E8B19E54FE100BF2D98 /* AAKBaseViewController.h */,
 				14F43E8C19E54FE100BF2D98 /* AAKBaseViewController.m */,
+				14F43E8E19E54FF000BF2D98 /* AAKContentViewController.h */,
+				14F43E8F19E54FF000BF2D98 /* AAKContentViewController.m */,
 				14B73C6019E3C76D0031DCB6 /* AAKToolbarController.h */,
 				14B73C6119E3C76D0031DCB6 /* AAKToolbarController.m */,
 				14B73C6319E3C7CA0031DCB6 /* AAKToolbarCell.h */,
