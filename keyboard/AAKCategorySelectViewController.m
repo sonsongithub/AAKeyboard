@@ -14,6 +14,7 @@
 	NSArray *_categories;
 	NSArray *_sizeOfCategories;
 	UIButton	*_earthKey;
+	UIButton	*_historyKey;
 	UIButton	*_deleteKey;
 }
 @end
@@ -28,6 +29,10 @@
 	NSLog(@"pushDeleteKey");
 }
 
+- (IBAction)pushHistoryKey:(id)sender {
+	NSLog(@"pushHistoryKey");
+}
+
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	
@@ -37,8 +42,9 @@
 - (void)prepareButton {
 	_earthKey = [[UIButton alloc] initWithFrame:CGRectZero];
 	[_earthKey setImage:[UIImage imageNamed:@"earth"] forState:UIControlStateNormal];
-	_earthKey.backgroundColor = [UIColor colorWithRed:203/255.0f green:203/255.0f blue:203/255.0f alpha:1];
 	[_earthKey addTarget:self action:@selector(pushEarthKey:) forControlEvents:UIControlEventTouchUpInside];
+	[_earthKey setBackgroundImage:[UIImage imageNamed:@"buttonBackHighlightedState"] forState:UIControlStateHighlighted];
+	 [_earthKey setBackgroundImage:[UIImage imageNamed:@"buttonBackNormalState"] forState:UIControlStateNormal];
 	// set background image for normal state
 	// set background image for highlighted state
 	// set image for highlighted state
@@ -47,6 +53,12 @@
 	[_deleteKey setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
 	_deleteKey.backgroundColor = [UIColor colorWithRed:203/255.0f green:203/255.0f blue:203/255.0f alpha:1];
 	[_deleteKey addTarget:self action:@selector(pushDeleteKey:) forControlEvents:UIControlEventTouchUpInside];
+	
+	_historyKey = [[UIButton alloc] initWithFrame:CGRectZero];
+	[_historyKey setImage:[UIImage imageNamed:@"history"] forState:UIControlStateNormal];
+	_historyKey.backgroundColor = [UIColor colorWithRed:203/255.0f green:203/255.0f blue:203/255.0f alpha:1];
+	[_historyKey addTarget:self action:@selector(pushHistoryKey:) forControlEvents:UIControlEventTouchUpInside];
+	
 	// set background image for normal state
 	// set background image for highlighted state
 	// set image for highlighted state
@@ -73,20 +85,24 @@
 	[self.view addSubview:_collectionView];
 	[self.view addSubview:_earthKey];
 	[self.view addSubview:_deleteKey];
+	[self.view addSubview:_historyKey];
 	
 	_collectionView.translatesAutoresizingMaskIntoConstraints = NO;
 	_earthKey.translatesAutoresizingMaskIntoConstraints = NO;
 	_deleteKey.translatesAutoresizingMaskIntoConstraints = NO;
+	_historyKey.translatesAutoresizingMaskIntoConstraints = NO;
 	
-	NSDictionary *views = NSDictionaryOfVariableBindings(_collectionView, _earthKey, _deleteKey);
+	NSDictionary *views = NSDictionaryOfVariableBindings(_collectionView, _earthKey, _deleteKey, _historyKey);
 
-	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_earthKey(==48)]-0-[_collectionView(>=0)]-0-[_deleteKey(==48)]-(==0)-|"
+	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_earthKey(==48)]-0-[_historyKey(==48)]-0-[_collectionView(>=0)]-0-[_deleteKey(==48)]-(==0)-|"
 																		 options:0 metrics:0 views:views]];
 	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_collectionView(>=0)]-(==0)-|"
 																		 options:0 metrics:0 views:views]];
 	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_earthKey(>=0)]-(==0)-|"
 																		 options:0 metrics:0 views:views]];
 	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_deleteKey(>=0)]-(==0)-|"
+																		 options:0 metrics:0 views:views]];
+	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_historyKey(>=0)]-(==0)-|"
 																		 options:0 metrics:0 views:views]];
 	[self.view updateConstraints];
 }
