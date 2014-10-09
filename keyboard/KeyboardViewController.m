@@ -24,16 +24,35 @@
 
 - (void)updateViewConstraints {
 	DNSLogMethod
-	CGFloat height = CGRectGetHeight(self.view.bounds);
-	_heightConstraint.constant = height;
+	CGRect screenBounds = [[UIScreen mainScreen] bounds];
+	CGFloat screenWidth = CGRectGetWidth(screenBounds);
+	CGFloat screenHeight = CGRectGetHeight(screenBounds);
+	
+	if (screenWidth < screenHeight) {
+		_heightConstraint.constant = 216;
+	}
+	else {
+		_heightConstraint.constant = 162;
+	}
     [super updateViewConstraints];
 }
 
 - (void)viewDidLayoutSubviews {
+	return;
+//	CGRect screenBounds = [[UIScreen mainScreen] bounds];
+//	CGFloat screenWidth = CGRectGetWidth(screenBounds);
+//	CGFloat screenHeight = CGRectGetHeight(screenBounds);
+//	
+//	if (screenWidth < screenHeight) {
+//		_heightConstraint.constant = 216;
+//	}
+//	else {
+//		_heightConstraint.constant = 162;
+//	}
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-	[super viewDidAppear:animated];
+	[super viewDidAp｀pear:animated];
 	[self.view setNeedsUpdateConstraints];
 }
 
@@ -54,7 +73,7 @@
 																	  options:0 metrics:0 views:views]];
 	
 	CGFloat height = CGRectGetHeight(self.view.bounds);
-	_heightConstraint = [NSLayoutConstraint constraintWithItem:baseView
+	_heightConstraint = [NSLayoutConstraint constraintWithItem:self.view
 														 attribute:NSLayoutAttributeHeight
 														 relatedBy:NSLayoutRelationEqual
 															toItem:nil

@@ -14,6 +14,7 @@
 @interface AAKBaseViewController () {
 	AAKToolbarController *_toolbarController;
 	AAKContentViewController *_contentViewController;
+	NSLayoutConstraint	*_toolbarHeightConstraint;
 }
 @end
 
@@ -53,6 +54,14 @@
 																		 options:0 metrics:0 views:views]];
 	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-1-[contentView]-0-[toolbar]-(==0)-|"
 																		 options:0 metrics:0 views:views]];
+	_toolbarHeightConstraint = [NSLayoutConstraint constraintWithItem:toolbar
+													 attribute:NSLayoutAttributeHeight
+													 relatedBy:NSLayoutRelationEqual
+														toItem:nil
+													 attribute:NSLayoutAttributeNotAnAttribute
+													multiplier:1
+															 constant:48];
+	[self.view addConstraint:_toolbarHeightConstraint];
 	
 	[self.view updateConstraints];
 	

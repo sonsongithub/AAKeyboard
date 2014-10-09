@@ -159,14 +159,14 @@
 																		 options:0 metrics:0 views:views]];
 	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_historyKey(>=0)]-(==0)-|"
 																		 options:0 metrics:0 views:views]];
-	_heightConstraint = [NSLayoutConstraint constraintWithItem:self.view
-													 attribute:NSLayoutAttributeHeight
-													 relatedBy:NSLayoutRelationEqual
-														toItem:nil
-													 attribute:NSLayoutAttributeNotAnAttribute
-													multiplier:1
-													  constant:[self toolbarHeight]];
-	[self.view.superview addConstraint:_heightConstraint];
+//	_heightConstraint = [NSLayoutConstraint constraintWithItem:self.view
+//													 attribute:NSLayoutAttributeHeight
+//													 relatedBy:NSLayoutRelationEqual
+//														toItem:nil
+//													 attribute:NSLayoutAttributeNotAnAttribute
+//													multiplier:1
+//													  constant:[self toolbarHeight]];
+//	[self.view addConstraint:_heightConstraint];
 	[self updateViewConstraints];
 	NSLog(@">>>>>>>>>>>>>>>>>>>>>>%f", self.view.frame.size.width);
 }
