@@ -23,6 +23,10 @@
 	return self.traitCollection;
 }
 
+- (void)viewDidLayoutSubviews {
+	DNSLogMethod
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 	

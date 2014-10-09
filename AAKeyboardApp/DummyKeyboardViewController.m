@@ -43,6 +43,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+#if 0
 	_baseViewController = [[AAKBaseViewController alloc] init];
 	[self.view addSubview:_baseViewController.view];
 	[self addChildViewController:_baseViewController];
@@ -57,6 +58,7 @@
 																				options:0 metrics:0 views:views]];
 	
 	[self updateViewConstraints];
+#endif
 }
 
 @end

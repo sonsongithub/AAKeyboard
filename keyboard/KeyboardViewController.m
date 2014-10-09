@@ -7,45 +7,61 @@
 //
 
 #import "KeyboardViewController.h"
+#import "AAKBaseViewController.h"
+#import "AAKToolbarController.h"
 
-@interface KeyboardViewController ()
-@property (nonatomic, strong) UIButton *nextKeyboardButton;
+@interface KeyboardViewController () {
+	AAKBaseViewController	*_baseViewController;
+	NSLayoutConstraint		*_heightConstraint;
+}
 @end
 
 @implementation KeyboardViewController
 
+- (UITraitCollection *)overrideTraitCollectionForChildViewController:(UIViewController *)childViewController {
+	return self.traitCollection;
+}
+
 - (void)updateViewConstraints {
+	DNSLogMethod
+	CGFloat height = CGRectGetHeight(self.view.bounds);
+	_heightConstraint.constant = height;
     [super updateViewConstraints];
-    
-    // Add custom view sizing constraints here
+}
+
+- (void)viewDidLayoutSubviews {
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	[self.view setNeedsUpdateConstraints];
 }
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	NSLog(@"%@", self.traitCollection);
+	DNSLogRect(self.view.bounds);
+	_baseViewController = [[AAKBaseViewController alloc] init];
+	[self.view addSubview:_baseViewController.view];
+	[self addChildViewController:_baseViewController];
 	
-	self.traitCollection.verticalSizeClass;
-	self.traitCollection.horizontalSizeClass;
-    
-    // Perform custom UI setup here
-    self.nextKeyboardButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    
-    [self.nextKeyboardButton setTitle:NSLocalizedString(@"Next Keyboard", @"Title for 'Next Keyboard' button") forState:UIControlStateNormal];
-    [self.nextKeyboardButton sizeToFit];
-    self.nextKeyboardButton.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    [self.nextKeyboardButton addTarget:self action:@selector(advanceToNextInputMode) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.view addSubview:self.nextKeyboardButton];
-    
-    NSLayoutConstraint *nextKeyboardButtonLeftSideConstraint = [NSLayoutConstraint constraintWithItem:self.nextKeyboardButton attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0.0];
-    NSLayoutConstraint *nextKeyboardButtonBottomConstraint = [NSLayoutConstraint constraintWithItem:self.nextKeyboardButton attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0];
-    [self.view addConstraints:@[nextKeyboardButtonLeftSideConstraint, nextKeyboardButtonBottomConstraint]];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated
+	UIView *baseView = _baseViewController.view;
+	
+	baseView.translatesAutoresizingMaskIntoConstraints = NO;
+	NSDictionary *views = NSDictionaryOfVariableBindings(baseView);
+	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[baseView]-(==0)-|"
+																	  options:0 metrics:0 views:views]];
+	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[baseView]-(==0)-|"
+																	  options:0 metrics:0 views:views]];
+	
+	CGFloat height = CGRectGetHeight(self.view.bounds);
+	_heightConstraint = [NSLayoutConstraint constraintWithItem:baseView
+														 attribute:NSLayoutAttributeHeight
+														 relatedBy:NSLayoutRelationEqual
+															toItem:nil
+														 attribute:NSLayoutAttributeNotAnAttribute
+														multiplier:0.0
+														  constant:height];
+	[self.view addConstraint:_heightConstraint];
 }
 
 - (void)textWillChange:(id<UITextInput>)textInput {
@@ -54,14 +70,12 @@
 
 - (void)textDidChange:(id<UITextInput>)textInput {
     // The app has just changed the document's contents, the document context has been updated.
-    
     UIColor *textColor = nil;
     if (self.textDocumentProxy.keyboardAppearance == UIKeyboardAppearanceDark) {
         textColor = [UIColor whiteColor];
     } else {
         textColor = [UIColor blackColor];
     }
-    [self.nextKeyboardButton setTitleColor:textColor forState:UIControlStateNormal];
 }
 
 @end

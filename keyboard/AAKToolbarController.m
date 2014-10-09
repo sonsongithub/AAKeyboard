@@ -8,6 +8,7 @@
 
 #import "AAKToolbarController.h"
 #import "AAKToolbarCell.h"
+#import "AAKBaseViewController.h"
 
 @interface AAKToolbarController () <UICollectionViewDataSource, UICollectionViewDelegate> {
 	UICollectionView	*_collectionView;
@@ -38,7 +39,6 @@
 	NSLog(@"pushHistoryKey");
 }
 
-
 - (void)prepareButton {
 	_earthKey = [[UIButton alloc] initWithFrame:CGRectZero];
 	[_earthKey setImage:[UIImage imageNamed:@"earth"] forState:UIControlStateNormal];
@@ -62,12 +62,7 @@
 }
 
 - (CGFloat)toolbarHeight {
-	if (self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassCompact)
-		return 36;
-	else if (self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassRegular)
-		return 48;
-	else
-		return 48;
+	return 48;
 }
 
 - (CGFloat)buttonWidth {
@@ -79,6 +74,20 @@
 		return 48;
 }
 
+- (void)viewWillLayoutSubviews {
+	[self updateWithWidth:self.view.frame.size.width];
+}
+
+- (void)viewDidLayoutSubviews {
+	DNSLogMethod
+	_earthKeyWidthConstraint.constant = [self buttonWidth];
+	_deleteKeyWidthConstraint.constant = [self buttonWidth];
+	_historyKeyWidthConstraint.constant = [self buttonWidth];
+	_heightConstraint.constant = [self toolbarHeight];
+	DNSLog(@"%f", [self toolbarHeight]);
+	[self.view updateConstraints];
+	[self.view.superview updateConstraints];
+}
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
@@ -159,15 +168,10 @@
 													  constant:[self toolbarHeight]];
 	[self.view.superview addConstraint:_heightConstraint];
 	[self updateViewConstraints];
-	
 	NSLog(@">>>>>>>>>>>>>>>>>>>>>>%f", self.view.frame.size.width);
-	
-	[self updateWithWidth:self.view.frame.size.width];
-	[_collectionView reloadData];
 }
 
 - (void)updateWithWidth:(CGFloat)width {
-	CGFloat parentWidth = width - [self buttonWidth] * 3;
 	NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:18]};
 	NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[_categories count]];
 	CGFloat sumation = 0;
@@ -178,9 +182,9 @@
 		s.height = [self toolbarHeight];
 		[buf addObject:[NSValue valueWithCGSize:s]];
 	}
+#if 0
+	CGFloat parentWidth = width - [self buttonWidth] * 3;
 	_collectionView.alwaysBounceHorizontal = YES;
-	NSLog(@"----%f", _collectionView.frame.size.width);
-//	NSLog(@"%f", self.view.frame.size.width);
 	if (sumation < parentWidth) {
 		CGFloat sumation = 0;
 		_collectionView.alwaysBounceHorizontal = NO;
@@ -197,27 +201,12 @@
 			[buf replaceObjectAtIndex:i withObject:[NSValue valueWithCGSize:s]];
 		}
 	}
+#endif
 	_sizeOfCategories = [NSArray arrayWithArray:buf];
 }
 
 - (void)setCategories:(NSArray*)categories {
 	_categories = [NSArray arrayWithArray:categories];
-}
-
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
-	[coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {
-	}
-								 completion:^(id<UIViewControllerTransitionCoordinatorContext> context) {
-									 NSLog(@"%@", self.traitCollection);
-									 _earthKeyWidthConstraint.constant = [self buttonWidth];
-									 _deleteKeyWidthConstraint.constant = [self buttonWidth];
-									 _historyKeyWidthConstraint.constant = [self buttonWidth];
-									 _heightConstraint.constant = [self toolbarHeight];
-									 [self.view updateConstraints];
-									 [self.view.superview updateConstraints];
-									 [self updateWithWidth:size.width];
-									 [_collectionView reloadData];
-								 }];
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
@@ -257,9 +246,6 @@
 	AAKToolbarCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"AAKCategoryCollectionViewCell" forIndexPath:indexPath];
 	cell.label.text = [_categories objectAtIndex:indexPath.item];
 	cell.isHead = (indexPath.item == 0);
-//	NSLog(@"%fx%f", cell.contentView.frame.size.width, cell.contentView.frame.size.height);
-//	cell.label.frame = CGRectMake(0, 0, cell.contentView.frame.size.width, cell.contentView.frame.size.height);
-//	[cell layoutIfNeeded];
 	return cell;
 }
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1422A34C19E66FA9008E359B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14FBD3B319E21213005FC38B /* Images.xcassets */; };
 		145A376219E4316200BE34BE /* DummyKeyboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 145A376119E4316200BE34BE /* DummyKeyboardViewController.m */; };
 		1491181319E42AA80039488F /* UITraitCollection+keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 1491181219E42AA80039488F /* UITraitCollection+keyboard.m */; };
 		1491181419E42AA80039488F /* UITraitCollection+keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 1491181219E42AA80039488F /* UITraitCollection+keyboard.m */; };
@@ -328,6 +329,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1422A34C19E66FA9008E359B /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,6 +490,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					_DEBUG,
+				);
 				INFOPLIST_FILE = AAKeyboardApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -544,6 +551,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
+					_DEBUG,
 				);
 				INFOPLIST_FILE = keyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";

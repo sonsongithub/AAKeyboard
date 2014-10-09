@@ -7,12 +7,17 @@
 //
 
 #import "AAKContentViewController.h"
+#import "AAKBaseViewController.h"
 
 @interface AAKContentViewController ()
 
 @end
 
 @implementation AAKContentViewController
+
+- (void)viewDidLayoutSubviews {
+	DNSLogMethod
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
