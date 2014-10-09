@@ -11,16 +11,16 @@
 
 @interface AAKToolbarController () <UICollectionViewDataSource, UICollectionViewDelegate> {
 	UICollectionView	*_collectionView;
-	NSArray *_categories;
-	NSArray *_sizeOfCategories;
-	UIButton	*_earthKey;
-	UIButton	*_historyKey;
-	UIButton	*_deleteKey;
+	NSArray				*_categories;
+	NSArray				*_sizeOfCategories;
+	UIButton			*_earthKey;
+	UIButton			*_historyKey;
+	UIButton			*_deleteKey;
 	
-	NSLayoutConstraint *_earthKeyWidthConstraint;
-	NSLayoutConstraint *_historyKeyWidthConstraint;
-	NSLayoutConstraint *_deleteKeyWidthConstraint;
-	NSLayoutConstraint *_heightConstraint;
+	NSLayoutConstraint	*_earthKeyWidthConstraint;
+	NSLayoutConstraint	*_historyKeyWidthConstraint;
+	NSLayoutConstraint	*_deleteKeyWidthConstraint;
+	NSLayoutConstraint	*_heightConstraint;
 }
 @end
 
@@ -62,13 +62,12 @@
 }
 
 - (CGFloat)toolbarHeight {
-	NSLog(@"%@", self.traitCollection);
 	if (self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassCompact)
-		return 60;
+		return 36;
 	else if (self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassRegular)
-		return 60;
+		return 48;
 	else
-		return 60;
+		return 48;
 }
 
 - (CGFloat)buttonWidth {
@@ -83,10 +82,6 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	
-	
-	NSLog(@"%@", self.traitCollection);
-	
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -210,10 +205,10 @@
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
-	NSLog(@"%fx%f", size.width, size.height);
 	[coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {
 	}
 								 completion:^(id<UIViewControllerTransitionCoordinatorContext> context) {
+									 NSLog(@"%@", self.traitCollection);
 									 _earthKeyWidthConstraint.constant = [self buttonWidth];
 									 _deleteKeyWidthConstraint.constant = [self buttonWidth];
 									 _historyKeyWidthConstraint.constant = [self buttonWidth];
