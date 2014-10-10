@@ -68,6 +68,7 @@
 															   multiplier:1
 																 constant:20];
 		[self addConstraint:c];
+		[_collectionView reloadData];
 	}
 	return self;
 }
@@ -80,6 +81,12 @@
 //	NSLog(@"=======================>%f", CGRectGetWidth(self.bounds));
 //	_collectionFlowLayout.itemSize = CGSizeMake(CGRectGetWidth(self.bounds)/4, CGRectGetHeight(self.bounds) - 20);
 //	[_collectionFlowLayout invalidateLayout];
+//	w = CGRectGetWidth(_collectionView.bounds)/4;
+//	h = CGRectGetHeight(_collectionView.bounds) - 20;
+//	[_collectionView reloadData];
+}
+
+- (void)load {
 	w = CGRectGetWidth(_collectionView.bounds)/4;
 	h = CGRectGetHeight(_collectionView.bounds) - 20;
 //	[_collectionView reloadData];

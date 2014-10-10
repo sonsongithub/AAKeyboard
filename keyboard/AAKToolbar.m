@@ -151,7 +151,7 @@
 	NSLog(@"%f", CGRectGetWidth(_collectionView.bounds));
 	[self updateWithWidth:CGRectGetWidth(_collectionView.bounds)];
 //	[_collectionFlowLayout invalidateLayout];
-//	[_collectionView reloadData];
+	[_collectionView reloadData];
 }
 
 - (void)updateWithWidth:(CGFloat)width {

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface AAKContentView : UIView
-
+- (void)load;
 @end

@@ -65,6 +65,8 @@
 														  constant:162];
 		[self.view addConstraint:_heightConstraint];
 	}
+	
+	[_keyboardView load];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

@@ -34,9 +34,9 @@
 
 	NSDictionary *views = NSDictionaryOfVariableBindings(_label);
 	
-	[self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-3-[_label]-3-|"
+	[self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[_label]-10-|"
 																 options:0 metrics:0 views:views]];
-	[self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-3-[_label]-3-|"
+	[self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_label]-10-|"
 																 options:0 metrics:0 views:views]];
 	
 	self.selectedBackgroundView = [[UIView alloc] initWithFrame:self.frame];

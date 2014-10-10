@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface AAKKeyboardView : UIView
-
+- (void)load;
 @end
