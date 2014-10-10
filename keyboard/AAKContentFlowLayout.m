@@ -16,6 +16,7 @@
 	CGRect targetRect = CGRectMake(proposedContentOffset.x, 0.0, self.collectionView.bounds.size.width, self.collectionView.bounds.size.height);
 	NSArray* array = [super layoutAttributesForElementsInRect:targetRect];
 	for (UICollectionViewLayoutAttributes* layoutAttributes in array) {
+		NSLog(@"%@", layoutAttributes);
 		CGFloat itemHorizontalCenter = layoutAttributes.frame.origin.x;
 		if (ABS(itemHorizontalCenter - horizontalCenter) < ABS(offsetAdjustment)) {
 			offsetAdjustment = itemHorizontalCenter - horizontalCenter;

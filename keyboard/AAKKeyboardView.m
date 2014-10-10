@@ -23,10 +23,12 @@
 @implementation AAKKeyboardView
 
 - (void)load {
-	CGFloat w = CGRectGetWidth(_collectionView.bounds)/2;
+	NSInteger itemsPerPage = 2;
+	CGFloat w = CGRectGetWidth(_collectionView.bounds)/itemsPerPage;
 	CGFloat h = CGRectGetHeight(_collectionView.bounds);
 	_collectionFlowLayout.itemSize = CGSizeMake(w, h);
 	[_collectionFlowLayout invalidateLayout];
+	_pageControl.numberOfPages = 20 / itemsPerPage;
 }
 
 - (void)layoutSubviews {
@@ -38,9 +40,12 @@
 	if (self) {
 		self.backgroundColor = [UIColor blueColor];
 		
+		_pageControl = [[UIPageControl alloc] initWithFrame:CGRectZero];
+		
 		_toolbar = [[AAKToolbar alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
 		_toolbar.delegate = self;
 		[self addSubview:_toolbar];
+		[self addSubview:_pageControl];
 		
 		_collectionView.pagingEnabled = YES;
 		_collectionFlowLayout = [[AAKContentFlowLayout alloc] init];
@@ -58,15 +63,18 @@
 		_collectionView.dataSource = self;
 		[self addSubview:_collectionView];
 		
+		_pageControl.translatesAutoresizingMaskIntoConstraints = NO;
 		_toolbar.translatesAutoresizingMaskIntoConstraints = NO;
 		_collectionView.translatesAutoresizingMaskIntoConstraints = NO;
 		
-		NSDictionary *views = NSDictionaryOfVariableBindings(_toolbar, _collectionView);
+		NSDictionary *views = NSDictionaryOfVariableBindings(_toolbar, _collectionView, _pageControl);
 		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_toolbar]-0-|"
-																		  options:0 metrics:0 views:views]];
+																	 options:0 metrics:0 views:views]];
+		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_pageControl]-0-|"
+																	 options:0 metrics:0 views:views]];
 		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_collectionView]-0-|"
 																		  options:0 metrics:0 views:views]];
-		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_collectionView]-0-[_toolbar]-0-|"
+		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_pageControl(==20)]-0-[_collectionView]-0-[_toolbar]-0-|"
 																		  options:0 metrics:0 views:views]];
 		_toolbarHeightConstraint = [NSLayoutConstraint constraintWithItem:_toolbar
 																attribute:NSLayoutAttributeHeight
