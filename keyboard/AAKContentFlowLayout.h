@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface AAKContentFlowLayout : UICollectionViewFlowLayout
-
+@property (nonatomic, assign) NSInteger numberOfPage;
 @end

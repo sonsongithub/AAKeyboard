@@ -22,4 +22,5 @@
 @interface AAKToolbar : UIView
 @property (nonatomic, assign) id <AAKToolbarDelegate> delegate;
 - (void)setCategories:(NSArray*)categories;
+- (void)layout;
 @end

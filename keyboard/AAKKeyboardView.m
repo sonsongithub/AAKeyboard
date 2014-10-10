@@ -23,12 +23,14 @@
 @implementation AAKKeyboardView
 
 - (void)load {
-	NSInteger itemsPerPage = 2;
+	NSInteger itemsPerPage = 4;
 	CGFloat w = CGRectGetWidth(_collectionView.bounds)/itemsPerPage;
 	CGFloat h = CGRectGetHeight(_collectionView.bounds);
 	_collectionFlowLayout.itemSize = CGSizeMake(w, h);
+	_collectionFlowLayout.numberOfPage = itemsPerPage;
 	[_collectionFlowLayout invalidateLayout];
 	_pageControl.numberOfPages = 20 / itemsPerPage;
+	[_toolbar layout];
 }
 
 - (void)layoutSubviews {
@@ -38,7 +40,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
 	self = [super initWithFrame:frame];
 	if (self) {
-		self.backgroundColor = [UIColor blueColor];
+//		self.backgroundColor = [UIColor blueColor];
 		
 		_pageControl = [[UIPageControl alloc] initWithFrame:CGRectZero];
 		
@@ -47,7 +49,6 @@
 		[self addSubview:_toolbar];
 		[self addSubview:_pageControl];
 		
-		_collectionView.pagingEnabled = YES;
 		_collectionFlowLayout = [[AAKContentFlowLayout alloc] init];
 		_collectionFlowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
 		_collectionFlowLayout.minimumLineSpacing = 0;
@@ -58,6 +59,7 @@
 		_collectionView.alwaysBounceHorizontal = YES;
 		_collectionView.showsHorizontalScrollIndicator = NO;
 		_collectionView.backgroundColor = [UIColor colorWithRed:254.0/255.0f green:254.0/255.0f blue:254.0/255.0f alpha:1];
+		_collectionView.backgroundColor = [UIColor clearColor];
 		[_collectionView registerClass:[AAKContentCell class] forCellWithReuseIdentifier:@"AAKContentCell"];
 		_collectionView.delegate = self;
 		_collectionView.dataSource = self;
@@ -117,6 +119,11 @@
 }
 
 #pragma mark - AAKToolbarDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+	NSIndexPath *indexPath = [_collectionView indexPathForItemAtPoint:_collectionView.contentOffset];
+	_pageControl.currentPage = indexPath.item / 4;
+}
 
 - (void)toolbar:(AAKToolbar*)toolbar didSelectCategoryIndex:(NSInteger)index {
 }

@@ -146,12 +146,16 @@
 
 - (void)layoutSubviews
 {
-	NSLog(@"layoutSubviews");
+	NSLog(@"AAKToolbar layoutSubviews");
 	[super layoutSubviews];
 	NSLog(@"%f", CGRectGetWidth(_collectionView.bounds));
+}
+
+- (void)layout {
 	[self updateWithWidth:CGRectGetWidth(_collectionView.bounds)];
-//	[_collectionFlowLayout invalidateLayout];
+	//	[_collectionFlowLayout invalidateLayout];
 	[_collectionView reloadData];
+	
 }
 
 - (void)updateWithWidth:(CGFloat)width {
@@ -165,8 +169,6 @@
 		s.height = [self toolbarHeight];
 		[buf addObject:[NSValue valueWithCGSize:s]];
 	}
-	NSLog(@"sumation = %f", sumation);
-	NSLog(@"collection = %f", width);
 #if 1
 	CGFloat parentWidth = width;
 	_collectionView.alwaysBounceHorizontal = YES;

@@ -24,6 +24,7 @@
 }
 
 - (void)keyboardViewDidPushDeleteButton:(AAKKeyboardView*)keyboardView {
+	[self.textDocumentProxy deleteBackward];
 }
 
 - (void)keyboardView:(AAKKeyboardView*)keyboardView willInsertString:(NSString*)string {
@@ -39,12 +40,14 @@
 
 - (void)viewDidLayoutSubviews {
 	[super viewDidLayoutSubviews];
+	
 	CGRect screenBounds = [[UIScreen mainScreen] bounds];
 	CGFloat screenWidth = CGRectGetWidth(screenBounds);
 	CGFloat screenHeight = CGRectGetHeight(screenBounds);
 	
-	[self.view removeConstraint:_heightConstraint];
-
+	if (_heightConstraint)
+		[self.view removeConstraint:_heightConstraint];
+	
 	if (screenWidth < screenHeight) {
 		_heightConstraint = [NSLayoutConstraint constraintWithItem:self.view
 														 attribute:NSLayoutAttributeHeight
@@ -72,13 +75,24 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	
-	UIView *view = self.view;
+	[self.view.superview addConstraint:[NSLayoutConstraint constraintWithItem:self.view
+																	attribute:NSLayoutAttributeLeading
+																	relatedBy:NSLayoutRelationEqual
+																	   toItem:self.view.superview
+																	attribute:NSLayoutAttributeLeading
+																   multiplier:1.0
+																	 constant:0.0]];
 	
-	NSDictionary *views = NSDictionaryOfVariableBindings(view);
-	[self.view.superview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[view]-0-|"
-																	  options:0 metrics:0 views:views]];
-	[self.view.superview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[view]-0-|"
-																	  options:0 metrics:0 views:views]];
+	[self.view.superview addConstraint:[NSLayoutConstraint constraintWithItem:self.view
+																	attribute:NSLayoutAttributeTrailing
+																	relatedBy:NSLayoutRelationEqual
+																	   toItem:self.view.superview
+																	attribute:NSLayoutAttributeTrailing
+																   multiplier:1.0
+																	 constant:0.0]];
+	
+	if (_heightConstraint)
+		[self.view removeConstraint:_heightConstraint];
 	
 	CGFloat height = CGRectGetHeight(self.view.bounds);
 	_heightConstraint = [NSLayoutConstraint constraintWithItem:self.view
