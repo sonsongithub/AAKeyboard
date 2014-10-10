@@ -8,39 +8,28 @@
 
 #import "AAKKeyboardView.h"
 #import "AAKToolbar.h"
-#import "AAKContentView.h"
 #import "AAKContentCell.h"
 #import "AAKContentFlowLayout.h"
 
 @interface AAKKeyboardView() <UICollectionViewDataSource, UICollectionViewDelegate> {
 	AAKToolbar *_toolbar;
-//	AAKContentView *_contentView;
 	NSLayoutConstraint	*_toolbarHeightConstraint;
 	UICollectionView	*_collectionView;
 	AAKContentFlowLayout *_collectionFlowLayout;
-	CGFloat w, h;
 }
 @end
 
 @implementation AAKKeyboardView
 
 - (void)load {
-	//	[_contentView load];
-	w = CGRectGetWidth(_collectionView.bounds)/2;
-	h = CGRectGetHeight(_collectionView.bounds);
+	CGFloat w = CGRectGetWidth(_collectionView.bounds)/2;
+	CGFloat h = CGRectGetHeight(_collectionView.bounds);
 	_collectionFlowLayout.itemSize = CGSizeMake(w, h);
 	[_collectionFlowLayout invalidateLayout];
 }
 
-- (void)layoutSubviews
-{
+- (void)layoutSubviews {
 	[super layoutSubviews];
-	//	NSLog(@"layoutSubviews");
-	//	[super layoutSubviews];
-	//	NSLog(@"=======================>%f", CGRectGetWidth(self.bounds));
-	//	_collectionFlowLayout.itemSize = CGSizeMake(CGRectGetWidth(self.bounds)/4, CGRectGetHeight(self.bounds) - 20);
-	//	[_collectionFlowLayout invalidateLayout];
-//		[_collectionView reloadData];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -49,9 +38,7 @@
 		self.backgroundColor = [UIColor blueColor];
 		
 		_toolbar = [[AAKToolbar alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-//		_contentView = [[AAKContentView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
 		[self addSubview:_toolbar];
-//		[self addSubview:_contentView];
 		
 		_collectionView.pagingEnabled = YES;
 		_collectionFlowLayout = [[AAKContentFlowLayout alloc] init];
@@ -64,14 +51,12 @@
 		_collectionView.alwaysBounceHorizontal = YES;
 		_collectionView.showsHorizontalScrollIndicator = NO;
 		_collectionView.backgroundColor = [UIColor colorWithRed:254.0/255.0f green:254.0/255.0f blue:254.0/255.0f alpha:1];
-		//	_collectionView.backgroundColor = [UIColor colorWithRed:203/255.0f green:203/255.0f blue:203/255.0f alpha:1];
 		[_collectionView registerClass:[AAKContentCell class] forCellWithReuseIdentifier:@"AAKContentCell"];
 		_collectionView.delegate = self;
 		_collectionView.dataSource = self;
 		[self addSubview:_collectionView];
 		
 		_toolbar.translatesAutoresizingMaskIntoConstraints = NO;
-//		_contentView.translatesAutoresizingMaskIntoConstraints = NO;
 		_collectionView.translatesAutoresizingMaskIntoConstraints = NO;
 		
 		NSDictionary *views = NSDictionaryOfVariableBindings(_toolbar, _collectionView);
@@ -95,29 +80,9 @@
 		[self addConstraint:_toolbarHeightConstraint];
 		
 		[self updateConstraints];
-		
-//		[_collectionView reloadData];
 	}
 	return self;
 }
-
-
-//- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-//{
-//	return UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f);
-//}
-//
-//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-//	return 0;
-//}
-//
-//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-//	return 0;
-//}
-//
-//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-//	return CGSizeMake(w, h);
-//}
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 	[collectionView deselectItemAtIndexPath:indexPath animated:YES];
