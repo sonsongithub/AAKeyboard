@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@class AAKKeyboardView;
+
+@protocol AAKKeyboardViewDelegate <NSObject>
+
+- (void)keyboardViewDidPushEarthButton:(AAKKeyboardView*)keyboardView;
+- (void)keyboardViewDidPushDeleteButton:(AAKKeyboardView*)keyboardView;
+- (void)keyboardView:(AAKKeyboardView*)keyboardView willInsertString:(NSString*)string;
+
+@end
+
 @interface AAKKeyboardView : UIView
+@property (nonatomic, assign) id <AAKKeyboardViewDelegate> delegate;
 - (void)load;
 @end

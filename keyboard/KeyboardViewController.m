@@ -10,7 +10,7 @@
 
 #import "AAKKeyboardView.h"
 
-@interface KeyboardViewController () {
+@interface KeyboardViewController () <AAKKeyboardViewDelegate> {
 	AAKKeyboardView *_keyboardView;
 	NSLayoutConstraint *_heightConstraint;
 }
@@ -18,22 +18,22 @@
 
 @implementation KeyboardViewController
 
+
+- (void)keyboardViewDidPushEarthButton:(AAKKeyboardView*)keyboardView {
+	[self advanceToNextInputMode];
+}
+
+- (void)keyboardViewDidPushDeleteButton:(AAKKeyboardView*)keyboardView {
+}
+
+- (void)keyboardView:(AAKKeyboardView*)keyboardView willInsertString:(NSString*)string {
+}
+
 - (UITraitCollection *)overrideTraitCollectionForChildViewController:(UIViewController *)childViewController {
 	return self.traitCollection;
 }
 
 - (void)updateViewConstraints {
-//	DNSLogMethod
-//	CGRect screenBounds = [[UIScreen mainScreen] bounds];
-//	CGFloat screenWidth = CGRectGetWidth(screenBounds);
-//	CGFloat screenHeight = CGRectGetHeight(screenBounds);
-//	
-//	if (screenWidth < screenHeight) {
-//		_heightConstraint.constant = 216;
-//	}
-//	else {
-//		_heightConstraint.constant = 162;
-//	}
     [super updateViewConstraints];
 }
 
@@ -98,6 +98,7 @@
 	
 	_keyboardView = [[AAKKeyboardView alloc] initWithFrame:self.view.bounds];
 	_keyboardView.translatesAutoresizingMaskIntoConstraints = NO;
+	_keyboardView.delegate = self;
 	[self.view addSubview:_keyboardView];
 	
 	NSDictionary *views = NSDictionaryOfVariableBindings(_keyboardView);

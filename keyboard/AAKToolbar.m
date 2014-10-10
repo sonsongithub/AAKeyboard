@@ -28,15 +28,15 @@
 @implementation AAKToolbar
 
 - (IBAction)pushEarthKey:(id)sender {
-	NSLog(@"pushEarthKey");
+	[self.delegate toolbar:self didPushEarthButton:sender];
 }
 
 - (IBAction)pushDeleteKey:(id)sender {
-	NSLog(@"pushDeleteKey");
+	[self.delegate toolbar:self didPushDeleteButton:sender];
 }
 
 - (IBAction)pushHistoryKey:(id)sender {
-	NSLog(@"pushHistoryKey");
+	[self.delegate toolbar:self didPushHistoryButton:sender];
 }
 
 - (CGFloat)toolbarHeight {
@@ -215,6 +215,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 	[collectionView deselectItemAtIndexPath:indexPath animated:YES];
+	[self.delegate toolbar:self didSelectCategoryIndex:indexPath.item];
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {

@@ -11,11 +11,12 @@
 #import "AAKContentCell.h"
 #import "AAKContentFlowLayout.h"
 
-@interface AAKKeyboardView() <UICollectionViewDataSource, UICollectionViewDelegate> {
+@interface AAKKeyboardView() <UICollectionViewDataSource, UICollectionViewDelegate, AAKToolbarDelegate> {
 	AAKToolbar *_toolbar;
 	NSLayoutConstraint	*_toolbarHeightConstraint;
 	UICollectionView	*_collectionView;
 	AAKContentFlowLayout *_collectionFlowLayout;
+	UIPageControl *_pageControl;
 }
 @end
 
@@ -38,6 +39,7 @@
 		self.backgroundColor = [UIColor blueColor];
 		
 		_toolbar = [[AAKToolbar alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+		_toolbar.delegate = self;
 		[self addSubview:_toolbar];
 		
 		_collectionView.pagingEnabled = YES;
@@ -104,6 +106,22 @@
 	AAKContentCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"AAKContentCell" forIndexPath:indexPath];
 	cell.label.text = [NSString stringWithFormat:@"%ld", indexPath.item];
 	return cell;
+}
+
+#pragma mark - AAKToolbarDelegate
+
+- (void)toolbar:(AAKToolbar*)toolbar didSelectCategoryIndex:(NSInteger)index {
+}
+
+- (void)toolbar:(AAKToolbar*)toolbar didPushEarthButton:(UIButton*)button {
+	[self.delegate keyboardViewDidPushEarthButton:self];
+}
+
+- (void)toolbar:(AAKToolbar*)toolbar didPushHistoryButton:(UIButton*)button {
+}
+
+- (void)toolbar:(AAKToolbar*)toolbar didPushDeleteButton:(UIButton*)button {
+	[self.delegate keyboardViewDidPushDeleteButton:self];
 }
 
 @end
