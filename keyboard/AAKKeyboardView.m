@@ -25,9 +25,35 @@
 
 - (void)load {
 	NSInteger itemsPerPage = 3;
-	CGFloat w = CGRectGetWidth(_collectionView.bounds)/itemsPerPage;
+	CGFloat w = CGRectGetWidth(self.bounds);
+	NSLog(@"width =	%f", w);
+	if (w == 1024) {
+		itemsPerPage = 8;
+	}
+	else if (w == 768) {
+		itemsPerPage = 6;
+	}
+	else if (w == 736) {
+		itemsPerPage = 6;
+	}
+	else if (w == 667) {
+		itemsPerPage = 6;
+	}
+	else if (w == 480) {
+		itemsPerPage = 6;
+	}
+	else if (w == 414) {
+		itemsPerPage = 4;
+	}
+	else if (w == 375) {
+		itemsPerPage = 4;
+	}
+	else if (w == 320) {
+		itemsPerPage = 4;
+	}
+	CGFloat pageWidth = w / itemsPerPage;
 	CGFloat h = CGRectGetHeight(_collectionView.bounds);
-	_collectionFlowLayout.itemSize = CGSizeMake(w, h);
+	_collectionFlowLayout.itemSize = CGSizeMake(pageWidth, h);
 	_collectionFlowLayout.numberOfPage = itemsPerPage;
 	[_collectionFlowLayout invalidateLayout];
 	[_toolbar layout];
@@ -78,7 +104,7 @@
 															   multiplier:1
 																 constant:48];
 		
-		[_toolbar setCategories:@[@"やる夫", @"やらない夫"]];
+		[_toolbar setCategories:@[@"history", @"やaa夫", @"やらない夫", @"kkk"]];
 		
 		_strings = @[
 					 @"　　　　　∧_∧::\n　　　　 (´Д`)::\n　　　 /⌒　　⌒)::\n　　　/ へ_＿/ /::\n　　 (＿＼＼ﾐ)/::\n　　　 ｜ `-イ::\n　　　 /ｙ　 )::\n　　　/／　／::\n　　 ／　／::\n　　(　く:::\n　　|＼ ヽ:::\n＼　| |＼ ⌒i:\n　＼| |::＼〈:\n　 ノ ):: (_ﾉ:\n　(_／＼\n　　　　＼",
@@ -120,13 +146,13 @@
 	NSDictionary *attributes = @{NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:[UIFont fontWithName:@"Mona" size:fontSize]};
 	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:source attributes:attributes];
 	cell.textView.attributedString = string;
+	[cell.label sizeToFit];
 	return cell;
 }
 
 #pragma mark - AAKToolbarDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-	NSIndexPath *indexPath = [_collectionView indexPathForItemAtPoint:_collectionView.contentOffset];
 }
 
 - (void)toolbar:(AAKToolbar*)toolbar didSelectCategoryIndex:(NSInteger)index {

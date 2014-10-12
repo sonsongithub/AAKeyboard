@@ -9,6 +9,7 @@
 #import "AAKToolbar.h"
 
 #import "AAKToolbarCell.h"
+#import "AAKToolbarHistoryCell.h"
 
 @interface AAKToolbar() <UICollectionViewDataSource, UICollectionViewDelegate> {
 	UICollectionView	*_collectionView;
@@ -16,11 +17,9 @@
 	NSArray				*_categories;
 	NSArray				*_sizeOfCategories;
 	UIButton			*_earthKey;
-	UIButton			*_historyKey;
 	UIButton			*_deleteKey;
 	
 	NSLayoutConstraint	*_earthKeyWidthConstraint;
-	NSLayoutConstraint	*_historyKeyWidthConstraint;
 	NSLayoutConstraint	*_deleteKeyWidthConstraint;
 }
 @end
@@ -60,13 +59,6 @@
 	[_deleteKey addTarget:self action:@selector(pushDeleteKey:) forControlEvents:UIControlEventTouchUpInside];
 	[_deleteKey setBackgroundImage:[UIImage imageNamed:@"buttonBackHighlightedState"] forState:UIControlStateHighlighted];
 	[_deleteKey setBackgroundImage:[UIImage imageNamed:@"buttonBackNormalState"] forState:UIControlStateNormal];
-	
-	_historyKey = [[UIButton alloc] initWithFrame:CGRectZero];
-	[_historyKey setImage:[UIImage imageNamed:@"history"] forState:UIControlStateNormal];
-	_historyKey.backgroundColor = [UIColor colorWithRed:203/255.0f green:203/255.0f blue:203/255.0f alpha:1];
-	[_historyKey addTarget:self action:@selector(pushHistoryKey:) forControlEvents:UIControlEventTouchUpInside];
-	[_historyKey setBackgroundImage:[UIImage imageNamed:@"buttonBackHighlightedState"] forState:UIControlStateHighlighted];
-	[_historyKey setBackgroundImage:[UIImage imageNamed:@"buttonBackNormalState"] forState:UIControlStateNormal];
 }
 
 
@@ -90,20 +82,19 @@
 		_collectionView.backgroundColor = [UIColor colorWithRed:254.0/255.0f green:254.0/255.0f blue:254.0/255.0f alpha:1];
 		//	_collectionView.backgroundColor = [UIColor colorWithRed:203/255.0f green:203/255.0f blue:203/255.0f alpha:1];
 		[_collectionView registerClass:[AAKToolbarCell class] forCellWithReuseIdentifier:@"AAKToolbarCell"];
+		[_collectionView registerClass:[AAKToolbarHistoryCell class] forCellWithReuseIdentifier:@"AAKToolbarHistoryCell"];
 		_collectionView.delegate = self;
 		_collectionView.dataSource = self;
 		
 		[self addSubview:_collectionView];
 		[self addSubview:_earthKey];
 		[self addSubview:_deleteKey];
-		[self addSubview:_historyKey];
 		
 		_collectionView.translatesAutoresizingMaskIntoConstraints = NO;
 		_earthKey.translatesAutoresizingMaskIntoConstraints = NO;
 		_deleteKey.translatesAutoresizingMaskIntoConstraints = NO;
-		_historyKey.translatesAutoresizingMaskIntoConstraints = NO;
 		
-		NSDictionary *views = NSDictionaryOfVariableBindings(_collectionView, _earthKey, _deleteKey, _historyKey);
+		NSDictionary *views = NSDictionaryOfVariableBindings(_collectionView, _earthKey, _deleteKey);
 		
 		_earthKeyWidthConstraint = [NSLayoutConstraint constraintWithItem:_earthKey
 																attribute:NSLayoutAttributeWidth
@@ -121,24 +112,14 @@
 																multiplier:1
 																  constant:[self buttonWidth]];
 		[self addConstraint:_deleteKeyWidthConstraint];
-		_historyKeyWidthConstraint = [NSLayoutConstraint constraintWithItem:_historyKey
-																  attribute:NSLayoutAttributeWidth
-																  relatedBy:NSLayoutRelationEqual
-																	 toItem:nil
-																  attribute:NSLayoutAttributeNotAnAttribute
-																 multiplier:1
-																   constant:[self buttonWidth]];
-		[self addConstraint:_historyKeyWidthConstraint];
 		
-		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_earthKey]-0-[_historyKey]-0-[_collectionView(>=0)]-0-[_deleteKey]-(==0)-|"
+		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_earthKey]-0-[_collectionView(>=0)]-0-[_deleteKey]-(==0)-|"
 																		  options:0 metrics:0 views:views]];
 		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_collectionView(>=0)]-(==0)-|"
 																		  options:0 metrics:0 views:views]];
 		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_earthKey(>=0)]-(==0)-|"
 																		  options:0 metrics:0 views:views]];
 		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_deleteKey(>=0)]-(==0)-|"
-																		  options:0 metrics:0 views:views]];
-		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_historyKey(>=0)]-(==0)-|"
 																		  options:0 metrics:0 views:views]];
 	}
 	return self;
@@ -232,10 +213,19 @@
 	return [_categories count];
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath; {
-	AAKToolbarCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"AAKToolbarCell" forIndexPath:indexPath];
-	cell.label.text = [_categories objectAtIndex:indexPath.item];
+- (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+	AAKToolbarCell *cell = nil;
+	NSString *temp = [_categories objectAtIndex:indexPath.item];
+	
+	if ([temp isEqualToString:@"history"]) {
+		cell = [cv dequeueReusableCellWithReuseIdentifier:@"AAKToolbarHistoryCell" forIndexPath:indexPath];
+	}
+	else {
+		cell = [cv dequeueReusableCellWithReuseIdentifier:@"AAKToolbarCell" forIndexPath:indexPath];
+		cell.label.text = [_categories objectAtIndex:indexPath.item];
+	}
 	cell.isHead = (indexPath.item == 0);
+	[cell.label sizeToFit];
 	return cell;
 }
 

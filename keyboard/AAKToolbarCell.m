@@ -14,25 +14,30 @@
 	self.backgroundColor = [UIColor blueColor];
 	self.contentView.backgroundColor = [UIColor clearColor];
 	_label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-//	_label.backgroundColor = [UIColor redColor];
 	_label.textColor = [UIColor colorWithRed:0 green:120.0/255.0f blue:255.0/255.0f alpha:1];
 	_label.textColor = [UIColor blackColor];
 	_label.textAlignment = NSTextAlignmentCenter;
-	_label.adjustsFontSizeToFitWidth = NO;
+	_label.adjustsFontSizeToFitWidth = YES;
 	_label.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
 	[_label setFont:[UIFont systemFontOfSize:16]];
 	[self.contentView addSubview:_label];
 	
+#if 0
+	NSDictionary *views = NSDictionaryOfVariableBindings(_label);
 	_label.translatesAutoresizingMaskIntoConstraints = NO;
-	
-	_label.translatesAutoresizingMaskIntoConstraints = NO;
-	[self.contentView addConstraint: [NSLayoutConstraint constraintWithItem:_label  attribute:NSLayoutAttributeCenterX  relatedBy:NSLayoutRelationEqual  toItem:self.contentView  attribute:NSLayoutAttributeCenterX  multiplier:1  constant:0 ] ] ;
-	[self.contentView addConstraint: [NSLayoutConstraint constraintWithItem:_label  attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual  toItem:self.contentView  attribute:NSLayoutAttributeCenterY multiplier:1  constant:0 ] ] ;
-	[self.contentView updateConstraints];
+	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_label]-0-|"
+																 options:0 metrics:0 views:views]];
+	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_label]-0-|"
+																 options:0 metrics:0 views:views]];
+#endif
 	
 	self.selectedBackgroundView = [[UIView alloc] initWithFrame:self.frame];
 	self.selectedBackgroundView.backgroundColor = [UIColor colorWithRed:222/255.0f green:222/255.0f blue:227/255.0f alpha:1];
+}
 
+- (void)layoutSubviews {
+	NSLog(@"AAKToolbarCell= layoutSubviews");
+	_label.center = self.contentView.center;
 }
 
 - (void)setBounds:(CGRect)bounds {
