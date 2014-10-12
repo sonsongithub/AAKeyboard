@@ -7,9 +7,13 @@
 //
 
 #import "AAKContentCell.h"
+#import "AAKTextView.h"
 
 @interface AAKContentCell() {
-	UILabel *_label;
+	UILabel		*_label;
+	AAKTextView	*_textView;
+	NSLayoutConstraint *_widthConstraint;
+	NSLayoutConstraint *_heightConstraint;
 }
 @end
 
@@ -21,23 +25,19 @@
 }
 
 - (void)privateInit {
-	_label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-	_label.textColor = [UIColor blackColor];
-	_label.backgroundColor = [UIColor lightGrayColor];
-	_label.textAlignment = NSTextAlignmentCenter;
-	_label.adjustsFontSizeToFitWidth = NO;
-	_label.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
-	[_label setFont:[UIFont systemFontOfSize:16]];
-	[self.contentView addSubview:_label];
+	_textView = [[AAKTextView alloc] initWithFrame:CGRectZero];
+	[self.contentView addSubview:_textView];
+	_textView.translatesAutoresizingMaskIntoConstraints = NO;
+	_textView.backgroundColor = [UIColor clearColor];
+	_textView.userInteractionEnabled = NO;
 	
-	_label.translatesAutoresizingMaskIntoConstraints = NO;
-
-	NSDictionary *views = NSDictionaryOfVariableBindings(_label);
 	
-	[self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[_label]-10-|"
-																 options:0 metrics:0 views:views]];
-	[self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_label]-10-|"
-																 options:0 metrics:0 views:views]];
+	NSDictionary *views = NSDictionaryOfVariableBindings(_textView);
+	
+	[self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[_textView]-10-|"
+																			 options:0 metrics:0 views:views]];
+	[self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_textView]-10-|"
+																			 options:0 metrics:0 views:views]];
 	
 	self.selectedBackgroundView = [[UIView alloc] initWithFrame:self.frame];
 	self.selectedBackgroundView.backgroundColor = [UIColor colorWithRed:222/255.0f green:222/255.0f blue:227/255.0f alpha:1];

@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+#import "AAKTextView.h"
+
 @interface AAKContentCell : UICollectionViewCell
 @property (nonatomic, readonly) UILabel *label;
+@property (nonatomic, readonly) AAKTextView *textView;
 @end

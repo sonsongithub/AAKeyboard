@@ -40,5 +40,9 @@
 		<key>NSExtensionPrincipalClass</key>
 		<string>KeyboardViewController</string>
 	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>mona.ttf</string>
+	</array>
 </dict>
 </plist>

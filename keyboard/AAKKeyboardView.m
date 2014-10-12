@@ -10,26 +10,26 @@
 #import "AAKToolbar.h"
 #import "AAKContentCell.h"
 #import "AAKContentFlowLayout.h"
+#import "NSParagraphStyle+keyboard.h"
 
 @interface AAKKeyboardView() <UICollectionViewDataSource, UICollectionViewDelegate, AAKToolbarDelegate> {
 	AAKToolbar *_toolbar;
 	NSLayoutConstraint	*_toolbarHeightConstraint;
 	UICollectionView	*_collectionView;
 	AAKContentFlowLayout *_collectionFlowLayout;
-	UIPageControl *_pageControl;
+	NSArray *_strings;
 }
 @end
 
 @implementation AAKKeyboardView
 
 - (void)load {
-	NSInteger itemsPerPage = 4;
+	NSInteger itemsPerPage = 3;
 	CGFloat w = CGRectGetWidth(_collectionView.bounds)/itemsPerPage;
 	CGFloat h = CGRectGetHeight(_collectionView.bounds);
 	_collectionFlowLayout.itemSize = CGSizeMake(w, h);
 	_collectionFlowLayout.numberOfPage = itemsPerPage;
 	[_collectionFlowLayout invalidateLayout];
-	_pageControl.numberOfPages = 20 / itemsPerPage;
 	[_toolbar layout];
 }
 
@@ -40,14 +40,9 @@
 - (instancetype)initWithFrame:(CGRect)frame {
 	self = [super initWithFrame:frame];
 	if (self) {
-//		self.backgroundColor = [UIColor blueColor];
-		
-		_pageControl = [[UIPageControl alloc] initWithFrame:CGRectZero];
-		
 		_toolbar = [[AAKToolbar alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
 		_toolbar.delegate = self;
 		[self addSubview:_toolbar];
-		[self addSubview:_pageControl];
 		
 		_collectionFlowLayout = [[AAKContentFlowLayout alloc] init];
 		_collectionFlowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
@@ -65,18 +60,15 @@
 		_collectionView.dataSource = self;
 		[self addSubview:_collectionView];
 		
-		_pageControl.translatesAutoresizingMaskIntoConstraints = NO;
 		_toolbar.translatesAutoresizingMaskIntoConstraints = NO;
 		_collectionView.translatesAutoresizingMaskIntoConstraints = NO;
 		
-		NSDictionary *views = NSDictionaryOfVariableBindings(_toolbar, _collectionView, _pageControl);
+		NSDictionary *views = NSDictionaryOfVariableBindings(_toolbar, _collectionView);
 		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_toolbar]-0-|"
-																	 options:0 metrics:0 views:views]];
-		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_pageControl]-0-|"
 																	 options:0 metrics:0 views:views]];
 		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_collectionView]-0-|"
 																		  options:0 metrics:0 views:views]];
-		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_pageControl(==20)]-0-[_collectionView]-0-[_toolbar]-0-|"
+		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_collectionView]-0-[_toolbar]-0-|"
 																		  options:0 metrics:0 views:views]];
 		_toolbarHeightConstraint = [NSLayoutConstraint constraintWithItem:_toolbar
 																attribute:NSLayoutAttributeHeight
@@ -86,8 +78,15 @@
 															   multiplier:1
 																 constant:48];
 		
-		[_toolbar setCategories:@[@"hoge", @"hoooo"]];
-//		[_toolbar setCategories:@[@"hoge", @"hoooo",@"hoge", @"hoooo",@"hoge", @"hoooo"]];
+		[_toolbar setCategories:@[@"やる夫", @"やらない夫"]];
+		
+		_strings = @[
+					 @"　　　　　∧_∧::\n　　　　 (´Д`)::\n　　　 /⌒　　⌒)::\n　　　/ へ_＿/ /::\n　　 (＿＼＼ﾐ)/::\n　　　 ｜ `-イ::\n　　　 /ｙ　 )::\n　　　/／　／::\n　　 ／　／::\n　　(　く:::\n　　|＼ ヽ:::\n＼　| |＼ ⌒i:\n　＼| |::＼〈:\n　 ノ ):: (_ﾉ:\n　(_／＼\n　　　　＼",
+					 @"　 　 　　　＿＿＿_ \n　 　　　／⌒　　⌒＼ \n　　　／（ ●） 　（●）＼ \n　 ／::::::⌒（__人__）⌒::::: ＼\n　 |　　　　　|r┬-|　　　　　| \n　 ＼ 　　 　 `ー'´ 　 　 ／",
+					 @"　 　　　＿＿＿_\n　　　／　　 　 　＼ （ ;;;;(\n　 ／　　＿ノ　 ヽ__＼) ;;;;)\n／ 　　 （─） 　（─ /;;／\n|　 　　 　 （__人__） l;;,´\n/　　　 　 ∩ ノ)━・'／\n(　 ＼　／ ＿ノ´.|　 |\n.＼　 \" 　／＿＿|　 |\n　　＼ ／＿＿＿ ／",
+					 @"　 　　　　 　　　＿＿＿_ \n　　　　　　　 ／_ノ 　ヽ､_＼ \n　ﾐ　ﾐ　ﾐ　　oﾟ(（●）) (（●）)ﾟo　　　　　　ﾐ　ﾐ　ﾐ\n/⌒)⌒)⌒. ::::::⌒（__人__）⌒:::＼　　　/⌒)⌒)⌒) \n|　/　/　/　　　　 　|r┬-|　　　　|　(⌒)/　/ / /／　　 \n|　:::::::::::(⌒)　　　　|　|　 |　　 ／ 　ゝ　　:::::::::::/ \n|　　　　　ノ　　 　　|　|　 |　 　＼　　/　　）　　/ 　 \nヽ　　　　/　　　　　　`ー'´ 　 　 　ヽ /　　　　／　　　　　 \n　|　　　　|　　 l||l　从人 l||l 　　　　 l||l 从人 l||l　　　バ　　　 \n　ヽ　　　 -一''''''\"～～｀`'ー--､　　　-一'''''''ー-､　ン \n　　ヽ ＿＿＿＿(⌒)(⌒)⌒)　)　　(⌒＿(⌒)⌒)⌒)) バ \n　　　　　　　　　　　　　　　　　　　　　　　　　　　　　ン",
+					 @"　　　　　　　　　　　　　　　　　　　 ／\n　　　　　　　　　　　　　　　　　 ,r'´\n　　　　　　　　　　　　　　　　／,ノ\n　　　　　　　　　　 　 　 　　/r' /\n　　　　 　　 　 　 　 　　　　!' /　　　　　　　　　　　　　　　　　　ﾉ　　i\n　　　　　 　 　 　 　 　 　 　 /　　　　　　　　　　　　　　　　　,.r'　　ノ !　|\n　　　　　　　　　　　　　　　 !　　　 　　　　　　　_,..r　　_,..r:〆　,.:イ　 | λ\n　　　ぼうやだからさ　　　i　　　　　　　　　,r '　,. r ' ´ ／,..イ’　　 丿/ '; 、\n　　　　　　　　　　　　　　　|　　　　　　　 ／,／´　　　.i'／　　　　 ノ／　 ヾt､\n　　　　　　 　 　　　 　　 　 !i !　　　　,.: ----- :...,_,......!.,,__ _,.. ::--' ´= :..,,_　'j'ヽ\n　　　　　　　　　　　　　　　 t !　　 /´::::::::::::::::::::::::::ヾ,~｀`'ヽ::::::::::::::::::::::::::::::`'':::..,t,\n　　　　　　　　　　　　　　　　ヾ　　i:::: : : : :..　　 :::::::::!j　 t`:::::: :: : : : : : : :::::::::::::::::':,\n　　　　　　　　　　　　　　　　　':,　 i::: : : : :::: : : : : : :ノ,:　 ゝ ﾐ: : : : : :::: : : : : :::::::::::!\n　　　　　　　　　　　 　 　　 　　 ヽ .'､...;;;;;;;;;;;;;..... ,.ｲ　,'　　　　ヽ : ..:::::: ::.... : : ::::::丿\n　　　　　　　　　　　　　　　__,...r-‐ヽ:ゝ.,,_:::::::,..r'´.　 ;'　　　　　 `: 、::::::::::::::: : ::ノ!\n　　　　　　　　　　　　　　/　! 　 　 　 ヽ｀~t　　　　/　　　　　　　　 `'- =::- ''´ ﾉ\n　　　　　　　　　　　　　 /　|　　　　　　 ）.:-+--‐‐k.、　　　　　　　　　 ゝk,.....イ/\n　　 　 　　　　　 　　　 /　. i　　　 ./='''\"_,,'y.',　　 \"''`ヽ､::　　　　　　ゝ :.,,~,.ノ´\n　　　　　　　　　　　　/　　 .!　　._/,,,,../'--'　 ':.、　　　-='::,=--　　　　 ヽ ,,.._,..イ\n　　　　　　　　　　　　.!　 ／''\"~~　　　~`\"'t--.,,＼　　　 .....'.;　　　　　　　:: ~' : . ,,__\n　　　　　　　　　　 ,r ' !／　　　　　　　　　!...,,丿__＼　 __,,..ノ　　　　　 .:::,..r '　: : :\n　　　　　　　　　　.i　／　　　　 ,......k-'' ‐-‐ '´　 ｀~T~k, . . ;'　　　 _,..:::''´ : : ,.. r:''\"\n　　　　　　　　　　,|.(´ _,,,,,.... -'\"-=`',,k___　　　　,r '\"~~`y''/‐‐ '''\": : :,. r:::''\": : : :\n　　　　　　　　　/ /''\"´　　　　　　　　 ~~`ヽ, ::/ : : : : .ノ.;:'　,..r:'ヽ,,/.,,......,_\n　　　　　　　　 / （　　　　　　　　 　 　　 　 ﾉヾ､: : : ／::;',.／　　　 ~`''‐-:ヽ\n　　　　　　　 ./　 .）　　---=''~~~='''''''', .､_ ゝ.,.ノ ::r': : :;' ´　!　　　　　　　　>,\n　　　　　　　/　　/　　　　　　　　　　　 `''t~~: : / : : ::;'　　　';　　　　　　.／　'.\n　　　　　　./　　 ヽ　　　　　　　 　 　 　 .ﾉ　 `y　: : :/ 　　　'k　　　　 ／　　　ヽ",
+					 ];
 		
 		[self addConstraint:_toolbarHeightConstraint];
 		
@@ -109,12 +108,18 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
-	return 20;
+	return [_strings count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath; {
 	AAKContentCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"AAKContentCell" forIndexPath:indexPath];
 	cell.label.text = [NSString stringWithFormat:@"%ld", indexPath.item];
+	CGFloat fontSize = 15;
+	NSString *source = _strings[indexPath.item];
+	NSParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyleWithFontSize:fontSize];
+	NSDictionary *attributes = @{NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:[UIFont fontWithName:@"Mona" size:fontSize]};
+	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:source attributes:attributes];
+	cell.textView.attributedString = string;
 	return cell;
 }
 
@@ -122,7 +127,6 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 	NSIndexPath *indexPath = [_collectionView indexPathForItemAtPoint:_collectionView.contentOffset];
-	_pageControl.currentPage = indexPath.item / 4;
 }
 
 - (void)toolbar:(AAKToolbar*)toolbar didSelectCategoryIndex:(NSInteger)index {
