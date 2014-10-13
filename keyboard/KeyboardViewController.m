@@ -9,6 +9,7 @@
 #import "KeyboardViewController.h"
 
 #import "AAKKeyboardView.h"
+#import "AAKHelper.h"
 
 @interface KeyboardViewController () <AAKKeyboardViewDelegate> {
 	AAKKeyboardView *_keyboardView;
@@ -18,6 +19,9 @@
 
 @implementation KeyboardViewController
 
+- (void)dealloc {
+	DNSLogMethod
+}
 
 - (void)keyboardViewDidPushEarthButton:(AAKKeyboardView*)keyboardView {
 	[self advanceToNextInputMode];

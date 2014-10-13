@@ -111,6 +111,7 @@
 		14CB158719EB420F00D05E9C /* AAKASCIIArt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKASCIIArt.m; sourceTree = "<group>"; };
 		14CB158A19EB56F600D05E9C /* AAKASCIIArtGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKASCIIArtGroup.h; sourceTree = "<group>"; };
 		14CB158B19EB56F600D05E9C /* AAKASCIIArtGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKASCIIArtGroup.m; sourceTree = "<group>"; };
+		14CB158E19EBC3B900D05E9C /* AAKHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKHelper.h; sourceTree = "<group>"; };
 		14F7A2F019E781A9007585CF /* AAKContentFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKContentFlowLayout.h; sourceTree = "<group>"; };
 		14F7A2F119E781A9007585CF /* AAKContentFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKContentFlowLayout.m; sourceTree = "<group>"; };
 		14FBD3A319E21213005FC38B /* AAKeyboardApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AAKeyboardApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -279,6 +280,7 @@
 				14FBD3D419E21263005FC38B /* KeyboardViewController.h */,
 				14FBD3D519E21263005FC38B /* KeyboardViewController.m */,
 				14FBD3D219E21263005FC38B /* Supporting Files */,
+				14CB158E19EBC3B900D05E9C /* AAKHelper.h */,
 			);
 			path = keyboard;
 			sourceTree = "<group>";
