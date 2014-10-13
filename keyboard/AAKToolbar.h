@@ -14,7 +14,6 @@
 
 - (void)toolbar:(AAKToolbar*)toolbar didSelectCategoryIndex:(NSInteger)index;
 - (void)toolbar:(AAKToolbar*)toolbar didPushEarthButton:(UIButton*)button;
-- (void)toolbar:(AAKToolbar*)toolbar didPushHistoryButton:(UIButton*)button;
 - (void)toolbar:(AAKToolbar*)toolbar didPushDeleteButton:(UIButton*)button;
 
 @end

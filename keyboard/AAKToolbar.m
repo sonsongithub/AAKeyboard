@@ -34,10 +34,6 @@
 	[self.delegate toolbar:self didPushDeleteButton:sender];
 }
 
-- (IBAction)pushHistoryKey:(id)sender {
-	[self.delegate toolbar:self didPushHistoryButton:sender];
-}
-
 - (CGFloat)toolbarHeight {
 	return 48;
 }
