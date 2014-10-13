@@ -11,6 +11,16 @@
 		145A376219E4316200BE34BE /* DummyKeyboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 145A376119E4316200BE34BE /* DummyKeyboardViewController.m */; };
 		1491181319E42AA80039488F /* UITraitCollection+keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 1491181219E42AA80039488F /* UITraitCollection+keyboard.m */; };
 		1491181419E42AA80039488F /* UITraitCollection+keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 1491181219E42AA80039488F /* UITraitCollection+keyboard.m */; };
+		14A5138419EC68530098C02C /* ActionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A5138319EC68530098C02C /* ActionViewController.m */; };
+		14A5138619EC68530098C02C /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14A5138519EC68530098C02C /* MainInterface.storyboard */; };
+		14A5138919EC68530098C02C /* register.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 14A5137E19EC68530098C02C /* register.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		14A5139119EC75300098C02C /* extension_js.js in Resources */ = {isa = PBXBuildFile; fileRef = 14A5138F19EC75300098C02C /* extension_js.js */; };
+		14A5139319EC85710098C02C /* UZCursorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CB155F19E935BB00D05E9C /* UZCursorView.m */; };
+		14A5139419EC85710098C02C /* UZLoupeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CB156119E935BB00D05E9C /* UZLoupeView.m */; };
+		14A5139519EC85710098C02C /* UZTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CB156319E935BB00D05E9C /* UZTextView.m */; };
+		14A5139619EC85750098C02C /* AAKTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CB156F19E9C3C200D05E9C /* AAKTextView.m */; };
+		14A5139719EC857E0098C02C /* NSParagraphStyle+keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CB157719E9C73900D05E9C /* NSParagraphStyle+keyboard.m */; };
+		14A5139819EC85BF0098C02C /* mona.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14CB156B19E935D700D05E9C /* mona.ttf */; };
 		14B2673E19E6BFD000C0321D /* AAKToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B2673D19E6BFD000C0321D /* AAKToolbar.m */; };
 		14B2673F19E6BFD300C0321D /* AAKToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B2673D19E6BFD000C0321D /* AAKToolbar.m */; };
 		14B2674219E6BFE900C0321D /* AAKKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B2674119E6BFE900C0321D /* AAKKeyboardView.m */; };
@@ -51,6 +61,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		14A5138719EC68530098C02C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 14FBD39B19E21213005FC38B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 14A5137D19EC68530098C02C;
+			remoteInfo = register;
+		};
+		14A5138A19EC68530098C02C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 14FBD39B19E21213005FC38B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 14A5137D19EC68530098C02C;
+			remoteInfo = register;
+		};
 		14FBD3BD19E21213005FC38B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 14FBD39B19E21213005FC38B /* Project object */;
@@ -75,6 +99,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				14FBD3D919E21263005FC38B /* keyboard.appex in Embed App Extensions */,
+				14A5138919EC68530098C02C /* register.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -86,6 +111,12 @@
 		145A376119E4316200BE34BE /* DummyKeyboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DummyKeyboardViewController.m; sourceTree = "<group>"; };
 		1491181119E42AA80039488F /* UITraitCollection+keyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITraitCollection+keyboard.h"; sourceTree = "<group>"; };
 		1491181219E42AA80039488F /* UITraitCollection+keyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITraitCollection+keyboard.m"; sourceTree = "<group>"; };
+		14A5137E19EC68530098C02C /* register.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = register.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		14A5138119EC68530098C02C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		14A5138219EC68530098C02C /* ActionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActionViewController.h; sourceTree = "<group>"; };
+		14A5138319EC68530098C02C /* ActionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActionViewController.m; sourceTree = "<group>"; };
+		14A5138519EC68530098C02C /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
+		14A5138F19EC75300098C02C /* extension_js.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = extension_js.js; sourceTree = "<group>"; };
 		14B2673C19E6BFD000C0321D /* AAKToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKToolbar.h; sourceTree = "<group>"; };
 		14B2673D19E6BFD000C0321D /* AAKToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKToolbar.m; sourceTree = "<group>"; };
 		14B2674019E6BFE900C0321D /* AAKKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKKeyboardView.h; sourceTree = "<group>"; };
@@ -134,6 +165,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		14A5137B19EC68530098C02C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		14FBD3A019E21213005FC38B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -158,6 +196,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		14A5137F19EC68530098C02C /* register */ = {
+			isa = PBXGroup;
+			children = (
+				14A5138219EC68530098C02C /* ActionViewController.h */,
+				14A5138319EC68530098C02C /* ActionViewController.m */,
+				14A5138519EC68530098C02C /* MainInterface.storyboard */,
+				14A5138019EC68530098C02C /* Supporting Files */,
+			);
+			path = register;
+			sourceTree = "<group>";
+		};
+		14A5138019EC68530098C02C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				14A5138119EC68530098C02C /* Info.plist */,
+				14A5138F19EC75300098C02C /* extension_js.js */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		14CB155C19E935BB00D05E9C /* vendor */ = {
 			isa = PBXGroup;
 			children = (
@@ -195,6 +253,7 @@
 				14FBD3A519E21213005FC38B /* AAKeyboardApp */,
 				14FBD3BF19E21213005FC38B /* AAKeyboardAppTests */,
 				14FBD3D119E21263005FC38B /* keyboard */,
+				14A5137F19EC68530098C02C /* register */,
 				14FBD3A419E21213005FC38B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -205,6 +264,7 @@
 				14FBD3A319E21213005FC38B /* AAKeyboardApp.app */,
 				14FBD3BC19E21213005FC38B /* AAKeyboardAppTests.xctest */,
 				14FBD3D019E21263005FC38B /* keyboard.appex */,
+				14A5137E19EC68530098C02C /* register.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -296,6 +356,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		14A5137D19EC68530098C02C /* register */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 14A5138E19EC68530098C02C /* Build configuration list for PBXNativeTarget "register" */;
+			buildPhases = (
+				14A5137A19EC68530098C02C /* Sources */,
+				14A5137B19EC68530098C02C /* Frameworks */,
+				14A5137C19EC68530098C02C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = register;
+			productName = register;
+			productReference = 14A5137E19EC68530098C02C /* register.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		14FBD3A219E21213005FC38B /* AAKeyboardApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 14FBD3C619E21213005FC38B /* Build configuration list for PBXNativeTarget "AAKeyboardApp" */;
@@ -309,6 +386,8 @@
 			);
 			dependencies = (
 				14FBD3D819E21263005FC38B /* PBXTargetDependency */,
+				14A5138819EC68530098C02C /* PBXTargetDependency */,
+				14A5138B19EC68530098C02C /* PBXTargetDependency */,
 			);
 			name = AAKeyboardApp;
 			productName = AAKeyboardApp;
@@ -359,6 +438,9 @@
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = sonson;
 				TargetAttributes = {
+					14A5137D19EC68530098C02C = {
+						CreatedOnToolsVersion = 6.0.1;
+					};
 					14FBD3A219E21213005FC38B = {
 						CreatedOnToolsVersion = 6.1;
 					};
@@ -387,11 +469,22 @@
 				14FBD3A219E21213005FC38B /* AAKeyboardApp */,
 				14FBD3BB19E21213005FC38B /* AAKeyboardAppTests */,
 				14FBD3CF19E21263005FC38B /* keyboard */,
+				14A5137D19EC68530098C02C /* register */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		14A5137C19EC68530098C02C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14A5139119EC75300098C02C /* extension_js.js in Resources */,
+				14A5138619EC68530098C02C /* MainInterface.storyboard in Resources */,
+				14A5139819EC85BF0098C02C /* mona.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		14FBD3A119E21213005FC38B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -422,6 +515,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		14A5137A19EC68530098C02C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14A5139719EC857E0098C02C /* NSParagraphStyle+keyboard.m in Sources */,
+				14A5138419EC68530098C02C /* ActionViewController.m in Sources */,
+				14A5139319EC85710098C02C /* UZCursorView.m in Sources */,
+				14A5139519EC85710098C02C /* UZTextView.m in Sources */,
+				14A5139419EC85710098C02C /* UZLoupeView.m in Sources */,
+				14A5139619EC85750098C02C /* AAKTextView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		14FBD39F19E21213005FC38B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -480,6 +586,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		14A5138819EC68530098C02C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 14A5137D19EC68530098C02C /* register */;
+			targetProxy = 14A5138719EC68530098C02C /* PBXContainerItemProxy */;
+		};
+		14A5138B19EC68530098C02C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 14A5137D19EC68530098C02C /* register */;
+			targetProxy = 14A5138A19EC68530098C02C /* PBXContainerItemProxy */;
+		};
 		14FBD3BE19E21213005FC38B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 14FBD3A219E21213005FC38B /* AAKeyboardApp */;
@@ -512,6 +628,33 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		14A5138C19EC68530098C02C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					TARGET_IS_EXTENSION,
+					_DEBUG,
+				);
+				INFOPLIST_FILE = register/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		14A5138D19EC68530098C02C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = TARGET_IS_EXTENSION;
+				INFOPLIST_FILE = register/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		14FBD3C419E21213005FC38B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -687,6 +830,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		14A5138E19EC68530098C02C /* Build configuration list for PBXNativeTarget "register" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14A5138C19EC68530098C02C /* Debug */,
+				14A5138D19EC68530098C02C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		14FBD39E19E21213005FC38B /* Build configuration list for PBXProject "AAKeyboardApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
