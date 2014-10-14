@@ -107,6 +107,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1441E88119ECD7F300A4881F /* register.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = register.entitlements; sourceTree = "<group>"; };
+		1441E88219ECD7FF00A4881F /* keyboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = keyboard.entitlements; sourceTree = "<group>"; };
+		1441E88319ECD83C00A4881F /* AAKeyboardApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = AAKeyboardApp.entitlements; sourceTree = "<group>"; };
 		145A376019E4316200BE34BE /* DummyKeyboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DummyKeyboardViewController.h; sourceTree = "<group>"; };
 		145A376119E4316200BE34BE /* DummyKeyboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DummyKeyboardViewController.m; sourceTree = "<group>"; };
 		1491181119E42AA80039488F /* UITraitCollection+keyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITraitCollection+keyboard.h"; sourceTree = "<group>"; };
@@ -199,6 +202,7 @@
 		14A5137F19EC68530098C02C /* register */ = {
 			isa = PBXGroup;
 			children = (
+				1441E88119ECD7F300A4881F /* register.entitlements */,
 				14A5138219EC68530098C02C /* ActionViewController.h */,
 				14A5138319EC68530098C02C /* ActionViewController.m */,
 				14A5138519EC68530098C02C /* MainInterface.storyboard */,
@@ -272,6 +276,7 @@
 		14FBD3A519E21213005FC38B /* AAKeyboardApp */ = {
 			isa = PBXGroup;
 			children = (
+				1441E88319ECD83C00A4881F /* AAKeyboardApp.entitlements */,
 				14FBD3AA19E21213005FC38B /* AppDelegate.h */,
 				14FBD3AB19E21213005FC38B /* AppDelegate.m */,
 				14FBD3AD19E21213005FC38B /* ViewController.h */,
@@ -315,6 +320,7 @@
 		14FBD3D119E21263005FC38B /* keyboard */ = {
 			isa = PBXGroup;
 			children = (
+				1441E88219ECD7FF00A4881F /* keyboard.entitlements */,
 				14CB158A19EB56F600D05E9C /* AAKASCIIArtGroup.h */,
 				14CB158B19EB56F600D05E9C /* AAKASCIIArtGroup.m */,
 				14CB158619EB420F00D05E9C /* AAKASCIIArt.h */,
@@ -440,9 +446,21 @@
 				TargetAttributes = {
 					14A5137D19EC68530098C02C = {
 						CreatedOnToolsVersion = 6.0.1;
+						DevelopmentTeam = JP866VWWSD;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					14FBD3A219E21213005FC38B = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = JP866VWWSD;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					14FBD3BB19E21213005FC38B = {
 						CreatedOnToolsVersion = 6.1;
@@ -450,6 +468,12 @@
 					};
 					14FBD3CF19E21263005FC38B = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = JP866VWWSD;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -631,6 +655,8 @@
 		14A5138C19EC68530098C02C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = register/register.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yuichi Yoshida (AK9FYY958C)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -640,6 +666,7 @@
 				INFOPLIST_FILE = register/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5009c6e9-307b-4d6d-91c5-3a53d65285a1";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -647,10 +674,13 @@
 		14A5138D19EC68530098C02C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = register/register.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yuichi Yoshida (AK9FYY958C)";
 				GCC_PREPROCESSOR_DEFINITIONS = TARGET_IS_EXTENSION;
 				INFOPLIST_FILE = register/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5009c6e9-307b-4d6d-91c5-3a53d65285a1";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -737,6 +767,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = AAKeyboardApp/AAKeyboardApp.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yuichi Yoshida (AK9FYY958C)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -754,6 +785,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = AAKeyboardApp/AAKeyboardApp.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yuichi Yoshida (AK9FYY958C)";
 				INFOPLIST_FILE = AAKeyboardApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -799,6 +831,7 @@
 		14FBD3DB19E21263005FC38B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = keyboard/keyboard.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yuichi Yoshida (AK9FYY958C)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -817,6 +850,7 @@
 		14FBD3DC19E21263005FC38B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = keyboard/keyboard.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yuichi Yoshida (AK9FYY958C)";
 				GCC_PREPROCESSOR_DEFINITIONS = TARGET_IS_EXTENSION;
 				INFOPLIST_FILE = keyboard/Info.plist;
@@ -837,6 +871,7 @@
 				14A5138D19EC68530098C02C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		14FBD39E19E21213005FC38B /* Build configuration list for PBXProject "AAKeyboardApp" */ = {
 			isa = XCConfigurationList;
