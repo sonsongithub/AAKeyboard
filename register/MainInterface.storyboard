@@ -72,8 +72,16 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="New AA" id="qQT-GE-WB2">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="5o9-nh-xuk"/>
-                        <barButtonItem key="rightBarButtonItem" title="Regist" style="done" id="uWq-IM-MFH"/>
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="5o9-nh-xuk">
+                            <connections>
+                                <action selector="cancel" destination="ObA-dk-sSI" id="U2U-WU-Sui"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Register" style="done" id="uWq-IM-MFH">
+                            <connections>
+                                <action selector="registerNewAA" destination="ObA-dk-sSI" id="hRV-9z-DDm"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="528"/>
@@ -105,7 +113,7 @@
         <!--Select Group-->
         <scene sceneID="ORa-qs-2bh">
             <objects>
-                <tableViewController id="QFz-fH-5Uj" sceneMemberID="viewController">
+                <tableViewController id="QFz-fH-5Uj" customClass="AAKSelectGroupViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="DZR-Gh-06G">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="528"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -138,7 +146,7 @@
         <!--New Group-->
         <scene sceneID="ze3-wL-W20">
             <objects>
-                <tableViewController id="TFv-S4-H0b" sceneMemberID="viewController">
+                <tableViewController id="TFv-S4-H0b" customClass="AAKCreateNewGroupViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="n6L-sm-8hJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -151,7 +159,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mkC-m2-c9k" id="xqf-Yz-vhO">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name for new group" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WiX-WT-06q">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name for new group" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WiX-WT-06q">
                                                     <rect key="frame" x="8" y="0.0" width="304" height="44"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -173,10 +181,20 @@
                             <outlet property="delegate" destination="TFv-S4-H0b" id="ZqD-fx-9ff"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="New Group" id="iw0-fQ-HFg">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="1FX-cK-jzw"/>
-                        <barButtonItem key="rightBarButtonItem" title="Create" style="done" id="bds-aP-ejn"/>
+                    <navigationItem key="navigationItem" title="New Group" id="5iy-l6-ITb">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="Hpk-w8-3bp">
+                            <connections>
+                                <action selector="cancel:" destination="TFv-S4-H0b" id="KV0-Si-BQS"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Create" style="done" id="3Ub-TW-JSO">
+                            <connections>
+                                <action selector="create:" destination="TFv-S4-H0b" id="yKb-cc-QyO"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="568"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FQf-jo-gZR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -186,7 +204,7 @@
         <scene sceneID="oy9-C7-b3c">
             <objects>
                 <navigationController id="Cdb-XV-vqP" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="aFx-1j-7ln">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="infinite" id="aFx-1j-7ln">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

@@ -35,6 +35,8 @@
 		14B2674B19E6CB2500C0321D /* AAKContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B2674919E6CB2500C0321D /* AAKContentCell.m */; };
 		14B73C6519E3C7CA0031DCB6 /* AAKToolbarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B73C6419E3C7CA0031DCB6 /* AAKToolbarCell.m */; };
 		14B73C6719E3C9060031DCB6 /* AAKToolbarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B73C6419E3C7CA0031DCB6 /* AAKToolbarCell.m */; };
+		14BC4AFF19EDD49D000682B2 /* AAKSelectGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14BC4AFE19EDD49D000682B2 /* AAKSelectGroupViewController.m */; };
+		14BC4B0219EDD4B6000682B2 /* AAKCreateNewGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14BC4B0119EDD4B6000682B2 /* AAKCreateNewGroupViewController.m */; };
 		14CB156419E935BB00D05E9C /* UZCursorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CB155F19E935BB00D05E9C /* UZCursorView.m */; };
 		14CB156519E935BB00D05E9C /* UZCursorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CB155F19E935BB00D05E9C /* UZCursorView.m */; };
 		14CB156619E935BB00D05E9C /* UZLoupeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CB156119E935BB00D05E9C /* UZLoupeView.m */; };
@@ -137,6 +139,10 @@
 		14B2674919E6CB2500C0321D /* AAKContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKContentCell.m; sourceTree = "<group>"; };
 		14B73C6319E3C7CA0031DCB6 /* AAKToolbarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKToolbarCell.h; sourceTree = "<group>"; };
 		14B73C6419E3C7CA0031DCB6 /* AAKToolbarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKToolbarCell.m; sourceTree = "<group>"; };
+		14BC4AFD19EDD49D000682B2 /* AAKSelectGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKSelectGroupViewController.h; sourceTree = "<group>"; };
+		14BC4AFE19EDD49D000682B2 /* AAKSelectGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKSelectGroupViewController.m; sourceTree = "<group>"; };
+		14BC4B0019EDD4B6000682B2 /* AAKCreateNewGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKCreateNewGroupViewController.h; sourceTree = "<group>"; };
+		14BC4B0119EDD4B6000682B2 /* AAKCreateNewGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKCreateNewGroupViewController.m; sourceTree = "<group>"; };
 		14CB155E19E935BB00D05E9C /* UZCursorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UZCursorView.h; sourceTree = "<group>"; };
 		14CB155F19E935BB00D05E9C /* UZCursorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UZCursorView.m; sourceTree = "<group>"; };
 		14CB156019E935BB00D05E9C /* UZLoupeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UZLoupeView.h; sourceTree = "<group>"; };
@@ -215,6 +221,10 @@
 			isa = PBXGroup;
 			children = (
 				1441E88119ECD7F300A4881F /* register.entitlements */,
+				14BC4AFD19EDD49D000682B2 /* AAKSelectGroupViewController.h */,
+				14BC4AFE19EDD49D000682B2 /* AAKSelectGroupViewController.m */,
+				14BC4B0019EDD4B6000682B2 /* AAKCreateNewGroupViewController.h */,
+				14BC4B0119EDD4B6000682B2 /* AAKCreateNewGroupViewController.m */,
 				14A5138219EC68530098C02C /* ActionViewController.h */,
 				14A5138319EC68530098C02C /* ActionViewController.m */,
 				14A5138519EC68530098C02C /* MainInterface.storyboard */,
@@ -560,6 +570,8 @@
 			files = (
 				14A5139719EC857E0098C02C /* NSParagraphStyle+keyboard.m in Sources */,
 				14A5138419EC68530098C02C /* ActionViewController.m in Sources */,
+				14BC4B0219EDD4B6000682B2 /* AAKCreateNewGroupViewController.m in Sources */,
+				14BC4AFF19EDD49D000682B2 /* AAKSelectGroupViewController.m in Sources */,
 				146EEB5C19EDC16D0032F6DE /* AAKSQLite.m in Sources */,
 				14A5139319EC85710098C02C /* UZCursorView.m in Sources */,
 				14A5139519EC85710098C02C /* UZTextView.m in Sources */,

@@ -83,10 +83,18 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)done {NSLog(@"%@", self.jsString);
+- (IBAction)cancel {
+	NSLog(@"%@", self.jsString);
     // Return any edited content to the host app.
     // This template doesn't do anything, so we just echo the passed in items.
     [self.extensionContext completeRequestReturningItems:nil completionHandler:nil];
+}
+
+- (IBAction)registerNewAA {
+	NSLog(@"%@", self.jsString);
+	// Return any edited content to the host app.
+	// This template doesn't do anything, so we just echo the passed in items.
+	[self.extensionContext completeRequestReturningItems:nil completionHandler:nil];
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
