@@ -42,7 +42,6 @@
 										  if (item != nil) {
 											  
 											  NSDictionary *resultDict = (NSDictionary *) item;
-											  
 											  sself.jsString = resultDict[NSExtensionJavaScriptPreprocessingResultsKey][@"content"];
 											  [sself update];
 										  }
@@ -55,11 +54,25 @@
 }
 
 - (void)update {
-	CGFloat fontSize = 18;
-	NSParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyleWithFontSize:fontSize];
-	NSDictionary *attributes = @{NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:[UIFont fontWithName:@"Mona" size:fontSize]};
-	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:self.jsString attributes:attributes];
-	_textView.attributedString = string;
+	if ([self.jsString length] > 0) {
+		CGFloat fontSize = 18;
+		NSParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyleWithFontSize:fontSize];
+		NSDictionary *attributes = @{NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:[UIFont fontWithName:@"Mona" size:fontSize]};
+		NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:self.jsString attributes:attributes];
+		_textView.attributedString = string;
+	}
+	else {
+		UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"hoge"
+																	   message:@"hoge"
+																preferredStyle:UIAlertControllerStyleAlert];
+		UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK"
+														 style:UIAlertActionStyleDefault
+													   handler:^(UIAlertAction *action) {
+														   [self done];
+													   }];
+		[alert addAction:action];
+		[self presentViewController:alert animated:YES completion:nil];
+	}
 }
 
 - (void)didReceiveMemoryWarning {
