@@ -65,6 +65,9 @@ static AAKSQLite* sharedSQLiteDatabase = nil;	/**< AAKSSQLiteオブジェクト�
  * テーブルを作成する．
  */
 - (void)initializeDatabaseTable {
+	sqlite3_exec(_database, "CREATE TABLE AAGroup (group_title TEXT, group_key INTEGER PRIMARY KEY AUTOINCREMENT);", NULL, NULL, NULL);
+	sqlite3_exec(_database, "CREATE TABLE AA (asciiart TEXT, group_key INTEGER);", NULL, NULL, NULL);
+	sqlite3_exec(_database, "CREATE UNIQUE INDEX AAIndex ON AA(group_key ASC);", NULL, NULL, NULL);
 }
 
 #pragma mark - Override
