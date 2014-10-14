@@ -19,6 +19,14 @@
 
 @implementation KeyboardViewController
 
+- (instancetype)init {
+	DNSLogMethod
+	self = [super init];
+	if (self) {
+	}
+	return self;
+}
+
 - (void)dealloc {
 	DNSLogMethod
 }

@@ -10,6 +10,7 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "AAKTextView.h"
 #import "NSParagraphStyle+keyboard.h"
+#import "AAKSQLite.h"
 
 @interface ActionViewController ()
 
@@ -27,6 +28,8 @@
     [super viewDidLoad];
 	_feetsInMeter = 3.2808399;
 	_metersInFoot = 0.3048;
+	
+	AAKSQLite *db = [AAKSQLite sharedInstance];
 	
 	for (NSExtensionItem *item in self.extensionContext.inputItems) {
 		NSLog(@"%@", item);
