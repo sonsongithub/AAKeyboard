@@ -11,25 +11,28 @@
 #import "AAKTextView.h"
 #import "NSParagraphStyle+keyboard.h"
 #import "AAKSQLite.h"
+#import "AAKSelectGroupViewController.h"
+#import "AAKASCIIArtGroup.h"
 
 @interface ActionViewController ()
 
-
 @property (nonatomic, strong) NSString *jsString;
-@property (nonatomic) double feetsInMeter;
-@property (nonatomic) double metersInFoot;
 @property (strong,nonatomic) IBOutlet AAKTextView *textView;
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
 
 @end
 
 @implementation ActionViewController
 
+- (void)setGroup:(AAKASCIIArtGroup *)group {
+	_group = group;
+	[self.tableView reloadData];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-	_feetsInMeter = 3.2808399;
-	_metersInFoot = 0.3048;
 	
-	AAKSQLite *db = [AAKSQLite sharedInstance];
+//	_group = @"Default";
 	
 	for (NSExtensionItem *item in self.extensionContext.inputItems) {
 		NSLog(@"%@", item);
@@ -92,8 +95,9 @@
 
 - (IBAction)registerNewAA {
 	NSLog(@"%@", self.jsString);
-	// Return any edited content to the host app.
-	// This template doesn't do anything, so we just echo the passed in items.
+	
+	[[AAKSQLite sharedInstance] insertNewASCIIArt:self.jsString groupKey:_group.key];
+	
 	[self.extensionContext completeRequestReturningItems:nil completionHandler:nil];
 }
 
@@ -117,7 +121,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+	cell.detailTextLabel.text = _group.title;
 	return cell;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+	if ([segue.identifier isEqualToString:@"openAAKSelectGroupViewController"]) {
+		AAKSelectGroupViewController *con = segue.destinationViewController;
+		con.actionViewController = self;
+	}
 }
 
 @end

@@ -14,6 +14,20 @@
 
 @implementation AppDelegate
 
+/**
+ * 2tchのスキーマが読み出されたときにコールされるデリゲートメソッド．
+ * アプリケーションがactive, background, スリープのときにはこのメソッドがコールされる．
+ * アプリケーションが起動していないときは，このメソッドはコールされない．
+ * @param application UIApplicationオブジェクト．
+ * @param url エラーオブジェクト．
+ **/
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)URL {
+	NSLog(@"%@", URL);
+	NSString *body = [URL.absoluteString stringByReplacingOccurrencesOfString:@"aakeyboard://" withString:@""];
+	NSString *aa = [body stringByRemovingPercentEncoding];
+	NSLog(@"%@", aa);
+	return YES;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	// Override point for customization after application launch.
@@ -23,6 +37,15 @@
 	NSString *documentsDirectory = [paths objectAtIndex:0];
 	NSLog(@"%@", documentsDirectory);
 #endif
+
+	if ([launchOptions objectForKey:UIApplicationLaunchOptionsURLKey]) {
+		NSURL *URL = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
+		NSLog(@"%@", URL);
+		NSString *body = [URL.absoluteString stringByReplacingOccurrencesOfString:@"aakeyboard://app?register=" withString:@""];
+		NSString *aa = [body stringByRemovingPercentEncoding];
+		NSLog(@"%@", aa);
+	}
+	
 	return YES;
 }
 

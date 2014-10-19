@@ -14,4 +14,16 @@
 
 @implementation AAKASCIIArtGroup
 
+- (instancetype)initWithTitle:(NSString*)title key:(NSInteger)key {
+	if (self = [super init]) {
+		_title = title;
+		_key = key;
+	}
+	return self;
+}
+
++ (AAKASCIIArtGroup*)groupWithTitle:(NSString*)title key:(NSInteger)key {
+	return [[AAKASCIIArtGroup alloc] initWithTitle:title key:key];
+}
+
 @end

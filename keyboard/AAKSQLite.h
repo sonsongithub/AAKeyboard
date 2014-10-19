@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString *const AAKSQLiteDidCreateNewGroupNotification;
+
 @interface AAKSQLite : NSObject
 
 /**
@@ -16,5 +18,15 @@
  * @return AAKSSQLiteオブジェクト．シングルトンモデル．
  */
 + (AAKSQLite*)sharedInstance;
+
+- (NSArray*)groups;
+- (void)insertNewGroup:(NSString*)group;
+
+/**
+ * 新しいAAを追加する．
+ * @param asciiArt アスキーアート本体．文字列．
+ * @param group アスキーアートのグループのSQLiteデータベースのキー．
+ **/
+- (void)insertNewASCIIArt:(NSString*)asciiArt groupKey:(NSInteger)groupKey;
 
 @end

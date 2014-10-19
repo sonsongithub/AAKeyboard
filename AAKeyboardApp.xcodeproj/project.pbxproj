@@ -57,6 +57,8 @@
 		14CB158D19EB56F600D05E9C /* AAKASCIIArtGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CB158B19EB56F600D05E9C /* AAKASCIIArtGroup.m */; };
 		14F7A2F219E781A9007585CF /* AAKContentFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F7A2F119E781A9007585CF /* AAKContentFlowLayout.m */; };
 		14F7A2F319E781E0007585CF /* AAKContentFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F7A2F119E781A9007585CF /* AAKContentFlowLayout.m */; };
+		14FB781719F46992001BFF36 /* AAKASCIIArtGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CB158B19EB56F600D05E9C /* AAKASCIIArtGroup.m */; };
+		14FB781819F46996001BFF36 /* AAKASCIIArt.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CB158719EB420F00D05E9C /* AAKASCIIArt.m */; };
 		14FBD3A919E21213005FC38B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 14FBD3A819E21213005FC38B /* main.m */; };
 		14FBD3AC19E21213005FC38B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14FBD3AB19E21213005FC38B /* AppDelegate.m */; };
 		14FBD3AF19E21213005FC38B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14FBD3AE19E21213005FC38B /* ViewController.m */; };
@@ -569,9 +571,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				14A5139719EC857E0098C02C /* NSParagraphStyle+keyboard.m in Sources */,
+				14FB781719F46992001BFF36 /* AAKASCIIArtGroup.m in Sources */,
 				14A5138419EC68530098C02C /* ActionViewController.m in Sources */,
 				14BC4B0219EDD4B6000682B2 /* AAKCreateNewGroupViewController.m in Sources */,
 				14BC4AFF19EDD49D000682B2 /* AAKSelectGroupViewController.m in Sources */,
+				14FB781819F46996001BFF36 /* AAKASCIIArt.m in Sources */,
 				146EEB5C19EDC16D0032F6DE /* AAKSQLite.m in Sources */,
 				14A5139319EC85710098C02C /* UZCursorView.m in Sources */,
 				14A5139519EC85710098C02C /* UZTextView.m in Sources */,

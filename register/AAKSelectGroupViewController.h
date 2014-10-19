@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class ActionViewController;
+
 @interface AAKSelectGroupViewController : UITableViewController
+
+@property (nonatomic, assign) ActionViewController *actionViewController;
 
 @end

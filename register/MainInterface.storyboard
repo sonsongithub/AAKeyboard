@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="DfR-iP-x9Z">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="DfR-iP-x9Z">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -48,7 +48,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="QFz-fH-5Uj" kind="push" id="4YQ-Db-S1f"/>
+                                            <segue destination="QFz-fH-5Uj" kind="push" identifier="openAAKSelectGroupViewController" id="4YQ-Db-S1f"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -86,6 +86,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="528"/>
                     <connections>
+                        <outlet property="tableView" destination="LmG-H8-Gin" id="fcS-1n-OaH"/>
                         <outlet property="textView" destination="L4E-6G-4lQ" id="epp-ib-K4f"/>
                         <outlet property="view" destination="zMn-AG-sqS" id="Qma-de-2ek"/>
                     </connections>
@@ -134,7 +135,7 @@
                     <navigationItem key="navigationItem" title="Select Group" id="ZdR-jd-avs">
                         <barButtonItem key="rightBarButtonItem" title="Add" style="done" id="b5v-H6-ZQP">
                             <connections>
-                                <segue destination="Cdb-XV-vqP" kind="modal" id="NXu-fx-Zn7"/>
+                                <segue destination="Cdb-XV-vqP" kind="modal" id="Nqq-Xk-sNv"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -195,6 +196,9 @@
                     </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="568"/>
+                    <connections>
+                        <outlet property="_newGroupTextField" destination="WiX-WT-06q" id="X8K-cW-03d"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FQf-jo-gZR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

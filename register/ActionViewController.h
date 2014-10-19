@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class AAKASCIIArtGroup;
+
 @interface ActionViewController : UIViewController
+
+@property (nonatomic, strong) AAKASCIIArtGroup *group;
 
 @end
