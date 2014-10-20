@@ -62,4 +62,11 @@ extern NSString *const AAKKeyboardDataManagerDidCreateNewGroupNotification;
  **/
 - (NSArray*)asciiArtForGroup:(AAKASCIIArtGroup*)group;
 
+/**
+ * 履歴を追加する．
+ * @param asciiArt アスキーアートの文字列．
+ * @param key アスキーアートのデータベース上でのキー．
+ **/
+- (void)insertHistoryASCIIArt:(NSString *)asciiArt ASCIIArtKey:(NSInteger)key;
+
 @end

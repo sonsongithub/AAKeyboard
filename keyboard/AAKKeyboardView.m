@@ -116,6 +116,8 @@
 		
 		[self addConstraint:_toolbarHeightConstraint];
 		
+		_asciiarts = [[AAKKeyboardDataManager defaultManager] asciiArtForGroup:groups[0]];
+		
 		[self updateConstraints];
 	}
 	return self;
@@ -123,6 +125,8 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 	[collectionView deselectItemAtIndexPath:indexPath animated:YES];
+	AAKASCIIArt *source = _asciiarts[indexPath.item];
+	[[AAKKeyboardDataManager defaultManager] insertHistoryASCIIArt:source.asciiArt ASCIIArtKey:source.key];
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
