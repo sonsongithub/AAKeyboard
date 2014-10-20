@@ -12,6 +12,8 @@
 #import "AAKContentFlowLayout.h"
 #import "NSParagraphStyle+keyboard.h"
 #import "AAKHelper.h"
+#import "AAKKeyboardDataManager.h"
+#import "AAKASCIIArtGroup.h"
 
 @interface AAKKeyboardView() <UICollectionViewDataSource, UICollectionViewDelegate, AAKToolbarDelegate> {
 	AAKToolbar *_toolbar;
@@ -104,8 +106,12 @@
 																attribute:NSLayoutAttributeNotAnAttribute
 															   multiplier:1
 																 constant:48];
+		NSArray *groups = [[AAKKeyboardDataManager defaultManager] groups];
 		
-		[_toolbar setCategories:@[@"history", @"やaa夫", @"やらない夫", @"kkk"]];
+		NSMutableArray *array = [NSMutableArray arrayWithArray:@[[AAKASCIIArtGroup historyGroup]]];
+		[array addObjectsFromArray:groups];
+		
+		[_toolbar setCategories:array];
 		
 		_strings = @[
 					 @"",
@@ -138,7 +144,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath; {
 	AAKContentCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"AAKContentCell" forIndexPath:indexPath];
-	cell.label.text = [NSString stringWithFormat:@"%ld", indexPath.item];
+	cell.label.text = [NSString stringWithFormat:@"%ld", (long)indexPath.item];
 	CGFloat fontSize = 15;
 	NSString *source = _strings[indexPath.item];
 	NSParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyleWithFontSize:fontSize];

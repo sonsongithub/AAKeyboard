@@ -14,16 +14,31 @@
 
 @implementation AAKASCIIArtGroup
 
-- (instancetype)initWithTitle:(NSString*)title key:(NSInteger)key {
+- (instancetype)initWithTitle:(NSString*)title key:(NSInteger)key type:(AAKASCIIArtGroupType)type {
 	if (self = [super init]) {
 		_title = title;
 		_key = key;
+		_type = type;
 	}
 	return self;
 }
 
 + (AAKASCIIArtGroup*)groupWithTitle:(NSString*)title key:(NSInteger)key {
-	return [[AAKASCIIArtGroup alloc] initWithTitle:title key:key];
+	return [[AAKASCIIArtGroup alloc] initWithTitle:title key:key type:AAKASCIIArtNormalGroup];
+}
+
++ (AAKASCIIArtGroup*)historyGroup {
+	return [[AAKASCIIArtGroup alloc] initWithTitle:nil key:-1 type:AAKASCIIArtHistoryGroup];
+}
+
+- (instancetype)init {
+	self = [super init];
+	if (self) {
+		_title = nil;
+		_type = AAKASCIIArtNormalGroup;
+		_key = -1;
+	}
+	return self;
 }
 
 @end

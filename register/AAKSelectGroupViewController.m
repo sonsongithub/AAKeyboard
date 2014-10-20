@@ -8,7 +8,7 @@
 
 #import "AAKSelectGroupViewController.h"
 #import "ActionViewController.h"
-#import "AAKSQLite.h"
+#import "AAKKeyboardDataManager.h"
 #import "AAKASCIIArtGroup.h"
 
 @interface AAKSelectGroupViewController () {
@@ -21,12 +21,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	_groups = [[AAKSQLite sharedInstance] groups];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didCreateNewGroupNotification:) name:AAKSQLiteDidCreateNewGroupNotification object:nil];
+	_groups = [[AAKKeyboardDataManager defaultManager] groups];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didCreateNewGroupNotification:) name:AAKKeyboardDataManagerDidCreateNewGroupNotification object:nil];
 }
 
 - (void)didCreateNewGroupNotification:(NSNotification*)notification {
-	_groups = [[AAKSQLite sharedInstance] groups];
+	_groups = [[AAKKeyboardDataManager defaultManager] groups];
 	[self.tableView reloadData];
 }
 

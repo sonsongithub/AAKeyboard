@@ -10,6 +10,7 @@
 
 #import "AAKToolbarCell.h"
 #import "AAKToolbarHistoryCell.h"
+#import "AAKASCIIArtGroup.h"
 
 @interface AAKToolbar() <UICollectionViewDataSource, UICollectionViewDelegate> {
 	UICollectionView	*_collectionView;
@@ -139,8 +140,8 @@
 	NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:18]};
 	NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[_categories count]];
 	CGFloat sumation = 0;
-	for (NSString *string in _categories) {
-		CGSize s = [string sizeWithAttributes:attributes];
+	for (AAKASCIIArtGroup *group in _categories) {
+		CGSize s = [group.title sizeWithAttributes:attributes];
 		s.width = floor(s.width) + 20;
 		sumation += s.width;
 		s.height = [self toolbarHeight];
@@ -211,14 +212,14 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
 	AAKToolbarCell *cell = nil;
-	NSString *temp = [_categories objectAtIndex:indexPath.item];
+	AAKASCIIArtGroup *group = [_categories objectAtIndex:indexPath.item];
 	
-	if ([temp isEqualToString:@"history"]) {
+	if (group.type == AAKASCIIArtHistoryGroup) {
 		cell = [cv dequeueReusableCellWithReuseIdentifier:@"AAKToolbarHistoryCell" forIndexPath:indexPath];
 	}
 	else {
 		cell = [cv dequeueReusableCellWithReuseIdentifier:@"AAKToolbarCell" forIndexPath:indexPath];
-		cell.label.text = [_categories objectAtIndex:indexPath.item];
+		cell.label.text = group.title;
 	}
 	cell.isHead = (indexPath.item == 0);
 	[cell.label sizeToFit];

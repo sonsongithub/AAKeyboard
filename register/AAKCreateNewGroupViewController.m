@@ -8,7 +8,7 @@
 
 #import "AAKCreateNewGroupViewController.h"
 
-#import "AAKSQLite.h"
+#import "AAKKeyboardDataManager.h"
 
 @interface AAKCreateNewGroupViewController () {
 	IBOutlet UITextField *_newGroupTextField;
@@ -23,9 +23,9 @@
 
 - (IBAction)create:(id)sender {
 	NSString *newGroup = _newGroupTextField.text;
-	[[AAKSQLite sharedInstance] insertNewGroup:newGroup];
+	[[AAKKeyboardDataManager defaultManager] insertNewGroup:newGroup];
 	[self dismissViewControllerAnimated:YES completion:nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName:AAKSQLiteDidCreateNewGroupNotification object:nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName:AAKKeyboardDataManagerDidCreateNewGroupNotification object:nil];
 }
 
 - (void)viewDidLoad {

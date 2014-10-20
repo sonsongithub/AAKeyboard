@@ -1,47 +1,23 @@
 //
-//  AAKSQLite.m
+//  AAKSharedKeyboardDataManager.m
 //  AAKeyboardApp
 //
-//  Created by sonson on 2014/10/15.
+//  Created by sonson on 2014/10/20.
 //  Copyright (c) 2014年 sonson. All rights reserved.
 //
 
-#import "AAKSQLite.h"
+#import "AAKSharedKeyboardDataManager.h"
 
-#import <sqlite3.h>
 #import "AAKHelper.h"
 #import "AAKASCIIArtGroup.h"
 
-NSString *const AAKSQLiteDidCreateNewGroupNotification = @"AAKSQLiteDidCreateNewGroupNotification";
-
-@interface AAKSQLite() {
-	sqlite3 *_database;
-}
-@end
-
-@implementation AAKSQLite
-
-static AAKSQLite* sharedSQLiteDatabase = nil;	/**< AAKSSQLiteオブジェクトのシングルトンオブジェクト */
-
-#pragma mark - Class mathod
-
-/**
- * シングルトンモデルで利用するAAKSSQLiteオブジェクトを返す．
- * このメソッド以外からAAKSSQLiteオブジェクトを生成してはならない．
- * @return AAKSSQLiteオブジェクト．シングルトンモデル．
- */
-+ (AAKSQLite*)sharedInstance {
-	if (sharedSQLiteDatabase == nil) {
-		sharedSQLiteDatabase = [[AAKSQLite alloc] init];
-	}
-	return sharedSQLiteDatabase;
-}
+@implementation AAKSharedKeyboardDataManager
 
 /**
  * AAKSSQLiteオブジェクトを保存するパスを返す．
  * @return SQLiteのファイルを保存するパス．
  */
-+ (NSString*)pathForDatabaseFile {
+- (NSString*)pathForDatabaseFile {
 	NSURL *storeURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.sonson.AAKeyboardApp"];
 	DNSLog(@"%@", [storeURL.path stringByAppendingPathComponent:@"aak.sql"]);
 	return [storeURL.path stringByAppendingPathComponent:@"aak.sql"];
@@ -155,13 +131,11 @@ static AAKSQLite* sharedSQLiteDatabase = nil;	/**< AAKSSQLiteオブジェクト�
 	sqlite3_finalize(statement);
 }
 
-#pragma mark - Override
-
-- (id)init {
+- (instancetype)init {
 	self = [super init];
 	if (self) {
 		// Initialization code here.
-		NSString *path = [AAKSQLite pathForDatabaseFile];
+		NSString *path = [self pathForDatabaseFile];
 		
 		if (sqlite3_open([path UTF8String], &_database) == SQLITE_OK) {
 			sqlite3_exec(_database, "PRAGMA auto_vacuum=1", NULL, NULL, NULL);
@@ -172,7 +146,6 @@ static AAKSQLite* sharedSQLiteDatabase = nil;	/**< AAKSSQLiteオブジェクト�
 		}
 		[self initializeDatabaseTable];
 	}
-	
 	return self;
 }
 

@@ -10,9 +10,9 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "AAKTextView.h"
 #import "NSParagraphStyle+keyboard.h"
-#import "AAKSQLite.h"
 #import "AAKSelectGroupViewController.h"
 #import "AAKASCIIArtGroup.h"
+#import "AAKKeyboardDataManager.h"
 
 @interface ActionViewController ()
 
@@ -96,7 +96,7 @@
 - (IBAction)registerNewAA {
 	NSLog(@"%@", self.jsString);
 	
-	[[AAKSQLite sharedInstance] insertNewASCIIArt:self.jsString groupKey:_group.key];
+	[[AAKKeyboardDataManager defaultManager] insertNewASCIIArt:self.jsString groupKey:_group.key];
 	
 	[self.extensionContext completeRequestReturningItems:nil completionHandler:nil];
 }

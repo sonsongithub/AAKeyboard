@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "AAKKeyboardDataManager.h"
 
 @interface AppDelegate ()
 
@@ -37,6 +38,11 @@
 	NSString *documentsDirectory = [paths objectAtIndex:0];
 	NSLog(@"%@", documentsDirectory);
 #endif
+	
+	NSArray *a = [[AAKKeyboardDataManager defaultManager] groups];
+	NSLog(@"%@", a);
+	
+	[AAKKeyboardDataManager defaultManager];
 
 	if ([launchOptions objectForKey:UIApplicationLaunchOptionsURLKey]) {
 		NSURL *URL = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
