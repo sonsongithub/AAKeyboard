@@ -28,7 +28,7 @@
 }
 
 + (AAKASCIIArtGroup*)historyGroup {
-	return [[AAKASCIIArtGroup alloc] initWithTitle:nil key:-1 type:AAKASCIIArtHistoryGroup];
+	return [[AAKASCIIArtGroup alloc] initWithTitle:@"history" key:-1 type:AAKASCIIArtHistoryGroup];
 }
 
 - (instancetype)init {

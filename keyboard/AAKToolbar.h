@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @class AAKToolbar;
+@class AAKASCIIArtGroup;
 
 @protocol AAKToolbarDelegate <NSObject>
 
-- (void)toolbar:(AAKToolbar*)toolbar didSelectCategoryIndex:(NSInteger)index;
+- (void)toolbar:(AAKToolbar*)toolbar didSelectGroup:(AAKASCIIArtGroup*)group;
 - (void)toolbar:(AAKToolbar*)toolbar didPushEarthButton:(UIButton*)button;
 - (void)toolbar:(AAKToolbar*)toolbar didPushDeleteButton:(UIButton*)button;
 

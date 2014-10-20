@@ -10,6 +10,8 @@
 
 #import <sqlite3.h>
 
+@class AAKASCIIArtGroup;
+
 extern NSString *const AAKKeyboardDataManagerDidCreateNewGroupNotification;
 
 @interface AAKKeyboardDataManager : NSObject {
@@ -53,5 +55,11 @@ extern NSString *const AAKKeyboardDataManagerDidCreateNewGroupNotification;
  * @param group アスキーアートのグループのSQLiteデータベースのキー．
  **/
 - (void)insertNewASCIIArt:(NSString*)asciiArt groupKey:(NSInteger)groupKey;
+
+/**
+ * groupに対応するのAAのリストを取得する．
+ * @param group AAリストを取得したいグループ．
+ **/
+- (NSArray*)asciiArtForGroup:(AAKASCIIArtGroup*)group;
 
 @end

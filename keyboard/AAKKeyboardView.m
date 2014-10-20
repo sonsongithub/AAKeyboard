@@ -14,13 +14,14 @@
 #import "AAKHelper.h"
 #import "AAKKeyboardDataManager.h"
 #import "AAKASCIIArtGroup.h"
+#import "AAKASCIIArt.h"
 
 @interface AAKKeyboardView() <UICollectionViewDataSource, UICollectionViewDelegate, AAKToolbarDelegate> {
 	AAKToolbar *_toolbar;
 	NSLayoutConstraint	*_toolbarHeightConstraint;
 	UICollectionView	*_collectionView;
 	AAKContentFlowLayout *_collectionFlowLayout;
-	NSArray *_strings;
+	NSArray *_asciiarts;
 }
 @end
 
@@ -113,12 +114,6 @@
 		
 		[_toolbar setCategories:array];
 		
-		_strings = @[
-					 @"",
-					 @"",
-					 @"",
-					 ];
-		
 		[self addConstraint:_toolbarHeightConstraint];
 		
 		[self updateConstraints];
@@ -139,17 +134,17 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
-	return [_strings count];
+	return [_asciiarts count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath; {
 	AAKContentCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"AAKContentCell" forIndexPath:indexPath];
 	cell.label.text = [NSString stringWithFormat:@"%ld", (long)indexPath.item];
 	CGFloat fontSize = 15;
-	NSString *source = _strings[indexPath.item];
+	AAKASCIIArt *source = _asciiarts[indexPath.item];
 	NSParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyleWithFontSize:fontSize];
 	NSDictionary *attributes = @{NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:[UIFont fontWithName:@"Mona" size:fontSize]};
-	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:source attributes:attributes];
+	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:source.asciiArt attributes:attributes];
 	cell.textView.attributedString = string;
 	[cell.label sizeToFit];
 	return cell;
@@ -157,7 +152,9 @@
 
 #pragma mark - AAKToolbarDelegate
 
-- (void)toolbar:(AAKToolbar*)toolbar didSelectCategoryIndex:(NSInteger)index {
+- (void)toolbar:(AAKToolbar*)toolbar didSelectGroup:(AAKASCIIArtGroup*)group {
+	_asciiarts = [[AAKKeyboardDataManager defaultManager] asciiArtForGroup:group];
+	[_collectionView reloadData];
 }
 
 - (void)toolbar:(AAKToolbar*)toolbar didPushEarthButton:(UIButton*)button {

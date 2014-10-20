@@ -195,7 +195,8 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 	[collectionView deselectItemAtIndexPath:indexPath animated:YES];
-	[self.delegate toolbar:self didSelectCategoryIndex:indexPath.item];
+	AAKASCIIArtGroup *group = [_categories objectAtIndex:indexPath.item];
+	[self.delegate toolbar:self didSelectGroup:group];
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {

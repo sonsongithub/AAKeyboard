@@ -10,6 +10,7 @@
 
 @interface AAKASCIIArt : NSObject
 
-@property (nonatomic, strong) NSMutableAttributedString *asciiArt;
+@property (nonatomic, strong) NSString *asciiArt;
+@property (nonatomic, assign) NSInteger key;
 
 @end

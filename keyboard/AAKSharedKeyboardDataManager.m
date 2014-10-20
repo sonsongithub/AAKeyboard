@@ -10,6 +10,7 @@
 
 #import "AAKHelper.h"
 #import "AAKASCIIArtGroup.h"
+#import "AAKASCIIArt.h"
 
 @implementation AAKSharedKeyboardDataManager
 
@@ -46,7 +47,7 @@
 - (void)initializeDatabaseTable {
 	sqlite3_exec(_database, "CREATE TABLE AAGroup (group_title TEXT UNIQUE, group_key INTEGER PRIMARY KEY AUTOINCREMENT);", NULL, NULL, NULL);
 	sqlite3_exec(_database, "CREATE TABLE AA (asciiart TEXT, group_key INTEGER, asciiart_key INTEGER PRIMARY KEY AUTOINCREMENT);", NULL, NULL, NULL);
-	sqlite3_exec(_database, "CREATE UNIQUE INDEX AAIndex ON AA(group_key ASC);", NULL, NULL, NULL);
+//	sqlite3_exec(_database, "CREATE UNIQUE INDEX AAIndex ON AA(group_key ASC);", NULL, NULL, NULL);
 	sqlite3_exec(_database, "INSERT INTO AAGroup (group_title, group_key) VALUES('Default', NULL);", NULL, NULL, NULL);
 }
 
@@ -129,6 +130,36 @@
 		NSLog(@"Error");
 	}
 	sqlite3_finalize(statement);
+}
+
+/**
+ * groupに対応するのAAのリストを取得する．
+ * @param group AAリストを取得したいグループ．
+ **/
+- (NSArray*)asciiArtForGroup:(AAKASCIIArtGroup*)group {
+	const char *sql = "select asciiart, asciiart_key from AA where group_key = ?";
+	sqlite3_stmt *statement = NULL;
+	
+	NSMutableArray *groups = [NSMutableArray array];
+	
+	if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
+		DNSLog( @"Error: failed to prepare statement with message '%s'.", sqlite3_errmsg(_database));
+	}
+	else {
+		sqlite3_bind_int64(statement, 1, group.key);
+		while (sqlite3_step(statement) == SQLITE_ROW) {
+			if (sqlite3_column_text(statement, 0)) {
+				NSString *title = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+				NSInteger key = sqlite3_column_int(statement, 1);
+				AAKASCIIArt *obj = [[AAKASCIIArt alloc] init];
+				obj.asciiArt = title;
+				obj.key = key;
+				[groups addObject:obj];
+			}
+		}
+	}
+	sqlite3_finalize(statement);
+	return [NSArray arrayWithArray:groups];
 }
 
 - (instancetype)init {
