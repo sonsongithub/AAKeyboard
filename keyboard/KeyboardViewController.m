@@ -44,6 +44,7 @@
 }
 
 - (void)keyboardView:(AAKKeyboardView*)keyboardView willInsertString:(NSString*)string {
+	[self.textDocumentProxy insertText:string];
 }
 
 - (UITraitCollection *)overrideTraitCollectionForChildViewController:(UIViewController *)childViewController {

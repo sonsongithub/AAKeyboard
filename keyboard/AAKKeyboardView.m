@@ -139,6 +139,7 @@
 	[collectionView deselectItemAtIndexPath:indexPath animated:YES];
 	AAKASCIIArt *source = _asciiarts[indexPath.item];
 	[[AAKKeyboardDataManager defaultManager] insertHistoryASCIIArtKey:source.key];
+	[self.delegate keyboardView:self willInsertString:source.asciiArt];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {

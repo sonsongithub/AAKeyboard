@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A386a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -18,21 +18,48 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YZ0-V6-wwS">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="58" width="600" height="542"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="2" maxValue="20" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2N6-g0-FD7">
+                                <rect key="frame" x="14" y="20" width="518" height="31"/>
+                                <connections>
+                                    <action selector="changed:" destination="BYZ-38-t0r" eventType="valueChanged" id="hLY-RV-aqi"/>
+                                </connections>
+                            </slider>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BcK-WW-JLa">
+                                <rect key="frame" x="547" y="20" width="37" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="RLb-OS-au8"/>
+                                    <constraint firstAttribute="width" constant="37" id="srC-Ni-TZI"/>
+                                </constraints>
+                                <state key="normal" title="Clear">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="clear:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0Ik-5S-eaZ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="YZ0-V6-wwS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="0Pi-Mf-eII"/>
-                            <constraint firstItem="YZ0-V6-wwS" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="cmb-OM-SZU"/>
+                            <constraint firstItem="2N6-g0-FD7" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Aqo-i0-O14"/>
+                            <constraint firstItem="BcK-WW-JLa" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Gmx-6b-ryA"/>
+                            <constraint firstItem="2N6-g0-FD7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="dIY-cd-uwG"/>
                             <constraint firstAttribute="trailingMargin" secondItem="YZ0-V6-wwS" secondAttribute="trailing" constant="-16" id="lev-nG-h9d"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="YZ0-V6-wwS" secondAttribute="bottom" id="neM-Ed-yFG"/>
+                            <constraint firstItem="YZ0-V6-wwS" firstAttribute="top" secondItem="2N6-g0-FD7" secondAttribute="bottom" constant="8" id="qTt-6W-qFG"/>
+                            <constraint firstItem="YZ0-V6-wwS" firstAttribute="top" secondItem="BcK-WW-JLa" secondAttribute="bottom" constant="8" id="rii-qK-fDW"/>
+                            <constraint firstItem="BcK-WW-JLa" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="sMl-CY-WKl"/>
+                            <constraint firstItem="BcK-WW-JLa" firstAttribute="leading" secondItem="2N6-g0-FD7" secondAttribute="trailing" constant="17" id="yqD-aS-RaW"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="_textView" destination="YZ0-V6-wwS" id="N5h-0Y-zjQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

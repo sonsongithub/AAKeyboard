@@ -10,10 +10,21 @@
 #import "DummyKeyboardViewController.h"
 
 @interface ViewController () {
+	IBOutlet UITextView *_textView;
 }
 @end
 
 @implementation ViewController
+
+- (IBAction)changed:(id)sender {
+	UISlider *slider = sender;
+	CGFloat fontSize = slider.value;
+	_textView.font = [UIFont fontWithName:@"Mona" size:fontSize];
+}
+
+- (IBAction)clear:(id)sender {
+	_textView.text = @"";
+}
 
 - (UITraitCollection *)overrideTraitCollectionForChildViewController:(UIViewController *)childViewController {
 	return self.traitCollection;
