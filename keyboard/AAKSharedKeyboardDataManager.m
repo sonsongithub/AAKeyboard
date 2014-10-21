@@ -61,7 +61,7 @@
  * @return グループ名の配列．
  **/
 - (NSArray*)groups {
-	const char *sql = "select group_title, group_key from AAGroup";
+	const char *sql = "select DISTINCT AAGroup.group_title, AA.group_key from AA, AAGroup where AA.group_key == AAGroup.group_key;";
 	sqlite3_stmt *statement = NULL;
 	
 	NSMutableArray *groups = [NSMutableArray array];
