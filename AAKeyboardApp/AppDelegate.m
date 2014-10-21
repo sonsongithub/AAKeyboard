@@ -24,9 +24,10 @@
  **/
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)URL {
 	NSLog(@"%@", URL);
-	NSString *body = [URL.absoluteString stringByReplacingOccurrencesOfString:@"aakeyboard://" withString:@""];
+	NSString *body = [URL.absoluteString stringByReplacingOccurrencesOfString:@"aakeyboard://app?register=" withString:@""];
 	NSString *aa = [body stringByRemovingPercentEncoding];
 	NSLog(@"%@", aa);
+	[[AAKKeyboardDataManager defaultManager] insertNewASCIIArt:aa groupKey:1];
 	return YES;
 }
 
@@ -50,6 +51,7 @@
 		NSString *body = [URL.absoluteString stringByReplacingOccurrencesOfString:@"aakeyboard://app?register=" withString:@""];
 		NSString *aa = [body stringByRemovingPercentEncoding];
 		NSLog(@"%@", aa);
+		[[AAKKeyboardDataManager defaultManager] insertNewASCIIArt:aa groupKey:1];
 	}
 	
 	return YES;
