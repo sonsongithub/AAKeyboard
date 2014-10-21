@@ -126,7 +126,19 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 	[collectionView deselectItemAtIndexPath:indexPath animated:YES];
 	AAKASCIIArt *source = _asciiarts[indexPath.item];
-	[[AAKKeyboardDataManager defaultManager] insertHistoryASCIIArt:source.asciiArt ASCIIArtKey:source.key];
+	[[AAKKeyboardDataManager defaultManager] insertHistoryASCIIArtKey:source.key];
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+	AAKASCIIArt *source = _asciiarts[indexPath.item];
+	CGFloat height = collectionView.frame.size.height;
+	CGFloat width = height * source.ratio;
+	CGFloat constraintWidth = self.frame.size.width * 0.75;
+	if (width > constraintWidth) {
+		width = constraintWidth;
+	}
+	DNSLog(@"%fx%f", width, height);
+	return CGSizeMake(width, height);
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {

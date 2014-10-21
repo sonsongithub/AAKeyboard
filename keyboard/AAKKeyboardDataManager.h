@@ -67,6 +67,6 @@ extern NSString *const AAKKeyboardDataManagerDidCreateNewGroupNotification;
  * @param asciiArt アスキーアートの文字列．
  * @param key アスキーアートのデータベース上でのキー．
  **/
-- (void)insertHistoryASCIIArt:(NSString *)asciiArt ASCIIArtKey:(NSInteger)key;
+- (void)insertHistoryASCIIArtKey:(NSInteger)key;
 
 @end
