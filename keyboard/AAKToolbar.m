@@ -36,11 +36,11 @@
 }
 
 - (CGFloat)toolbarHeight {
-	return 48;
+	return _height;
 }
 
 - (CGFloat)buttonWidth {
-	return 48;
+	return _height;
 }
 
 - (void)prepareButton {
@@ -59,11 +59,13 @@
 }
 
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
 	self = [super initWithFrame:frame];
 	if (self) {
 		self.backgroundColor = [UIColor redColor];
+		
+		_height = 48;
+		_fontSize = 14;
 		
 		[self prepareButton];
 		
@@ -221,6 +223,7 @@
 	else {
 		cell = [cv dequeueReusableCellWithReuseIdentifier:@"AAKToolbarCell" forIndexPath:indexPath];
 		cell.label.text = group.title;
+		cell.label.font = [UIFont systemFontOfSize:_fontSize];
 	}
 	cell.isHead = (indexPath.item == 0);
 	[cell.label sizeToFit];

@@ -73,6 +73,7 @@
 														multiplier:0.0
 														  constant:216];
 		[self.view addConstraint:_heightConstraint];
+		[_keyboardView setPortraitMode];
 	}
 	else {
 		_heightConstraint = [NSLayoutConstraint constraintWithItem:self.view
@@ -83,6 +84,7 @@
 														multiplier:0.0
 														  constant:162];
 		[self.view addConstraint:_heightConstraint];
+		[_keyboardView setLandscapeMode];
 	}
 	
 	[_keyboardView load];

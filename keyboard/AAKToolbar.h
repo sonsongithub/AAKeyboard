@@ -21,6 +21,8 @@
 
 @interface AAKToolbar : UIView
 @property (nonatomic, assign) id <AAKToolbarDelegate> delegate;
+@property (nonatomic, assign) CGFloat height;
+@property (nonatomic, assign) CGFloat fontSize;
 - (void)setCategories:(NSArray*)categories;
 - (void)layout;
 @end

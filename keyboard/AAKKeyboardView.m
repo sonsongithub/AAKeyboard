@@ -67,6 +67,18 @@
 	[super layoutSubviews];
 }
 
+- (void)setPortraitMode {
+	_toolbarHeightConstraint.constant = 48;
+	_toolbar.height = 48;
+	_toolbar.fontSize = 16;
+}
+
+- (void)setLandscapeMode {
+	_toolbarHeightConstraint.constant = 30;
+	_toolbar.height = 30;
+	_toolbar.fontSize = 12;
+}
+
 - (instancetype)initWithFrame:(CGRect)frame {
 	self = [super initWithFrame:frame];
 	if (self) {

@@ -21,4 +21,6 @@
 @interface AAKKeyboardView : UIView
 @property (nonatomic, assign) id <AAKKeyboardViewDelegate> delegate;
 - (void)load;
+- (void)setPortraitMode;
+- (void)setLandscapeMode;
 @end
