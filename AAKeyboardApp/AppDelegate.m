@@ -22,9 +22,9 @@
  * @param application UIApplicationオブジェクト．
  * @param url エラーオブジェクト．
  **/
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)URL {
-	NSLog(@"%@", URL);
-	NSString *body = [URL.absoluteString stringByReplacingOccurrencesOfString:@"aakeyboard://app?register=" withString:@""];
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+	NSLog(@"%@", url);
+	NSString *body = [url.absoluteString stringByReplacingOccurrencesOfString:@"aakeyboard://app?register=" withString:@""];
 	NSString *aa = [body stringByRemovingPercentEncoding];
 	NSLog(@"%@", aa);
 	[[AAKKeyboardDataManager defaultManager] insertNewASCIIArt:aa groupKey:1];
@@ -44,15 +44,6 @@
 	NSLog(@"%@", a);
 	
 	[AAKKeyboardDataManager defaultManager];
-
-	if ([launchOptions objectForKey:UIApplicationLaunchOptionsURLKey]) {
-		NSURL *URL = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
-		NSLog(@"%@", URL);
-		NSString *body = [URL.absoluteString stringByReplacingOccurrencesOfString:@"aakeyboard://app?register=" withString:@""];
-		NSString *aa = [body stringByRemovingPercentEncoding];
-		NSLog(@"%@", aa);
-		[[AAKKeyboardDataManager defaultManager] insertNewASCIIArt:aa groupKey:1];
-	}
 	
 	return YES;
 }
