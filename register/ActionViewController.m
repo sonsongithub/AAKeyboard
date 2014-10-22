@@ -127,8 +127,8 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 	if ([segue.identifier isEqualToString:@"openAAKSelectGroupViewController"]) {
-		AAKSelectGroupViewController *con = segue.destinationViewController;
-		con.actionViewController = self;
+//		AAKSelectGroupViewController *con = segue.destinationViewController;
+//		con.actionViewController = self;
 	}
 }
 

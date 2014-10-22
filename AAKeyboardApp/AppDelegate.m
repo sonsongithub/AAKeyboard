@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "AAKKeyboardDataManager.h"
 
+#import "AAKRegisterViewController.h"
+
 @interface AppDelegate ()
 
 @end
@@ -27,7 +29,15 @@
 	NSString *body = [url.absoluteString stringByReplacingOccurrencesOfString:@"aakeyboard://app?register=" withString:@""];
 	NSString *aa = [body stringByRemovingPercentEncoding];
 	NSLog(@"%@", aa);
-	[[AAKKeyboardDataManager defaultManager] insertNewASCIIArt:aa groupKey:1];
+	
+	UINavigationController *nav = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"AAKRegisterNavigationController"];
+	AAKRegisterViewController *con = (AAKRegisterViewController*)nav.topViewController;
+	
+	con.asciiart = aa;
+	
+	
+	[self.window.rootViewController presentViewController:nav animated:YES completion:nil];
+	
 	return YES;
 }
 

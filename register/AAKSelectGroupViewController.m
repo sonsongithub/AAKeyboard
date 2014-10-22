@@ -10,6 +10,7 @@
 #import "ActionViewController.h"
 #import "AAKKeyboardDataManager.h"
 #import "AAKASCIIArtGroup.h"
+#import "AAKEditViewController.h"
 
 @interface AAKSelectGroupViewController () {
 	NSArray *_groups;
@@ -21,12 +22,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	_groups = [[AAKKeyboardDataManager defaultManager] groups];
+	_groups = [[AAKKeyboardDataManager defaultManager] allGroups];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didCreateNewGroupNotification:) name:AAKKeyboardDataManagerDidCreateNewGroupNotification object:nil];
 }
 
 - (void)didCreateNewGroupNotification:(NSNotification*)notification {
-	_groups = [[AAKKeyboardDataManager defaultManager] groups];
+	_groups = [[AAKKeyboardDataManager defaultManager] allGroups];
 	[self.tableView reloadData];
 }
 
@@ -57,7 +58,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	_actionViewController.group = _groups[indexPath.row];
+	_editViewController.group = _groups[indexPath.row];
 	[self.navigationController popViewControllerAnimated:YES];
 }
 

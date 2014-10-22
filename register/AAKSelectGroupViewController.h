@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @class ActionViewController;
+@class AAKEditViewController;
 
 @interface AAKSelectGroupViewController : UITableViewController
 
 @property (nonatomic, assign) ActionViewController *actionViewController;
+@property (nonatomic, assign) AAKEditViewController *editViewController;
 
 @end

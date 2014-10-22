@@ -70,7 +70,7 @@
 - (void)setPortraitMode {
 	_toolbarHeightConstraint.constant = 48;
 	_toolbar.height = 48;
-	_toolbar.fontSize = 16;
+	_toolbar.fontSize = 14;
 }
 
 - (void)setLandscapeMode {
@@ -150,7 +150,6 @@
 	if (width > constraintWidth) {
 		width = constraintWidth;
 	}
-	DNSLog(@"%fx%f", width, height);
 	return CGSizeMake(width, height);
 }
 

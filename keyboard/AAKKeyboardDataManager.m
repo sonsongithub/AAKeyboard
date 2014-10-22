@@ -76,6 +76,14 @@ static AAKKeyboardDataManager *sharedKeyboardDataManager = nil;
 }
 
 /**
+ * すべてのグループ一覧を作成する．
+ * @return グループ名の配列．
+ **/
+- (NSArray*)allGroups {
+	return nil;
+}
+
+/**
  * 新しいグループを作成する．
  * @param group 新しいグループ名の文字列．
  **/
