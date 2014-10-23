@@ -24,8 +24,8 @@
         <!--Collection View Controller-->
         <scene sceneID="7ox-Rn-Nde">
             <objects>
-                <collectionViewController id="8tx-kG-BsU" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="vEr-kW-Jw9">
+                <collectionViewController id="8tx-kG-BsU" customClass="AAKAACollectionViewController" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" id="vEr-kW-Jw9">
                         <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ZPP-fa-9ca">

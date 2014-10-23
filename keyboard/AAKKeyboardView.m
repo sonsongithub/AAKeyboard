@@ -181,8 +181,8 @@
 #pragma mark - AAKToolbarDelegate
 
 - (void)toolbar:(AAKToolbar*)toolbar didSelectGroup:(AAKASCIIArtGroup*)group {
-	_asciiarts = [[AAKKeyboardDataManager defaultManager] asciiArtForGroup:group];
 	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		_asciiarts = [[AAKKeyboardDataManager defaultManager] asciiArtForGroup:group];
 		[_collectionView reloadData];
 	});
 }

@@ -18,6 +18,9 @@
 		14214F9619F803AA00600D4A /* AAKCreateNewGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14BC4B0119EDD4B6000682B2 /* AAKCreateNewGroupViewController.m */; };
 		14214F9719F803AB00600D4A /* AAKCreateNewGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14BC4B0119EDD4B6000682B2 /* AAKCreateNewGroupViewController.m */; };
 		1422A34C19E66FA9008E359B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14FBD3B319E21213005FC38B /* Images.xcassets */; };
+		143BD0E419F8EB14004D80D7 /* AAKAACollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 143BD0E319F8EB14004D80D7 /* AAKAACollectionViewController.m */; };
+		143BD0E619F8EBBA004D80D7 /* AAKAACollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 143BD0E519F8EBBA004D80D7 /* AAKAACollectionViewCell.xib */; };
+		143BD0E919F8EBF3004D80D7 /* AAKAACollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 143BD0E819F8EBF3004D80D7 /* AAKAACollectionViewCell.m */; };
 		145A376219E4316200BE34BE /* DummyKeyboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 145A376119E4316200BE34BE /* DummyKeyboardViewController.m */; };
 		146EEB5519ED5CDE0032F6DE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */; };
 		146EEB5619ED5CE50032F6DE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */; };
@@ -140,6 +143,11 @@
 		14214F8B19F7FDC500600D4A /* AAKEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKEditViewController.m; sourceTree = "<group>"; };
 		14214F8F19F7FDE600600D4A /* AAKRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKRegisterViewController.h; sourceTree = "<group>"; };
 		14214F9019F7FDE600600D4A /* AAKRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKRegisterViewController.m; sourceTree = "<group>"; };
+		143BD0E219F8EB14004D80D7 /* AAKAACollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKAACollectionViewController.h; sourceTree = "<group>"; };
+		143BD0E319F8EB14004D80D7 /* AAKAACollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKAACollectionViewController.m; sourceTree = "<group>"; };
+		143BD0E519F8EBBA004D80D7 /* AAKAACollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AAKAACollectionViewCell.xib; sourceTree = "<group>"; };
+		143BD0E719F8EBF3004D80D7 /* AAKAACollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKAACollectionViewCell.h; sourceTree = "<group>"; };
+		143BD0E819F8EBF3004D80D7 /* AAKAACollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKAACollectionViewCell.m; sourceTree = "<group>"; };
 		1441E88119ECD7F300A4881F /* register.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = register.entitlements; sourceTree = "<group>"; };
 		1441E88219ECD7FF00A4881F /* keyboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = keyboard.entitlements; sourceTree = "<group>"; };
 		1441E88319ECD83C00A4881F /* AAKeyboardApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = AAKeyboardApp.entitlements; sourceTree = "<group>"; };
@@ -375,6 +383,11 @@
 			isa = PBXGroup;
 			children = (
 				1441E88219ECD7FF00A4881F /* keyboard.entitlements */,
+				143BD0E219F8EB14004D80D7 /* AAKAACollectionViewController.h */,
+				143BD0E319F8EB14004D80D7 /* AAKAACollectionViewController.m */,
+				143BD0E519F8EBBA004D80D7 /* AAKAACollectionViewCell.xib */,
+				143BD0E719F8EBF3004D80D7 /* AAKAACollectionViewCell.h */,
+				143BD0E819F8EBF3004D80D7 /* AAKAACollectionViewCell.m */,
 				14CB158E19EBC3B900D05E9C /* AAKHelper.h */,
 				14214F8A19F7FDC500600D4A /* AAKEditViewController.h */,
 				14214F8B19F7FDC500600D4A /* AAKEditViewController.m */,
@@ -580,6 +593,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14FBD3B219E21213005FC38B /* Main.storyboard in Resources */,
+				143BD0E619F8EBBA004D80D7 /* AAKAACollectionViewCell.xib in Resources */,
 				14FBD3B719E21213005FC38B /* LaunchScreen.xib in Resources */,
 				14FBD3B419E21213005FC38B /* Images.xcassets in Resources */,
 				14CB156C19E935D700D05E9C /* mona.ttf in Resources */,
@@ -642,11 +656,13 @@
 				14FBD3AF19E21213005FC38B /* ViewController.m in Sources */,
 				14CB157C19EA328500D05E9C /* AAKToolbarHistoryCell.m in Sources */,
 				14F7A2F319E781E0007585CF /* AAKContentFlowLayout.m in Sources */,
+				143BD0E919F8EBF3004D80D7 /* AAKAACollectionViewCell.m in Sources */,
 				14FBD3AC19E21213005FC38B /* AppDelegate.m in Sources */,
 				14B2674A19E6CB2500C0321D /* AAKContentCell.m in Sources */,
 				146EEB5A19EDC16D0032F6DE /* AAKSQLite.m in Sources */,
 				14B2673F19E6BFD300C0321D /* AAKToolbar.m in Sources */,
 				14B2674219E6BFE900C0321D /* AAKKeyboardView.m in Sources */,
+				143BD0E419F8EB14004D80D7 /* AAKAACollectionViewController.m in Sources */,
 				14214F8C19F7FDC500600D4A /* AAKEditViewController.m in Sources */,
 				14FBD3A919E21213005FC38B /* main.m in Sources */,
 				14214F9119F7FDE600600D4A /* AAKRegisterViewController.m in Sources */,

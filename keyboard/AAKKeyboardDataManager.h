@@ -38,7 +38,7 @@ extern NSString *const AAKKeyboardDataManagerDidCreateNewGroupNotification;
 #pragma mark - Group
 
 /**
- * グループ一覧を作成する．
+ * グループ一覧を作成する．AAが登録されていないグループは含まれない．
  * @return グループ名の配列．
  **/
 - (NSArray*)groups;
