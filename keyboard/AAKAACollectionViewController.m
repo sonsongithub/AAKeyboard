@@ -91,7 +91,10 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-	return CGSizeMake(100, 100);
+	NSArray *data = _AAGroups[indexPath.section];
+	AAKASCIIArt *source = data[indexPath.item];
+	CGFloat height = 80;
+	return CGSizeMake(height * source.ratio, height);
 }
 
 #pragma mark <UICollectionViewDelegate>
