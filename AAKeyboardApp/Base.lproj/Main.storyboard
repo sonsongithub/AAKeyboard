@@ -35,17 +35,7 @@
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="aQI-0j-NKS">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                            </collectionViewCell>
-                        </cells>
+                        <cells/>
                         <connections>
                             <outlet property="dataSource" destination="8tx-kG-BsU" id="wCz-NJ-Dc6"/>
                             <outlet property="delegate" destination="8tx-kG-BsU" id="EfL-6M-cqx"/>
@@ -134,7 +124,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="2" maxValue="20" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2N6-g0-FD7">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="9" minValue="2" maxValue="16" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2N6-g0-FD7">
                                 <rect key="frame" x="14" y="52" width="572" height="31"/>
                                 <connections>
                                     <action selector="didChangeSlider:" destination="BYZ-38-t0r" eventType="valueChanged" id="Oc0-WQ-x5G"/>
@@ -348,7 +338,7 @@
                                     <outlet property="delegate" destination="Hbq-Jc-XW8" id="82s-aX-fH1"/>
                                 </connections>
                             </tableView>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="2" maxValue="20" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8pP-1H-dU3">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="9" minValue="2" maxValue="16" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8pP-1H-dU3">
                                 <rect key="frame" x="14" y="52" width="572" height="31"/>
                                 <connections>
                                     <action selector="didChangeSlider:" destination="Hbq-Jc-XW8" eventType="valueChanged" id="8pe-VG-JEH"/>
@@ -387,6 +377,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="hLR-ag-K7X"/>
+        <segue reference="TvC-sY-SyO"/>
     </inferredMetricsTieBreakers>
 </document>

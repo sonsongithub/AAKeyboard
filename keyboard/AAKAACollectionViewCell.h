@@ -12,6 +12,6 @@
 
 @interface AAKAACollectionViewCell : UICollectionViewCell
 
-@property (nonatomic, readonly) IBOutlet AAKTextView *textView;
+@property (nonatomic, assign) IBOutlet AAKTextView *textView;
 
 @end

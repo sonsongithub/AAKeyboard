@@ -30,7 +30,6 @@
 		146EEB5C19EDC16D0032F6DE /* AAKSQLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 146EEB5919EDC16D0032F6DE /* AAKSQLite.m */; };
 		1491181319E42AA80039488F /* UITraitCollection+keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 1491181219E42AA80039488F /* UITraitCollection+keyboard.m */; };
 		1491181419E42AA80039488F /* UITraitCollection+keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 1491181219E42AA80039488F /* UITraitCollection+keyboard.m */; };
-		14A5138419EC68530098C02C /* ActionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A5138319EC68530098C02C /* ActionViewController.m */; };
 		14A5138619EC68530098C02C /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14A5138519EC68530098C02C /* MainInterface.storyboard */; };
 		14A5138919EC68530098C02C /* register.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 14A5137E19EC68530098C02C /* register.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		14A5139119EC75300098C02C /* extension_js.js in Resources */ = {isa = PBXBuildFile; fileRef = 14A5138F19EC75300098C02C /* extension_js.js */; };
@@ -68,6 +67,7 @@
 		14CB158919EB420F00D05E9C /* AAKASCIIArt.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CB158719EB420F00D05E9C /* AAKASCIIArt.m */; };
 		14CB158C19EB56F600D05E9C /* AAKASCIIArtGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CB158B19EB56F600D05E9C /* AAKASCIIArtGroup.m */; };
 		14CB158D19EB56F600D05E9C /* AAKASCIIArtGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CB158B19EB56F600D05E9C /* AAKASCIIArtGroup.m */; };
+		14D0D72F19FA13D900870C92 /* AAKRegisterActionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D0D72E19FA13D900870C92 /* AAKRegisterActionViewController.m */; };
 		14DDEEFA19F4C5EC00AD0AC1 /* AAKKeyboardDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 14DDEEF919F4C5EC00AD0AC1 /* AAKKeyboardDataManager.m */; };
 		14DDEEFB19F4C5EC00AD0AC1 /* AAKKeyboardDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 14DDEEF919F4C5EC00AD0AC1 /* AAKKeyboardDataManager.m */; };
 		14DDEEFC19F4C5EC00AD0AC1 /* AAKKeyboardDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 14DDEEF919F4C5EC00AD0AC1 /* AAKKeyboardDataManager.m */; };
@@ -160,8 +160,6 @@
 		1491181219E42AA80039488F /* UITraitCollection+keyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITraitCollection+keyboard.m"; sourceTree = "<group>"; };
 		14A5137E19EC68530098C02C /* register.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = register.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		14A5138119EC68530098C02C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		14A5138219EC68530098C02C /* ActionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActionViewController.h; sourceTree = "<group>"; };
-		14A5138319EC68530098C02C /* ActionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActionViewController.m; sourceTree = "<group>"; };
 		14A5138519EC68530098C02C /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		14A5138F19EC75300098C02C /* extension_js.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = extension_js.js; sourceTree = "<group>"; };
 		14B2673C19E6BFD000C0321D /* AAKToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKToolbar.h; sourceTree = "<group>"; };
@@ -194,6 +192,8 @@
 		14CB158A19EB56F600D05E9C /* AAKASCIIArtGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKASCIIArtGroup.h; sourceTree = "<group>"; };
 		14CB158B19EB56F600D05E9C /* AAKASCIIArtGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKASCIIArtGroup.m; sourceTree = "<group>"; };
 		14CB158E19EBC3B900D05E9C /* AAKHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKHelper.h; sourceTree = "<group>"; };
+		14D0D72D19FA13D900870C92 /* AAKRegisterActionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKRegisterActionViewController.h; sourceTree = "<group>"; };
+		14D0D72E19FA13D900870C92 /* AAKRegisterActionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKRegisterActionViewController.m; sourceTree = "<group>"; };
 		14DDEEF819F4C5EC00AD0AC1 /* AAKKeyboardDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKKeyboardDataManager.h; sourceTree = "<group>"; };
 		14DDEEF919F4C5EC00AD0AC1 /* AAKKeyboardDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKKeyboardDataManager.m; sourceTree = "<group>"; };
 		14DDEEFD19F4C72D00AD0AC1 /* AAKLocalKeyboardDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKLocalKeyboardDataManager.h; sourceTree = "<group>"; };
@@ -264,8 +264,8 @@
 				14BC4AFE19EDD49D000682B2 /* AAKSelectGroupViewController.m */,
 				14BC4B0019EDD4B6000682B2 /* AAKCreateNewGroupViewController.h */,
 				14BC4B0119EDD4B6000682B2 /* AAKCreateNewGroupViewController.m */,
-				14A5138219EC68530098C02C /* ActionViewController.h */,
-				14A5138319EC68530098C02C /* ActionViewController.m */,
+				14D0D72D19FA13D900870C92 /* AAKRegisterActionViewController.h */,
+				14D0D72E19FA13D900870C92 /* AAKRegisterActionViewController.m */,
 				14A5138519EC68530098C02C /* MainInterface.storyboard */,
 				14A5138019EC68530098C02C /* Supporting Files */,
 			);
@@ -627,11 +627,11 @@
 				14DDEF0619F4C74F00AD0AC1 /* AAKSharedKeyboardDataManager.m in Sources */,
 				14A5139719EC857E0098C02C /* NSParagraphStyle+keyboard.m in Sources */,
 				14FB781719F46992001BFF36 /* AAKASCIIArtGroup.m in Sources */,
-				14A5138419EC68530098C02C /* ActionViewController.m in Sources */,
 				14BC4B0219EDD4B6000682B2 /* AAKCreateNewGroupViewController.m in Sources */,
 				14BC4AFF19EDD49D000682B2 /* AAKSelectGroupViewController.m in Sources */,
 				14214F9319F7FDE600600D4A /* AAKRegisterViewController.m in Sources */,
 				14FB781819F46996001BFF36 /* AAKASCIIArt.m in Sources */,
+				14D0D72F19FA13D900870C92 /* AAKRegisterActionViewController.m in Sources */,
 				14DDEEFC19F4C5EC00AD0AC1 /* AAKKeyboardDataManager.m in Sources */,
 				146EEB5C19EDC16D0032F6DE /* AAKSQLite.m in Sources */,
 				14A5139319EC85710098C02C /* UZCursorView.m in Sources */,

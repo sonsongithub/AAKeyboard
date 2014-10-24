@@ -50,7 +50,6 @@
 	sqlite3_exec(_database, "CREATE TABLE AAGroup (group_title TEXT UNIQUE, group_key INTEGER PRIMARY KEY AUTOINCREMENT);", NULL, NULL, NULL);
 	sqlite3_exec(_database, "CREATE TABLE AA (asciiart TEXT, number INTEGER, ratio NUMERIC, group_key INTEGER, asciiart_key INTEGER PRIMARY KEY AUTOINCREMENT);", NULL, NULL, NULL);
 	sqlite3_exec(_database, "CREATE TABLE History (last_time INTEGER, asciiart_key INTEGER);", NULL, NULL, NULL);
-//	sqlite3_exec(_database, "CREATE UNIQUE INDEX AAIndex ON AA(group_key ASC);", NULL, NULL, NULL);
 	sqlite3_exec(_database, "INSERT INTO AAGroup (group_title, group_key) VALUES('Default', NULL);", NULL, NULL, NULL);
 }
 
