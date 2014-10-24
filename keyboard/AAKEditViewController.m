@@ -27,11 +27,11 @@
 	// Do any additional setup after loading the view.
 	_AATextView.font = [UIFont fontWithName:@"Mona" size:10];
 	[_groupTableView reloadData];
+	_AATextView.text = _asciiart;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	_AATextView.text = _asciiart;
 }
 
 #pragma mark - IBAction
