@@ -23,6 +23,10 @@
 	return self;
 }
 
++ (AAKASCIIArtGroup*)defaultGroup {
+	return [[AAKASCIIArtGroup alloc] initWithTitle:@"Default" key:0 type:AAKASCIIArtNormalGroup];
+}
+
 + (AAKASCIIArtGroup*)groupWithTitle:(NSString*)title key:(NSInteger)key {
 	return [[AAKASCIIArtGroup alloc] initWithTitle:title key:key type:AAKASCIIArtNormalGroup];
 }

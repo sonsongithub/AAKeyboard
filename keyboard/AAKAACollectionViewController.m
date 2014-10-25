@@ -13,6 +13,7 @@
 #import "NSParagraphStyle+keyboard.h"
 #import "AAKAACollectionViewCell.h"
 #import "AAKTextView.h"
+#import "AAKEditViewController.h"
 
 @interface AAKAACollectionViewController () {
 	NSArray *_group;
@@ -52,16 +53,6 @@ static NSString * const reuseIdentifier = @"Cell";
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -90,11 +81,34 @@ static NSString * const reuseIdentifier = @"Cell";
     return cell;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+	NSArray *data = _AAGroups[indexPath.section];
+	AAKASCIIArtGroup *group = _group[indexPath.section];
+	AAKASCIIArt *source = data[indexPath.item];
+	AAKEditViewController *con = [self.storyboard instantiateViewControllerWithIdentifier:@"AAKEditViewController"];
+	con.art = source;
+	con.group = group;
+	[self.navigationController pushViewController:con animated:YES];
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+	return UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f);
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+	return 0;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+	return 0;
+}
+
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
 	NSArray *data = _AAGroups[indexPath.section];
 	AAKASCIIArt *source = data[indexPath.item];
-	CGFloat height = 80;
-	return CGSizeMake(height * source.ratio, height);
+	CGFloat width = self.collectionView.frame.size.width / 2;
+	CGFloat height = width;
+	return CGSizeMake(width, height);
 }
 
 #pragma mark <UICollectionViewDelegate>

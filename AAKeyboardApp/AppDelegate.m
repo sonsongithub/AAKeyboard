@@ -10,6 +10,7 @@
 #import "AAKKeyboardDataManager.h"
 
 #import "AAKRegisterViewController.h"
+#import "AAKASCIIArt.h"
 
 @interface AppDelegate ()
 
@@ -33,8 +34,11 @@
 	UINavigationController *nav = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"AAKRegisterNavigationController"];
 	AAKRegisterViewController *con = (AAKRegisterViewController*)nav.topViewController;
 	
-	con.asciiart = aa;
+	AAKASCIIArt *asciiart = [[AAKASCIIArt alloc] init];
 	
+	asciiart.asciiArt = aa;
+	
+	con.art = asciiart;
 	
 	[self.window.rootViewController presentViewController:nav animated:YES completion:nil];
 	

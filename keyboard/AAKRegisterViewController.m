@@ -19,6 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	self.group = [AAKASCIIArtGroup defaultGroup];
 }
 
 - (IBAction)cancel:(id)sender {

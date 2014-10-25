@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class AAKASCIIArt;
 @class AAKASCIIArtGroup;
 
 @interface AAKEditViewController : UIViewController {
@@ -16,6 +17,6 @@
 	IBOutlet UITableView	*_groupTableView;
 }
 @property (nonatomic, strong) AAKASCIIArtGroup *group;
-@property (nonatomic, strong) NSString *asciiart;
+@property (nonatomic, strong) AAKASCIIArt *art;
 - (IBAction)didChangeSlider:(id)sender;
 @end

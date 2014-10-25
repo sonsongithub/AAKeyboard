@@ -8,6 +8,7 @@
 
 #import "AAKEditViewController.h"
 
+#import "AAKASCIIArt.h"
 #import "AAKASCIIArtGroup.h"
 #import "AAKSelectGroupViewController.h"
 
@@ -27,7 +28,7 @@
 	// Do any additional setup after loading the view.
 	_AATextView.font = [UIFont fontWithName:@"Mona" size:10];
 	[_groupTableView reloadData];
-	_AATextView.text = _asciiart;
+	_AATextView.text = _art.asciiArt;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
