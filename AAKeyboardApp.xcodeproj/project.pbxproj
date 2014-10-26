@@ -22,6 +22,8 @@
 		143BD0E619F8EBBA004D80D7 /* AAKAACollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 143BD0E519F8EBBA004D80D7 /* AAKAACollectionViewCell.xib */; };
 		143BD0E919F8EBF3004D80D7 /* AAKAACollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 143BD0E819F8EBF3004D80D7 /* AAKAACollectionViewCell.m */; };
 		145A376219E4316200BE34BE /* DummyKeyboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 145A376119E4316200BE34BE /* DummyKeyboardViewController.m */; };
+		1465517619FC437C0030C4F7 /* AAKAASupplementaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1465517519FC437C0030C4F7 /* AAKAASupplementaryView.m */; };
+		1465517819FC43930030C4F7 /* AAKAASupplementaryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1465517719FC43930030C4F7 /* AAKAASupplementaryView.xib */; };
 		146EEB5519ED5CDE0032F6DE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */; };
 		146EEB5619ED5CE50032F6DE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */; };
 		146EEB5719ED5CEF0032F6DE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */; };
@@ -153,6 +155,9 @@
 		1441E88319ECD83C00A4881F /* AAKeyboardApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = AAKeyboardApp.entitlements; sourceTree = "<group>"; };
 		145A376019E4316200BE34BE /* DummyKeyboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DummyKeyboardViewController.h; sourceTree = "<group>"; };
 		145A376119E4316200BE34BE /* DummyKeyboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DummyKeyboardViewController.m; sourceTree = "<group>"; };
+		1465517419FC437C0030C4F7 /* AAKAASupplementaryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKAASupplementaryView.h; sourceTree = "<group>"; };
+		1465517519FC437C0030C4F7 /* AAKAASupplementaryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKAASupplementaryView.m; sourceTree = "<group>"; };
+		1465517719FC43930030C4F7 /* AAKAASupplementaryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AAKAASupplementaryView.xib; sourceTree = "<group>"; };
 		146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		146EEB5819EDC16D0032F6DE /* AAKSQLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKSQLite.h; sourceTree = "<group>"; };
 		146EEB5919EDC16D0032F6DE /* AAKSQLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKSQLite.m; sourceTree = "<group>"; };
@@ -385,9 +390,12 @@
 				1441E88219ECD7FF00A4881F /* keyboard.entitlements */,
 				143BD0E219F8EB14004D80D7 /* AAKAACollectionViewController.h */,
 				143BD0E319F8EB14004D80D7 /* AAKAACollectionViewController.m */,
-				143BD0E519F8EBBA004D80D7 /* AAKAACollectionViewCell.xib */,
 				143BD0E719F8EBF3004D80D7 /* AAKAACollectionViewCell.h */,
 				143BD0E819F8EBF3004D80D7 /* AAKAACollectionViewCell.m */,
+				143BD0E519F8EBBA004D80D7 /* AAKAACollectionViewCell.xib */,
+				1465517419FC437C0030C4F7 /* AAKAASupplementaryView.h */,
+				1465517519FC437C0030C4F7 /* AAKAASupplementaryView.m */,
+				1465517719FC43930030C4F7 /* AAKAASupplementaryView.xib */,
 				14CB158E19EBC3B900D05E9C /* AAKHelper.h */,
 				14214F8A19F7FDC500600D4A /* AAKEditViewController.h */,
 				14214F8B19F7FDC500600D4A /* AAKEditViewController.m */,
@@ -594,6 +602,7 @@
 			files = (
 				14FBD3B219E21213005FC38B /* Main.storyboard in Resources */,
 				143BD0E619F8EBBA004D80D7 /* AAKAACollectionViewCell.xib in Resources */,
+				1465517819FC43930030C4F7 /* AAKAASupplementaryView.xib in Resources */,
 				14FBD3B719E21213005FC38B /* LaunchScreen.xib in Resources */,
 				14FBD3B419E21213005FC38B /* Images.xcassets in Resources */,
 				14CB156C19E935D700D05E9C /* mona.ttf in Resources */,
@@ -653,6 +662,7 @@
 				14CB157819E9C73900D05E9C /* NSParagraphStyle+keyboard.m in Sources */,
 				14B73C6719E3C9060031DCB6 /* AAKToolbarCell.m in Sources */,
 				14CB156819E935BB00D05E9C /* UZTextView.m in Sources */,
+				1465517619FC437C0030C4F7 /* AAKAASupplementaryView.m in Sources */,
 				14FBD3AF19E21213005FC38B /* ViewController.m in Sources */,
 				14CB157C19EA328500D05E9C /* AAKToolbarHistoryCell.m in Sources */,
 				14F7A2F319E781E0007585CF /* AAKContentFlowLayout.m in Sources */,
