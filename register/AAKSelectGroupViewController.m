@@ -22,7 +22,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	_groups = [[AAKKeyboardDataManager defaultManager] allGroups];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didCreateNewGroupNotification:) name:AAKKeyboardDataManagerDidCreateNewGroupNotification object:nil];
 }
 
 - (void)didCreateNewGroupNotification:(NSNotification*)notification {

@@ -60,8 +60,6 @@ static NSString * const reuseIdentifier = @"Cell";
     // Do any additional setup after loading the view.
 	_group = [[AAKKeyboardDataManager defaultManager] groups];
 	
-	
-	
 	NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[_group count]];
 	
 	for (AAKASCIIArtGroup *group in _group) {

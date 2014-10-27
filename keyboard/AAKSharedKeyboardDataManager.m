@@ -47,9 +47,8 @@
  * テーブルを作成する．
  */
 - (void)initializeDatabaseTable {
-	sqlite3_exec(_database, "CREATE TABLE AAGroup (group_title TEXT UNIQUE, group_key INTEGER PRIMARY KEY AUTOINCREMENT);", NULL, NULL, NULL);
-	sqlite3_exec(_database, "CREATE TABLE AA (asciiart TEXT, number INTEGER, ratio NUMERIC, group_key INTEGER, asciiart_key INTEGER PRIMARY KEY AUTOINCREMENT);", NULL, NULL, NULL);
-	sqlite3_exec(_database, "CREATE TABLE History (last_time INTEGER, asciiart_key INTEGER);", NULL, NULL, NULL);
+	sqlite3_exec(_database, "CREATE TABLE AAGroup (group_title TEXT UNIQUE, number INTEGER, group_key INTEGER PRIMARY KEY AUTOINCREMENT);", NULL, NULL, NULL);
+	sqlite3_exec(_database, "CREATE TABLE AA (asciiart TEXT, number INTEGER, ratio NUMERIC, group_key INTEGER, lastUseTime NUMERIC, asciiart_key INTEGER PRIMARY KEY AUTOINCREMENT);", NULL, NULL, NULL);
 	sqlite3_exec(_database, "INSERT INTO AAGroup (group_title, group_key) VALUES('Default', NULL);", NULL, NULL, NULL);
 }
 
@@ -117,7 +116,7 @@
 	sqlite3_stmt *statement = NULL;
 	
 	if (statement == nil) {
-		static char *sql = "INSERT INTO AAGroup (group_title, group_key) VALUES(?, NULL)";
+		static char *sql = "INSERT INTO AAGroup (group_title, group_key, number) VALUES(?, NULL, -1)";
 		if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
 			NSLog( @"Can't prepare statment to insert board information. into board, with messages '%s'.", sqlite3_errmsg(_database));
 		}
@@ -152,7 +151,7 @@
 	CGFloat ratio = size.width / size.height;
 	
 	if (statement == nil) {
-		static char *sql = "INSERT INTO AA (asciiart, group_key, ratio, asciiart_key) VALUES(?, ?, ?, NULL)";
+		static char *sql = "INSERT INTO AA (asciiart, group_key, ratio, lastUseTime, asciiart_key) VALUES(?, ?, ?, ?, NULL)";
 		if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
 			NSLog( @"Can't prepare statment to insert board information. into board, with messages '%s'.", sqlite3_errmsg(_database));
 		}
@@ -162,6 +161,7 @@
 	sqlite3_bind_text(statement, 1, [asciiArt UTF8String], -1, SQLITE_TRANSIENT);
 	sqlite3_bind_int64(statement, 2, groupKey);
 	sqlite3_bind_double(statement, 3, ratio);
+	sqlite3_bind_double(statement, 4, [NSDate timeIntervalSinceReferenceDate]);
 	int success = sqlite3_step(statement);
 	if (success != SQLITE_ERROR) {
 	}
@@ -177,7 +177,7 @@
  * @param group AAリストを取得したいグループ．
  **/
 - (NSArray*)asciiArtForExistingGroup:(AAKASCIIArtGroup*)group {
-	const char *sql = "select asciiart, asciiart_key, ratio from AA where group_key = ?";
+	const char *sql = "select asciiart, asciiart_key, ratio from AA where group_key = ? order by lastUseTime";
 	sqlite3_stmt *statement = NULL;
 	
 	NSMutableArray *groups = [NSMutableArray array];
@@ -208,7 +208,7 @@
  * @param group AAリストを取得したいグループ．
  **/
 - (NSArray*)asciiArtHistory {
-	const char *sql = "select asciiart, asciiart_key, ratio from AA where asciiart_key in (select asciiart_key from History order by last_time desc); ";
+	const char *sql = "select asciiart, asciiart_key, ratio from AA order by lastUseTime limit 20";
 	sqlite3_stmt *statement = NULL;
 	
 	NSMutableArray *groups = [NSMutableArray array];
@@ -254,22 +254,23 @@
  * @param key アスキーアートのデータベース上でのキー．
  **/
 - (void)insertHistoryASCIIArtKey:(NSInteger)key {
-	sqlite3_stmt *statement = NULL;
-	static char *sql = "INSERT INTO History (last_time, asciiart_key) VALUES(?, ?)";
-	if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
-		NSLog( @"Can't prepare statment to insert board information. into board, with messages '%s'.", sqlite3_errmsg(_database));
-	}
-	else {
-	}
-	sqlite3_bind_double(statement, 1, [NSDate timeIntervalSinceReferenceDate]);
-	sqlite3_bind_int64(statement, 2, key);
-	int success = sqlite3_step(statement);
-	if (success != SQLITE_ERROR) {
-	}
-	else{
-		NSLog(@"Error");
-	}
-	sqlite3_finalize(statement);
+//	sqlite3_stmt *statement = NULL;
+//	static char *sql = "INSERT INTO History (last_time, asciiart_key) VALUES(?, ?)";
+//	if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
+//		NSLog( @"Can't prepare statment to insert board information. into board, with messages '%s'.", sqlite3_errmsg(_database));
+//	}
+//	else {
+//	}
+//	sqlite3_bind_double(statement, 1, [NSDate timeIntervalSinceReferenceDate]);
+//	sqlite3_bind_int64(statement, 2, key);
+//	int success = sqlite3_step(statement);
+//	if (success != SQLITE_ERROR) {
+//	}
+//	else{
+//		NSLog(@"Error");
+//	}
+//	sqlite3_finalize(statement);
+	[[NSNotificationCenter defaultCenter] postNotificationName:AAKKeyboardDataManagerDidUpdateNotification object:nil userInfo:nil];
 }
 
 /**
@@ -286,8 +287,8 @@
 	else {
 	}
 	sqlite3_bind_text(statement, 1, [asciiArt.asciiArt UTF8String], -1, SQLITE_TRANSIENT);
-	sqlite3_bind_int64(statement, 2, asciiArt.key);
-	sqlite3_bind_int64(statement, 3, group.key);
+	sqlite3_bind_int64(statement, 2, group.key);
+	sqlite3_bind_int64(statement, 3, asciiArt.key);
 	int success = sqlite3_step(statement);
 	if (success != SQLITE_ERROR) {
 	}
