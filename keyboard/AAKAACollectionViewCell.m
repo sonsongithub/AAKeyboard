@@ -8,10 +8,12 @@
 
 #import "AAKAACollectionViewCell.h"
 
+#import "AAKKeyboardDataManager.h"
+
 @implementation AAKAACollectionViewCell
 
 - (IBAction)delete:(id)sender {
-	
+	[[AAKKeyboardDataManager defaultManager] deleteASCIIArt:_asciiart];
 }
 
 @end

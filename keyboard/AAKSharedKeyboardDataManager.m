@@ -302,6 +302,33 @@
 	return NO;
 }
 
+
+/**
+ * AAを削除する．
+ * @param asciiArt アスキーアートオブジェクト．
+ * @param group アスキーアートグループオブジェクト．
+ **/
+- (BOOL)deleteASCIIArt:(AAKASCIIArt*)asciiArt {
+	sqlite3_stmt *statement = NULL;
+	static char *sql = "delete from AA where asciiart_key = ?";
+	if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
+		NSLog( @"Can't prepare statment to insert board information. into board, with messages '%s'.", sqlite3_errmsg(_database));
+	}
+	else {
+	}
+	sqlite3_bind_int64(statement, 1, asciiArt.key);
+	int success = sqlite3_step(statement);
+	if (success != SQLITE_ERROR) {
+	}
+	else{
+		NSLog(@"Error");
+	}
+	sqlite3_finalize(statement);
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:AAKKeyboardDataManagerDidUpdateNotification object:nil userInfo:@{AAKKeyboardDataManagerDidRemoveObjectKey:asciiArt}];
+	return NO;
+}
+
 - (instancetype)init {
 	self = [super init];
 	if (self) {

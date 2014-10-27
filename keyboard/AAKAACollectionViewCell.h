@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @class AAKTextView;
+@class AAKASCIIArt;
 
 @interface AAKAACollectionViewCell : UICollectionViewCell
 
 @property (nonatomic, assign) IBOutlet AAKTextView *textView;
+@property (nonatomic, assign) AAKASCIIArt *asciiart;
 
 @end

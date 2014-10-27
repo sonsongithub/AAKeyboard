@@ -16,6 +16,7 @@
 
 NSString *const AAKKeyboardDataManagerDidCreateNewGroupNotification	= @"AAKKeyboardDataManagerDidCreateNewGroupNotification";
 NSString *const AAKKeyboardDataManagerDidUpdateNotification			= @"AAKKeyboardDataManagerDidUpdateNotification";
+NSString *const AAKKeyboardDataManagerDidRemoveObjectKey			= @"AAKKeyboardDataManagerDidRemoveObjectKey";
 
 static AAKKeyboardDataManager *sharedKeyboardDataManager = nil;
 
@@ -123,6 +124,15 @@ static AAKKeyboardDataManager *sharedKeyboardDataManager = nil;
  * @param key アスキーアートのデータベース上でのキー．
  **/
 - (void)insertHistoryASCIIArtKey:(NSInteger)key {
+}
+
+/**
+ * AAを削除する．
+ * @param asciiArt アスキーアートオブジェクト．
+ * @param group アスキーアートグループオブジェクト．
+ **/
+- (BOOL)deleteASCIIArt:(AAKASCIIArt*)asciiArt {
+	return NO;
 }
 
 @end

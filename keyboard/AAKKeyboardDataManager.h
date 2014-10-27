@@ -15,6 +15,7 @@
 
 extern NSString *const AAKKeyboardDataManagerDidCreateNewGroupNotification __attribute((deprecated("Use AAKKeyboardDataManagerDidUpdateNotification instaed")));
 extern NSString *const AAKKeyboardDataManagerDidUpdateNotification;
+extern NSString *const AAKKeyboardDataManagerDidRemoveObjectKey;
 
 @interface AAKKeyboardDataManager : NSObject {
 	sqlite3 *_database;
@@ -83,5 +84,12 @@ extern NSString *const AAKKeyboardDataManagerDidUpdateNotification;
  * @param group アスキーアートグループオブジェクト．
  **/
 - (BOOL)updateASCIIArt:(AAKASCIIArt*)asciiArt group:(AAKASCIIArtGroup*)group;
+
+/**
+ * AAを削除する．
+ * @param asciiArt アスキーアートオブジェクト．
+ * @param group アスキーアートグループオブジェクト．
+ **/
+- (BOOL)deleteASCIIArt:(AAKASCIIArt*)asciiArt;
 
 @end

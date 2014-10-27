@@ -28,16 +28,46 @@
 static NSString * const reuseIdentifier = @"Cell";
 
 - (void)didUpdateDatabase:(NSNotification*)notification {
-	_group = [[AAKKeyboardDataManager defaultManager] groups];
 	
-	NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[_group count]];
+	NSDictionary *userInfo = notification.userInfo;
 	
-	for (AAKASCIIArtGroup *group in _group) {
-		NSArray *data = [[AAKKeyboardDataManager defaultManager] asciiArtForGroup:group];
-		[buf addObject:data];
+	AAKASCIIArt *deleted = userInfo[AAKKeyboardDataManagerDidRemoveObjectKey];
+	
+	if (deleted == nil) {
+		_group = [[AAKKeyboardDataManager defaultManager] groups];
+		
+		NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[_group count]];
+		
+		for (AAKASCIIArtGroup *group in _group) {
+			NSArray *data = [[AAKKeyboardDataManager defaultManager] asciiArtForGroup:group];
+			[buf addObject:data];
+		}
+		_AAGroups = [NSArray arrayWithArray:buf];
+		[self.collectionView reloadData];
 	}
-	_AAGroups = [NSArray arrayWithArray:buf];
-	[self.collectionView reloadData];
+	else {
+		for (int i = 0; i < _AAGroups.count; i++) {
+			NSArray *buf = _AAGroups[i];
+			for (int j = 0; j < buf.count; j++) {
+				AAKASCIIArt *obj = buf[j];
+				if (obj.key == deleted.key) {
+					[self.collectionView performBatchUpdates:^(void){
+						
+						NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[_group count]];
+						
+						for (AAKASCIIArtGroup *group in _group) {
+							NSArray *data = [[AAKKeyboardDataManager defaultManager] asciiArtForGroup:group];
+							[buf addObject:data];
+						}
+						_AAGroups = [NSArray arrayWithArray:buf];
+						[self.collectionView deleteItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:j inSection:i]]];
+					} completion:nil];
+					return;
+				}
+			}
+		}
+		
+	}
 }
 
 - (void)viewDidLoad {
@@ -109,6 +139,7 @@ static NSString * const reuseIdentifier = @"Cell";
 	NSDictionary *attributes = @{NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:[UIFont fontWithName:@"Mona" size:fontSize]};
 	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:source.asciiArt attributes:attributes];
 	cell.textView.attributedString = string;
+	cell.asciiart = source;
     
     return cell;
 }
