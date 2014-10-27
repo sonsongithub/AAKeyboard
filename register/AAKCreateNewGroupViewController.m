@@ -25,7 +25,7 @@
 	NSString *newGroup = _newGroupTextField.text;
 	[[AAKKeyboardDataManager defaultManager] insertNewGroup:newGroup];
 	[self dismissViewControllerAnimated:YES completion:nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName:AAKKeyboardDataManagerDidCreateNewGroupNotification object:nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName:AAKKeyboardDataManagerDidUpdateNotification object:nil];
 }
 
 - (void)viewDidLoad {
