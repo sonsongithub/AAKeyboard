@@ -22,9 +22,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	_groups = [[AAKKeyboardDataManager defaultManager] allGroups];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDataManagerDidUpdateNotification:) name:AAKKeyboardDataManagerDidUpdateNotification object:nil];
 }
 
-- (void)didCreateNewGroupNotification:(NSNotification*)notification {
+- (void)keyboardDataManagerDidUpdateNotification:(NSNotification*)notification {
 	_groups = [[AAKKeyboardDataManager defaultManager] allGroups];
 	[self.tableView reloadData];
 }

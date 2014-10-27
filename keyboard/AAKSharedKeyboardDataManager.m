@@ -177,7 +177,7 @@
  * @param group AAリストを取得したいグループ．
  **/
 - (NSArray*)asciiArtForExistingGroup:(AAKASCIIArtGroup*)group {
-	const char *sql = "select asciiart, asciiart_key, ratio from AA where group_key = ? order by lastUseTime";
+	const char *sql = "select asciiart, asciiart_key, ratio from AA where group_key = ? order by lastUseTime desc";
 	sqlite3_stmt *statement = NULL;
 	
 	NSMutableArray *groups = [NSMutableArray array];
@@ -208,7 +208,7 @@
  * @param group AAリストを取得したいグループ．
  **/
 - (NSArray*)asciiArtHistory {
-	const char *sql = "select asciiart, asciiart_key, ratio from AA order by lastUseTime limit 20";
+	const char *sql = "select asciiart, asciiart_key, ratio from AA order by lastUseTime desc limit 20";
 	sqlite3_stmt *statement = NULL;
 	
 	NSMutableArray *groups = [NSMutableArray array];
@@ -250,26 +250,26 @@
 
 /**
  * 履歴を追加する．
- * @param asciiArt アスキーアートの文字列．
  * @param key アスキーアートのデータベース上でのキー．
  **/
 - (void)insertHistoryASCIIArtKey:(NSInteger)key {
-//	sqlite3_stmt *statement = NULL;
-//	static char *sql = "INSERT INTO History (last_time, asciiart_key) VALUES(?, ?)";
-//	if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
-//		NSLog( @"Can't prepare statment to insert board information. into board, with messages '%s'.", sqlite3_errmsg(_database));
-//	}
-//	else {
-//	}
-//	sqlite3_bind_double(statement, 1, [NSDate timeIntervalSinceReferenceDate]);
-//	sqlite3_bind_int64(statement, 2, key);
-//	int success = sqlite3_step(statement);
-//	if (success != SQLITE_ERROR) {
-//	}
-//	else{
-//		NSLog(@"Error");
-//	}
-//	sqlite3_finalize(statement);
+	sqlite3_stmt *statement = NULL;
+	static char *sql = "update AA set lastUseTime = ? where asciiart_key = ?";
+	if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
+		NSLog( @"Can't prepare statment to insert board information. into board, with messages '%s'.", sqlite3_errmsg(_database));
+	}
+	else {
+	}
+	sqlite3_bind_double(statement, 1, [NSDate timeIntervalSinceReferenceDate]);
+	sqlite3_bind_int64(statement, 2, key);
+	int success = sqlite3_step(statement);
+	if (success != SQLITE_ERROR) {
+	}
+	else{
+		NSLog(@"Error");
+	}
+	sqlite3_finalize(statement);
+	
 	[[NSNotificationCenter defaultCenter] postNotificationName:AAKKeyboardDataManagerDidUpdateNotification object:nil userInfo:nil];
 }
 
