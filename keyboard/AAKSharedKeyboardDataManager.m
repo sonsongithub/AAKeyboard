@@ -253,14 +253,11 @@
  **/
 - (void)insertHistoryASCIIArtKey:(NSInteger)key {
 	sqlite3_stmt *statement = NULL;
-	
-	if (statement == nil) {
-		static char *sql = "INSERT INTO History (last_time, asciiart_key) VALUES(?, ?)";
-		if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
-			NSLog( @"Can't prepare statment to insert board information. into board, with messages '%s'.", sqlite3_errmsg(_database));
-		}
-		else {
-		}
+	static char *sql = "INSERT INTO History (last_time, asciiart_key) VALUES(?, ?)";
+	if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
+		NSLog( @"Can't prepare statment to insert board information. into board, with messages '%s'.", sqlite3_errmsg(_database));
+	}
+	else {
 	}
 	sqlite3_bind_double(statement, 1, [NSDate timeIntervalSinceReferenceDate]);
 	sqlite3_bind_int64(statement, 2, key);
@@ -271,6 +268,33 @@
 		NSLog(@"Error");
 	}
 	sqlite3_finalize(statement);
+}
+
+/**
+ * AAを更新する．
+ * @param asciiArt アスキーアートオブジェクト．
+ * @param group アスキーアートグループオブジェクト．
+ **/
+- (BOOL)updateASCIIArt:(AAKASCIIArt*)asciiArt group:(AAKASCIIArtGroup*)group {
+	sqlite3_stmt *statement = NULL;
+	static char *sql = "update AA set asciiart = ?, group_key = ? where asciiart_key = ?";
+	if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
+		NSLog( @"Can't prepare statment to insert board information. into board, with messages '%s'.", sqlite3_errmsg(_database));
+	}
+	else {
+	}
+	sqlite3_bind_text(statement, 1, [asciiArt.asciiArt UTF8String], -1, SQLITE_TRANSIENT);
+	sqlite3_bind_int64(statement, 2, asciiArt.key);
+	sqlite3_bind_int64(statement, 3, group.key);
+	int success = sqlite3_step(statement);
+	if (success != SQLITE_ERROR) {
+	}
+	else{
+		NSLog(@"Error");
+	}
+	sqlite3_finalize(statement);
+	
+	return NO;
 }
 
 - (instancetype)init {

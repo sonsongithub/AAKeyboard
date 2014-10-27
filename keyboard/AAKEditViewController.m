@@ -11,6 +11,7 @@
 #import "AAKASCIIArt.h"
 #import "AAKASCIIArtGroup.h"
 #import "AAKSelectGroupViewController.h"
+#import "AAKKeyboardDataManager.h"
 
 @interface AAKEditViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -37,8 +38,13 @@
 
 #pragma mark - IBAction
 
+- (IBAction)save:(id)sender {
+	_art.asciiArt = _AATextView.text;
+}
+
 - (IBAction)didChangeSlider:(id)sender {
 	_AATextView.font = [UIFont fontWithName:@"Mona" size:_fontSizeSlider.value];
+	[[AAKKeyboardDataManager defaultManager] updateASCIIArt:_art group:_group];
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource

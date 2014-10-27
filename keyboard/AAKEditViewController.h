@@ -19,4 +19,5 @@
 @property (nonatomic, strong) AAKASCIIArtGroup *group;
 @property (nonatomic, strong) AAKASCIIArt *art;
 - (IBAction)didChangeSlider:(id)sender;
+- (IBAction)save:(id)sender;
 @end

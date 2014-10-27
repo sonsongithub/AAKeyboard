@@ -360,7 +360,11 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="Edit AA" id="ErX-k3-6Pi">
-                        <barButtonItem key="rightBarButtonItem" title="Save" style="done" id="807-jg-mUu"/>
+                        <barButtonItem key="rightBarButtonItem" title="Save" style="done" id="807-jg-mUu">
+                            <connections>
+                                <action selector="save:" destination="Hbq-Jc-XW8" id="fWd-s8-nQo"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="_AATextView" destination="VN4-Tq-4f2" id="UOQ-Do-VpI"/>

@@ -9,6 +9,7 @@
 #import "AAKKeyboardDataManager.h"
 
 #import "AAKASCIIArtGroup.h"
+#import "AAKASCIIArt.h"
 #import "AAKHelper.h"
 #import "AAKLocalKeyboardDataManager.h"
 #import "AAKSharedKeyboardDataManager.h"
@@ -96,6 +97,15 @@ static AAKKeyboardDataManager *sharedKeyboardDataManager = nil;
  * @param group アスキーアートのグループのSQLiteデータベースのキー．
  **/
 - (void)insertNewASCIIArt:(NSString*)asciiArt groupKey:(NSInteger)groupKey {
+}
+
+/**
+ * AAを更新する．
+ * @param asciiArt アスキーアートオブジェクト．
+ * @param group アスキーアートグループオブジェクト．
+ **/
+- (BOOL)updateASCIIArt:(AAKASCIIArt*)asciiArt group:(AAKASCIIArtGroup*)group {
+	return NO;
 }
 
 /**
