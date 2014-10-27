@@ -40,11 +40,11 @@
 
 - (IBAction)save:(id)sender {
 	_art.asciiArt = _AATextView.text;
+	[[AAKKeyboardDataManager defaultManager] updateASCIIArt:_art group:_group];
 }
 
 - (IBAction)didChangeSlider:(id)sender {
 	_AATextView.font = [UIFont fontWithName:@"Mona" size:_fontSizeSlider.value];
-	[[AAKKeyboardDataManager defaultManager] updateASCIIArt:_art group:_group];
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource

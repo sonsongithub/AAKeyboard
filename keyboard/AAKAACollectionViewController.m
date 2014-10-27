@@ -27,9 +27,24 @@
 
 static NSString * const reuseIdentifier = @"Cell";
 
+- (void)didUpdateDatabase:(NSNotification*)notification {
+	_group = [[AAKKeyboardDataManager defaultManager] groups];
+	
+	NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[_group count]];
+	
+	for (AAKASCIIArtGroup *group in _group) {
+		NSArray *data = [[AAKKeyboardDataManager defaultManager] asciiArtForGroup:group];
+		[buf addObject:data];
+	}
+	_AAGroups = [NSArray arrayWithArray:buf];
+	[self.collectionView reloadData];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didUpdateDatabase:) name:AAKKeyboardDataManagerDidUpdateNotification object:nil];
+  
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
     

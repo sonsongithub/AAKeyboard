@@ -132,6 +132,7 @@
 		NSLog(@"Error");
 	}
 	sqlite3_finalize(statement);
+	[[NSNotificationCenter defaultCenter] postNotificationName:AAKKeyboardDataManagerDidUpdateNotification object:nil userInfo:nil];
 }
 
 /**
@@ -168,6 +169,7 @@
 		NSLog(@"Error");
 	}
 	sqlite3_finalize(statement);
+	[[NSNotificationCenter defaultCenter] postNotificationName:AAKKeyboardDataManagerDidUpdateNotification object:nil userInfo:nil];
 }
 
 /**
@@ -293,6 +295,8 @@
 		NSLog(@"Error");
 	}
 	sqlite3_finalize(statement);
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:AAKKeyboardDataManagerDidUpdateNotification object:nil userInfo:nil];
 	
 	return NO;
 }

@@ -13,7 +13,8 @@
 @class AAKASCIIArt;
 @class AAKASCIIArtGroup;
 
-extern NSString *const AAKKeyboardDataManagerDidCreateNewGroupNotification;
+extern NSString *const AAKKeyboardDataManagerDidCreateNewGroupNotification __attribute((deprecated("Use AAKKeyboardDataManagerDidUpdateNotification instaed")));
+extern NSString *const AAKKeyboardDataManagerDidUpdateNotification;
 
 @interface AAKKeyboardDataManager : NSObject {
 	sqlite3 *_database;

@@ -14,7 +14,8 @@
 #import "AAKLocalKeyboardDataManager.h"
 #import "AAKSharedKeyboardDataManager.h"
 
-NSString *const AAKKeyboardDataManagerDidCreateNewGroupNotification = @"AAKKeyboardDataManagerDidCreateNewGroupNotification";
+NSString *const AAKKeyboardDataManagerDidCreateNewGroupNotification	= @"AAKKeyboardDataManagerDidCreateNewGroupNotification";
+NSString *const AAKKeyboardDataManagerDidUpdateNotification			= @"AAKKeyboardDataManagerDidUpdateNotification";
 
 static AAKKeyboardDataManager *sharedKeyboardDataManager = nil;
 
