@@ -10,4 +10,8 @@
 
 @implementation AAKAACollectionViewCell
 
+- (IBAction)delete:(id)sender {
+	
+}
+
 @end
