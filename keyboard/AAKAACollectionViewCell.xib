@@ -13,34 +13,78 @@
                 <rect key="frame" x="0.0" y="0.0" width="258" height="168"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ilP-2I-6HM" customClass="AAKTextView">
-                        <rect key="frame" x="1" y="1" width="256" height="166"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EoT-Pl-yAU">
+                        <rect key="frame" x="0.0" y="0.0" width="258" height="168"/>
+                        <subviews>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0UO-vQ-n0s" customClass="AAKTextView">
+                                <rect key="frame" x="1" y="1" width="256" height="166"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="0UO-vQ-n0s" firstAttribute="leading" secondItem="EoT-Pl-yAU" secondAttribute="leading" constant="1" id="J8X-ah-cyd"/>
+                            <constraint firstAttribute="bottom" secondItem="0UO-vQ-n0s" secondAttribute="bottom" constant="1" id="PuY-F6-EtE"/>
+                            <constraint firstItem="0UO-vQ-n0s" firstAttribute="top" secondItem="EoT-Pl-yAU" secondAttribute="top" constant="1" id="djQ-JI-Ary"/>
+                            <constraint firstAttribute="trailing" secondItem="0UO-vQ-n0s" secondAttribute="trailing" constant="1" id="dwf-Cn-NQJ"/>
+                        </constraints>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BhB-dr-08S">
-                        <rect key="frame" x="206" y="130" width="44" height="30"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="KaA-GP-Q6B">
+                        <rect key="frame" x="194" y="0.0" width="64" height="168"/>
+                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="64" id="J9F-ZR-EHp"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                         <state key="normal" title="Delete">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <connections>
-                            <action selector="delete:" destination="dTP-bg-J8X" eventType="touchUpInside" id="7W2-jX-qK0"/>
+                            <action selector="delete:" destination="dTP-bg-J8X" eventType="touchUpInside" id="P1m-Ve-iaJ"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="4pi-Go-DNg">
+                        <rect key="frame" x="130" y="0.0" width="64" height="168"/>
+                        <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="64" id="6xg-bJ-p0Q"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                        <state key="normal" title="Copy">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="copy:" destination="dTP-bg-J8X" eventType="touchUpInside" id="coP-lA-lJn"/>
                         </connections>
                     </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
-            <color key="backgroundColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="BhB-dr-08S" secondAttribute="trailing" constant="8" id="Ecl-yl-69o"/>
-                <constraint firstItem="ilP-2I-6HM" firstAttribute="leading" secondItem="dTP-bg-J8X" secondAttribute="leading" constant="1" id="IxY-VW-mpU"/>
-                <constraint firstAttribute="bottom" secondItem="BhB-dr-08S" secondAttribute="bottom" constant="8" id="SpP-eP-mfR"/>
-                <constraint firstItem="ilP-2I-6HM" firstAttribute="top" secondItem="dTP-bg-J8X" secondAttribute="top" constant="1" id="Trq-gS-00M"/>
-                <constraint firstAttribute="bottom" secondItem="ilP-2I-6HM" secondAttribute="bottom" constant="1" id="mQt-WO-DNG"/>
-                <constraint firstAttribute="trailing" secondItem="ilP-2I-6HM" secondAttribute="trailing" constant="1" id="oQA-t0-Dzc"/>
+                <constraint firstAttribute="trailing" secondItem="EoT-Pl-yAU" secondAttribute="trailing" id="Hwc-xS-Pr7"/>
+                <constraint firstAttribute="bottom" secondItem="4pi-Go-DNg" secondAttribute="bottom" id="Pb2-MZ-wsc"/>
+                <constraint firstItem="EoT-Pl-yAU" firstAttribute="top" secondItem="dTP-bg-J8X" secondAttribute="top" id="Uce-rQ-hxN"/>
+                <constraint firstAttribute="bottom" secondItem="KaA-GP-Q6B" secondAttribute="bottom" id="Y3k-Bw-Wvz"/>
+                <constraint firstAttribute="trailing" secondItem="KaA-GP-Q6B" secondAttribute="trailing" id="Yj7-4u-1Py"/>
+                <constraint firstItem="KaA-GP-Q6B" firstAttribute="leading" secondItem="4pi-Go-DNg" secondAttribute="trailing" id="aPo-eR-zFv"/>
+                <constraint firstItem="EoT-Pl-yAU" firstAttribute="leading" secondItem="dTP-bg-J8X" secondAttribute="leading" id="c0S-U8-lMC"/>
+                <constraint firstAttribute="bottom" secondItem="EoT-Pl-yAU" secondAttribute="bottom" id="f4s-uh-3Ve"/>
+                <constraint firstItem="KaA-GP-Q6B" firstAttribute="top" secondItem="dTP-bg-J8X" secondAttribute="top" id="pjj-5J-eDs"/>
+                <constraint firstItem="4pi-Go-DNg" firstAttribute="top" secondItem="dTP-bg-J8X" secondAttribute="top" id="qjC-T4-KDF"/>
             </constraints>
             <size key="customSize" width="258" height="168"/>
             <connections>
-                <outlet property="textView" destination="ilP-2I-6HM" id="nha-mg-Rlp"/>
+                <outlet property="leftMargin" destination="c0S-U8-lMC" id="7fe-eK-ZIh"/>
+                <outlet property="myCopyButton" destination="4pi-Go-DNg" id="caD-IC-MTb"/>
+                <outlet property="myCopyButtonWidth" destination="6xg-bJ-p0Q" id="hsb-O6-fgV"/>
+                <outlet property="myDeleteButton" destination="KaA-GP-Q6B" id="r5h-qA-Fki"/>
+                <outlet property="myDeleteButtonWidth" destination="J9F-ZR-EHp" id="pcL-hr-j41"/>
+                <outlet property="rightMargin" destination="Hwc-xS-Pr7" id="cPa-qd-5Ob"/>
+                <outlet property="textBackView" destination="EoT-Pl-yAU" id="Jgd-0X-Kyi"/>
+                <outlet property="textView" destination="0UO-vQ-n0s" id="LRh-T0-HUI"/>
             </connections>
             <point key="canvasLocation" x="527" y="-175"/>
         </collectionViewCell>

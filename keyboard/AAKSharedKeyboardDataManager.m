@@ -173,6 +173,32 @@
 }
 
 /**
+ * AAをコピーする
+ **/
+- (void)duplicateASCIIArt:(NSInteger)asciiArtKey {
+	sqlite3_stmt *statement = NULL;
+
+	// insert into customer(id, name) select code, username from usertable;
+	
+	if (statement == nil) {
+		static char *sql = "INSERT INTO AA(asciiart, group_key, ratio, lastUseTime) select asciiart, group_key, ratio, lastUseTime from AA where asciiart_key == ?";
+		if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
+			NSLog( @"Can't prepare statment to insert board information. into board, with messages '%s'.", sqlite3_errmsg(_database));
+		}
+		else {
+		}
+	}
+	sqlite3_bind_int64(statement, 1, asciiArtKey);
+	int success = sqlite3_step(statement);
+	if (success != SQLITE_ERROR) {
+	}
+	else{
+		NSLog(@"Error");
+	}
+	sqlite3_finalize(statement);
+}
+
+/**
  * groupに対応するのAAのリストを取得する．
  * @param group AAリストを取得したいグループ．
  **/
@@ -324,8 +350,6 @@
 		NSLog(@"Error");
 	}
 	sqlite3_finalize(statement);
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName:AAKKeyboardDataManagerDidUpdateNotification object:nil userInfo:@{AAKKeyboardDataManagerDidRemoveObjectKey:asciiArt}];
 	return NO;
 }
 

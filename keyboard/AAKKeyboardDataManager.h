@@ -92,4 +92,9 @@ extern NSString *const AAKKeyboardDataManagerDidRemoveObjectKey;
  **/
 - (BOOL)deleteASCIIArt:(AAKASCIIArt*)asciiArt;
 
+/**
+ * AAをコピーする
+ **/
+- (void)duplicateASCIIArt:(NSInteger)asciiArtKey;
+
 @end

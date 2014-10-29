@@ -10,10 +10,29 @@
 
 @class AAKTextView;
 @class AAKASCIIArt;
+@class AAKAACollectionViewCell;
+
+@protocol AAKAACollectionViewCellDelegate <NSObject>
+
+- (void)didSelectCell:(AAKAACollectionViewCell*)cell;
+- (void)didPushCopyCell:(AAKAACollectionViewCell*)cell;
+- (void)didPushDeleteCell:(AAKAACollectionViewCell*)cell;
+
+@end
 
 @interface AAKAACollectionViewCell : UICollectionViewCell
 
 @property (nonatomic, assign) IBOutlet AAKTextView *textView;
-@property (nonatomic, assign) AAKASCIIArt *asciiart;
+@property (nonatomic, assign) IBOutlet UIView *textBackView;
+@property (nonatomic, assign) IBOutlet UIButton *myCopyButton;
+@property (nonatomic, assign) IBOutlet UIButton *myDeleteButton;
+@property (nonatomic, strong) AAKASCIIArt *asciiart;
+
+@property (nonatomic, assign) IBOutlet NSLayoutConstraint *leftMargin;
+@property (nonatomic, assign) IBOutlet NSLayoutConstraint *rightMargin;
+@property (nonatomic, assign) IBOutlet NSLayoutConstraint *myCopyButtonWidth;
+@property (nonatomic, assign) IBOutlet NSLayoutConstraint *myDeleteButtonWidth;
+
+@property (nonatomic, assign) id <AAKAACollectionViewCellDelegate> delegate;
 
 @end

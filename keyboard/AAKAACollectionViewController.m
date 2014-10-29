@@ -17,7 +17,7 @@
 #import "AAKAASupplementaryView.h"
 #import "AAKASCIIArtGroup.h"
 
-@interface AAKAACollectionViewController () {
+@interface AAKAACollectionViewController () <AAKAACollectionViewCellDelegate> {
 	NSArray *_group;
 	NSArray *_AAGroups;
 }
@@ -27,14 +27,23 @@
 
 static NSString * const reuseIdentifier = @"Cell";
 
-- (void)didUpdateDatabase:(NSNotification*)notification {
-	
-	NSDictionary *userInfo = notification.userInfo;
-	
-	AAKASCIIArt *deleted = userInfo[AAKKeyboardDataManagerDidRemoveObjectKey];
-	
-	if (deleted == nil) {
-		_group = [[AAKKeyboardDataManager defaultManager] groups];
+- (void)didSelectCell:(AAKAACollectionViewCell*)cell {
+	NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
+	NSArray *data = _AAGroups[indexPath.section];
+	AAKASCIIArtGroup *group = _group[indexPath.section];
+	AAKASCIIArt *source = data[indexPath.item];
+	AAKEditViewController *con = [self.storyboard instantiateViewControllerWithIdentifier:@"AAKEditViewController"];
+	con.art = source;
+	con.group = group;
+	[self.navigationController pushViewController:con animated:YES];
+}
+
+- (void)didPushCopyCell:(AAKAACollectionViewCell*)cell {
+	AAKASCIIArt *obj = cell.asciiart;
+	NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
+	[self.collectionView performBatchUpdates:^(void){
+		
+		[[AAKKeyboardDataManager defaultManager] duplicateASCIIArt:obj.key];
 		
 		NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[_group count]];
 		
@@ -43,31 +52,45 @@ static NSString * const reuseIdentifier = @"Cell";
 			[buf addObject:data];
 		}
 		_AAGroups = [NSArray arrayWithArray:buf];
-		[self.collectionView reloadData];
-	}
-	else {
-		for (int i = 0; i < _AAGroups.count; i++) {
-			NSArray *buf = _AAGroups[i];
-			for (int j = 0; j < buf.count; j++) {
-				AAKASCIIArt *obj = buf[j];
-				if (obj.key == deleted.key) {
-					[self.collectionView performBatchUpdates:^(void){
-						
-						NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[_group count]];
-						
-						for (AAKASCIIArtGroup *group in _group) {
-							NSArray *data = [[AAKKeyboardDataManager defaultManager] asciiArtForGroup:group];
-							[buf addObject:data];
-						}
-						_AAGroups = [NSArray arrayWithArray:buf];
-						[self.collectionView deleteItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:j inSection:i]]];
-					} completion:nil];
-					return;
-				}
-			}
-		}
+		[self.collectionView insertItemsAtIndexPaths:@[indexPath]];
+	} completion:nil];
+}
+
+- (void)didPushDeleteCell:(AAKAACollectionViewCell*)cell {
+	AAKASCIIArt *obj = cell.asciiart;
+	NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
+	[[AAKKeyboardDataManager defaultManager] deleteASCIIArt:obj];
+	[self.collectionView performBatchUpdates:^(void){
 		
-	}
+
+		NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[_group count]];
+
+		for (AAKASCIIArtGroup *group in _group) {
+			NSArray *data = [[AAKKeyboardDataManager defaultManager] asciiArtForGroup:group];
+			[buf addObject:data];
+		}
+		_AAGroups = [NSArray arrayWithArray:buf];
+		[self.collectionView deleteItemsAtIndexPaths:@[indexPath]];
+	} completion:nil];
+}
+
+- (void)didUpdateDatabase:(NSNotification*)notification {	
+//	NSDictionary *userInfo = notification.userInfo;
+//	
+//	AAKASCIIArt *deleted = userInfo[AAKKeyboardDataManagerDidRemoveObjectKey];
+//	
+//	if (deleted == nil) {
+//		_group = [[AAKKeyboardDataManager defaultManager] groups];
+//		
+//		NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[_group count]];
+//		
+//		for (AAKASCIIArtGroup *group in _group) {
+//			NSArray *data = [[AAKKeyboardDataManager defaultManager] asciiArtForGroup:group];
+//			[buf addObject:data];
+//		}
+//		_AAGroups = [NSArray arrayWithArray:buf];
+//		[self.collectionView reloadData];
+//	}
 }
 
 - (void)viewDidLoad {
@@ -140,18 +163,19 @@ static NSString * const reuseIdentifier = @"Cell";
 	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:source.asciiArt attributes:attributes];
 	cell.textView.attributedString = string;
 	cell.asciiart = source;
+	cell.delegate = self;
     
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-	NSArray *data = _AAGroups[indexPath.section];
-	AAKASCIIArtGroup *group = _group[indexPath.section];
-	AAKASCIIArt *source = data[indexPath.item];
-	AAKEditViewController *con = [self.storyboard instantiateViewControllerWithIdentifier:@"AAKEditViewController"];
-	con.art = source;
-	con.group = group;
-	[self.navigationController pushViewController:con animated:YES];
+//	NSArray *data = _AAGroups[indexPath.section];
+//	AAKASCIIArtGroup *group = _group[indexPath.section];
+//	AAKASCIIArt *source = data[indexPath.item];
+//	AAKEditViewController *con = [self.storyboard instantiateViewControllerWithIdentifier:@"AAKEditViewController"];
+//	con.art = source;
+//	con.group = group;
+//	[self.navigationController pushViewController:con animated:YES];
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {

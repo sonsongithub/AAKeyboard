@@ -135,4 +135,10 @@ static AAKKeyboardDataManager *sharedKeyboardDataManager = nil;
 	return NO;
 }
 
+/**
+ * AAをコピーする
+ **/
+- (void)duplicateASCIIArt:(NSInteger)asciiArtKey {
+}
+
 @end
