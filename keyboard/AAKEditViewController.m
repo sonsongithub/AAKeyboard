@@ -41,6 +41,7 @@
 - (IBAction)save:(id)sender {
 	_art.asciiArt = _AATextView.text;
 	[[AAKKeyboardDataManager defaultManager] updateASCIIArt:_art group:_group];
+	[[NSNotificationCenter defaultCenter] postNotificationName:AAKKeyboardDataManagerDidUpdateNotification object:nil userInfo:nil];
 }
 
 - (IBAction)didChangeSlider:(id)sender {

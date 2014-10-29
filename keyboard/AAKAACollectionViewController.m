@@ -75,22 +75,22 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (void)didUpdateDatabase:(NSNotification*)notification {	
-//	NSDictionary *userInfo = notification.userInfo;
-//	
-//	AAKASCIIArt *deleted = userInfo[AAKKeyboardDataManagerDidRemoveObjectKey];
-//	
-//	if (deleted == nil) {
-//		_group = [[AAKKeyboardDataManager defaultManager] groups];
-//		
-//		NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[_group count]];
-//		
-//		for (AAKASCIIArtGroup *group in _group) {
-//			NSArray *data = [[AAKKeyboardDataManager defaultManager] asciiArtForGroup:group];
-//			[buf addObject:data];
-//		}
-//		_AAGroups = [NSArray arrayWithArray:buf];
-//		[self.collectionView reloadData];
-//	}
+	NSDictionary *userInfo = notification.userInfo;
+	
+	AAKASCIIArt *deleted = userInfo[AAKKeyboardDataManagerDidRemoveObjectKey];
+	
+	if (deleted == nil) {
+		_group = [[AAKKeyboardDataManager defaultManager] groups];
+		
+		NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[_group count]];
+		
+		for (AAKASCIIArtGroup *group in _group) {
+			NSArray *data = [[AAKKeyboardDataManager defaultManager] asciiArtForGroup:group];
+			[buf addObject:data];
+		}
+		_AAGroups = [NSArray arrayWithArray:buf];
+		[self.collectionView reloadData];
+	}
 }
 
 - (void)viewDidLoad {
