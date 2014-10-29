@@ -26,7 +26,7 @@
 - (void)update {
 	dispatch_async(dispatch_get_main_queue(), ^{
 		if ([self.jsString length] > 0) {
-			_AATextView.text = self.jsString;
+			self.AATextView.text = self.jsString;
 		}
 		else {
 			UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"hoge"
@@ -78,7 +78,7 @@
 }
 
 - (IBAction)registerAA:(id)sender {
-	[[AAKKeyboardDataManager defaultManager] insertNewASCIIArt:_AATextView.text groupKey:self.group.key];
+	[[AAKKeyboardDataManager defaultManager] insertNewASCIIArt:self.AATextView.text groupKey:self.group.key];
 	[self.extensionContext completeRequestReturningItems:nil completionHandler:nil];
 }
 

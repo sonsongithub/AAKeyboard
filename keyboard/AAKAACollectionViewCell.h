@@ -35,4 +35,6 @@
 
 @property (nonatomic, assign) id <AAKAACollectionViewCellDelegate> delegate;
 
+- (AAKTextView*)textViewForAnimation;
+
 @end

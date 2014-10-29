@@ -27,7 +27,7 @@
 }
 
 - (IBAction)registerAA:(id)sender {
-	[[AAKKeyboardDataManager defaultManager] insertNewASCIIArt:_AATextView.text groupKey:self.group.key];
+	[[AAKKeyboardDataManager defaultManager] insertNewASCIIArt:self.AATextView.text groupKey:self.group.key];
 	[self dismissViewControllerAnimated:YES completion:nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:AAKKeyboardDataManagerDidUpdateNotification object:nil userInfo:nil];
 }

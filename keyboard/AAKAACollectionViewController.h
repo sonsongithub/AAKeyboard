@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AAKAACollectionViewController : UICollectionViewController
+@class AAKASCIIArt;
 
+@interface AAKAACollectionViewController : UICollectionViewController
+- (NSIndexPath*)indexPathForAsciiArt:(AAKASCIIArt*)asciiart;
 @end

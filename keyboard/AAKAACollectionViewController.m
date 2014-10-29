@@ -18,6 +18,7 @@
 #import "AAKASCIIArtGroup.h"
 #import "AAKAAEditPresentationController.h"
 #import "AAKAAEditAnimatedTransitioning.h"
+#import "AAKAACollectionViewCell.h"
 
 @interface AAKAACollectionViewController () <AAKAACollectionViewCellDelegate, UIViewControllerTransitioningDelegate> {
 	NSArray *_group;
@@ -29,6 +30,18 @@
 
 static NSString * const reuseIdentifier = @"Cell";
 
+- (NSIndexPath*)indexPathForAsciiArt:(AAKASCIIArt*)asciiart {
+	for (int i = 0; i < [_AAGroups count]; i++) {
+		NSArray *buf = _AAGroups[i];
+		for (int j = 0; j < [buf count]; j++) {
+			AAKASCIIArt *art = buf[j];
+			if (art.key == asciiart.key)
+				return [NSIndexPath indexPathForItem:j inSection:i];
+		}
+	}
+	return nil;
+}
+
 - (void)didSelectCell:(AAKAACollectionViewCell*)cell {
 	NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
 	NSArray *data = _AAGroups[indexPath.section];
@@ -36,7 +49,7 @@ static NSString * const reuseIdentifier = @"Cell";
 	AAKASCIIArt *source = data[indexPath.item];
 	
 	UINavigationController *nav = [self.storyboard instantiateViewControllerWithIdentifier:@"AAKEditNavigationController"];
-	AAKEditViewController *con = nav.topViewController;
+	AAKEditViewController *con = (AAKEditViewController*)nav.topViewController;
 	
 	con.art = source;
 	con.group = group;

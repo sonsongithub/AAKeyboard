@@ -11,6 +11,8 @@
 #import "AAKKeyboardDataManager.h"
 #import "AAKHelper.h"
 #import "AAKTextView.h"
+#import "NSParagraphStyle+keyboard.h"
+#import "AAKASCIIArt.h"
 
 @interface AAKAACollectionViewCell() <UIGestureRecognizerDelegate> {
 	CGPoint _startPoint;
@@ -20,6 +22,18 @@
 @end
 
 @implementation AAKAACollectionViewCell
+
+- (AAKTextView*)textViewForAnimation {
+	CGFloat fontSize = 15;
+	NSParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyleWithFontSize:fontSize];
+	NSDictionary *attributes = @{NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:[UIFont fontWithName:@"Mona" size:fontSize]};
+	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:_asciiart.asciiArt attributes:attributes];
+	DNSLogRect(self.textView.bounds);
+	AAKTextView *textView = [[AAKTextView alloc] initWithFrame:self.textView.bounds];
+	textView.attributedString = string;
+	textView.backgroundColor = [UIColor whiteColor];
+	return textView;
+}
 
 - (void)close {
 	_opened = NO;
@@ -45,7 +59,7 @@
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
 	
-	float enableThreshold = 2;
+	float enableThreshold = 10;
 	
 	if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
 		

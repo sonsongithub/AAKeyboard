@@ -12,12 +12,12 @@
 @class AAKASCIIArtGroup;
 
 @interface AAKEditViewController : UIViewController {
-	IBOutlet UITextView		*_AATextView;
 	IBOutlet UISlider		*_fontSizeSlider;
 	IBOutlet UITableView	*_groupTableView;
 }
 @property (nonatomic, strong) AAKASCIIArtGroup *group;
 @property (nonatomic, strong) AAKASCIIArt *art;
+@property (nonatomic, strong) IBOutlet UITextView *AATextView;
 - (IBAction)didChangeSlider:(id)sender;
 - (IBAction)save:(id)sender;
 - (IBAction)cancel:(id)sender;
