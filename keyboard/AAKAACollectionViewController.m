@@ -16,8 +16,10 @@
 #import "AAKEditViewController.h"
 #import "AAKAASupplementaryView.h"
 #import "AAKASCIIArtGroup.h"
+#import "AAKAAEditPresentationController.h"
+#import "AAKAAEditAnimatedTransitioning.h"
 
-@interface AAKAACollectionViewController () <AAKAACollectionViewCellDelegate> {
+@interface AAKAACollectionViewController () <AAKAACollectionViewCellDelegate, UIViewControllerTransitioningDelegate> {
 	NSArray *_group;
 	NSArray *_AAGroups;
 }
@@ -32,10 +34,17 @@ static NSString * const reuseIdentifier = @"Cell";
 	NSArray *data = _AAGroups[indexPath.section];
 	AAKASCIIArtGroup *group = _group[indexPath.section];
 	AAKASCIIArt *source = data[indexPath.item];
-	AAKEditViewController *con = [self.storyboard instantiateViewControllerWithIdentifier:@"AAKEditViewController"];
+	
+	UINavigationController *nav = [self.storyboard instantiateViewControllerWithIdentifier:@"AAKEditNavigationController"];
+	AAKEditViewController *con = nav.topViewController;
+	
 	con.art = source;
 	con.group = group;
-	[self.navigationController pushViewController:con animated:YES];
+	
+	nav.modalPresentationStyle = UIModalPresentationCustom;
+	nav.transitioningDelegate = self;
+	
+	[self presentViewController:nav animated:YES completion:nil];
 }
 
 - (void)didPushCopyCell:(AAKAACollectionViewCell*)cell {
@@ -204,35 +213,21 @@ referenceSizeForHeaderInSection:(NSInteger)section {
 	return CGSizeMake(width, height);
 }
 
-#pragma mark <UICollectionViewDelegate>
-
-/*
-// Uncomment this method to specify if the specified item should be highlighted during tracking
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-	return YES;
-}
-*/
-
-/*
-// Uncomment this method to specify if the specified item should be selected
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-*/
-
-/*
-// Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath {
-	return NO;
+- (UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented
+													  presentingViewController:(UIViewController *)presenting
+														  sourceViewController:(UIViewController *)source {
+	return [[AAKAAEditPresentationController alloc] initWithPresentedViewController:presented presentingViewController:presenting];
 }
 
-- (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	return NO;
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
+																  presentingController:(UIViewController *)presenting
+																	  sourceController:(UIViewController *)source {
+	return [[AAKAAEditAnimatedTransitioning alloc] initWithPresentFlag:NO];
+	return nil;
 }
 
-- (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+	return [[AAKAAEditAnimatedTransitioning alloc] initWithPresentFlag:YES];
 }
-*/
 
 @end

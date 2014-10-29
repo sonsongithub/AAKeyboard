@@ -19,7 +19,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qLy-UY-pmA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="145" y="-240"/>
+            <point key="canvasLocation" x="-595" y="-240"/>
         </scene>
         <!--AA List-->
         <scene sceneID="7ox-Rn-Nde">
@@ -42,11 +42,24 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="AA List" id="bOC-aV-MTB"/>
-                    <connections>
-                        <segue destination="Hbq-Jc-XW8" kind="show" identifier="ToEditAAViewController" id="85T-9k-Dof"/>
-                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4mP-zJ-70F" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="145" y="-240"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="WVd-tU-elE">
+            <objects>
+                <navigationController storyboardIdentifier="AAKEditNavigationController" id="xok-cl-QqD" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zyl-yV-XBb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Hbq-Jc-XW8" kind="relationship" relationship="rootViewController" id="eMy-gh-617"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wmn-9q-hzr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="821" y="-240"/>
         </scene>

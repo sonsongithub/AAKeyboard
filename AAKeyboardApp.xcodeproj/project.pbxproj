@@ -41,6 +41,8 @@
 		14A5139619EC85750098C02C /* AAKTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CB156F19E9C3C200D05E9C /* AAKTextView.m */; };
 		14A5139719EC857E0098C02C /* NSParagraphStyle+keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CB157719E9C73900D05E9C /* NSParagraphStyle+keyboard.m */; };
 		14A5139819EC85BF0098C02C /* mona.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14CB156B19E935D700D05E9C /* mona.ttf */; };
+		14A57F8F1A00E9B300F01AAF /* AAKAAEditPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A57F8E1A00E9B300F01AAF /* AAKAAEditPresentationController.m */; };
+		14A57F921A00E9DC00F01AAF /* AAKAAEditAnimatedTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A57F911A00E9DC00F01AAF /* AAKAAEditAnimatedTransitioning.m */; };
 		14B2673E19E6BFD000C0321D /* AAKToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B2673D19E6BFD000C0321D /* AAKToolbar.m */; };
 		14B2673F19E6BFD300C0321D /* AAKToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B2673D19E6BFD000C0321D /* AAKToolbar.m */; };
 		14B2674219E6BFE900C0321D /* AAKKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B2674119E6BFE900C0321D /* AAKKeyboardView.m */; };
@@ -167,6 +169,10 @@
 		14A5138119EC68530098C02C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14A5138519EC68530098C02C /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		14A5138F19EC75300098C02C /* extension_js.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = extension_js.js; sourceTree = "<group>"; };
+		14A57F8D1A00E9B300F01AAF /* AAKAAEditPresentationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKAAEditPresentationController.h; sourceTree = "<group>"; };
+		14A57F8E1A00E9B300F01AAF /* AAKAAEditPresentationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKAAEditPresentationController.m; sourceTree = "<group>"; };
+		14A57F901A00E9DC00F01AAF /* AAKAAEditAnimatedTransitioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKAAEditAnimatedTransitioning.h; sourceTree = "<group>"; };
+		14A57F911A00E9DC00F01AAF /* AAKAAEditAnimatedTransitioning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKAAEditAnimatedTransitioning.m; sourceTree = "<group>"; };
 		14B2673C19E6BFD000C0321D /* AAKToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKToolbar.h; sourceTree = "<group>"; };
 		14B2673D19E6BFD000C0321D /* AAKToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKToolbar.m; sourceTree = "<group>"; };
 		14B2674019E6BFE900C0321D /* AAKKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKKeyboardView.h; sourceTree = "<group>"; };
@@ -390,6 +396,10 @@
 				1441E88219ECD7FF00A4881F /* keyboard.entitlements */,
 				143BD0E219F8EB14004D80D7 /* AAKAACollectionViewController.h */,
 				143BD0E319F8EB14004D80D7 /* AAKAACollectionViewController.m */,
+				14A57F8D1A00E9B300F01AAF /* AAKAAEditPresentationController.h */,
+				14A57F8E1A00E9B300F01AAF /* AAKAAEditPresentationController.m */,
+				14A57F901A00E9DC00F01AAF /* AAKAAEditAnimatedTransitioning.h */,
+				14A57F911A00E9DC00F01AAF /* AAKAAEditAnimatedTransitioning.m */,
 				143BD0E719F8EBF3004D80D7 /* AAKAACollectionViewCell.h */,
 				143BD0E819F8EBF3004D80D7 /* AAKAACollectionViewCell.m */,
 				143BD0E519F8EBBA004D80D7 /* AAKAACollectionViewCell.xib */,
@@ -668,8 +678,10 @@
 				14F7A2F319E781E0007585CF /* AAKContentFlowLayout.m in Sources */,
 				143BD0E919F8EBF3004D80D7 /* AAKAACollectionViewCell.m in Sources */,
 				14FBD3AC19E21213005FC38B /* AppDelegate.m in Sources */,
+				14A57F921A00E9DC00F01AAF /* AAKAAEditAnimatedTransitioning.m in Sources */,
 				14B2674A19E6CB2500C0321D /* AAKContentCell.m in Sources */,
 				146EEB5A19EDC16D0032F6DE /* AAKSQLite.m in Sources */,
+				14A57F8F1A00E9B300F01AAF /* AAKAAEditPresentationController.m in Sources */,
 				14B2673F19E6BFD300C0321D /* AAKToolbar.m in Sources */,
 				14B2674219E6BFE900C0321D /* AAKKeyboardView.m in Sources */,
 				143BD0E419F8EB14004D80D7 /* AAKAACollectionViewController.m in Sources */,
