@@ -20,4 +20,5 @@
 @property (nonatomic, strong) AAKASCIIArt *art;
 - (IBAction)didChangeSlider:(id)sender;
 - (IBAction)save:(id)sender;
+- (IBAction)cancel:(id)sender;
 @end

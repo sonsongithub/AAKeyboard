@@ -42,6 +42,11 @@
 	_art.asciiArt = _AATextView.text;
 	[[AAKKeyboardDataManager defaultManager] updateASCIIArt:_art group:_group];
 	[[NSNotificationCenter defaultCenter] postNotificationName:AAKKeyboardDataManagerDidUpdateNotification object:nil userInfo:nil];
+	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)cancel:(id)sender {
+	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)didChangeSlider:(id)sender {

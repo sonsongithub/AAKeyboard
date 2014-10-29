@@ -373,6 +373,11 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="Edit AA" id="ErX-k3-6Pi">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="6Y1-2O-g5U">
+                            <connections>
+                                <action selector="cancel:" destination="Hbq-Jc-XW8" id="fok-FP-5ud"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Save" style="done" id="807-jg-mUu">
                             <connections>
                                 <action selector="save:" destination="Hbq-Jc-XW8" id="fWd-s8-nQo"/>

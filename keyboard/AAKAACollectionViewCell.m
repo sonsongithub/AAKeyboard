@@ -15,12 +15,14 @@
 @interface AAKAACollectionViewCell() <UIGestureRecognizerDelegate> {
 	CGPoint _startPoint;
 	CGFloat _movement;
+	BOOL _opened;
 }
 @end
 
 @implementation AAKAACollectionViewCell
 
 - (void)close {
+	_opened = NO;
 	_leftMargin.constant = 0;
 	_rightMargin.constant = 0;
 	_myCopyButtonWidth.constant = 0;
@@ -70,7 +72,12 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	DNSLogMethod
-	[_delegate didSelectCell:self];
+	if (_opened) {
+		[self close];
+	}
+	else {
+		[_delegate didSelectCell:self];
+	}
 }
 
 - (void)awakeFromNib {
@@ -91,39 +98,50 @@
 	
 	CGPoint translate = [gestureRecognizer locationInView:self];
 	
-	CGFloat diff = _startPoint.x - translate.x;
 	
 	if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+		DNSLog(@"UIGestureRecognizerStateBegan");
 		_startPoint = translate;
+		DNSLogPoint(_startPoint);
 	}
 	else if (gestureRecognizer.state == UIGestureRecognizerStateChanged) {
+		CGFloat diff = _startPoint.x - translate.x;
+		DNSLog(@"UIGestureRecognizerStateChanged");
+		DNSLog(@"%f", diff);
+		if (_opened)
+			_movement = 128;
+		else
+			_movement = 0;
 		if (_movement + diff > 0) {
 			_leftMargin.constant = -_movement - diff;
 			_rightMargin.constant = _movement + diff;
 			_myCopyButtonWidth.constant = (_movement+ diff) / 2;
 			_myDeleteButtonWidth.constant = (_movement + diff) / 2;
+				
 		}
 		else {
-			_leftMargin.constant = -_movement;
-			_rightMargin.constant = _movement;
-			_myCopyButtonWidth.constant = _movement/2;
-			_myDeleteButtonWidth.constant = _movement/2;
+			_leftMargin.constant = 0;
+			_rightMargin.constant = 0;
+			_myCopyButtonWidth.constant = 0;
+			_myDeleteButtonWidth.constant = 0;
 		}
 	}
 	else if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+		CGFloat diff = _startPoint.x - translate.x;
+		DNSLog(@"UIGestureRecognizerStateEnded");
 		if (_movement + diff < 64) {
-			_movement = 0;
-			_leftMargin.constant = -_movement;
-			_rightMargin.constant = _movement;
-			_myCopyButtonWidth.constant = _movement/2;
-			_myDeleteButtonWidth.constant = _movement/2;
+			_opened = NO;
+			_leftMargin.constant = 0;
+			_rightMargin.constant = 0;
+			_myCopyButtonWidth.constant = 0;
+			_myDeleteButtonWidth.constant = 0;
 		}
 		else {
-			_movement = 128;
-			_leftMargin.constant = -_movement;
-			_rightMargin.constant = _movement;
-			_myCopyButtonWidth.constant = _movement/2;
-			_myDeleteButtonWidth.constant = _movement/2;
+			_opened = YES;
+			_leftMargin.constant = -128;
+			_rightMargin.constant = 128;
+			_myCopyButtonWidth.constant = 64;
+			_myDeleteButtonWidth.constant = 64;
 		}
 		[UIView animateWithDuration:0.3
 						 animations:^{

@@ -33,7 +33,14 @@
 		UIViewController *fromController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
 		UIViewController *toController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
 		[[transitionContext containerView] addSubview:toController.view];
-		[transitionContext completeTransition:YES];
+		toController.view.transform = CGAffineTransformMakeScale(0, 0);
+		[UIView animateWithDuration:0.3
+						 animations:^{
+							 toController.view.transform = CGAffineTransformMakeScale(1, 1);
+						 } completion:^(BOOL finished) {
+							 
+							 [transitionContext completeTransition:YES];
+						 }];
 	}
 }
 
