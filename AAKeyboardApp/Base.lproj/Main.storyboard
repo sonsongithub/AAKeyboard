@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Kz7-TH-ldM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Kz7-TH-ldM">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -62,6 +62,10 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5HB-Xf-qhu" customClass="AAKTextView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="600" id="a6S-yP-vLO"/>
+                                    <constraint firstAttribute="width" constant="600" id="ab7-aC-sqv"/>
+                                </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ya1-Nu-igY">
                                 <rect key="frame" x="528" y="560" width="46" height="30"/>
@@ -79,12 +83,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="5HB-Xf-qhu" secondAttribute="trailing" id="GP7-K4-btj"/>
-                            <constraint firstItem="4IR-HT-sky" firstAttribute="top" secondItem="5HB-Xf-qhu" secondAttribute="bottom" id="Jcw-CV-ZLd"/>
+                            <constraint firstAttribute="centerY" secondItem="5HB-Xf-qhu" secondAttribute="centerY" id="GeW-mg-H4H"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Ya1-Nu-igY" secondAttribute="trailing" constant="10" id="PbL-lM-ny3"/>
                             <constraint firstItem="4IR-HT-sky" firstAttribute="top" secondItem="Ya1-Nu-igY" secondAttribute="bottom" constant="10" id="TSa-86-KCO"/>
-                            <constraint firstItem="5HB-Xf-qhu" firstAttribute="top" secondItem="lAJ-w0-1FP" secondAttribute="bottom" constant="-20" id="emX-R5-Nwd"/>
-                            <constraint firstItem="5HB-Xf-qhu" firstAttribute="leading" secondItem="Ljy-z7-zrq" secondAttribute="leading" id="y07-XQ-NyF"/>
+                            <constraint firstAttribute="centerX" secondItem="5HB-Xf-qhu" secondAttribute="centerX" id="h2C-rc-bdJ"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
@@ -97,7 +99,9 @@
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="Vuk-7m-Rao"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="heightConstraint" destination="a6S-yP-vLO" id="577-tI-97i"/>
                         <outlet property="textView" destination="5HB-Xf-qhu" id="VfY-Gy-WdA"/>
+                        <outlet property="widthConstraint" destination="ab7-aC-sqv" id="iDs-Iw-WHT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="glB-qA-LSY" userLabel="First Responder" sceneMemberID="firstResponder"/>
