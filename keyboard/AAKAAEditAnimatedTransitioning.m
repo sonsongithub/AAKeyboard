@@ -66,12 +66,19 @@
 	
 	CGRect r3 = [transitionContext finalFrameForViewController:toController];
 	
+	CGPoint targetCenter = CGPointMake(CGRectGetMidX(r3), CGRectGetMidY(r3));
+	CGFloat wh = r3.size.width < r3.size.height ? r3.size.width : r3.size.height;
+	r3.size = CGSizeMake(wh, wh);
+	
+	
 	CGRect r2 = [[transitionContext containerView] convertRect:previewController.textView.frame fromView:previewController.textView.superview];
 	
 	[UIView animateWithDuration:0.2
 					 animations:^{
 						 textView.frame = r3;
+						 textView.center = targetCenter;
 						 textView.alpha = 1;
+						 previewController.view.alpha = 1.0;
 					 } completion:^(BOOL finished) {
 						 previewController.view.alpha = 1.0;
 						 [textView removeFromSuperview];
