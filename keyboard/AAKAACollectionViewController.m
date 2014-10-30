@@ -34,7 +34,7 @@ static NSString * const reuseIdentifier = @"Cell";
 - (id)cellForAsciiArt:(AAKASCIIArt*)asciiart {
 	NSArray *visibleCells = [self.collectionView visibleCells];
 	for (AAKAACollectionViewCell* cell in visibleCells) {
-		if (cell.asciiart == asciiart)
+		if (cell.asciiart.key == asciiart.key)
 			return cell;
 	}
 	return nil;
@@ -103,23 +103,19 @@ static NSString * const reuseIdentifier = @"Cell";
 	}];
 }
 
-- (void)didUpdateDatabase:(NSNotification*)notification {	
-	NSDictionary *userInfo = notification.userInfo;
+- (void)didUpdateDatabase:(NSNotification*)notification {
 	
-	AAKASCIIArt *deleted = userInfo[AAKKeyboardDataManagerDidRemoveObjectKey];
+	_group = [[AAKKeyboardDataManager defaultManager] groups];
 	
-	if (deleted == nil) {
-		_group = [[AAKKeyboardDataManager defaultManager] groups];
-		
-		NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[_group count]];
-		
-		for (AAKASCIIArtGroup *group in _group) {
-			NSArray *data = [[AAKKeyboardDataManager defaultManager] asciiArtForGroup:group];
-			[buf addObject:data];
-		}
-		_AAGroups = [NSArray arrayWithArray:buf];
-		[self.collectionView reloadData];
+	NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[_group count]];
+	
+	for (AAKASCIIArtGroup *group in _group) {
+		NSArray *data = [[AAKKeyboardDataManager defaultManager] asciiArtForGroup:group];
+		[buf addObject:data];
 	}
+	_AAGroups = [NSArray arrayWithArray:buf];
+	[self.collectionView reloadData];
+	
 }
 
 - (void)viewDidLoad {
@@ -192,7 +188,7 @@ static NSString * const reuseIdentifier = @"Cell";
 	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:source.asciiArt attributes:attributes];
 	cell.textView.attributedString = string;
 	cell.asciiart = source;
-	cell.group = nil;
+	cell.group = _group[indexPath.section];
 	cell.delegate = self;
 	cell.debugLabel.text = [NSString stringWithFormat:@"%d", source.key];
     
