@@ -29,6 +29,12 @@
                             <constraint firstAttribute="trailing" secondItem="0UO-vQ-n0s" secondAttribute="trailing" constant="1" id="dwf-Cn-NQJ"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZV-py-HwM">
+                        <rect key="frame" x="10" y="137" width="200" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="KaA-GP-Q6B">
                         <rect key="frame" x="194" y="0.0" width="64" height="168"/>
                         <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -64,6 +70,7 @@
             </view>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="NZV-py-HwM" secondAttribute="bottom" constant="10" id="BPj-sR-VLS"/>
                 <constraint firstAttribute="trailing" secondItem="EoT-Pl-yAU" secondAttribute="trailing" id="Hwc-xS-Pr7"/>
                 <constraint firstAttribute="bottom" secondItem="4pi-Go-DNg" secondAttribute="bottom" id="Pb2-MZ-wsc"/>
                 <constraint firstItem="EoT-Pl-yAU" firstAttribute="top" secondItem="dTP-bg-J8X" secondAttribute="top" id="Uce-rQ-hxN"/>
@@ -74,9 +81,11 @@
                 <constraint firstAttribute="bottom" secondItem="EoT-Pl-yAU" secondAttribute="bottom" id="f4s-uh-3Ve"/>
                 <constraint firstItem="KaA-GP-Q6B" firstAttribute="top" secondItem="dTP-bg-J8X" secondAttribute="top" id="pjj-5J-eDs"/>
                 <constraint firstItem="4pi-Go-DNg" firstAttribute="top" secondItem="dTP-bg-J8X" secondAttribute="top" id="qjC-T4-KDF"/>
+                <constraint firstItem="NZV-py-HwM" firstAttribute="leading" secondItem="dTP-bg-J8X" secondAttribute="leading" constant="10" id="tzS-hf-IVN"/>
             </constraints>
             <size key="customSize" width="258" height="168"/>
             <connections>
+                <outlet property="debugLabel" destination="NZV-py-HwM" id="3Tz-j4-Lo0"/>
                 <outlet property="leftMargin" destination="c0S-U8-lMC" id="7fe-eK-ZIh"/>
                 <outlet property="myCopyButton" destination="4pi-Go-DNg" id="caD-IC-MTb"/>
                 <outlet property="myCopyButtonWidth" destination="6xg-bJ-p0Q" id="hsb-O6-fgV"/>

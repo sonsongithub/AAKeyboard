@@ -63,6 +63,7 @@
 	[textView updateLayout];
 	[textView setNeedsDisplay];
 
+	previewController.textView.hidden = YES;
 	
 	CGRect r3 = [transitionContext finalFrameForViewController:toController];
 	
@@ -83,6 +84,7 @@
 						 previewController.view.alpha = 1.0;
 						 [textView removeFromSuperview];
 						 [transitionContext completeTransition:YES];
+						 previewController.textView.hidden = NO;
 					 }];
 }
 

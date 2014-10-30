@@ -27,6 +27,7 @@
 @property (nonatomic, assign) IBOutlet UIView *textBackView;
 @property (nonatomic, assign) IBOutlet UIButton *myCopyButton;
 @property (nonatomic, assign) IBOutlet UIButton *myDeleteButton;
+@property (nonatomic, assign) IBOutlet UILabel *debugLabel;
 @property (nonatomic, strong) AAKASCIIArt *asciiart;
 @property (nonatomic, strong) AAKASCIIArtGroup *group;
 

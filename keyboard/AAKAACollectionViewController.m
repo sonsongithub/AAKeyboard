@@ -66,9 +66,9 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)didPushCopyCell:(AAKAACollectionViewCell*)cell {
 	AAKASCIIArt *obj = cell.asciiart;
 	NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
+	[[AAKKeyboardDataManager defaultManager] duplicateASCIIArt:obj.key];
 	[self.collectionView performBatchUpdates:^(void){
 		
-		[[AAKKeyboardDataManager defaultManager] duplicateASCIIArt:obj.key];
 		
 		NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[_group count]];
 		
@@ -78,7 +78,9 @@ static NSString * const reuseIdentifier = @"Cell";
 		}
 		_AAGroups = [NSArray arrayWithArray:buf];
 		[self.collectionView insertItemsAtIndexPaths:@[indexPath]];
-	} completion:nil];
+	} completion:^(BOOL finished) {
+		[self.collectionView reloadData];
+	}];
 }
 
 - (void)didPushDeleteCell:(AAKAACollectionViewCell*)cell {
@@ -96,7 +98,9 @@ static NSString * const reuseIdentifier = @"Cell";
 		}
 		_AAGroups = [NSArray arrayWithArray:buf];
 		[self.collectionView deleteItemsAtIndexPaths:@[indexPath]];
-	} completion:nil];
+	} completion:^(BOOL finished) {
+		[self.collectionView reloadData];
+	}];
 }
 
 - (void)didUpdateDatabase:(NSNotification*)notification {	
@@ -190,6 +194,7 @@ static NSString * const reuseIdentifier = @"Cell";
 	cell.asciiart = source;
 	cell.group = nil;
 	cell.delegate = self;
+	cell.debugLabel.text = [NSString stringWithFormat:@"%d", source.key];
     
     return cell;
 }
