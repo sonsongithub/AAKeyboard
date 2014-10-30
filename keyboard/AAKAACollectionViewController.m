@@ -31,6 +31,15 @@
 
 static NSString * const reuseIdentifier = @"Cell";
 
+- (id)cellForAsciiArt:(AAKASCIIArt*)asciiart {
+	NSArray *visibleCells = [self.collectionView visibleCells];
+	for (AAKAACollectionViewCell* cell in visibleCells) {
+		if (cell.asciiart == asciiart)
+			return cell;
+	}
+	return nil;
+}
+
 - (NSIndexPath*)indexPathForAsciiArt:(AAKASCIIArt*)asciiart {
 	for (int i = 0; i < [_AAGroups count]; i++) {
 		NSArray *buf = _AAGroups[i];
@@ -44,21 +53,14 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (void)didSelectCell:(AAKAACollectionViewCell*)cell {
-	NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
-	NSArray *data = _AAGroups[indexPath.section];
-	AAKASCIIArtGroup *group = _group[indexPath.section];
-	AAKASCIIArt *source = data[indexPath.item];
+	NSLog(@"%p", cell);
+	AAKPreviewController *con = (AAKPreviewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"AAKPreviewController"];
+	con.art = cell.asciiart;
+	con.group = cell.group;
+	con.modalPresentationStyle = UIModalPresentationCustom;
+	con.transitioningDelegate = self;
 	
-	UINavigationController *nav = [self.storyboard instantiateViewControllerWithIdentifier:@"AAKPreviewNavigationController"];
-	AAKPreviewController *con = (AAKPreviewController*)nav.topViewController;
-	
-	con.art = source;
-	con.group = group;
-	
-	nav.modalPresentationStyle = UIModalPresentationCustom;
-	nav.transitioningDelegate = self;
-	
-	[self presentViewController:nav animated:YES completion:nil];
+	[self presentViewController:con animated:YES completion:nil];
 }
 
 - (void)didPushCopyCell:(AAKAACollectionViewCell*)cell {
@@ -186,6 +188,7 @@ static NSString * const reuseIdentifier = @"Cell";
 	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:source.asciiArt attributes:attributes];
 	cell.textView.attributedString = string;
 	cell.asciiart = source;
+	cell.group = nil;
 	cell.delegate = self;
     
     return cell;

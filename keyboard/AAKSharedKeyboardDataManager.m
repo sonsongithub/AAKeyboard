@@ -201,7 +201,7 @@
  * @param group AAリストを取得したいグループ．
  **/
 - (NSArray*)asciiArtForExistingGroup:(AAKASCIIArtGroup*)group {
-	const char *sql = "select asciiart, asciiart_key, ratio from AA where group_key = ? order by lastUseTime desc";
+	const char *sql = "select asciiart, asciiart_key, ratio from AA where group_key = ? order by lastUseTime, asciiart_key desc";
 	sqlite3_stmt *statement = NULL;
 	
 	NSMutableArray *groups = [NSMutableArray array];

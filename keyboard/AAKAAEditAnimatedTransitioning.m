@@ -40,16 +40,14 @@
 			collectionViewController = (AAKAACollectionViewController*)nav.topViewController;
 		}
 	}
-	if ([toController isKindOfClass:[UINavigationController class]]) {
-		UINavigationController *nav = (UINavigationController*)toController;
-		if ([nav.topViewController isKindOfClass:[AAKPreviewController class]]) {
-			previewController = (AAKPreviewController*)nav.topViewController;
-		}
+	if ([toController isKindOfClass:[AAKPreviewController class]]) {
+		previewController = (AAKPreviewController*)toController;
 	}
 
-	NSIndexPath *indexPath = [collectionViewController indexPathForAsciiArt:previewController.art];
+//	NSIndexPath *indexPath = [collectionViewController indexPathForAsciiArt:previewController.art];
+//	AAKAACollectionViewCell *cell = (AAKAACollectionViewCell*)[collectionViewController.collectionView cellForItemAtIndexPath:indexPath];
 	
-	AAKAACollectionViewCell *cell = (AAKAACollectionViewCell*)[collectionViewController.collectionView cellForItemAtIndexPath:indexPath];
+	AAKAACollectionViewCell *cell = [collectionViewController cellForAsciiArt:previewController.art];
 	
 	AAKTextView *textView = [cell textViewForAnimation];
 	
@@ -67,8 +65,6 @@
 
 	
 	CGRect r3 = [transitionContext finalFrameForViewController:toController];
-	r3.origin.y += 64;
-	r3.size.height -= 64;
 	
 	CGRect r2 = [[transitionContext containerView] convertRect:previewController.textView.frame fromView:previewController.textView.superview];
 	
@@ -89,11 +85,8 @@
 	
 	AAKAACollectionViewController *collectionViewController = nil;
 	AAKPreviewController *previewController = nil;
-	if ([fromController isKindOfClass:[UINavigationController class]]) {
-		UINavigationController *nav = (UINavigationController*)fromController;
-		if ([nav.topViewController isKindOfClass:[AAKPreviewController class]]) {
-			previewController = (AAKPreviewController*)nav.topViewController;
-		}
+	if ([fromController isKindOfClass:[AAKPreviewController class]]) {
+		previewController = (AAKPreviewController*)fromController;
 	}
 	if ([toController isKindOfClass:[UINavigationController class]]) {
 		UINavigationController *nav = (UINavigationController*)toController;
@@ -102,9 +95,11 @@
 		}
 	}
 	
-	NSIndexPath *indexPath = [collectionViewController indexPathForAsciiArt:previewController.art];
+//	NSIndexPath *indexPath = [collectionViewController indexPathForAsciiArt:previewController.art];
+//	
+//	AAKAACollectionViewCell *cell = (AAKAACollectionViewCell*)[collectionViewController.collectionView cellForItemAtIndexPath:indexPath];
 	
-	AAKAACollectionViewCell *cell = (AAKAACollectionViewCell*)[collectionViewController.collectionView cellForItemAtIndexPath:indexPath];
+	AAKAACollectionViewCell *cell = [collectionViewController cellForAsciiArt:previewController.art];
 	
 	cell.hidden = YES;
 	

@@ -12,4 +12,5 @@
 
 @interface AAKAACollectionViewController : UICollectionViewController
 - (NSIndexPath*)indexPathForAsciiArt:(AAKASCIIArt*)asciiart;
+- (id)cellForAsciiArt:(AAKASCIIArt*)asciiart;
 @end

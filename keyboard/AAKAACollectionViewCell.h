@@ -10,6 +10,7 @@
 
 @class AAKTextView;
 @class AAKASCIIArt;
+@class AAKASCIIArtGroup;
 @class AAKAACollectionViewCell;
 
 @protocol AAKAACollectionViewCellDelegate <NSObject>
@@ -27,6 +28,7 @@
 @property (nonatomic, assign) IBOutlet UIButton *myCopyButton;
 @property (nonatomic, assign) IBOutlet UIButton *myDeleteButton;
 @property (nonatomic, strong) AAKASCIIArt *asciiart;
+@property (nonatomic, strong) AAKASCIIArtGroup *group;
 
 @property (nonatomic, assign) IBOutlet NSLayoutConstraint *leftMargin;
 @property (nonatomic, assign) IBOutlet NSLayoutConstraint *rightMargin;

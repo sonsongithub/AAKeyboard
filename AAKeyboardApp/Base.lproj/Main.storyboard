@@ -47,44 +47,43 @@
             </objects>
             <point key="canvasLocation" x="145" y="-240"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="JfI-nU-UKs">
-            <objects>
-                <navigationController storyboardIdentifier="AAKPreviewNavigationController" id="mlR-ry-E3g" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7cO-4C-MtA">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="6bA-Do-0CJ" kind="relationship" relationship="rootViewController" id="4Np-Yv-7BK"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cXS-KI-Wsx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="145" y="-940"/>
-        </scene>
         <!--Preview Controller-->
         <scene sceneID="OG4-w6-iUm">
             <objects>
-                <viewController id="6bA-Do-0CJ" customClass="AAKPreviewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AAKPreviewController" id="6bA-Do-0CJ" customClass="AAKPreviewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lAJ-w0-1FP"/>
                         <viewControllerLayoutGuide type="bottom" id="4IR-HT-sky"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ljy-z7-zrq">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5HB-Xf-qhu" customClass="AAKTextView">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ya1-Nu-igY">
+                                <rect key="frame" x="528" y="560" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="1pT-kq-BXq"/>
+                                    <constraint firstAttribute="height" constant="30" id="D9I-CT-LVO"/>
+                                </constraints>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="xok-cl-QqD" kind="presentation" identifier="OpenAAKEditNavigationController" modalTransitionStyle="flipHorizontal" id="95G-MC-UQ3"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="5HB-Xf-qhu" secondAttribute="trailing" id="GP7-K4-btj"/>
                             <constraint firstItem="4IR-HT-sky" firstAttribute="top" secondItem="5HB-Xf-qhu" secondAttribute="bottom" id="Jcw-CV-ZLd"/>
-                            <constraint firstItem="5HB-Xf-qhu" firstAttribute="top" secondItem="lAJ-w0-1FP" secondAttribute="bottom" id="emX-R5-Nwd"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Ya1-Nu-igY" secondAttribute="trailing" constant="10" id="PbL-lM-ny3"/>
+                            <constraint firstItem="4IR-HT-sky" firstAttribute="top" secondItem="Ya1-Nu-igY" secondAttribute="bottom" constant="10" id="TSa-86-KCO"/>
+                            <constraint firstItem="5HB-Xf-qhu" firstAttribute="top" secondItem="lAJ-w0-1FP" secondAttribute="bottom" constant="-20" id="emX-R5-Nwd"/>
                             <constraint firstItem="5HB-Xf-qhu" firstAttribute="leading" secondItem="Ljy-z7-zrq" secondAttribute="leading" id="y07-XQ-NyF"/>
                         </constraints>
                     </view>
@@ -95,11 +94,7 @@
                                 <action selector="close:" destination="6bA-Do-0CJ" id="Owy-6v-W2W"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="Vuk-7m-Rao">
-                            <connections>
-                                <segue destination="xok-cl-QqD" kind="presentation" modalTransitionStyle="flipHorizontal" id="WMH-wW-jwf"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="Vuk-7m-Rao"/>
                     </navigationItem>
                     <connections>
                         <outlet property="textView" destination="5HB-Xf-qhu" id="VfY-Gy-WdA"/>
