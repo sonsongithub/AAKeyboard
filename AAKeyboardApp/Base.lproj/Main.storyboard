@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Kz7-TH-ldM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Kz7-TH-ldM">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -46,6 +46,68 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4mP-zJ-70F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="145" y="-240"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="JfI-nU-UKs">
+            <objects>
+                <navigationController storyboardIdentifier="AAKPreviewNavigationController" id="mlR-ry-E3g" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7cO-4C-MtA">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="6bA-Do-0CJ" kind="relationship" relationship="rootViewController" id="4Np-Yv-7BK"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cXS-KI-Wsx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="145" y="-940"/>
+        </scene>
+        <!--Preview Controller-->
+        <scene sceneID="OG4-w6-iUm">
+            <objects>
+                <viewController id="6bA-Do-0CJ" customClass="AAKPreviewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lAJ-w0-1FP"/>
+                        <viewControllerLayoutGuide type="bottom" id="4IR-HT-sky"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ljy-z7-zrq">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5HB-Xf-qhu" customClass="AAKTextView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="5HB-Xf-qhu" secondAttribute="trailing" id="GP7-K4-btj"/>
+                            <constraint firstItem="4IR-HT-sky" firstAttribute="top" secondItem="5HB-Xf-qhu" secondAttribute="bottom" id="Jcw-CV-ZLd"/>
+                            <constraint firstItem="5HB-Xf-qhu" firstAttribute="top" secondItem="lAJ-w0-1FP" secondAttribute="bottom" id="emX-R5-Nwd"/>
+                            <constraint firstItem="5HB-Xf-qhu" firstAttribute="leading" secondItem="Ljy-z7-zrq" secondAttribute="leading" id="y07-XQ-NyF"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <navigationItem key="navigationItem" id="Ohy-sv-RGt">
+                        <barButtonItem key="leftBarButtonItem" title="Close" id="7MU-72-weu">
+                            <connections>
+                                <action selector="close:" destination="6bA-Do-0CJ" id="Owy-6v-W2W"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="Vuk-7m-Rao">
+                            <connections>
+                                <segue destination="xok-cl-QqD" kind="presentation" modalTransitionStyle="flipHorizontal" id="WMH-wW-jwf"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="textView" destination="5HB-Xf-qhu" id="VfY-Gy-WdA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="glB-qA-LSY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="821" y="-940"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="WVd-tU-elE">
@@ -207,7 +269,7 @@
                     <navigationItem key="navigationItem" title="Select Group" id="hsg-D1-gqr">
                         <barButtonItem key="rightBarButtonItem" title="Add" id="VbH-60-iED">
                             <connections>
-                                <segue destination="AlP-id-y7k" kind="presentation" id="vDG-SI-6q8"/>
+                                <segue destination="AlP-id-y7k" kind="presentation" modalTransitionStyle="flipHorizontal" id="vDG-SI-6q8"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

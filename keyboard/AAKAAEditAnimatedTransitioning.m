@@ -12,6 +12,7 @@
 #import "AAKEditViewController.h"
 #import "AAKTextView.h"
 #import "AAKAACollectionViewCell.h"
+#import "AAKPreviewController.h"
 
 @interface AAKAAEditAnimatedTransitioning() {
 	BOOL _isPresent;
@@ -32,7 +33,7 @@
 	UIViewController *fromController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
 	UIViewController *toController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
 	AAKAACollectionViewController *collectionViewController = nil;
-	AAKEditViewController *editViewController = nil;
+	AAKPreviewController *previewController = nil;
 	if ([fromController isKindOfClass:[UINavigationController class]]) {
 		UINavigationController *nav = (UINavigationController*)fromController;
 		if ([nav.topViewController isKindOfClass:[AAKAACollectionViewController class]]) {
@@ -41,12 +42,12 @@
 	}
 	if ([toController isKindOfClass:[UINavigationController class]]) {
 		UINavigationController *nav = (UINavigationController*)toController;
-		if ([nav.topViewController isKindOfClass:[AAKEditViewController class]]) {
-			editViewController = (AAKEditViewController*)nav.topViewController;
+		if ([nav.topViewController isKindOfClass:[AAKPreviewController class]]) {
+			previewController = (AAKPreviewController*)nav.topViewController;
 		}
 	}
-	
-	NSIndexPath *indexPath = [collectionViewController indexPathForAsciiArt:editViewController.art];
+
+	NSIndexPath *indexPath = [collectionViewController indexPathForAsciiArt:previewController.art];
 	
 	AAKAACollectionViewCell *cell = (AAKAACollectionViewCell*)[collectionViewController.collectionView cellForItemAtIndexPath:indexPath];
 	
@@ -54,30 +55,30 @@
 	
 	CGRect r = [[transitionContext containerView] convertRect:cell.textView.bounds fromView:cell.textView];
 	
-	//		textView.backgroundColor = [UIColor redColor];
+//	textView.backgroundColor = [UIColor redColor];
 	
 	[[transitionContext containerView] addSubview:toController.view];
 	[[transitionContext containerView] addSubview:textView];
-	editViewController.view.alpha = 0;
+	previewController.view.alpha = 0;
 	
 	textView.frame = r;
 	[textView updateLayout];
 	[textView setNeedsDisplay];
+
 	
-	CGRect r2 = [[transitionContext containerView] convertRect:editViewController.AATextView.frame fromView:editViewController.AATextView.superview];
+	CGRect r3 = [transitionContext finalFrameForViewController:toController];
+	r3.origin.y += 64;
+	r3.size.height -= 64;
 	
-	CGRect r3;
+	CGRect r2 = [[transitionContext containerView] convertRect:previewController.textView.frame fromView:previewController.textView.superview];
 	
-	r3.origin = r2.origin;
-	r3.origin.y += 110;
-	r3.size = CGSizeMake(375, 375);
-	
-	[UIView animateWithDuration:0.5
+	[UIView animateWithDuration:0.2
 					 animations:^{
 						 textView.frame = r3;
-						 textView.alpha = 0;
-						 editViewController.view.alpha = 1.0;
+						 textView.alpha = 1;
 					 } completion:^(BOOL finished) {
+						 previewController.view.alpha = 1.0;
+						 [textView removeFromSuperview];
 						 [transitionContext completeTransition:YES];
 					 }];
 }
@@ -87,11 +88,11 @@
 	UIViewController *toController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
 	
 	AAKAACollectionViewController *collectionViewController = nil;
-	AAKEditViewController *editViewController = nil;
+	AAKPreviewController *previewController = nil;
 	if ([fromController isKindOfClass:[UINavigationController class]]) {
 		UINavigationController *nav = (UINavigationController*)fromController;
-		if ([nav.topViewController isKindOfClass:[AAKEditViewController class]]) {
-			editViewController = (AAKEditViewController*)nav.topViewController;
+		if ([nav.topViewController isKindOfClass:[AAKPreviewController class]]) {
+			previewController = (AAKPreviewController*)nav.topViewController;
 		}
 	}
 	if ([toController isKindOfClass:[UINavigationController class]]) {
@@ -101,28 +102,38 @@
 		}
 	}
 	
-	NSIndexPath *indexPath = [collectionViewController indexPathForAsciiArt:editViewController.art];
+	NSIndexPath *indexPath = [collectionViewController indexPathForAsciiArt:previewController.art];
 	
 	AAKAACollectionViewCell *cell = (AAKAACollectionViewCell*)[collectionViewController.collectionView cellForItemAtIndexPath:indexPath];
 	
+	cell.hidden = YES;
+	
 	AAKTextView *textView = [cell textViewForAnimation];
 	
-	CGRect r3 = CGRectMake(0, 155, 375, 375);
+	//textView.backgroundColor = [UIColor redColor];
 	
-	textView.frame = r3;
-	textView.alpha = 0;
+	CGRect r2 = [[transitionContext containerView] convertRect:previewController.textView.frame fromView:previewController.textView.superview];
+	
+	previewController.textView.hidden = YES;
+	
+	r2.size.height = r2.size.width;
+	
+	textView.frame = r2;
+	
+	textView.center = [[transitionContext containerView] convertPoint:previewController.textView.center fromView:previewController.textView.superview];
 	
 	CGRect r = [[transitionContext containerView] convertRect:cell.textView.bounds fromView:cell.textView];
 	
 	[[transitionContext containerView] addSubview:textView];
 	
-	[UIView animateWithDuration:0.5
+	[UIView animateWithDuration:0.2
 					 animations:^{
 						 textView.alpha = 1;
 						 textView.frame = r;
 						 fromController.view.alpha = 0;
 					 } completion:^(BOOL finished) {
-						 [editViewController.AATextView removeFromSuperview];
+						 [textView removeFromSuperview];
+						 cell.hidden = NO;
 						 [transitionContext completeTransition:YES];
 					 }];
 }

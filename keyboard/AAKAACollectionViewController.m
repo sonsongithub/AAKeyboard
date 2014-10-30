@@ -19,6 +19,7 @@
 #import "AAKAAEditPresentationController.h"
 #import "AAKAAEditAnimatedTransitioning.h"
 #import "AAKAACollectionViewCell.h"
+#import "AAKPreviewController.h"
 
 @interface AAKAACollectionViewController () <AAKAACollectionViewCellDelegate, UIViewControllerTransitioningDelegate> {
 	NSArray *_group;
@@ -48,8 +49,8 @@ static NSString * const reuseIdentifier = @"Cell";
 	AAKASCIIArtGroup *group = _group[indexPath.section];
 	AAKASCIIArt *source = data[indexPath.item];
 	
-	UINavigationController *nav = [self.storyboard instantiateViewControllerWithIdentifier:@"AAKEditNavigationController"];
-	AAKEditViewController *con = (AAKEditViewController*)nav.topViewController;
+	UINavigationController *nav = [self.storyboard instantiateViewControllerWithIdentifier:@"AAKPreviewNavigationController"];
+	AAKPreviewController *con = (AAKPreviewController*)nav.topViewController;
 	
 	con.art = source;
 	con.group = group;
