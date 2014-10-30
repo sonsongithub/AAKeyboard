@@ -59,7 +59,7 @@
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
 	
-	float enableThreshold = 10;
+	float enableThreshold = 20;
 	
 	if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
 		

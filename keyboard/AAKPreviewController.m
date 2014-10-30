@@ -13,6 +13,7 @@
 #import "AAKASCIIArt.h"
 #import "AAKEditViewController.h"
 #import "AAKKeyboardDataManager.h"
+#import "AAKHelper.h"
 
 @interface AAKPreviewController () {
 }
@@ -55,6 +56,11 @@
     [super viewDidLoad];
 	
 	CGFloat fontSize = 15;
+	
+	CGFloat wh = self.view.frame.size.width < self.view.frame.size.height ? self.view.frame.size.width : self.view.frame.size.height;
+	
+	self.widthConstraint.constant = wh;
+	self.heightConstraint.constant = wh;
 	
 	NSParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyleWithFontSize:fontSize];
 	NSDictionary *attributes = @{NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:[UIFont fontWithName:@"Mona" size:fontSize]};

@@ -14,6 +14,8 @@
 
 @interface AAKPreviewController : UIViewController
 @property (nonatomic, strong) IBOutlet AAKTextView *textView;
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint *widthConstraint;
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint *heightConstraint;
 @property (nonatomic, strong) AAKASCIIArtGroup *group;
 @property (nonatomic, strong) AAKASCIIArt *art;
 @end
