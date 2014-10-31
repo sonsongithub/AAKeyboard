@@ -141,7 +141,7 @@
 - (void)insertNewASCIIArt:(NSString*)asciiArt groupKey:(NSInteger)groupKey {
 	sqlite3_stmt *statement = NULL;
 
-	CGFloat fontSize = 18;
+	CGFloat fontSize = 15;
 	NSParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyleWithFontSize:fontSize];
 	NSDictionary *attributes = @{NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:[UIFont fontWithName:@"Mona" size:fontSize]};
 	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:asciiArt attributes:attributes];
@@ -302,7 +302,16 @@
  **/
 - (BOOL)updateASCIIArt:(AAKASCIIArt*)asciiArt group:(AAKASCIIArtGroup*)group {
 	sqlite3_stmt *statement = NULL;
-	static char *sql = "update AA set asciiart = ?, group_key = ? where asciiart_key = ?";
+	
+	CGFloat fontSize = 15;
+	NSParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyleWithFontSize:fontSize];
+	NSDictionary *attributes = @{NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:[UIFont fontWithName:@"Mona" size:fontSize]};
+	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:asciiArt.asciiArt attributes:attributes];
+	
+	CGSize size = [UZTextView sizeForAttributedString:string withBoundWidth:CGFLOAT_MAX margin:UIEdgeInsetsZero];
+	CGFloat ratio = size.width / size.height;
+	
+	static char *sql = "update AA set asciiart = ?, group_key = ?, ratio = ? where asciiart_key = ?";
 	if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
 		NSLog( @"Can't prepare statment to insert board information. into board, with messages '%s'.", sqlite3_errmsg(_database));
 	}
@@ -310,7 +319,8 @@
 	}
 	sqlite3_bind_text(statement, 1, [asciiArt.asciiArt UTF8String], -1, SQLITE_TRANSIENT);
 	sqlite3_bind_int64(statement, 2, group.key);
-	sqlite3_bind_int64(statement, 3, asciiArt.key);
+	sqlite3_bind_double(statement, 3, ratio);
+	sqlite3_bind_int64(statement, 4, asciiArt.key);
 	int success = sqlite3_step(statement);
 	if (success != SQLITE_ERROR) {
 	}

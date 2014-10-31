@@ -59,8 +59,8 @@
 	
 	CGFloat wh = self.view.frame.size.width < self.view.frame.size.height ? self.view.frame.size.width : self.view.frame.size.height;
 	
-	self.widthConstraint.constant = wh;
-	self.heightConstraint.constant = wh;
+//	self.widthConstraint.constant = wh;
+//	self.heightConstraint.constant = wh;
 	
 	NSParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyleWithFontSize:fontSize];
 	NSDictionary *attributes = @{NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:[UIFont fontWithName:@"Mona" size:fontSize]};
