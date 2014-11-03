@@ -91,6 +91,13 @@
 	if ([toController isKindOfClass:[AAKPreviewController class]]) {
 		previewController = (AAKPreviewController*)toController;
 	}
+	
+	// for error case
+	if (previewController == nil || collectionViewController == nil) {
+		[[transitionContext containerView] addSubview:toController.view];
+		[transitionContext completeTransition:YES];
+		return;
+	}
 
 	AAKAACollectionViewCell *cell = [collectionViewController cellForAsciiArt:previewController.art];
 	
@@ -148,6 +155,11 @@
 		if ([nav.topViewController isKindOfClass:[AAKAACollectionViewController class]]) {
 			collectionViewController = (AAKAACollectionViewController*)nav.topViewController;
 		}
+	}
+	
+	if (previewController == nil || collectionViewController == nil) {
+		[transitionContext completeTransition:YES];
+		return;
 	}
 	
 	AAKAACollectionViewCell *cell = [collectionViewController cellForAsciiArt:previewController.art];
