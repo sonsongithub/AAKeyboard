@@ -31,6 +31,52 @@
 	return self;
 }
 
+- (CGSize)AASizeForPreviewControllerWithTransition:(id<UIViewControllerContextTransitioning>)transitionContext
+								 previewController:(AAKPreviewController*)previewController
+						  collectionViewController:(AAKAACollectionViewController*)collectionViewController {
+	
+	AAKAACollectionViewCell *cell = [collectionViewController cellForAsciiArt:previewController.art];
+	
+	CGRect containerViewFrame = [transitionContext containerView].frame;
+	
+	{
+		CGFloat a = containerViewFrame.size.width / containerViewFrame.size.height;
+		CGFloat b = cell.asciiart.ratio;
+		if (a >= b) {
+			float w = containerViewFrame.size.height * b;
+			float h = containerViewFrame.size.height;
+			return CGSizeMake(w, h);
+		}
+		else {
+			float w = containerViewFrame.size.width;
+			float h = containerViewFrame.size.width / b;
+			return CGSizeMake(w, h);
+		}
+	}
+}
+
+- (CGSize)AASizeForAACollectionViewControllerWithTransition:(id<UIViewControllerContextTransitioning>)transitionContext
+										  previewController:(AAKPreviewController*)previewController
+								   collectionViewController:(AAKAACollectionViewController*)collectionViewController {
+	
+	AAKAACollectionViewCell *cell = [collectionViewController cellForAsciiArt:previewController.art];
+	
+	{
+		CGFloat a = cell.textView.frame.size.width / cell.textView.frame.size.height;
+		CGFloat b = cell.asciiart.ratio;
+		if (a >= b) {
+			float w = cell.textView.frame.size.height * b;
+			float h = cell.textView.frame.size.height;
+			return CGSizeMake(w, h);
+		}
+		else {
+			float w = cell.textView.frame.size.width;
+			float h = cell.textView.frame.size.width / b;
+			return CGSizeMake(w, h);
+		}
+	}
+}
+
 - (void)animationPresentTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
 	UIViewController *fromController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
 	UIViewController *toController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
@@ -48,40 +94,12 @@
 
 	AAKAACollectionViewCell *cell = [collectionViewController cellForAsciiArt:previewController.art];
 	
-	CGRect containerViewFrame = [transitionContext containerView].frame;
-	
-	CGSize fromContentSize = CGSizeZero;
-	CGSize toContentSize = CGSizeZero;
-	
-	{
-		CGFloat a = containerViewFrame.size.width / containerViewFrame.size.height;
-		CGFloat b = cell.asciiart.ratio;
-		if (a >= b) {
-			float w = containerViewFrame.size.height * b;
-			float h = containerViewFrame.size.height;
-			toContentSize = CGSizeMake(w, h);
-		}
-		else {
-			float w = containerViewFrame.size.width;
-			float h = containerViewFrame.size.width / b;
-			toContentSize = CGSizeMake(w, h);
-		}
-	}
-	{
-		CGFloat a = cell.textView.frame.size.width / cell.textView.frame.size.height;
-		CGFloat b = cell.asciiart.ratio;
-		if (a >= b) {
-			float w = cell.textView.frame.size.height * b;
-			float h = cell.textView.frame.size.height;
-			fromContentSize = CGSizeMake(w, h);
-		}
-		else {
-			float w = cell.textView.frame.size.width;
-			float h = cell.textView.frame.size.width / b;
-			fromContentSize = CGSizeMake(w, h);
-		}
-	}
-	
+	CGSize fromContentSize = [self AASizeForAACollectionViewControllerWithTransition:transitionContext
+																   previewController:previewController
+															collectionViewController:collectionViewController];
+	CGSize toContentSize = [self AASizeForPreviewControllerWithTransition:transitionContext
+														previewController:previewController
+												 collectionViewController:collectionViewController];
 	float scale = toContentSize.width / fromContentSize.width;
 	
 	
@@ -134,40 +152,12 @@
 	
 	AAKAACollectionViewCell *cell = [collectionViewController cellForAsciiArt:previewController.art];
 	
-	CGRect containerViewFrame = [transitionContext containerView].frame;
-	
-	CGSize fromContentSize = CGSizeZero;
-	CGSize toContentSize = CGSizeZero;
-	
-	{
-		CGFloat a = containerViewFrame.size.width / containerViewFrame.size.height;
-		CGFloat b = cell.asciiart.ratio;
-		if (a >= b) {
-			float w = containerViewFrame.size.height * b;
-			float h = containerViewFrame.size.height;
-			fromContentSize = CGSizeMake(w, h);
-		}
-		else {
-			float w = containerViewFrame.size.width;
-			float h = containerViewFrame.size.width / b;
-			fromContentSize = CGSizeMake(w, h);
-		}
-	}
-	{
-		CGFloat a = cell.textView.frame.size.width / cell.textView.frame.size.height;
-		CGFloat b = cell.asciiart.ratio;
-		if (a >= b) {
-			float w = cell.textView.frame.size.height * b;
-			float h = cell.textView.frame.size.height;
-			toContentSize = CGSizeMake(w, h);
-		}
-		else {
-			float w = cell.textView.frame.size.width;
-			float h = cell.textView.frame.size.width / b;
-			toContentSize = CGSizeMake(w, h);
-		}
-	}
-	
+	CGSize toContentSize = [self AASizeForAACollectionViewControllerWithTransition:transitionContext
+																   previewController:previewController
+															collectionViewController:collectionViewController];
+	CGSize fromContentSize = [self AASizeForPreviewControllerWithTransition:transitionContext
+														previewController:previewController
+												 collectionViewController:collectionViewController];
 	float scale = fromContentSize.width / toContentSize.width;
 	
 	cell.hidden = YES;
@@ -205,7 +195,7 @@
 }
 
 - (CGFloat)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
-	return 0.3;
+	return 0.2;
 }
 
 @end
