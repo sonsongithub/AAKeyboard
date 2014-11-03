@@ -14,6 +14,7 @@
 #import "AAKAACollectionViewCell.h"
 #import "AAKPreviewController.h"
 #import "AAKASCIIArt.h"
+#import "AAKHelper.h"
 
 @interface AAKAAEditAnimatedTransitioning() {
 	BOOL _isPresent;
@@ -45,10 +46,56 @@
 		previewController = (AAKPreviewController*)toController;
 	}
 
-//	NSIndexPath *indexPath = [collectionViewController indexPathForAsciiArt:previewController.art];
-//	AAKAACollectionViewCell *cell = (AAKAACollectionViewCell*)[collectionViewController.collectionView cellForItemAtIndexPath:indexPath];
+	NSIndexPath *indexPath = [collectionViewController indexPathForAsciiArt:previewController.art];
+	AAKAACollectionViewCell *cell = (AAKAACollectionViewCell*)[collectionViewController.collectionView cellForItemAtIndexPath:indexPath];
 	
-	AAKAACollectionViewCell *cell = [collectionViewController cellForAsciiArt:previewController.art];
+	CGRect containerViewFrame = [transitionContext containerView].frame;
+	
+	CGSize fromContentSize = CGSizeZero;
+	CGSize toContentSize = CGSizeZero;
+	
+	CGRect fromTextViewFrame = CGRectMake(0, 0, 0, 0);
+	CGRect finalTextViewFrame = CGRectMake(0, 0, 0, 0);
+	
+	CGPoint fromTextViewCenter = [[transitionContext containerView] convertPoint:cell.textView.center fromView:cell.textView.superview];
+	
+	// calculate destination ascii art size
+	{
+		CGFloat a = containerViewFrame.size.width / containerViewFrame.size.height;
+		CGFloat b = cell.asciiart.ratio;
+		
+		NSLog(@"-----content ratio = %lf", a);
+		NSLog(@"-----content ratio = %lf", b);
+		
+		if (a >= b) {
+			float w = containerViewFrame.size.height * b;
+			float h = containerViewFrame.size.height;
+			finalTextViewFrame.size = CGSizeMake(w, h);
+		}
+		else {
+			float w = containerViewFrame.size.width;
+			float h = containerViewFrame.size.width / b;
+			finalTextViewFrame.size = CGSizeMake(w, h);
+		}
+	}
+	{
+		CGFloat a = cell.textView.frame.size.width / cell.textView.frame.size.height;
+		CGFloat b = cell.asciiart.ratio;
+		if (a >= b) {
+			float w = cell.textView.frame.size.height * b;
+			float h = cell.textView.frame.size.height;
+			fromTextViewFrame.size = CGSizeMake(w, h);
+		}
+		else {
+			float w = cell.textView.frame.size.width;
+			float h = cell.textView.frame.size.width / b;
+			fromTextViewFrame.size = CGSizeMake(w, h);
+		}
+	}
+	
+	float ratio2 = finalTextViewFrame.size.width / fromTextViewFrame.size.width;
+	
+	CGRect rr = CGRectMake(0, 0, cell.textView.frame.size.width * ratio2, cell.textView.frame.size.height * ratio2);
 	
 	AAKTextView *textView = [cell textViewForAnimation];
 	
@@ -57,7 +104,7 @@
 	NSLog(@"content ratio = %lf", textView.contentSize.height);
 	CGRect r = [[transitionContext containerView] convertRect:cell.textView.bounds fromView:cell.textView];
 	
-	textView.backgroundColor = [UIColor redColor];
+//	textView.backgroundColor = [UIColor redColor];
 	
 	[[transitionContext containerView] addSubview:toController.view];
 	[[transitionContext containerView] addSubview:textView];
@@ -72,13 +119,13 @@
 	CGRect textViewFrame = CGRectMake(0, 0, 0, 0);
 	
 
-	CGRect containerViewFrame = [transitionContext containerView].frame;
 	float viewRatio = containerViewFrame.size.width / containerViewFrame.size.height;
 	
 	float textViewRatio = cell.textView.frame.size.width / cell.textView.frame.size.height;
 	
-	NSLog(@"content ratio = %lf", textViewRatio);
-	NSLog(@"content ratio = %lf", cell.asciiart.ratio);
+	
+	DNSLogRect(toController.view.frame)
+	DNSLogRect(containerViewFrame)
 	
 	if (textViewRatio > cell.asciiart.ratio) {
 		textViewFrame.size = CGSizeMake(containerViewFrame.size.height, containerViewFrame.size.height);
@@ -87,15 +134,29 @@
 		textViewFrame.size = CGSizeMake(containerViewFrame.size.width, containerViewFrame.size.width);
 	}
 	
-	[UIView animateWithDuration:0.2
+//	UIView *v = [[UIView alloc] initWithFrame:finalTextViewFrame];
+//	v.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:0.4];
+//	[[transitionContext containerView] addSubview:v];
+//	
+//	UIView *v2 = [[UIView alloc] initWithFrame:fromTextViewFrame];
+//	v2.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.4];
+//	v2.center = fromTextViewCenter;
+//	[[transitionContext containerView] addSubview:v2];
+	
+	textView.frame = r;
+//	textView.center = fromTextViewCenter;
+	
+	
+	[UIView animateWithDuration:0.3
 					 animations:^{
-						 textView.frame = textViewFrame;
+						 textView.frame = rr;
 						 textView.center = CGPointMake(ceil([transitionContext containerView].center.x), ceil([transitionContext containerView].center.y));
-						 textView.alpha = 0.4;
+						 textView.alpha = 1;
 						 previewController.view.alpha = 1.0;
 					 } completion:^(BOOL finished) {
 						 previewController.view.alpha = 1.0;
-//						 [textView removeFromSuperview];
+						 DNSLogRect(textView.frame);
+						 [textView removeFromSuperview];
 						 [transitionContext completeTransition:YES];
 						 previewController.textView.hidden = NO;
 					 }];
