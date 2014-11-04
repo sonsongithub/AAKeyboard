@@ -14,7 +14,8 @@
 #import "NSParagraphStyle+keyboard.h"
 #import "AAKASCIIArt.h"
 
-#import <dispatch/object.h>
+static NSInteger AAKSwipeDirectionThreadholdAsDegree = 20;
+static NSInteger AAKCellButtonWidth = 96;
 
 @interface AAKAACollectionViewCell() <UIGestureRecognizerDelegate> {
 	CGPoint _startPoint;
@@ -25,6 +26,10 @@
 
 @implementation AAKAACollectionViewCell
 
+/**
+ * リストからAAをプレビューするアニメーションに使うテキストビューを作成する．
+ * @return セルが表示中のAAがセットされたAAKTextViewオブジェクト．
+ **/
 - (AAKTextView*)textViewForAnimation {
 	CGFloat fontSize = 15;
 	NSParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyleWithFontSize:fontSize];
@@ -37,59 +42,155 @@
 	return textView;
 }
 
-- (void)close {
+/**
+ * 複製と削除ボタンを非表示にする．
+ **/
+- (void)closeAnimated:(BOOL)animated {
 	_opened = NO;
 	_leftMargin.constant = 0;
 	_rightMargin.constant = 0;
 	_myCopyButtonWidth.constant = 0;
 	_myDeleteButtonWidth.constant = 0;
+	
+	if (animated) {
+		[UIView animateWithDuration:0.3
+						 animations:^{
+							 [_textBackView.superview layoutIfNeeded];
+						 }];
+	}
+}
+
+/**
+ * ジェスチャが開始されたタイミングの処理．
+ * @param tapPoint ジェスチャ中のタップの位置．
+ **/
+- (void)gestureRecognizerStateBegan:(UISwipeGestureRecognizer*)gestureRecognizer {
+	CGPoint translate = [gestureRecognizer locationInView:self];
+	_startPoint = translate;
+}
+
+/**
+ * ジェスチャ中にタップの位置が変更されたタイミングの処理．
+ * @param tapPoint ジェスチャ中のタップの位置．
+ **/
+- (void)gestureRecognizerStateChanged:(UISwipeGestureRecognizer*)gestureRecognizer {
+	CGPoint translate = [gestureRecognizer locationInView:self];
+	CGFloat diff = _startPoint.x - translate.x;
+	if (_opened)
+		_movement = AAKCellButtonWidth;
+	else
+		_movement = 0;
+	if (_movement + diff > 0) {
+		_leftMargin.constant = -_movement - diff;
+		_rightMargin.constant = _movement + diff;
+		_myCopyButtonWidth.constant = (_movement+ diff);
+		_myDeleteButtonWidth.constant = (_movement + diff);
+		
+	}
+	else {
+		_leftMargin.constant = 0;
+		_rightMargin.constant = 0;
+		_myCopyButtonWidth.constant = 0;
+		_myDeleteButtonWidth.constant = 0;
+	}
+}
+
+/**
+ * ジェスチャが完了したタイミングの処理．
+ * @param tapPoint ジェスチャ中のタップの位置．
+ **/
+- (void)gestureRecognizerStateEnded:(UISwipeGestureRecognizer*)gestureRecognizer {
+	CGPoint translate = [gestureRecognizer locationInView:self];
+	CGFloat diff = _startPoint.x - translate.x;
+	if (_movement + diff < AAKCellButtonWidth) {
+		_opened = NO;
+		_leftMargin.constant = 0;
+		_rightMargin.constant = 0;
+		_myCopyButtonWidth.constant = 0;
+		_myDeleteButtonWidth.constant = 0;
+	}
+	else {
+		_opened = YES;
+		_leftMargin.constant = -AAKCellButtonWidth;
+		_rightMargin.constant = AAKCellButtonWidth;
+		_myCopyButtonWidth.constant = AAKCellButtonWidth;
+		_myDeleteButtonWidth.constant = AAKCellButtonWidth;
+	}
 	[UIView animateWithDuration:0.3
 					 animations:^{
 						 [_textBackView.superview layoutIfNeeded];
 					 }];
 }
 
-- (IBAction)delete:(id)sender {
-	[_delegate didPushDeleteCell:self];
-	[self close];
+/**
+ * ジェスチャレコガナイザの状態が変更された時にコールされる．
+ * @param sender メッセージの送信元オブジェクト．UISwipeGestureRecognizerクラスのインスタンス．
+ **/
+- (void)swipeleft:(UISwipeGestureRecognizer*)gestureRecognizer {
+	if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+		DNSLog(@"UIGestureRecognizerStateBegan");
+		[self gestureRecognizerStateBegan:gestureRecognizer];
+	}
+	else if (gestureRecognizer.state == UIGestureRecognizerStateChanged) {
+		DNSLog(@"UIGestureRecognizerStateChanged");
+		[self gestureRecognizerStateChanged:gestureRecognizer];
+	}
+	else if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+		DNSLog(@"UIGestureRecognizerStateEnded");
+		[self gestureRecognizerStateEnded:gestureRecognizer];
+	}
 }
 
-- (IBAction)copy:(id)sender {
-	[_delegate didPushCopyCell:self];
-	[self close];
-}
+#pragma mark - UIGestureRecognizerDelegate
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
-	
-	float enableThreshold = 20;
-	
+	// スワイプのジェスチャを開始するかを判定する
 	if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
-		
 		UIPanGestureRecognizer *panGesture = (UIPanGestureRecognizer *)gestureRecognizer;
 		CGPoint velocity = [panGesture velocityInView:panGesture.view];
 		
 		double radian = atan(velocity.y/velocity.x);
 		double degree = radian * 180 / M_PI;
 		
-		if (fabs(degree) > enableThreshold) {
+		// 指定した角度よりも大きく（斜めに）スワイプした場合は，ジェスチャは開始されない
+		if (fabs(degree) > AAKSwipeDirectionThreadholdAsDegree) {
 			return NO;
 		}
 	}
 	return YES;
 }
 
+#pragma mark - IBAction
+
+/**
+ * 削除ボタンを押した時のメソッド．
+ * @param sender メッセージの送信元オブジェクト
+ **/
+- (IBAction)delete:(id)sender {
+	[_delegate didPushDeleteCell:self];
+	[self closeAnimated:YES];
+}
+
+/**
+ * 複製ボタンを押した時のメソッド．
+ * @param sender メッセージの送信元オブジェクト
+ **/
+- (IBAction)copy:(id)sender {
+	[_delegate didPushCopyCell:self];
+	[self closeAnimated:YES];
+}
+
+#pragma mark - Override
+
 - (void)prepareForReuse {
 	[super prepareForReuse];
-	_leftMargin.constant = 0;
-	_rightMargin.constant = 0;
-	_myCopyButtonWidth.constant = 0;
-	_myDeleteButtonWidth.constant = 0;
+	[self closeAnimated:NO];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	DNSLogMethod
 	if (_opened) {
-		[self close];
+		[self closeAnimated:YES];
 	}
 	else {
 		[_delegate didSelectCell:self];
@@ -99,71 +200,18 @@
 - (void)awakeFromNib {
 	[super awakeFromNib];
 	
+	// ジェスチャを設定
 	UIPanGestureRecognizer * swipeleft = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(swipeleft:)];
 	swipeleft.delegate = self;
 	[self addGestureRecognizer:swipeleft];
 	
+	// ボタンを見えないように下に隠す
 	[_myCopyButton.superview sendSubviewToBack:_myCopyButton];
 	[_myDeleteButton.superview sendSubviewToBack:_myDeleteButton];
 	
+	// ボタンの大きさを０に修正しておく．
 	_myCopyButtonWidth.constant = 0;
 	_myDeleteButtonWidth.constant = 0;
-}
-
--(void)swipeleft:(UISwipeGestureRecognizer*)gestureRecognizer {
-	
-	CGPoint translate = [gestureRecognizer locationInView:self];
-	
-	
-	if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-		DNSLog(@"UIGestureRecognizerStateBegan");
-		_startPoint = translate;
-		DNSLogPoint(_startPoint);
-	}
-	else if (gestureRecognizer.state == UIGestureRecognizerStateChanged) {
-		CGFloat diff = _startPoint.x - translate.x;
-		DNSLog(@"UIGestureRecognizerStateChanged");
-		DNSLog(@"%f", diff);
-		if (_opened)
-			_movement = 96;
-		else
-			_movement = 0;
-		if (_movement + diff > 0) {
-			_leftMargin.constant = -_movement - diff;
-			_rightMargin.constant = _movement + diff;
-			_myCopyButtonWidth.constant = (_movement+ diff);
-			_myDeleteButtonWidth.constant = (_movement + diff);
-				
-		}
-		else {
-			_leftMargin.constant = 0;
-			_rightMargin.constant = 0;
-			_myCopyButtonWidth.constant = 0;
-			_myDeleteButtonWidth.constant = 0;
-		}
-	}
-	else if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
-		CGFloat diff = _startPoint.x - translate.x;
-		DNSLog(@"UIGestureRecognizerStateEnded");
-		if (_movement + diff < 48) {
-			_opened = NO;
-			_leftMargin.constant = 0;
-			_rightMargin.constant = 0;
-			_myCopyButtonWidth.constant = 0;
-			_myDeleteButtonWidth.constant = 0;
-		}
-		else {
-			_opened = YES;
-			_leftMargin.constant = -96;
-			_rightMargin.constant = 96;
-			_myCopyButtonWidth.constant = 96;
-			_myDeleteButtonWidth.constant = 96;
-		}
-		[UIView animateWithDuration:0.3
-						 animations:^{
-							 [_textBackView.superview layoutIfNeeded];
-						 }];
-	}
 }
 
 @end

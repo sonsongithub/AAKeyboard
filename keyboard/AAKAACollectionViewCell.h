@@ -38,6 +38,10 @@
 
 @property (nonatomic, assign) id <AAKAACollectionViewCellDelegate> delegate;
 
+/**
+ * リストからAAをプレビューするアニメーションに使うテキストビューを作成する．
+ * @return セルが表示中のAAがセットされたAAKTextViewオブジェクト．
+ **/
 - (AAKTextView*)textViewForAnimation;
 
 @end
