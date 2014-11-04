@@ -14,6 +14,8 @@
 #import "NSParagraphStyle+keyboard.h"
 #import "AAKASCIIArt.h"
 
+#import <dispatch/object.h>
+
 @interface AAKAACollectionViewCell() <UIGestureRecognizerDelegate> {
 	CGPoint _startPoint;
 	CGFloat _movement;
@@ -123,14 +125,14 @@
 		DNSLog(@"UIGestureRecognizerStateChanged");
 		DNSLog(@"%f", diff);
 		if (_opened)
-			_movement = 128;
+			_movement = 96;
 		else
 			_movement = 0;
 		if (_movement + diff > 0) {
 			_leftMargin.constant = -_movement - diff;
 			_rightMargin.constant = _movement + diff;
-			_myCopyButtonWidth.constant = (_movement+ diff) / 2;
-			_myDeleteButtonWidth.constant = (_movement + diff) / 2;
+			_myCopyButtonWidth.constant = (_movement+ diff);
+			_myDeleteButtonWidth.constant = (_movement + diff);
 				
 		}
 		else {
@@ -143,7 +145,7 @@
 	else if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
 		CGFloat diff = _startPoint.x - translate.x;
 		DNSLog(@"UIGestureRecognizerStateEnded");
-		if (_movement + diff < 64) {
+		if (_movement + diff < 48) {
 			_opened = NO;
 			_leftMargin.constant = 0;
 			_rightMargin.constant = 0;
@@ -152,10 +154,10 @@
 		}
 		else {
 			_opened = YES;
-			_leftMargin.constant = -128;
-			_rightMargin.constant = 128;
-			_myCopyButtonWidth.constant = 64;
-			_myDeleteButtonWidth.constant = 64;
+			_leftMargin.constant = -96;
+			_rightMargin.constant = 96;
+			_myCopyButtonWidth.constant = 96;
+			_myDeleteButtonWidth.constant = 96;
 		}
 		[UIView animateWithDuration:0.3
 						 animations:^{

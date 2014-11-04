@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -29,17 +29,17 @@
                             <constraint firstAttribute="trailing" secondItem="0UO-vQ-n0s" secondAttribute="trailing" constant="1" id="dwf-Cn-NQJ"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZV-py-HwM">
-                        <rect key="frame" x="10" y="137" width="200" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZV-py-HwM">
+                        <rect key="frame" x="10" y="137" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="KaA-GP-Q6B">
-                        <rect key="frame" x="194" y="0.0" width="64" height="168"/>
+                        <rect key="frame" x="162" y="84" width="96" height="84"/>
                         <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="64" id="J9F-ZR-EHp"/>
+                            <constraint firstAttribute="width" constant="96" id="J9F-ZR-EHp"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                         <state key="normal" title="Delete">
@@ -51,13 +51,13 @@
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="4pi-Go-DNg">
-                        <rect key="frame" x="130" y="0.0" width="64" height="168"/>
+                        <rect key="frame" x="162" y="0.0" width="96" height="84"/>
                         <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="64" id="6xg-bJ-p0Q"/>
+                            <constraint firstAttribute="width" constant="96" id="6xg-bJ-p0Q"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                        <state key="normal" title="Copy">
+                        <state key="normal" title="Duplicate">
                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -70,17 +70,18 @@
             </view>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="4pi-Go-DNg" secondAttribute="trailing" id="8sX-Kl-n2F"/>
                 <constraint firstAttribute="bottom" secondItem="NZV-py-HwM" secondAttribute="bottom" constant="10" id="BPj-sR-VLS"/>
                 <constraint firstAttribute="trailing" secondItem="EoT-Pl-yAU" secondAttribute="trailing" id="Hwc-xS-Pr7"/>
-                <constraint firstAttribute="bottom" secondItem="4pi-Go-DNg" secondAttribute="bottom" id="Pb2-MZ-wsc"/>
+                <constraint firstItem="4pi-Go-DNg" firstAttribute="top" secondItem="dTP-bg-J8X" secondAttribute="top" id="J1l-Zn-PUK"/>
+                <constraint firstItem="KaA-GP-Q6B" firstAttribute="top" secondItem="4pi-Go-DNg" secondAttribute="bottom" id="QrR-fi-GWf"/>
+                <constraint firstItem="KaA-GP-Q6B" firstAttribute="height" secondItem="4pi-Go-DNg" secondAttribute="height" id="UI5-jd-dO6"/>
                 <constraint firstItem="EoT-Pl-yAU" firstAttribute="top" secondItem="dTP-bg-J8X" secondAttribute="top" id="Uce-rQ-hxN"/>
-                <constraint firstAttribute="bottom" secondItem="KaA-GP-Q6B" secondAttribute="bottom" id="Y3k-Bw-Wvz"/>
-                <constraint firstAttribute="trailing" secondItem="KaA-GP-Q6B" secondAttribute="trailing" id="Yj7-4u-1Py"/>
-                <constraint firstItem="KaA-GP-Q6B" firstAttribute="leading" secondItem="4pi-Go-DNg" secondAttribute="trailing" id="aPo-eR-zFv"/>
+                <constraint firstItem="KaA-GP-Q6B" firstAttribute="top" secondItem="4pi-Go-DNg" secondAttribute="bottom" id="UnT-XK-eWa"/>
                 <constraint firstItem="EoT-Pl-yAU" firstAttribute="leading" secondItem="dTP-bg-J8X" secondAttribute="leading" id="c0S-U8-lMC"/>
+                <constraint firstAttribute="bottom" secondItem="KaA-GP-Q6B" secondAttribute="bottom" id="eno-mC-EIK"/>
                 <constraint firstAttribute="bottom" secondItem="EoT-Pl-yAU" secondAttribute="bottom" id="f4s-uh-3Ve"/>
-                <constraint firstItem="KaA-GP-Q6B" firstAttribute="top" secondItem="dTP-bg-J8X" secondAttribute="top" id="pjj-5J-eDs"/>
-                <constraint firstItem="4pi-Go-DNg" firstAttribute="top" secondItem="dTP-bg-J8X" secondAttribute="top" id="qjC-T4-KDF"/>
+                <constraint firstAttribute="trailing" secondItem="KaA-GP-Q6B" secondAttribute="trailing" id="oSW-Xh-xwG"/>
                 <constraint firstItem="NZV-py-HwM" firstAttribute="leading" secondItem="dTP-bg-J8X" secondAttribute="leading" constant="10" id="tzS-hf-IVN"/>
             </constraints>
             <size key="customSize" width="258" height="168"/>
