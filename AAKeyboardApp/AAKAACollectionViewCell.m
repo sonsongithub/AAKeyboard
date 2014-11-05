@@ -195,6 +195,11 @@ static NSInteger AAKCellButtonWidth = 96;
 
 - (void)awakeFromNib {
 	[super awakeFromNib];
+
+#ifndef _DEBUG
+	[self.debugLabel removeFromSuperview];
+	self.debugLabel = nil;
+#endif
 	
 	// ジェスチャを設定
 	UIPanGestureRecognizer * swipeleft = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(swipeleft:)];

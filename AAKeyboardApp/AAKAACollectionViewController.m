@@ -52,7 +52,6 @@ static NSString * const reuseIdentifier = @"Cell";
 	NSLog(@"%p", cell);
 	AAKPreviewController *con = (AAKPreviewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"AAKPreviewController"];
 	con.art = cell.asciiart;
-	con.group = cell.group;
 	con.modalPresentationStyle = UIModalPresentationCustom;
 	con.transitioningDelegate = self;
 	
@@ -200,7 +199,6 @@ static NSString * const reuseIdentifier = @"Cell";
 	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:source.text attributes:attributes];
 	cell.textView.attributedString = string;
 	cell.asciiart = source;
-	cell.group = _group[indexPath.section];
 	cell.delegate = self;
 	cell.debugLabel.text = [NSString stringWithFormat:@"%ld", (long)source.key];
     

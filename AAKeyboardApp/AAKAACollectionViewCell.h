@@ -29,7 +29,6 @@
 @property (nonatomic, assign) IBOutlet UIButton *myDeleteButton;
 @property (nonatomic, assign) IBOutlet UILabel *debugLabel;
 @property (nonatomic, strong) AAKASCIIArt *asciiart;
-@property (nonatomic, strong) AAKASCIIArtGroup *group;
 
 @property (nonatomic, assign) IBOutlet NSLayoutConstraint *leftMargin;
 @property (nonatomic, assign) IBOutlet NSLayoutConstraint *rightMargin;
