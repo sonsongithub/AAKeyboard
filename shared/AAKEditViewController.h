@@ -14,10 +14,11 @@
 @interface AAKEditViewController : UIViewController {
 	IBOutlet UISlider		*_fontSizeSlider;
 	IBOutlet UITableView	*_groupTableView;
+	AAKASCIIArt				*_art;
 }
-@property (nonatomic, strong) AAKASCIIArtGroup *group;
 @property (nonatomic, strong) AAKASCIIArt *art;
 @property (nonatomic, strong) IBOutlet UITextView *AATextView;
+- (void)setGroup:(AAKASCIIArtGroup *)group;
 - (IBAction)didChangeSlider:(id)sender;
 - (IBAction)save:(id)sender;
 - (IBAction)cancel:(id)sender;

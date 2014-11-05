@@ -29,21 +29,6 @@
 #pragma mark - Instance mathod
 
 /**
- * AAKSSQLiteオブジェクトのトランザクションを開始する．
- */
-- (void)beginTransaction {
-	sqlite3_exec(_database, "BEGIN", NULL, NULL, NULL);
-}
-
-/**
- * AAKSSQLiteオブジェクトのトランザクションをコミット，終了する．
- */
-- (void)commitTransaction {
-	sqlite3_exec(_database, "COMMIT", NULL, NULL, NULL);
-	sqlite3_exec(_database, "END", NULL, NULL, NULL);
-}
-
-/**
  * テーブルを作成する．
  */
 - (void)initializeDatabaseTable {
@@ -136,7 +121,7 @@
 /**
  * 新しいAAを追加する．
  * @param asciiArt アスキーアート本体．文字列．
- * @param group アスキーアートのグループのSQLiteデータベースのキー．
+ * @param groupKey アスキーアートのグループのSQLiteデータベースのキー．
  **/
 - (void)insertNewASCIIArt:(NSString*)asciiArt groupKey:(NSInteger)groupKey {
 	sqlite3_stmt *statement = NULL;
@@ -197,8 +182,9 @@
 }
 
 /**
- * groupに対応するのAAのリストを取得する．
+ * groupに含まれるAAのリストを取得する．
  * @param group AAリストを取得したいグループ．
+ * @return groupに含まれるAAのリスト．NSArrayオブジェクト．
  **/
 - (NSArray*)asciiArtForExistingGroup:(AAKASCIIArtGroup*)group {
 	const char *sql = "select asciiart, asciiart_key, ratio from AA where group_key = ? order by lastUseTime desc, asciiart_key asc";
@@ -216,6 +202,7 @@
 				NSString *title = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
 				NSInteger key = sqlite3_column_int(statement, 1);
 				AAKASCIIArt *obj = [[AAKASCIIArt alloc] init];
+				obj.group = group;
 				obj.text = title;
 				obj.key = key;
 				obj.ratio = sqlite3_column_double(statement, 2);
@@ -228,8 +215,8 @@
 }
 
 /**
- * groupに対応するのAAのリストを取得する．
- * @param group AAリストを取得したいグループ．
+ * 最近使用したAAのリストを返す．
+ * @return 最近使用したAAのリスト．NSArrayオブジェクト．
  **/
 - (NSArray*)asciiArtHistory {
 	const char *sql = "select asciiart, asciiart_key, ratio from AA order by lastUseTime desc limit 20";
@@ -247,6 +234,7 @@
 				NSInteger key = sqlite3_column_int(statement, 1);
 				AAKASCIIArt *obj = [[AAKASCIIArt alloc] init];
 				obj.text = title;
+				obj.group = [AAKASCIIArtGroup historyGroup];
 				obj.key = key;
 				obj.ratio = sqlite3_column_double(statement, 2);
 				[groups addObject:obj];
@@ -258,8 +246,10 @@
 }
 
 /**
- * groupに対応するのAAのリストを取得する．
+ * 指定されたAAKASCIIArtGroupオブジェクトが指定するgroupに含まれるAAのリストを取得する．
+ * 履歴グループが渡されたときは，最近の履歴を返す．
  * @param group AAリストを取得したいグループ．
+ * @return AAのリスト．NSArrayオブジェクト．
  **/
 - (NSArray*)asciiArtForGroup:(AAKASCIIArtGroup*)group {
 	if (group.type == AAKASCIIArtNormalGroup) {
@@ -298,9 +288,9 @@
 /**
  * AAを更新する．
  * @param asciiArt アスキーアートオブジェクト．
- * @param group アスキーアートグループオブジェクト．
+ * @return 削除に成功した場合にYESを返す．（未実装）
  **/
-- (BOOL)updateASCIIArt:(AAKASCIIArt*)asciiArt group:(AAKASCIIArtGroup*)group {
+- (BOOL)updateASCIIArt:(AAKASCIIArt*)asciiArt {
 	sqlite3_stmt *statement = NULL;
 	
 	CGFloat fontSize = 15;
@@ -318,7 +308,7 @@
 	else {
 	}
 	sqlite3_bind_text(statement, 1, [asciiArt.text UTF8String], -1, SQLITE_TRANSIENT);
-	sqlite3_bind_int64(statement, 2, group.key);
+	sqlite3_bind_int64(statement, 2, asciiArt.group.key);
 	sqlite3_bind_double(statement, 3, ratio);
 	sqlite3_bind_int64(statement, 4, asciiArt.key);
 	int success = sqlite3_step(statement);
@@ -335,8 +325,8 @@
 
 /**
  * AAを削除する．
- * @param asciiArt アスキーアートオブジェクト．
- * @param group アスキーアートグループオブジェクト．
+ * @param asciiArt 削除したいアスキーアートオブジェクト．
+ * @return 削除に成功した場合にYESを返す．（未実装）
  **/
 - (BOOL)deleteASCIIArt:(AAKASCIIArt*)asciiArt {
 	sqlite3_stmt *statement = NULL;
@@ -354,7 +344,7 @@
 		NSLog(@"Error");
 	}
 	sqlite3_finalize(statement);
-	return NO;
+	return YES;
 }
 
 - (instancetype)init {

@@ -20,7 +20,7 @@
 @implementation AAKEditViewController
 
 - (void)setGroup:(AAKASCIIArtGroup *)group {
-	_group = group;
+	_art.group = group;
 	[_groupTableView reloadData];
 }
 
@@ -40,7 +40,7 @@
 
 - (IBAction)save:(id)sender {
 	_art.text = _AATextView.text;
-	[[AAKKeyboardDataManager defaultManager] updateASCIIArt:_art group:_group];
+	[[AAKKeyboardDataManager defaultManager] updateASCIIArt:_art];
 	[[NSNotificationCenter defaultCenter] postNotificationName:AAKKeyboardDataManagerDidUpdateNotification object:nil userInfo:nil];
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -73,7 +73,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-	cell.detailTextLabel.text = _group.title;
+	cell.detailTextLabel.text = _art.group.title;
 	return cell;
 }
 

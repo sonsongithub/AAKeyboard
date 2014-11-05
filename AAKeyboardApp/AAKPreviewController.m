@@ -29,7 +29,6 @@
 	if ([segue.identifier isEqualToString:@"OpenAAKEditNavigationController"]) {
 		UINavigationController *nav = (UINavigationController*)segue.destinationViewController;
 		AAKEditViewController *vc = (AAKEditViewController*)nav.topViewController;
-		vc.group = self.group;
 		vc.art = self.art;
 	}
 }

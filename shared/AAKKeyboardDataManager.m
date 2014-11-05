@@ -14,14 +14,17 @@
 #import "AAKLocalKeyboardDataManager.h"
 #import "AAKSharedKeyboardDataManager.h"
 
-NSString *const AAKKeyboardDataManagerDidCreateNewGroupNotification	= @"AAKKeyboardDataManagerDidCreateNewGroupNotification";
 NSString *const AAKKeyboardDataManagerDidUpdateNotification			= @"AAKKeyboardDataManagerDidUpdateNotification";
-NSString *const AAKKeyboardDataManagerDidRemoveObjectKey			= @"AAKKeyboardDataManagerDidRemoveObjectKey";
 
 static AAKKeyboardDataManager *sharedKeyboardDataManager = nil;
 
 @implementation AAKKeyboardDataManager
 
+/**
+ * シングルトンぽく扱うAAKKeyboardDataManagerクラスを生成，アクセスする．
+ * 実行中のプロセスが共有データにアクセスできない場合は，ローカルのドキュメントパスにSQLiteのデータベースを生成し，それを利用する．
+ * @return AAKKeyboardDataManagerオブジェクトを返す．
+ **/
 + (AAKKeyboardDataManager*)defaultManager {
 	if (sharedKeyboardDataManager == nil) {
 		if ([AAKKeyboardDataManager isOpenAccessGranted]) {
@@ -34,6 +37,10 @@ static AAKKeyboardDataManager *sharedKeyboardDataManager = nil;
 	return sharedKeyboardDataManager;
 }
 
+/**
+ * 実行中のプロセスが共有データにアクセスできるかを判定する．
+ * @return 共有データにアクセスできる場合は，YESを返す．
+ **/
 + (BOOL)isOpenAccessGranted {
 	NSError *error = nil;
 	NSFileManager *fm = [NSFileManager defaultManager];
@@ -54,12 +61,15 @@ static AAKKeyboardDataManager *sharedKeyboardDataManager = nil;
  * AAKSSQLiteオブジェクトのトランザクションを開始する．
  */
 - (void)beginTransaction {
+	sqlite3_exec(_database, "BEGIN", NULL, NULL, NULL);
 }
 
 /**
  * AAKSSQLiteオブジェクトのトランザクションをコミット，終了する．
  */
 - (void)commitTransaction {
+	sqlite3_exec(_database, "COMMIT", NULL, NULL, NULL);
+	sqlite3_exec(_database, "END", NULL, NULL, NULL);
 }
 
 /**
@@ -70,19 +80,20 @@ static AAKKeyboardDataManager *sharedKeyboardDataManager = nil;
 
 #pragma mark - Group
 
-/**
- * グループ一覧を作成する．
- * @return グループ名の配列．
- **/
-- (NSArray*)groups {
-	return nil;
-}
 
 /**
  * すべてのグループ一覧を作成する．
  * @return グループ名の配列．
  **/
 - (NSArray*)allGroups {
+	return nil;
+}
+
+/**
+ * AAが登録されているグループ一覧を作成する．
+ * @return グループ名の配列．
+ **/
+- (NSArray*)groups {
 	return nil;
 }
 
@@ -96,23 +107,30 @@ static AAKKeyboardDataManager *sharedKeyboardDataManager = nil;
 /**
  * 新しいAAを追加する．
  * @param asciiArt アスキーアート本体．文字列．
- * @param group アスキーアートのグループのSQLiteデータベースのキー．
+ * @param groupKey アスキーアートのグループのSQLiteデータベースのキー．
  **/
 - (void)insertNewASCIIArt:(NSString*)asciiArt groupKey:(NSInteger)groupKey {
 }
 
 /**
- * AAを更新する．
- * @param asciiArt アスキーアートオブジェクト．
- * @param group アスキーアートグループオブジェクト．
+ * AAをコピーする
  **/
-- (BOOL)updateASCIIArt:(AAKASCIIArt*)asciiArt group:(AAKASCIIArtGroup*)group {
-	return NO;
+- (void)duplicateASCIIArt:(NSInteger)asciiArtKey {
 }
 
 /**
- * groupに対応するのAAのリストを取得する．
+ * 最近使用したAAのリストを返す．
+ * @return 最近使用したAAのリスト．NSArrayオブジェクト．
+ **/
+- (NSArray*)asciiArtHistory {
+	return nil;
+}
+
+/**
+ * 指定されたAAKASCIIArtGroupオブジェクトが指定するgroupに含まれるAAのリストを取得する．
+ * 履歴グループが渡されたときは，最近の履歴を返す．
  * @param group AAリストを取得したいグループ．
+ * @return AAのリスト．NSArrayオブジェクト．
  **/
 - (NSArray*)asciiArtForGroup:(AAKASCIIArtGroup*)group {
 	return nil;
@@ -120,25 +138,27 @@ static AAKKeyboardDataManager *sharedKeyboardDataManager = nil;
 
 /**
  * 履歴を追加する．
- * @param asciiArt アスキーアートの文字列．
  * @param key アスキーアートのデータベース上でのキー．
  **/
 - (void)insertHistoryASCIIArtKey:(NSInteger)key {
 }
 
 /**
- * AAを削除する．
+ * AAを更新する．
  * @param asciiArt アスキーアートオブジェクト．
- * @param group アスキーアートグループオブジェクト．
+ * @return 削除に成功した場合にYESを返す．（未実装）
  **/
-- (BOOL)deleteASCIIArt:(AAKASCIIArt*)asciiArt {
+- (BOOL)updateASCIIArt:(AAKASCIIArt*)asciiArt {
 	return NO;
 }
 
 /**
- * AAをコピーする
+ * AAを削除する．
+ * @param asciiArt 削除したいアスキーアートオブジェクト．
+ * @return 削除に成功した場合にYESを返す．（未実装）
  **/
-- (void)duplicateASCIIArt:(NSInteger)asciiArtKey {
+- (BOOL)deleteASCIIArt:(AAKASCIIArt*)asciiArt {
+	return NO;
 }
 
 @end

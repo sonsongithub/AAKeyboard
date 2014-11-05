@@ -394,14 +394,14 @@
 		14B275221A0A160F005BF3B1 /* viewcontroller */ = {
 			isa = PBXGroup;
 			children = (
-				14B274A61A0A0D6F005BF3B1 /* AAKCreateNewGroupViewController.h */,
-				14B274A71A0A0D6F005BF3B1 /* AAKCreateNewGroupViewController.m */,
 				14B274A81A0A0D6F005BF3B1 /* AAKEditViewController.h */,
 				14B274A91A0A0D6F005BF3B1 /* AAKEditViewController.m */,
 				14B274AB1A0A0D6F005BF3B1 /* AAKRegisterViewController.h */,
 				14B274AC1A0A0D6F005BF3B1 /* AAKRegisterViewController.m */,
 				14B274AD1A0A0D6F005BF3B1 /* AAKSelectGroupViewController.h */,
 				14B274AE1A0A0D6F005BF3B1 /* AAKSelectGroupViewController.m */,
+				14B274A61A0A0D6F005BF3B1 /* AAKCreateNewGroupViewController.h */,
+				14B274A71A0A0D6F005BF3B1 /* AAKCreateNewGroupViewController.m */,
 			);
 			name = viewcontroller;
 			sourceTree = "<group>";

@@ -10,6 +10,7 @@
 #import "AAKKeyboardDataManager.h"
 #import "AAKASCIIArtGroup.h"
 #import "AAKEditViewController.h"
+#import "AAKASCIIArt.h"
 
 @interface AAKSelectGroupViewController () {
 	NSArray *_groups;
@@ -57,7 +58,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	_editViewController.group = _groups[indexPath.row];
+	[_editViewController setGroup:_groups[indexPath.row]];
 	[self.navigationController popViewControllerAnimated:YES];
 }
 

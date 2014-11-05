@@ -75,7 +75,7 @@
 }
 
 - (IBAction)registerAA:(id)sender {
-	[[AAKKeyboardDataManager defaultManager] insertNewASCIIArt:self.AATextView.text groupKey:self.group.key];
+	[[AAKKeyboardDataManager defaultManager] insertNewASCIIArt:self.AATextView.text groupKey:self.art.group.key];
 	[self.extensionContext completeRequestReturningItems:nil completionHandler:nil];
 }
 
