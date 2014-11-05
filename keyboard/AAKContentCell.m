@@ -7,7 +7,8 @@
 //
 
 #import "AAKContentCell.h"
-#import "AAKTextView.h"
+
+#import "AAKShared.h"
 
 @interface AAKContentCell() {
 	UILabel		*_label;

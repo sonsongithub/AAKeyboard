@@ -8,11 +8,7 @@
 
 #import "AAKAACollectionViewCell.h"
 
-#import "AAKKeyboardDataManager.h"
-#import "AAKHelper.h"
-#import "AAKTextView.h"
-#import "NSParagraphStyle+keyboard.h"
-#import "AAKASCIIArt.h"
+#import "AAKShared.h"
 
 static NSInteger AAKSwipeDirectionThreadholdAsDegree = 20;
 static NSInteger AAKCellButtonWidth = 96;

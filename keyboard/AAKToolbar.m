@@ -10,8 +10,8 @@
 
 #import "AAKToolbarCell.h"
 #import "AAKToolbarHistoryCell.h"
-#import "AAKASCIIArtGroup.h"
-#import "AAKHelper.h"
+
+#import "AAKShared.h"
 
 @interface AAKToolbar() <UICollectionViewDataSource, UICollectionViewDelegate> {
 	UICollectionView	*_collectionView;

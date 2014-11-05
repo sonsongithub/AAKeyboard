@@ -10,10 +10,7 @@
 
 #import <MobileCoreServices/MobileCoreServices.h>
 
-#import "NSParagraphStyle+keyboard.h"
-#import "AAKTextView.h"
-#import "AAKKeyboardDataManager.h"
-#import "AAKASCIIArtGroup.h"
+#import "AAKShared.h"
 
 @interface AAKRegisterActionViewController ()
 

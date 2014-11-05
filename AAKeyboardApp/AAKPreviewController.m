@@ -8,12 +8,7 @@
 
 #import "AAKPreviewController.h"
 
-#import "AAKTextView.h"
-#import "NSParagraphStyle+keyboard.h"
-#import "AAKASCIIArt.h"
-#import "AAKEditViewController.h"
-#import "AAKKeyboardDataManager.h"
-#import "AAKHelper.h"
+#import "AAKShared.h"
 
 @interface AAKPreviewController () {
 }

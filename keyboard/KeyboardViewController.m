@@ -8,9 +8,8 @@
 
 #import "KeyboardViewController.h"
 
+#import "AAKShared.h"
 #import "AAKKeyboardView.h"
-#import "AAKHelper.h"
-#import "AAKKeyboardDataManager.h"
 
 @interface KeyboardViewController () <AAKKeyboardViewDelegate> {
 	AAKKeyboardView *_keyboardView;

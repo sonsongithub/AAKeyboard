@@ -8,13 +8,11 @@
 
 #import "AAKAAEditAnimatedTransitioning.h"
 
+#import "AAKShared.h"
+
 #import "AAKAACollectionViewController.h"
-#import "AAKEditViewController.h"
-#import "AAKTextView.h"
 #import "AAKAACollectionViewCell.h"
 #import "AAKPreviewController.h"
-#import "AAKASCIIArt.h"
-#import "AAKHelper.h"
 
 @interface AAKAAEditAnimatedTransitioning() {
 	BOOL _isPresent;

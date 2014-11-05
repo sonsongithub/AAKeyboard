@@ -8,14 +8,10 @@
 
 #import "AAKAACollectionViewController.h"
 
-#import "AAKKeyboardDataManager.h"
-#import "AAKASCIIArt.h"
-#import "NSParagraphStyle+keyboard.h"
+#import "AAKShared.h"
+
 #import "AAKAACollectionViewCell.h"
-#import "AAKTextView.h"
-#import "AAKEditViewController.h"
 #import "AAKAASupplementaryView.h"
-#import "AAKASCIIArtGroup.h"
 #import "AAKAAEditPresentationController.h"
 #import "AAKAAEditAnimatedTransitioning.h"
 #import "AAKAACollectionViewCell.h"

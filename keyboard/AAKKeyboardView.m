@@ -10,11 +10,8 @@
 #import "AAKToolbar.h"
 #import "AAKContentCell.h"
 #import "AAKContentFlowLayout.h"
-#import "NSParagraphStyle+keyboard.h"
-#import "AAKHelper.h"
-#import "AAKKeyboardDataManager.h"
-#import "AAKASCIIArtGroup.h"
-#import "AAKASCIIArt.h"
+
+#import "AAKShared.h"
 
 @interface AAKKeyboardView() <UICollectionViewDataSource, UICollectionViewDelegate, AAKToolbarDelegate> {
 	AAKToolbar *_toolbar;
