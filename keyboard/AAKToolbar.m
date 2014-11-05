@@ -10,6 +10,8 @@
 
 #import "AAKToolbarCell.h"
 #import "AAKToolbarHistoryCell.h"
+#import "AAKASCIIArtGroup.h"
+#import "AAKHelper.h"
 
 @interface AAKToolbar() <UICollectionViewDataSource, UICollectionViewDelegate> {
 	UICollectionView	*_collectionView;
@@ -35,11 +37,11 @@
 }
 
 - (CGFloat)toolbarHeight {
-	return 48;
+	return _height;
 }
 
 - (CGFloat)buttonWidth {
-	return 48;
+	return _height;
 }
 
 - (void)prepareButton {
@@ -58,11 +60,13 @@
 }
 
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
 	self = [super initWithFrame:frame];
 	if (self) {
 		self.backgroundColor = [UIColor redColor];
+		
+		_height = 48;
+		_fontSize = 14;
 		
 		[self prepareButton];
 		
@@ -130,39 +134,54 @@
 
 - (void)layout {
 	[self updateWithWidth:CGRectGetWidth(_collectionView.bounds)];
-	//	[_collectionFlowLayout invalidateLayout];
+	[_collectionFlowLayout invalidateLayout];
 	[_collectionView reloadData];
-	
 }
 
 - (void)updateWithWidth:(CGFloat)width {
-	NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:18]};
+	if (width < 1)
+		return;
+	NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:_fontSize]};
 	NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[_categories count]];
 	CGFloat sumation = 0;
-	for (NSString *string in _categories) {
-		CGSize s = [string sizeWithAttributes:attributes];
+	for (AAKASCIIArtGroup *group in _categories) {
+		CGSize s = [group.title sizeWithAttributes:attributes];
 		s.width = floor(s.width) + 20;
 		sumation += s.width;
 		s.height = [self toolbarHeight];
 		[buf addObject:[NSValue valueWithCGSize:s]];
+		NSLog(@"--------------------->%f (%f)", s.width, sumation);
 	}
 #if 1
+	NSLog(@"-------------------------------------------->%f - %f", sumation, width);
 	CGFloat parentWidth = width;
 	_collectionView.alwaysBounceHorizontal = YES;
 	if (sumation < parentWidth) {
-		CGFloat sumation = 0;
 		_collectionView.alwaysBounceHorizontal = NO;
-		for (int i = 0; i < buf.count; i++) {
-			CGSize s = [[buf objectAtIndex:i] CGSizeValue];
+		
+		CGFloat leftWidth = parentWidth - sumation;
+		CGFloat quota = leftWidth / buf.count;
+		
+		if (quota > 1) {
+			quota = floor(quota);
+			CGFloat leftQuota = 0;
+			for (int i = 0; i < buf.count; i++) {
+				CGSize s = [[buf objectAtIndex:i] CGSizeValue];
+				if (i < buf.count - 1) {
+					s.width = s.width + quota;
+					leftQuota += quota;
+				}
+				else {
+					s.width = s.width + leftWidth - leftQuota;
+				}
+				[buf replaceObjectAtIndex:i withObject:[NSValue valueWithCGSize:s]];
+			}
+		}
+		else {
+			CGSize s = [[buf objectAtIndex:0] CGSizeValue];
+			s.width = s.width + leftWidth;
+			[buf replaceObjectAtIndex:0 withObject:[NSValue valueWithCGSize:s]];
 			
-			if (i == buf.count - 1) {
-				s.width = parentWidth - sumation;
-			}
-			else {
-				s.width = floor(parentWidth / buf.count);
-				sumation += s.width;
-			}
-			[buf replaceObjectAtIndex:i withObject:[NSValue valueWithCGSize:s]];
 		}
 	}
 #endif
@@ -189,12 +208,15 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-	return [[_sizeOfCategories objectAtIndex:indexPath.item] CGSizeValue];
+	CGSize size =  [[_sizeOfCategories objectAtIndex:indexPath.item] CGSizeValue];
+	DNSLogSize(size);
+	return size;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 	[collectionView deselectItemAtIndexPath:indexPath animated:YES];
-	[self.delegate toolbar:self didSelectCategoryIndex:indexPath.item];
+	AAKASCIIArtGroup *group = [_categories objectAtIndex:indexPath.item];
+	[self.delegate toolbar:self didSelectGroup:group];
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -211,17 +233,19 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
 	AAKToolbarCell *cell = nil;
-	NSString *temp = [_categories objectAtIndex:indexPath.item];
+	AAKASCIIArtGroup *group = [_categories objectAtIndex:indexPath.item];
 	
-	if ([temp isEqualToString:@"history"]) {
+	if (group.type == AAKASCIIArtHistoryGroup) {
 		cell = [cv dequeueReusableCellWithReuseIdentifier:@"AAKToolbarHistoryCell" forIndexPath:indexPath];
 	}
 	else {
 		cell = [cv dequeueReusableCellWithReuseIdentifier:@"AAKToolbarCell" forIndexPath:indexPath];
-		cell.label.text = [_categories objectAtIndex:indexPath.item];
+		cell.label.text = group.title;
+		cell.label.font = [UIFont systemFontOfSize:_fontSize];
 	}
 	cell.isHead = (indexPath.item == 0);
 	[cell.label sizeToFit];
+	//
 	return cell;
 }
 

@@ -7,9 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface AAKASCIIArt : NSObject
 
-@property (nonatomic, strong) NSMutableAttributedString *asciiArt;
+@property (nonatomic, strong) NSString *asciiArt;
+@property (nonatomic, assign) NSInteger key;
+@property (nonatomic, assign) CGFloat ratio;
 
 @end

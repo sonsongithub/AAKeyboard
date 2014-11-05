@@ -7,6 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import "AAKKeyboardDataManager.h"
+
+#import "AAKRegisterViewController.h"
+#import "AAKASCIIArt.h"
 
 @interface AppDelegate ()
 
@@ -14,6 +18,32 @@
 
 @implementation AppDelegate
 
+/**
+ * 2tchのスキーマが読み出されたときにコールされるデリゲートメソッド．
+ * アプリケーションがactive, background, スリープのときにはこのメソッドがコールされる．
+ * アプリケーションが起動していないときは，このメソッドはコールされない．
+ * @param application UIApplicationオブジェクト．
+ * @param url エラーオブジェクト．
+ **/
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+	NSLog(@"%@", url);
+	NSString *body = [url.absoluteString stringByReplacingOccurrencesOfString:@"aakeyboard://app?register=" withString:@""];
+	NSString *aa = [body stringByRemovingPercentEncoding];
+	NSLog(@"%@", aa);
+	
+	UINavigationController *nav = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"AAKRegisterNavigationController"];
+	AAKRegisterViewController *con = (AAKRegisterViewController*)nav.topViewController;
+	
+	AAKASCIIArt *asciiart = [[AAKASCIIArt alloc] init];
+	
+	asciiart.asciiArt = aa;
+	
+	con.art = asciiart;
+	
+	[self.window.rootViewController presentViewController:nav animated:YES completion:nil];
+	
+	return YES;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	// Override point for customization after application launch.
@@ -23,6 +53,12 @@
 	NSString *documentsDirectory = [paths objectAtIndex:0];
 	NSLog(@"%@", documentsDirectory);
 #endif
+	
+	NSArray *a = [[AAKKeyboardDataManager defaultManager] groups];
+	NSLog(@"%@", a);
+	
+	[AAKKeyboardDataManager defaultManager];
+	
 	return YES;
 }
 

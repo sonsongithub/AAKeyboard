@@ -10,6 +10,7 @@
 
 #import "AAKKeyboardView.h"
 #import "AAKHelper.h"
+#import "AAKKeyboardDataManager.h"
 
 @interface KeyboardViewController () <AAKKeyboardViewDelegate> {
 	AAKKeyboardView *_keyboardView;
@@ -18,6 +19,17 @@
 @end
 
 @implementation KeyboardViewController
+
+- (instancetype)init {
+	DNSLogMethod
+	self = [super init];
+	if (self) {
+		[AAKKeyboardDataManager defaultManager];
+		NSArray *a = [[AAKKeyboardDataManager defaultManager] groups];
+		NSLog(@"%@", a);
+	}
+	return self;
+}
 
 - (void)dealloc {
 	DNSLogMethod
@@ -32,6 +44,7 @@
 }
 
 - (void)keyboardView:(AAKKeyboardView*)keyboardView willInsertString:(NSString*)string {
+	[self.textDocumentProxy insertText:string];
 }
 
 - (UITraitCollection *)overrideTraitCollectionForChildViewController:(UIViewController *)childViewController {
@@ -61,6 +74,7 @@
 														multiplier:0.0
 														  constant:216];
 		[self.view addConstraint:_heightConstraint];
+		[_keyboardView setPortraitMode];
 	}
 	else {
 		_heightConstraint = [NSLayoutConstraint constraintWithItem:self.view
@@ -71,6 +85,7 @@
 														multiplier:0.0
 														  constant:162];
 		[self.view addConstraint:_heightConstraint];
+		[_keyboardView setLandscapeMode];
 	}
 	
 	[_keyboardView load];
