@@ -15,9 +15,9 @@ typedef enum AAKASCIIArtGroupType_ {
 
 @interface AAKASCIIArtGroup : NSObject
 
-@property (nonatomic, readonly) NSString *title;
-@property (nonatomic, readonly) AAKASCIIArtGroupType type;
-@property (nonatomic, readonly) NSInteger key;
+@property (nonatomic, readonly) NSString *title;				/** グループ名 */
+@property (nonatomic, readonly) AAKASCIIArtGroupType type;		/** グループのタイプ．AAKASCIIArtGroupTypeで指定する*/
+@property (nonatomic, readonly) NSInteger key;					/** グループを一意に識別するキー */
 
 + (AAKASCIIArtGroup*)defaultGroup;
 + (AAKASCIIArtGroup*)historyGroup;

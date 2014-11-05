@@ -30,7 +30,7 @@ static NSInteger AAKCellButtonWidth = 96;
 	CGFloat fontSize = 15;
 	NSParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyleWithFontSize:fontSize];
 	NSDictionary *attributes = @{NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:[UIFont fontWithName:@"Mona" size:fontSize]};
-	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:_asciiart.asciiArt attributes:attributes];
+	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:_asciiart.text attributes:attributes];
 	DNSLogRect(self.textView.bounds);
 	AAKTextView *textView = [[AAKTextView alloc] initWithFrame:self.textView.bounds];
 	textView.attributedString = string;

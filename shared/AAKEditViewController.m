@@ -29,7 +29,7 @@
 	// Do any additional setup after loading the view.
 	_AATextView.font = [UIFont fontWithName:@"Mona" size:10];
 	[_groupTableView reloadData];
-	_AATextView.text = _art.asciiArt;
+	_AATextView.text = _art.text;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -39,7 +39,7 @@
 #pragma mark - IBAction
 
 - (IBAction)save:(id)sender {
-	_art.asciiArt = _AATextView.text;
+	_art.text = _AATextView.text;
 	[[AAKKeyboardDataManager defaultManager] updateASCIIArt:_art group:_group];
 	[[NSNotificationCenter defaultCenter] postNotificationName:AAKKeyboardDataManagerDidUpdateNotification object:nil userInfo:nil];
 	[self dismissViewControllerAnimated:YES completion:nil];

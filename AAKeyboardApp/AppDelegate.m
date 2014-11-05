@@ -34,7 +34,7 @@
 	
 	AAKASCIIArt *asciiart = [[AAKASCIIArt alloc] init];
 	
-	asciiart.asciiArt = decodedString;
+	asciiart.text = decodedString;
 	
 	con.art = asciiart;
 	

@@ -136,7 +136,7 @@
 	[collectionView deselectItemAtIndexPath:indexPath animated:YES];
 	AAKASCIIArt *source = _asciiarts[indexPath.item];
 	[[AAKKeyboardDataManager defaultManager] insertHistoryASCIIArtKey:source.key];
-	[self.delegate keyboardView:self willInsertString:source.asciiArt];
+	[self.delegate keyboardView:self willInsertString:source.text];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -169,7 +169,7 @@
 	AAKASCIIArt *source = _asciiarts[indexPath.item];
 	NSParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyleWithFontSize:fontSize];
 	NSDictionary *attributes = @{NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:[UIFont fontWithName:@"Mona" size:fontSize]};
-	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:source.asciiArt attributes:attributes];
+	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:source.text attributes:attributes];
 	cell.textView.attributedString = string;
 	[cell.label sizeToFit];
 	return cell;

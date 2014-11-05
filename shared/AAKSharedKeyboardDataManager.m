@@ -216,7 +216,7 @@
 				NSString *title = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
 				NSInteger key = sqlite3_column_int(statement, 1);
 				AAKASCIIArt *obj = [[AAKASCIIArt alloc] init];
-				obj.asciiArt = title;
+				obj.text = title;
 				obj.key = key;
 				obj.ratio = sqlite3_column_double(statement, 2);
 				[groups addObject:obj];
@@ -246,7 +246,7 @@
 				NSString *title = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
 				NSInteger key = sqlite3_column_int(statement, 1);
 				AAKASCIIArt *obj = [[AAKASCIIArt alloc] init];
-				obj.asciiArt = title;
+				obj.text = title;
 				obj.key = key;
 				obj.ratio = sqlite3_column_double(statement, 2);
 				[groups addObject:obj];
@@ -306,7 +306,7 @@
 	CGFloat fontSize = 15;
 	NSParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyleWithFontSize:fontSize];
 	NSDictionary *attributes = @{NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:[UIFont fontWithName:@"Mona" size:fontSize]};
-	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:asciiArt.asciiArt attributes:attributes];
+	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:asciiArt.text attributes:attributes];
 	
 	CGSize size = [UZTextView sizeForAttributedString:string withBoundWidth:CGFLOAT_MAX margin:UIEdgeInsetsZero];
 	CGFloat ratio = size.width / size.height;
@@ -317,7 +317,7 @@
 	}
 	else {
 	}
-	sqlite3_bind_text(statement, 1, [asciiArt.asciiArt UTF8String], -1, SQLITE_TRANSIENT);
+	sqlite3_bind_text(statement, 1, [asciiArt.text UTF8String], -1, SQLITE_TRANSIENT);
 	sqlite3_bind_int64(statement, 2, group.key);
 	sqlite3_bind_double(statement, 3, ratio);
 	sqlite3_bind_int64(statement, 4, asciiArt.key);
