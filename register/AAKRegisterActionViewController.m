@@ -9,7 +9,6 @@
 #import "AAKRegisterActionViewController.h"
 
 #import <MobileCoreServices/MobileCoreServices.h>
-
 #import "AAKShared.h"
 
 @interface AAKRegisterActionViewController ()
@@ -20,19 +19,42 @@
 
 @implementation AAKRegisterActionViewController
 
+/**
+ * キャンセルボタンを押したときのイベント処理．
+ * @param sender メッセージの送信元オブジェクト．
+ **/
+- (IBAction)cancel:(id)sender {
+	// registerの処理コンテキストを終了する
+	[self.extensionContext completeRequestReturningItems:nil completionHandler:nil];
+}
+
+/**
+ * 登録ボタンを押したときのイベント処理．
+ * @param sender メッセージの送信元オブジェクト．
+ **/
+- (IBAction)registerAA:(id)sender {
+	// AAを登録してから，registerの処理コンテキストを終了する
+	[[AAKKeyboardDataManager defaultManager] insertNewASCIIArt:self.AATextView.text groupKey:self.art.group.key];
+	[self.extensionContext completeRequestReturningItems:nil completionHandler:nil];
+}
+
+/**
+ * Safariのビューで選択されているテキストをUIに反映する．
+ * @param sender メッセージの送信元オブジェクト．
+ **/
 - (void)update {
 	dispatch_async(dispatch_get_main_queue(), ^{
 		if ([self.jsString length] > 0) {
 			self.AATextView.text = self.jsString;
 		}
 		else {
-			UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"hoge"
-																		   message:@"hoge"
+			UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Error", nil)
+																		   message:NSLocalizedString(@"Any text is not selected.", nil)
 																	preferredStyle:UIAlertControllerStyleAlert];
 			UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK"
 															 style:UIAlertActionStyleDefault
 														   handler:^(UIAlertAction *action) {
-															   //[self done];
+															   [self cancel:nil];
 														   }];
 			[alert addAction:action];
 			[self presentViewController:alert animated:YES completion:nil];
@@ -40,13 +62,12 @@
 	});
 }
 
-- (void)viewDidLoad {
-	[super viewDidLoad];
-	
-	//	_group = @"Default";
-	
+/**
+ * Safari中で選択中のテキストを取得し，成功した場合，updateメソッドをコールする．
+ **/
+- (void)extractSelectedText {
 	for (NSExtensionItem *item in self.extensionContext.inputItems) {
-		NSLog(@"%@", item);
+		
 		for (NSItemProvider *itemProvider in item.attachments) {
 			if ([itemProvider hasItemConformingToTypeIdentifier:(NSString *)kUTTypePropertyList]) {
 				
@@ -70,13 +91,11 @@
 	}
 }
 
-- (IBAction)cancel:(id)sender {
-	[self.extensionContext completeRequestReturningItems:nil completionHandler:nil];
-}
+#pragma mark - Override
 
-- (IBAction)registerAA:(id)sender {
-	[[AAKKeyboardDataManager defaultManager] insertNewASCIIArt:self.AATextView.text groupKey:self.art.group.key];
-	[self.extensionContext completeRequestReturningItems:nil completionHandler:nil];
+- (void)viewDidLoad {
+	[super viewDidLoad];
+	[self extractSelectedText];
 }
 
 @end
