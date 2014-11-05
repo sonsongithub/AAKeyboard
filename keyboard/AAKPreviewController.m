@@ -39,7 +39,7 @@
 	}
 }
 
-- (void)hoge:(NSNotification*)notification {
+- (void)keyboardDataManagerDidUpdateNotification:(NSNotification*)notification {
 	
 	
 	CGFloat fontSize = 15;
@@ -56,12 +56,6 @@
     [super viewDidLoad];
 	
 	CGFloat fontSize = 15;
-	
-	CGFloat wh = self.view.frame.size.width < self.view.frame.size.height ? self.view.frame.size.width : self.view.frame.size.height;
-	
-//	self.widthConstraint.constant = wh;
-//	self.heightConstraint.constant = wh;
-	
 	NSParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyleWithFontSize:fontSize];
 	NSDictionary *attributes = @{NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:[UIFont fontWithName:@"Mona" size:fontSize]};
 	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:_art.asciiArt attributes:attributes];
@@ -69,7 +63,7 @@
 	_textView.attributedString = string;
 	_textView.userInteractionEnabled = NO;
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hoge:) name:AAKKeyboardDataManagerDidUpdateNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDataManagerDidUpdateNotification:) name:AAKKeyboardDataManagerDidUpdateNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -206,7 +206,7 @@ static NSString * const reuseIdentifier = @"Cell";
 	cell.asciiart = source;
 	cell.group = _group[indexPath.section];
 	cell.delegate = self;
-	cell.debugLabel.text = [NSString stringWithFormat:@"%ld", source.key];
+	cell.debugLabel.text = [NSString stringWithFormat:@"%ld", (long)source.key];
     
     return cell;
 }

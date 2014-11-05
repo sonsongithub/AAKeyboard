@@ -26,17 +26,15 @@
  * @param url エラーオブジェクト．
  **/
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-	NSLog(@"%@", url);
 	NSString *body = [url.absoluteString stringByReplacingOccurrencesOfString:@"aakeyboard://app?register=" withString:@""];
-	NSString *aa = [body stringByRemovingPercentEncoding];
-	NSLog(@"%@", aa);
+	NSString *decodedString = [body stringByRemovingPercentEncoding];
 	
 	UINavigationController *nav = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"AAKRegisterNavigationController"];
 	AAKRegisterViewController *con = (AAKRegisterViewController*)nav.topViewController;
 	
 	AAKASCIIArt *asciiart = [[AAKASCIIArt alloc] init];
 	
-	asciiart.asciiArt = aa;
+	asciiart.asciiArt = decodedString;
 	
 	con.art = asciiart;
 	
@@ -53,10 +51,6 @@
 	NSString *documentsDirectory = [paths objectAtIndex:0];
 	NSLog(@"%@", documentsDirectory);
 #endif
-	
-	NSArray *a = [[AAKKeyboardDataManager defaultManager] groups];
-	NSLog(@"%@", a);
-	
 	[AAKKeyboardDataManager defaultManager];
 	
 	return YES;
