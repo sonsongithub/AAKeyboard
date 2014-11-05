@@ -27,7 +27,7 @@
 - (void)load {
 	NSInteger itemsPerPage = 3;
 	CGFloat w = CGRectGetWidth(self.bounds);
-	NSLog(@"width =	%f", w);
+//	NSLog(@"width =	%f", w);
 	if (w == 1024) {
 		itemsPerPage = 8;
 	}
@@ -133,10 +133,11 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+	DNSLogMethod
 	[collectionView deselectItemAtIndexPath:indexPath animated:YES];
-	AAKASCIIArt *source = _asciiarts[indexPath.item];
-	[[AAKKeyboardDataManager defaultManager] insertHistoryASCIIArtKey:source.key];
-	[self.delegate keyboardView:self willInsertString:source.text];
+//	AAKASCIIArt *source = _asciiarts[indexPath.item];
+//	[[AAKKeyboardDataManager defaultManager] insertHistoryASCIIArtKey:source.key];
+//	[self.delegate keyboardView:self willInsertString:source.text];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {

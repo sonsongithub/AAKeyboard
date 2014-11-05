@@ -27,7 +27,6 @@
 }
 
 - (void)layoutSubviews {
-	NSLog(@"AAKToolbarCell= layoutSubviews");
 	_iconImageView.center = self.contentView.center;
 }
 

@@ -125,11 +125,10 @@
 	return self;
 }
 
-- (void)layoutSubviews
-{
-	NSLog(@"AAKToolbar layoutSubviews");
+- (void)layoutSubviews {
+//	NSLog(@"AAKToolbar layoutSubviews");
 	[super layoutSubviews];
-	NSLog(@"%f", CGRectGetWidth(_collectionView.bounds));
+//	NSLog(@"%f", CGRectGetWidth(_collectionView.bounds));
 }
 
 - (void)layout {
@@ -150,10 +149,10 @@
 		sumation += s.width;
 		s.height = [self toolbarHeight];
 		[buf addObject:[NSValue valueWithCGSize:s]];
-		NSLog(@"--------------------->%f (%f)", s.width, sumation);
+//		NSLog(@"--------------------->%f (%f)", s.width, sumation);
 	}
 #if 1
-	NSLog(@"-------------------------------------------->%f - %f", sumation, width);
+//	NSLog(@"-------------------------------------------->%f - %f", sumation, width);
 	CGFloat parentWidth = width;
 	_collectionView.alwaysBounceHorizontal = YES;
 	if (sumation < parentWidth) {
@@ -209,7 +208,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
 	CGSize size =  [[_sizeOfCategories objectAtIndex:indexPath.item] CGSizeValue];
-	DNSLogSize(size);
+//	DNSLogSize(size);
 	return size;
 }
 

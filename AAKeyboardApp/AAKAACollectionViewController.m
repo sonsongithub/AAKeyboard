@@ -206,13 +206,6 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-//	NSArray *data = _AAGroups[indexPath.section];
-//	AAKASCIIArtGroup *group = _group[indexPath.section];
-//	AAKASCIIArt *source = data[indexPath.item];
-//	AAKEditViewController *con = [self.storyboard instantiateViewControllerWithIdentifier:@"AAKEditViewController"];
-//	con.art = source;
-//	con.group = group;
-//	[self.navigationController pushViewController:con animated:YES];
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {

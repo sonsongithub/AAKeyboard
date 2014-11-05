@@ -36,7 +36,7 @@
 }
 
 - (void)layoutSubviews {
-	NSLog(@"AAKToolbarCell= layoutSubviews");
+//	NSLog(@"AAKToolbarCell= layoutSubviews");
 	_label.center = self.contentView.center;
 }
 
