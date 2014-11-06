@@ -24,8 +24,8 @@
  * セッター．アスキーアートが更新された時にグループの選択UIを更新するために実装．
  * @param asciiart アスキーアートオブジェクト．
  **/
-- (void)setArt:(AAKASCIIArt *)art {
-	_art = art;
+- (void)setAsciiart:(AAKASCIIArt *)art {
+	_asciiart = art;
 	[_groupTableView reloadData];
 }
 
@@ -34,7 +34,7 @@
  * @param group アスキーアートのグループオブジェクト．
  **/
 - (void)setGroup:(AAKASCIIArtGroup *)group {
-	_art.group = group;
+	_asciiart.group = group;
 	[_groupTableView reloadData];
 }
 
@@ -45,8 +45,8 @@
  * @param sender メッセージの送信元オブジェクト．
  **/
 - (IBAction)save:(id)sender {
-	_art.text = _AATextView.text;
-	[[AAKKeyboardDataManager defaultManager] updateASCIIArt:_art];
+	_asciiart.text = _AATextView.text;
+	[[AAKKeyboardDataManager defaultManager] updateASCIIArt:_asciiart];
 	[[NSNotificationCenter defaultCenter] postNotificationName:AAKKeyboardDataManagerDidUpdateNotification object:nil userInfo:nil];
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -83,7 +83,7 @@
 	
 	// UIを更新
 	_AATextView.font = [UIFont fontWithName:@"Mona" size:10];
-	_AATextView.text = _art.text;
+	_AATextView.text = _asciiart.text;
 	[_groupTableView reloadData];
 }
 
@@ -107,7 +107,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-	cell.detailTextLabel.text = _art.group.title;
+	cell.detailTextLabel.text = _asciiart.group.title;
 	return cell;
 }
 

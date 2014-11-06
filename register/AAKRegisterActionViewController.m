@@ -34,7 +34,7 @@
  **/
 - (IBAction)registerAA:(id)sender {
 	// AAを登録してから，registerの処理コンテキストを終了する
-	[[AAKKeyboardDataManager defaultManager] insertNewASCIIArt:self.AATextView.text groupKey:self.art.group.key];
+	[[AAKKeyboardDataManager defaultManager] insertNewASCIIArt:self.AATextView.text groupKey:self.asciiart.group.key];
 	[self.extensionContext completeRequestReturningItems:nil completionHandler:nil];
 }
 

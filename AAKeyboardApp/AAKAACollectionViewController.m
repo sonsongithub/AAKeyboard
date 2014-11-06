@@ -51,7 +51,7 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)didSelectCell:(AAKAACollectionViewCell*)cell {
 	NSLog(@"%p", cell);
 	AAKPreviewController *con = (AAKPreviewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"AAKPreviewController"];
-	con.art = cell.asciiart;
+	con.asciiart = cell.asciiart;
 	con.modalPresentationStyle = UIModalPresentationCustom;
 	con.transitioningDelegate = self;
 	

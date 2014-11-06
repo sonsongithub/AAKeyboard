@@ -17,5 +17,5 @@
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *widthConstraint;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *heightConstraint;
 @property (nonatomic, strong) AAKASCIIArtGroup *group;
-@property (nonatomic, strong) AAKASCIIArt *art;
+@property (nonatomic, strong) AAKASCIIArt *asciiart;
 @end

@@ -29,7 +29,7 @@
 	if ([segue.identifier isEqualToString:@"OpenAAKEditNavigationController"]) {
 		UINavigationController *nav = (UINavigationController*)segue.destinationViewController;
 		AAKEditViewController *vc = (AAKEditViewController*)nav.topViewController;
-		vc.art = self.art;
+		vc.asciiart = self.asciiart;
 	}
 }
 
@@ -40,7 +40,7 @@
 	
 	NSParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyleWithFontSize:fontSize];
 	NSDictionary *attributes = @{NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:[UIFont fontWithName:@"Mona" size:fontSize]};
-	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:_art.text attributes:attributes];
+	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:_asciiart.text attributes:attributes];
 	
 	_textView.attributedString = string;
 	_textView.userInteractionEnabled = NO;
@@ -52,7 +52,7 @@
 	CGFloat fontSize = 15;
 	NSParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyleWithFontSize:fontSize];
 	NSDictionary *attributes = @{NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:[UIFont fontWithName:@"Mona" size:fontSize]};
-	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:_art.text attributes:attributes];
+	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:_asciiart.text attributes:attributes];
 	
 	_textView.attributedString = string;
 	_textView.userInteractionEnabled = NO;

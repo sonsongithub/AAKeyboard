@@ -13,7 +13,6 @@
 
 @interface AAKSelectGroupViewController : UITableViewController
 
-@property (nonatomic, assign) ActionViewController *actionViewController;
-@property (nonatomic, assign) AAKEditViewController *editViewController;
+@property (nonatomic, assign) AAKEditViewController *editViewController;		/** 編集ビューコントローラ．変更したグループを設定するためにセットする．コードが汚い．*/
 
 @end

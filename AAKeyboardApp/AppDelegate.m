@@ -36,7 +36,7 @@
 	
 	asciiart.text = decodedString;
 	
-	con.art = asciiart;
+	con.asciiart = asciiart;
 	
 	[self.window.rootViewController presentViewController:nav animated:YES completion:nil];
 	

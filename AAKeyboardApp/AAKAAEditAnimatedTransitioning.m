@@ -33,7 +33,7 @@
 								 previewController:(AAKPreviewController*)previewController
 						  collectionViewController:(AAKAACollectionViewController*)collectionViewController {
 	
-	AAKAACollectionViewCell *cell = [collectionViewController cellForAsciiArt:previewController.art];
+	AAKAACollectionViewCell *cell = [collectionViewController cellForAsciiArt:previewController.asciiart];
 	
 	CGRect containerViewFrame = [transitionContext containerView].frame;
 	
@@ -57,7 +57,7 @@
 										  previewController:(AAKPreviewController*)previewController
 								   collectionViewController:(AAKAACollectionViewController*)collectionViewController {
 	
-	AAKAACollectionViewCell *cell = [collectionViewController cellForAsciiArt:previewController.art];
+	AAKAACollectionViewCell *cell = [collectionViewController cellForAsciiArt:previewController.asciiart];
 	
 	{
 		CGFloat a = cell.textView.frame.size.width / cell.textView.frame.size.height;
@@ -97,7 +97,7 @@
 		return;
 	}
 
-	AAKAACollectionViewCell *cell = [collectionViewController cellForAsciiArt:previewController.art];
+	AAKAACollectionViewCell *cell = [collectionViewController cellForAsciiArt:previewController.asciiart];
 	
 	CGSize fromContentSize = [self AASizeForAACollectionViewControllerWithTransition:transitionContext
 																   previewController:previewController
@@ -160,7 +160,7 @@
 		return;
 	}
 	
-	AAKAACollectionViewCell *cell = [collectionViewController cellForAsciiArt:previewController.art];
+	AAKAACollectionViewCell *cell = [collectionViewController cellForAsciiArt:previewController.asciiart];
 	
 	CGSize toContentSize = [self AASizeForAACollectionViewControllerWithTransition:transitionContext
 																   previewController:previewController
