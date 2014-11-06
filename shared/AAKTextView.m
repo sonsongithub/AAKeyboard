@@ -8,6 +8,8 @@
 
 #import "AAKTextView.h"
 
+static CGFloat AAKTextViewImageWidth = 320;
+
 @interface AAKTextView() {
 	NSLayoutConstraint *_widthConstraint;
 	NSLayoutConstraint *_heightConstraint;
@@ -16,6 +18,24 @@
 @end
 
 @implementation AAKTextView
+
+/**
+ * クリップボードにAAの画像を転送するために，画像データを作るためのメソッド．
+ * @return UIImageオブジェクト．
+ **/
+- (UIImage*)imageForPasteBoard {
+	CGFloat width = AAKTextViewImageWidth;
+	CGSize textSize = [UZTextView sizeForAttributedString:self.attributedString withBoundWidth:CGFLOAT_MAX margin:UIEdgeInsetsZero];
+	AAKTextView *dummyTextView = [[AAKTextView alloc] initWithFrame:CGRectMake(0, 0, width, width / textSize.width * textSize.height)];
+	dummyTextView.backgroundColor = [UIColor clearColor];
+	dummyTextView.attributedString = self.attributedString;
+	
+	UIGraphicsBeginImageContextWithOptions(dummyTextView.bounds.size, NO, 0);
+	[dummyTextView.layer renderInContext:UIGraphicsGetCurrentContext()];
+	UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+	return image;
+}
 
 - (void)updateLayout {
 	if (_lastLayoutWidth == (self.frame.size.width - (_margin.left + _margin.right))) {
@@ -57,34 +77,6 @@
 	CGPathAddRect(path, NULL, _contentRect);
 	_frame = CTFramesetterCreateFrame(_framesetter, CFRangeMake(0, 0), path, NULL);
 	CGPathRelease(path);
-	
-//	if (_widthConstraint == nil) {
-//		_widthConstraint = [NSLayoutConstraint constraintWithItem:self
-//														attribute:NSLayoutAttributeWidth
-//														relatedBy:NSLayoutRelationEqual
-//														   toItem:nil
-//														attribute:NSLayoutAttributeNotAnAttribute
-//													   multiplier:1
-//														 constant:contentSize.width];
-//		[self addConstraint:_widthConstraint];
-//	}
-//	else {
-//		_widthConstraint.constant = contentSize.width;
-//	}
-//	if (_heightConstraint == nil) {
-//		_heightConstraint = [NSLayoutConstraint constraintWithItem:self
-//														 attribute:NSLayoutAttributeHeight
-//														 relatedBy:NSLayoutRelationEqual
-//															toItem:nil
-//														 attribute:NSLayoutAttributeNotAnAttribute
-//														multiplier:1
-//														  constant:contentSize.height];
-//		[self addConstraint:_heightConstraint];
-//	}
-//	else {
-//		_heightConstraint.constant = contentSize.height;
-//	}
-//	[self updateConstraints];
 }
 
 /**

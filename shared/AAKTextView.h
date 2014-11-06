@@ -10,4 +10,10 @@
 
 @interface AAKTextView : UZTextView
 
+/**
+ * クリップボードにAAの画像を転送するために，画像データを作るためのメソッド．
+ * @return UIImageオブジェクト．
+ **/
+- (UIImage*)imageForPasteBoard;
+
 @end

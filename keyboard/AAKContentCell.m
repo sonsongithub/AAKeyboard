@@ -26,16 +26,7 @@
  * AAを画像としてクリップボードにコピーする．
  **/
 - (void)copyAAImageToPasteBoard {
-	CGFloat width = 160;
-	CGSize textSize = [UZTextView sizeForAttributedString:self.textView.attributedString withBoundWidth:CGFLOAT_MAX margin:UIEdgeInsetsZero];
-	AAKTextView *dummyTextView = [[AAKTextView alloc] initWithFrame:CGRectMake(0, 0, width, width / textSize.width * textSize.height)];
-	dummyTextView.backgroundColor = [UIColor clearColor];
-	dummyTextView.attributedString = self.textView.attributedString;
-	
-	UIGraphicsBeginImageContextWithOptions(dummyTextView.bounds.size, NO, 0);
-	[dummyTextView.layer renderInContext:UIGraphicsGetCurrentContext()];
-	UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-	UIGraphicsEndImageContext();
+	UIImage *image = [self.textView imageForPasteBoard];
 	[[UIPasteboard generalPasteboard] setValue:UIImagePNGRepresentation(image) forPasteboardType:@"public.png"];
 }
 
