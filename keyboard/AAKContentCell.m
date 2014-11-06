@@ -20,46 +20,29 @@
 
 @implementation AAKContentCell
 
-#pragma mark - Override
-
-- (void)setBounds:(CGRect)bounds {
-	[super setBounds:bounds];
-	self.contentView.frame = bounds;
-}
-
-- (id)initWithFrame:(CGRect)frame {
-	self = [super initWithFrame:frame];
-	[self privateInit];
-	return self;
-}
-
-- (void)awakeFromNib {
-	[super awakeFromNib];
-	[self privateInit];
-}
-
-#pragma mark - UIGestureRecognizer
-
-- (void)longPress:(UIGestureRecognizer*)gestureRecognizer {
-	DNSLogMethod
-	if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-		DNSLog(@"UIGestureRecognizerStateBegan");
-	}
-	else if (gestureRecognizer.state == UIGestureRecognizerStateChanged) {
-		DNSLog(@"UIGestureRecognizerStateChanged");
-	}
-	else if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
-		DNSLog(@"UIGestureRecognizerStateEnded");
-		[self copyAAImageToPasteBoard];
-	}
-}
-
 #pragma mark - Instance method
 
+/**
+ * AAを画像としてクリップボードにコピーする．
+ **/
 - (void)copyAAImageToPasteBoard {
+	CGFloat width = 160;
+	CGSize textSize = [UZTextView sizeForAttributedString:self.textView.attributedString withBoundWidth:CGFLOAT_MAX margin:UIEdgeInsetsZero];
+	AAKTextView *dummyTextView = [[AAKTextView alloc] initWithFrame:CGRectMake(0, 0, width, width / textSize.width * textSize.height)];
+	dummyTextView.backgroundColor = [UIColor clearColor];
+	dummyTextView.attributedString = self.textView.attributedString;
 	
+	UIGraphicsBeginImageContextWithOptions(dummyTextView.bounds.size, NO, 0);
+	[dummyTextView.layer renderInContext:UIGraphicsGetCurrentContext()];
+	UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+	[[UIPasteboard generalPasteboard] setValue:UIImagePNGRepresentation(image) forPasteboardType:@"public.png"];
 }
 
+/**
+ * セルを初期化する．
+ * テキストビューの生成，レイアウト，背景色の設定，ジェスチャのアタッチを行う．
+ **/
 - (void)privateInit {
 	// テキストビューをセットアップ
 	_textView = [[AAKTextView alloc] initWithFrame:CGRectZero];
@@ -81,8 +64,45 @@
 	
 	// ジェスチャを設定
 	UILongPressGestureRecognizer * longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
-	longPress.minimumPressDuration = 2;
+	longPress.minimumPressDuration = 1;
 	[self addGestureRecognizer:longPress];
+}
+
+#pragma mark - Override
+
+- (void)setBounds:(CGRect)bounds {
+	[super setBounds:bounds];
+	self.contentView.frame = bounds;
+}
+
+- (id)initWithFrame:(CGRect)frame {
+	self = [super initWithFrame:frame];
+	[self privateInit];
+	return self;
+}
+
+- (void)awakeFromNib {
+	[super awakeFromNib];
+	[self privateInit];
+}
+
+#pragma mark - UIGestureRecognizer
+
+/**
+ * 長押しジェスチャの状態変化を受け取るメソッド
+ **/
+- (void)longPress:(UIGestureRecognizer*)gestureRecognizer {
+	DNSLogMethod
+	if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+		DNSLog(@"UIGestureRecognizerStateBegan");
+	}
+	else if (gestureRecognizer.state == UIGestureRecognizerStateChanged) {
+		DNSLog(@"UIGestureRecognizerStateChanged");
+	}
+	else if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+		DNSLog(@"UIGestureRecognizerStateEnded");
+		[self copyAAImageToPasteBoard];
+	}
 }
 
 @end
