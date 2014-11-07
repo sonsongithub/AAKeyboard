@@ -274,6 +274,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1402F19F1A0D29A50000F269 /* UICollectionReusableView */ = {
+			isa = PBXGroup;
+			children = (
+				14B274D01A0A0D83005BF3B1 /* AAKAACollectionViewCell.h */,
+				14B274D61A0A0D83005BF3B1 /* AAKAACollectionViewCell.m */,
+				14B274DC1A0A0D83005BF3B1 /* AAKAACollectionViewCell.xib */,
+				14B274D41A0A0D83005BF3B1 /* AAKAASupplementaryView.h */,
+				14B274DA1A0A0D83005BF3B1 /* AAKAASupplementaryView.m */,
+				14B274DD1A0A0D83005BF3B1 /* AAKAASupplementaryView.xib */,
+			);
+			name = UICollectionReusableView;
+			sourceTree = "<group>";
+		};
+		1402F1A01A0D29BF0000F269 /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				14B274D31A0A0D83005BF3B1 /* AAKAAEditPresentationController.h */,
+				14B274D91A0A0D83005BF3B1 /* AAKAAEditPresentationController.m */,
+				14B274D21A0A0D83005BF3B1 /* AAKAAEditAnimatedTransitioning.h */,
+				14B274D81A0A0D83005BF3B1 /* AAKAAEditAnimatedTransitioning.m */,
+			);
+			name = Animation;
+			sourceTree = "<group>";
+		};
 		14A5137F19EC68530098C02C /* register */ = {
 			isa = PBXGroup;
 			children = (
@@ -459,22 +483,14 @@
 		14FBD3A519E21213005FC38B /* AAKeyboardApp */ = {
 			isa = PBXGroup;
 			children = (
-				14B274D01A0A0D83005BF3B1 /* AAKAACollectionViewCell.h */,
-				14B274D61A0A0D83005BF3B1 /* AAKAACollectionViewCell.m */,
-				14B274DC1A0A0D83005BF3B1 /* AAKAACollectionViewCell.xib */,
-				14B274D41A0A0D83005BF3B1 /* AAKAASupplementaryView.h */,
-				14B274DA1A0A0D83005BF3B1 /* AAKAASupplementaryView.m */,
-				14B274DD1A0A0D83005BF3B1 /* AAKAASupplementaryView.xib */,
 				14B274D11A0A0D83005BF3B1 /* AAKAACollectionViewController.h */,
 				14B274D71A0A0D83005BF3B1 /* AAKAACollectionViewController.m */,
-				14B274D21A0A0D83005BF3B1 /* AAKAAEditAnimatedTransitioning.h */,
-				14B274D81A0A0D83005BF3B1 /* AAKAAEditAnimatedTransitioning.m */,
-				14B274D31A0A0D83005BF3B1 /* AAKAAEditPresentationController.h */,
-				14B274D91A0A0D83005BF3B1 /* AAKAAEditPresentationController.m */,
 				14B274D51A0A0D83005BF3B1 /* AAKPreviewController.h */,
 				14B274DB1A0A0D83005BF3B1 /* AAKPreviewController.m */,
 				14FBD3AA19E21213005FC38B /* AppDelegate.h */,
 				14FBD3AB19E21213005FC38B /* AppDelegate.m */,
+				1402F1A01A0D29BF0000F269 /* Animation */,
+				1402F19F1A0D29A50000F269 /* UICollectionReusableView */,
 				14FBD3B019E21213005FC38B /* Main.storyboard */,
 				14FBD3A619E21213005FC38B /* Supporting Files */,
 			);
