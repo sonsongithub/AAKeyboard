@@ -63,15 +63,7 @@ static NSString * const reuseIdentifier = @"Cell";
 	NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
 	[[AAKKeyboardDataManager defaultManager] duplicateASCIIArt:obj.key];
 	[self.collectionView performBatchUpdates:^(void){
-		
-		
-		NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[_group count]];
-		
-		for (AAKASCIIArtGroup *group in _group) {
-			NSArray *data = [[AAKKeyboardDataManager defaultManager] asciiArtForGroup:group];
-			[buf addObject:data];
-		}
-		_AAGroups = [NSArray arrayWithArray:buf];
+		[self updateContent];
 		[self.collectionView insertItemsAtIndexPaths:@[indexPath]];
 	} completion:^(BOOL finished) {
 		[self.collectionView reloadData];
@@ -84,14 +76,8 @@ static NSString * const reuseIdentifier = @"Cell";
 	[[AAKKeyboardDataManager defaultManager] deleteASCIIArt:obj];
 	[self.collectionView performBatchUpdates:^(void){
 		
-
-		NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[_group count]];
-
-		for (AAKASCIIArtGroup *group in _group) {
-			NSArray *data = [[AAKKeyboardDataManager defaultManager] asciiArtForGroup:group];
-			[buf addObject:data];
-		}
-		_AAGroups = [NSArray arrayWithArray:buf];
+		[self updateContent];
+		
 		[self.collectionView deleteItemsAtIndexPaths:@[indexPath]];
 	} completion:^(BOOL finished) {
 		[self.collectionView reloadData];
@@ -99,23 +85,18 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (void)didUpdateDatabase:(NSNotification*)notification {
-	
-	_group = [[AAKKeyboardDataManager defaultManager] groups];
-	
-	NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[_group count]];
-	
-	for (AAKASCIIArtGroup *group in _group) {
-		NSArray *data = [[AAKKeyboardDataManager defaultManager] asciiArtForGroup:group];
-		[buf addObject:data];
-	}
-	_AAGroups = [NSArray arrayWithArray:buf];
+	[self updateContent];
 	[self.collectionView reloadData];
 	
 }
 
 - (void)applicationWillEnterForegroundNotification:(NSNotification*)notification {
-	
-	_group = [[AAKKeyboardDataManager defaultManager] groups];
+	[self updateContent];
+	[self.collectionView reloadData];
+}
+
+- (void)updateContent {
+	_group = [[AAKKeyboardDataManager defaultManager] groupsWithoutHistory];
 	
 	NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[_group count]];
 	
@@ -124,7 +105,6 @@ static NSString * const reuseIdentifier = @"Cell";
 		[buf addObject:data];
 	}
 	_AAGroups = [NSArray arrayWithArray:buf];
-	[self.collectionView reloadData];
 }
 
 #pragma mark - Override
@@ -143,13 +123,7 @@ static NSString * const reuseIdentifier = @"Cell";
 	UINib *nib = [UINib nibWithNibName:@"AAKAASupplementaryView" bundle:nil];
 	[self.collectionView registerNib:nib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"AAKAASupplementaryView"];
 	
-	_group = [[AAKKeyboardDataManager defaultManager] groups];
-	NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[_group count]];
-	for (AAKASCIIArtGroup *group in _group) {
-		NSArray *data = [[AAKKeyboardDataManager defaultManager] asciiArtForGroup:group];
-		[buf addObject:data];
-	}
-	_AAGroups = [NSArray arrayWithArray:buf];
+	[self updateContent];
 }
 
 #pragma mark - UIViewControllerTransitionDelegate

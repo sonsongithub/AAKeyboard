@@ -96,6 +96,33 @@
 }
 
 /**
+ * AAが登録されているグループ一覧を作成する．
+ * @return グループ名の配列．
+ **/
+- (NSArray*)groupsWithoutHistory {
+	const char *sql = "select DISTINCT AAGroup.group_title, AA.group_key from AA, AAGroup where AA.group_key == AAGroup.group_key;";
+	sqlite3_stmt *statement = NULL;
+	
+	NSMutableArray *groups = [NSMutableArray array];
+	
+	if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
+		DNSLog( @"Error: failed to prepare statement with message '%s'.", sqlite3_errmsg(_database));
+	}
+	else {
+		while (sqlite3_step(statement) == SQLITE_ROW) {
+			if (sqlite3_column_text(statement, 0)) {
+				NSString *title = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+				NSInteger key = sqlite3_column_int(statement, 1);
+				AAKASCIIArtGroup *obj = [AAKASCIIArtGroup groupWithTitle:title key:key];
+				[groups addObject:obj];
+			}
+		}
+	}
+	sqlite3_finalize(statement);
+	return [NSArray arrayWithArray:groups];
+}
+
+/**
  * 新しいグループを作成する．
  * @param group 新しいグループ名の文字列．
  **/

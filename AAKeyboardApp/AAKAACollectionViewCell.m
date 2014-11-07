@@ -124,15 +124,15 @@ static NSInteger AAKCellButtonWidth = 96;
  **/
 - (void)swipeleft:(UISwipeGestureRecognizer*)gestureRecognizer {
 	if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-		DNSLog(@"UIGestureRecognizerStateBegan");
+//		DNSLog(@"UIGestureRecognizerStateBegan");
 		[self gestureRecognizerStateBegan:gestureRecognizer];
 	}
 	else if (gestureRecognizer.state == UIGestureRecognizerStateChanged) {
-		DNSLog(@"UIGestureRecognizerStateChanged");
+//		DNSLog(@"UIGestureRecognizerStateChanged");
 		[self gestureRecognizerStateChanged:gestureRecognizer];
 	}
 	else if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
-		DNSLog(@"UIGestureRecognizerStateEnded");
+//		DNSLog(@"UIGestureRecognizerStateEnded");
 		[self gestureRecognizerStateEnded:gestureRecognizer];
 	}
 }

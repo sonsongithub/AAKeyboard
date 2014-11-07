@@ -62,6 +62,12 @@ extern NSString *const AAKKeyboardDataManagerDidUpdateNotification;		/** デー�
 - (NSArray*)groups;
 
 /**
+ * AAが登録されているグループ一覧を作成する．
+ * @return グループ名の配列．
+ **/
+- (NSArray*)groupsWithoutHistory;
+
+/**
  * 新しいグループを作成する．
  * @param group 新しいグループ名の文字列．
  **/
