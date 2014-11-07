@@ -34,27 +34,6 @@
 	}
 }
 
-- (void)setCurrentGroup:(AAKASCIIArtGroup *)currentGroup {
-	_currentGroup = currentGroup;
-	[self updateSelectedCell];
-}
-
-- (IBAction)pushEarthKey:(id)sender {
-	[self.delegate toolbar:self didPushEarthButton:sender];
-}
-
-- (IBAction)pushDeleteKey:(id)sender {
-	[self.delegate toolbar:self didPushDeleteButton:sender];
-}
-
-- (CGFloat)toolbarHeight {
-	return _height;
-}
-
-- (CGFloat)buttonWidth {
-	return _height;
-}
-
 - (void)prepareButton {
 	_earthKey = [[UIButton alloc] initWithFrame:CGRectZero];
 	[_earthKey setImage:[UIImage imageNamed:@"earth"] forState:UIControlStateNormal];
@@ -70,6 +49,91 @@
 	[_deleteKey setBackgroundImage:[UIImage imageNamed:@"buttonBackNormalState"] forState:UIControlStateNormal];
 }
 
+- (void)layout {
+	[self updateWithWidth:CGRectGetWidth(_collectionView.bounds)];
+	[_collectionFlowLayout invalidateLayout];
+	[_collectionView reloadData];
+}
+
+- (void)updateWithWidth:(CGFloat)width {
+	if (width < 1)
+		return;
+	NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:_fontSize]};
+	NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[_categories count]];
+	CGFloat sumation = 0;
+	for (AAKASCIIArtGroup *group in _categories) {
+		CGSize s = [group.title sizeWithAttributes:attributes];
+		s.width = floor(s.width) + 20;
+		sumation += s.width;
+		s.height = _height;
+		[buf addObject:[NSValue valueWithCGSize:s]];
+	}
+	
+	CGFloat parentWidth = width;
+	_collectionView.alwaysBounceHorizontal = YES;
+	if (sumation < parentWidth) {
+		_collectionView.alwaysBounceHorizontal = NO;
+		
+		CGFloat leftWidth = parentWidth - sumation;
+		CGFloat quota = leftWidth / buf.count;
+		
+		if (quota > 1) {
+			quota = floor(quota);
+			CGFloat leftQuota = 0;
+			for (int i = 0; i < buf.count; i++) {
+				CGSize s = [[buf objectAtIndex:i] CGSizeValue];
+				if (i < buf.count - 1) {
+					s.width = s.width + quota;
+					leftQuota += quota;
+				}
+				else {
+					s.width = s.width + leftWidth - leftQuota;
+				}
+				[buf replaceObjectAtIndex:i withObject:[NSValue valueWithCGSize:s]];
+			}
+		}
+		else {
+			CGSize s = [[buf objectAtIndex:0] CGSizeValue];
+			s.width = s.width + leftWidth;
+			[buf replaceObjectAtIndex:0 withObject:[NSValue valueWithCGSize:s]];
+			
+		}
+	}
+	_sizeOfCategories = [NSArray arrayWithArray:buf];
+}
+
+#pragma mark - IBAction
+
+- (IBAction)pushEarthKey:(id)sender {
+	[self.delegate toolbar:self didPushEarthButton:sender];
+}
+
+- (IBAction)pushDeleteKey:(id)sender {
+	[self.delegate toolbar:self didPushDeleteButton:sender];
+}
+
+#pragma mark - Setter
+
+- (void)setGroups:(NSArray*)categories {
+	_categories = [NSArray arrayWithArray:categories];
+	[self updateWithWidth:CGRectGetWidth(_collectionView.bounds)];
+	[_collectionView reloadData];
+}
+
+- (void)setCurrentGroup:(AAKASCIIArtGroup *)currentGroup {
+	_currentGroup = currentGroup;
+	[self updateSelectedCell];
+}
+
+#pragma mark - AAKToolbarCellDelegate
+
+- (void)didSelectToolbarCell:(AAKToolbarCell *)cell {
+	_currentGroup = cell.group;
+	[self updateSelectedCell];
+	[self.delegate toolbar:self didSelectGroup:cell.group];
+}
+
+#pragma mark - Override
 
 - (instancetype)initWithFrame:(CGRect)frame {
 	self = [super initWithFrame:frame];
@@ -113,7 +177,7 @@
 																   toItem:nil
 																attribute:NSLayoutAttributeNotAnAttribute
 															   multiplier:1
-																 constant:[self buttonWidth]];
+																 constant:_height];
 		[self addConstraint:_earthKeyWidthConstraint];
 		_deleteKeyWidthConstraint = [NSLayoutConstraint constraintWithItem:_deleteKey
 																 attribute:NSLayoutAttributeWidth
@@ -121,101 +185,24 @@
 																	toItem:nil
 																 attribute:NSLayoutAttributeNotAnAttribute
 																multiplier:1
-																  constant:[self buttonWidth]];
+																  constant:_height];
 		[self addConstraint:_deleteKeyWidthConstraint];
 		
 		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_earthKey]-0-[_collectionView(>=0)]-0-[_deleteKey]-(==0)-|"
-																		  options:0 metrics:0 views:views]];
+																	 options:0 metrics:0 views:views]];
 		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_collectionView(>=0)]-(==0)-|"
-																		  options:0 metrics:0 views:views]];
+																	 options:0 metrics:0 views:views]];
 		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_earthKey(>=0)]-(==0)-|"
-																		  options:0 metrics:0 views:views]];
+																	 options:0 metrics:0 views:views]];
 		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_deleteKey(>=0)]-(==0)-|"
-																		  options:0 metrics:0 views:views]];
+																	 options:0 metrics:0 views:views]];
 	}
 	return self;
 }
 
-- (void)didSelectToolbarCell:(AAKToolbarCell *)cell {
-	_currentGroup = cell.group;
-	[self updateSelectedCell];
-	[self.delegate toolbar:self didSelectGroup:cell.group];
-	//	[collectionView deselectItemAtIndexPath:indexPath animated:YES];
-	//	AAKASCIIArtGroup *group = [_categories objectAtIndex:indexPath.item];
-	//	[self setCurrentGroup:group];
-	//	[self.delegate toolbar:self didSelectGroup:group];
-}
+#pragma mark - UICollectionViewDelegate, UICollectionViewDataSource
 
-- (void)layoutSubviews {
-//	NSLog(@"AAKToolbar layoutSubviews");
-	[super layoutSubviews];
-//	NSLog(@"%f", CGRectGetWidth(_collectionView.bounds));
-}
-
-- (void)layout {
-	[self updateWithWidth:CGRectGetWidth(_collectionView.bounds)];
-	[_collectionFlowLayout invalidateLayout];
-	[_collectionView reloadData];
-}
-
-- (void)updateWithWidth:(CGFloat)width {
-	if (width < 1)
-		return;
-	NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:_fontSize]};
-	NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[_categories count]];
-	CGFloat sumation = 0;
-	for (AAKASCIIArtGroup *group in _categories) {
-		CGSize s = [group.title sizeWithAttributes:attributes];
-		s.width = floor(s.width) + 20;
-		sumation += s.width;
-		s.height = [self toolbarHeight];
-		[buf addObject:[NSValue valueWithCGSize:s]];
-//		NSLog(@"--------------------->%f (%f)", s.width, sumation);
-	}
-#if 1
-//	NSLog(@"-------------------------------------------->%f - %f", sumation, width);
-	CGFloat parentWidth = width;
-	_collectionView.alwaysBounceHorizontal = YES;
-	if (sumation < parentWidth) {
-		_collectionView.alwaysBounceHorizontal = NO;
-		
-		CGFloat leftWidth = parentWidth - sumation;
-		CGFloat quota = leftWidth / buf.count;
-		
-		if (quota > 1) {
-			quota = floor(quota);
-			CGFloat leftQuota = 0;
-			for (int i = 0; i < buf.count; i++) {
-				CGSize s = [[buf objectAtIndex:i] CGSizeValue];
-				if (i < buf.count - 1) {
-					s.width = s.width + quota;
-					leftQuota += quota;
-				}
-				else {
-					s.width = s.width + leftWidth - leftQuota;
-				}
-				[buf replaceObjectAtIndex:i withObject:[NSValue valueWithCGSize:s]];
-			}
-		}
-		else {
-			CGSize s = [[buf objectAtIndex:0] CGSizeValue];
-			s.width = s.width + leftWidth;
-			[buf replaceObjectAtIndex:0 withObject:[NSValue valueWithCGSize:s]];
-			
-		}
-	}
-#endif
-	_sizeOfCategories = [NSArray arrayWithArray:buf];
-}
-
-- (void)setGroups:(NSArray*)categories {
-	_categories = [NSArray arrayWithArray:categories];
-	[self updateWithWidth:CGRectGetWidth(_collectionView.bounds)];
-	[_collectionView reloadData];
-}
-
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-{
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
 	return UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
@@ -229,15 +216,10 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
 	CGSize size =  [[_sizeOfCategories objectAtIndex:indexPath.item] CGSizeValue];
-//	DNSLogSize(size);
 	return size;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-//	[collectionView deselectItemAtIndexPath:indexPath animated:YES];
-//	AAKASCIIArtGroup *group = [_categories objectAtIndex:indexPath.item];
-//	[self setCurrentGroup:group];
-//	[self.delegate toolbar:self didSelectGroup:group];
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -256,23 +238,18 @@
 	AAKToolbarCell *cell = nil;
 	AAKASCIIArtGroup *group = [_categories objectAtIndex:indexPath.item];
 	
-	
 	if (group.type == AAKASCIIArtHistoryGroup) {
 		cell = [cv dequeueReusableCellWithReuseIdentifier:@"AAKToolbarHistoryCell" forIndexPath:indexPath];
 	}
 	else {
 		cell = [cv dequeueReusableCellWithReuseIdentifier:@"AAKToolbarCell" forIndexPath:indexPath];
-		cell.label.text = group.title;
-		cell.label.font = [UIFont systemFontOfSize:_fontSize];
 	}
+	
 	cell.group = group;
 	cell.delegate = self;
-	
 	[cell setOriginalHighlighted:(cell.group.key == _currentGroup.key)];
-	
 	cell.isHead = (indexPath.item == 0);
-	[cell.label sizeToFit];
-	//
+	
 	return cell;
 }
 

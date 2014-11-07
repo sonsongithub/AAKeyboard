@@ -22,6 +22,7 @@
 }
 @property (nonatomic, readonly) UILabel *label;
 @property (nonatomic, assign) AAKASCIIArtGroup *group;
+@property (nonatomic, assign) CGFloat fontSize;
 @property (nonatomic, assign) BOOL isHead;
 @property (nonatomic, assign) id <AAKToolbarCellDelegate> delegate;
 - (void)setOriginalHighlighted:(BOOL)highlighted;

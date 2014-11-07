@@ -8,7 +8,30 @@
 
 #import "AAKToolbarCell.h"
 
+#import "AAKShared.h"
+
 @implementation AAKToolbarCell
+
+#pragma mark - Instance method
+
+- (void)setOriginalHighlighted:(BOOL)highlighted {
+	[super setHighlighted:highlighted];
+	if (highlighted)
+		_label.textColor = [UIColor whiteColor];
+	else
+		_label.textColor = [UIColor blackColor];
+}
+
+- (void)setGroup:(AAKASCIIArtGroup *)group {
+	_group = group;
+	_label.text = _group.title;
+	[_label sizeToFit];
+}
+
+- (void)setFontSize:(CGFloat)fontSize {
+	_fontSize = fontSize;
+	_label.font = [UIFont systemFontOfSize:_fontSize];
+}
 
 - (void)privateInit {
 	self.backgroundColor = [UIColor blueColor];
@@ -35,29 +58,15 @@
 	self.selectedBackgroundView.backgroundColor = [UIColor colorWithRed:203/255.0f green:203/255.0f blue:203/255.0f alpha:1];
 }
 
+#pragma mark - Override
+
 - (void)layoutSubviews {
-//	NSLog(@"AAKToolbarCell= layoutSubviews");
 	_label.center = self.contentView.center;
 }
 
 - (void)setBounds:(CGRect)bounds {
 	[super setBounds:bounds];
 	self.contentView.frame = bounds;
-}
-
-- (void)setOriginalHighlighted:(BOOL)highlighted {
-	[super setHighlighted:highlighted];
-	if (highlighted)
-		_label.textColor = [UIColor whiteColor];
-	else
-		_label.textColor = [UIColor blackColor];
-}
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-//	[self setOriginalHighlighted:YES];
-}
-
-- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -68,10 +77,6 @@
 }
 
 - (void)setSelected:(BOOL)selected {
-}
-
-- (void)updateConstraints {
-	[super updateConstraints];
 }
 
 - (void)prepareForReuse {
@@ -91,16 +96,16 @@
 	[self privateInit];
 }
 
-- (void)drawRect:(CGRect)rect {
-	CGContextRef context = UIGraphicsGetCurrentContext();
-	[[UIColor colorWithRed:254.0/255.0f green:254.0/255.0f blue:254.0/255.0f alpha:1] setFill];
-	CGContextFillRect(context, rect);
-	[[UIColor colorWithRed:203.0/255.0f green:203.0/255.0f blue:203.0/255.0f alpha:1] setFill];
-//	CGContextFillRect(context, CGRectMake(0, 0, rect.size.width, 0.5));
-	CGContextFillRect(context, CGRectMake(rect.size.width - 0.5, 0, 0.5, rect.size.height));
-	if (self.isHead)
-		CGContextFillRect(context, CGRectMake(0, 0, 0.5, rect.size.height));
-//	CGContextFillRect(context, CGRectMake(0, rect.size.height - 0.5, rect.size.width, 0.5));
-}
+//- (void)drawRect:(CGRect)rect {
+//	CGContextRef context = UIGraphicsGetCurrentContext();
+//	[[UIColor colorWithRed:254.0/255.0f green:254.0/255.0f blue:254.0/255.0f alpha:1] setFill];
+//	CGContextFillRect(context, rect);
+//	[[UIColor colorWithRed:23.0/255.0f green:23.0/255.0f blue:23.0/255.0f alpha:1] setFill];
+////	CGContextFillRect(context, CGRectMake(0, 0, rect.size.width, 0.5));
+//	CGContextFillRect(context, CGRectMake(rect.size.width - 0.5, 0, 0.5, rect.size.height));
+//	if (self.isHead)
+//		CGContextFillRect(context, CGRectMake(0, 0, 0.5, rect.size.height));
+////	CGContextFillRect(context, CGRectMake(0, rect.size.height - 0.5, rect.size.width, 0.5));
+//}
 
 @end
