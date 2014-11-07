@@ -246,6 +246,8 @@
 		
 		_groups = [[AAKKeyboardDataManager defaultManager] groups];
 		
+		[self updateWithWidth:100];
+		
 		NSInteger groupKey = [[NSUserDefaults standardUserDefaults] integerForKey:@"groupKey"];
 		_currentGroup = [self groupForGroupKey:groupKey];
 		

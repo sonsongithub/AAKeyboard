@@ -29,8 +29,6 @@
 	self = [super init];
 	if (self) {
 		[AAKKeyboardDataManager defaultManager];
-		NSArray *a = [[AAKKeyboardDataManager defaultManager] groups];
-		NSLog(@"%@", a);
 	}
 	return self;
 }
