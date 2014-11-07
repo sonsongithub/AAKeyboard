@@ -169,6 +169,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 	DNSLogMethod
+	[collectionView deselectItemAtIndexPath:indexPath animated:YES];
 	AAKASCIIArt *source = _asciiarts[indexPath.item];
 	[[AAKKeyboardDataManager defaultManager] insertHistoryASCIIArtKey:source.key];
 	[self.delegate keyboardView:self willInsertString:source.text];

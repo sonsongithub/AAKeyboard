@@ -30,12 +30,7 @@
 
 - (void)updateSelectedCell {
 	for (AAKToolbarCell *cell in [_collectionView visibleCells]) {
-		if (cell.group.key == _currentGroup.key) {
-			cell.label.textColor = [UIColor redColor];
-		}
-		else {
-			cell.label.textColor = [UIColor blackColor];
-		}
+		[cell setOriginalHighlighted:(cell.group.key == _currentGroup.key)];
 	}
 }
 
@@ -142,7 +137,8 @@
 }
 
 - (void)didSelectToolbarCell:(AAKToolbarCell *)cell {
-	
+	_currentGroup = cell.group;
+	[self updateSelectedCell];
 	[self.delegate toolbar:self didSelectGroup:cell.group];
 	//	[collectionView deselectItemAtIndexPath:indexPath animated:YES];
 	//	AAKASCIIArtGroup *group = [_categories objectAtIndex:indexPath.item];
@@ -271,6 +267,8 @@
 	}
 	cell.group = group;
 	cell.delegate = self;
+	
+	[cell setOriginalHighlighted:(cell.group.key == _currentGroup.key)];
 	
 	cell.isHead = (indexPath.item == 0);
 	[cell.label sizeToFit];

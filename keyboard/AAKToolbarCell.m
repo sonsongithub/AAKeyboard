@@ -54,15 +54,13 @@
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-	[self setOriginalHighlighted:YES];
+//	[self setOriginalHighlighted:YES];
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-	[self setOriginalHighlighted:NO];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-	[self setOriginalHighlighted:NO];
 	[self.delegate didSelectToolbarCell:self];
 }
 
