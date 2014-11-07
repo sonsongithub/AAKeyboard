@@ -14,26 +14,35 @@
 #import "AAKShared.h"
 
 @interface AAKToolbar() <UICollectionViewDataSource, UICollectionViewDelegate, AAKToolbarCellDelegate> {
-	UICollectionView	*_collectionView;
-	UICollectionViewFlowLayout *_collectionFlowLayout;
-	NSArray				*_categories;
-	NSArray				*_sizeOfCategories;
-	UIButton			*_earthKey;
-	UIButton			*_deleteKey;
+	UICollectionView			*_collectionView;
+	UICollectionViewFlowLayout	*_collectionFlowLayout;
+	NSArray						*_categories;
+	NSArray						*_sizeOfCategories;
+	UIButton					*_earthKey;
+	UIButton					*_deleteKey;
 	
-	NSLayoutConstraint	*_earthKeyWidthConstraint;
-	NSLayoutConstraint	*_deleteKeyWidthConstraint;
+	NSLayoutConstraint			*_earthKeyWidthConstraint;
+	NSLayoutConstraint			*_deleteKeyWidthConstraint;
 }
 @end
 
 @implementation AAKToolbar
 
+#pragma mark - Instance method
+
+/**
+ * ツールバーの選択状態になっているセルを更新する．
+ * reloadDataだと色々問題が発生するため．
+ **/
 - (void)updateSelectedCell {
 	for (AAKToolbarCell *cell in [_collectionView visibleCells]) {
 		[cell setOriginalHighlighted:(cell.group.key == _currentGroup.key)];
 	}
 }
 
+/**
+ * 両脇のボタンを初期化，配置する．
+ **/
 - (void)prepareButton {
 	_earthKey = [[UIButton alloc] initWithFrame:CGRectZero];
 	[_earthKey setImage:[UIImage imageNamed:@"earth"] forState:UIControlStateNormal];
@@ -47,17 +56,31 @@
 	[_deleteKey addTarget:self action:@selector(pushDeleteKey:) forControlEvents:UIControlEventTouchUpInside];
 	[_deleteKey setBackgroundImage:[UIImage imageNamed:@"buttonBackHighlightedState"] forState:UIControlStateHighlighted];
 	[_deleteKey setBackgroundImage:[UIImage imageNamed:@"buttonBackNormalState"] forState:UIControlStateNormal];
+	
+	[self addSubview:_earthKey];
+	[self addSubview:_deleteKey];
 }
 
+/**
+ * ツールバー全体をレイアウトする．
+ * グループ名の枠の大きさを計算し，すべてのセルの幅を計算する．そのあとに，セルのレイアウトを更新したりする．
+ **/
 - (void)layout {
 	[self updateWithWidth:CGRectGetWidth(_collectionView.bounds)];
 	[_collectionFlowLayout invalidateLayout];
 	[_collectionView reloadData];
 }
 
+/**
+ * 各グループのボタンのサイズを再計算する．
+ * 幅より，すべてのボタンの幅の総和が狭い場合は，均等にあまり割り当て，スクロールしないようにする．
+ **/
 - (void)updateWithWidth:(CGFloat)width {
+	// 幅が不当なときは計算しない．
 	if (width < 1)
 		return;
+	
+	// まず，普通にすべてのグループについて幅を計算する．
 	NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:_fontSize]};
 	NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[_categories count]];
 	CGFloat sumation = 0;
@@ -69,12 +92,15 @@
 		[buf addObject:[NSValue valueWithCGSize:s]];
 	}
 	
-	CGFloat parentWidth = width;
 	_collectionView.alwaysBounceHorizontal = YES;
-	if (sumation < parentWidth) {
+	
+	// すべてのグループの幅の総和がビューの幅よりも小さい場合，
+	// あまりの部分をそれぞれのセルに割り当てて，空白を作らないようにする．
+	if (sumation < width) {
+		// 固定になるので，バウンスは解除する．
 		_collectionView.alwaysBounceHorizontal = NO;
 		
-		CGFloat leftWidth = parentWidth - sumation;
+		CGFloat leftWidth = width - sumation;
 		CGFloat quota = leftWidth / buf.count;
 		
 		if (quota > 1) {
@@ -100,6 +126,66 @@
 		}
 	}
 	_sizeOfCategories = [NSArray arrayWithArray:buf];
+}
+
+/**
+ * UICollectionViewを初期化する．
+ **/
+- (void)prepareCollectionView {
+	_collectionFlowLayout = [[UICollectionViewFlowLayout alloc] init];
+	_collectionFlowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+	_collectionFlowLayout.minimumLineSpacing = 0;
+	_collectionFlowLayout.minimumInteritemSpacing = 0;
+	
+	_collectionFlowLayout.sectionInset = UIEdgeInsetsZero;
+	_collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_collectionFlowLayout];
+	_collectionView.alwaysBounceHorizontal = YES;
+	_collectionView.showsHorizontalScrollIndicator = NO;
+	_collectionView.backgroundColor = [UIColor colorWithRed:254.0/255.0f green:254.0/255.0f blue:254.0/255.0f alpha:1];
+	//	_collectionView.backgroundColor = [UIColor colorWithRed:203/255.0f green:203/255.0f blue:203/255.0f alpha:1];
+	[_collectionView registerClass:[AAKToolbarCell class] forCellWithReuseIdentifier:@"AAKToolbarCell"];
+	[_collectionView registerClass:[AAKToolbarHistoryCell class] forCellWithReuseIdentifier:@"AAKToolbarHistoryCell"];
+	_collectionView.delegate = self;
+	_collectionView.dataSource = self;
+	
+	[self addSubview:_collectionView];
+}
+
+/**
+ * ツールバーボタンの大きさを調整するautolayoutを設定する．
+ **/
+- (void)setupAutolayout {
+	_collectionView.translatesAutoresizingMaskIntoConstraints = NO;
+	_earthKey.translatesAutoresizingMaskIntoConstraints = NO;
+	_deleteKey.translatesAutoresizingMaskIntoConstraints = NO;
+	
+	NSDictionary *views = NSDictionaryOfVariableBindings(_collectionView, _earthKey, _deleteKey);
+	
+	_earthKeyWidthConstraint = [NSLayoutConstraint constraintWithItem:_earthKey
+															attribute:NSLayoutAttributeWidth
+															relatedBy:NSLayoutRelationEqual
+															   toItem:nil
+															attribute:NSLayoutAttributeNotAnAttribute
+														   multiplier:1
+															 constant:_height];
+	[self addConstraint:_earthKeyWidthConstraint];
+	_deleteKeyWidthConstraint = [NSLayoutConstraint constraintWithItem:_deleteKey
+															 attribute:NSLayoutAttributeWidth
+															 relatedBy:NSLayoutRelationEqual
+																toItem:nil
+															 attribute:NSLayoutAttributeNotAnAttribute
+															multiplier:1
+															  constant:_height];
+	[self addConstraint:_deleteKeyWidthConstraint];
+	
+	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_earthKey]-0-[_collectionView(>=0)]-0-[_deleteKey]-(==0)-|"
+																 options:0 metrics:0 views:views]];
+	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_collectionView(>=0)]-(==0)-|"
+																 options:0 metrics:0 views:views]];
+	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_earthKey(>=0)]-(==0)-|"
+																 options:0 metrics:0 views:views]];
+	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_deleteKey(>=0)]-(==0)-|"
+																 options:0 metrics:0 views:views]];
 }
 
 #pragma mark - IBAction
@@ -139,63 +225,11 @@
 	self = [super initWithFrame:frame];
 	if (self) {
 		self.backgroundColor = [UIColor redColor];
-		
 		_height = 48;
 		_fontSize = 14;
-		
 		[self prepareButton];
-		
-		_collectionFlowLayout = [[UICollectionViewFlowLayout alloc] init];
-		_collectionFlowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-		_collectionFlowLayout.minimumLineSpacing = 0;
-		_collectionFlowLayout.minimumInteritemSpacing = 0;
-		
-		_collectionFlowLayout.sectionInset = UIEdgeInsetsZero;
-		_collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_collectionFlowLayout];
-		_collectionView.alwaysBounceHorizontal = YES;
-		_collectionView.showsHorizontalScrollIndicator = NO;
-		_collectionView.backgroundColor = [UIColor colorWithRed:254.0/255.0f green:254.0/255.0f blue:254.0/255.0f alpha:1];
-		//	_collectionView.backgroundColor = [UIColor colorWithRed:203/255.0f green:203/255.0f blue:203/255.0f alpha:1];
-		[_collectionView registerClass:[AAKToolbarCell class] forCellWithReuseIdentifier:@"AAKToolbarCell"];
-		[_collectionView registerClass:[AAKToolbarHistoryCell class] forCellWithReuseIdentifier:@"AAKToolbarHistoryCell"];
-		_collectionView.delegate = self;
-		_collectionView.dataSource = self;
-		
-		[self addSubview:_collectionView];
-		[self addSubview:_earthKey];
-		[self addSubview:_deleteKey];
-		
-		_collectionView.translatesAutoresizingMaskIntoConstraints = NO;
-		_earthKey.translatesAutoresizingMaskIntoConstraints = NO;
-		_deleteKey.translatesAutoresizingMaskIntoConstraints = NO;
-		
-		NSDictionary *views = NSDictionaryOfVariableBindings(_collectionView, _earthKey, _deleteKey);
-		
-		_earthKeyWidthConstraint = [NSLayoutConstraint constraintWithItem:_earthKey
-																attribute:NSLayoutAttributeWidth
-																relatedBy:NSLayoutRelationEqual
-																   toItem:nil
-																attribute:NSLayoutAttributeNotAnAttribute
-															   multiplier:1
-																 constant:_height];
-		[self addConstraint:_earthKeyWidthConstraint];
-		_deleteKeyWidthConstraint = [NSLayoutConstraint constraintWithItem:_deleteKey
-																 attribute:NSLayoutAttributeWidth
-																 relatedBy:NSLayoutRelationEqual
-																	toItem:nil
-																 attribute:NSLayoutAttributeNotAnAttribute
-																multiplier:1
-																  constant:_height];
-		[self addConstraint:_deleteKeyWidthConstraint];
-		
-		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_earthKey]-0-[_collectionView(>=0)]-0-[_deleteKey]-(==0)-|"
-																	 options:0 metrics:0 views:views]];
-		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_collectionView(>=0)]-(==0)-|"
-																	 options:0 metrics:0 views:views]];
-		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_earthKey(>=0)]-(==0)-|"
-																	 options:0 metrics:0 views:views]];
-		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_deleteKey(>=0)]-(==0)-|"
-																	 options:0 metrics:0 views:views]];
+		[self prepareCollectionView];
+		[self setupAutolayout];
 	}
 	return self;
 }

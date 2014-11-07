@@ -25,10 +25,7 @@
 
 @implementation AAKKeyboardView
 
-- (void)dealloc {
-	[[NSUserDefaults standardUserDefaults] setInteger:_currentGroup.key forKey:@"groupKey"];
-	[[NSUserDefaults standardUserDefaults] synchronize];
-}
+#pragma mark - Instance method
 
 /**
  * レイアウトをリロードして変更する．
@@ -137,6 +134,11 @@
 }
 
 #pragma mark - Override
+
+- (void)dealloc {
+	[[NSUserDefaults standardUserDefaults] setInteger:_currentGroup.key forKey:@"groupKey"];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+}
 
 - (instancetype)initWithFrame:(CGRect)frame {
 	self = [super initWithFrame:frame];
