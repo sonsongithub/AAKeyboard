@@ -13,7 +13,7 @@
 
 #import "AAKShared.h"
 
-@interface AAKToolbar() <UICollectionViewDataSource, UICollectionViewDelegate> {
+@interface AAKToolbar() <UICollectionViewDataSource, UICollectionViewDelegate, AAKToolbarCellDelegate> {
 	UICollectionView	*_collectionView;
 	UICollectionViewFlowLayout *_collectionFlowLayout;
 	NSArray				*_categories;
@@ -27,6 +27,22 @@
 @end
 
 @implementation AAKToolbar
+
+- (void)updateSelectedCell {
+	for (AAKToolbarCell *cell in [_collectionView visibleCells]) {
+		if (cell.group.key == _currentGroup.key) {
+			cell.label.textColor = [UIColor redColor];
+		}
+		else {
+			cell.label.textColor = [UIColor blackColor];
+		}
+	}
+}
+
+- (void)setCurrentGroup:(AAKASCIIArtGroup *)currentGroup {
+	_currentGroup = currentGroup;
+	[self updateSelectedCell];
+}
 
 - (IBAction)pushEarthKey:(id)sender {
 	[self.delegate toolbar:self didPushEarthButton:sender];
@@ -125,6 +141,15 @@
 	return self;
 }
 
+- (void)didSelectToolbarCell:(AAKToolbarCell *)cell {
+	
+	[self.delegate toolbar:self didSelectGroup:cell.group];
+	//	[collectionView deselectItemAtIndexPath:indexPath animated:YES];
+	//	AAKASCIIArtGroup *group = [_categories objectAtIndex:indexPath.item];
+	//	[self setCurrentGroup:group];
+	//	[self.delegate toolbar:self didSelectGroup:group];
+}
+
 - (void)layoutSubviews {
 //	NSLog(@"AAKToolbar layoutSubviews");
 	[super layoutSubviews];
@@ -187,7 +212,7 @@
 	_sizeOfCategories = [NSArray arrayWithArray:buf];
 }
 
-- (void)setCategories:(NSArray*)categories {
+- (void)setGroups:(NSArray*)categories {
 	_categories = [NSArray arrayWithArray:categories];
 	[self updateWithWidth:CGRectGetWidth(_collectionView.bounds)];
 	[_collectionView reloadData];
@@ -213,9 +238,10 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-	[collectionView deselectItemAtIndexPath:indexPath animated:YES];
-	AAKASCIIArtGroup *group = [_categories objectAtIndex:indexPath.item];
-	[self.delegate toolbar:self didSelectGroup:group];
+//	[collectionView deselectItemAtIndexPath:indexPath animated:YES];
+//	AAKASCIIArtGroup *group = [_categories objectAtIndex:indexPath.item];
+//	[self setCurrentGroup:group];
+//	[self.delegate toolbar:self didSelectGroup:group];
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -234,6 +260,7 @@
 	AAKToolbarCell *cell = nil;
 	AAKASCIIArtGroup *group = [_categories objectAtIndex:indexPath.item];
 	
+	
 	if (group.type == AAKASCIIArtHistoryGroup) {
 		cell = [cv dequeueReusableCellWithReuseIdentifier:@"AAKToolbarHistoryCell" forIndexPath:indexPath];
 	}
@@ -242,6 +269,9 @@
 		cell.label.text = group.title;
 		cell.label.font = [UIFont systemFontOfSize:_fontSize];
 	}
+	cell.group = group;
+	cell.delegate = self;
+	
 	cell.isHead = (indexPath.item == 0);
 	[cell.label sizeToFit];
 	//

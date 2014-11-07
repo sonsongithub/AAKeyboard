@@ -45,6 +45,33 @@
 	self.contentView.frame = bounds;
 }
 
+- (void)setOriginalHighlighted:(BOOL)highlighted {
+	[super setHighlighted:highlighted];
+	if (highlighted)
+		_label.textColor = [UIColor whiteColor];
+	else
+		_label.textColor = [UIColor blackColor];
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+	[self setOriginalHighlighted:YES];
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+	[self setOriginalHighlighted:NO];
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+	[self setOriginalHighlighted:NO];
+	[self.delegate didSelectToolbarCell:self];
+}
+
+- (void)setHighlighted:(BOOL)highlighted {
+}
+
+- (void)setSelected:(BOOL)selected {
+}
+
 - (void)updateConstraints {
 	[super updateConstraints];
 }
