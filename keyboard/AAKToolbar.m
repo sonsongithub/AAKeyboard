@@ -230,7 +230,7 @@
 - (void)didSelectToolbarCell:(AAKToolbarCell *)cell {
 	_currentGroup = cell.group;
 	[self updateSelectedCell];
-	[self.delegate toolbar:self didSelectGroup:cell.group];
+	[self.delegate didSelectGroupToolbar:self];
 }
 
 #pragma mark - Override

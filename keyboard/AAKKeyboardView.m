@@ -18,7 +18,6 @@
 	UICollectionView			*_collectionView;
 	UICollectionViewFlowLayout	*_collectionFlowLayout;
 	NSArray						*_asciiarts;
-//	NSArray						*_groups;
 }
 @end
 
@@ -87,7 +86,6 @@
 	[self addSubview:_collectionView];
 }
 
-
 /**
  * ツールバーとアスキーアートのキービューの大きさを調整するautolayoutを設定する．
  **/
@@ -113,14 +111,31 @@
 	[self addConstraint:_toolbarHeightConstraint];
 }
 
+/**
+ * アスキーアートオブジェクトの配列を現在選択中のグループに従ってアップデートする．
+ **/
 - (void)updateASCIIArtsForCurrentGroup {
 	_asciiarts = [_toolbar asciiArtsForCurrentGroup];
 }
 
-#pragma mark - Override
+#pragma mark - AAKToolbarDelegate
 
-- (void)dealloc {
+- (void)didSelectGroupToolbar:(AAKToolbar*)toolbar {
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		[self updateASCIIArtsForCurrentGroup];
+		[_collectionView reloadData];
+	});
 }
+
+- (void)toolbar:(AAKToolbar*)toolbar didPushEarthButton:(UIButton*)button {
+	[self.delegate keyboardViewDidPushEarthButton:self];
+}
+
+- (void)toolbar:(AAKToolbar*)toolbar didPushDeleteButton:(UIButton*)button {
+	[self.delegate keyboardViewDidPushDeleteButton:self];
+}
+
+#pragma mark - Override
 
 - (instancetype)initWithFrame:(CGRect)frame {
 	self = [super initWithFrame:frame];
@@ -138,7 +153,7 @@
 	return self;
 }
 
-#pragma mark - UICollectionViewDelegate
+#pragma mark - UICollectionViewDelegate, UICollectionViewDataSource
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 	DNSLogMethod
@@ -182,23 +197,6 @@
 	cell.textView.attributedString = string;
 	[cell.label sizeToFit];
 	return cell;
-}
-
-#pragma mark - AAKToolbarDelegate
-
-- (void)toolbar:(AAKToolbar*)toolbar didSelectGroup:(AAKASCIIArtGroup*)group {
-	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-		[self updateASCIIArtsForCurrentGroup];
-		[_collectionView reloadData];
-	});
-}
-
-- (void)toolbar:(AAKToolbar*)toolbar didPushEarthButton:(UIButton*)button {
-	[self.delegate keyboardViewDidPushEarthButton:self];
-}
-
-- (void)toolbar:(AAKToolbar*)toolbar didPushDeleteButton:(UIButton*)button {
-	[self.delegate keyboardViewDidPushDeleteButton:self];
 }
 
 @end

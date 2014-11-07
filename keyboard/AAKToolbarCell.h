@@ -13,6 +13,10 @@
 
 @protocol AAKToolbarCellDelegate <NSObject>
 
+/**
+ * AAKToolbarCellがタップされたときに呼ばれるデリゲートメソッド．
+ * @param cell タップされたAAKToolbarCellオブジェクト．
+ **/
 - (void)didSelectToolbarCell:(AAKToolbarCell*)cell;
 
 @end
