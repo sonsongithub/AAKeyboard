@@ -8,9 +8,6 @@
 
 #import "AAKAAGroupForCollection.h"
 
-@class AAKASCIIArtGroup;
-@class AAKASCIIArt;
-
 @implementation AAKAAGroupForCollection
 
 + (instancetype)groupForCollectionWithGroup:(AAKASCIIArtGroup*)group asciiarts:(NSArray*)array {

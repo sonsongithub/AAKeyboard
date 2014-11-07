@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class AAKASCIIArtGroup;
+@class AAKASCIIArt;
 
 @interface AAKAAGroupForCollection : NSObject
 

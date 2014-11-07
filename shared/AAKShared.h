@@ -19,6 +19,7 @@
 // Model
 #import "AAKASCIIArt.h"
 #import "AAKASCIIArtGroup.h"
+#import "AAKAAGroupForCollection.h"
 
 // Databse
 #import "AAKKeyboardDataManager.h"

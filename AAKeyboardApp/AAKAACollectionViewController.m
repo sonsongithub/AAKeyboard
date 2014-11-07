@@ -16,7 +16,6 @@
 #import "AAKAAEditAnimatedTransitioning.h"
 #import "AAKAACollectionViewCell.h"
 #import "AAKPreviewController.h"
-#import "AAKAAGroupForCollection.h"
 
 @interface AAKAACollectionViewController () <AAKAACollectionViewCellDelegate, UIViewControllerTransitioningDelegate> {
 	NSArray *_groups;
