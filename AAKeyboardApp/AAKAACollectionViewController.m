@@ -127,30 +127,24 @@ static NSString * const reuseIdentifier = @"Cell";
 	[self.collectionView reloadData];
 }
 
+#pragma mark - Override
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
+	// Notification
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForegroundNotification:) name:UIApplicationWillEnterForegroundNotification object:nil];
-	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didUpdateDatabase:) name:AAKKeyboardDataManagerDidUpdateNotification object:nil];
-  
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Register cell classes
+	
+    // Register cell classes to collection view
 	UINib *cellNib = [UINib nibWithNibName:@"AAKAACollectionViewCell" bundle:nil];
 	[self.collectionView registerNib:cellNib forCellWithReuseIdentifier:@"cvCell"];
+	
 	UINib *nib = [UINib nibWithNibName:@"AAKAASupplementaryView" bundle:nil];
-	[self.collectionView registerNib:nib
-		  forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-				 withReuseIdentifier:@"AAKAASupplementaryView"];
-//    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
+	[self.collectionView registerNib:nib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"AAKAASupplementaryView"];
 	
-    // Do any additional setup after loading the view.
 	_group = [[AAKKeyboardDataManager defaultManager] groups];
-	
 	NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[_group count]];
-	
 	for (AAKASCIIArtGroup *group in _group) {
 		NSArray *data = [[AAKKeyboardDataManager defaultManager] asciiArtForGroup:group];
 		[buf addObject:data];
@@ -158,12 +152,25 @@ static NSString * const reuseIdentifier = @"Cell";
 	_AAGroups = [NSArray arrayWithArray:buf];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - UIViewControllerTransitionDelegate
+
+- (UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented
+													  presentingViewController:(UIViewController *)presenting
+														  sourceViewController:(UIViewController *)source {
+	return [[AAKAAEditPresentationController alloc] initWithPresentedViewController:presented presentingViewController:presenting];
 }
 
-#pragma mark <UICollectionViewDataSource>
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
+																  presentingController:(UIViewController *)presenting
+																	  sourceController:(UIViewController *)source {
+	return [[AAKAAEditAnimatedTransitioning alloc] initWithPresentFlag:NO];
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+	return [[AAKAAEditAnimatedTransitioning alloc] initWithPresentFlag:YES];
+}
+
+#pragma mark - UICollectionViewDelegate, UICollectionViewDataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
 	return [_AAGroups count];
@@ -220,9 +227,7 @@ static NSString * const reuseIdentifier = @"Cell";
 	return 0;
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView
-				  layout:(UICollectionViewLayout *)collectionViewLayout
-referenceSizeForHeaderInSection:(NSInteger)section {
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
 	return CGSizeMake(320, 44);
 }
 
@@ -232,23 +237,6 @@ referenceSizeForHeaderInSection:(NSInteger)section {
 	CGFloat width = self.collectionView.frame.size.width / 2;
 	CGFloat height = width;
 	return CGSizeMake(width, height);
-}
-
-- (UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented
-													  presentingViewController:(UIViewController *)presenting
-														  sourceViewController:(UIViewController *)source {
-	return [[AAKAAEditPresentationController alloc] initWithPresentedViewController:presented presentingViewController:presenting];
-}
-
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
-																  presentingController:(UIViewController *)presenting
-																	  sourceController:(UIViewController *)source {
-	return [[AAKAAEditAnimatedTransitioning alloc] initWithPresentFlag:NO];
-	return nil;
-}
-
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-	return [[AAKAAEditAnimatedTransitioning alloc] initWithPresentFlag:YES];
 }
 
 @end

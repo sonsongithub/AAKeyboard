@@ -17,12 +17,44 @@
 
 @implementation AAKPreviewController
 
+#pragma mark - IBAction
+
+- (IBAction)close:(id)sender {
+	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - Instance method
+
+/**
+ * テキストビューに再度AAを突っ込みコンテンツを最新のものに更新する．
+ **/
+- (void)updateTextView {
+	CGFloat fontSize = 15;
+	NSParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyleWithFontSize:fontSize];
+	NSDictionary *attributes = @{NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:[UIFont fontWithName:@"Mona" size:fontSize]};
+	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:_asciiart.text attributes:attributes];
+	_textView.attributedString = string;
+}
+
+/**
+ * データが更新された通知を受け取って実行する．
+ * @param notification 通知オブジェクト．
+ **/
+- (void)keyboardDataManagerDidUpdateNotification:(NSNotification*)notification {
+	[self updateTextView];
+}
+
+#pragma mark - Override
+
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)close:(id)sender {
-	[self dismissViewControllerAnimated:YES completion:nil];
+- (void)viewDidLoad {
+	[super viewDidLoad];
+	_textView.userInteractionEnabled = NO;
+	[self updateTextView];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDataManagerDidUpdateNotification:) name:AAKKeyboardDataManagerDidUpdateNotification object:nil];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -31,38 +63,6 @@
 		AAKEditViewController *vc = (AAKEditViewController*)nav.topViewController;
 		vc.asciiart = self.asciiart;
 	}
-}
-
-- (void)keyboardDataManagerDidUpdateNotification:(NSNotification*)notification {
-	
-	
-	CGFloat fontSize = 15;
-	
-	NSParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyleWithFontSize:fontSize];
-	NSDictionary *attributes = @{NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:[UIFont fontWithName:@"Mona" size:fontSize]};
-	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:_asciiart.text attributes:attributes];
-	
-	_textView.attributedString = string;
-	_textView.userInteractionEnabled = NO;
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-	
-	CGFloat fontSize = 15;
-	NSParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyleWithFontSize:fontSize];
-	NSDictionary *attributes = @{NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:[UIFont fontWithName:@"Mona" size:fontSize]};
-	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:_asciiart.text attributes:attributes];
-	
-	_textView.attributedString = string;
-	_textView.userInteractionEnabled = NO;
-	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDataManagerDidUpdateNotification:) name:AAKKeyboardDataManagerDidUpdateNotification object:nil];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end
