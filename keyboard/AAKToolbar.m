@@ -30,6 +30,27 @@
 #pragma mark - Instance method
 
 /**
+ * 現在，選択中のグループのアスキーアートオブジェクトの配列を返す．
+ * @return AAKASCIIArtオブジェクトを含むNSArray，
+ **/
+- (NSArray*)asciiArtsForCurrentGroup {
+	return [[AAKKeyboardDataManager defaultManager] asciiArtForGroup:_currentGroup];
+}
+
+/**
+ * 指定されたキーを持つAAKASCIIArtGroupオブジェクトを_groupsの中から返す．
+ * 指定されたキーを持つオブジェクトが存在しない場合は，先頭のオブジェクトを返す．
+ * @return AAKASCIIArtオブジェクトを含むNSArray，
+ **/
+- (AAKASCIIArtGroup*)groupForGroupKey:(NSInteger)key {
+	for (AAKASCIIArtGroup *group in _groups) {
+		if (group.key == key)
+			return group;
+	}
+	return _groups[0];
+}
+
+/**
  * ツールバーの選択状態になっているセルを更新する．
  * reloadDataだと色々問題が発生するため．
  **/
@@ -217,18 +238,6 @@
 - (void)dealloc {
 	[[NSUserDefaults standardUserDefaults] setInteger:_currentGroup.key forKey:@"groupKey"];
 	[[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-- (NSArray*)asciiArtsForCurrentGroup {
-	return [[AAKKeyboardDataManager defaultManager] asciiArtForGroup:_currentGroup];
-}
-
-- (AAKASCIIArtGroup*)groupForGroupKey:(NSInteger)key {
-	for (AAKASCIIArtGroup *group in _groups) {
-		if (group.key == key)
-			return group;
-	}
-	return [AAKASCIIArtGroup defaultGroup];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
