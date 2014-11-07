@@ -9,18 +9,17 @@
 #import "AAKKeyboardView.h"
 #import "AAKToolbar.h"
 #import "AAKContentCell.h"
-#import "AAKContentFlowLayout.h"
 
 #import "AAKShared.h"
 
 @interface AAKKeyboardView() <UICollectionViewDataSource, UICollectionViewDelegate, AAKToolbarDelegate> {
-	AAKToolbar				*_toolbar;
-	NSLayoutConstraint		*_toolbarHeightConstraint;
-	UICollectionView		*_collectionView;
-	AAKContentFlowLayout	*_collectionFlowLayout;
-	NSArray					*_asciiarts;
-	AAKASCIIArtGroup		*_currentGroup;
-	NSArray					*_groups;
+	AAKToolbar					*_toolbar;
+	NSLayoutConstraint			*_toolbarHeightConstraint;
+	UICollectionView			*_collectionView;
+	UICollectionViewFlowLayout	*_collectionFlowLayout;
+	NSArray						*_asciiarts;
+	AAKASCIIArtGroup			*_currentGroup;
+	NSArray						*_groups;
 }
 @end
 
@@ -73,7 +72,7 @@
  **/
 - (void)prepareCollectionView {
 	// collection flow layoutを設定
-	_collectionFlowLayout = [[AAKContentFlowLayout alloc] init];
+	_collectionFlowLayout = [[UICollectionViewFlowLayout alloc] init];
 	_collectionFlowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
 	_collectionFlowLayout.minimumLineSpacing = 0;
 	_collectionFlowLayout.minimumInteritemSpacing = 0;
