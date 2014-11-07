@@ -13,11 +13,13 @@
 
 @interface AAKRegisterActionViewController ()
 
-@property (nonatomic, strong) NSString *jsString;
+@property (nonatomic, strong) NSString *buffer;	/** Javascriptで選択中テキストをこのプロパティにコピーする． */
 
 @end
 
 @implementation AAKRegisterActionViewController
+
+#pragma mark - IBAction
 
 /**
  * キャンセルボタンを押したときのイベント処理．
@@ -38,14 +40,16 @@
 	[self.extensionContext completeRequestReturningItems:nil completionHandler:nil];
 }
 
+#pragma mark - Instance method
+
 /**
  * Safariのビューで選択されているテキストをUIに反映する．
  * @param sender メッセージの送信元オブジェクト．
  **/
 - (void)update {
 	dispatch_async(dispatch_get_main_queue(), ^{
-		if ([self.jsString length] > 0) {
-			self.AATextView.text = self.jsString;
+		if ([self.buffer length] > 0) {
+			self.AATextView.text = self.buffer;
 		}
 		else {
 			UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Error", nil)
@@ -80,7 +84,7 @@
 										  if (item != nil) {
 											  
 											  NSDictionary *resultDict = (NSDictionary *) item;
-											  sself.jsString = resultDict[NSExtensionJavaScriptPreprocessingResultsKey][@"content"];
+											  sself.buffer = resultDict[NSExtensionJavaScriptPreprocessingResultsKey][@"content"];
 											  [sself update];
 										  }
 										  
