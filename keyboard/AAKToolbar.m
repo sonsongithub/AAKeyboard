@@ -16,11 +16,10 @@
 @interface AAKToolbar() <UICollectionViewDataSource, UICollectionViewDelegate, AAKToolbarCellDelegate> {
 	UICollectionView			*_collectionView;
 	UICollectionViewFlowLayout	*_collectionFlowLayout;
-	NSArray						*_categories;
 	NSArray						*_sizeOfCategories;
 	UIButton					*_earthKey;
 	UIButton					*_deleteKey;
-	
+	NSArray						*_groups;
 	NSLayoutConstraint			*_earthKeyWidthConstraint;
 	NSLayoutConstraint			*_deleteKeyWidthConstraint;
 }
@@ -82,9 +81,9 @@
 	
 	// まず，普通にすべてのグループについて幅を計算する．
 	NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:_fontSize]};
-	NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[_categories count]];
+	NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[_groups count]];
 	CGFloat sumation = 0;
-	for (AAKASCIIArtGroup *group in _categories) {
+	for (AAKASCIIArtGroup *group in _groups) {
 		CGSize s = [group.title sizeWithAttributes:attributes];
 		s.width = floor(s.width) + 20;
 		sumation += s.width;
@@ -200,12 +199,6 @@
 
 #pragma mark - Setter
 
-- (void)setGroups:(NSArray*)categories {
-	_categories = [NSArray arrayWithArray:categories];
-	[self updateWithWidth:CGRectGetWidth(_collectionView.bounds)];
-	[_collectionView reloadData];
-}
-
 - (void)setCurrentGroup:(AAKASCIIArtGroup *)currentGroup {
 	_currentGroup = currentGroup;
 	[self updateSelectedCell];
@@ -221,9 +214,32 @@
 
 #pragma mark - Override
 
+- (void)dealloc {
+	[[NSUserDefaults standardUserDefaults] setInteger:_currentGroup.key forKey:@"groupKey"];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSArray*)asciiArtsForCurrentGroup {
+	return [[AAKKeyboardDataManager defaultManager] asciiArtForGroup:_currentGroup];
+}
+
+- (AAKASCIIArtGroup*)groupForGroupKey:(NSInteger)key {
+	for (AAKASCIIArtGroup *group in _groups) {
+		if (group.key == key)
+			return group;
+	}
+	return [AAKASCIIArtGroup defaultGroup];
+}
+
 - (instancetype)initWithFrame:(CGRect)frame {
 	self = [super initWithFrame:frame];
 	if (self) {
+		
+		_groups = [[AAKKeyboardDataManager defaultManager] groups];
+		
+		NSInteger groupKey = [[NSUserDefaults standardUserDefaults] integerForKey:@"groupKey"];
+		_currentGroup = [self groupForGroupKey:groupKey];
+		
 		self.backgroundColor = [UIColor redColor];
 		_height = 48;
 		_fontSize = 14;
@@ -265,12 +281,12 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
-	return [_categories count];
+	return [_groups count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
 	AAKToolbarCell *cell = nil;
-	AAKASCIIArtGroup *group = [_categories objectAtIndex:indexPath.item];
+	AAKASCIIArtGroup *group = [_groups objectAtIndex:indexPath.item];
 	
 	if (group.type == AAKASCIIArtHistoryGroup) {
 		cell = [cv dequeueReusableCellWithReuseIdentifier:@"AAKToolbarHistoryCell" forIndexPath:indexPath];

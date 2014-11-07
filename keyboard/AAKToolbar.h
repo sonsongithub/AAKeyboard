@@ -23,7 +23,7 @@
 @property (nonatomic, assign) id <AAKToolbarDelegate> delegate;
 @property (nonatomic, assign) CGFloat height;
 @property (nonatomic, assign) CGFloat fontSize;
-@property (nonatomic, strong) AAKASCIIArtGroup *currentGroup;
-- (void)setGroups:(NSArray*)groups;
+@property (nonatomic, readonly) AAKASCIIArtGroup *currentGroup;
+- (NSArray*)asciiArtsForCurrentGroup;
 - (void)layout;
 @end

@@ -18,8 +18,7 @@
 	UICollectionView			*_collectionView;
 	UICollectionViewFlowLayout	*_collectionFlowLayout;
 	NSArray						*_asciiarts;
-	AAKASCIIArtGroup			*_currentGroup;
-	NSArray						*_groups;
+//	NSArray						*_groups;
 }
 @end
 
@@ -114,30 +113,13 @@
 	[self addConstraint:_toolbarHeightConstraint];
 }
 
-- (AAKASCIIArtGroup*)groupForGroupKey:(NSInteger)key {
-	for (AAKASCIIArtGroup *group in _groups) {
-		if (group.key == key)
-			return group;
-	}
-	return [AAKASCIIArtGroup defaultGroup];
-}
-
 - (void)updateASCIIArtsForCurrentGroup {
-	for (AAKASCIIArtGroup *group in _groups) {
-		if (_currentGroup.key == group.key) {
-			_asciiarts = [[AAKKeyboardDataManager defaultManager] asciiArtForGroup:group];
-			return;
-		}
-	}
-	_currentGroup = [AAKASCIIArtGroup defaultGroup];
-	_asciiarts = [[AAKKeyboardDataManager defaultManager] asciiArtForGroup:_currentGroup];
+	_asciiarts = [_toolbar asciiArtsForCurrentGroup];
 }
 
 #pragma mark - Override
 
 - (void)dealloc {
-	[[NSUserDefaults standardUserDefaults] setInteger:_currentGroup.key forKey:@"groupKey"];
-	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -149,17 +131,7 @@
 		
 		[self setupAutolayout];
 		
-		_groups = [[AAKKeyboardDataManager defaultManager] groups];
-		NSMutableArray *array = [NSMutableArray arrayWithArray:@[[AAKASCIIArtGroup historyGroup]]];
-		[array addObjectsFromArray:_groups];
-		[_toolbar setGroups:array];
-		
-		NSInteger groupKey = [[NSUserDefaults standardUserDefaults] integerForKey:@"groupKey"];
-		_currentGroup = [self groupForGroupKey:groupKey];
-		
 		[self updateASCIIArtsForCurrentGroup];
-		
-		[_toolbar setCurrentGroup:_currentGroup];
 		
 		[self updateConstraints];
 	}
@@ -216,7 +188,6 @@
 
 - (void)toolbar:(AAKToolbar*)toolbar didSelectGroup:(AAKASCIIArtGroup*)group {
 	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-		_currentGroup = group;
 		[self updateASCIIArtsForCurrentGroup];
 		[_collectionView reloadData];
 	});

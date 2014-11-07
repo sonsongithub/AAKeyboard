@@ -76,6 +76,8 @@
 	
 	NSMutableArray *groups = [NSMutableArray array];
 	
+	[groups addObject:[AAKASCIIArtGroup historyGroup]];
+	
 	if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
 		DNSLog( @"Error: failed to prepare statement with message '%s'.", sqlite3_errmsg(_database));
 	}
