@@ -87,11 +87,11 @@
             <size key="customSize" width="258" height="168"/>
             <connections>
                 <outlet property="debugLabel" destination="NZV-py-HwM" id="3Tz-j4-Lo0"/>
+                <outlet property="deleteButtonOnCell" destination="KaA-GP-Q6B" id="XdA-jI-JES"/>
+                <outlet property="deleteButtonOnCellWidth" destination="J9F-ZR-EHp" id="Fcm-Ye-DiG"/>
+                <outlet property="duplicateButtonOnCell" destination="4pi-Go-DNg" id="HbY-g2-y50"/>
+                <outlet property="duplicateButtonOnCellWidth" destination="6xg-bJ-p0Q" id="0W4-R4-VbT"/>
                 <outlet property="leftMargin" destination="c0S-U8-lMC" id="7fe-eK-ZIh"/>
-                <outlet property="myCopyButton" destination="4pi-Go-DNg" id="caD-IC-MTb"/>
-                <outlet property="myCopyButtonWidth" destination="6xg-bJ-p0Q" id="hsb-O6-fgV"/>
-                <outlet property="myDeleteButton" destination="KaA-GP-Q6B" id="r5h-qA-Fki"/>
-                <outlet property="myDeleteButtonWidth" destination="J9F-ZR-EHp" id="pcL-hr-j41"/>
                 <outlet property="rightMargin" destination="Hwc-xS-Pr7" id="cPa-qd-5Ob"/>
                 <outlet property="textBackView" destination="EoT-Pl-yAU" id="Jgd-0X-Kyi"/>
                 <outlet property="textView" destination="0UO-vQ-n0s" id="LRh-T0-HUI"/>

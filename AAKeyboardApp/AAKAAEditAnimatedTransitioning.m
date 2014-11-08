@@ -15,12 +15,19 @@
 #import "AAKPreviewController.h"
 
 @interface AAKAAEditAnimatedTransitioning() {
-	BOOL _isPresent;
+	BOOL _isPresent;	/** 表示中であるかのフラグ．このフラグがYESのときは，すでに表示中を意味する． */
 }
 @end
 
 @implementation AAKAAEditAnimatedTransitioning
 
+/**
+ * AAKAAEditAnimatedTransitioningオブジェクトを初期化する．
+ * 表示中であるかのフラグ．このフラグがYESのときは，すでに表示中を意味する．
+ * 表示する時も，破棄する時もこのクラスを使う．
+ * @param presentFlag 表示中であるかのフラグ
+ * @return 初期化されたAAKAAEditAnimatedTransitioningオブジェクト．
+ **/
 - (instancetype)initWithPresentFlag:(BOOL)presentFlag {
 	self = [super init];
 	if (self) {
@@ -29,66 +36,108 @@
 	return self;
 }
 
+/**
+ * プレビューコントローラ上のtextviewでレンダリングされるAAの実サイズを取得する．
+ * このサイズは，セルとプレビュー間の拡大縮小アニメーションに使う．
+ * @param transitionContext トランジションのコンテキストオブジェクト．
+ * @param previewController プレビューコントローラ．このビューコントローラがもつAAKASCIIArtオブジェクトからアスキーアートのアスペクト比を取得する．
+ * @return プレビューコントローラ上のtextviewでレンダリングされるAAのサイズ．
+ **/
 - (CGSize)AASizeForPreviewControllerWithTransition:(id<UIViewControllerContextTransitioning>)transitionContext
-								 previewController:(AAKPreviewController*)previewController
-						  collectionViewController:(AAKAACollectionViewController*)collectionViewController {
-	
-	AAKAACollectionViewCell *cell = [collectionViewController cellForAsciiArt:previewController.asciiart];
-	
+								 previewController:(AAKPreviewController*)previewController {
+	// 画面全体のフレームを取得する．
 	CGRect containerViewFrame = [transitionContext containerView].frame;
+
+	// aspect ratio
+	// コンテナビューとプレビューコントローラのサイズが同じなのでこれでよい
+	CGFloat containerViewRatio = containerViewFrame.size.width / containerViewFrame.size.height;
+	CGFloat asciiartRatio = previewController.asciiart.ratio;
 	
-	{
-		CGFloat a = containerViewFrame.size.width / containerViewFrame.size.height;
-		CGFloat b = cell.asciiart.ratio;
-		if (a >= b) {
-			float w = containerViewFrame.size.height * b;
-			float h = containerViewFrame.size.height;
-			return CGSizeMake(w, h);
-		}
-		else {
-			float w = containerViewFrame.size.width;
-			float h = containerViewFrame.size.width / b;
-			return CGSizeMake(w, h);
-		}
+	if (containerViewRatio >= asciiartRatio) {
+		float w = containerViewFrame.size.height * asciiartRatio;
+		float h = containerViewFrame.size.height;
+		return CGSizeMake(w, h);
+	}
+	else {
+		float w = containerViewFrame.size.width;
+		float h = containerViewFrame.size.width / asciiartRatio;
+		return CGSizeMake(w, h);
 	}
 }
 
+/**
+ * コレクションコントローラ上のセルのtextviewでレンダリングされるAAの実サイズを取得する．
+ * セルは，指定したプレビューコントローラと同じアスキーアートをもつものが選ばれる．
+ * このサイズは，セルとプレビュー間の拡大縮小アニメーションに使う．
+ * @param transitionContext トランジションのコンテキストオブジェクト．
+ * @param previewController プレビューコントローラ．このビューコントローラがもつAAKASCIIArtオブジェクトからアスキーアートのアスペクト比を取得する．
+ * @param collectionViewController コレクションビューコントローラ．このビューコントローラがもつcollectionビューコントローラから，プレビューコントローラのアスキーアートと同じアスキーアートをもつセルを取得する．
+ * @return コレクションコントローラ上のセルのtextviewでレンダリングされるAAのサイズ．
+ **/
 - (CGSize)AASizeForAACollectionViewControllerWithTransition:(id<UIViewControllerContextTransitioning>)transitionContext
 										  previewController:(AAKPreviewController*)previewController
 								   collectionViewController:(AAKAACollectionViewController*)collectionViewController {
 	
 	AAKAACollectionViewCell *cell = [collectionViewController cellForAsciiArt:previewController.asciiart];
 	
-	{
-		CGFloat a = cell.textView.frame.size.width / cell.textView.frame.size.height;
-		CGFloat b = cell.asciiart.ratio;
-		if (a >= b) {
-			float w = cell.textView.frame.size.height * b;
-			float h = cell.textView.frame.size.height;
-			return CGSizeMake(w, h);
-		}
-		else {
-			float w = cell.textView.frame.size.width;
-			float h = cell.textView.frame.size.width / b;
-			return CGSizeMake(w, h);
-		}
+	// aspect ratio
+	// コンテナビューとプレビューコントローラのサイズが同じなのでこれでよい
+	CGFloat textViewOnCellRatio = cell.textView.frame.size.width / cell.textView.frame.size.height;
+	CGFloat asciiartRatio = previewController.asciiart.ratio;
+	
+	if (textViewOnCellRatio >= asciiartRatio) {
+		float w = cell.textView.frame.size.height * asciiartRatio;
+		float h = cell.textView.frame.size.height;
+		return CGSizeMake(w, h);
+	}
+	else {
+		float w = cell.textView.frame.size.width;
+		float h = cell.textView.frame.size.width / asciiartRatio;
+		return CGSizeMake(w, h);
 	}
 }
 
-- (void)animationPresentTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
-	UIViewController *fromController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-	UIViewController *toController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+/**
+ * ナビゲーションコントローラのトップビューからAAKAACollectionViewControllerを抽出する．
+ * 引数のviewControllerがナビゲーションコントローラではない場合，AAKAACollectionViewControllerが見つからない場合はnilを返す．
+ * @param viewController ビューコントローラ．
+ * @return 抽出したAAKAACollectionViewControllerビューコントローラ．
+ **/
+- (AAKAACollectionViewController*)collectionViewControllerFromViewController:(UIViewController*)viewController {
 	AAKAACollectionViewController *collectionViewController = nil;
-	AAKPreviewController *previewController = nil;
-	if ([fromController isKindOfClass:[UINavigationController class]]) {
-		UINavigationController *nav = (UINavigationController*)fromController;
+	if ([viewController isKindOfClass:[UINavigationController class]]) {
+		UINavigationController *nav = (UINavigationController*)viewController;
 		if ([nav.topViewController isKindOfClass:[AAKAACollectionViewController class]]) {
 			collectionViewController = (AAKAACollectionViewController*)nav.topViewController;
 		}
 	}
-	if ([toController isKindOfClass:[AAKPreviewController class]]) {
-		previewController = (AAKPreviewController*)toController;
+	return collectionViewController;
+}
+
+/**
+ * ビューコントローラをAAKPreviewControllerとして返す．
+ * ビューコントローラがAAKPreviewControllerクラスでない場合，nilを返す．
+ * @param viewController ビューコントローラ．
+ * @return 抽出したAAKPreviewControllerビューコントローラ．
+ **/
+- (AAKPreviewController*)previewViewControllerFromViewController:(UIViewController*)viewController {
+	AAKPreviewController *previewController = nil;
+	if ([viewController isKindOfClass:[AAKPreviewController class]]) {
+		previewController = (AAKPreviewController*)viewController;
 	}
+	return previewController;
+}
+
+/**
+ * 表示トランジションを実行する．
+ * @param transitionContext トランジションのコンテキストオブジェクト．
+ **/
+- (void)animationPresentTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
+	UIViewController *fromController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+	UIViewController *toController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+
+	AAKAACollectionViewController *collectionViewController = [self collectionViewControllerFromViewController:fromController];
+	AAKPreviewController *previewController = [self previewViewControllerFromViewController:toController];
 	
 	// for error case
 	if (previewController == nil || collectionViewController == nil) {
@@ -103,8 +152,7 @@
 																   previewController:previewController
 															collectionViewController:collectionViewController];
 	CGSize toContentSize = [self AASizeForPreviewControllerWithTransition:transitionContext
-														previewController:previewController
-												 collectionViewController:collectionViewController];
+														previewController:previewController];
 	float scale = toContentSize.width / fromContentSize.width;
 	
 	
@@ -132,29 +180,24 @@
 						 previewController.view.alpha = 1.0;
 					 } completion:^(BOOL finished) {
 						 previewController.view.alpha = 1.0;
-						 DNSLogRect(textView.frame);
 						 [textView removeFromSuperview];
 						 [transitionContext completeTransition:YES];
 						 previewController.textView.hidden = NO;
 					 }];
 }
 
+/**
+ * 破棄トランジションを実行する．
+ * @param transitionContext トランジションのコンテキストオブジェクト．
+ **/
 - (void)animationDismissTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
 	UIViewController *fromController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
 	UIViewController *toController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+
+	AAKAACollectionViewController *collectionViewController = [self collectionViewControllerFromViewController:toController];
+	AAKPreviewController *previewController = [self previewViewControllerFromViewController:fromController];
 	
-	AAKAACollectionViewController *collectionViewController = nil;
-	AAKPreviewController *previewController = nil;
-	if ([fromController isKindOfClass:[AAKPreviewController class]]) {
-		previewController = (AAKPreviewController*)fromController;
-	}
-	if ([toController isKindOfClass:[UINavigationController class]]) {
-		UINavigationController *nav = (UINavigationController*)toController;
-		if ([nav.topViewController isKindOfClass:[AAKAACollectionViewController class]]) {
-			collectionViewController = (AAKAACollectionViewController*)nav.topViewController;
-		}
-	}
-	
+	// for error case
 	if (previewController == nil || collectionViewController == nil) {
 		[transitionContext completeTransition:YES];
 		return;
@@ -166,8 +209,7 @@
 																   previewController:previewController
 															collectionViewController:collectionViewController];
 	CGSize fromContentSize = [self AASizeForPreviewControllerWithTransition:transitionContext
-														previewController:previewController
-												 collectionViewController:collectionViewController];
+														previewController:previewController];
 	float scale = fromContentSize.width / toContentSize.width;
 	
 	cell.hidden = YES;
@@ -195,7 +237,10 @@
 					 }];
 }
 
+#pragma mark - Override
+
 - (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
+	// 表示か，破棄は，フラグで判定する．
 	if (_isPresent) {
 		[self animationDismissTransition:transitionContext];
 	}

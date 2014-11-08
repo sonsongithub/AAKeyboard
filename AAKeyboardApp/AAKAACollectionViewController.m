@@ -18,7 +18,7 @@
 #import "AAKPreviewController.h"
 
 @interface AAKAACollectionViewController () <AAKAACollectionViewCellDelegate, UIViewControllerTransitioningDelegate> {
-	NSArray *_groups;
+	NSArray *_groups;	/** AAKAAGroupForCollectionオブジェクトの配列 */
 }
 @end
 
@@ -26,15 +26,23 @@
 
 static NSString * const reuseIdentifier = @"Cell";
 
+/**
+ * 指定されたアスキーアートを含むセルを返す．
+ * 見つからない場合は，nilを返す．
+ * @param asciiart アスキーアートオブジェクト．
+ * @return アスキーアートオブジェクトを保持するAAKAACollectionViewCellインスタンスを返す．
+ **/
 - (id)cellForAsciiArt:(AAKASCIIArt*)asciiart {
-	NSArray *visibleCells = [self.collectionView visibleCells];
-	for (AAKAACollectionViewCell* cell in visibleCells) {
-		if (cell.asciiart.key == asciiart.key)
-			return cell;
-	}
-	return nil;
+	NSIndexPath *indexPath = [self indexPathForAsciiArt:asciiart];
+	return [self.collectionView cellForItemAtIndexPath:indexPath];
 }
 
+/**
+ * 指定されたアスキーアートを含むセルのパスを返す．
+ * 見つからない場合は，nilを返す．
+ * @param asciiart アスキーアートオブジェクト．
+ * @return アスキーアートオブジェクトを保持するAAKAACollectionViewCellが持つはずであるNSIndexPathオブジェクト．
+ **/
 - (NSIndexPath*)indexPathForAsciiArt:(AAKASCIIArt*)asciiart {
 	for (int i = 0; i < [_groups count]; i++) {
 		AAKAAGroupForCollection *collection = _groups[i];
@@ -47,11 +55,12 @@ static NSString * const reuseIdentifier = @"Cell";
 	return nil;
 }
 
+/**
+ * AAKAAGroupForCollectionオブジェクトの配列ですべてのアスキーアートを列挙し，_groupsに保存する．
+ **/
 - (void)updateCollections {
 	NSArray *temp = [[AAKKeyboardDataManager defaultManager] groupsWithoutHistory];
-	
 	NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[temp count]];
-	
 	for (AAKASCIIArtGroup *group in temp) {
 		NSArray *asciiarts = [[AAKKeyboardDataManager defaultManager] asciiArtForGroup:group];
 		AAKAAGroupForCollection *collection = [AAKAAGroupForCollection groupForCollectionWithGroup:group asciiarts:asciiarts];
@@ -62,12 +71,21 @@ static NSString * const reuseIdentifier = @"Cell";
 
 #pragma mark - Notification
 
+/**
+ * データベースが更新されるタイミングでビューを再ロードする．
+ * @param notifiation 通知オブジェクト．
+ **/
 - (void)didUpdateDatabaseNotification:(NSNotification*)notification {
 	[self updateCollections];
 	[self.collectionView reloadData];
 	
 }
 
+/**
+ * アプリケーションがフォアグラウンドに来る直前に来る通知．
+ * このタイミングでビューを再ロードする．
+ * @param notifiation 通知オブジェクト．
+ **/
 - (void)applicationWillEnterForegroundNotification:(NSNotification*)notification {
 	[self updateCollections];
 	[self.collectionView reloadData];
@@ -82,10 +100,9 @@ static NSString * const reuseIdentifier = @"Cell";
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForegroundNotification:) name:UIApplicationWillEnterForegroundNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didUpdateDatabaseNotification:) name:AAKKeyboardDataManagerDidUpdateNotification object:nil];
 	
-    // Register cell classes to collection view
+    // Register cell and supplemental classes to collection view
 	UINib *cellNib = [UINib nibWithNibName:@"AAKAACollectionViewCell" bundle:nil];
 	[self.collectionView registerNib:cellNib forCellWithReuseIdentifier:@"cvCell"];
-	
 	UINib *nib = [UINib nibWithNibName:@"AAKAASupplementaryView" bundle:nil];
 	[self.collectionView registerNib:nib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"AAKAASupplementaryView"];
 	
@@ -112,8 +129,12 @@ static NSString * const reuseIdentifier = @"Cell";
 
 #pragma mark - AAKAACollectionViewCellDelegate
 
+/**
+ * セルを選択したときに呼び出されるメソッド．
+ * セルをタップした後はプレビューを拡大する．
+ * @param cell メソッドをコールしたAAKAACollectionViewCellオブジェクト．
+ **/
 - (void)didSelectCell:(AAKAACollectionViewCell*)cell {
-	NSLog(@"%p", cell);
 	AAKPreviewController *con = (AAKPreviewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"AAKPreviewController"];
 	con.asciiart = cell.asciiart;
 	con.modalPresentationStyle = UIModalPresentationCustom;
@@ -122,7 +143,11 @@ static NSString * const reuseIdentifier = @"Cell";
 	[self presentViewController:con animated:YES completion:nil];
 }
 
-- (void)didPushCopyCell:(AAKAACollectionViewCell*)cell {
+/**
+ * セルの複製ボタンを押したときに呼び出されるメソッド．
+ * @param cell メソッドをコールしたAAKAACollectionViewCellオブジェクト．
+ **/
+- (void)didPushDuplicateButtonOnCell:(AAKAACollectionViewCell*)cell {
 	AAKASCIIArt *obj = cell.asciiart;
 	NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
 	[[AAKKeyboardDataManager defaultManager] duplicateASCIIArt:obj.key];
@@ -134,7 +159,11 @@ static NSString * const reuseIdentifier = @"Cell";
 	}];
 }
 
-- (void)didPushDeleteCell:(AAKAACollectionViewCell*)cell {
+/**
+ * セルの削除ボタンを押したときに呼び出されるメソッド．
+ * @param cell メソッドをコールしたAAKAACollectionViewCellオブジェクト．
+ **/
+- (void)didPushDeleteButtonOnCell:(AAKAACollectionViewCell*)cell {
 	AAKASCIIArt *obj = cell.asciiart;
 	NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
 	[[AAKKeyboardDataManager defaultManager] deleteASCIIArt:obj];

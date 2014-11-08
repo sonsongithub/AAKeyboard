@@ -15,27 +15,42 @@
 
 @protocol AAKAACollectionViewCellDelegate <NSObject>
 
+/**
+ * セルを選択したときに呼び出されるメソッド．
+ * セルをタップした後はプレビューを拡大する．
+ * @param cell メソッドをコールしたAAKAACollectionViewCellオブジェクト．
+ **/
 - (void)didSelectCell:(AAKAACollectionViewCell*)cell;
-- (void)didPushCopyCell:(AAKAACollectionViewCell*)cell;
-- (void)didPushDeleteCell:(AAKAACollectionViewCell*)cell;
+
+/**
+ * セルの複製ボタンを押したときに呼び出されるメソッド．
+ * @param cell メソッドをコールしたAAKAACollectionViewCellオブジェクト．
+ **/
+- (void)didPushDuplicateButtonOnCell:(AAKAACollectionViewCell*)cell;
+
+/**
+ * セルの削除ボタンを押したときに呼び出されるメソッド．
+ * @param cell メソッドをコールしたAAKAACollectionViewCellオブジェクト．
+ **/
+- (void)didPushDeleteButtonOnCell:(AAKAACollectionViewCell*)cell;
 
 @end
 
 @interface AAKAACollectionViewCell : UICollectionViewCell
 
-@property (nonatomic, assign) IBOutlet AAKTextView *textView;
-@property (nonatomic, assign) IBOutlet UIView *textBackView;
-@property (nonatomic, assign) IBOutlet UIButton *myCopyButton;
-@property (nonatomic, assign) IBOutlet UIButton *myDeleteButton;
-@property (nonatomic, assign) IBOutlet UILabel *debugLabel;
-@property (nonatomic, strong) AAKASCIIArt *asciiart;
+@property (nonatomic, assign) IBOutlet AAKTextView *textView;							/** アスキーアートをレンダリングするビュー */
+@property (nonatomic, assign) IBOutlet UIView *textBackView;							/** テキストの背景ビュー */
+@property (nonatomic, assign) IBOutlet UIButton *duplicateButtonOnCell;					/** 複製ボタン */
+@property (nonatomic, assign) IBOutlet UIButton *deleteButtonOnCell;					/** 削除ボタン */
+@property (nonatomic, assign) IBOutlet UILabel *debugLabel;								/** デバッグ用のラベル */
 
-@property (nonatomic, assign) IBOutlet NSLayoutConstraint *leftMargin;
-@property (nonatomic, assign) IBOutlet NSLayoutConstraint *rightMargin;
-@property (nonatomic, assign) IBOutlet NSLayoutConstraint *myCopyButtonWidth;
-@property (nonatomic, assign) IBOutlet NSLayoutConstraint *myDeleteButtonWidth;
+@property (nonatomic, assign) IBOutlet NSLayoutConstraint *leftMargin;					/** 背景のセルに対する左マージン */
+@property (nonatomic, assign) IBOutlet NSLayoutConstraint *rightMargin;					/** 背景のセルに対する右マージン */
+@property (nonatomic, assign) IBOutlet NSLayoutConstraint *duplicateButtonOnCellWidth;	/** 複製ボタンの幅 */
+@property (nonatomic, assign) IBOutlet NSLayoutConstraint *deleteButtonOnCellWidth;		/** 削除ボタンの幅 */
 
-@property (nonatomic, assign) id <AAKAACollectionViewCellDelegate> delegate;
+@property (nonatomic, assign) id <AAKAACollectionViewCellDelegate> delegate;			/** 親のビューにコールバックするためのデリゲート */
+@property (nonatomic, strong) AAKASCIIArt *asciiart;									/** 表示するアスキーアート */
 
 /**
  * リストからAAをプレビューするアニメーションに使うテキストビューを作成する．

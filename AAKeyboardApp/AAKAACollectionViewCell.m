@@ -10,13 +10,13 @@
 
 #import "AAKShared.h"
 
-static NSInteger AAKSwipeDirectionThreadholdAsDegree = 20;
-static NSInteger AAKCellButtonWidth = 96;
+static NSInteger AAKSwipeDirectionThreadholdAsDegree = 20;		/** 斜めのスワイプを横方向へのスワイプと判定するための閾値 */
+static NSInteger AAKCellButtonWidth = 96;						/** セルの複製，削除ボタンの幅 */
 
 @interface AAKAACollectionViewCell() <UIGestureRecognizerDelegate> {
-	CGPoint _startPoint;
-	CGFloat _movement;
-	BOOL _opened;
+	CGPoint		_startPoint;	/** ジェスチャの開始点 */
+	CGFloat		_movement;		/** ジェスチャの移動量 */
+	BOOL		_opened;		/** 複製，削除ボタンが開いているかのフラグ */
 }
 @end
 
@@ -31,7 +31,6 @@ static NSInteger AAKCellButtonWidth = 96;
 	NSParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyleWithFontSize:fontSize];
 	NSDictionary *attributes = @{NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:[UIFont fontWithName:@"Mona" size:fontSize]};
 	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:_asciiart.text attributes:attributes];
-	DNSLogRect(self.textView.bounds);
 	AAKTextView *textView = [[AAKTextView alloc] initWithFrame:self.textView.bounds];
 	textView.attributedString = string;
 	textView.backgroundColor = [UIColor whiteColor];
@@ -45,8 +44,8 @@ static NSInteger AAKCellButtonWidth = 96;
 	_opened = NO;
 	_leftMargin.constant = 0;
 	_rightMargin.constant = 0;
-	_myCopyButtonWidth.constant = 0;
-	_myDeleteButtonWidth.constant = 0;
+	_duplicateButtonOnCellWidth.constant = 0;
+	_deleteButtonOnCellWidth.constant = 0;
 	
 	if (animated) {
 		[UIView animateWithDuration:0.3
@@ -61,6 +60,7 @@ static NSInteger AAKCellButtonWidth = 96;
  * @param tapPoint ジェスチャ中のタップの位置．
  **/
 - (void)gestureRecognizerStateBegan:(UISwipeGestureRecognizer*)gestureRecognizer {
+	DNSLogMainThread
 	CGPoint translate = [gestureRecognizer locationInView:self];
 	_startPoint = translate;
 }
@@ -70,24 +70,28 @@ static NSInteger AAKCellButtonWidth = 96;
  * @param tapPoint ジェスチャ中のタップの位置．
  **/
 - (void)gestureRecognizerStateChanged:(UISwipeGestureRecognizer*)gestureRecognizer {
+	DNSLogMainThread
 	CGPoint translate = [gestureRecognizer locationInView:self];
 	CGFloat diff = _startPoint.x - translate.x;
-	if (_opened)
+	if (_opened) {
 		_movement = AAKCellButtonWidth;
-	else
+	}
+	else {
 		_movement = 0;
+	}
+	
 	if (_movement + diff > 0) {
 		_leftMargin.constant = -_movement - diff;
 		_rightMargin.constant = _movement + diff;
-		_myCopyButtonWidth.constant = (_movement+ diff);
-		_myDeleteButtonWidth.constant = (_movement + diff);
+		_duplicateButtonOnCellWidth.constant = (_movement+ diff);
+		_deleteButtonOnCellWidth.constant = (_movement + diff);
 		
 	}
 	else {
 		_leftMargin.constant = 0;
 		_rightMargin.constant = 0;
-		_myCopyButtonWidth.constant = 0;
-		_myDeleteButtonWidth.constant = 0;
+		_duplicateButtonOnCellWidth.constant = 0;
+		_deleteButtonOnCellWidth.constant = 0;
 	}
 }
 
@@ -96,21 +100,22 @@ static NSInteger AAKCellButtonWidth = 96;
  * @param tapPoint ジェスチャ中のタップの位置．
  **/
 - (void)gestureRecognizerStateEnded:(UISwipeGestureRecognizer*)gestureRecognizer {
+	DNSLogMainThread
 	CGPoint translate = [gestureRecognizer locationInView:self];
 	CGFloat diff = _startPoint.x - translate.x;
 	if (_movement + diff < AAKCellButtonWidth) {
 		_opened = NO;
 		_leftMargin.constant = 0;
 		_rightMargin.constant = 0;
-		_myCopyButtonWidth.constant = 0;
-		_myDeleteButtonWidth.constant = 0;
+		_duplicateButtonOnCellWidth.constant = 0;
+		_deleteButtonOnCellWidth.constant = 0;
 	}
 	else {
 		_opened = YES;
 		_leftMargin.constant = -AAKCellButtonWidth;
 		_rightMargin.constant = AAKCellButtonWidth;
-		_myCopyButtonWidth.constant = AAKCellButtonWidth;
-		_myDeleteButtonWidth.constant = AAKCellButtonWidth;
+		_duplicateButtonOnCellWidth.constant = AAKCellButtonWidth;
+		_deleteButtonOnCellWidth.constant = AAKCellButtonWidth;
 	}
 	[UIView animateWithDuration:0.3
 					 animations:^{
@@ -124,15 +129,12 @@ static NSInteger AAKCellButtonWidth = 96;
  **/
 - (void)swipeleft:(UISwipeGestureRecognizer*)gestureRecognizer {
 	if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-//		DNSLog(@"UIGestureRecognizerStateBegan");
 		[self gestureRecognizerStateBegan:gestureRecognizer];
 	}
 	else if (gestureRecognizer.state == UIGestureRecognizerStateChanged) {
-//		DNSLog(@"UIGestureRecognizerStateChanged");
 		[self gestureRecognizerStateChanged:gestureRecognizer];
 	}
 	else if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
-//		DNSLog(@"UIGestureRecognizerStateEnded");
 		[self gestureRecognizerStateEnded:gestureRecognizer];
 	}
 }
@@ -163,7 +165,7 @@ static NSInteger AAKCellButtonWidth = 96;
  * @param sender メッセージの送信元オブジェクト
  **/
 - (IBAction)delete:(id)sender {
-	[_delegate didPushDeleteCell:self];
+	[_delegate didPushDeleteButtonOnCell:self];
 	[self closeAnimated:YES];
 }
 
@@ -172,7 +174,7 @@ static NSInteger AAKCellButtonWidth = 96;
  * @param sender メッセージの送信元オブジェクト
  **/
 - (IBAction)copy:(id)sender {
-	[_delegate didPushCopyCell:self];
+	[_delegate didPushDuplicateButtonOnCell:self];
 	[self closeAnimated:YES];
 }
 
@@ -184,7 +186,6 @@ static NSInteger AAKCellButtonWidth = 96;
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-	DNSLogMethod
 	if (_opened) {
 		[self closeAnimated:YES];
 	}
@@ -207,12 +208,12 @@ static NSInteger AAKCellButtonWidth = 96;
 	[self addGestureRecognizer:swipeleft];
 	
 	// ボタンを見えないように下に隠す
-	[_myCopyButton.superview sendSubviewToBack:_myCopyButton];
-	[_myDeleteButton.superview sendSubviewToBack:_myDeleteButton];
+	[_duplicateButtonOnCell.superview sendSubviewToBack:_duplicateButtonOnCell];
+	[_deleteButtonOnCell.superview sendSubviewToBack:_deleteButtonOnCell];
 	
 	// ボタンの大きさを０に修正しておく．
-	_myCopyButtonWidth.constant = 0;
-	_myDeleteButtonWidth.constant = 0;
+	_duplicateButtonOnCellWidth.constant = 0;
+	_deleteButtonOnCellWidth.constant = 0;
 }
 
 @end

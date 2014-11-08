@@ -11,6 +11,13 @@
 @class AAKASCIIArt;
 
 @interface AAKAACollectionViewController : UICollectionViewController
-- (NSIndexPath*)indexPathForAsciiArt:(AAKASCIIArt*)asciiart;
+
+/**
+ * 指定されたアスキーアートを含むセルを返す．
+ * 見つからない場合は，nilを返す．
+ * @param asciiart アスキーアートオブジェクト．
+ * @return アスキーアートオブジェクトを保持するAAKAACollectionViewCellインスタンスを返す．
+ **/
 - (id)cellForAsciiArt:(AAKASCIIArt*)asciiart;
+
 @end
