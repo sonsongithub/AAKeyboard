@@ -9,137 +9,158 @@
 #import "AAKKeyboardView.h"
 #import "AAKToolbar.h"
 #import "AAKContentCell.h"
-#import "AAKContentFlowLayout.h"
-#import "NSParagraphStyle+keyboard.h"
-#import "AAKHelper.h"
-#import "AAKKeyboardDataManager.h"
-#import "AAKASCIIArtGroup.h"
-#import "AAKASCIIArt.h"
+
+#import "AAKShared.h"
 
 @interface AAKKeyboardView() <UICollectionViewDataSource, UICollectionViewDelegate, AAKToolbarDelegate> {
-	AAKToolbar *_toolbar;
-	NSLayoutConstraint	*_toolbarHeightConstraint;
-	UICollectionView	*_collectionView;
-	AAKContentFlowLayout *_collectionFlowLayout;
-	NSArray *_asciiarts;
+	AAKToolbar					*_toolbar;
+	NSLayoutConstraint			*_toolbarHeightConstraint;
+	UICollectionView			*_collectionView;
+	UICollectionViewFlowLayout	*_collectionFlowLayout;
+	NSArray						*_asciiarts;
 }
 @end
 
 @implementation AAKKeyboardView
 
+#pragma mark - Instance method
+
+/**
+ * レイアウトをリロードして変更する．
+ **/
 - (void)load {
-	NSInteger itemsPerPage = 3;
-	CGFloat w = CGRectGetWidth(self.bounds);
-	NSLog(@"width =	%f", w);
-	if (w == 1024) {
-		itemsPerPage = 8;
-	}
-	else if (w == 768) {
-		itemsPerPage = 6;
-	}
-	else if (w == 736) {
-		itemsPerPage = 6;
-	}
-	else if (w == 667) {
-		itemsPerPage = 6;
-	}
-	else if (w == 480) {
-		itemsPerPage = 6;
-	}
-	else if (w == 414) {
-		itemsPerPage = 4;
-	}
-	else if (w == 375) {
-		itemsPerPage = 3;
-	}
-	else if (w == 320) {
-		itemsPerPage = 3;
-	}
-	CGFloat pageWidth = w / itemsPerPage;
-	CGFloat h = CGRectGetHeight(_collectionView.bounds);
-	_collectionFlowLayout.itemSize = CGSizeMake(pageWidth, h);
-	_collectionFlowLayout.numberOfPage = itemsPerPage;
-	[_collectionFlowLayout invalidateLayout];
+ 	[_collectionFlowLayout invalidateLayout];
 	[_toolbar layout];
 }
 
-- (void)layoutSubviews {
-	[super layoutSubviews];
-}
-
+/**
+ * キーボードを縦のときに合わせる．
+ * ツールバーの高さやフォントサイズを変更する．
+ **/
 - (void)setPortraitMode {
 	_toolbarHeightConstraint.constant = 48;
 	_toolbar.height = 48;
 	_toolbar.fontSize = 14;
 }
 
+/**
+ * キーボードを縦のときに合わせる．
+ * ツールバーの高さやフォントサイズを変更する．
+ **/
 - (void)setLandscapeMode {
 	_toolbarHeightConstraint.constant = 30;
 	_toolbar.height = 30;
 	_toolbar.fontSize = 12;
 }
 
+/**
+ * グループ選択や切り替え，削除ボタンためのツールバーを初期化する．
+ **/
+- (void)prepareToolbar {
+	_toolbar = [[AAKToolbar alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+	_toolbar.delegate = self;
+	[self addSubview:_toolbar];
+}
+
+/**
+ * UICollectionViewを初期化する．
+ **/
+- (void)prepareCollectionView {
+	// collection flow layoutを設定
+	_collectionFlowLayout = [[UICollectionViewFlowLayout alloc] init];
+	_collectionFlowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+	_collectionFlowLayout.minimumLineSpacing = 0;
+	_collectionFlowLayout.minimumInteritemSpacing = 0;
+	_collectionFlowLayout.itemSize = CGSizeMake(100, 140);
+	_collectionFlowLayout.sectionInset = UIEdgeInsetsZero;
+	
+	// collection viewを生成，セットアップ
+	_collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_collectionFlowLayout];
+	_collectionView.alwaysBounceHorizontal = YES;
+	_collectionView.showsHorizontalScrollIndicator = NO;
+	_collectionView.backgroundColor = [UIColor colorWithRed:254.0/255.0f green:254.0/255.0f blue:254.0/255.0f alpha:1];
+	_collectionView.backgroundColor = [UIColor clearColor];
+	[_collectionView registerClass:[AAKContentCell class] forCellWithReuseIdentifier:@"AAKContentCell"];
+	_collectionView.delegate = self;
+	_collectionView.dataSource = self;
+	[self addSubview:_collectionView];
+}
+
+/**
+ * ツールバーとアスキーアートのキービューの大きさを調整するautolayoutを設定する．
+ **/
+- (void)setupAutolayout {
+	
+	_toolbar.translatesAutoresizingMaskIntoConstraints = NO;
+	_collectionView.translatesAutoresizingMaskIntoConstraints = NO;
+	
+	NSDictionary *views = NSDictionaryOfVariableBindings(_toolbar, _collectionView);
+	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_toolbar]-0-|"
+																 options:0 metrics:0 views:views]];
+	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_collectionView]-0-|"
+																 options:0 metrics:0 views:views]];
+	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_collectionView]-0-[_toolbar]-0-|"
+																 options:0 metrics:0 views:views]];
+	_toolbarHeightConstraint = [NSLayoutConstraint constraintWithItem:_toolbar
+															attribute:NSLayoutAttributeHeight
+															relatedBy:NSLayoutRelationEqual
+															   toItem:nil
+															attribute:NSLayoutAttributeNotAnAttribute
+														   multiplier:1
+															 constant:48];
+	[self addConstraint:_toolbarHeightConstraint];
+}
+
+/**
+ * アスキーアートオブジェクトの配列を現在選択中のグループに従ってアップデートする．
+ **/
+- (void)updateASCIIArtsForCurrentGroup {
+	_asciiarts = [_toolbar asciiArtsForCurrentGroup];
+}
+
+#pragma mark - AAKToolbarDelegate
+
+- (void)didSelectGroupToolbar:(AAKToolbar*)toolbar {
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		[self updateASCIIArtsForCurrentGroup];
+		[_collectionView reloadData];
+	});
+}
+
+- (void)toolbar:(AAKToolbar*)toolbar didPushEarthButton:(UIButton*)button {
+	[self.delegate keyboardViewDidPushEarthButton:self];
+}
+
+- (void)toolbar:(AAKToolbar*)toolbar didPushDeleteButton:(UIButton*)button {
+	[self.delegate keyboardViewDidPushDeleteButton:self];
+}
+
+#pragma mark - Override
+
 - (instancetype)initWithFrame:(CGRect)frame {
 	self = [super initWithFrame:frame];
 	if (self) {
-		_toolbar = [[AAKToolbar alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-		_toolbar.delegate = self;
-		[self addSubview:_toolbar];
+		[self prepareToolbar];
 		
-		_collectionFlowLayout = [[AAKContentFlowLayout alloc] init];
-		_collectionFlowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-		_collectionFlowLayout.minimumLineSpacing = 0;
-		_collectionFlowLayout.minimumInteritemSpacing = 0;
-		_collectionFlowLayout.itemSize = CGSizeMake(100, 140);
-		_collectionFlowLayout.sectionInset = UIEdgeInsetsZero;
-		_collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_collectionFlowLayout];
-		_collectionView.alwaysBounceHorizontal = YES;
-		_collectionView.showsHorizontalScrollIndicator = NO;
-		_collectionView.backgroundColor = [UIColor colorWithRed:254.0/255.0f green:254.0/255.0f blue:254.0/255.0f alpha:1];
-		_collectionView.backgroundColor = [UIColor clearColor];
-		[_collectionView registerClass:[AAKContentCell class] forCellWithReuseIdentifier:@"AAKContentCell"];
-		_collectionView.delegate = self;
-		_collectionView.dataSource = self;
-		[self addSubview:_collectionView];
+		[self prepareCollectionView];
 		
-		_toolbar.translatesAutoresizingMaskIntoConstraints = NO;
-		_collectionView.translatesAutoresizingMaskIntoConstraints = NO;
+		[self setupAutolayout];
 		
-		NSDictionary *views = NSDictionaryOfVariableBindings(_toolbar, _collectionView);
-		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_toolbar]-0-|"
-																	 options:0 metrics:0 views:views]];
-		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_collectionView]-0-|"
-																		  options:0 metrics:0 views:views]];
-		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_collectionView]-0-[_toolbar]-0-|"
-																		  options:0 metrics:0 views:views]];
-		_toolbarHeightConstraint = [NSLayoutConstraint constraintWithItem:_toolbar
-																attribute:NSLayoutAttributeHeight
-																relatedBy:NSLayoutRelationEqual
-																   toItem:nil
-																attribute:NSLayoutAttributeNotAnAttribute
-															   multiplier:1
-																 constant:48];
-		NSArray *groups = [[AAKKeyboardDataManager defaultManager] groups];
-		
-		NSMutableArray *array = [NSMutableArray arrayWithArray:@[[AAKASCIIArtGroup historyGroup]]];
-		[array addObjectsFromArray:groups];
-		
-		[_toolbar setCategories:array];
-		
-		[self addConstraint:_toolbarHeightConstraint];
-		
-		_asciiarts = [[AAKKeyboardDataManager defaultManager] asciiArtForGroup:groups[0]];
+		[self updateASCIIArtsForCurrentGroup];
 		
 		[self updateConstraints];
 	}
 	return self;
 }
 
+#pragma mark - UICollectionViewDelegate, UICollectionViewDataSource
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+	DNSLogMethod
 	[collectionView deselectItemAtIndexPath:indexPath animated:YES];
 	AAKASCIIArt *source = _asciiarts[indexPath.item];
 	[[AAKKeyboardDataManager defaultManager] insertHistoryASCIIArtKey:source.key];
-	[self.delegate keyboardView:self willInsertString:source.asciiArt];
+	[self.delegate keyboardView:self willInsertString:source.text];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -172,27 +193,10 @@
 	AAKASCIIArt *source = _asciiarts[indexPath.item];
 	NSParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyleWithFontSize:fontSize];
 	NSDictionary *attributes = @{NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:[UIFont fontWithName:@"Mona" size:fontSize]};
-	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:source.asciiArt attributes:attributes];
+	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:source.text attributes:attributes];
 	cell.textView.attributedString = string;
 	[cell.label sizeToFit];
 	return cell;
-}
-
-#pragma mark - AAKToolbarDelegate
-
-- (void)toolbar:(AAKToolbar*)toolbar didSelectGroup:(AAKASCIIArtGroup*)group {
-	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-		_asciiarts = [[AAKKeyboardDataManager defaultManager] asciiArtForGroup:group];
-		[_collectionView reloadData];
-	});
-}
-
-- (void)toolbar:(AAKToolbar*)toolbar didPushEarthButton:(UIButton*)button {
-	[self.delegate keyboardViewDidPushEarthButton:self];
-}
-
-- (void)toolbar:(AAKToolbar*)toolbar didPushDeleteButton:(UIButton*)button {
-	[self.delegate keyboardViewDidPushDeleteButton:self];
 }
 
 @end

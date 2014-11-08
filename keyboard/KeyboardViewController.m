@@ -8,9 +8,8 @@
 
 #import "KeyboardViewController.h"
 
+#import "AAKShared.h"
 #import "AAKKeyboardView.h"
-#import "AAKHelper.h"
-#import "AAKKeyboardDataManager.h"
 
 @interface KeyboardViewController () <AAKKeyboardViewDelegate> {
 	AAKKeyboardView *_keyboardView;
@@ -20,44 +19,34 @@
 
 @implementation KeyboardViewController
 
+#pragma mark - Override
+
+/**
+ * キーボードのメインビューコントローラは，initメソッドで初期化される．
+ **/
 - (instancetype)init {
 	DNSLogMethod
 	self = [super init];
 	if (self) {
 		[AAKKeyboardDataManager defaultManager];
-		NSArray *a = [[AAKKeyboardDataManager defaultManager] groups];
-		NSLog(@"%@", a);
 	}
 	return self;
 }
 
+/**
+ * デバッグ用．キーボードがどのタイミングで破棄されるかを確認する．
+ **/
 - (void)dealloc {
 	DNSLogMethod
 }
 
-- (void)keyboardViewDidPushEarthButton:(AAKKeyboardView*)keyboardView {
-	[self advanceToNextInputMode];
-}
-
-- (void)keyboardViewDidPushDeleteButton:(AAKKeyboardView*)keyboardView {
-	[self.textDocumentProxy deleteBackward];
-}
-
-- (void)keyboardView:(AAKKeyboardView*)keyboardView willInsertString:(NSString*)string {
-	[self.textDocumentProxy insertText:string];
-}
-
-- (UITraitCollection *)overrideTraitCollectionForChildViewController:(UIViewController *)childViewController {
-	return self.traitCollection;
-}
-
-- (void)updateViewConstraints {
-    [super updateViewConstraints];
-}
-
+/**
+ * ビューコントローラのビューがlayoutSubviewsを実行した直後に呼ばれる，
+ **/
 - (void)viewDidLayoutSubviews {
 	[super viewDidLayoutSubviews];
 	
+	// このキーボードビューのサイズをautolayoutで指定する．
 	CGRect screenBounds = [[UIScreen mainScreen] bounds];
 	CGFloat screenWidth = CGRectGetWidth(screenBounds);
 	CGFloat screenHeight = CGRectGetHeight(screenBounds);
@@ -66,6 +55,7 @@
 		[self.view removeConstraint:_heightConstraint];
 	
 	if (screenWidth < screenHeight) {
+		// 縦長の場合
 		_heightConstraint = [NSLayoutConstraint constraintWithItem:self.view
 														 attribute:NSLayoutAttributeHeight
 														 relatedBy:NSLayoutRelationEqual
@@ -77,6 +67,7 @@
 		[_keyboardView setPortraitMode];
 	}
 	else {
+		// 横長の場合
 		_heightConstraint = [NSLayoutConstraint constraintWithItem:self.view
 														 attribute:NSLayoutAttributeHeight
 														 relatedBy:NSLayoutRelationEqual
@@ -94,6 +85,7 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	
+	// このビューの左右の端のマージンを設定する．
 	[self.view.superview addConstraint:[NSLayoutConstraint constraintWithItem:self.view
 																	attribute:NSLayoutAttributeLeading
 																	relatedBy:NSLayoutRelationEqual
@@ -109,31 +101,19 @@
 																	attribute:NSLayoutAttributeTrailing
 																   multiplier:1.0
 																	 constant:0.0]];
-	
-	if (_heightConstraint)
-		[self.view removeConstraint:_heightConstraint];
-	
-	CGFloat height = CGRectGetHeight(self.view.bounds);
-	_heightConstraint = [NSLayoutConstraint constraintWithItem:self.view
-													 attribute:NSLayoutAttributeHeight
-													 relatedBy:NSLayoutRelationEqual
-														toItem:nil
-													 attribute:NSLayoutAttributeNotAnAttribute
-													multiplier:0.0
-													  constant:height];
-	[self.view addConstraint:_heightConstraint];
 }
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
-	 self.view.translatesAutoresizingMaskIntoConstraints = NO;
-	
+	// キーボードビューをセットアップ
+	self.view.translatesAutoresizingMaskIntoConstraints = NO;
 	_keyboardView = [[AAKKeyboardView alloc] initWithFrame:self.view.bounds];
 	_keyboardView.translatesAutoresizingMaskIntoConstraints = NO;
 	_keyboardView.delegate = self;
 	[self.view addSubview:_keyboardView];
 	
+	// キーボードビューは，このビューコントローラにぴっちり貼り付ける
 	NSDictionary *views = NSDictionaryOfVariableBindings(_keyboardView);
 	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_keyboardView]-0-|"
 																	  options:0 metrics:0 views:views]];
@@ -141,12 +121,26 @@
 																	  options:0 metrics:0 views:views]];
 }
 
+#pragma mark - AAKeyboardViewDelegate
+
+- (void)keyboardViewDidPushEarthButton:(AAKKeyboardView*)keyboardView {
+	[self advanceToNextInputMode];
+}
+
+- (void)keyboardViewDidPushDeleteButton:(AAKKeyboardView*)keyboardView {
+	[self.textDocumentProxy deleteBackward];
+}
+
+- (void)keyboardView:(AAKKeyboardView*)keyboardView willInsertString:(NSString*)string {
+	[self.textDocumentProxy insertText:string];
+}
+
+#pragma mark - UITextInput
+
 - (void)textWillChange:(id<UITextInput>)textInput {
-    // The app is about to change the document's contents. Perform any preparation here.
 }
 
 - (void)textDidChange:(id<UITextInput>)textInput {
-    // The app has just changed the document's contents, the document context has been updated.
     UIColor *textColor = nil;
     if (self.textDocumentProxy.keyboardAppearance == UIKeyboardAppearanceDark) {
         textColor = [UIColor whiteColor];
