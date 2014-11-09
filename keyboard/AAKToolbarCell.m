@@ -22,11 +22,11 @@
 	[super setHighlighted:highlighted];
 	if (highlighted) {
 		_label.textColor = [UIColor whiteColor];
-		self.contentView.backgroundColor = [UIColor colorWithRed:187/255.0f green:190/255.0f blue:195/255.0f alpha:1];
+		self.contentView.backgroundColor = [UIColor highlightedKeyColor];
 	}
 	else {
 		_label.textColor = [UIColor blackColor];
-		self.contentView.backgroundColor = [UIColor colorWithRed:247/255.0f green:248/255.0f blue:249/255.0f alpha:1];
+		self.contentView.backgroundColor = [UIColor keyColor];
 	}
 }
 
@@ -70,7 +70,6 @@
 	self.backgroundColor = [UIColor blueColor];
 	self.contentView.backgroundColor = [UIColor clearColor];
 	_label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-	_label.textColor = [UIColor colorWithRed:0 green:120.0/255.0f blue:255.0/255.0f alpha:1];
 	_label.textColor = [UIColor blackColor];
 	_label.textAlignment = NSTextAlignmentCenter;
 	_label.adjustsFontSizeToFitWidth = YES;
@@ -80,7 +79,7 @@
 
 	[self setupVerticalSeperator];
 	
-	self.contentView.backgroundColor = [UIColor colorWithRed:247/255.0f green:248/255.0f blue:249/255.0f alpha:1];
+	self.contentView.backgroundColor = [UIColor keyColor];
 	
 #if 0
 	NSDictionary *views = NSDictionaryOfVariableBindings(_label);
@@ -90,9 +89,6 @@
 	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_label]-0-|"
 																 options:0 metrics:0 views:views]];
 #endif
-	
-	self.selectedBackgroundView = [[UIView alloc] initWithFrame:self.frame];
-	self.selectedBackgroundView.backgroundColor = [UIColor colorWithRed:203/255.0f green:203/255.0f blue:203/255.0f alpha:1];
 }
 
 #pragma mark - Override
@@ -137,17 +133,5 @@
 	[super awakeFromNib];
 	[self privateInit];
 }
-
-//- (void)drawRect:(CGRect)rect {
-//	CGContextRef context = UIGraphicsGetCurrentContext();
-//	[[UIColor colorWithRed:254.0/255.0f green:254.0/255.0f blue:254.0/255.0f alpha:1] setFill];
-//	CGContextFillRect(context, rect);
-//	[[UIColor colorWithRed:23.0/255.0f green:23.0/255.0f blue:23.0/255.0f alpha:1] setFill];
-////	CGContextFillRect(context, CGRectMake(0, 0, rect.size.width, 0.5));
-//	CGContextFillRect(context, CGRectMake(rect.size.width - 0.5, 0, 0.5, rect.size.height));
-//	if (self.isHead)
-//		CGContextFillRect(context, CGRectMake(0, 0, 0.5, rect.size.height));
-////	CGContextFillRect(context, CGRectMake(0, rect.size.height - 0.5, rect.size.width, 0.5));
-//}
 
 @end

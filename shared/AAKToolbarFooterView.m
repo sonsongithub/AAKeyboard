@@ -20,6 +20,7 @@
 	UIImage *temp = [UIImage imageNamed:@"leftEdge"];
 	UIImage *temp2 = [temp stretchableImageWithLeftCapWidth:1 topCapHeight:1];
 	_imageView.image = temp2;
+	self.backgroundColor = [UIColor clearColor];
 }
 
 @end

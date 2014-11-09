@@ -9,8 +9,6 @@
 #import "AAKKeyboardView.h"
 #import "AAKToolbar.h"
 #import "AAKContentCell.h"
-#import "AAKToolbarHeaderView.h"
-#import "AAKToolbarFooterView.h"
 
 #import "AAKShared.h"
 
@@ -80,7 +78,7 @@
 	_collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_collectionFlowLayout];
 	_collectionView.alwaysBounceHorizontal = YES;
 	_collectionView.showsHorizontalScrollIndicator = NO;
-	_collectionView.backgroundColor = [UIColor colorWithRed:247/255.0f green:248/255.0f blue:249/255.0f alpha:1];
+	_collectionView.backgroundColor = [UIColor keyColor];
 	_collectionView.delegate = self;
 	_collectionView.dataSource = self;
 	_collectionView.contentInset = UIEdgeInsetsMake(0, -2, 0, -2);

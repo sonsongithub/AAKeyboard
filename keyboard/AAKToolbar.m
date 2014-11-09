@@ -10,8 +10,6 @@
 
 #import "AAKToolbarCell.h"
 #import "AAKToolbarHistoryCell.h"
-#import "AAKToolbarHeaderView.h"
-#import "AAKToolbarFooterView.h"
 
 #import "AAKShared.h"
 
@@ -63,11 +61,13 @@
 }
 
 - (void)buttonHighlight:(UIButton*)sender {
-	sender.backgroundColor = [UIColor colorWithRed:247/255.0f green:248/255.0f blue:249/255.0f alpha:1];
+	// 両脇のボタンはハイライトと通常の色が逆
+	sender.backgroundColor = [UIColor keyColor];
 }
 
 - (void)buttonStopHighlight:(UIButton*)sender {
-	sender.backgroundColor = [UIColor colorWithRed:187/255.0f green:190/255.0f blue:195/255.0f alpha:1];
+	// 両脇のボタンはハイライトと通常の色が逆
+	sender.backgroundColor = [UIColor highlightedKeyColor];
 }
 
 /**
@@ -81,7 +81,7 @@
 		[_earthKey addTarget:self action:@selector(pushEarthKey:) forControlEvents:UIControlEventTouchUpInside];
 		[_earthKey addTarget:self action:@selector(buttonHighlight:) forControlEvents:UIControlEventTouchDown];
 		[_earthKey addTarget:self action:@selector(buttonStopHighlight:) forControlEvents:UIControlEventTouchUpOutside];
-		[_earthKey setBackgroundColor:[UIColor colorWithRed:187/255.0f green:190/255.0f blue:195/255.0f alpha:1]];
+		[_earthKey setBackgroundColor:[UIColor highlightedKeyColor]];
 		UIImage *temp = [UIImage imageNamed:@"rightEdge"];
 		UIImage *temp2 = [temp stretchableImageWithLeftCapWidth:1 topCapHeight:1];
 		[_earthKey setBackgroundImage:temp2 forState:UIControlStateNormal];
@@ -91,7 +91,7 @@
 		_deleteKey = [[UIButton alloc] initWithFrame:CGRectZero];
 		[_deleteKey setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
 		[_deleteKey setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateHighlighted];
-		_deleteKey.backgroundColor = [UIColor colorWithRed:187/255.0f green:190/255.0f blue:195/255.0f alpha:1];
+		_deleteKey.backgroundColor = [UIColor highlightedKeyColor];
 		[_deleteKey addTarget:self action:@selector(pushDeleteKey:) forControlEvents:UIControlEventTouchUpInside];
 		[_deleteKey addTarget:self action:@selector(buttonHighlight:) forControlEvents:UIControlEventTouchDown];
 		[_deleteKey addTarget:self action:@selector(buttonStopHighlight:) forControlEvents:UIControlEventTouchUpOutside];
@@ -186,9 +186,10 @@
 	_collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_collectionFlowLayout];
 	_collectionView.alwaysBounceHorizontal = YES;
 	_collectionView.showsHorizontalScrollIndicator = NO;
-	_collectionView.backgroundColor = [UIColor colorWithRed:254.0/255.0f green:254.0/255.0f blue:254.0/255.0f alpha:1];
+	_collectionView.backgroundColor = [UIColor keyColor];
 	_collectionView.delegate = self;
 	_collectionView.dataSource = self;
+	_collectionView.contentInset = UIEdgeInsetsMake(0, -2, 0, -2);
 	[self addSubview:_collectionView];
 	
 	// supplementary resources
@@ -258,12 +259,12 @@
 #pragma mark - IBAction
 
 - (IBAction)pushEarthKey:(UIButton*)sender {
-	sender.backgroundColor = [UIColor colorWithRed:187/255.0f green:190/255.0f blue:195/255.0f alpha:1];
+	sender.backgroundColor = [UIColor highlightedKeyColor];
 	[self.delegate toolbar:self didPushEarthButton:sender];
 }
 
 - (IBAction)pushDeleteKey:(UIButton*)sender {
-	sender.backgroundColor = [UIColor colorWithRed:187/255.0f green:190/255.0f blue:195/255.0f alpha:1];
+	sender.backgroundColor = [UIColor highlightedKeyColor];
 	[self.delegate toolbar:self didPushDeleteButton:sender];
 }
 
@@ -307,10 +308,6 @@
 		[self prepareCollectionView];
 		[self setupAutolayout];
 		[self setupTopBorderLine];
-		
-		_collectionView.contentInset = UIEdgeInsetsMake(0, -2, 0, -2);
-		self.backgroundColor = [UIColor colorWithRed:247/255.0f green:248/255.0f blue:249/255.0f alpha:1];
-		_collectionView.backgroundColor = [UIColor colorWithRed:247/255.0f green:248/255.0f blue:249/255.0f alpha:1];
 	}
 	return self;
 }

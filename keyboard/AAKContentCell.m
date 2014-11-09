@@ -52,7 +52,7 @@
 	
 	// 背景をセット
 	self.selectedBackgroundView = [[UIView alloc] initWithFrame:self.frame];
-	self.selectedBackgroundView.backgroundColor = [UIColor colorWithRed:222/255.0f green:222/255.0f blue:227/255.0f alpha:1];
+	self.selectedBackgroundView.backgroundColor = [UIColor highlightedKeyColor];
 	
 	
 	UIImage *temp = [UIImage imageNamed:@"rightEdge"];
