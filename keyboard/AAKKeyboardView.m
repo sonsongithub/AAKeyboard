@@ -81,13 +81,13 @@
 	_collectionView.alwaysBounceHorizontal = YES;
 	_collectionView.showsHorizontalScrollIndicator = NO;
 	_collectionView.backgroundColor = [UIColor colorWithRed:247/255.0f green:248/255.0f blue:249/255.0f alpha:1];
-	[_collectionView registerClass:[AAKContentCell class] forCellWithReuseIdentifier:@"AAKContentCell"];
 	_collectionView.delegate = self;
 	_collectionView.dataSource = self;
+	_collectionView.contentInset = UIEdgeInsetsMake(0, -2, 0, -2);
 	[self addSubview:_collectionView];
 	
-	_collectionView.contentInset = UIEdgeInsetsMake(0, -2, 0, -2);
-	
+	// supplementary
+	[_collectionView registerClass:[AAKContentCell class] forCellWithReuseIdentifier:@"AAKContentCell"];
 	{
 		UINib *nib = [UINib nibWithNibName:@"AAKToolbarHeaderView" bundle:nil];
 		[_collectionView registerNib:nib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"AAKToolbarHeaderView"];

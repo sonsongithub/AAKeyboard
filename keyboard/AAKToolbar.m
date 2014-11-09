@@ -74,30 +74,27 @@
  * 両脇のボタンを初期化，配置する．
  **/
 - (void)prepareButton {
-	_earthKey = [[UIButton alloc] initWithFrame:CGRectZero];
-	[_earthKey setImage:[UIImage imageNamed:@"earth"] forState:UIControlStateNormal];
-	[_earthKey setImage:[UIImage imageNamed:@"earth"] forState:UIControlStateHighlighted];
-	[_earthKey addTarget:self action:@selector(pushEarthKey:) forControlEvents:UIControlEventTouchUpInside];
-	[_earthKey addTarget:self action:@selector(buttonHighlight:) forControlEvents:UIControlEventTouchDown];
-	[_earthKey addTarget:self action:@selector(buttonStopHighlight:) forControlEvents:UIControlEventTouchUpOutside];
-	[_earthKey setBackgroundColor:[UIColor colorWithRed:187/255.0f green:190/255.0f blue:195/255.0f alpha:1]];
-
 	{
+		_earthKey = [[UIButton alloc] initWithFrame:CGRectZero];
+		[_earthKey setImage:[UIImage imageNamed:@"earth"] forState:UIControlStateNormal];
+		[_earthKey setImage:[UIImage imageNamed:@"earth"] forState:UIControlStateHighlighted];
+		[_earthKey addTarget:self action:@selector(pushEarthKey:) forControlEvents:UIControlEventTouchUpInside];
+		[_earthKey addTarget:self action:@selector(buttonHighlight:) forControlEvents:UIControlEventTouchDown];
+		[_earthKey addTarget:self action:@selector(buttonStopHighlight:) forControlEvents:UIControlEventTouchUpOutside];
+		[_earthKey setBackgroundColor:[UIColor colorWithRed:187/255.0f green:190/255.0f blue:195/255.0f alpha:1]];
 		UIImage *temp = [UIImage imageNamed:@"rightEdge"];
 		UIImage *temp2 = [temp stretchableImageWithLeftCapWidth:1 topCapHeight:1];
 		[_earthKey setBackgroundImage:temp2 forState:UIControlStateNormal];
 		[_earthKey setBackgroundImage:temp2 forState:UIControlStateHighlighted];
 	}
-	
-	_deleteKey = [[UIButton alloc] initWithFrame:CGRectZero];
-	[_deleteKey setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
-	[_deleteKey setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateHighlighted];
-	_deleteKey.backgroundColor = [UIColor colorWithRed:187/255.0f green:190/255.0f blue:195/255.0f alpha:1];
-	[_deleteKey addTarget:self action:@selector(pushDeleteKey:) forControlEvents:UIControlEventTouchUpInside];
-	[_deleteKey addTarget:self action:@selector(buttonHighlight:) forControlEvents:UIControlEventTouchDown];
-	[_deleteKey addTarget:self action:@selector(buttonStopHighlight:) forControlEvents:UIControlEventTouchUpOutside];
-	
 	{
+		_deleteKey = [[UIButton alloc] initWithFrame:CGRectZero];
+		[_deleteKey setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
+		[_deleteKey setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateHighlighted];
+		_deleteKey.backgroundColor = [UIColor colorWithRed:187/255.0f green:190/255.0f blue:195/255.0f alpha:1];
+		[_deleteKey addTarget:self action:@selector(pushDeleteKey:) forControlEvents:UIControlEventTouchUpInside];
+		[_deleteKey addTarget:self action:@selector(buttonHighlight:) forControlEvents:UIControlEventTouchDown];
+		[_deleteKey addTarget:self action:@selector(buttonStopHighlight:) forControlEvents:UIControlEventTouchUpOutside];
 		UIImage *temp = [UIImage imageNamed:@"leftEdge"];
 		UIImage *temp2 = [temp stretchableImageWithLeftCapWidth:1 topCapHeight:1];
 		[_deleteKey setBackgroundImage:temp2 forState:UIControlStateNormal];
@@ -178,22 +175,25 @@
  * UICollectionViewを初期化する．
  **/
 - (void)prepareCollectionView {
+	// flow layout
 	_collectionFlowLayout = [[UICollectionViewFlowLayout alloc] init];
 	_collectionFlowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
 	_collectionFlowLayout.minimumLineSpacing = 0;
 	_collectionFlowLayout.minimumInteritemSpacing = 0;
-	
 	_collectionFlowLayout.sectionInset = UIEdgeInsetsZero;
+	
+	// collection view
 	_collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_collectionFlowLayout];
 	_collectionView.alwaysBounceHorizontal = YES;
 	_collectionView.showsHorizontalScrollIndicator = NO;
 	_collectionView.backgroundColor = [UIColor colorWithRed:254.0/255.0f green:254.0/255.0f blue:254.0/255.0f alpha:1];
-	//	_collectionView.backgroundColor = [UIColor colorWithRed:203/255.0f green:203/255.0f blue:203/255.0f alpha:1];
-	[_collectionView registerClass:[AAKToolbarCell class] forCellWithReuseIdentifier:@"AAKToolbarCell"];
-	[_collectionView registerClass:[AAKToolbarHistoryCell class] forCellWithReuseIdentifier:@"AAKToolbarHistoryCell"];
 	_collectionView.delegate = self;
 	_collectionView.dataSource = self;
+	[self addSubview:_collectionView];
 	
+	// supplementary resources
+	[_collectionView registerClass:[AAKToolbarCell class] forCellWithReuseIdentifier:@"AAKToolbarCell"];
+	[_collectionView registerClass:[AAKToolbarHistoryCell class] forCellWithReuseIdentifier:@"AAKToolbarHistoryCell"];
 	{
 		UINib *nib = [UINib nibWithNibName:@"AAKToolbarHeaderView" bundle:nil];
 		[_collectionView registerNib:nib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"AAKToolbarHeaderView"];
@@ -202,9 +202,20 @@
 		UINib *nib = [UINib nibWithNibName:@"AAKToolbarFooterView" bundle:nil];
 		[_collectionView registerNib:nib forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"AAKToolbarFooterView"];
 	}
-	
-	
-	[self addSubview:_collectionView];
+}
+
+/**
+ * ツールバーの上の枠線をセットアップする．
+ **/
+- (void)setupTopBorderLine {
+	UIImageView *topBar = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"topEdge"]];
+	NSDictionary *views = NSDictionaryOfVariableBindings(topBar);
+	topBar.translatesAutoresizingMaskIntoConstraints = NO;
+	[self addSubview:topBar];
+	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[topBar(==2)]-(>=0)-|"
+																 options:0 metrics:0 views:views]];
+	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[topBar(>=0)]-(==0)-|"
+																 options:0 metrics:0 views:views]];
 }
 
 /**
@@ -214,12 +225,8 @@
 	_collectionView.translatesAutoresizingMaskIntoConstraints = NO;
 	_earthKey.translatesAutoresizingMaskIntoConstraints = NO;
 	_deleteKey.translatesAutoresizingMaskIntoConstraints = NO;
-	
-	UIImageView *topBar = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"topEdge"]];
-	topBar.translatesAutoresizingMaskIntoConstraints = NO;
 
-
-	NSDictionary *views = NSDictionaryOfVariableBindings(_collectionView, _earthKey, _deleteKey, topBar);
+	NSDictionary *views = NSDictionaryOfVariableBindings(_collectionView, _earthKey, _deleteKey);
 	
 	_earthKeyWidthConstraint = [NSLayoutConstraint constraintWithItem:_earthKey
 															attribute:NSLayoutAttributeWidth
@@ -245,12 +252,6 @@
 	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_earthKey(>=0)]-(==0)-|"
 																 options:0 metrics:0 views:views]];
 	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_deleteKey(>=0)]-(==0)-|"
-																 options:0 metrics:0 views:views]];
-	
-	[self addSubview:topBar];
-	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[topBar(==1)]-(>=0)-|"
-																 options:0 metrics:0 views:views]];
-	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[topBar(>=0)]-(==0)-|"
 																 options:0 metrics:0 views:views]];
 }
 
@@ -305,8 +306,9 @@
 		[self prepareButton];
 		[self prepareCollectionView];
 		[self setupAutolayout];
+		[self setupTopBorderLine];
 		
-		_collectionView.contentInset = UIEdgeInsetsMake(0, -1, 0, -1);
+		_collectionView.contentInset = UIEdgeInsetsMake(0, -2, 0, -2);
 		self.backgroundColor = [UIColor colorWithRed:247/255.0f green:248/255.0f blue:249/255.0f alpha:1];
 		_collectionView.backgroundColor = [UIColor colorWithRed:247/255.0f green:248/255.0f blue:249/255.0f alpha:1];
 	}
@@ -387,11 +389,11 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-	return CGSizeMake(1, _height);
+	return CGSizeMake(2, _height);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
-	return CGSizeMake(1, _height);
+	return CGSizeMake(2, _height);
 }
 
 @end
