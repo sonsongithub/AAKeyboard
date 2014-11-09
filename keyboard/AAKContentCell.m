@@ -15,6 +15,7 @@
 	AAKTextView	*_textView;
 	NSLayoutConstraint *_widthConstraint;
 	NSLayoutConstraint *_heightConstraint;
+	UIImageView *_seperator;
 }
 @end
 
@@ -53,10 +54,21 @@
 	self.selectedBackgroundView = [[UIView alloc] initWithFrame:self.frame];
 	self.selectedBackgroundView.backgroundColor = [UIColor colorWithRed:222/255.0f green:222/255.0f blue:227/255.0f alpha:1];
 	
+	
+	UIImage *temp = [UIImage imageNamed:@"rightEdge"];
+	UIImage *temp2 = [temp stretchableImageWithLeftCapWidth:1 topCapHeight:1];
+	_seperator = [[UIImageView alloc] initWithImage:temp2];
+	[self.contentView addSubview:_seperator];
+	
 	// ジェスチャを設定
 	UILongPressGestureRecognizer * longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
 	longPress.minimumPressDuration = 1;
 	[self addGestureRecognizer:longPress];
+}
+
+- (void)setIsTail:(BOOL)isTail {
+	_isTail = isTail;
+	_seperator.hidden = _isTail;
 }
 
 #pragma mark - Override
@@ -64,6 +76,11 @@
 - (void)setBounds:(CGRect)bounds {
 	[super setBounds:bounds];
 	self.contentView.frame = bounds;
+}
+
+- (void)layoutSubviews {
+	[super layoutSubviews];
+	_seperator.frame = CGRectMake(self.frame.size.width - 2, 0, 2, self.frame.size.height);
 }
 
 - (id)initWithFrame:(CGRect)frame {

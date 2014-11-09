@@ -13,4 +13,5 @@
 @interface AAKContentCell : UICollectionViewCell
 @property (nonatomic, readonly) UILabel *label;
 @property (nonatomic, readonly) AAKTextView *textView;
+@property (nonatomic, assign) BOOL isTail;
 @end

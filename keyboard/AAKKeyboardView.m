@@ -9,6 +9,8 @@
 #import "AAKKeyboardView.h"
 #import "AAKToolbar.h"
 #import "AAKContentCell.h"
+#import "AAKToolbarHeaderView.h"
+#import "AAKToolbarFooterView.h"
 
 #import "AAKShared.h"
 
@@ -78,12 +80,22 @@
 	_collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_collectionFlowLayout];
 	_collectionView.alwaysBounceHorizontal = YES;
 	_collectionView.showsHorizontalScrollIndicator = NO;
-	_collectionView.backgroundColor = [UIColor colorWithRed:254.0/255.0f green:254.0/255.0f blue:254.0/255.0f alpha:1];
-	_collectionView.backgroundColor = [UIColor clearColor];
+	_collectionView.backgroundColor = [UIColor colorWithRed:247/255.0f green:248/255.0f blue:249/255.0f alpha:1];
 	[_collectionView registerClass:[AAKContentCell class] forCellWithReuseIdentifier:@"AAKContentCell"];
 	_collectionView.delegate = self;
 	_collectionView.dataSource = self;
 	[self addSubview:_collectionView];
+	
+	_collectionView.contentInset = UIEdgeInsetsMake(0, -2, 0, -2);
+	
+	{
+		UINib *nib = [UINib nibWithNibName:@"AAKToolbarHeaderView" bundle:nil];
+		[_collectionView registerNib:nib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"AAKToolbarHeaderView"];
+	}
+	{
+		UINib *nib = [UINib nibWithNibName:@"AAKToolbarFooterView" bundle:nil];
+		[_collectionView registerNib:nib forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"AAKToolbarFooterView"];
+	}
 }
 
 /**
@@ -171,7 +183,7 @@
 	if (width > constraintWidth) {
 		width = constraintWidth;
 	}
-	return CGSizeMake(width, height);
+	return CGSizeMake(floor(width), floor(height));
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -195,8 +207,37 @@
 	NSDictionary *attributes = @{NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:[UIFont fontWithName:@"Mona" size:fontSize]};
 	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:source.text attributes:attributes];
 	cell.textView.attributedString = string;
+	cell.isTail = ((_asciiarts.count - 1) == indexPath.item);
 	[cell.label sizeToFit];
 	return cell;
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
+		   viewForSupplementaryElementOfKind:(NSString *)kind
+								 atIndexPath:(NSIndexPath *)indexPath {
+	if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+		AAKToolbarHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+																			  withReuseIdentifier:@"AAKToolbarHeaderView"
+																					 forIndexPath:indexPath];
+		return headerView;
+	}
+	else if ([kind isEqualToString:UICollectionElementKindSectionFooter]) {
+		AAKToolbarFooterView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter
+																			  withReuseIdentifier:@"AAKToolbarFooterView"
+																					 forIndexPath:indexPath];
+		return footerView;
+	}
+	else {
+		return nil;
+	}
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
+	return CGSizeMake(2, _collectionView.frame.size.height);
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
+	return CGSizeMake(2, _collectionView.frame.size.height);
 }
 
 @end
