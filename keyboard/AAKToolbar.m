@@ -62,15 +62,26 @@
 	}
 }
 
+- (void)buttonHighlight:(UIButton*)sender {
+	sender.backgroundColor = [UIColor colorWithRed:247/255.0f green:248/255.0f blue:249/255.0f alpha:1];
+}
+
+- (void)buttonStopHighlight:(UIButton*)sender {
+	sender.backgroundColor = [UIColor colorWithRed:187/255.0f green:190/255.0f blue:195/255.0f alpha:1];
+}
+
 /**
  * 両脇のボタンを初期化，配置する．
  **/
 - (void)prepareButton {
 	_earthKey = [[UIButton alloc] initWithFrame:CGRectZero];
 	[_earthKey setImage:[UIImage imageNamed:@"earth"] forState:UIControlStateNormal];
+	[_earthKey setImage:[UIImage imageNamed:@"earth"] forState:UIControlStateHighlighted];
 	[_earthKey addTarget:self action:@selector(pushEarthKey:) forControlEvents:UIControlEventTouchUpInside];
-	[_earthKey setBackgroundColor:[UIColor colorWithRed:203/255.0f green:203/255.0f blue:203/255.0f alpha:1]];
-	
+	[_earthKey addTarget:self action:@selector(buttonHighlight:) forControlEvents:UIControlEventTouchDown];
+	[_earthKey addTarget:self action:@selector(buttonStopHighlight:) forControlEvents:UIControlEventTouchUpOutside];
+	[_earthKey setBackgroundColor:[UIColor colorWithRed:187/255.0f green:190/255.0f blue:195/255.0f alpha:1]];
+
 	{
 		UIImage *temp = [UIImage imageNamed:@"rightEdge"];
 		UIImage *temp2 = [temp stretchableImageWithLeftCapWidth:1 topCapHeight:1];
@@ -80,8 +91,11 @@
 	
 	_deleteKey = [[UIButton alloc] initWithFrame:CGRectZero];
 	[_deleteKey setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
-	_deleteKey.backgroundColor = [UIColor colorWithRed:203/255.0f green:203/255.0f blue:203/255.0f alpha:1];
+	[_deleteKey setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateHighlighted];
+	_deleteKey.backgroundColor = [UIColor colorWithRed:187/255.0f green:190/255.0f blue:195/255.0f alpha:1];
 	[_deleteKey addTarget:self action:@selector(pushDeleteKey:) forControlEvents:UIControlEventTouchUpInside];
+	[_deleteKey addTarget:self action:@selector(buttonHighlight:) forControlEvents:UIControlEventTouchDown];
+	[_deleteKey addTarget:self action:@selector(buttonStopHighlight:) forControlEvents:UIControlEventTouchUpOutside];
 	
 	{
 		UIImage *temp = [UIImage imageNamed:@"leftEdge"];
@@ -242,12 +256,14 @@
 
 #pragma mark - IBAction
 
-- (IBAction)pushEarthKey:(id)sender {
-	[self.delegate toolbar:self didPushEarthButton:sender];
+- (IBAction)pushEarthKey:(UIButton*)sender {
+	sender.backgroundColor = [UIColor colorWithRed:187/255.0f green:190/255.0f blue:195/255.0f alpha:1];
+//	[self.delegate toolbar:self didPushEarthButton:sender];
 }
 
-- (IBAction)pushDeleteKey:(id)sender {
-	[self.delegate toolbar:self didPushDeleteButton:sender];
+- (IBAction)pushDeleteKey:(UIButton*)sender {
+	sender.backgroundColor = [UIColor colorWithRed:187/255.0f green:190/255.0f blue:195/255.0f alpha:1];
+//	[self.delegate toolbar:self didPushDeleteButton:sender];
 }
 
 #pragma mark - Setter
@@ -290,7 +306,9 @@
 		[self prepareCollectionView];
 		[self setupAutolayout];
 		
-		_collectionView.contentInset = UIEdgeInsetsMake(0, -20, 0, -20);
+		_collectionView.contentInset = UIEdgeInsetsMake(0, -1, 0, -1);
+		self.backgroundColor = [UIColor colorWithRed:247/255.0f green:248/255.0f blue:249/255.0f alpha:1];
+		_collectionView.backgroundColor = [UIColor colorWithRed:247/255.0f green:248/255.0f blue:249/255.0f alpha:1];
 	}
 	return self;
 }
@@ -369,11 +387,11 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-	return CGSizeMake(20, _height);
+	return CGSizeMake(1, _height);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
-	return CGSizeMake(20, _height);
+	return CGSizeMake(1, _height);
 }
 
 @end
