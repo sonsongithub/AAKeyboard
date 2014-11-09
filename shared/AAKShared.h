@@ -14,6 +14,7 @@
 
 // Category
 #import "NSParagraphStyle+keyboard.h"
+#import "UIColor+keyboard.h"
 #import "UITraitCollection+keyboard.h"
 
 // Model
@@ -32,5 +33,7 @@
 
 // View
 #import "AAKTextView.h"
+#import "AAKToolbarHeaderView.h"
+#import "AAKToolbarFooterView.h"
 
 #endif

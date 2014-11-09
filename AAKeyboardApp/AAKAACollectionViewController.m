@@ -188,7 +188,7 @@ static NSString * const reuseIdentifier = @"Cell";
     return collection.asciiarts.count;
 }
 
--(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
 		  viewForSupplementaryElementOfKind:(NSString *)kind
 								atIndexPath:(NSIndexPath *)indexPath {
 	if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {

@@ -61,22 +61,53 @@
 }
 
 /**
+ * 両サイドのボタンを押下したときに，そのボタンの背景色を反転させる．
+ * @param sender
+ **/
+- (void)buttonHighlight:(UIButton*)sender {
+	// 両脇のボタンはハイライトと通常の色が逆
+	sender.backgroundColor = [UIColor keyColor];
+}
+
+/**
+ * 両サイドのボタンを押下したときに，そのボタンの背景色を反転させる．
+ * @param sender
+ **/
+- (void)buttonStopHighlight:(UIButton*)sender {
+	// 両脇のボタンはハイライトと通常の色が逆
+	sender.backgroundColor = [UIColor highlightedKeyColor];
+}
+
+/**
  * 両脇のボタンを初期化，配置する．
  **/
 - (void)prepareButton {
-	_earthKey = [[UIButton alloc] initWithFrame:CGRectZero];
-	[_earthKey setImage:[UIImage imageNamed:@"earth"] forState:UIControlStateNormal];
-	[_earthKey addTarget:self action:@selector(pushEarthKey:) forControlEvents:UIControlEventTouchUpInside];
-	[_earthKey setBackgroundImage:[UIImage imageNamed:@"buttonBackHighlightedState"] forState:UIControlStateHighlighted];
-	[_earthKey setBackgroundImage:[UIImage imageNamed:@"buttonBackNormalState"] forState:UIControlStateNormal];
-	
-	_deleteKey = [[UIButton alloc] initWithFrame:CGRectZero];
-	[_deleteKey setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
-	_deleteKey.backgroundColor = [UIColor colorWithRed:203/255.0f green:203/255.0f blue:203/255.0f alpha:1];
-	[_deleteKey addTarget:self action:@selector(pushDeleteKey:) forControlEvents:UIControlEventTouchUpInside];
-	[_deleteKey setBackgroundImage:[UIImage imageNamed:@"buttonBackHighlightedState"] forState:UIControlStateHighlighted];
-	[_deleteKey setBackgroundImage:[UIImage imageNamed:@"buttonBackNormalState"] forState:UIControlStateNormal];
-	
+	{
+		_earthKey = [[UIButton alloc] initWithFrame:CGRectZero];
+		[_earthKey setImage:[UIImage imageNamed:@"earth"] forState:UIControlStateNormal];
+		[_earthKey setImage:[UIImage imageNamed:@"earth"] forState:UIControlStateHighlighted];
+		[_earthKey addTarget:self action:@selector(pushEarthKey:) forControlEvents:UIControlEventTouchUpInside];
+		[_earthKey addTarget:self action:@selector(buttonHighlight:) forControlEvents:UIControlEventTouchDown];
+		[_earthKey addTarget:self action:@selector(buttonStopHighlight:) forControlEvents:UIControlEventTouchUpOutside];
+		[_earthKey setBackgroundColor:[UIColor highlightedKeyColor]];
+		UIImage *temp = [UIImage imageNamed:@"rightEdge"];
+		UIImage *temp2 = [temp stretchableImageWithLeftCapWidth:1 topCapHeight:1];
+		[_earthKey setBackgroundImage:temp2 forState:UIControlStateNormal];
+		[_earthKey setBackgroundImage:temp2 forState:UIControlStateHighlighted];
+	}
+	{
+		_deleteKey = [[UIButton alloc] initWithFrame:CGRectZero];
+		[_deleteKey setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
+		[_deleteKey setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateHighlighted];
+		_deleteKey.backgroundColor = [UIColor highlightedKeyColor];
+		[_deleteKey addTarget:self action:@selector(pushDeleteKey:) forControlEvents:UIControlEventTouchUpInside];
+		[_deleteKey addTarget:self action:@selector(buttonHighlight:) forControlEvents:UIControlEventTouchDown];
+		[_deleteKey addTarget:self action:@selector(buttonStopHighlight:) forControlEvents:UIControlEventTouchUpOutside];
+		UIImage *temp = [UIImage imageNamed:@"leftEdge"];
+		UIImage *temp2 = [temp stretchableImageWithLeftCapWidth:1 topCapHeight:1];
+		[_deleteKey setBackgroundImage:temp2 forState:UIControlStateNormal];
+		[_deleteKey setBackgroundImage:temp2 forState:UIControlStateHighlighted];
+	}
 	[self addSubview:_earthKey];
 	[self addSubview:_deleteKey];
 }
@@ -152,23 +183,48 @@
  * UICollectionViewを初期化する．
  **/
 - (void)prepareCollectionView {
+	// flow layout
 	_collectionFlowLayout = [[UICollectionViewFlowLayout alloc] init];
 	_collectionFlowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
 	_collectionFlowLayout.minimumLineSpacing = 0;
 	_collectionFlowLayout.minimumInteritemSpacing = 0;
-	
 	_collectionFlowLayout.sectionInset = UIEdgeInsetsZero;
+	
+	// collection view
 	_collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_collectionFlowLayout];
 	_collectionView.alwaysBounceHorizontal = YES;
 	_collectionView.showsHorizontalScrollIndicator = NO;
-	_collectionView.backgroundColor = [UIColor colorWithRed:254.0/255.0f green:254.0/255.0f blue:254.0/255.0f alpha:1];
-	//	_collectionView.backgroundColor = [UIColor colorWithRed:203/255.0f green:203/255.0f blue:203/255.0f alpha:1];
-	[_collectionView registerClass:[AAKToolbarCell class] forCellWithReuseIdentifier:@"AAKToolbarCell"];
-	[_collectionView registerClass:[AAKToolbarHistoryCell class] forCellWithReuseIdentifier:@"AAKToolbarHistoryCell"];
+	_collectionView.backgroundColor = [UIColor keyColor];
 	_collectionView.delegate = self;
 	_collectionView.dataSource = self;
-	
+	_collectionView.contentInset = UIEdgeInsetsMake(0, -2, 0, -2);	// 端の線を常に表示させないためにヘッダとフッターを隠す
 	[self addSubview:_collectionView];
+	
+	// supplementary resources
+	[_collectionView registerClass:[AAKToolbarCell class] forCellWithReuseIdentifier:@"AAKToolbarCell"];
+	[_collectionView registerClass:[AAKToolbarHistoryCell class] forCellWithReuseIdentifier:@"AAKToolbarHistoryCell"];
+	{
+		UINib *nib = [UINib nibWithNibName:@"AAKToolbarHeaderView" bundle:nil];
+		[_collectionView registerNib:nib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"AAKToolbarHeaderView"];
+	}
+	{
+		UINib *nib = [UINib nibWithNibName:@"AAKToolbarFooterView" bundle:nil];
+		[_collectionView registerNib:nib forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"AAKToolbarFooterView"];
+	}
+}
+
+/**
+ * ツールバーの上の枠線をセットアップする．
+ **/
+- (void)setupTopBorderLine {
+	UIImageView *topBar = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"topEdge"]];
+	NSDictionary *views = NSDictionaryOfVariableBindings(topBar);
+	topBar.translatesAutoresizingMaskIntoConstraints = NO;
+	[self addSubview:topBar];
+	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[topBar(==2)]-(>=0)-|"
+																 options:0 metrics:0 views:views]];
+	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[topBar(>=0)]-(==0)-|"
+																 options:0 metrics:0 views:views]];
 }
 
 /**
@@ -178,7 +234,7 @@
 	_collectionView.translatesAutoresizingMaskIntoConstraints = NO;
 	_earthKey.translatesAutoresizingMaskIntoConstraints = NO;
 	_deleteKey.translatesAutoresizingMaskIntoConstraints = NO;
-	
+
 	NSDictionary *views = NSDictionaryOfVariableBindings(_collectionView, _earthKey, _deleteKey);
 	
 	_earthKeyWidthConstraint = [NSLayoutConstraint constraintWithItem:_earthKey
@@ -210,11 +266,13 @@
 
 #pragma mark - IBAction
 
-- (IBAction)pushEarthKey:(id)sender {
+- (IBAction)pushEarthKey:(UIButton*)sender {
+	sender.backgroundColor = [UIColor highlightedKeyColor];
 	[self.delegate toolbar:self didPushEarthButton:sender];
 }
 
-- (IBAction)pushDeleteKey:(id)sender {
+- (IBAction)pushDeleteKey:(UIButton*)sender {
+	sender.backgroundColor = [UIColor highlightedKeyColor];
 	[self.delegate toolbar:self didPushDeleteButton:sender];
 }
 
@@ -257,6 +315,7 @@
 		[self prepareButton];
 		[self prepareCollectionView];
 		[self setupAutolayout];
+		[self setupTopBorderLine];
 	}
 	return self;
 }
@@ -295,6 +354,26 @@
 	return [_groups count];
 }
 
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
+		   viewForSupplementaryElementOfKind:(NSString *)kind
+								 atIndexPath:(NSIndexPath *)indexPath {
+	if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+		AAKToolbarHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+																				withReuseIdentifier:@"AAKToolbarHeaderView"
+																					   forIndexPath:indexPath];
+		return headerView;
+	}
+	else if ([kind isEqualToString:UICollectionElementKindSectionFooter]) {
+		AAKToolbarFooterView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter
+																			  withReuseIdentifier:@"AAKToolbarFooterView"
+																					 forIndexPath:indexPath];
+		return footerView;
+	}
+	else {
+		return nil;
+	}
+}
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
 	AAKToolbarCell *cell = nil;
 	AAKASCIIArtGroup *group = [_groups objectAtIndex:indexPath.item];
@@ -309,9 +388,17 @@
 	cell.group = group;
 	cell.delegate = self;
 	[cell setOriginalHighlighted:(cell.group.key == _currentGroup.key)];
-	cell.isHead = (indexPath.item == 0);
+	cell.isTail = (indexPath.item == ([_groups count] - 1));
 	
 	return cell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
+	return CGSizeMake(2, _height);
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
+	return CGSizeMake(2, _height);
 }
 
 @end
