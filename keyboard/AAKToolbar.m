@@ -258,12 +258,12 @@
 
 - (IBAction)pushEarthKey:(UIButton*)sender {
 	sender.backgroundColor = [UIColor colorWithRed:187/255.0f green:190/255.0f blue:195/255.0f alpha:1];
-//	[self.delegate toolbar:self didPushEarthButton:sender];
+	[self.delegate toolbar:self didPushEarthButton:sender];
 }
 
 - (IBAction)pushDeleteKey:(UIButton*)sender {
 	sender.backgroundColor = [UIColor colorWithRed:187/255.0f green:190/255.0f blue:195/255.0f alpha:1];
-//	[self.delegate toolbar:self didPushDeleteButton:sender];
+	[self.delegate toolbar:self didPushDeleteButton:sender];
 }
 
 #pragma mark - Setter
