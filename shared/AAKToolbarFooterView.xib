@@ -23,7 +23,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="_imageView" destination="Hab-ER-RTb" id="loL-bR-Q5w"/>
+                <outlet property="_leftSeperatorImageView" destination="Hab-ER-RTb" id="7wi-gW-QQ3"/>
             </connections>
         </view>
     </objects>

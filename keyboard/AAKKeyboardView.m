@@ -81,7 +81,7 @@
 	_collectionView.backgroundColor = [UIColor keyColor];
 	_collectionView.delegate = self;
 	_collectionView.dataSource = self;
-	_collectionView.contentInset = UIEdgeInsetsMake(0, -2, 0, -2);
+	_collectionView.contentInset = UIEdgeInsetsMake(0, -2, 0, -2);	// 端の線を常に表示させないためにヘッダとフッターを隠す
 	[self addSubview:_collectionView];
 	
 	// supplementary

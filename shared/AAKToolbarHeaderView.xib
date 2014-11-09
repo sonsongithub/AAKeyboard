@@ -23,7 +23,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="_imageView" destination="dNw-Ea-Bo1" id="XN7-UZ-5Rq"/>
+                <outlet property="_rightSeperatorImageView" destination="dNw-Ea-Bo1" id="VUQ-YE-kGE"/>
             </connections>
             <point key="canvasLocation" x="357" y="284"/>
         </view>

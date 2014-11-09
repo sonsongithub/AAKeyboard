@@ -60,11 +60,19 @@
 	}
 }
 
+/**
+ * 両サイドのボタンを押下したときに，そのボタンの背景色を反転させる．
+ * @param sender
+ **/
 - (void)buttonHighlight:(UIButton*)sender {
 	// 両脇のボタンはハイライトと通常の色が逆
 	sender.backgroundColor = [UIColor keyColor];
 }
 
+/**
+ * 両サイドのボタンを押下したときに，そのボタンの背景色を反転させる．
+ * @param sender
+ **/
 - (void)buttonStopHighlight:(UIButton*)sender {
 	// 両脇のボタンはハイライトと通常の色が逆
 	sender.backgroundColor = [UIColor highlightedKeyColor];
@@ -189,7 +197,7 @@
 	_collectionView.backgroundColor = [UIColor keyColor];
 	_collectionView.delegate = self;
 	_collectionView.dataSource = self;
-	_collectionView.contentInset = UIEdgeInsetsMake(0, -2, 0, -2);
+	_collectionView.contentInset = UIEdgeInsetsMake(0, -2, 0, -2);	// 端の線を常に表示させないためにヘッダとフッターを隠す
 	[self addSubview:_collectionView];
 	
 	// supplementary resources

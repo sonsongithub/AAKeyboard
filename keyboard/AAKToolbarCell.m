@@ -12,6 +12,18 @@
 
 @implementation AAKToolbarCell
 
+#pragma mark - Setter
+
+/**
+ * セルがセクションの末尾にあるかのフラグ．
+ * 末尾にある場合は，枠線を表示しない．
+ * @param isTail
+ **/
+- (void)setIsTail:(BOOL)isTail {
+	_isTail = isTail;
+	_imageView.hidden = _isTail;
+}
+
 #pragma mark - Instance method
 
 /**
@@ -40,11 +52,6 @@
 	[_label sizeToFit];
 }
 
-- (void)setIsTail:(BOOL)isTail {
-	_isTail = isTail;
-	_imageView.hidden = _isTail;
-}
-
 /**
  * グループのタイトルを表示するラベルのフォントサイズを指定する．
  * 画面の回転によってフォントサイズが変更されるために，このメソッドが必要．
@@ -55,6 +62,9 @@
 	_label.font = [UIFont systemFontOfSize:_fontSize];
 }
 
+/**
+ * セルの右端に配置する縦線をセットアップする．
+ **/
 - (void)setupVerticalSeperator {
 	UIImage *temp = [UIImage imageNamed:@"rightEdge"];
 	UIImage *temp2 = [temp stretchableImageWithLeftCapWidth:1 topCapHeight:1];
@@ -80,15 +90,6 @@
 	[self setupVerticalSeperator];
 	
 	self.contentView.backgroundColor = [UIColor keyColor];
-	
-#if 0
-	NSDictionary *views = NSDictionaryOfVariableBindings(_label);
-	_label.translatesAutoresizingMaskIntoConstraints = NO;
-	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_label]-0-|"
-																 options:0 metrics:0 views:views]];
-	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_label]-0-|"
-																 options:0 metrics:0 views:views]];
-#endif
 }
 
 #pragma mark - Override

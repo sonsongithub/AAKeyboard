@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ * UICollectionViewの右端に枠線を描画するためのフッタービュー
+ **/
 @interface AAKToolbarFooterView : UICollectionReusableView
-
 @end

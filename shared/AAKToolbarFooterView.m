@@ -9,7 +9,7 @@
 #import "AAKToolbarFooterView.h"
 
 @interface AAKToolbarFooterView() {
-	IBOutlet UIImageView *_imageView;
+	IBOutlet UIImageView *_leftSeperatorImageView;
 }
 @end
 
@@ -19,7 +19,7 @@
 	[super awakeFromNib];
 	UIImage *temp = [UIImage imageNamed:@"leftEdge"];
 	UIImage *temp2 = [temp stretchableImageWithLeftCapWidth:1 topCapHeight:1];
-	_imageView.image = temp2;
+	_leftSeperatorImageView.image = temp2;
 	self.backgroundColor = [UIColor clearColor];
 }
 
