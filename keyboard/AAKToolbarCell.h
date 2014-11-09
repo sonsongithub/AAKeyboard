@@ -23,11 +23,13 @@
 
 @interface AAKToolbarCell : UICollectionViewCell {
 	IBOutlet UILabel *_label;
+	UIImageView *_imageView;
 }
 @property (nonatomic, readonly) UILabel *label;
 @property (nonatomic, assign) AAKASCIIArtGroup *group;
 @property (nonatomic, assign) CGFloat fontSize;
-@property (nonatomic, assign) BOOL isHead;
+@property (nonatomic, assign) BOOL isTail;
 @property (nonatomic, assign) id <AAKToolbarCellDelegate> delegate;
+- (void)setupVerticalSeperator;
 - (void)setOriginalHighlighted:(BOOL)highlighted;
 @end

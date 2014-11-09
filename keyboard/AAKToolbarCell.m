@@ -36,6 +36,11 @@
 	[_label sizeToFit];
 }
 
+- (void)setIsTail:(BOOL)isTail {
+	_isTail = isTail;
+	_imageView.hidden = _isTail;
+}
+
 /**
  * グループのタイトルを表示するラベルのフォントサイズを指定する．
  * 画面の回転によってフォントサイズが変更されるために，このメソッドが必要．
@@ -44,6 +49,13 @@
 - (void)setFontSize:(CGFloat)fontSize {
 	_fontSize = fontSize;
 	_label.font = [UIFont systemFontOfSize:_fontSize];
+}
+
+- (void)setupVerticalSeperator {
+	UIImage *temp = [UIImage imageNamed:@"rightEdge"];
+	UIImage *temp2 = [temp stretchableImageWithLeftCapWidth:1 topCapHeight:1];
+	_imageView = [[UIImageView alloc] initWithImage:temp2];
+	[self.contentView addSubview:_imageView];
 }
 
 /**
@@ -61,6 +73,10 @@
 	_label.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
 	[_label setFont:[UIFont systemFontOfSize:16]];
 	[self.contentView addSubview:_label];
+
+	[self setupVerticalSeperator];
+	
+	self.contentView.backgroundColor = [UIColor colorWithRed:203/255.0f green:203/255.0f blue:203/255.0f alpha:1];
 	
 #if 0
 	NSDictionary *views = NSDictionaryOfVariableBindings(_label);
@@ -79,7 +95,9 @@
 
 - (void)layoutSubviews {
 	// タイトルラベルをセンタリング．
+	[super layoutSubviews];
 	_label.center = self.contentView.center;
+	_imageView.frame = self.contentView.bounds;
 }
 
 - (void)setBounds:(CGRect)bounds {
@@ -102,7 +120,7 @@
 - (void)prepareForReuse {
 	[super prepareForReuse];
 	[self setNeedsDisplay];
-	self.isHead = NO;
+	self.isTail = NO;
 }
 
 - (id)initWithFrame:(CGRect)frame {
@@ -116,16 +134,16 @@
 	[self privateInit];
 }
 
-- (void)drawRect:(CGRect)rect {
-	CGContextRef context = UIGraphicsGetCurrentContext();
-	[[UIColor colorWithRed:254.0/255.0f green:254.0/255.0f blue:254.0/255.0f alpha:1] setFill];
-	CGContextFillRect(context, rect);
-	[[UIColor colorWithRed:23.0/255.0f green:23.0/255.0f blue:23.0/255.0f alpha:1] setFill];
-//	CGContextFillRect(context, CGRectMake(0, 0, rect.size.width, 0.5));
-	CGContextFillRect(context, CGRectMake(rect.size.width - 0.5, 0, 0.5, rect.size.height));
-	if (self.isHead)
-		CGContextFillRect(context, CGRectMake(0, 0, 0.5, rect.size.height));
-//	CGContextFillRect(context, CGRectMake(0, rect.size.height - 0.5, rect.size.width, 0.5));
-}
+//- (void)drawRect:(CGRect)rect {
+//	CGContextRef context = UIGraphicsGetCurrentContext();
+//	[[UIColor colorWithRed:254.0/255.0f green:254.0/255.0f blue:254.0/255.0f alpha:1] setFill];
+//	CGContextFillRect(context, rect);
+//	[[UIColor colorWithRed:23.0/255.0f green:23.0/255.0f blue:23.0/255.0f alpha:1] setFill];
+////	CGContextFillRect(context, CGRectMake(0, 0, rect.size.width, 0.5));
+//	CGContextFillRect(context, CGRectMake(rect.size.width - 0.5, 0, 0.5, rect.size.height));
+//	if (self.isHead)
+//		CGContextFillRect(context, CGRectMake(0, 0, 0.5, rect.size.height));
+////	CGContextFillRect(context, CGRectMake(0, rect.size.height - 0.5, rect.size.width, 0.5));
+//}
 
 @end

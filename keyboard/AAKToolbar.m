@@ -10,6 +10,8 @@
 
 #import "AAKToolbarCell.h"
 #import "AAKToolbarHistoryCell.h"
+#import "AAKToolbarHeaderView.h"
+#import "AAKToolbarFooterView.h"
 
 #import "AAKShared.h"
 
@@ -67,16 +69,26 @@
 	_earthKey = [[UIButton alloc] initWithFrame:CGRectZero];
 	[_earthKey setImage:[UIImage imageNamed:@"earth"] forState:UIControlStateNormal];
 	[_earthKey addTarget:self action:@selector(pushEarthKey:) forControlEvents:UIControlEventTouchUpInside];
-	[_earthKey setBackgroundImage:[UIImage imageNamed:@"buttonBackHighlightedState"] forState:UIControlStateHighlighted];
-	[_earthKey setBackgroundImage:[UIImage imageNamed:@"buttonBackNormalState"] forState:UIControlStateNormal];
+	[_earthKey setBackgroundColor:[UIColor colorWithRed:203/255.0f green:203/255.0f blue:203/255.0f alpha:1]];
+	
+	{
+		UIImage *temp = [UIImage imageNamed:@"rightEdge"];
+		UIImage *temp2 = [temp stretchableImageWithLeftCapWidth:1 topCapHeight:1];
+		[_earthKey setBackgroundImage:temp2 forState:UIControlStateNormal];
+		[_earthKey setBackgroundImage:temp2 forState:UIControlStateHighlighted];
+	}
 	
 	_deleteKey = [[UIButton alloc] initWithFrame:CGRectZero];
 	[_deleteKey setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
 	_deleteKey.backgroundColor = [UIColor colorWithRed:203/255.0f green:203/255.0f blue:203/255.0f alpha:1];
 	[_deleteKey addTarget:self action:@selector(pushDeleteKey:) forControlEvents:UIControlEventTouchUpInside];
-	[_deleteKey setBackgroundImage:[UIImage imageNamed:@"buttonBackHighlightedState"] forState:UIControlStateHighlighted];
-	[_deleteKey setBackgroundImage:[UIImage imageNamed:@"buttonBackNormalState"] forState:UIControlStateNormal];
 	
+	{
+		UIImage *temp = [UIImage imageNamed:@"leftEdge"];
+		UIImage *temp2 = [temp stretchableImageWithLeftCapWidth:1 topCapHeight:1];
+		[_deleteKey setBackgroundImage:temp2 forState:UIControlStateNormal];
+		[_deleteKey setBackgroundImage:temp2 forState:UIControlStateHighlighted];
+	}
 	[self addSubview:_earthKey];
 	[self addSubview:_deleteKey];
 }
@@ -168,6 +180,16 @@
 	_collectionView.delegate = self;
 	_collectionView.dataSource = self;
 	
+	{
+		UINib *nib = [UINib nibWithNibName:@"AAKToolbarHeaderView" bundle:nil];
+		[_collectionView registerNib:nib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"AAKToolbarHeaderView"];
+	}
+	{
+		UINib *nib = [UINib nibWithNibName:@"AAKToolbarFooterView" bundle:nil];
+		[_collectionView registerNib:nib forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"AAKToolbarFooterView"];
+	}
+	
+	
 	[self addSubview:_collectionView];
 }
 
@@ -179,7 +201,11 @@
 	_earthKey.translatesAutoresizingMaskIntoConstraints = NO;
 	_deleteKey.translatesAutoresizingMaskIntoConstraints = NO;
 	
-	NSDictionary *views = NSDictionaryOfVariableBindings(_collectionView, _earthKey, _deleteKey);
+	UIImageView *topBar = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"topEdge"]];
+	topBar.translatesAutoresizingMaskIntoConstraints = NO;
+
+
+	NSDictionary *views = NSDictionaryOfVariableBindings(_collectionView, _earthKey, _deleteKey, topBar);
 	
 	_earthKeyWidthConstraint = [NSLayoutConstraint constraintWithItem:_earthKey
 															attribute:NSLayoutAttributeWidth
@@ -205,6 +231,12 @@
 	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_earthKey(>=0)]-(==0)-|"
 																 options:0 metrics:0 views:views]];
 	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_deleteKey(>=0)]-(==0)-|"
+																 options:0 metrics:0 views:views]];
+	
+	[self addSubview:topBar];
+	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[topBar(==1)]-(>=0)-|"
+																 options:0 metrics:0 views:views]];
+	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[topBar(>=0)]-(==0)-|"
 																 options:0 metrics:0 views:views]];
 }
 
@@ -257,6 +289,8 @@
 		[self prepareButton];
 		[self prepareCollectionView];
 		[self setupAutolayout];
+		
+		_collectionView.contentInset = UIEdgeInsetsMake(0, -20, 0, -20);
 	}
 	return self;
 }
@@ -295,6 +329,26 @@
 	return [_groups count];
 }
 
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
+		   viewForSupplementaryElementOfKind:(NSString *)kind
+								 atIndexPath:(NSIndexPath *)indexPath {
+	if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+		AAKToolbarHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+																				withReuseIdentifier:@"AAKToolbarHeaderView"
+																					   forIndexPath:indexPath];
+		return headerView;
+	}
+	else if ([kind isEqualToString:UICollectionElementKindSectionFooter]) {
+		AAKToolbarFooterView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter
+																			  withReuseIdentifier:@"AAKToolbarFooterView"
+																					 forIndexPath:indexPath];
+		return footerView;
+	}
+	else {
+		return nil;
+	}
+}
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
 	AAKToolbarCell *cell = nil;
 	AAKASCIIArtGroup *group = [_groups objectAtIndex:indexPath.item];
@@ -309,9 +363,17 @@
 	cell.group = group;
 	cell.delegate = self;
 	[cell setOriginalHighlighted:(cell.group.key == _currentGroup.key)];
-	cell.isHead = (indexPath.item == 0);
+	cell.isTail = (indexPath.item == ([_groups count] - 1));
 	
 	return cell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
+	return CGSizeMake(20, _height);
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
+	return CGSizeMake(20, _height);
 }
 
 @end

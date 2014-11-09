@@ -22,8 +22,12 @@
  * テキストビューの生成，レイアウト，背景色の設定，ジェスチャのアタッチを行う．
  **/
 - (void)privateInit {
-	self.backgroundColor = [UIColor blueColor];
-	self.contentView.backgroundColor = [UIColor clearColor];
+	
+	self.contentView.backgroundColor = [UIColor colorWithRed:203/255.0f green:203/255.0f blue:203/255.0f alpha:1];
+//	self.backgroundColor = [UIColor blueColor];
+//	self.contentView.backgroundColor = [UIColor clearColor];
+	
+	[self setupVerticalSeperator];
 	
 	_iconImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"history"]];
 	[self.contentView addSubview:_iconImageView];
@@ -37,6 +41,7 @@
 - (void)layoutSubviews {
 	// アイコン画像をセンタリング
 	_iconImageView.center = self.contentView.center;
+	_imageView.frame = self.contentView.bounds;
 }
 
 @end
