@@ -18,6 +18,7 @@
 	UICollectionView			*_collectionView;
 	UICollectionViewFlowLayout	*_collectionFlowLayout;
 	NSArray						*_asciiarts;
+	UIKeyboardAppearance		_keyboardAppearance;
 }
 @end
 
@@ -57,7 +58,7 @@
  * グループ選択や切り替え，削除ボタンためのツールバーを初期化する．
  **/
 - (void)prepareToolbar {
-	_toolbar = [[AAKToolbar alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+	_toolbar = [[AAKToolbar alloc] initWithFrame:CGRectZero keyboardAppearance:_keyboardAppearance];
 	_toolbar.delegate = self;
 	[self addSubview:_toolbar];
 }
@@ -128,6 +129,30 @@
 	_asciiarts = [_toolbar asciiArtsForCurrentGroup];
 }
 
+/**
+ * AAKKeyboardViewクラスを初期化する．
+ * @param frame ビューのframeを指定する．
+ * @param keyboardAppearance 表示中のキーボードのアピアランス．
+ * @return 初期化されたAAKKeyboardViewオブジェクト．
+ **/
+- (instancetype)initWithFrame:(CGRect)frame keyboardAppearance:(UIKeyboardAppearance)keyboardAppearance {
+	self = [super initWithFrame:frame];
+	if (self) {
+		_keyboardAppearance = keyboardAppearance;
+		
+		[self prepareToolbar];
+		
+		[self prepareCollectionView];
+		
+		[self setupAutolayout];
+		
+		[self updateASCIIArtsForCurrentGroup];
+		
+		[self updateConstraints];
+	}
+	return self;
+}
+
 #pragma mark - AAKToolbarDelegate
 
 - (void)didSelectGroupToolbar:(AAKToolbar*)toolbar {
@@ -143,24 +168,6 @@
 
 - (void)toolbar:(AAKToolbar*)toolbar didPushDeleteButton:(UIButton*)button {
 	[self.delegate keyboardViewDidPushDeleteButton:self];
-}
-
-#pragma mark - Override
-
-- (instancetype)initWithFrame:(CGRect)frame {
-	self = [super initWithFrame:frame];
-	if (self) {
-		[self prepareToolbar];
-		
-		[self prepareCollectionView];
-		
-		[self setupAutolayout];
-		
-		[self updateASCIIArtsForCurrentGroup];
-		
-		[self updateConstraints];
-	}
-	return self;
 }
 
 #pragma mark - UICollectionViewDelegate, UICollectionViewDataSource

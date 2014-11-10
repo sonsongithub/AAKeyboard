@@ -108,7 +108,7 @@
 	
 	// キーボードビューをセットアップ
 	self.view.translatesAutoresizingMaskIntoConstraints = NO;
-	_keyboardView = [[AAKKeyboardView alloc] initWithFrame:self.view.bounds];
+	_keyboardView = [[AAKKeyboardView alloc] initWithFrame:self.view.bounds keyboardAppearance:self.textDocumentProxy.keyboardAppearance];
 	_keyboardView.translatesAutoresizingMaskIntoConstraints = NO;
 	_keyboardView.delegate = self;
 	[self.view addSubview:_keyboardView];
@@ -141,12 +141,6 @@
 }
 
 - (void)textDidChange:(id<UITextInput>)textInput {
-    UIColor *textColor = nil;
-    if (self.textDocumentProxy.keyboardAppearance == UIKeyboardAppearanceDark) {
-        textColor = [UIColor whiteColor];
-    } else {
-        textColor = [UIColor blackColor];
-    }
 }
 
 @end

@@ -22,6 +22,7 @@
 	NSArray						*_groups;
 	NSLayoutConstraint			*_earthKeyWidthConstraint;
 	NSLayoutConstraint			*_deleteKeyWidthConstraint;
+	UIKeyboardAppearance		_keyboardAppearance;
 }
 @end
 
@@ -264,6 +265,35 @@
 																 options:0 metrics:0 views:views]];
 }
 
+/**
+ * AAKToolbarクラスを初期化する．
+ * @param frame ビューのframeを指定する．
+ * @param keyboardAppearance 表示中のキーボードのアピアランス．
+ * @return 初期化されたAAKToolbarオブジェクト．
+ **/
+- (instancetype)initWithFrame:(CGRect)frame keyboardAppearance:(UIKeyboardAppearance)keyboardAppearance {
+	self = [super initWithFrame:frame];
+	if (self) {
+		_keyboardAppearance = keyboardAppearance;
+		
+		_groups = [[AAKKeyboardDataManager defaultManager] groups];
+		
+		[self updateWithWidth:100];
+		
+		NSInteger groupKey = [[NSUserDefaults standardUserDefaults] integerForKey:@"groupKey"];
+		_currentGroup = [self groupForGroupKey:groupKey];
+		
+		self.backgroundColor = [UIColor redColor];
+		_height = 48;
+		_fontSize = 14;
+		[self prepareButton];
+		[self prepareCollectionView];
+		[self setupAutolayout];
+		[self setupTopBorderLine];
+	}
+	return self;
+}
+
 #pragma mark - IBAction
 
 - (IBAction)pushEarthKey:(UIButton*)sender {
@@ -296,28 +326,6 @@
 - (void)dealloc {
 	[[NSUserDefaults standardUserDefaults] setInteger:_currentGroup.key forKey:@"groupKey"];
 	[[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-- (instancetype)initWithFrame:(CGRect)frame {
-	self = [super initWithFrame:frame];
-	if (self) {
-		
-		_groups = [[AAKKeyboardDataManager defaultManager] groups];
-		
-		[self updateWithWidth:100];
-		
-		NSInteger groupKey = [[NSUserDefaults standardUserDefaults] integerForKey:@"groupKey"];
-		_currentGroup = [self groupForGroupKey:groupKey];
-		
-		self.backgroundColor = [UIColor redColor];
-		_height = 48;
-		_fontSize = 14;
-		[self prepareButton];
-		[self prepareCollectionView];
-		[self setupAutolayout];
-		[self setupTopBorderLine];
-	}
-	return self;
 }
 
 #pragma mark - UICollectionViewDelegate, UICollectionViewDataSource
