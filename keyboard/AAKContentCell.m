@@ -72,7 +72,12 @@
 
 - (void)setKeyboardAppearance:(UIKeyboardAppearance)keyboardAppearance {
 	_keyboardAppearance = keyboardAppearance;
-	self.selectedBackgroundView.backgroundColor = [UIColor highlightedKeyColorForKeyboardAppearance:_keyboardAppearance];
+	if (keyboardAppearance == UIKeyboardAppearanceDark) {
+		self.selectedBackgroundView.backgroundColor = [UIColor lightColorForDarkMode];
+	}
+	else {
+		self.selectedBackgroundView.backgroundColor = [UIColor highlightedKeyColor];
+	}
 }
 
 #pragma mark - Override

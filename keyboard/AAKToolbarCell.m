@@ -24,6 +24,10 @@
 	_imageView.hidden = _isTail;
 }
 
+- (void)setKeyboardAppearance:(UIKeyboardAppearance)keyboardAppearance {
+	_keyboardAppearance = keyboardAppearance;
+}
+
 #pragma mark - Instance method
 
 /**
@@ -33,12 +37,24 @@
 - (void)setOriginalHighlighted:(BOOL)highlighted {
 	[super setHighlighted:highlighted];
 	if (highlighted) {
-		_label.textColor = [UIColor whiteColor];
-		self.contentView.backgroundColor = [UIColor highlightedKeyColor];
+		if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+			_label.textColor = [UIColor whiteColor];
+			self.contentView.backgroundColor = [UIColor colorWithRed:50/255.0f green:50/255.0f blue:50/255.0f alpha:0.1f];
+		}
+		else {
+			_label.textColor = [UIColor whiteColor];
+			self.contentView.backgroundColor = [UIColor highlightedKeyColor];
+		}
 	}
 	else {
-		_label.textColor = [UIColor blackColor];
-		self.contentView.backgroundColor = [UIColor keyColor];
+		if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+			_label.textColor = [UIColor whiteColor];
+			self.contentView.backgroundColor = [UIColor colorWithRed:200/255.0f green:200/255.0f blue:200/255.0f alpha:0.1f];
+		}
+		else {
+			_label.textColor = [UIColor blackColor];
+			self.contentView.backgroundColor = [UIColor keyColorForKeyboardAppearance:_keyboardAppearance];
+		}
 	}
 }
 
@@ -77,19 +93,24 @@
  * テキストビューの生成，レイアウト，背景色の設定，ジェスチャのアタッチを行う．
  **/
 - (void)privateInit {
-	self.backgroundColor = [UIColor blueColor];
+	self.backgroundColor = [UIColor clearColor];
 	self.contentView.backgroundColor = [UIColor clearColor];
 	_label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-	_label.textColor = [UIColor blackColor];
 	_label.textAlignment = NSTextAlignmentCenter;
 	_label.adjustsFontSizeToFitWidth = YES;
 	_label.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
 	[_label setFont:[UIFont systemFontOfSize:16]];
+	
+	if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+		_label.textColor = [UIColor whiteColor];
+	}
+	else {
+		_label.textColor = [UIColor blackColor];
+	}
+	
 	[self.contentView addSubview:_label];
 
 	[self setupVerticalSeperator];
-	
-	self.contentView.backgroundColor = [UIColor keyColor];
 }
 
 #pragma mark - Override
@@ -97,7 +118,7 @@
 - (void)layoutSubviews {
 	// タイトルラベルをセンタリング．
 	[super layoutSubviews];
-	_label.center = self.contentView.center;
+	_label.center = CGPointFloor(self.contentView.center);
 	_imageView.frame = self.contentView.bounds;
 }
 

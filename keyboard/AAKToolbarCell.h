@@ -29,6 +29,7 @@
 @property (nonatomic, assign) AAKASCIIArtGroup *group;
 @property (nonatomic, assign) CGFloat fontSize;
 @property (nonatomic, assign) BOOL isTail;
+@property (nonatomic, assign) UIKeyboardAppearance keyboardAppearance;
 @property (nonatomic, assign) id <AAKToolbarCellDelegate> delegate;
 - (void)setupVerticalSeperator;
 - (void)setOriginalHighlighted:(BOOL)highlighted;

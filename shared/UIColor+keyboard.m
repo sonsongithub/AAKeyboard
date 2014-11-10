@@ -40,4 +40,12 @@
 	return [UIColor colorWithRed:247/255.0f green:248/255.0f blue:249/255.0f alpha:1];
 }
 
++ (UIColor*)darkColorForDarkMode {
+	return [UIColor colorWithRed:50/255.0f green:50/255.0f blue:50/255.0f alpha:0.1f];
+}
+
++ (UIColor*)lightColorForDarkMode {
+	return [UIColor colorWithRed:200/255.0f green:200/255.0f blue:200/255.0f alpha:0.1f];
+}
+
 @end

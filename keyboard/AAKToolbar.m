@@ -67,7 +67,12 @@
  **/
 - (void)buttonHighlight:(UIButton*)sender {
 	// 両脇のボタンはハイライトと通常の色が逆
-	sender.backgroundColor = [UIColor keyColor];
+	if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+		sender.backgroundColor = [UIColor lightColorForDarkMode];
+	}
+	else {
+		sender.backgroundColor = [UIColor keyColor];
+	}
 }
 
 /**
@@ -76,7 +81,12 @@
  **/
 - (void)buttonStopHighlight:(UIButton*)sender {
 	// 両脇のボタンはハイライトと通常の色が逆
-	sender.backgroundColor = [UIColor highlightedKeyColor];
+	if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+		sender.backgroundColor = [UIColor darkColorForDarkMode];
+	}
+	else {
+		sender.backgroundColor = [UIColor highlightedKeyColor];
+	}
 }
 
 /**
@@ -85,12 +95,21 @@
 - (void)prepareButton {
 	{
 		_earthKey = [[UIButton alloc] initWithFrame:CGRectZero];
-		[_earthKey setImage:[UIImage imageNamed:@"earth"] forState:UIControlStateNormal];
-		[_earthKey setImage:[UIImage imageNamed:@"earth"] forState:UIControlStateHighlighted];
 		[_earthKey addTarget:self action:@selector(pushEarthKey:) forControlEvents:UIControlEventTouchUpInside];
 		[_earthKey addTarget:self action:@selector(buttonHighlight:) forControlEvents:UIControlEventTouchDown];
 		[_earthKey addTarget:self action:@selector(buttonStopHighlight:) forControlEvents:UIControlEventTouchUpOutside];
-		[_earthKey setBackgroundColor:[UIColor highlightedKeyColor]];
+		
+		if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+			[_earthKey setBackgroundColor:[UIColor darkColorForDarkMode]];
+			[_earthKey setImage:[UIImage imageNamed:@"earthHighlighted"] forState:UIControlStateNormal];
+			[_earthKey setImage:[UIImage imageNamed:@"earthHighlighted"] forState:UIControlStateHighlighted];
+		}
+		else {
+			[_earthKey setBackgroundColor:[UIColor highlightedKeyColor]];
+			[_earthKey setImage:[UIImage imageNamed:@"earth"] forState:UIControlStateNormal];
+			[_earthKey setImage:[UIImage imageNamed:@"earth"] forState:UIControlStateHighlighted];
+		}
+		
 		UIImage *temp = [UIImage imageNamed:@"rightEdge"];
 		UIImage *temp2 = [temp stretchableImageWithLeftCapWidth:1 topCapHeight:1];
 		[_earthKey setBackgroundImage:temp2 forState:UIControlStateNormal];
@@ -98,8 +117,6 @@
 	}
 	{
 		_deleteKey = [[UIButton alloc] initWithFrame:CGRectZero];
-		[_deleteKey setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
-		[_deleteKey setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateHighlighted];
 		_deleteKey.backgroundColor = [UIColor highlightedKeyColor];
 		[_deleteKey addTarget:self action:@selector(pushDeleteKey:) forControlEvents:UIControlEventTouchUpInside];
 		[_deleteKey addTarget:self action:@selector(buttonHighlight:) forControlEvents:UIControlEventTouchDown];
@@ -108,6 +125,17 @@
 		UIImage *temp2 = [temp stretchableImageWithLeftCapWidth:1 topCapHeight:1];
 		[_deleteKey setBackgroundImage:temp2 forState:UIControlStateNormal];
 		[_deleteKey setBackgroundImage:temp2 forState:UIControlStateHighlighted];
+		
+		if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+			[_deleteKey setBackgroundColor:[UIColor darkColorForDarkMode]];
+			[_deleteKey setImage:[UIImage imageNamed:@"deleteHighlighted"] forState:UIControlStateNormal];
+			[_deleteKey setImage:[UIImage imageNamed:@"deleteHighlighted"] forState:UIControlStateHighlighted];
+		}
+		else {
+			[_deleteKey setBackgroundColor:[UIColor highlightedKeyColor]];
+			[_deleteKey setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
+			[_deleteKey setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateHighlighted];
+		}
 	}
 	[self addSubview:_earthKey];
 	[self addSubview:_deleteKey];
@@ -298,12 +326,23 @@
 #pragma mark - IBAction
 
 - (IBAction)pushEarthKey:(UIButton*)sender {
-	sender.backgroundColor = [UIColor highlightedKeyColor];
+	if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+		sender.backgroundColor = [UIColor darkColorForDarkMode];
+	}
+	else {
+		sender.backgroundColor = [UIColor highlightedKeyColor];
+	}
 	[self.delegate toolbar:self didPushEarthButton:sender];
 }
 
 - (IBAction)pushDeleteKey:(UIButton*)sender {
-	sender.backgroundColor = [UIColor highlightedKeyColor];
+	
+	if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+		sender.backgroundColor = [UIColor darkColorForDarkMode];
+	}
+	else {
+		sender.backgroundColor = [UIColor highlightedKeyColor];
+	}
 	[self.delegate toolbar:self didPushDeleteButton:sender];
 }
 
@@ -394,6 +433,7 @@
 		cell = [cv dequeueReusableCellWithReuseIdentifier:@"AAKToolbarCell" forIndexPath:indexPath];
 	}
 	
+	cell.keyboardAppearance = _keyboardAppearance;
 	cell.group = group;
 	cell.delegate = self;
 	[cell setOriginalHighlighted:(cell.group.key == _currentGroup.key)];

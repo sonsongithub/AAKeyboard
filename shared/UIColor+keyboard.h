@@ -16,4 +16,7 @@
 + (UIColor*)keyColorForKeyboardAppearance:(UIKeyboardAppearance)keyboardApperance;
 + (UIColor*)highlightedKeyColorForKeyboardAppearance:(UIKeyboardAppearance)keyboardApperance;
 
++ (UIColor*)darkColorForDarkMode;
++ (UIColor*)lightColorForDarkMode;
+
 @end

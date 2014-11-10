@@ -79,7 +79,12 @@
 	_collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_collectionFlowLayout];
 	_collectionView.alwaysBounceHorizontal = YES;
 	_collectionView.showsHorizontalScrollIndicator = NO;
-	_collectionView.backgroundColor = [UIColor keyColorForKeyboardAppearance:_keyboardAppearance];
+	if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+		_collectionView.backgroundColor = [UIColor darkColorForDarkMode];
+	}
+	else {
+		_collectionView.backgroundColor = [UIColor keyColorForKeyboardAppearance:_keyboardAppearance];
+	}
 	_collectionView.delegate = self;
 	_collectionView.dataSource = self;
 	_collectionView.contentInset = UIEdgeInsetsMake(0, -2, 0, -2);	// 端の線を常に表示させないためにヘッダとフッターを隠す

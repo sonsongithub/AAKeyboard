@@ -25,13 +25,25 @@
  **/
 - (void)setOriginalHighlighted:(BOOL)highlighted {
 	[super setHighlighted:highlighted];
-	if (highlighted) {
-		self.contentView.backgroundColor = [UIColor highlightedKeyColor];
-		_iconImageView.image = [UIImage imageNamed:@"historyHighlighted"];
+	if (self.keyboardAppearance == UIKeyboardAppearanceDark) {
+		if (highlighted) {
+			self.contentView.backgroundColor = [UIColor darkColorForDarkMode];
+			_iconImageView.image = [UIImage imageNamed:@"historyHighlighted"];
+		}
+		else {
+			self.contentView.backgroundColor = [UIColor lightColorForDarkMode];
+			_iconImageView.image = [UIImage imageNamed:@"historyHighlighted"];
+		}
 	}
 	else {
-		self.contentView.backgroundColor = [UIColor keyColor];
-		_iconImageView.image = [UIImage imageNamed:@"history"];
+		if (highlighted) {
+			self.contentView.backgroundColor = [UIColor highlightedKeyColor];
+			_iconImageView.image = [UIImage imageNamed:@"historyHighlighted"];
+		}
+		else {
+			self.contentView.backgroundColor = [UIColor keyColor];
+			_iconImageView.image = [UIImage imageNamed:@"history"];
+		}
 	}
 }
 
