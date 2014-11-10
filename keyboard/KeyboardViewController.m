@@ -124,6 +124,12 @@
 																	  options:0 metrics:0 views:views]];
 }
 
+- (void)viewDidLoad {
+	[super viewDidLoad];
+	self.view.backgroundColor = [UIColor clearColor];
+	self.view.superview.backgroundColor = [UIColor clearColor];
+}
+
 #pragma mark - AAKeyboardViewDelegate
 
 - (void)keyboardViewDidPushEarthButton:(AAKKeyboardView*)keyboardView {

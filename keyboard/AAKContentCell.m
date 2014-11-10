@@ -52,7 +52,6 @@
 	
 	// 背景をセット
 	self.selectedBackgroundView = [[UIView alloc] initWithFrame:self.frame];
-	self.selectedBackgroundView.backgroundColor = [UIColor highlightedKeyColor];
 	
 	
 	UIImage *temp = [UIImage imageNamed:@"rightEdge"];
@@ -69,6 +68,11 @@
 - (void)setIsTail:(BOOL)isTail {
 	_isTail = isTail;
 	_seperator.hidden = _isTail;
+}
+
+- (void)setKeyboardAppearance:(UIKeyboardAppearance)keyboardAppearance {
+	_keyboardAppearance = keyboardAppearance;
+	self.selectedBackgroundView.backgroundColor = [UIColor highlightedKeyColorForKeyboardAppearance:_keyboardAppearance];
 }
 
 #pragma mark - Override

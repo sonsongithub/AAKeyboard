@@ -276,6 +276,8 @@
 	if (self) {
 		_keyboardAppearance = keyboardAppearance;
 		
+		self.backgroundColor = [UIColor clearColor];
+		
 		_groups = [[AAKKeyboardDataManager defaultManager] groups];
 		
 		[self updateWithWidth:100];

@@ -79,7 +79,7 @@
 	_collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_collectionFlowLayout];
 	_collectionView.alwaysBounceHorizontal = YES;
 	_collectionView.showsHorizontalScrollIndicator = NO;
-	_collectionView.backgroundColor = [UIColor keyColor];
+	_collectionView.backgroundColor = [UIColor keyColorForKeyboardAppearance:_keyboardAppearance];
 	_collectionView.delegate = self;
 	_collectionView.dataSource = self;
 	_collectionView.contentInset = UIEdgeInsetsMake(0, -2, 0, -2);	// 端の線を常に表示させないためにヘッダとフッターを隠す
@@ -138,6 +138,7 @@
 - (instancetype)initWithFrame:(CGRect)frame keyboardAppearance:(UIKeyboardAppearance)keyboardAppearance {
 	self = [super initWithFrame:frame];
 	if (self) {
+		self.backgroundColor = [UIColor clearColor];
 		_keyboardAppearance = keyboardAppearance;
 		
 		[self prepareToolbar];
@@ -208,11 +209,21 @@
 	cell.label.text = [NSString stringWithFormat:@"%ld", (long)indexPath.item];
 	CGFloat fontSize = 15;
 	AAKASCIIArt *source = _asciiarts[indexPath.item];
+	
+	UIColor *textColor = nil;
+	if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+		textColor = [UIColor whiteColor];
+	}
+	else {
+		textColor = [UIColor blackColor];
+	}
+	
 	NSParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyleWithFontSize:fontSize];
-	NSDictionary *attributes = @{NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:[UIFont fontWithName:@"Mona" size:fontSize]};
+	NSDictionary *attributes = @{NSForegroundColorAttributeName:textColor, NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:[UIFont fontWithName:@"Mona" size:fontSize]};
 	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:source.text attributes:attributes];
 	cell.textView.attributedString = string;
 	cell.isTail = ((_asciiarts.count - 1) == indexPath.item);
+	cell.keyboardAppearance = _keyboardAppearance;
 	[cell.label sizeToFit];
 	return cell;
 }
