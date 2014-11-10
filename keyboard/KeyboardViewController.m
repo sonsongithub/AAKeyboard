@@ -44,7 +44,11 @@
  * ビューコントローラのビューがlayoutSubviewsを実行した直後に呼ばれる，
  **/
 - (void)viewDidLayoutSubviews {
+	DNSLogMethod
 	[super viewDidLayoutSubviews];
+	
+	// キーボードビューをセットアップ
+	self.view.translatesAutoresizingMaskIntoConstraints = NO;
 	
 	// このキーボードビューのサイズをautolayoutで指定する．
 	CGRect screenBounds = [[UIScreen mainScreen] bounds];
@@ -83,8 +87,10 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+	DNSLogMethod
 	[super viewDidAppear:animated];
 	
+	// このタイミングでないとうまくいかない
 	// このビューの左右の端のマージンを設定する．
 	[self.view.superview addConstraint:[NSLayoutConstraint constraintWithItem:self.view
 																	attribute:NSLayoutAttributeLeading
@@ -101,13 +107,10 @@
 																	attribute:NSLayoutAttributeTrailing
 																   multiplier:1.0
 																	 constant:0.0]];
-}
-
-- (void)viewDidLoad {
-	[super viewDidLoad];
 	
-	// キーボードビューをセットアップ
-	self.view.translatesAutoresizingMaskIntoConstraints = NO;
+	// キーボードのメインビューを貼り付ける．
+	// textDocumentProxyのkeyboardAppearanceがviewDidAppearの前にきまる．
+	// viewDidLoadではアピアランスがわからないのでこのタイミングで初期化する必要がある．
 	_keyboardView = [[AAKKeyboardView alloc] initWithFrame:self.view.bounds keyboardAppearance:self.textDocumentProxy.keyboardAppearance];
 	_keyboardView.translatesAutoresizingMaskIntoConstraints = NO;
 	_keyboardView.delegate = self;
