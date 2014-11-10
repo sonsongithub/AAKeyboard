@@ -10,8 +10,10 @@
 
 @interface UIColor(keyboard)
 
-+ (UIColor*) keyColor;
++ (UIColor*)keyColor __attribute__((deprecated));
++ (UIColor*)highlightedKeyColor __attribute__((deprecated));
 
-+ (UIColor*) highlightedKeyColor;
++ (UIColor*)keyColorForKeyboardAppearance:(UIKeyboardAppearance)keyboardApperance;
++ (UIColor*)highlightedKeyColorForKeyboardAppearance:(UIKeyboardAppearance)keyboardApperance;
 
 @end

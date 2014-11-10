@@ -195,7 +195,7 @@
 	_collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_collectionFlowLayout];
 	_collectionView.alwaysBounceHorizontal = YES;
 	_collectionView.showsHorizontalScrollIndicator = NO;
-	_collectionView.backgroundColor = [UIColor keyColor];
+	_collectionView.backgroundColor = [UIColor keyColorForKeyboardAppearance:_keyboardAppearance];
 	_collectionView.delegate = self;
 	_collectionView.dataSource = self;
 	_collectionView.contentInset = UIEdgeInsetsMake(0, -2, 0, -2);	// 端の線を常に表示させないためにヘッダとフッターを隠す
@@ -283,7 +283,6 @@
 		NSInteger groupKey = [[NSUserDefaults standardUserDefaults] integerForKey:@"groupKey"];
 		_currentGroup = [self groupForGroupKey:groupKey];
 		
-		self.backgroundColor = [UIColor redColor];
 		_height = 48;
 		_fontSize = 14;
 		[self prepareButton];
