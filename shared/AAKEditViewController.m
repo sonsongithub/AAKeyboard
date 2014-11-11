@@ -8,6 +8,7 @@
 
 #import "AAKEditViewController.h"
 
+#import "AAKHelper.h"
 #import "AAKASCIIArt.h"
 #import "AAKASCIIArtGroup.h"
 #import "AAKSelectGroupViewController.h"
@@ -85,6 +86,17 @@
 	_AATextView.font = [UIFont fontWithName:@"Mona" size:10];
 	_AATextView.text = _asciiart.text;
 	[_groupTableView reloadData];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hoge:) name:UIKeyboardWillChangeFrameNotification object:nil];
+}
+
+- (void)hoge:(NSNotification*)notification {
+#ifndef TARGET_IS_EXTENSION
+	CGRect rect = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+	rect = [[[UIApplication sharedApplication] keyWindow] convertRect:rect toView:self.view];
+	CGFloat space = _AATextView.frame.origin.y + _AATextView.frame.size.height - rect.origin.y;
+	_bottomTextViewMargin.constant = space;
+#endif
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource

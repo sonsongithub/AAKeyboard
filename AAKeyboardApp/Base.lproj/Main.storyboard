@@ -444,6 +444,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="_AATextView" destination="VN4-Tq-4f2" id="UOQ-Do-VpI"/>
+                        <outlet property="_bottomTextViewMargin" destination="pPI-Uz-ON7" id="92T-3B-vCS"/>
                         <outlet property="_fontSizeSlider" destination="8pP-1H-dU3" id="a9g-9Y-scC"/>
                         <outlet property="_groupTableView" destination="lua-UD-dQf" id="Xfs-ww-6Kq"/>
                     </connections>
@@ -454,7 +455,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="editIcon" width="16" height="16"/>
+        <image name="editIcon" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="TvC-sY-SyO"/>

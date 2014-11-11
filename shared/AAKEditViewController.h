@@ -14,6 +14,7 @@
 @interface AAKEditViewController : UIViewController {
 	IBOutlet UISlider		*_fontSizeSlider;
 	IBOutlet UITableView	*_groupTableView;
+	IBOutlet NSLayoutConstraint *_bottomTextViewMargin;
 	AAKASCIIArt				*_asciiart;
 }
 @property (nonatomic, strong) AAKASCIIArt *asciiart;
