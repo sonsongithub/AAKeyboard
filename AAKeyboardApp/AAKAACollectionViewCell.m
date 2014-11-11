@@ -103,7 +103,7 @@ static NSInteger AAKCellButtonWidth = 96;						/** セルの複製，削除ボ�
 	DNSLogMainThread
 	CGPoint translate = [gestureRecognizer locationInView:self];
 	CGFloat diff = _startPoint.x - translate.x;
-	if (_movement + diff < AAKCellButtonWidth) {
+	if (_movement + diff < AAKCellButtonWidth * 0.6) {
 		_opened = NO;
 		_leftMargin.constant = 0;
 		_rightMargin.constant = 0;

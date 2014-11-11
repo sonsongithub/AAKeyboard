@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14B17" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Kz7-TH-ldM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14B23" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Kz7-TH-ldM">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -63,13 +63,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ya1-Nu-igY">
-                                <rect key="frame" x="528" y="560" width="46" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ya1-Nu-igY">
+                                <rect key="frame" x="532" y="532" width="48" height="48"/>
+                                <color key="backgroundColor" white="0.5" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="46" id="1pT-kq-BXq"/>
-                                    <constraint firstAttribute="height" constant="30" id="D9I-CT-LVO"/>
+                                    <constraint firstAttribute="width" constant="48" id="1pT-kq-BXq"/>
+                                    <constraint firstAttribute="height" constant="48" id="D9I-CT-LVO"/>
                                 </constraints>
-                                <state key="normal" title="Button">
+                                <state key="normal" backgroundImage="editIcon">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -79,10 +80,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="Ya1-Nu-igY" secondAttribute="trailing" constant="10" id="PbL-lM-ny3"/>
-                            <constraint firstItem="4IR-HT-sky" firstAttribute="top" secondItem="Ya1-Nu-igY" secondAttribute="bottom" constant="10" id="TSa-86-KCO"/>
                             <constraint firstItem="5HB-Xf-qhu" firstAttribute="top" secondItem="Ljy-z7-zrq" secondAttribute="top" id="hcA-l5-FhP"/>
+                            <constraint firstAttribute="trailing" secondItem="Ya1-Nu-igY" secondAttribute="trailing" constant="20" id="k3Z-kh-ju0"/>
                             <constraint firstItem="4IR-HT-sky" firstAttribute="top" secondItem="5HB-Xf-qhu" secondAttribute="bottom" id="meJ-QR-guM"/>
+                            <constraint firstItem="4IR-HT-sky" firstAttribute="top" secondItem="Ya1-Nu-igY" secondAttribute="bottom" constant="20" id="rFg-pd-tLC"/>
                             <constraint firstAttribute="trailing" secondItem="5HB-Xf-qhu" secondAttribute="trailing" id="scF-JU-UaZ"/>
                             <constraint firstItem="5HB-Xf-qhu" firstAttribute="leading" secondItem="Ljy-z7-zrq" secondAttribute="leading" id="yFM-PH-59d"/>
                         </constraints>
@@ -452,6 +453,9 @@
             <point key="canvasLocation" x="1548" y="-240"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="editIcon" width="16" height="16"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="TvC-sY-SyO"/>
     </inferredMetricsTieBreakers>
