@@ -15,6 +15,8 @@
 	#import <objc/runtime.h>
 #endif
 
+#define CGPointFloor(p) CGPointMake(floor(p.x), floor(p.y)) 
+
 #ifdef	_DEBUG
 	#define	DNSLog(...)		NSLog(__VA_ARGS__);
 	#define DNSLogMethod	NSLog(@"[%s] %@", class_getName([self class]), NSStringFromSelector(_cmd));

@@ -10,8 +10,12 @@
 
 @interface UIColor(keyboard)
 
-+ (UIColor*) keyColor;
++ (UIColor*)lightColorForDefault;
 
-+ (UIColor*) highlightedKeyColor;
++ (UIColor*)darkColorForDefault;
+
++ (UIColor*)lightColorForDark;
+
++ (UIColor*)darkColorForDark;
 
 @end

@@ -22,10 +22,38 @@
 	NSArray						*_groups;
 	NSLayoutConstraint			*_earthKeyWidthConstraint;
 	NSLayoutConstraint			*_deleteKeyWidthConstraint;
+	UIKeyboardAppearance		_keyboardAppearance;
 }
 @end
 
 @implementation AAKToolbar
+
+- (UIColor*)buttonBackgroundColor {
+	if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+		return [UIColor darkColorForDark];
+	}
+	else {
+		return [UIColor darkColorForDefault];
+	}
+}
+
+- (UIColor*)buttonHighlightedBackgroundColor {
+	if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+		return [UIColor lightColorForDark];
+	}
+	else {
+		return [UIColor lightColorForDefault];
+	}
+}
+
+- (UIColor*)cellBackgroundColor {
+	if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+		return [UIColor darkColorForDark];
+	}
+	else {
+		return [UIColor lightColorForDefault];
+	}
+}
 
 #pragma mark - Instance method
 
@@ -66,7 +94,7 @@
  **/
 - (void)buttonHighlight:(UIButton*)sender {
 	// 両脇のボタンはハイライトと通常の色が逆
-	sender.backgroundColor = [UIColor keyColor];
+	sender.backgroundColor = [self buttonHighlightedBackgroundColor];
 }
 
 /**
@@ -75,7 +103,7 @@
  **/
 - (void)buttonStopHighlight:(UIButton*)sender {
 	// 両脇のボタンはハイライトと通常の色が逆
-	sender.backgroundColor = [UIColor highlightedKeyColor];
+	sender.backgroundColor = [self buttonBackgroundColor];
 }
 
 /**
@@ -84,29 +112,46 @@
 - (void)prepareButton {
 	{
 		_earthKey = [[UIButton alloc] initWithFrame:CGRectZero];
-		[_earthKey setImage:[UIImage imageNamed:@"earth"] forState:UIControlStateNormal];
-		[_earthKey setImage:[UIImage imageNamed:@"earth"] forState:UIControlStateHighlighted];
 		[_earthKey addTarget:self action:@selector(pushEarthKey:) forControlEvents:UIControlEventTouchUpInside];
 		[_earthKey addTarget:self action:@selector(buttonHighlight:) forControlEvents:UIControlEventTouchDown];
 		[_earthKey addTarget:self action:@selector(buttonStopHighlight:) forControlEvents:UIControlEventTouchUpOutside];
-		[_earthKey setBackgroundColor:[UIColor highlightedKeyColor]];
-		UIImage *temp = [UIImage imageNamed:@"rightEdge"];
-		UIImage *temp2 = [temp stretchableImageWithLeftCapWidth:1 topCapHeight:1];
-		[_earthKey setBackgroundImage:temp2 forState:UIControlStateNormal];
-		[_earthKey setBackgroundImage:temp2 forState:UIControlStateHighlighted];
+		
+		_earthKey.backgroundColor = [self buttonBackgroundColor];
+		
+		if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+			[_earthKey setImage:[UIImage imageNamed:@"earthHighlighted"] forState:UIControlStateNormal];
+			[_earthKey setImage:[UIImage imageNamed:@"earthHighlighted"] forState:UIControlStateHighlighted];
+		}
+		else {
+			[_earthKey setImage:[UIImage imageNamed:@"earth"] forState:UIControlStateNormal];
+			[_earthKey setImage:[UIImage imageNamed:@"earth"] forState:UIControlStateHighlighted];
+		}
+		
+		UIImage *temp = [UIImage rightEdgeWithKeyboardAppearance:_keyboardAppearance];
+		[_earthKey setBackgroundImage:temp forState:UIControlStateNormal];
+		[_earthKey setBackgroundImage:temp forState:UIControlStateHighlighted];
 	}
 	{
 		_deleteKey = [[UIButton alloc] initWithFrame:CGRectZero];
-		[_deleteKey setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
-		[_deleteKey setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateHighlighted];
-		_deleteKey.backgroundColor = [UIColor highlightedKeyColor];
+		
+		_deleteKey.backgroundColor = [self buttonBackgroundColor];
+		
 		[_deleteKey addTarget:self action:@selector(pushDeleteKey:) forControlEvents:UIControlEventTouchUpInside];
 		[_deleteKey addTarget:self action:@selector(buttonHighlight:) forControlEvents:UIControlEventTouchDown];
 		[_deleteKey addTarget:self action:@selector(buttonStopHighlight:) forControlEvents:UIControlEventTouchUpOutside];
-		UIImage *temp = [UIImage imageNamed:@"leftEdge"];
-		UIImage *temp2 = [temp stretchableImageWithLeftCapWidth:1 topCapHeight:1];
-		[_deleteKey setBackgroundImage:temp2 forState:UIControlStateNormal];
-		[_deleteKey setBackgroundImage:temp2 forState:UIControlStateHighlighted];
+
+		UIImage *temp = [UIImage leftEdgeWithKeyboardAppearance:_keyboardAppearance];
+		[_deleteKey setBackgroundImage:temp forState:UIControlStateNormal];
+		[_deleteKey setBackgroundImage:temp forState:UIControlStateHighlighted];
+		
+		if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+			[_deleteKey setImage:[UIImage imageNamed:@"deleteHighlighted"] forState:UIControlStateNormal];
+			[_deleteKey setImage:[UIImage imageNamed:@"deleteHighlighted"] forState:UIControlStateHighlighted];
+		}
+		else {
+			[_deleteKey setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
+			[_deleteKey setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateHighlighted];
+		}
 	}
 	[self addSubview:_earthKey];
 	[self addSubview:_deleteKey];
@@ -194,7 +239,7 @@
 	_collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_collectionFlowLayout];
 	_collectionView.alwaysBounceHorizontal = YES;
 	_collectionView.showsHorizontalScrollIndicator = NO;
-	_collectionView.backgroundColor = [UIColor keyColor];
+	_collectionView.backgroundColor = [self cellBackgroundColor];
 	_collectionView.delegate = self;
 	_collectionView.dataSource = self;
 	_collectionView.contentInset = UIEdgeInsetsMake(0, -2, 0, -2);	// 端の線を常に表示させないためにヘッダとフッターを隠す
@@ -217,7 +262,7 @@
  * ツールバーの上の枠線をセットアップする．
  **/
 - (void)setupTopBorderLine {
-	UIImageView *topBar = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"topEdge"]];
+	UIImageView *topBar = [[UIImageView alloc] initWithImage:[UIImage topEdgeWithKeyboardAppearance:_keyboardAppearance]];
 	NSDictionary *views = NSDictionaryOfVariableBindings(topBar);
 	topBar.translatesAutoresizingMaskIntoConstraints = NO;
 	[self addSubview:topBar];
@@ -264,15 +309,45 @@
 																 options:0 metrics:0 views:views]];
 }
 
+/**
+ * AAKToolbarクラスを初期化する．
+ * @param frame ビューのframeを指定する．
+ * @param keyboardAppearance 表示中のキーボードのアピアランス．
+ * @return 初期化されたAAKToolbarオブジェクト．
+ **/
+- (instancetype)initWithFrame:(CGRect)frame keyboardAppearance:(UIKeyboardAppearance)keyboardAppearance {
+	self = [super initWithFrame:frame];
+	if (self) {
+		_keyboardAppearance = keyboardAppearance;
+		
+		self.backgroundColor = [UIColor clearColor];
+		
+		_groups = [[AAKKeyboardDataManager defaultManager] groups];
+		
+		[self updateWithWidth:100];
+		
+		NSInteger groupKey = [[NSUserDefaults standardUserDefaults] integerForKey:@"groupKey"];
+		_currentGroup = [self groupForGroupKey:groupKey];
+		
+		_height = 48;
+		_fontSize = 14;
+		[self prepareButton];
+		[self prepareCollectionView];
+		[self setupAutolayout];
+		[self setupTopBorderLine];
+	}
+	return self;
+}
+
 #pragma mark - IBAction
 
 - (IBAction)pushEarthKey:(UIButton*)sender {
-	sender.backgroundColor = [UIColor highlightedKeyColor];
+	sender.backgroundColor = [self buttonBackgroundColor];
 	[self.delegate toolbar:self didPushEarthButton:sender];
 }
 
 - (IBAction)pushDeleteKey:(UIButton*)sender {
-	sender.backgroundColor = [UIColor highlightedKeyColor];
+	sender.backgroundColor = [self buttonBackgroundColor];
 	[self.delegate toolbar:self didPushDeleteButton:sender];
 }
 
@@ -296,28 +371,6 @@
 - (void)dealloc {
 	[[NSUserDefaults standardUserDefaults] setInteger:_currentGroup.key forKey:@"groupKey"];
 	[[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-- (instancetype)initWithFrame:(CGRect)frame {
-	self = [super initWithFrame:frame];
-	if (self) {
-		
-		_groups = [[AAKKeyboardDataManager defaultManager] groups];
-		
-		[self updateWithWidth:100];
-		
-		NSInteger groupKey = [[NSUserDefaults standardUserDefaults] integerForKey:@"groupKey"];
-		_currentGroup = [self groupForGroupKey:groupKey];
-		
-		self.backgroundColor = [UIColor redColor];
-		_height = 48;
-		_fontSize = 14;
-		[self prepareButton];
-		[self prepareCollectionView];
-		[self setupAutolayout];
-		[self setupTopBorderLine];
-	}
-	return self;
 }
 
 #pragma mark - UICollectionViewDelegate, UICollectionViewDataSource
@@ -385,6 +438,7 @@
 		cell = [cv dequeueReusableCellWithReuseIdentifier:@"AAKToolbarCell" forIndexPath:indexPath];
 	}
 	
+	cell.keyboardAppearance = _keyboardAppearance;
 	cell.group = group;
 	cell.delegate = self;
 	[cell setOriginalHighlighted:(cell.group.key == _currentGroup.key)];

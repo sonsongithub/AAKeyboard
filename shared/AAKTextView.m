@@ -8,6 +8,8 @@
 
 #import "AAKTextView.h"
 
+#import "NSParagraphStyle+keyboard.h"
+
 static CGFloat AAKTextViewImageWidth = 320;
 
 @interface AAKTextView() {
@@ -25,10 +27,15 @@ static CGFloat AAKTextViewImageWidth = 320;
  **/
 - (UIImage*)imageForPasteBoard {
 	CGFloat width = AAKTextViewImageWidth;
-	CGSize textSize = [UZTextView sizeForAttributedString:self.attributedString withBoundWidth:CGFLOAT_MAX margin:UIEdgeInsetsZero];
+	
+	NSParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyleWithFontSize:15];
+	NSDictionary *attributes = @{NSForegroundColorAttributeName:[UIColor blackColor], NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:[UIFont fontWithName:@"Mona" size:15]};
+	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:self.attributedString.string attributes:attributes];
+	
+	CGSize textSize = [UZTextView sizeForAttributedString:string withBoundWidth:CGFLOAT_MAX margin:UIEdgeInsetsZero];
 	AAKTextView *dummyTextView = [[AAKTextView alloc] initWithFrame:CGRectMake(0, 0, width, width / textSize.width * textSize.height)];
-	dummyTextView.backgroundColor = [UIColor clearColor];
-	dummyTextView.attributedString = self.attributedString;
+	dummyTextView.backgroundColor = [UIColor whiteColor];
+	dummyTextView.attributedString = string;
 	
 	UIGraphicsBeginImageContextWithOptions(dummyTextView.bounds.size, NO, 0);
 	[dummyTextView.layer renderInContext:UIGraphicsGetCurrentContext()];

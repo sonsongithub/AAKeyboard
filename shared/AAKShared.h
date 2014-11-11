@@ -15,6 +15,7 @@
 // Category
 #import "NSParagraphStyle+keyboard.h"
 #import "UIColor+keyboard.h"
+#import "UIImage+keyboard.h"
 #import "UITraitCollection+keyboard.h"
 
 // Model

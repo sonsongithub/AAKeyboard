@@ -18,10 +18,20 @@
 	UICollectionView			*_collectionView;
 	UICollectionViewFlowLayout	*_collectionFlowLayout;
 	NSArray						*_asciiarts;
+	UIKeyboardAppearance		_keyboardAppearance;
 }
 @end
 
 @implementation AAKKeyboardView
+
+- (UIColor*)cellBackgroundColor {
+	if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+		return [UIColor darkColorForDark];
+	}
+	else {
+		return [UIColor lightColorForDefault];
+	}
+}
 
 #pragma mark - Instance method
 
@@ -57,7 +67,7 @@
  * グループ選択や切り替え，削除ボタンためのツールバーを初期化する．
  **/
 - (void)prepareToolbar {
-	_toolbar = [[AAKToolbar alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+	_toolbar = [[AAKToolbar alloc] initWithFrame:CGRectZero keyboardAppearance:_keyboardAppearance];
 	_toolbar.delegate = self;
 	[self addSubview:_toolbar];
 }
@@ -78,7 +88,7 @@
 	_collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_collectionFlowLayout];
 	_collectionView.alwaysBounceHorizontal = YES;
 	_collectionView.showsHorizontalScrollIndicator = NO;
-	_collectionView.backgroundColor = [UIColor keyColor];
+	_collectionView.backgroundColor = [self cellBackgroundColor];
 	_collectionView.delegate = self;
 	_collectionView.dataSource = self;
 	_collectionView.contentInset = UIEdgeInsetsMake(0, -2, 0, -2);	// 端の線を常に表示させないためにヘッダとフッターを隠す
@@ -128,6 +138,31 @@
 	_asciiarts = [_toolbar asciiArtsForCurrentGroup];
 }
 
+/**
+ * AAKKeyboardViewクラスを初期化する．
+ * @param frame ビューのframeを指定する．
+ * @param keyboardAppearance 表示中のキーボードのアピアランス．
+ * @return 初期化されたAAKKeyboardViewオブジェクト．
+ **/
+- (instancetype)initWithFrame:(CGRect)frame keyboardAppearance:(UIKeyboardAppearance)keyboardAppearance {
+	self = [super initWithFrame:frame];
+	if (self) {
+		self.backgroundColor = [UIColor clearColor];
+		_keyboardAppearance = keyboardAppearance;
+		
+		[self prepareToolbar];
+		
+		[self prepareCollectionView];
+		
+		[self setupAutolayout];
+		
+		[self updateASCIIArtsForCurrentGroup];
+		
+		[self updateConstraints];
+	}
+	return self;
+}
+
 #pragma mark - AAKToolbarDelegate
 
 - (void)didSelectGroupToolbar:(AAKToolbar*)toolbar {
@@ -143,24 +178,6 @@
 
 - (void)toolbar:(AAKToolbar*)toolbar didPushDeleteButton:(UIButton*)button {
 	[self.delegate keyboardViewDidPushDeleteButton:self];
-}
-
-#pragma mark - Override
-
-- (instancetype)initWithFrame:(CGRect)frame {
-	self = [super initWithFrame:frame];
-	if (self) {
-		[self prepareToolbar];
-		
-		[self prepareCollectionView];
-		
-		[self setupAutolayout];
-		
-		[self updateASCIIArtsForCurrentGroup];
-		
-		[self updateConstraints];
-	}
-	return self;
 }
 
 #pragma mark - UICollectionViewDelegate, UICollectionViewDataSource
@@ -201,11 +218,21 @@
 	cell.label.text = [NSString stringWithFormat:@"%ld", (long)indexPath.item];
 	CGFloat fontSize = 15;
 	AAKASCIIArt *source = _asciiarts[indexPath.item];
+	
+	UIColor *textColor = nil;
+	if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+		textColor = [UIColor whiteColor];
+	}
+	else {
+		textColor = [UIColor blackColor];
+	}
+	
+	cell.isTail = ((_asciiarts.count - 1) == indexPath.item);
+	cell.keyboardAppearance = _keyboardAppearance;
 	NSParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyleWithFontSize:fontSize];
-	NSDictionary *attributes = @{NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:[UIFont fontWithName:@"Mona" size:fontSize]};
+	NSDictionary *attributes = @{NSForegroundColorAttributeName:[cell colorForAA], NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:[UIFont fontWithName:@"Mona" size:fontSize]};
 	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:source.text attributes:attributes];
 	cell.textView.attributedString = string;
-	cell.isTail = ((_asciiarts.count - 1) == indexPath.item);
 	[cell.label sizeToFit];
 	return cell;
 }
@@ -217,12 +244,14 @@
 		AAKToolbarHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
 																			  withReuseIdentifier:@"AAKToolbarHeaderView"
 																					 forIndexPath:indexPath];
+		headerView.keyboardAppearance = _keyboardAppearance;
 		return headerView;
 	}
 	else if ([kind isEqualToString:UICollectionElementKindSectionFooter]) {
 		AAKToolbarFooterView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 																			  withReuseIdentifier:@"AAKToolbarFooterView"
 																					 forIndexPath:indexPath];
+		footerView.keyboardAppearance = _keyboardAppearance;
 		return footerView;
 	}
 	else {

@@ -37,6 +37,14 @@
 @property (nonatomic, assign) id <AAKKeyboardViewDelegate> delegate;
 
 /**
+ * AAKKeyboardViewクラスを初期化する．
+ * @param frame ビューのframeを指定する．
+ * @param keyboardAppearance 表示中のキーボードのアピアランス．
+ * @return 初期化されたAAKKeyboardViewオブジェクト．
+ **/
+- (instancetype)initWithFrame:(CGRect)frame keyboardAppearance:(UIKeyboardAppearance)keyboardAppearance;
+
+/**
  * レイアウトをリロードして変更する．
  **/
 - (void)load;

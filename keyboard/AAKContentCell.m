@@ -21,6 +21,24 @@
 
 @implementation AAKContentCell
 
+- (UIColor*)cellHighlightedBackgroundColor {
+	if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+		return [UIColor lightColorForDark];
+	}
+	else {
+		return [UIColor darkColorForDefault];
+	}
+}
+
+- (UIColor*)colorForAA {
+	if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+		return [UIColor whiteColor];
+	}
+	else {
+		return [UIColor blackColor];
+	}
+}
+
 #pragma mark - Instance method
 
 /**
@@ -43,6 +61,9 @@
 	_textView.backgroundColor = [UIColor clearColor];
 	_textView.userInteractionEnabled = NO;
 	
+	self.backgroundColor = [UIColor clearColor];
+	self.contentView.backgroundColor = [UIColor clearColor];
+	
 	// autolayout
 	NSDictionary *views = NSDictionaryOfVariableBindings(_textView);
 	[self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[_textView]-10-|"
@@ -52,12 +73,8 @@
 	
 	// 背景をセット
 	self.selectedBackgroundView = [[UIView alloc] initWithFrame:self.frame];
-	self.selectedBackgroundView.backgroundColor = [UIColor highlightedKeyColor];
 	
-	
-	UIImage *temp = [UIImage imageNamed:@"rightEdge"];
-	UIImage *temp2 = [temp stretchableImageWithLeftCapWidth:1 topCapHeight:1];
-	_seperator = [[UIImageView alloc] initWithImage:temp2];
+	_seperator = [[UIImageView alloc] initWithFrame:CGRectZero];
 	[self.contentView addSubview:_seperator];
 	
 	// ジェスチャを設定
@@ -69,6 +86,12 @@
 - (void)setIsTail:(BOOL)isTail {
 	_isTail = isTail;
 	_seperator.hidden = _isTail;
+}
+
+- (void)setKeyboardAppearance:(UIKeyboardAppearance)keyboardAppearance {
+	_keyboardAppearance = keyboardAppearance;
+	self.selectedBackgroundView.backgroundColor = [self cellHighlightedBackgroundColor];
+	_seperator.image = [UIImage rightEdgeWithKeyboardAppearance:_keyboardAppearance];
 }
 
 #pragma mark - Override

@@ -10,6 +10,9 @@
 		1402F1A61A0D3B430000F269 /* AAKAAGroupForCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 1402F1A51A0D3B430000F269 /* AAKAAGroupForCollection.m */; };
 		1402F1A71A0D3B630000F269 /* AAKAAGroupForCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 1402F1A51A0D3B430000F269 /* AAKAAGroupForCollection.m */; };
 		1402F1A81A0D3B630000F269 /* AAKAAGroupForCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 1402F1A51A0D3B430000F269 /* AAKAAGroupForCollection.m */; };
+		14527C0F1A11DB870019F93A /* UIImage+keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 14527C0E1A11DB870019F93A /* UIImage+keyboard.m */; };
+		14527C101A11DB870019F93A /* UIImage+keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 14527C0E1A11DB870019F93A /* UIImage+keyboard.m */; };
+		14527C111A11DB870019F93A /* UIImage+keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 14527C0E1A11DB870019F93A /* UIImage+keyboard.m */; };
 		146EEB5519ED5CDE0032F6DE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */; };
 		146EEB5619ED5CE50032F6DE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */; };
 		146EEB5719ED5CEF0032F6DE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */; };
@@ -162,6 +165,8 @@
 		1441E88119ECD7F300A4881F /* register.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = register.entitlements; sourceTree = "<group>"; };
 		1441E88219ECD7FF00A4881F /* keyboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = keyboard.entitlements; sourceTree = "<group>"; };
 		1441E88319ECD83C00A4881F /* AAKeyboardApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = AAKeyboardApp.entitlements; sourceTree = "<group>"; };
+		14527C0D1A11DB870019F93A /* UIImage+keyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+keyboard.h"; sourceTree = "<group>"; };
+		14527C0E1A11DB870019F93A /* UIImage+keyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+keyboard.m"; sourceTree = "<group>"; };
 		146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		14A5137E19EC68530098C02C /* register.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = register.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		14A5138119EC68530098C02C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -419,6 +424,8 @@
 				14B274B21A0A0D6F005BF3B1 /* NSParagraphStyle+keyboard.m */,
 				14F6F39A1A100DA900BEE8E2 /* UIColor+keyboard.h */,
 				14F6F39B1A100DA900BEE8E2 /* UIColor+keyboard.m */,
+				14527C0D1A11DB870019F93A /* UIImage+keyboard.h */,
+				14527C0E1A11DB870019F93A /* UIImage+keyboard.m */,
 				14B274B31A0A0D6F005BF3B1 /* UITraitCollection+keyboard.h */,
 				14B274B41A0A0D6F005BF3B1 /* UITraitCollection+keyboard.m */,
 			);
@@ -777,6 +784,7 @@
 				14B2750D1A0A0DD2005BF3B1 /* AAKKeyboardDataManager.m in Sources */,
 				14F6F3961A100D8600BEE8E2 /* AAKToolbarHeaderView.m in Sources */,
 				14B274C31A0A0D6F005BF3B1 /* AAKRegisterViewController.m in Sources */,
+				14527C111A11DB870019F93A /* UIImage+keyboard.m in Sources */,
 				14B275131A0A0DD2005BF3B1 /* AAKSharedKeyboardDataManager.m in Sources */,
 				14B274B71A0A0D6F005BF3B1 /* AAKASCIIArt.m in Sources */,
 				14F6F39E1A100DA900BEE8E2 /* UIColor+keyboard.m in Sources */,
@@ -789,6 +797,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14B274ED1A0A0D83005BF3B1 /* AAKPreviewController.m in Sources */,
+				14527C0F1A11DB870019F93A /* UIImage+keyboard.m in Sources */,
 				14B274E11A0A0D83005BF3B1 /* AAKAACollectionViewController.m in Sources */,
 				14B73C6719E3C9060031DCB6 /* AAKToolbarCell.m in Sources */,
 				14B274B51A0A0D6F005BF3B1 /* AAKASCIIArt.m in Sources */,
@@ -853,6 +862,7 @@
 				14B274C81A0A0D6F005BF3B1 /* AAKTextView.m in Sources */,
 				14B274B61A0A0D6F005BF3B1 /* AAKASCIIArt.m in Sources */,
 				14B274BF1A0A0D6F005BF3B1 /* AAKEditViewController.m in Sources */,
+				14527C101A11DB870019F93A /* UIImage+keyboard.m in Sources */,
 				14B2673E19E6BFD000C0321D /* AAKToolbar.m in Sources */,
 				14B2750C1A0A0DD2005BF3B1 /* AAKKeyboardDataManager.m in Sources */,
 				14B2674319E6BFE900C0321D /* AAKKeyboardView.m in Sources */,

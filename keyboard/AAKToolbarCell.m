@@ -12,6 +12,33 @@
 
 @implementation AAKToolbarCell
 
+- (UIColor*)cellHighlightedBackgroundColor {
+	if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+		return [UIColor lightColorForDark];
+	}
+	else {
+		return [UIColor darkColorForDefault];
+	}
+}
+
+- (UIColor*)textColor {
+	if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+		return [UIColor whiteColor];
+	}
+	else {
+		return [UIColor blackColor];
+	}
+}
+
+- (UIColor*)highlightedTextColor {
+	if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+		return [UIColor whiteColor];
+	}
+	else {
+		return [UIColor whiteColor];
+	}
+}
+
 #pragma mark - Setter
 
 /**
@@ -24,6 +51,11 @@
 	_imageView.hidden = _isTail;
 }
 
+- (void)setKeyboardAppearance:(UIKeyboardAppearance)keyboardAppearance {
+	_keyboardAppearance = keyboardAppearance;
+	_imageView.image = [UIImage rightEdgeWithKeyboardAppearance:_keyboardAppearance];
+}
+
 #pragma mark - Instance method
 
 /**
@@ -32,13 +64,12 @@
  **/
 - (void)setOriginalHighlighted:(BOOL)highlighted {
 	[super setHighlighted:highlighted];
+	self.selectedBackgroundView.backgroundColor = [self cellHighlightedBackgroundColor];
 	if (highlighted) {
-		_label.textColor = [UIColor whiteColor];
-		self.contentView.backgroundColor = [UIColor highlightedKeyColor];
+		_label.textColor = [self highlightedTextColor];
 	}
 	else {
-		_label.textColor = [UIColor blackColor];
-		self.contentView.backgroundColor = [UIColor keyColor];
+		_label.textColor = [self textColor];
 	}
 }
 
@@ -66,9 +97,7 @@
  * セルの右端に配置する縦線をセットアップする．
  **/
 - (void)setupVerticalSeperator {
-	UIImage *temp = [UIImage imageNamed:@"rightEdge"];
-	UIImage *temp2 = [temp stretchableImageWithLeftCapWidth:1 topCapHeight:1];
-	_imageView = [[UIImageView alloc] initWithImage:temp2];
+	_imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
 	[self.contentView addSubview:_imageView];
 }
 
@@ -77,19 +106,19 @@
  * テキストビューの生成，レイアウト，背景色の設定，ジェスチャのアタッチを行う．
  **/
 - (void)privateInit {
-	self.backgroundColor = [UIColor blueColor];
+	self.backgroundColor = [UIColor clearColor];
 	self.contentView.backgroundColor = [UIColor clearColor];
 	_label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-	_label.textColor = [UIColor blackColor];
 	_label.textAlignment = NSTextAlignmentCenter;
 	_label.adjustsFontSizeToFitWidth = YES;
 	_label.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
 	[_label setFont:[UIFont systemFontOfSize:16]];
+	// 背景をセット
+	self.selectedBackgroundView = [[UIView alloc] initWithFrame:self.frame];
+	
 	[self.contentView addSubview:_label];
 
 	[self setupVerticalSeperator];
-	
-	self.contentView.backgroundColor = [UIColor keyColor];
 }
 
 #pragma mark - Override
@@ -97,7 +126,7 @@
 - (void)layoutSubviews {
 	// タイトルラベルをセンタリング．
 	[super layoutSubviews];
-	_label.center = self.contentView.center;
+	_label.center = CGPointFloor(self.contentView.center);
 	_imageView.frame = self.contentView.bounds;
 }
 

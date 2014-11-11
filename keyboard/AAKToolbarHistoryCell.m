@@ -19,19 +19,35 @@
 
 #pragma mark - Instance method
 
+- (UIImage*)historyIcon {
+	if (self.keyboardAppearance == UIKeyboardAppearanceDark) {
+		return [UIImage imageNamed:@"historyHighlighted"];
+	}
+	else {
+		return [UIImage imageNamed:@"history"];
+	}
+}
+
+- (UIImage*)highlightedHistoryIcon {
+	if (self.keyboardAppearance == UIKeyboardAppearanceDark) {
+		return [UIImage imageNamed:@"historyHighlighted"];
+	}
+	else {
+		return [UIImage imageNamed:@"historyHighlighted"];
+	}
+}
+
 /**
  * セルが現在選択中のグループだった場合にハイライトさせるためのメソッド．
  * @param highlighted ハイライトさせるかのフラグ．
  **/
 - (void)setOriginalHighlighted:(BOOL)highlighted {
-	[super setHighlighted:highlighted];
+	[super setOriginalHighlighted:highlighted];
 	if (highlighted) {
-		self.contentView.backgroundColor = [UIColor highlightedKeyColor];
-		_iconImageView.image = [UIImage imageNamed:@"historyHighlighted"];
+		_iconImageView.image = [self highlightedHistoryIcon];
 	}
 	else {
-		self.contentView.backgroundColor = [UIColor keyColor];
-		_iconImageView.image = [UIImage imageNamed:@"history"];
+		_iconImageView.image = [self historyIcon];
 	}
 }
 
@@ -40,15 +56,12 @@
  * テキストビューの生成，レイアウト，背景色の設定，ジェスチャのアタッチを行う．
  **/
 - (void)privateInit {
-	self.contentView.backgroundColor = [UIColor keyColor];
-	
 	[self setupVerticalSeperator];
-	
+	self.backgroundColor = [UIColor clearColor];
+	self.contentView.backgroundColor = [UIColor clearColor];
 	_iconImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"history"]];
 	[self.contentView addSubview:_iconImageView];
-	
 	self.selectedBackgroundView = [[UIView alloc] initWithFrame:self.frame];
-	self.selectedBackgroundView.backgroundColor = [UIColor highlightedKeyColor];
 }
 
 #pragma mark - Override
