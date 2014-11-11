@@ -13,6 +13,8 @@
 		14527C0F1A11DB870019F93A /* UIImage+keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 14527C0E1A11DB870019F93A /* UIImage+keyboard.m */; };
 		14527C101A11DB870019F93A /* UIImage+keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 14527C0E1A11DB870019F93A /* UIImage+keyboard.m */; };
 		14527C111A11DB870019F93A /* UIImage+keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 14527C0E1A11DB870019F93A /* UIImage+keyboard.m */; };
+		14527C141A1207F10019F93A /* AAKNotifyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14527C131A1207F10019F93A /* AAKNotifyView.m */; };
+		14527C161A1208030019F93A /* AAKNotifyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14527C151A1208030019F93A /* AAKNotifyView.xib */; };
 		146EEB5519ED5CDE0032F6DE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */; };
 		146EEB5619ED5CE50032F6DE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */; };
 		146EEB5719ED5CEF0032F6DE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */; };
@@ -167,6 +169,9 @@
 		1441E88319ECD83C00A4881F /* AAKeyboardApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = AAKeyboardApp.entitlements; sourceTree = "<group>"; };
 		14527C0D1A11DB870019F93A /* UIImage+keyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+keyboard.h"; sourceTree = "<group>"; };
 		14527C0E1A11DB870019F93A /* UIImage+keyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+keyboard.m"; sourceTree = "<group>"; };
+		14527C121A1207F10019F93A /* AAKNotifyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKNotifyView.h; sourceTree = "<group>"; };
+		14527C131A1207F10019F93A /* AAKNotifyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKNotifyView.m; sourceTree = "<group>"; };
+		14527C151A1208030019F93A /* AAKNotifyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AAKNotifyView.xib; sourceTree = "<group>"; };
 		146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		14A5137E19EC68530098C02C /* register.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = register.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		14A5138119EC68530098C02C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -387,6 +392,9 @@
 				14B2674119E6BFE900C0321D /* AAKKeyboardView.m */,
 				14B2674819E6CB2500C0321D /* AAKContentCell.h */,
 				14B2674919E6CB2500C0321D /* AAKContentCell.m */,
+				14527C121A1207F10019F93A /* AAKNotifyView.h */,
+				14527C131A1207F10019F93A /* AAKNotifyView.m */,
+				14527C151A1208030019F93A /* AAKNotifyView.xib */,
 			);
 			name = Keyboard;
 			sourceTree = "<group>";
@@ -754,6 +762,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14527C161A1208030019F93A /* AAKNotifyView.xib in Resources */,
 				14B275181A0A0DF3005BF3B1 /* Images.xcassets in Resources */,
 				14F6F3981A100D8600BEE8E2 /* AAKToolbarHeaderView.xib in Resources */,
 				14B2751B1A0A0DF3005BF3B1 /* mona.ttf in Resources */,
@@ -844,6 +853,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14527C141A1207F10019F93A /* AAKNotifyView.m in Sources */,
 				14B73C6519E3C7CA0031DCB6 /* AAKToolbarCell.m in Sources */,
 				14B274BC1A0A0D6F005BF3B1 /* AAKCreateNewGroupViewController.m in Sources */,
 				14B274C51A0A0D6F005BF3B1 /* AAKSelectGroupViewController.m in Sources */,
