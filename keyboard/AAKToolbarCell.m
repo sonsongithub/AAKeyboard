@@ -12,6 +12,33 @@
 
 @implementation AAKToolbarCell
 
+- (UIColor*)cellHighlightedBackgroundColor {
+	if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+		return [UIColor darkColorForDark];
+	}
+	else {
+		return [UIColor darkColorForDefault];
+	}
+}
+
+- (UIColor*)textColor {
+	if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+		return [UIColor whiteColor];
+	}
+	else {
+		return [UIColor blackColor];
+	}
+}
+
+- (UIColor*)highlightedTextColor {
+	if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+		return [UIColor whiteColor];
+	}
+	else {
+		return [UIColor whiteColor];
+	}
+}
+
 #pragma mark - Setter
 
 /**
@@ -36,25 +63,12 @@
  **/
 - (void)setOriginalHighlighted:(BOOL)highlighted {
 	[super setHighlighted:highlighted];
+	self.selectedBackgroundView.backgroundColor = [self cellHighlightedBackgroundColor];
 	if (highlighted) {
-		if (_keyboardAppearance == UIKeyboardAppearanceDark) {
-			_label.textColor = [UIColor whiteColor];
-			self.contentView.backgroundColor = [UIColor colorWithRed:50/255.0f green:50/255.0f blue:50/255.0f alpha:0.1f];
-		}
-		else {
-			_label.textColor = [UIColor whiteColor];
-			self.contentView.backgroundColor = [UIColor highlightedKeyColor];
-		}
+		_label.textColor = [self highlightedTextColor];
 	}
 	else {
-		if (_keyboardAppearance == UIKeyboardAppearanceDark) {
-			_label.textColor = [UIColor whiteColor];
-			self.contentView.backgroundColor = [UIColor colorWithRed:200/255.0f green:200/255.0f blue:200/255.0f alpha:0.1f];
-		}
-		else {
-			_label.textColor = [UIColor blackColor];
-			self.contentView.backgroundColor = [UIColor keyColorForKeyboardAppearance:_keyboardAppearance];
-		}
+		_label.textColor = [self textColor];
 	}
 }
 
@@ -100,13 +114,8 @@
 	_label.adjustsFontSizeToFitWidth = YES;
 	_label.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
 	[_label setFont:[UIFont systemFontOfSize:16]];
-	
-	if (_keyboardAppearance == UIKeyboardAppearanceDark) {
-		_label.textColor = [UIColor whiteColor];
-	}
-	else {
-		_label.textColor = [UIColor blackColor];
-	}
+	// 背景をセット
+	self.selectedBackgroundView = [[UIView alloc] initWithFrame:self.frame];
 	
 	[self.contentView addSubview:_label];
 

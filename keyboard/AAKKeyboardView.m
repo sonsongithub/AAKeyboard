@@ -24,6 +24,15 @@
 
 @implementation AAKKeyboardView
 
+- (UIColor*)cellBackgroundColor {
+	if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+		return [UIColor darkColorForDark];
+	}
+	else {
+		return [UIColor lightColorForDefault];
+	}
+}
+
 #pragma mark - Instance method
 
 /**
@@ -79,12 +88,7 @@
 	_collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_collectionFlowLayout];
 	_collectionView.alwaysBounceHorizontal = YES;
 	_collectionView.showsHorizontalScrollIndicator = NO;
-	if (_keyboardAppearance == UIKeyboardAppearanceDark) {
-		_collectionView.backgroundColor = [UIColor darkColorForDarkMode];
-	}
-	else {
-		_collectionView.backgroundColor = [UIColor keyColorForKeyboardAppearance:_keyboardAppearance];
-	}
+	_collectionView.backgroundColor = [self cellBackgroundColor];
 	_collectionView.delegate = self;
 	_collectionView.dataSource = self;
 	_collectionView.contentInset = UIEdgeInsetsMake(0, -2, 0, -2);	// 端の線を常に表示させないためにヘッダとフッターを隠す
@@ -223,12 +227,12 @@
 		textColor = [UIColor blackColor];
 	}
 	
-	NSParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyleWithFontSize:fontSize];
-	NSDictionary *attributes = @{NSForegroundColorAttributeName:textColor, NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:[UIFont fontWithName:@"Mona" size:fontSize]};
-	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:source.text attributes:attributes];
-	cell.textView.attributedString = string;
 	cell.isTail = ((_asciiarts.count - 1) == indexPath.item);
 	cell.keyboardAppearance = _keyboardAppearance;
+	NSParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyleWithFontSize:fontSize];
+	NSDictionary *attributes = @{NSForegroundColorAttributeName:[cell colorForAA], NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:[UIFont fontWithName:@"Mona" size:fontSize]};
+	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:source.text attributes:attributes];
+	cell.textView.attributedString = string;
 	[cell.label sizeToFit];
 	return cell;
 }

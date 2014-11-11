@@ -21,6 +21,24 @@
 
 @implementation AAKContentCell
 
+- (UIColor*)cellHighlightedBackgroundColor {
+	if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+		return [UIColor lightColorForDark];
+	}
+	else {
+		return [UIColor darkColorForDefault];
+	}
+}
+
+- (UIColor*)colorForAA {
+	if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+		return [UIColor whiteColor];
+	}
+	else {
+		return [UIColor blackColor];
+	}
+}
+
 #pragma mark - Instance method
 
 /**
@@ -42,7 +60,7 @@
 	_textView.translatesAutoresizingMaskIntoConstraints = NO;
 	_textView.backgroundColor = [UIColor clearColor];
 	_textView.userInteractionEnabled = NO;
-	
+
 	// autolayout
 	NSDictionary *views = NSDictionaryOfVariableBindings(_textView);
 	[self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[_textView]-10-|"
@@ -52,7 +70,6 @@
 	
 	// 背景をセット
 	self.selectedBackgroundView = [[UIView alloc] initWithFrame:self.frame];
-	
 	
 	UIImage *temp = [UIImage imageNamed:@"rightEdge"];
 	UIImage *temp2 = [temp stretchableImageWithLeftCapWidth:1 topCapHeight:1];
@@ -72,12 +89,7 @@
 
 - (void)setKeyboardAppearance:(UIKeyboardAppearance)keyboardAppearance {
 	_keyboardAppearance = keyboardAppearance;
-	if (keyboardAppearance == UIKeyboardAppearanceDark) {
-		self.selectedBackgroundView.backgroundColor = [UIColor lightColorForDarkMode];
-	}
-	else {
-		self.selectedBackgroundView.backgroundColor = [UIColor highlightedKeyColor];
-	}
+	self.selectedBackgroundView.backgroundColor = [self cellHighlightedBackgroundColor];
 }
 
 #pragma mark - Override

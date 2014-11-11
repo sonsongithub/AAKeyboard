@@ -10,13 +10,21 @@
 
 @interface UIColor(keyboard)
 
++ (UIColor*)lightColorForDefault;
+
++ (UIColor*)darkColorForDefault;
+
++ (UIColor*)lightColorForDark;
+
++ (UIColor*)darkColorForDark;
+
 + (UIColor*)keyColor __attribute__((deprecated));
 + (UIColor*)highlightedKeyColor __attribute__((deprecated));
 
-+ (UIColor*)keyColorForKeyboardAppearance:(UIKeyboardAppearance)keyboardApperance;
-+ (UIColor*)highlightedKeyColorForKeyboardAppearance:(UIKeyboardAppearance)keyboardApperance;
++ (UIColor*)keyColorForKeyboardAppearance:(UIKeyboardAppearance)keyboardApperance __attribute__((deprecated));
++ (UIColor*)highlightedKeyColorForKeyboardAppearance:(UIKeyboardAppearance)keyboardApperance __attribute__((deprecated));
 
-+ (UIColor*)darkColorForDarkMode;
-+ (UIColor*)lightColorForDarkMode;
++ (UIColor*)darkColorForDarkMode __attribute__((deprecated));
++ (UIColor*)lightColorForDarkMode __attribute__((deprecated));
 
 @end

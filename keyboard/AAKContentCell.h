@@ -15,4 +15,5 @@
 @property (nonatomic, readonly) AAKTextView *textView;
 @property (nonatomic, assign) BOOL isTail;
 @property (nonatomic, assign) UIKeyboardAppearance keyboardAppearance;
+- (UIColor*)colorForAA;
 @end

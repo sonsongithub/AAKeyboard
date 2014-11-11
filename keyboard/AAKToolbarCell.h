@@ -33,4 +33,7 @@
 @property (nonatomic, assign) id <AAKToolbarCellDelegate> delegate;
 - (void)setupVerticalSeperator;
 - (void)setOriginalHighlighted:(BOOL)highlighted;
+- (UIColor*)cellHighlightedBackgroundColor;
+- (UIColor*)textColor;
+- (UIColor*)highlightedTextColor;
 @end
