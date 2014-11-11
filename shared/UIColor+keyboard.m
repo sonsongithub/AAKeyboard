@@ -19,11 +19,11 @@
 }
 
 + (UIColor*)lightColorForDark {
-	return [UIColor colorWithRed:180/255.0f green:200/255.0f blue:200/255.0f alpha:0.5];
+	return [UIColor colorWithRed:180/255.0f green:200/255.0f blue:200/255.0f alpha:0.2];
 }
 
 + (UIColor*)darkColorForDark {
-	return [UIColor colorWithRed:100/255.0f green:100/255.0f blue:100/255.0f alpha:0.5];
+	return [UIColor colorWithRed:20/255.0f green:20/255.0f blue:20/255.0f alpha:0.1];
 }
 
 @end
