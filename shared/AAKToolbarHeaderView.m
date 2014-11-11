@@ -8,6 +8,8 @@
 
 #import "AAKToolbarHeaderView.h"
 
+#import "AAKShared.h"
+
 @interface AAKToolbarHeaderView() {
 	IBOutlet UIImageView *_rightSeperatorImageView;
 }
@@ -15,11 +17,13 @@
 
 @implementation AAKToolbarHeaderView
 
+- (void)setKeyboardAppearance:(UIKeyboardAppearance)keyboardAppearance {
+	_keyboardAppearance = keyboardAppearance;
+	_rightSeperatorImageView.image = [UIImage rightEdgeWithKeyboardAppearance:_keyboardAppearance];
+}
+
 - (void)awakeFromNib {
 	[super awakeFromNib];
-	UIImage *temp = [UIImage imageNamed:@"rightEdge"];
-	UIImage *temp2 = [temp stretchableImageWithLeftCapWidth:1 topCapHeight:1];
-	_rightSeperatorImageView.image = temp2;
 	self.backgroundColor = [UIColor clearColor];
 }
 

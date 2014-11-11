@@ -8,6 +8,8 @@
 
 #import "AAKToolbarFooterView.h"
 
+#import "AAKShared.h"
+
 @interface AAKToolbarFooterView() {
 	IBOutlet UIImageView *_leftSeperatorImageView;
 }
@@ -15,11 +17,13 @@
 
 @implementation AAKToolbarFooterView
 
+- (void)setKeyboardAppearance:(UIKeyboardAppearance)keyboardAppearance {
+	_keyboardAppearance = keyboardAppearance;
+	_leftSeperatorImageView.image = [UIImage leftEdgeWithKeyboardAppearance:_keyboardAppearance];
+}
+
 - (void)awakeFromNib {
 	[super awakeFromNib];
-	UIImage *temp = [UIImage imageNamed:@"leftEdge"];
-	UIImage *temp2 = [temp stretchableImageWithLeftCapWidth:1 topCapHeight:1];
-	_leftSeperatorImageView.image = temp2;
 	self.backgroundColor = [UIColor clearColor];
 }
 

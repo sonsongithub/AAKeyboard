@@ -48,7 +48,7 @@
 
 - (UIColor*)cellBackgroundColor {
 	if (_keyboardAppearance == UIKeyboardAppearanceDark) {
-		return [UIColor lightColorForDark];
+		return [UIColor darkColorForDark];
 	}
 	else {
 		return [UIColor lightColorForDefault];
@@ -127,10 +127,9 @@
 			[_earthKey setImage:[UIImage imageNamed:@"earth"] forState:UIControlStateHighlighted];
 		}
 		
-		UIImage *temp = [UIImage imageNamed:@"rightEdge"];
-		UIImage *temp2 = [temp stretchableImageWithLeftCapWidth:1 topCapHeight:1];
-		[_earthKey setBackgroundImage:temp2 forState:UIControlStateNormal];
-		[_earthKey setBackgroundImage:temp2 forState:UIControlStateHighlighted];
+		UIImage *temp = [UIImage rightEdgeWithKeyboardAppearance:_keyboardAppearance];
+		[_earthKey setBackgroundImage:temp forState:UIControlStateNormal];
+		[_earthKey setBackgroundImage:temp forState:UIControlStateHighlighted];
 	}
 	{
 		_deleteKey = [[UIButton alloc] initWithFrame:CGRectZero];
@@ -140,10 +139,10 @@
 		[_deleteKey addTarget:self action:@selector(pushDeleteKey:) forControlEvents:UIControlEventTouchUpInside];
 		[_deleteKey addTarget:self action:@selector(buttonHighlight:) forControlEvents:UIControlEventTouchDown];
 		[_deleteKey addTarget:self action:@selector(buttonStopHighlight:) forControlEvents:UIControlEventTouchUpOutside];
-		UIImage *temp = [UIImage imageNamed:@"leftEdge"];
-		UIImage *temp2 = [temp stretchableImageWithLeftCapWidth:1 topCapHeight:1];
-		[_deleteKey setBackgroundImage:temp2 forState:UIControlStateNormal];
-		[_deleteKey setBackgroundImage:temp2 forState:UIControlStateHighlighted];
+
+		UIImage *temp = [UIImage leftEdgeWithKeyboardAppearance:_keyboardAppearance];
+		[_deleteKey setBackgroundImage:temp forState:UIControlStateNormal];
+		[_deleteKey setBackgroundImage:temp forState:UIControlStateHighlighted];
 		
 		if (_keyboardAppearance == UIKeyboardAppearanceDark) {
 			[_deleteKey setImage:[UIImage imageNamed:@"deleteHighlighted"] forState:UIControlStateNormal];
@@ -263,7 +262,7 @@
  * ツールバーの上の枠線をセットアップする．
  **/
 - (void)setupTopBorderLine {
-	UIImageView *topBar = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"topEdge"]];
+	UIImageView *topBar = [[UIImageView alloc] initWithImage:[UIImage topEdgeWithKeyboardAppearance:_keyboardAppearance]];
 	NSDictionary *views = NSDictionaryOfVariableBindings(topBar);
 	topBar.translatesAutoresizingMaskIntoConstraints = NO;
 	[self addSubview:topBar];

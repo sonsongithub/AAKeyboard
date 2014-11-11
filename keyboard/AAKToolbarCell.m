@@ -14,7 +14,7 @@
 
 - (UIColor*)cellHighlightedBackgroundColor {
 	if (_keyboardAppearance == UIKeyboardAppearanceDark) {
-		return [UIColor darkColorForDark];
+		return [UIColor lightColorForDark];
 	}
 	else {
 		return [UIColor darkColorForDefault];
@@ -53,6 +53,7 @@
 
 - (void)setKeyboardAppearance:(UIKeyboardAppearance)keyboardAppearance {
 	_keyboardAppearance = keyboardAppearance;
+	_imageView.image = [UIImage rightEdgeWithKeyboardAppearance:_keyboardAppearance];
 }
 
 #pragma mark - Instance method
@@ -96,9 +97,7 @@
  * セルの右端に配置する縦線をセットアップする．
  **/
 - (void)setupVerticalSeperator {
-	UIImage *temp = [UIImage imageNamed:@"rightEdge"];
-	UIImage *temp2 = [temp stretchableImageWithLeftCapWidth:1 topCapHeight:1];
-	_imageView = [[UIImageView alloc] initWithImage:temp2];
+	_imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
 	[self.contentView addSubview:_imageView];
 }
 

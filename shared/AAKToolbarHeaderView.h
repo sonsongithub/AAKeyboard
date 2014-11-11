@@ -12,4 +12,5 @@
  * UICollectionViewの左端に枠線を描画するためのフッタービュー
  **/
 @interface AAKToolbarHeaderView : UICollectionReusableView
+@property (nonatomic, assign) UIKeyboardAppearance keyboardAppearance;
 @end
