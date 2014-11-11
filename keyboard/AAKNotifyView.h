@@ -9,4 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface AAKNotifyView : UIView
+@property (nonatomic, assign) UIKeyboardAppearance keyboardAppearance;
 @end

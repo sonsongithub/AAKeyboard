@@ -10,6 +10,8 @@
 
 #import "NSParagraphStyle+keyboard.h"
 
+NSString *const AAKTextViewDidCopyAAImageToPasteboard = @"AAKTextViewDidCopyAAImageToPasteboard";
+
 static CGFloat AAKTextViewImageWidth = 320;
 
 @interface AAKTextView() {
@@ -41,6 +43,7 @@ static CGFloat AAKTextViewImageWidth = 320;
 	[dummyTextView.layer renderInContext:UIGraphicsGetCurrentContext()];
 	UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();
+	
 	return image;
 }
 

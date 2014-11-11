@@ -47,6 +47,7 @@
 - (void)copyAAImageToPasteBoard {
 	UIImage *image = [self.textView imageForPasteBoard];
 	[[UIPasteboard generalPasteboard] setValue:UIImagePNGRepresentation(image) forPasteboardType:@"public.png"];
+	[[NSNotificationCenter defaultCenter] postNotificationName:AAKTextViewDidCopyAAImageToPasteboard object:nil userInfo:nil];
 }
 
 /**

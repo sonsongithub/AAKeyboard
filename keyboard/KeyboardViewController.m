@@ -10,10 +10,12 @@
 
 #import "AAKShared.h"
 #import "AAKKeyboardView.h"
+#import "AAKNotifyView.h"
 
 @interface KeyboardViewController () <AAKKeyboardViewDelegate> {
 	AAKKeyboardView *_keyboardView;
 	NSLayoutConstraint *_heightConstraint;
+	AAKNotifyView				*_notifyView;
 }
 @end
 
@@ -116,12 +118,45 @@
 	_keyboardView.delegate = self;
 	[self.view addSubview:_keyboardView];
 	
-	// キーボードビューは，このビューコントローラにぴっちり貼り付ける
-	NSDictionary *views = NSDictionaryOfVariableBindings(_keyboardView);
+	// 通知ビューを貼り付ける
+	UINib *nib = [UINib nibWithNibName:@"AAKNotifyView" bundle:nil];
+	_notifyView = [[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
+	_notifyView.translatesAutoresizingMaskIntoConstraints = NO;
+	_notifyView.userInteractionEnabled = NO;
+	_notifyView.hidden = YES;
+	_notifyView.keyboardAppearance = self.textDocumentProxy.keyboardAppearance;
+	[self.view addSubview:_notifyView];
+	
+	// キーボードビューも通知ビューも，このビューコントローラにぴっちり貼り付ける
+	NSDictionary *views = NSDictionaryOfVariableBindings(_keyboardView, _notifyView);
 	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_keyboardView]-0-|"
 																	  options:0 metrics:0 views:views]];
 	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_keyboardView]-0-|"
 																	  options:0 metrics:0 views:views]];
+	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_notifyView]-0-|"
+																	  options:0 metrics:0 views:views]];
+	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_notifyView]-0-|"
+																	  options:0 metrics:0 views:views]];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewDidCopyAAImageToPasteboard:) name:AAKTextViewDidCopyAAImageToPasteboard object:nil];
+}
+
+- (void)textViewDidCopyAAImageToPasteboard:(NSNotification*)notification {
+	_notifyView.hidden = NO;
+	_notifyView.alpha = 0;
+	[UIView animateWithDuration:0.4
+					 animations:^{
+						 _notifyView.alpha = 1;
+					 }
+					 completion:^(BOOL finished) {
+						 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+							 [UIView animateWithDuration:0.4
+											  animations:^{
+												  _notifyView.alpha = 0;
+											  } completion:^(BOOL finished) {
+											  }];
+						 });
+					 }];
 }
 
 - (void)viewDidLoad {

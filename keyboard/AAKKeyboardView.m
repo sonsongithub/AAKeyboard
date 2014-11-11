@@ -9,7 +9,6 @@
 #import "AAKKeyboardView.h"
 #import "AAKToolbar.h"
 #import "AAKContentCell.h"
-#import "AAKNotifyView.h"
 
 #import "AAKShared.h"
 
@@ -20,7 +19,6 @@
 	UICollectionViewFlowLayout	*_collectionFlowLayout;
 	NSArray						*_asciiarts;
 	UIKeyboardAppearance		_keyboardAppearance;
-	AAKNotifyView				*_notifyView;
 }
 @end
 
@@ -179,18 +177,7 @@
 }
 
 - (void)toolbar:(AAKToolbar*)toolbar didPushDeleteButton:(UIButton*)button {
-	UINib *nib = [UINib nibWithNibName:@"AAKNotifyView" bundle:nil];
-	_notifyView = [[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
-	
-	_notifyView.translatesAutoresizingMaskIntoConstraints = NO;
-	[self addSubview:_notifyView];
 	[self.delegate keyboardViewDidPushDeleteButton:self];
-	
-	NSDictionary *views = NSDictionaryOfVariableBindings(_notifyView);
-	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_notifyView(==100)]-0-|"
-																 options:0 metrics:0 views:views]];
-	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_notifyView(==100)]-0-|"
-																 options:0 metrics:0 views:views]];
 }
 
 #pragma mark - UICollectionViewDelegate, UICollectionViewDataSource
@@ -232,13 +219,6 @@
 	CGFloat fontSize = 15;
 	AAKASCIIArt *source = _asciiarts[indexPath.item];
 	
-	UIColor *textColor = nil;
-	if (_keyboardAppearance == UIKeyboardAppearanceDark) {
-		textColor = [UIColor whiteColor];
-	}
-	else {
-		textColor = [UIColor blackColor];
-	}
 	
 	cell.isTail = ((_asciiarts.count - 1) == indexPath.item);
 	cell.keyboardAppearance = _keyboardAppearance;

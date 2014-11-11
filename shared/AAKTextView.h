@@ -8,6 +8,8 @@
 
 #import "UZTextView.h"
 
+extern NSString *const AAKTextViewDidCopyAAImageToPasteboard;
+
 @interface AAKTextView : UZTextView
 
 /**

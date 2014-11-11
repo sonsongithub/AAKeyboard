@@ -413,13 +413,15 @@
 	if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
 		AAKToolbarHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
 																				withReuseIdentifier:@"AAKToolbarHeaderView"
-																					   forIndexPath:indexPath];
+																					 forIndexPath:indexPath];
+		headerView.keyboardAppearance = _keyboardAppearance;
 		return headerView;
 	}
 	else if ([kind isEqualToString:UICollectionElementKindSectionFooter]) {
 		AAKToolbarFooterView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 																			  withReuseIdentifier:@"AAKToolbarFooterView"
 																					 forIndexPath:indexPath];
+		footerView.keyboardAppearance = _keyboardAppearance;
 		return footerView;
 	}
 	else {
