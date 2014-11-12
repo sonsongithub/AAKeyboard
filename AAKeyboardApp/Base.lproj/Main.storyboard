@@ -59,16 +59,12 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5HB-Xf-qhu" customClass="AAKTextView">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ya1-Nu-igY">
-                                <rect key="frame" x="532" y="532" width="48" height="48"/>
+                                <rect key="frame" x="548" y="548" width="32" height="32"/>
                                 <color key="backgroundColor" white="0.5" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="48" id="1pT-kq-BXq"/>
-                                    <constraint firstAttribute="height" constant="48" id="D9I-CT-LVO"/>
+                                    <constraint firstAttribute="width" constant="32" id="1pT-kq-BXq"/>
+                                    <constraint firstAttribute="height" constant="32" id="D9I-CT-LVO"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="editIcon">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -77,14 +73,33 @@
                                     <segue destination="xok-cl-QqD" kind="presentation" identifier="OpenAAKEditNavigationController" modalTransitionStyle="flipHorizontal" id="95G-MC-UQ3"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5HB-Xf-qhu" customClass="AAKTextView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hAW-lw-gaM">
+                                <rect key="frame" x="20" y="548" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="32" id="3SL-Mn-SQa"/>
+                                    <constraint firstAttribute="height" constant="32" id="MoA-sd-0nH"/>
+                                </constraints>
+                                <state key="normal" image="photos">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="saveAsImage:" destination="6bA-Do-0CJ" eventType="touchUpInside" id="J3O-JX-Dg5"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="hAW-lw-gaM" firstAttribute="leading" secondItem="Ljy-z7-zrq" secondAttribute="leading" constant="20" id="f2W-wt-pbm"/>
                             <constraint firstItem="5HB-Xf-qhu" firstAttribute="top" secondItem="Ljy-z7-zrq" secondAttribute="top" id="hcA-l5-FhP"/>
                             <constraint firstAttribute="trailing" secondItem="Ya1-Nu-igY" secondAttribute="trailing" constant="20" id="k3Z-kh-ju0"/>
                             <constraint firstItem="4IR-HT-sky" firstAttribute="top" secondItem="5HB-Xf-qhu" secondAttribute="bottom" id="meJ-QR-guM"/>
                             <constraint firstItem="4IR-HT-sky" firstAttribute="top" secondItem="Ya1-Nu-igY" secondAttribute="bottom" constant="20" id="rFg-pd-tLC"/>
                             <constraint firstAttribute="trailing" secondItem="5HB-Xf-qhu" secondAttribute="trailing" id="scF-JU-UaZ"/>
+                            <constraint firstItem="4IR-HT-sky" firstAttribute="top" secondItem="hAW-lw-gaM" secondAttribute="bottom" constant="20" id="v2t-8I-1Of"/>
                             <constraint firstItem="5HB-Xf-qhu" firstAttribute="leading" secondItem="Ljy-z7-zrq" secondAttribute="leading" id="yFM-PH-59d"/>
                         </constraints>
                     </view>
@@ -455,7 +470,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="editIcon" width="48" height="48"/>
+        <image name="editIcon" width="32" height="32"/>
+        <image name="photos" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="TvC-sY-SyO"/>

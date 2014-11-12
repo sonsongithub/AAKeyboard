@@ -23,6 +23,11 @@
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (IBAction)saveAsImage:(id)sender {
+	DNSLogMethod
+	// to be done
+}
+
 #pragma mark - Instance method
 
 /**
