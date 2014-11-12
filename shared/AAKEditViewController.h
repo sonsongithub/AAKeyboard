@@ -19,6 +19,7 @@
 }
 @property (nonatomic, strong) AAKASCIIArt *asciiart;
 @property (nonatomic, strong) IBOutlet UITextView *AATextView;
+@property (nonatomic, readonly) AAKASCIIArtGroup *group;
 - (void)setGroup:(AAKASCIIArtGroup *)group;
 - (IBAction)didChangeSlider:(id)sender;
 - (IBAction)save:(id)sender;

@@ -161,11 +161,38 @@ static AAKKeyboardDataManager *sharedKeyboardDataManager = nil;
 }
 
 /**
+ * グループの順番を更新する．
+ * @param group グループオブジェクト．
+ * @return 削除に成功した場合にYESを返す．（未実装）
+ **/
+- (BOOL)updateASCIIArtGroup:(AAKASCIIArtGroup*)group {
+	return NO;
+}
+
+/**
  * AAを削除する．
  * @param asciiArt 削除したいアスキーアートオブジェクト．
  * @return 削除に成功した場合にYESを返す．（未実装）
  **/
 - (BOOL)deleteASCIIArt:(AAKASCIIArt*)asciiArt {
+	return NO;
+}
+
+/**
+ * 特定のグループのアスキーアートをDefaultグループに移動する．
+ * @param group グループオブジェクト．
+ * @return 削除に成功した場合にYESを返す．（未実装）
+ **/
+- (BOOL)moveToDefaultGroupFromASCIIArtGroup:(AAKASCIIArtGroup*)group {
+	return NO;
+}
+
+/**
+ * グループを削除する．
+ * @param group アスキーアートグループ
+ * @return 削除に成功した場合にYESを返す．（未実装）
+ **/
+- (BOOL)deleteASCIIArtGroup:(AAKASCIIArtGroup*)group {
 	return NO;
 }
 

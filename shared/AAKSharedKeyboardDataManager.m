@@ -44,7 +44,7 @@
  * @return グループ名の配列．
  **/
 - (NSArray*)allGroups {
-	const char *sql = "select DISTINCT group_title, group_key from AAGroup";
+	const char *sql = "select DISTINCT group_title, group_key, number from AAGroup order by number asc";
 	sqlite3_stmt *statement = NULL;
 	
 	NSMutableArray *groups = [NSMutableArray array];
@@ -57,7 +57,8 @@
 			if (sqlite3_column_text(statement, 0)) {
 				NSString *title = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
 				NSInteger key = sqlite3_column_int(statement, 1);
-				AAKASCIIArtGroup *obj = [AAKASCIIArtGroup groupWithTitle:title key:key];
+				NSInteger number = sqlite3_column_int(statement, 2);
+				AAKASCIIArtGroup *obj = [AAKASCIIArtGroup groupWithTitle:title key:key number:number];
 				[groups addObject:obj];
 			}
 		}
@@ -71,7 +72,7 @@
  * @return グループ名の配列．
  **/
 - (NSArray*)groups {
-	const char *sql = "select DISTINCT AAGroup.group_title, AA.group_key from AA, AAGroup where AA.group_key == AAGroup.group_key;";
+	const char *sql = "select DISTINCT AAGroup.group_title, AA.group_key, AAGroup.number, from AA, AAGroup where AA.group_key == AAGroup.group_key order by AAGroup.number asc";
 	sqlite3_stmt *statement = NULL;
 	
 	NSMutableArray *groups = [NSMutableArray array];
@@ -86,7 +87,8 @@
 			if (sqlite3_column_text(statement, 0)) {
 				NSString *title = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
 				NSInteger key = sqlite3_column_int(statement, 1);
-				AAKASCIIArtGroup *obj = [AAKASCIIArtGroup groupWithTitle:title key:key];
+				NSInteger number = sqlite3_column_int(statement, 2);
+				AAKASCIIArtGroup *obj = [AAKASCIIArtGroup groupWithTitle:title key:key number:number];
 				[groups addObject:obj];
 			}
 		}
@@ -100,7 +102,7 @@
  * @return グループ名の配列．
  **/
 - (NSArray*)groupsWithoutHistory {
-	const char *sql = "select DISTINCT AAGroup.group_title, AA.group_key from AA, AAGroup where AA.group_key == AAGroup.group_key;";
+	const char *sql = "select DISTINCT AAGroup.group_title, AA.group_key, AAGroup.number from AA, AAGroup where AA.group_key == AAGroup.group_key order by AAGroup.number asc";
 	sqlite3_stmt *statement = NULL;
 	
 	NSMutableArray *groups = [NSMutableArray array];
@@ -113,7 +115,8 @@
 			if (sqlite3_column_text(statement, 0)) {
 				NSString *title = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
 				NSInteger key = sqlite3_column_int(statement, 1);
-				AAKASCIIArtGroup *obj = [AAKASCIIArtGroup groupWithTitle:title key:key];
+				NSInteger number = sqlite3_column_int(statement, 2);
+				AAKASCIIArtGroup *obj = [AAKASCIIArtGroup groupWithTitle:title key:key number:number];
 				[groups addObject:obj];
 			}
 		}
@@ -351,6 +354,56 @@
 	return NO;
 }
 
+/**
+ * グループの順番を更新する．
+ * @param group グループオブジェクト．
+ * @return 削除に成功した場合にYESを返す．（未実装）
+ **/
+- (BOOL)updateASCIIArtGroup:(AAKASCIIArtGroup*)group {
+	sqlite3_stmt *statement = NULL;
+	static char *sql = "update AAGroup set group_title = ?, number = ? where group_key = ?";
+	if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
+		NSLog( @"Can't prepare statment to insert board information. into board, with messages '%s'.", sqlite3_errmsg(_database));
+	}
+	else {
+	}
+	sqlite3_bind_text(statement, 1, [group.title UTF8String], -1, SQLITE_TRANSIENT);
+	sqlite3_bind_int64(statement, 2, group.number);
+	sqlite3_bind_int64(statement, 3, group.key);
+	int success = sqlite3_step(statement);
+	if (success != SQLITE_ERROR) {
+	}
+	else{
+		NSLog(@"Error");
+	}
+	sqlite3_finalize(statement);
+	
+	return NO;
+}
+
+/**
+ * 特定のグループのアスキーアートをDefaultグループに移動する．
+ * @param group グループオブジェクト．
+ * @return 削除に成功した場合にYESを返す．（未実装）
+ **/
+- (BOOL)moveToDefaultGroupFromASCIIArtGroup:(AAKASCIIArtGroup*)group {
+	sqlite3_stmt *statement = NULL;
+	static char *sql = "update AA set group_key = 1 where group_key = ?";
+	if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
+		NSLog( @"Can't prepare statment to insert board information. into board, with messages '%s'.", sqlite3_errmsg(_database));
+	}
+	else {
+	}
+	sqlite3_bind_int64(statement, 1, group.key);
+	int success = sqlite3_step(statement);
+	if (success != SQLITE_ERROR) {
+	}
+	else{
+		NSLog(@"Error");
+	}
+	sqlite3_finalize(statement);
+	return NO;
+}
 
 /**
  * AAを削除する．
@@ -366,6 +419,30 @@
 	else {
 	}
 	sqlite3_bind_int64(statement, 1, asciiArt.key);
+	int success = sqlite3_step(statement);
+	if (success != SQLITE_ERROR) {
+	}
+	else{
+		NSLog(@"Error");
+	}
+	sqlite3_finalize(statement);
+	return YES;
+}
+
+/**
+ * グループを削除する．
+ * @param group アスキーアートグループ
+ * @return 削除に成功した場合にYESを返す．（未実装）
+ **/
+- (BOOL)deleteASCIIArtGroup:(AAKASCIIArtGroup*)group {
+	sqlite3_stmt *statement = NULL;
+	static char *sql = "delete from AAGroup where group_key = ?";
+	if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
+		NSLog( @"Can't prepare statment to insert board information. into board, with messages '%s'.", sqlite3_errmsg(_database));
+	}
+	else {
+	}
+	sqlite3_bind_int64(statement, 1, group.key);
 	int success = sqlite3_step(statement);
 	if (success != SQLITE_ERROR) {
 	}

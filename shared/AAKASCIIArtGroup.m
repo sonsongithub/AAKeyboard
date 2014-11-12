@@ -20,7 +20,9 @@
  * @return デフォルト設定であるデフォルトグループを示すAAKASCIIArtGroupオブジェクトを返す．
  **/
 + (AAKASCIIArtGroup*)defaultGroup {
-	return [[AAKASCIIArtGroup alloc] initWithTitle:@"Default" key:1 type:AAKASCIIArtNormalGroup];
+	AAKASCIIArtGroup *obj = [[AAKASCIIArtGroup alloc] initWithTitle:@"Default" key:1 type:AAKASCIIArtNormalGroup];
+	obj.number = -1;
+	return obj;
 }
 
 /**
@@ -31,6 +33,19 @@
  **/
 + (AAKASCIIArtGroup*)groupWithTitle:(NSString*)title key:(NSInteger)key {
 	return [[AAKASCIIArtGroup alloc] initWithTitle:title key:key type:AAKASCIIArtNormalGroup];
+}
+
+/**
+ * 指定された名前のグループとキーを持つAAKASCIIArtGroupオブジェクトを生成する．
+ * @param title グループの名前．
+ * @param key グループを示すキー
+ * @param number グループを並べるときの順番を示すキー
+ * @return 指定された値を持つAAKASCIIArtGroupオブジェクト．
+ **/
++ (AAKASCIIArtGroup*)groupWithTitle:(NSString*)title key:(NSInteger)key number:(NSInteger)number {
+	AAKASCIIArtGroup *obj = [[AAKASCIIArtGroup alloc] initWithTitle:title key:key type:AAKASCIIArtNormalGroup];
+	obj.number = number;
+	return obj;
 }
 
 /**
@@ -55,6 +70,7 @@
 		_title = title;
 		_key = key;
 		_type = type;
+		_number = -1;
 	}
 	return self;
 }
@@ -67,6 +83,7 @@
 		_title = nil;
 		_type = AAKASCIIArtNormalGroup;
 		_key = -1;
+		_number = -1;
 	}
 	return self;
 }

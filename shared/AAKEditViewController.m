@@ -39,6 +39,10 @@
 	[_groupTableView reloadData];
 }
 
+- (AAKASCIIArtGroup*)group {
+	return _asciiart.group;
+}
+
 #pragma mark - IBAction
 
 /**

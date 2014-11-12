@@ -59,7 +59,7 @@ static NSString * const reuseIdentifier = @"Cell";
  * AAKAAGroupForCollectionオブジェクトの配列ですべてのアスキーアートを列挙し，_groupsに保存する．
  **/
 - (void)updateCollections {
-	NSArray *temp = [[AAKKeyboardDataManager defaultManager] groupsWithoutHistory];
+	NSArray *temp = [[AAKKeyboardDataManager defaultManager] allGroups];
 	NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[temp count]];
 	for (AAKASCIIArtGroup *group in temp) {
 		NSArray *asciiarts = [[AAKKeyboardDataManager defaultManager] asciiArtForGroup:group];
@@ -192,12 +192,15 @@ static NSString * const reuseIdentifier = @"Cell";
 		  viewForSupplementaryElementOfKind:(NSString *)kind
 								atIndexPath:(NSIndexPath *)indexPath {
 	if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
-		AAKAASupplementaryView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-																				withReuseIdentifier:@"AAKAASupplementaryView"
-																					   forIndexPath:indexPath];
 		AAKAAGroupForCollection *collection = _groups[indexPath.section];
-		headerView.label.text = collection.group.title;
-		return headerView;
+		if ([collection.asciiarts count] > 0) {
+			AAKAASupplementaryView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+																					withReuseIdentifier:@"AAKAASupplementaryView"
+																						   forIndexPath:indexPath];
+			headerView.label.text = collection.group.title;
+			return headerView;
+		}
+		return nil;
 	}
 	else {
 		return nil;
@@ -239,7 +242,11 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-	return CGSizeMake(320, 44);
+	AAKAAGroupForCollection *collection = _groups[section];
+	if ([collection.asciiarts count] > 0) {
+		return CGSizeMake(320, 44);
+	}
+	return CGSizeZero;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
