@@ -106,7 +106,7 @@ UIView *topView(UIView *current) {
 - (CGFloat)getSpaceKeyboardRect:(CGRect)keyboardRect {
 #ifndef TARGET_IS_EXTENSION
 	UIView *rootView = [[UIApplication sharedApplication] keyWindow];
-	CGRect rect = [rootView convertRect:keyboardRect toView:self.view];
+	CGRect rect = [rootView convertRect:_AATextView.frame fromView:self.view];
 #else
 	UIView *rootView = topView(self.view);
 	CGRect rect = [rootView convertRect:_AATextView.frame fromView:self.view];
