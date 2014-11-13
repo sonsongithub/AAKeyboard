@@ -17,6 +17,15 @@
 @interface AAKEditViewController () <UITableViewDataSource, UITableViewDelegate>
 @end
 
+UIView *topView(UIView *current) {
+	if (current.superview == nil) {
+		if ([current isKindOfClass:[UIWindow class]])
+			return current;
+		return nil;
+	}
+	return topView(current.superview);
+}
+
 @implementation AAKEditViewController
 
 #pragma mark - Instance method
@@ -94,13 +103,24 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hoge:) name:UIKeyboardWillChangeFrameNotification object:nil];
 }
 
-- (void)hoge:(NSNotification*)notification {
+- (CGFloat)getSpaceKeyboardRect:(CGRect)keyboardRect {
 #ifndef TARGET_IS_EXTENSION
-	CGRect rect = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-	rect = [[[UIApplication sharedApplication] keyWindow] convertRect:rect toView:self.view];
-	CGFloat space = _AATextView.frame.origin.y + _AATextView.frame.size.height - rect.origin.y;
-	_bottomTextViewMargin.constant = space;
+	UIView *rootView = [[UIApplication sharedApplication] keyWindow];
+	CGRect rect = [rootView convertRect:keyboardRect toView:self.view];
+#else
+	UIView *rootView = topView(self.view);
+	CGRect rect = [rootView convertRect:_AATextView.frame fromView:self.view];
+	UIScreen *mainScreen = [UIScreen mainScreen];
+	rect.origin.x += floor((mainScreen.bounds.size.width - rootView.bounds.size.width)/2);
+	rect.origin.y += floor((mainScreen.bounds.size.height - rootView.bounds.size.height)/2);
 #endif
+	CGRect intersected = CGRectIntersection(keyboardRect, rect);
+	return intersected.size.height;
+}
+
+- (void)hoge:(NSNotification*)notification {
+	CGRect rect = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+	_bottomTextViewMargin.constant = [self getSpaceKeyboardRect:rect];
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
