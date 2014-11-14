@@ -91,6 +91,16 @@
 		14CB157C19EA328500D05E9C /* AAKToolbarHistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CB157B19EA328500D05E9C /* AAKToolbarHistoryCell.m */; };
 		14CB157D19EA328500D05E9C /* AAKToolbarHistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CB157B19EA328500D05E9C /* AAKToolbarHistoryCell.m */; };
 		14D0D72F19FA13D900870C92 /* AAKRegisterActionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D0D72E19FA13D900870C92 /* AAKRegisterActionViewController.m */; };
+		14EE653C1A15ED6200FA0731 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 14EE653A1A15ED6200FA0731 /* Model.xcdatamodeld */; };
+		14EE653D1A15ED6200FA0731 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 14EE653A1A15ED6200FA0731 /* Model.xcdatamodeld */; };
+		14EE653E1A15ED6200FA0731 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 14EE653A1A15ED6200FA0731 /* Model.xcdatamodeld */; };
+		14EE65401A15EEB800FA0731 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14EE653F1A15EEB700FA0731 /* CoreData.framework */; };
+		14EE654D1A15EF6700FA0731 /* ASCIIArt.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EE654C1A15EF6700FA0731 /* ASCIIArt.m */; };
+		14EE654E1A15EF6700FA0731 /* ASCIIArt.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EE654C1A15EF6700FA0731 /* ASCIIArt.m */; };
+		14EE654F1A15EF6700FA0731 /* ASCIIArt.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EE654C1A15EF6700FA0731 /* ASCIIArt.m */; };
+		14EE65521A15EF6800FA0731 /* ASCIIArtGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EE65511A15EF6800FA0731 /* ASCIIArtGroup.m */; };
+		14EE65531A15EF6800FA0731 /* ASCIIArtGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EE65511A15EF6800FA0731 /* ASCIIArtGroup.m */; };
+		14EE65541A15EF6800FA0731 /* ASCIIArtGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EE65511A15EF6800FA0731 /* ASCIIArtGroup.m */; };
 		14F6F38E1A100D8600BEE8E2 /* AAKToolbarFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F6F3891A100D8600BEE8E2 /* AAKToolbarFooterView.m */; };
 		14F6F38F1A100D8600BEE8E2 /* AAKToolbarFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F6F3891A100D8600BEE8E2 /* AAKToolbarFooterView.m */; };
 		14F6F3901A100D8600BEE8E2 /* AAKToolbarFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F6F3891A100D8600BEE8E2 /* AAKToolbarFooterView.m */; };
@@ -237,6 +247,12 @@
 		14CB157B19EA328500D05E9C /* AAKToolbarHistoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKToolbarHistoryCell.m; sourceTree = "<group>"; };
 		14D0D72D19FA13D900870C92 /* AAKRegisterActionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKRegisterActionViewController.h; sourceTree = "<group>"; };
 		14D0D72E19FA13D900870C92 /* AAKRegisterActionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKRegisterActionViewController.m; sourceTree = "<group>"; };
+		14EE653B1A15ED6200FA0731 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		14EE653F1A15EEB700FA0731 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		14EE654B1A15EF6700FA0731 /* ASCIIArt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASCIIArt.h; sourceTree = "<group>"; };
+		14EE654C1A15EF6700FA0731 /* ASCIIArt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASCIIArt.m; sourceTree = "<group>"; };
+		14EE65501A15EF6800FA0731 /* ASCIIArtGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASCIIArtGroup.h; sourceTree = "<group>"; };
+		14EE65511A15EF6800FA0731 /* ASCIIArtGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASCIIArtGroup.m; sourceTree = "<group>"; };
 		14F6F3881A100D8600BEE8E2 /* AAKToolbarFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKToolbarFooterView.h; sourceTree = "<group>"; };
 		14F6F3891A100D8600BEE8E2 /* AAKToolbarFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKToolbarFooterView.m; sourceTree = "<group>"; };
 		14F6F38A1A100D8600BEE8E2 /* AAKToolbarFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AAKToolbarFooterView.xib; sourceTree = "<group>"; };
@@ -266,6 +282,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14EE65401A15EEB800FA0731 /* CoreData.framework in Frameworks */,
 				146EEB5519ED5CDE0032F6DE /* libsqlite3.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -344,6 +361,7 @@
 		14B2749C1A0A0A87005BF3B1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				14EE653F1A15EEB700FA0731 /* CoreData.framework */,
 				146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */,
 			);
 			name = Frameworks;
@@ -355,10 +373,11 @@
 				14B275241A0A1652005BF3B1 /* AAKShared.h */,
 				14B274AA1A0A0D6F005BF3B1 /* AAKHelper.h */,
 				14B275211A0A15F6005BF3B1 /* category */,
-				14B275201A0A15DF005BF3B1 /* model */,
+				14EE65391A15ED4900FA0731 /* CoreData */,
 				14B2751F1A0A15DA005BF3B1 /* database */,
-				14B275221A0A160F005BF3B1 /* viewcontroller */,
+				14B275201A0A15DF005BF3B1 /* model */,
 				14B275231A0A1626005BF3B1 /* view */,
+				14B275221A0A160F005BF3B1 /* viewcontroller */,
 			);
 			path = shared;
 			sourceTree = "<group>";
@@ -489,6 +508,18 @@
 				14CB156319E935BB00D05E9C /* UZTextView.m */,
 			);
 			path = UZTextView;
+			sourceTree = "<group>";
+		};
+		14EE65391A15ED4900FA0731 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				14EE654B1A15EF6700FA0731 /* ASCIIArt.h */,
+				14EE654C1A15EF6700FA0731 /* ASCIIArt.m */,
+				14EE65501A15EF6800FA0731 /* ASCIIArtGroup.h */,
+				14EE65511A15EF6800FA0731 /* ASCIIArtGroup.m */,
+				14EE653A1A15ED6200FA0731 /* Model.xcdatamodeld */,
+			);
+			name = CoreData;
 			sourceTree = "<group>";
 		};
 		14FBD39A19E21213005FC38B = {
@@ -786,7 +817,9 @@
 				14A5139319EC85710098C02C /* UZCursorView.m in Sources */,
 				14B274BD1A0A0D6F005BF3B1 /* AAKCreateNewGroupViewController.m in Sources */,
 				14B274C91A0A0D6F005BF3B1 /* AAKTextView.m in Sources */,
+				14EE653E1A15ED6200FA0731 /* Model.xcdatamodeld in Sources */,
 				14A5139519EC85710098C02C /* UZTextView.m in Sources */,
+				14EE654F1A15EF6700FA0731 /* ASCIIArt.m in Sources */,
 				14B274CC1A0A0D6F005BF3B1 /* NSParagraphStyle+keyboard.m in Sources */,
 				14B274C01A0A0D6F005BF3B1 /* AAKEditViewController.m in Sources */,
 				14B274BA1A0A0D6F005BF3B1 /* AAKASCIIArtGroup.m in Sources */,
@@ -798,6 +831,7 @@
 				14B274B71A0A0D6F005BF3B1 /* AAKASCIIArt.m in Sources */,
 				14F6F39E1A100DA900BEE8E2 /* UIColor+keyboard.m in Sources */,
 				14A5139419EC85710098C02C /* UZLoupeView.m in Sources */,
+				14EE65541A15EF6800FA0731 /* ASCIIArtGroup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -824,12 +858,14 @@
 				14B2750E1A0A0DD2005BF3B1 /* AAKLocalKeyboardDataManager.m in Sources */,
 				14B2673F19E6BFD300C0321D /* AAKToolbar.m in Sources */,
 				14B274BB1A0A0D6F005BF3B1 /* AAKCreateNewGroupViewController.m in Sources */,
+				14EE654D1A15EF6700FA0731 /* ASCIIArt.m in Sources */,
 				14B2674219E6BFE900C0321D /* AAKKeyboardView.m in Sources */,
 				14FBD3A919E21213005FC38B /* main.m in Sources */,
 				14B275111A0A0DD2005BF3B1 /* AAKSharedKeyboardDataManager.m in Sources */,
 				14B274EA1A0A0D83005BF3B1 /* AAKAASupplementaryView.m in Sources */,
 				1402F1A61A0D3B430000F269 /* AAKAAGroupForCollection.m in Sources */,
 				14B274E41A0A0D83005BF3B1 /* AAKAAEditAnimatedTransitioning.m in Sources */,
+				14EE653C1A15ED6200FA0731 /* Model.xcdatamodeld in Sources */,
 				14B274BE1A0A0D6F005BF3B1 /* AAKEditViewController.m in Sources */,
 				14B274CA1A0A0D6F005BF3B1 /* NSParagraphStyle+keyboard.m in Sources */,
 				14CB156419E935BB00D05E9C /* UZCursorView.m in Sources */,
@@ -838,6 +874,7 @@
 				14F6F3941A100D8600BEE8E2 /* AAKToolbarHeaderView.m in Sources */,
 				14CB156619E935BB00D05E9C /* UZLoupeView.m in Sources */,
 				14B274C71A0A0D6F005BF3B1 /* AAKTextView.m in Sources */,
+				14EE65521A15EF6800FA0731 /* ASCIIArtGroup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -854,14 +891,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				14527C141A1207F10019F93A /* AAKNotifyView.m in Sources */,
+				14EE654E1A15EF6700FA0731 /* ASCIIArt.m in Sources */,
 				14B73C6519E3C7CA0031DCB6 /* AAKToolbarCell.m in Sources */,
 				14B274BC1A0A0D6F005BF3B1 /* AAKCreateNewGroupViewController.m in Sources */,
+				14EE653D1A15ED6200FA0731 /* Model.xcdatamodeld in Sources */,
 				14B274C51A0A0D6F005BF3B1 /* AAKSelectGroupViewController.m in Sources */,
 				14CB156519E935BB00D05E9C /* UZCursorView.m in Sources */,
 				14CB156719E935BB00D05E9C /* UZLoupeView.m in Sources */,
 				14B274CE1A0A0D6F005BF3B1 /* UITraitCollection+keyboard.m in Sources */,
 				14B2750F1A0A0DD2005BF3B1 /* AAKLocalKeyboardDataManager.m in Sources */,
 				14B274B91A0A0D6F005BF3B1 /* AAKASCIIArtGroup.m in Sources */,
+				14EE65531A15EF6800FA0731 /* ASCIIArtGroup.m in Sources */,
 				14B274CB1A0A0D6F005BF3B1 /* NSParagraphStyle+keyboard.m in Sources */,
 				14B2674B19E6CB2500C0321D /* AAKContentCell.m in Sources */,
 				14B274C21A0A0D6F005BF3B1 /* AAKRegisterViewController.m in Sources */,
@@ -1186,6 +1226,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		14EE653A1A15ED6200FA0731 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				14EE653B1A15ED6200FA0731 /* Model.xcdatamodel */,
+			);
+			currentVersion = 14EE653B1A15ED6200FA0731 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 14FBD39B19E21213005FC38B /* Project object */;
 }
