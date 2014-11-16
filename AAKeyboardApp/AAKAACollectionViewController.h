@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class AAKASCIIArt;
+@class _AAKASCIIArt;
 
 @interface AAKAACollectionViewController : UICollectionViewController
 
@@ -18,6 +18,6 @@
  * @param asciiart アスキーアートオブジェクト．
  * @return アスキーアートオブジェクトを保持するAAKAACollectionViewCellインスタンスを返す．
  **/
-- (id)cellForAsciiArt:(AAKASCIIArt*)asciiart;
+- (id)cellForAsciiArt:(_AAKASCIIArt*)asciiart;
 
 @end

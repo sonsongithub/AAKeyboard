@@ -1,13 +1,17 @@
 //
-//  AAKShared.h
+//  AAKShared.pch
 //  AAKeyboardApp
 //
-//  Created by sonson on 2014/11/05.
+//  Created by sonson on 2014/11/16.
 //  Copyright (c) 2014年 sonson. All rights reserved.
 //
 
-#ifndef AAKeyboardApp_AAKShared_h
-#define AAKeyboardApp_AAKShared_h
+#ifndef AAKeyboardApp_AAKShared_pch
+#define AAKeyboardApp_AAKShared_pch
+
+// For CoreData, MagicalRecord
+#import <CoreData/CoreData.h>
+#import "CoreData+MagicalRecord.h"
 
 // Helper
 #import "AAKHelper.h"
@@ -19,8 +23,8 @@
 #import "UITraitCollection+keyboard.h"
 
 // Model
-#import "AAKASCIIArt.h"
-#import "AAKASCIIArtGroup.h"
+#import "_AAKASCIIArt.h"
+#import "_AAKASCIIArtGroup.h"
 #import "AAKAAGroupForCollection.h"
 
 // Databse

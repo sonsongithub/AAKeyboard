@@ -8,7 +8,6 @@
 
 #import "KeyboardViewController.h"
 
-#import "AAKShared.h"
 #import "AAKKeyboardView.h"
 #import "AAKNotifyView.h"
 

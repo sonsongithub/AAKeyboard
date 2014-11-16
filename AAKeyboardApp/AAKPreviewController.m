@@ -8,8 +8,6 @@
 
 #import "AAKPreviewController.h"
 
-#import "AAKShared.h"
-
 @interface AAKPreviewController () {
 }
 
@@ -66,7 +64,7 @@
 	if ([segue.identifier isEqualToString:@"OpenAAKEditNavigationController"]) {
 		UINavigationController *nav = (UINavigationController*)segue.destinationViewController;
 		AAKEditViewController *vc = (AAKEditViewController*)nav.topViewController;
-		vc.asciiart = self.asciiart;
+		vc.asciiart_ = self.asciiart;
 	}
 }
 

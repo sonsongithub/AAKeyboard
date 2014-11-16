@@ -9,8 +9,8 @@
 #import "AAKSharedKeyboardDataManager.h"
 
 #import "AAKHelper.h"
-#import "AAKASCIIArtGroup.h"
-#import "AAKASCIIArt.h"
+#import "_AAKASCIIArtGroup.h"
+#import "_AAKASCIIArt.h"
 #import "UZTextView.h"
 #import "NSParagraphStyle+keyboard.h"
 
@@ -58,7 +58,7 @@
 				NSString *title = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
 				NSInteger key = sqlite3_column_int(statement, 1);
 				NSInteger number = sqlite3_column_int(statement, 2);
-				AAKASCIIArtGroup *obj = [AAKASCIIArtGroup groupWithTitle:title key:key number:number];
+				_AAKASCIIArtGroup *obj = [_AAKASCIIArtGroup groupWithTitle:title key:key number:number];
 				[groups addObject:obj];
 			}
 		}
@@ -77,7 +77,7 @@
 	
 	NSMutableArray *groups = [NSMutableArray array];
 	
-	[groups addObject:[AAKASCIIArtGroup historyGroup]];
+	[groups addObject:[_AAKASCIIArtGroup historyGroup]];
 	
 	if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
 		DNSLog( @"Error: failed to prepare statement with message '%s'.", sqlite3_errmsg(_database));
@@ -88,7 +88,7 @@
 				NSString *title = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
 				NSInteger key = sqlite3_column_int(statement, 1);
 				NSInteger number = sqlite3_column_int(statement, 2);
-				AAKASCIIArtGroup *obj = [AAKASCIIArtGroup groupWithTitle:title key:key number:number];
+				_AAKASCIIArtGroup *obj = [_AAKASCIIArtGroup groupWithTitle:title key:key number:number];
 				[groups addObject:obj];
 			}
 		}
@@ -116,7 +116,7 @@
 				NSString *title = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
 				NSInteger key = sqlite3_column_int(statement, 1);
 				NSInteger number = sqlite3_column_int(statement, 2);
-				AAKASCIIArtGroup *obj = [AAKASCIIArtGroup groupWithTitle:title key:key number:number];
+				_AAKASCIIArtGroup *obj = [_AAKASCIIArtGroup groupWithTitle:title key:key number:number];
 				[groups addObject:obj];
 			}
 		}
@@ -218,7 +218,7 @@
  * @param group AAリストを取得したいグループ．
  * @return groupに含まれるAAのリスト．NSArrayオブジェクト．
  **/
-- (NSArray*)asciiArtForExistingGroup:(AAKASCIIArtGroup*)group {
+- (NSArray*)asciiArtForExistingGroup:(_AAKASCIIArtGroup*)group {
 	const char *sql = "select asciiart, asciiart_key, ratio from AA where group_key = ? order by lastUseTime desc, asciiart_key asc";
 	sqlite3_stmt *statement = NULL;
 	
@@ -233,7 +233,7 @@
 			if (sqlite3_column_text(statement, 0)) {
 				NSString *title = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
 				NSInteger key = sqlite3_column_int(statement, 1);
-				AAKASCIIArt *obj = [[AAKASCIIArt alloc] init];
+				_AAKASCIIArt *obj = [[_AAKASCIIArt alloc] init];
 				obj.group = group;
 				obj.text = title;
 				obj.key = key;
@@ -264,9 +264,9 @@
 			if (sqlite3_column_text(statement, 0)) {
 				NSString *title = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
 				NSInteger key = sqlite3_column_int(statement, 1);
-				AAKASCIIArt *obj = [[AAKASCIIArt alloc] init];
+				_AAKASCIIArt *obj = [[_AAKASCIIArt alloc] init];
 				obj.text = title;
-				obj.group = [AAKASCIIArtGroup historyGroup];
+				obj.group = [_AAKASCIIArtGroup historyGroup];
 				obj.key = key;
 				obj.ratio = sqlite3_column_double(statement, 2);
 				[groups addObject:obj];
@@ -283,7 +283,7 @@
  * @param group AAリストを取得したいグループ．
  * @return AAのリスト．NSArrayオブジェクト．
  **/
-- (NSArray*)asciiArtForGroup:(AAKASCIIArtGroup*)group {
+- (NSArray*)asciiArtForGroup:(_AAKASCIIArtGroup*)group {
 	if (group.type == AAKASCIIArtNormalGroup) {
 		return [self asciiArtForExistingGroup:group];
 	}
@@ -322,7 +322,7 @@
  * @param asciiArt アスキーアートオブジェクト．
  * @return 削除に成功した場合にYESを返す．（未実装）
  **/
-- (BOOL)updateASCIIArt:(AAKASCIIArt*)asciiArt {
+- (BOOL)updateASCIIArt:(_AAKASCIIArt*)asciiArt {
 	sqlite3_stmt *statement = NULL;
 	
 	CGFloat fontSize = 15;
@@ -359,7 +359,7 @@
  * @param group グループオブジェクト．
  * @return 削除に成功した場合にYESを返す．（未実装）
  **/
-- (BOOL)updateASCIIArtGroup:(AAKASCIIArtGroup*)group {
+- (BOOL)updateASCIIArtGroup:(_AAKASCIIArtGroup*)group {
 	sqlite3_stmt *statement = NULL;
 	static char *sql = "update AAGroup set group_title = ?, number = ? where group_key = ?";
 	if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
@@ -386,7 +386,7 @@
  * @param group グループオブジェクト．
  * @return 削除に成功した場合にYESを返す．（未実装）
  **/
-- (BOOL)moveToDefaultGroupFromASCIIArtGroup:(AAKASCIIArtGroup*)group {
+- (BOOL)moveToDefaultGroupFromASCIIArtGroup:(_AAKASCIIArtGroup*)group {
 	sqlite3_stmt *statement = NULL;
 	static char *sql = "update AA set group_key = 1 where group_key = ?";
 	if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
@@ -410,7 +410,7 @@
  * @param asciiArt 削除したいアスキーアートオブジェクト．
  * @return 削除に成功した場合にYESを返す．（未実装）
  **/
-- (BOOL)deleteASCIIArt:(AAKASCIIArt*)asciiArt {
+- (BOOL)deleteASCIIArt:(_AAKASCIIArt*)asciiArt {
 	sqlite3_stmt *statement = NULL;
 	static char *sql = "delete from AA where asciiart_key = ?";
 	if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {
@@ -434,7 +434,7 @@
  * @param group アスキーアートグループ
  * @return 削除に成功した場合にYESを返す．（未実装）
  **/
-- (BOOL)deleteASCIIArtGroup:(AAKASCIIArtGroup*)group {
+- (BOOL)deleteASCIIArtGroup:(_AAKASCIIArtGroup*)group {
 	sqlite3_stmt *statement = NULL;
 	static char *sql = "delete from AAGroup where group_key = ?";
 	if (sqlite3_prepare_v2(_database, sql, -1, &statement, NULL) != SQLITE_OK) {

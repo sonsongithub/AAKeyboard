@@ -8,8 +8,6 @@
 
 #import "AAKToolbarHistoryCell.h"
 
-#import "AAKShared.h"
-
 @interface AAKToolbarHistoryCell() {
 	UIImageView *_iconImageView;
 }

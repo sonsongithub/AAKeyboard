@@ -8,8 +8,6 @@
 
 #import "AAKToolbarCell.h"
 
-#import "AAKShared.h"
-
 @implementation AAKToolbarCell
 
 - (UIColor*)cellHighlightedBackgroundColor {
@@ -77,7 +75,7 @@
  * セルに表示させるグループを入力する．
  * @param group AAKASCIIArtGroupオブジェクト．
  **/
-- (void)setGroup:(AAKASCIIArtGroup *)group {
+- (void)setGroup:(_AAKASCIIArtGroup *)group {
 	_group = group;
 	_label.text = _group.title;
 	[_label sizeToFit];

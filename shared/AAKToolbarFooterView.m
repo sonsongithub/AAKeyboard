@@ -8,8 +8,6 @@
 
 #import "AAKToolbarFooterView.h"
 
-#import "AAKShared.h"
-
 @interface AAKToolbarFooterView() {
 	IBOutlet UIImageView *_leftSeperatorImageView;
 }

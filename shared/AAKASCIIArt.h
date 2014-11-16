@@ -2,20 +2,20 @@
 //  AAKASCIIArt.h
 //  AAKeyboardApp
 //
-//  Created by sonson on 2014/10/13.
+//  Created by sonson on 2014/11/17.
 //  Copyright (c) 2014年 sonson. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 
 @class AAKASCIIArtGroup;
 
-@interface AAKASCIIArt : NSObject
+@interface AAKASCIIArt : NSManagedObject
 
-@property (nonatomic, strong) NSString *text;			/** ASCII art データ本体 */
-@property (nonatomic, strong) AAKASCIIArtGroup *group;	/** ASCII art データ本体 */
-@property (nonatomic, assign) NSInteger key;			/** ASCII artを一意に指定できるキー */
-@property (nonatomic, assign) CGFloat ratio;			/** ASCII artの縦横比 */
+@property (nonatomic) double lastUsedTime;
+@property (nonatomic) double ratio;
+@property (nonatomic, retain) NSString * text;
+@property (nonatomic, retain) AAKASCIIArtGroup *relationship;
 
 @end

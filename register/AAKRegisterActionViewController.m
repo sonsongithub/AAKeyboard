@@ -9,7 +9,6 @@
 #import "AAKRegisterActionViewController.h"
 
 #import <MobileCoreServices/MobileCoreServices.h>
-#import "AAKShared.h"
 
 @interface AAKRegisterActionViewController ()
 
@@ -36,7 +35,7 @@
  **/
 - (IBAction)registerAA:(id)sender {
 	// AAを登録してから，registerの処理コンテキストを終了する
-	[[AAKKeyboardDataManager defaultManager] insertNewASCIIArt:self.AATextView.text groupKey:self.asciiart.group.key];
+//	[[AAKKeyboardDataManager defaultManager] insertNewASCIIArt:self.AATextView.text groupKey:self.group_.key];
 	[self.extensionContext completeRequestReturningItems:nil completionHandler:nil];
 }
 

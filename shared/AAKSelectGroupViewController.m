@@ -8,9 +8,9 @@
 
 #import "AAKSelectGroupViewController.h"
 #import "AAKKeyboardDataManager.h"
-#import "AAKASCIIArtGroup.h"
+#import "_AAKASCIIArtGroup.h"
 #import "AAKEditViewController.h"
-#import "AAKASCIIArt.h"
+#import "_AAKASCIIArt.h"
 
 @interface AAKSelectGroupViewController () {
 	NSMutableArray *_groups;
@@ -63,7 +63,7 @@
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-	AAKASCIIArtGroup *group = _groups[indexPath.row];
+	_AAKASCIIArtGroup *group = _groups[indexPath.row];
 	if (group.key == 1)
 		return UITableViewCellEditingStyleNone;
 	return UITableViewCellEditingStyleDelete;
@@ -86,9 +86,9 @@
 	[_groups insertObject:moving atIndex:toIndexPath.row];
 	
 	int i = 0;
-	for (AAKASCIIArtGroup *grp in _groups)
+	for (_AAKASCIIArtGroup *grp in _groups)
 		grp.number = i++;
-	for (AAKASCIIArtGroup *grp in _groups)
+	for (_AAKASCIIArtGroup *grp in _groups)
 		[[AAKKeyboardDataManager defaultManager] updateASCIIArtGroup:grp];
 	[[NSNotificationCenter defaultCenter] postNotificationName:AAKKeyboardDataManagerDidUpdateNotification object:nil userInfo:nil];
 }
@@ -119,19 +119,19 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-	AAKASCIIArtGroup *group = _groups[indexPath.row];
+	_AAKASCIIArtGroup *group = _groups[indexPath.row];
 	cell.textLabel.text = group.title;
 	
-	if (group.key == _editViewController.group.key)
-		cell.accessoryType = UITableViewCellAccessoryCheckmark;
-	else
-		cell.accessoryType = UITableViewCellAccessoryNone;
+//	if (group.key == _editViewController.group_.key)
+//		cell.accessoryType = UITableViewCellAccessoryCheckmark;
+//	else
+//		cell.accessoryType = UITableViewCellAccessoryNone;
 	
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	[_editViewController setGroup:_groups[indexPath.row]];
+	[_editViewController setGroup_:_groups[indexPath.row]];
 	[self.navigationController popViewControllerAnimated:YES];
 }
 

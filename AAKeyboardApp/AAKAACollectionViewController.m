@@ -8,8 +8,6 @@
 
 #import "AAKAACollectionViewController.h"
 
-#import "AAKShared.h"
-
 #import "AAKAACollectionViewCell.h"
 #import "AAKAASupplementaryView.h"
 #import "AAKAAEditPresentationController.h"
@@ -32,7 +30,7 @@ static NSString * const reuseIdentifier = @"Cell";
  * @param asciiart アスキーアートオブジェクト．
  * @return アスキーアートオブジェクトを保持するAAKAACollectionViewCellインスタンスを返す．
  **/
-- (id)cellForAsciiArt:(AAKASCIIArt*)asciiart {
+- (id)cellForAsciiArt:(_AAKASCIIArt*)asciiart {
 	NSIndexPath *indexPath = [self indexPathForAsciiArt:asciiart];
 	return [self.collectionView cellForItemAtIndexPath:indexPath];
 }
@@ -43,11 +41,11 @@ static NSString * const reuseIdentifier = @"Cell";
  * @param asciiart アスキーアートオブジェクト．
  * @return アスキーアートオブジェクトを保持するAAKAACollectionViewCellが持つはずであるNSIndexPathオブジェクト．
  **/
-- (NSIndexPath*)indexPathForAsciiArt:(AAKASCIIArt*)asciiart {
+- (NSIndexPath*)indexPathForAsciiArt:(_AAKASCIIArt*)asciiart {
 	for (int i = 0; i < [_groups count]; i++) {
 		AAKAAGroupForCollection *collection = _groups[i];
 		for (int j = 0; j < [collection.asciiarts count]; j++) {
-			AAKASCIIArt *art = collection.asciiarts[j];
+			_AAKASCIIArt *art = collection.asciiarts[j];
 			if (art.key == asciiart.key)
 				return [NSIndexPath indexPathForItem:j inSection:i];
 		}
@@ -61,7 +59,7 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)updateCollections {
 	NSArray *temp = [[AAKKeyboardDataManager defaultManager] allGroups];
 	NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[temp count]];
-	for (AAKASCIIArtGroup *group in temp) {
+	for (_AAKASCIIArtGroup *group in temp) {
 		NSArray *asciiarts = [[AAKKeyboardDataManager defaultManager] asciiArtForGroup:group];
 		AAKAAGroupForCollection *collection = [AAKAAGroupForCollection groupForCollectionWithGroup:group asciiarts:asciiarts];
 		[buf addObject:collection];
@@ -148,7 +146,7 @@ static NSString * const reuseIdentifier = @"Cell";
  * @param cell メソッドをコールしたAAKAACollectionViewCellオブジェクト．
  **/
 - (void)didPushDuplicateButtonOnCell:(AAKAACollectionViewCell*)cell {
-	AAKASCIIArt *obj = cell.asciiart;
+	_AAKASCIIArt *obj = cell.asciiart;
 	NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
 	[[AAKKeyboardDataManager defaultManager] duplicateASCIIArt:obj.key];
 	[self.collectionView performBatchUpdates:^(void){
@@ -164,7 +162,7 @@ static NSString * const reuseIdentifier = @"Cell";
  * @param cell メソッドをコールしたAAKAACollectionViewCellオブジェクト．
  **/
 - (void)didPushDeleteButtonOnCell:(AAKAACollectionViewCell*)cell {
-	AAKASCIIArt *obj = cell.asciiart;
+	_AAKASCIIArt *obj = cell.asciiart;
 	NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
 	[[AAKKeyboardDataManager defaultManager] deleteASCIIArt:obj];
 	[self.collectionView performBatchUpdates:^(void){
@@ -212,7 +210,7 @@ static NSString * const reuseIdentifier = @"Cell";
     // Configure the cell
 	
 	AAKAAGroupForCollection *collection = _groups[indexPath.section];
-	AAKASCIIArt *source = collection.asciiarts[indexPath.item];
+	_AAKASCIIArt *source = collection.asciiarts[indexPath.item];
 	CGFloat fontSize = 15;
 	
 	NSParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyleWithFontSize:fontSize];

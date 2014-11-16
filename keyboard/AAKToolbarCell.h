@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class AAKASCIIArtGroup;
+@class _AAKASCIIArtGroup;
 @class AAKToolbarCell;
 
 @protocol AAKToolbarCellDelegate <NSObject>
@@ -26,7 +26,7 @@
 	UIImageView *_imageView;
 }
 @property (nonatomic, readonly) UILabel *label;
-@property (nonatomic, assign) AAKASCIIArtGroup *group;
+@property (nonatomic, assign) _AAKASCIIArtGroup *group;
 @property (nonatomic, assign) CGFloat fontSize;
 @property (nonatomic, assign) BOOL isTail;
 @property (nonatomic, assign) UIKeyboardAppearance keyboardAppearance;

@@ -9,8 +9,8 @@
 #import "AAKEditViewController.h"
 
 #import "AAKHelper.h"
-#import "AAKASCIIArt.h"
-#import "AAKASCIIArtGroup.h"
+#import "_AAKASCIIArt.h"
+#import "_AAKASCIIArtGroup.h"
 #import "AAKSelectGroupViewController.h"
 #import "AAKKeyboardDataManager.h"
 
@@ -34,7 +34,7 @@ UIView *topView(UIView *current) {
  * セッター．アスキーアートが更新された時にグループの選択UIを更新するために実装．
  * @param asciiart アスキーアートオブジェクト．
  **/
-- (void)setAsciiart:(AAKASCIIArt *)art {
+- (void)setAsciiart_:(_AAKASCIIArt *)art {
 	_asciiart = art;
 	[_groupTableView reloadData];
 }
@@ -43,12 +43,12 @@ UIView *topView(UIView *current) {
  * セッター．アスキーアートが更新された時にグループの選択UIを更新するために実装．
  * @param group アスキーアートのグループオブジェクト．
  **/
-- (void)setGroup:(AAKASCIIArtGroup *)group {
+- (void)setGroup_:(_AAKASCIIArtGroup *)group {
 	_asciiart.group = group;
 	[_groupTableView reloadData];
 }
 
-- (AAKASCIIArtGroup*)group {
+- (_AAKASCIIArtGroup*)group {
 	return _asciiart.group;
 }
 

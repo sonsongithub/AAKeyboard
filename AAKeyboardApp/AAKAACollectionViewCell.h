@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @class AAKTextView;
-@class AAKASCIIArt;
-@class AAKASCIIArtGroup;
+@class _AAKASCIIArt;
+@class _AAKASCIIArtGroup;
 @class AAKAACollectionViewCell;
 
 @protocol AAKAACollectionViewCellDelegate <NSObject>
@@ -50,7 +50,7 @@
 @property (nonatomic, assign) IBOutlet NSLayoutConstraint *deleteButtonOnCellWidth;		/** 削除ボタンの幅 */
 
 @property (nonatomic, assign) id <AAKAACollectionViewCellDelegate> delegate;			/** 親のビューにコールバックするためのデリゲート */
-@property (nonatomic, strong) AAKASCIIArt *asciiart;									/** 表示するアスキーアート */
+@property (nonatomic, strong) _AAKASCIIArt *asciiart;									/** 表示するアスキーアート */
 
 /**
  * リストからAAをプレビューするアニメーションに使うテキストビューを作成する．

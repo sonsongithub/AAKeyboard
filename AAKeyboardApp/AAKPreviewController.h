@@ -9,12 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @class AAKTextView;
-@class AAKASCIIArt;
-@class AAKASCIIArtGroup;
+@class _AAKASCIIArt;
+@class _AAKASCIIArtGroup;
 
 @interface AAKPreviewController : UIViewController
 @property (nonatomic, strong) IBOutlet AAKTextView *textView;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *widthConstraint;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *heightConstraint;
-@property (nonatomic, strong) AAKASCIIArt *asciiart;
+@property (nonatomic, strong) _AAKASCIIArt *asciiart;
 @end

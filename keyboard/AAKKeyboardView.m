@@ -10,8 +10,6 @@
 #import "AAKToolbar.h"
 #import "AAKContentCell.h"
 
-#import "AAKShared.h"
-
 @interface AAKKeyboardView() <UICollectionViewDataSource, UICollectionViewDelegate, AAKToolbarDelegate> {
 	AAKToolbar					*_toolbar;
 	NSLayoutConstraint			*_toolbarHeightConstraint;
@@ -185,13 +183,13 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 	DNSLogMethod
 	[collectionView deselectItemAtIndexPath:indexPath animated:YES];
-	AAKASCIIArt *source = _asciiarts[indexPath.item];
+	_AAKASCIIArt *source = _asciiarts[indexPath.item];
 	[[AAKKeyboardDataManager defaultManager] insertHistoryASCIIArtKey:source.key];
 	[self.delegate keyboardView:self willInsertString:source.text];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-	AAKASCIIArt *source = _asciiarts[indexPath.item];
+	_AAKASCIIArt *source = _asciiarts[indexPath.item];
 	CGFloat height = collectionView.frame.size.height;
 	CGFloat width = height * source.ratio;
 	CGFloat constraintWidth = self.frame.size.width * 0.75;
@@ -217,7 +215,7 @@
 	AAKContentCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"AAKContentCell" forIndexPath:indexPath];
 	cell.label.text = [NSString stringWithFormat:@"%ld", (long)indexPath.item];
 	CGFloat fontSize = 15;
-	AAKASCIIArt *source = _asciiarts[indexPath.item];
+	_AAKASCIIArt *source = _asciiarts[indexPath.item];
 	
 	
 	cell.isTail = ((_asciiarts.count - 1) == indexPath.item);

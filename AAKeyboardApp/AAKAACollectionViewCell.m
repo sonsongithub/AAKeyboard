@@ -8,8 +8,6 @@
 
 #import "AAKAACollectionViewCell.h"
 
-#import "AAKShared.h"
-
 static NSInteger AAKSwipeDirectionThreadholdAsDegree = 20;		/** 斜めのスワイプを横方向へのスワイプと判定するための閾値 */
 static NSInteger AAKCellButtonWidth = 96;						/** セルの複製，削除ボタンの幅 */
 

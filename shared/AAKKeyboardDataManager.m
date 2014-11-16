@@ -8,8 +8,8 @@
 
 #import "AAKKeyboardDataManager.h"
 
-#import "AAKASCIIArtGroup.h"
-#import "AAKASCIIArt.h"
+#import "_AAKASCIIArtGroup.h"
+#import "_AAKASCIIArt.h"
 #import "AAKHelper.h"
 #import "AAKLocalKeyboardDataManager.h"
 #import "AAKSharedKeyboardDataManager.h"
@@ -140,7 +140,7 @@ static AAKKeyboardDataManager *sharedKeyboardDataManager = nil;
  * @param group AAリストを取得したいグループ．
  * @return AAのリスト．NSArrayオブジェクト．
  **/
-- (NSArray*)asciiArtForGroup:(AAKASCIIArtGroup*)group {
+- (NSArray*)asciiArtForGroup:(_AAKASCIIArtGroup*)group {
 	return nil;
 }
 
@@ -156,7 +156,7 @@ static AAKKeyboardDataManager *sharedKeyboardDataManager = nil;
  * @param asciiArt アスキーアートオブジェクト．
  * @return 削除に成功した場合にYESを返す．（未実装）
  **/
-- (BOOL)updateASCIIArt:(AAKASCIIArt*)asciiArt {
+- (BOOL)updateASCIIArt:(_AAKASCIIArt*)asciiArt {
 	return NO;
 }
 
@@ -165,7 +165,7 @@ static AAKKeyboardDataManager *sharedKeyboardDataManager = nil;
  * @param group グループオブジェクト．
  * @return 削除に成功した場合にYESを返す．（未実装）
  **/
-- (BOOL)updateASCIIArtGroup:(AAKASCIIArtGroup*)group {
+- (BOOL)updateASCIIArtGroup:(_AAKASCIIArtGroup*)group {
 	return NO;
 }
 
@@ -174,7 +174,7 @@ static AAKKeyboardDataManager *sharedKeyboardDataManager = nil;
  * @param asciiArt 削除したいアスキーアートオブジェクト．
  * @return 削除に成功した場合にYESを返す．（未実装）
  **/
-- (BOOL)deleteASCIIArt:(AAKASCIIArt*)asciiArt {
+- (BOOL)deleteASCIIArt:(_AAKASCIIArt*)asciiArt {
 	return NO;
 }
 
@@ -183,7 +183,7 @@ static AAKKeyboardDataManager *sharedKeyboardDataManager = nil;
  * @param group グループオブジェクト．
  * @return 削除に成功した場合にYESを返す．（未実装）
  **/
-- (BOOL)moveToDefaultGroupFromASCIIArtGroup:(AAKASCIIArtGroup*)group {
+- (BOOL)moveToDefaultGroupFromASCIIArtGroup:(_AAKASCIIArtGroup*)group {
 	return NO;
 }
 
@@ -192,7 +192,7 @@ static AAKKeyboardDataManager *sharedKeyboardDataManager = nil;
  * @param group アスキーアートグループ
  * @return 削除に成功した場合にYESを返す．（未実装）
  **/
-- (BOOL)deleteASCIIArtGroup:(AAKASCIIArtGroup*)group {
+- (BOOL)deleteASCIIArtGroup:(_AAKASCIIArtGroup*)group {
 	return NO;
 }
 

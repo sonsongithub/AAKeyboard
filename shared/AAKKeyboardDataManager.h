@@ -10,8 +10,8 @@
 
 #import <sqlite3.h>
 
-@class AAKASCIIArt;
-@class AAKASCIIArtGroup;
+@class _AAKASCIIArt;
+@class _AAKASCIIArtGroup;
 
 extern NSString *const AAKKeyboardDataManagerDidUpdateNotification;		/** データベースが更新された時に通知されるNotification */
 
@@ -97,7 +97,7 @@ extern NSString *const AAKKeyboardDataManagerDidUpdateNotification;		/** デー�
  * @param group AAリストを取得したいグループ．
  * @return AAのリスト．NSArrayオブジェクト．
  **/
-- (NSArray*)asciiArtForGroup:(AAKASCIIArtGroup*)group;
+- (NSArray*)asciiArtForGroup:(_AAKASCIIArtGroup*)group;
 
 /**
  * 履歴を追加する．
@@ -110,34 +110,34 @@ extern NSString *const AAKKeyboardDataManagerDidUpdateNotification;		/** デー�
  * @param asciiArt アスキーアートオブジェクト．
  * @return 削除に成功した場合にYESを返す．（未実装）
  **/
-- (BOOL)updateASCIIArt:(AAKASCIIArt*)asciiArt;
+- (BOOL)updateASCIIArt:(_AAKASCIIArt*)asciiArt;
 
 /**
  * グループの順番を更新する．
  * @param group グループオブジェクト．
  * @return 削除に成功した場合にYESを返す．（未実装）
  **/
-- (BOOL)updateASCIIArtGroup:(AAKASCIIArtGroup*)group;
+- (BOOL)updateASCIIArtGroup:(_AAKASCIIArtGroup*)group;
 
 /**
  * AAを削除する．
  * @param asciiArt 削除したいアスキーアートオブジェクト．
  * @return 削除に成功した場合にYESを返す．（未実装）
  **/
-- (BOOL)deleteASCIIArt:(AAKASCIIArt*)asciiArt;
+- (BOOL)deleteASCIIArt:(_AAKASCIIArt*)asciiArt;
 
 /**
  * 特定のグループのアスキーアートをDefaultグループに移動する．
  * @param group グループオブジェクト．
  * @return 削除に成功した場合にYESを返す．（未実装）
  **/
-- (BOOL)moveToDefaultGroupFromASCIIArtGroup:(AAKASCIIArtGroup*)group;
+- (BOOL)moveToDefaultGroupFromASCIIArtGroup:(_AAKASCIIArtGroup*)group;
 
 /**
  * グループを削除する．
  * @param group アスキーアートグループ
  * @return 削除に成功した場合にYESを返す．（未実装）
  **/
-- (BOOL)deleteASCIIArtGroup:(AAKASCIIArtGroup*)group;
+- (BOOL)deleteASCIIArtGroup:(_AAKASCIIArtGroup*)group;
 
 @end

@@ -11,8 +11,6 @@
 #import "AAKToolbarCell.h"
 #import "AAKToolbarHistoryCell.h"
 
-#import "AAKShared.h"
-
 @interface AAKToolbar() <UICollectionViewDataSource, UICollectionViewDelegate, AAKToolbarCellDelegate> {
 	UICollectionView			*_collectionView;
 	UICollectionViewFlowLayout	*_collectionFlowLayout;
@@ -70,8 +68,8 @@
  * 指定されたキーを持つオブジェクトが存在しない場合は，先頭のオブジェクトを返す．
  * @return AAKASCIIArtオブジェクトを含むNSArray，
  **/
-- (AAKASCIIArtGroup*)groupForGroupKey:(NSInteger)key {
-	for (AAKASCIIArtGroup *group in _groups) {
+- (_AAKASCIIArtGroup*)groupForGroupKey:(NSInteger)key {
+	for (_AAKASCIIArtGroup *group in _groups) {
 		if (group.key == key)
 			return group;
 	}
@@ -180,7 +178,7 @@
 	NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:_fontSize]};
 	NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[_groups count]];
 	CGFloat sumation = 0;
-	for (AAKASCIIArtGroup *group in _groups) {
+	for (_AAKASCIIArtGroup *group in _groups) {
 		CGSize s = [group.title sizeWithAttributes:attributes];
 		s.width = floor(s.width) + 20;
 		sumation += s.width;
@@ -353,7 +351,7 @@
 
 #pragma mark - Setter
 
-- (void)setCurrentGroup:(AAKASCIIArtGroup *)currentGroup {
+- (void)setCurrentGroup:(_AAKASCIIArtGroup *)currentGroup {
 	_currentGroup = currentGroup;
 	[self updateSelectedCell];
 }
@@ -431,7 +429,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
 	AAKToolbarCell *cell = nil;
-	AAKASCIIArtGroup *group = [_groups objectAtIndex:indexPath.item];
+	_AAKASCIIArtGroup *group = [_groups objectAtIndex:indexPath.item];
 	
 	if (group.type == AAKASCIIArtHistoryGroup) {
 		cell = [cv dequeueReusableCellWithReuseIdentifier:@"AAKToolbarHistoryCell" forIndexPath:indexPath];
