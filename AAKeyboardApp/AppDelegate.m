@@ -23,15 +23,20 @@
 	UINavigationController *nav = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"AAKRegisterNavigationController"];
 	AAKRegisterViewController *con = (AAKRegisterViewController*)nav.topViewController;
 	
-	_AAKASCIIArt *asciiart = [[_AAKASCIIArt alloc] init];
-	
-	asciiart.text = decodedString;
-	
-	con.asciiart_ = asciiart;
+	con.AATextView.text = decodedString;
 	
 	[self.window.rootViewController presentViewController:nav animated:YES completion:nil];
 	
 	return YES;
+}
+
+-(void)applicationWillEnterForeground:(UIApplication *)application {
+	NSURL *containerURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.sonson.AAKeyboardApp"];
+	NSURL *fileURL = [containerURL URLByAppendingPathComponent:@"asciiart.db"];
+	
+	[MagicalRecord setupCoreDataStackWithStoreAtURL:fileURL];
+	
+	[AAKASCIIArtGroup addDefaultASCIIArtGroup];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -42,14 +47,17 @@
 	[MagicalRecord cleanUp];
 }
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+- (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	NSURL *containerURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.sonson.AAKeyboardApp"];
 	NSURL *fileURL = [containerURL URLByAppendingPathComponent:@"asciiart.db"];
 	
 	[MagicalRecord setupCoreDataStackWithStoreAtURL:fileURL];
 	
 	[AAKASCIIArtGroup addDefaultASCIIArtGroup];
-	
+	return YES;
+}
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	NSArray *people = [AAKASCIIArtGroup MR_findAll];
 	for (AAKASCIIArtGroup *group in people) {
 		DNSLog(@"---------->%@", group);
@@ -65,22 +73,7 @@
 #endif
 	
 	[AAKKeyboardDataManager defaultManager];
-	
-	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 		
-		UINavigationController *nav = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"AAKRegisterNavigationController"];
-		AAKRegisterViewController *con = (AAKRegisterViewController*)nav.topViewController;
-		
-		_AAKASCIIArt *asciiart = [[_AAKASCIIArt alloc] init];
-		
-		asciiart.text = @"a";
-		
-		con.asciiart_ = asciiart;
-		
-		[self.window.rootViewController presentViewController:nav animated:YES completion:nil];
-	});
-	
-	
 	return YES;
 }
 

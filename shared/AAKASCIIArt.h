@@ -16,6 +16,10 @@
 @property (nonatomic) double lastUsedTime;
 @property (nonatomic) double ratio;
 @property (nonatomic, retain) NSString * text;
-@property (nonatomic, retain) AAKASCIIArtGroup *relationship;
+@property (nonatomic, retain) AAKASCIIArtGroup *group;
+
+- (void)updateLastUsedTime;
+
+- (void)updateRatio;
 
 @end

@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-
 @interface AAKASCIIArtGroup : NSManagedObject
 
 @property (nonatomic) int64_t order;
@@ -17,5 +16,6 @@
 @property (nonatomic) int64_t type;
 
 + (void)addDefaultASCIIArtGroup;
++ (AAKASCIIArtGroup*)defaultGroup;
 
 @end

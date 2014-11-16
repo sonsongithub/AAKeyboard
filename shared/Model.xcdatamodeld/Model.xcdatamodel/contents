@@ -4,7 +4,7 @@
         <attribute name="lastUsedTime" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="ratio" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AAKASCIIArtGroup" syncable="YES"/>
+        <relationship name="group" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AAKASCIIArtGroup" syncable="YES"/>
     </entity>
     <entity name="AAKASCIIArtGroup" representedClassName="AAKASCIIArtGroup" syncable="YES">
         <attribute name="order" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>

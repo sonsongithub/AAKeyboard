@@ -8,11 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-typedef enum AAKASCIIArtGroupType_ {
-	AAKASCIIArtNormalGroup	= 0,
-	AAKASCIIArtHistoryGroup	= 1,
-}AAKASCIIArtGroupType;
-
 @interface _AAKASCIIArtGroup : NSObject
 
 @property (nonatomic, readonly) NSString *title;				/** グループ名 */

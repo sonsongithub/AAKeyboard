@@ -9,8 +9,8 @@
 #import "AAKRegisterViewController.h"
 
 #import "AAKKeyboardDataManager.h"
-#import "_AAKASCIIArtGroup.h"
-#import "_AAKASCIIArt.h"
+#import "AAKASCIIArtGroup.h"
+#import "AAKASCIIArt.h"
 
 @interface AAKRegisterViewController ()
 
@@ -23,7 +23,15 @@
  * @param sender メッセージの送信元オブジェクト．
  **/
 - (IBAction)registerAA:(id)sender {
-//	[[AAKKeyboardDataManager defaultManager] insertNewASCIIArt:self.AATextView.text groupKey:self.group_.key];
+	AAKASCIIArt *newASCIIArt = [AAKASCIIArt MR_createEntity];
+	newASCIIArt.text = self.AATextView.text;
+	newASCIIArt.group = self.group;
+	
+	[newASCIIArt updateLastUsedTime];
+	[newASCIIArt updateRatio];
+	
+	[[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+	
 	[self dismissViewControllerAnimated:YES completion:nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:AAKKeyboardDataManagerDidUpdateNotification object:nil userInfo:nil];
 }
@@ -32,9 +40,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//	self.asciiart_ = [[_AAKASCIIArt alloc] init];
-//	self.asciiart_.text = self.AATextView.text;
-//	self.asciiart_.group = [_AAKASCIIArtGroup defaultGroup];
 }
 
 @end

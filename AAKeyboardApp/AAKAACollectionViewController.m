@@ -195,7 +195,7 @@ static NSString * const reuseIdentifier = @"Cell";
 			AAKAASupplementaryView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
 																					withReuseIdentifier:@"AAKAASupplementaryView"
 																						   forIndexPath:indexPath];
-			headerView.label.text = collection.group.title;
+//			headerView.label.text = collection.group.title;
 			return headerView;
 		}
 		return nil;

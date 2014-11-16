@@ -22,10 +22,23 @@
 	if (results.count == 0) {
 		AAKASCIIArtGroup *defaultGroup	= [AAKASCIIArtGroup MR_createEntity];
 		defaultGroup.title = @"Default";
-		defaultGroup.type = 0;
+		defaultGroup.type = AAKASCIIArtDefaultGroup;
 		defaultGroup.order = 0;
 		[[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
 	}
+}
+
++ (AAKASCIIArtGroup*)defaultGroup {
+	NSArray *results = [AAKASCIIArtGroup MR_findAllWithPredicate:[NSPredicate predicateWithFormat: @"type == 0"]];
+	if (results.count == 0) {
+		AAKASCIIArtGroup *defaultGroup	= [AAKASCIIArtGroup MR_createEntity];
+		defaultGroup.title = @"Default";
+		defaultGroup.type = AAKASCIIArtDefaultGroup;
+		defaultGroup.order = 0;
+		[[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+		return defaultGroup;
+	}
+	return results.firstObject;
 }
 
 @end

@@ -9,6 +9,12 @@
 #ifndef AAKeyboardApp_AAKShared_pch
 #define AAKeyboardApp_AAKShared_pch
 
+typedef enum AAKASCIIArtGroupType_ {
+	AAKASCIIArtDefaultGroup	= 0,
+	AAKASCIIArtNormalGroup	= 1,
+	AAKASCIIArtHistoryGroup	= 2,
+}AAKASCIIArtGroupType;
+
 // For CoreData, MagicalRecord
 #import <CoreData/CoreData.h>
 #import "CoreData+MagicalRecord.h"

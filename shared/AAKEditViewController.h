@@ -8,15 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class _AAKASCIIArt;
-@class _AAKASCIIArtGroup;
-
 @class AAKASCIIArt;
 @class AAKASCIIArtGroup;
 
 @interface AAKEditViewController : UIViewController {
-	IBOutlet UISlider		*_fontSizeSlider;
-	IBOutlet UITableView	*_groupTableView;
+	IBOutlet UISlider			*_fontSizeSlider;
+	IBOutlet UITableView		*_groupTableView;
 	IBOutlet NSLayoutConstraint *_bottomTextViewMargin;
 }
 @property (nonatomic, strong) IBOutlet UITextView *AATextView;
@@ -24,7 +21,6 @@
 @property (nonatomic, strong) AAKASCIIArt *asciiart;
 @property (nonatomic, strong) AAKASCIIArtGroup *group;
 
-- (void)setGroup_:(_AAKASCIIArtGroup *)group;
 - (IBAction)didChangeSlider:(id)sender;
 - (IBAction)save:(id)sender;
 - (IBAction)cancel:(id)sender;

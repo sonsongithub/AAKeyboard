@@ -8,14 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@class _AAKASCIIArtGroup;
-@class _AAKASCIIArt;
+@class AAKASCIIArtGroup;
+@class AAKASCIIArt;
 
 @interface AAKAAGroupForCollection : NSObject
 
-@property (nonatomic, readonly) _AAKASCIIArtGroup *group;
+@property (nonatomic, readonly) AAKASCIIArtGroup *group;
 @property (nonatomic, readonly) NSArray *asciiarts;
 
-+ (instancetype)groupForCollectionWithGroup:(_AAKASCIIArtGroup*)group asciiarts:(NSArray*)array;
++ (instancetype)groupForCollectionWithGroup:(AAKASCIIArtGroup*)group asciiarts:(NSArray*)array;
 
 @end
