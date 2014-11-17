@@ -41,12 +41,6 @@
 @property (nonatomic, readonly) AAKASCIIArtGroup *currentGroup;
 
 /**
- * 現在，選択中のグループのアスキーアートオブジェクトの配列を返す．
- * @return AAKASCIIArtオブジェクトを含むNSArray，
- **/
-- (NSArray*)asciiArtsForCurrentGroup;
-
-/**
  * ツールバー全体をレイアウトする．
  * グループ名の枠の大きさを計算し，すべてのセルの幅を計算する．そのあとに，セルのレイアウトを更新したりする．
  **/
