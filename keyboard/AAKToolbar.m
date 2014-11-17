@@ -60,7 +60,8 @@
  * @return AAKASCIIArtオブジェクトを含むNSArray，
  **/
 - (NSArray*)asciiArtsForCurrentGroup {
-	return [[AAKKeyboardDataManager defaultManager] asciiArtForGroup:_currentGroup];
+	return nil;
+//	return [[AAKKeyboardDataManager defaultManager] asciiArtForGroup:_currentGroup];
 }
 
 /**
@@ -68,12 +69,13 @@
  * 指定されたキーを持つオブジェクトが存在しない場合は，先頭のオブジェクトを返す．
  * @return AAKASCIIArtオブジェクトを含むNSArray，
  **/
-- (_AAKASCIIArtGroup*)groupForGroupKey:(NSInteger)key {
-	for (_AAKASCIIArtGroup *group in _groups) {
-		if (group.key == key)
-			return group;
-	}
-	return _groups[0];
+- (AAKASCIIArtGroup*)groupForGroupKey:(NSInteger)key {
+	return nil;
+//	for (AAKASCIIArtGroup *group in _groups) {
+//		if (group.key == key)
+//			return group;
+//	}
+//	return _groups[0];
 }
 
 /**
@@ -82,7 +84,7 @@
  **/
 - (void)updateSelectedCell {
 	for (AAKToolbarCell *cell in [_collectionView visibleCells]) {
-		[cell setOriginalHighlighted:(cell.group.key == _currentGroup.key)];
+		[cell setOriginalHighlighted:(cell.group == _currentGroup)];
 	}
 }
 
@@ -177,8 +179,8 @@
 	// まず，普通にすべてのグループについて幅を計算する．
 	NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:_fontSize]};
 	NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[_groups count]];
-	CGFloat sumation = 0;
-	for (_AAKASCIIArtGroup *group in _groups) {
+	CGFloat sumation = 50;
+	for (AAKASCIIArtGroup *group in _groups) {
 		CGSize s = [group.title sizeWithAttributes:attributes];
 		s.width = floor(s.width) + 20;
 		sumation += s.width;
@@ -320,12 +322,16 @@
 		
 		self.backgroundColor = [UIColor clearColor];
 		
-		_groups = [[AAKKeyboardDataManager defaultManager] groups];
+		NSMutableArray *temp = [NSMutableArray array];
+		NSArray *allgroups = [AAKASCIIArtGroup MR_findAll];
+		[temp addObjectsFromArray:allgroups];
+		_groups = [NSArray arrayWithArray:temp];
+		_currentGroup = allgroups[0];
 		
 		[self updateWithWidth:100];
 		
-		NSInteger groupKey = [[NSUserDefaults standardUserDefaults] integerForKey:@"groupKey"];
-		_currentGroup = [self groupForGroupKey:groupKey];
+//		NSInteger groupKey = [[NSUserDefaults standardUserDefaults] integerForKey:@"groupKey"];
+//		_currentGroup = [self groupForGroupKey:groupKey];
 		
 		_height = 48;
 		_fontSize = 14;
@@ -351,7 +357,7 @@
 
 #pragma mark - Setter
 
-- (void)setCurrentGroup:(_AAKASCIIArtGroup *)currentGroup {
+- (void)setCurrentGroup:(AAKASCIIArtGroup *)currentGroup {
 	_currentGroup = currentGroup;
 	[self updateSelectedCell];
 }
@@ -367,8 +373,8 @@
 #pragma mark - Override
 
 - (void)dealloc {
-	[[NSUserDefaults standardUserDefaults] setInteger:_currentGroup.key forKey:@"groupKey"];
-	[[NSUserDefaults standardUserDefaults] synchronize];
+//	[[NSUserDefaults standardUserDefaults] setInteger:_currentGroup.key forKey:@"groupKey"];
+//	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 #pragma mark - UICollectionViewDelegate, UICollectionViewDataSource
@@ -386,8 +392,13 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-	CGSize size =  [[_sizeOfCategories objectAtIndex:indexPath.item] CGSizeValue];
-	return size;
+	if (indexPath.row == 0) {
+		return CGSizeMake(50, _height);
+	}
+	else {
+		CGSize size =  [[_sizeOfCategories objectAtIndex:indexPath.item - 1] CGSizeValue];
+		return size;
+	}
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -402,7 +413,7 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
-	return [_groups count];
+	return [_groups count] + 1;
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
@@ -429,20 +440,20 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
 	AAKToolbarCell *cell = nil;
-	_AAKASCIIArtGroup *group = [_groups objectAtIndex:indexPath.item];
 	
-	if (group.type == AAKASCIIArtHistoryGroup) {
+	if (indexPath.row == 0) {
 		cell = [cv dequeueReusableCellWithReuseIdentifier:@"AAKToolbarHistoryCell" forIndexPath:indexPath];
 	}
 	else {
+		AAKASCIIArtGroup *group = [_groups objectAtIndex:indexPath.item - 1];
 		cell = [cv dequeueReusableCellWithReuseIdentifier:@"AAKToolbarCell" forIndexPath:indexPath];
+		cell.group = group;
 	}
 	
 	cell.keyboardAppearance = _keyboardAppearance;
-	cell.group = group;
 	cell.delegate = self;
-	[cell setOriginalHighlighted:(cell.group.key == _currentGroup.key)];
-	cell.isTail = (indexPath.item == ([_groups count] - 1));
+	[cell setOriginalHighlighted:(cell.group == _currentGroup)];
+	cell.isTail = (indexPath.item == ([_groups count]));
 	
 	return cell;
 }

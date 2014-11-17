@@ -29,7 +29,12 @@
 	DNSLogMethod
 	self = [super init];
 	if (self) {
-		[AAKKeyboardDataManager defaultManager];
+		NSURL *containerURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.sonson.AAKeyboardApp"];
+		NSURL *fileURL = [containerURL URLByAppendingPathComponent:@"asciiart.db"];
+		
+		[MagicalRecord setupCoreDataStackWithStoreAtURL:fileURL];
+		
+		[AAKASCIIArtGroup addDefaultASCIIArtGroup];
 	}
 	return self;
 }

@@ -133,7 +133,14 @@
  * アスキーアートオブジェクトの配列を現在選択中のグループに従ってアップデートする．
  **/
 - (void)updateASCIIArtsForCurrentGroup {
-	_asciiarts = [_toolbar asciiArtsForCurrentGroup];
+	if (_toolbar.currentGroup) {
+		_asciiarts = [AAKASCIIArt MR_findAllWithPredicate:[NSPredicate predicateWithFormat: @"group == %@", _toolbar.currentGroup]];
+	}
+	else {
+		NSFetchRequest *request = [AAKASCIIArt MR_requestAllSortedBy:@"lastUsedTime" ascending:NO];
+		[request setFetchLimit:20];
+		_asciiarts = [AAKASCIIArt MR_executeFetchRequest:request];
+	}
 }
 
 /**
@@ -183,13 +190,13 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 	DNSLogMethod
 	[collectionView deselectItemAtIndexPath:indexPath animated:YES];
-	_AAKASCIIArt *source = _asciiarts[indexPath.item];
-	[[AAKKeyboardDataManager defaultManager] insertHistoryASCIIArtKey:source.key];
+	AAKASCIIArt *source = _asciiarts[indexPath.item];
+//	[[AAKKeyboardDataManager defaultManager] insertHistoryASCIIArtKey:source.key];
 	[self.delegate keyboardView:self willInsertString:source.text];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-	_AAKASCIIArt *source = _asciiarts[indexPath.item];
+	AAKASCIIArt *source = _asciiarts[indexPath.item];
 	CGFloat height = collectionView.frame.size.height;
 	CGFloat width = height * source.ratio;
 	CGFloat constraintWidth = self.frame.size.width * 0.75;
@@ -215,8 +222,7 @@
 	AAKContentCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"AAKContentCell" forIndexPath:indexPath];
 	cell.label.text = [NSString stringWithFormat:@"%ld", (long)indexPath.item];
 	CGFloat fontSize = 15;
-	_AAKASCIIArt *source = _asciiarts[indexPath.item];
-	
+	AAKASCIIArt *source = _asciiarts[indexPath.item];
 	
 	cell.isTail = ((_asciiarts.count - 1) == indexPath.item);
 	cell.keyboardAppearance = _keyboardAppearance;

@@ -29,8 +29,6 @@ typedef enum AAKASCIIArtGroupType_ {
 #import "UITraitCollection+keyboard.h"
 
 // Model
-#import "_AAKASCIIArt.h"
-#import "_AAKASCIIArtGroup.h"
 #import "AAKASCIIArt.h"
 #import "AAKASCIIArtGroup.h"
 #import "AAKAAGroupForCollection.h"

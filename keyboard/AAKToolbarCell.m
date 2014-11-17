@@ -75,7 +75,7 @@
  * セルに表示させるグループを入力する．
  * @param group AAKASCIIArtGroupオブジェクト．
  **/
-- (void)setGroup:(_AAKASCIIArtGroup *)group {
+- (void)setGroup:(AAKASCIIArtGroup *)group {
 	_group = group;
 	_label.text = _group.title;
 	[_label sizeToFit];

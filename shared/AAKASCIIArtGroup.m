@@ -15,7 +15,6 @@
 @dynamic title;
 @dynamic type;
 
-
 + (void)addDefaultASCIIArtGroup {
 	NSArray *results = [AAKASCIIArtGroup MR_findAllWithPredicate:[NSPredicate predicateWithFormat: @"type == 0"]];
 	
