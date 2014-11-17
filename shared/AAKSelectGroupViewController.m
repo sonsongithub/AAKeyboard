@@ -7,11 +7,7 @@
 //
 
 #import "AAKSelectGroupViewController.h"
-#import "AAKKeyboardDataManager.h"
-#import "_AAKASCIIArtGroup.h"
 #import "AAKEditViewController.h"
-#import "_AAKASCIIArt.h"
-
 #import "AAKASCIIArtGroup.h"
 
 @interface AAKSelectGroupViewController () {
@@ -56,7 +52,7 @@
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-	_AAKASCIIArtGroup *group = _groups[indexPath.row];
+	AAKASCIIArtGroup *group = _groups[indexPath.row];
 	if (group.type == AAKASCIIArtDefaultGroup)
 		return UITableViewCellEditingStyleNone;
 	return UITableViewCellEditingStyleDelete;

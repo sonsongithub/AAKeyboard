@@ -8,7 +8,6 @@
 
 #import "AAKRegisterViewController.h"
 
-#import "AAKKeyboardDataManager.h"
 #import "AAKASCIIArtGroup.h"
 #import "AAKASCIIArt.h"
 

@@ -18,6 +18,7 @@ typedef enum AAKASCIIArtGroupType_ {
 // For CoreData, MagicalRecord
 #import <CoreData/CoreData.h>
 #import "CoreData+MagicalRecord.h"
+#import "AAKCoreDataStack.h"
 
 // Helper
 #import "AAKHelper.h"
@@ -32,9 +33,6 @@ typedef enum AAKASCIIArtGroupType_ {
 #import "AAKASCIIArt.h"
 #import "AAKASCIIArtGroup.h"
 #import "AAKAAGroupForCollection.h"
-
-// Databse
-#import "AAKKeyboardDataManager.h"
 
 // View controllers
 #import "AAKCreateNewGroupViewController.h"

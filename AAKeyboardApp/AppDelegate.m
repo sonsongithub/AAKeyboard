@@ -31,12 +31,7 @@
 }
 
 -(void)applicationWillEnterForeground:(UIApplication *)application {
-	NSURL *containerURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.sonson.AAKeyboardApp"];
-	NSURL *fileURL = [containerURL URLByAppendingPathComponent:@"asciiart.db"];
-	
-	[MagicalRecord setupCoreDataStackWithStoreAtURL:fileURL];
-	
-	[AAKASCIIArtGroup addDefaultASCIIArtGroup];
+	[AAKCoreDataStack setupMagicalRecordForAppGroupsContainer];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -48,32 +43,16 @@
 }
 
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-	NSURL *containerURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.sonson.AAKeyboardApp"];
-	NSURL *fileURL = [containerURL URLByAppendingPathComponent:@"asciiart.db"];
-	
-	[MagicalRecord setupCoreDataStackWithStoreAtURL:fileURL];
-	
-	[AAKASCIIArtGroup addDefaultASCIIArtGroup];
+	[AAKCoreDataStack setupMagicalRecordForAppGroupsContainer];
 	return YES;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-	NSArray *people = [AAKASCIIArtGroup MR_findAll];
-	for (AAKASCIIArtGroup *group in people) {
-		DNSLog(@"---------->%@", group);
-		DNSLog(@"%@", group.title);
-	}
-	
-	[[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
-
 #if TARGET_IPHONE_SIMULATOR
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
 	NSLog(@"%@", documentsDirectory);
 #endif
-	
-	[AAKKeyboardDataManager defaultManager];
-		
 	return YES;
 }
 

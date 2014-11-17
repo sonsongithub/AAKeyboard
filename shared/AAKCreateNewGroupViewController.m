@@ -8,8 +8,6 @@
 
 #import "AAKCreateNewGroupViewController.h"
 
-#import "AAKKeyboardDataManager.h"
-
 #import "AAKASCIIArtGroup.h"
 
 @interface AAKCreateNewGroupViewController () {

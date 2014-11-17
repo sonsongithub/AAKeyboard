@@ -104,9 +104,7 @@
 #pragma mark - Override
 
 - (void)viewDidLoad {
-	NSURL *containerURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.sonson.AAKeyboardApp"];
-	NSURL *fileURL = [containerURL URLByAppendingPathComponent:@"asciiart.db"];
-	[MagicalRecord setupCoreDataStackWithStoreAtURL:fileURL];
+	[AAKCoreDataStack setupMagicalRecordForAppGroupsContainer];
 	
 	[super viewDidLoad];
 	

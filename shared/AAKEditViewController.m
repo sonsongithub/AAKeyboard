@@ -10,7 +10,6 @@
 
 #import "AAKHelper.h"
 #import "AAKSelectGroupViewController.h"
-#import "AAKKeyboardDataManager.h"
 
 #import "AAKASCIIArt.h"
 #import "AAKASCIIArtGroup.h"

@@ -20,63 +20,6 @@
 
 @implementation KeyboardViewController
 
-/**
- * 実行中のプロセスが共有データにアクセスできるかを判定する．
- * @return 共有データにアクセスできる場合は，YESを返す．
- **/
-+ (BOOL)isOpenAccessGranted {
-#ifdef DISABLED_APP_GROUPS
-	DNSLog(@"Full Access: Off by force.");
-	return NO;
-#else
-	NSError *error = nil;
-	NSFileManager *fm = [NSFileManager defaultManager];
-	NSString *containerPath = [[fm containerURLForSecurityApplicationGroupIdentifier:@"group.com.sonson.AAKeyboardApp"] path];
-	
-	[fm contentsOfDirectoryAtPath:containerPath error:&error];
-	
-	if (error != nil) {
-		DNSLog(@"Full Access: Off , %@", [error localizedDescription]);
-		return NO;
-	}
-	
-	DNSLog(@"Full Access On");
-	return YES;
-#endif
-}
-
-- (void)addDefulatDataset {
-	NSArray *array = [AAKASCIIArt MR_findAll];
-	if (array.count > 0)
-		return;
-	
-	NSString *path = [[NSBundle mainBundle] pathForResource:@"default.json" ofType:nil];
-	NSData *jsonData = [NSData dataWithContentsOfFile:path];
-	NSArray *json = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
-	
-	int i = 1;
-	
-	for (NSDictionary *dict in json) {
-		NSString *title = dict[@"name"];
-		NSArray *aa_array = dict[@"aa"];
-		
-		AAKASCIIArtGroup *group	= [AAKASCIIArtGroup MR_createEntity];
-		group.title = title;
-		group.type = AAKASCIIArtNormalGroup;
-		group.order = i++;
-		
-		for (NSString *aa in [aa_array reverseObjectEnumerator]) {
-			AAKASCIIArt *newASCIIArt = [AAKASCIIArt MR_createEntity];
-			newASCIIArt.text = aa;
-			newASCIIArt.group = group;
-			[newASCIIArt updateLastUsedTime];
-			[newASCIIArt updateRatio];
-		}
-	}
-
-	[[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
-}
-
 #pragma mark - Override
 
 /**
@@ -86,21 +29,11 @@
 	DNSLogMethod
 	self = [super init];
 	if (self) {
-		if ([KeyboardViewController isOpenAccessGranted]) {
-			NSURL *containerURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.sonson.AAKeyboardApp"];
-			NSURL *fileURL = [containerURL URLByAppendingPathComponent:@"asciiart.db"];
-			DNSLog(@"%@", fileURL);
-			[MagicalRecord setupCoreDataStackWithStoreAtURL:fileURL];
-			[AAKASCIIArtGroup addDefaultASCIIArtGroup];
+		if ([AAKCoreDataStack isOpenAccessGranted]) {
+			[AAKCoreDataStack setupMagicalRecordForAppGroupsContainer];
 		}
 		else {
-			NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-			NSString *path = paths[0];
-			NSURL *containerURL = [NSURL fileURLWithPath:path];
-			NSURL *fileURL = [containerURL URLByAppendingPathComponent:@"asciiart.db"];
-			DNSLog(@"%@", fileURL);
-			[MagicalRecord setupCoreDataStackWithStoreAtURL:fileURL];
-			[self addDefulatDataset];
+			[AAKCoreDataStack setupMagicalRecordForLocal];
 		}
 	}
 	return self;
@@ -117,7 +50,6 @@
  * ビューコントローラのビューがlayoutSubviewsを実行した直後に呼ばれる，
  **/
 - (void)viewDidLayoutSubviews {
-	DNSLogMethod
 	[super viewDidLayoutSubviews];
 	
 	// キーボードビューをセットアップ
@@ -211,7 +143,7 @@
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewDidCopyAAImageToPasteboard:) name:AAKTextViewDidCopyAAImageToPasteboard object:nil];
 	
-	if (![KeyboardViewController isOpenAccessGranted]) {
+	if (![AAKCoreDataStack isOpenAccessGranted]) {
 		[self showNotifyWithMessage:NSLocalizedString(@"Please turn on \"full access\"\n in order to input other AAs.", nil)];
 	}
 }
