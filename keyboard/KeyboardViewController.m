@@ -10,11 +10,12 @@
 
 #import "AAKKeyboardView.h"
 #import "AAKNotifyView.h"
+#import "AAKDummyDatabaseWrapper.h"
 
 @interface KeyboardViewController () <AAKKeyboardViewDelegate> {
-	AAKKeyboardView *_keyboardView;
-	NSLayoutConstraint *_heightConstraint;
-	AAKNotifyView				*_notifyView;
+	AAKKeyboardView		*_keyboardView;
+	NSLayoutConstraint	*_heightConstraint;
+	AAKNotifyView		*_notifyView;
 }
 @end
 
@@ -29,12 +30,12 @@
 	DNSLogMethod
 	self = [super init];
 	if (self) {
-		NSURL *containerURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.sonson.AAKeyboardApp"];
-		NSURL *fileURL = [containerURL URLByAppendingPathComponent:@"asciiart.db"];
-		
-		[MagicalRecord setupCoreDataStackWithStoreAtURL:fileURL];
-		
-		[AAKASCIIArtGroup addDefaultASCIIArtGroup];
+		if ([AAKDummyDatabaseWrapper isOpenAccessGranted]) {
+			NSURL *containerURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.sonson.AAKeyboardApp"];
+			NSURL *fileURL = [containerURL URLByAppendingPathComponent:@"asciiart.db"];
+			[MagicalRecord setupCoreDataStackWithStoreAtURL:fileURL];
+			[AAKASCIIArtGroup addDefaultASCIIArtGroup];
+		}
 	}
 	return self;
 }

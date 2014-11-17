@@ -181,6 +181,7 @@
 		14EE653E1A15ED6200FA0731 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 14EE653A1A15ED6200FA0731 /* Model.xcdatamodeld */; };
 		14EE65401A15EEB800FA0731 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14EE653F1A15EEB700FA0731 /* CoreData.framework */; };
 		14EE65581A199BC200FA0731 /* AAKASCIIArtDummyHistoryGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EE65561A199AFD00FA0731 /* AAKASCIIArtDummyHistoryGroup.m */; };
+		14EF9AB61A19D5160068F63E /* AAKDummyDatabaseWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EF9AB51A19D5160068F63E /* AAKDummyDatabaseWrapper.m */; };
 		14F6F38E1A100D8600BEE8E2 /* AAKToolbarFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F6F3891A100D8600BEE8E2 /* AAKToolbarFooterView.m */; };
 		14F6F38F1A100D8600BEE8E2 /* AAKToolbarFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F6F3891A100D8600BEE8E2 /* AAKToolbarFooterView.m */; };
 		14F6F3901A100D8600BEE8E2 /* AAKToolbarFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F6F3891A100D8600BEE8E2 /* AAKToolbarFooterView.m */; };
@@ -390,6 +391,8 @@
 		14EE653F1A15EEB700FA0731 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		14EE65551A199AFD00FA0731 /* AAKASCIIArtDummyHistoryGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKASCIIArtDummyHistoryGroup.h; sourceTree = "<group>"; };
 		14EE65561A199AFD00FA0731 /* AAKASCIIArtDummyHistoryGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKASCIIArtDummyHistoryGroup.m; sourceTree = "<group>"; };
+		14EF9AB41A19D5160068F63E /* AAKDummyDatabaseWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKDummyDatabaseWrapper.h; sourceTree = "<group>"; };
+		14EF9AB51A19D5160068F63E /* AAKDummyDatabaseWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKDummyDatabaseWrapper.m; sourceTree = "<group>"; };
 		14F6F3881A100D8600BEE8E2 /* AAKToolbarFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKToolbarFooterView.h; sourceTree = "<group>"; };
 		14F6F3891A100D8600BEE8E2 /* AAKToolbarFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKToolbarFooterView.m; sourceTree = "<group>"; };
 		14F6F38A1A100D8600BEE8E2 /* AAKToolbarFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AAKToolbarFooterView.xib; sourceTree = "<group>"; };
@@ -841,6 +844,8 @@
 			children = (
 				14FBD3D419E21263005FC38B /* KeyboardViewController.h */,
 				14FBD3D519E21263005FC38B /* KeyboardViewController.m */,
+				14EF9AB41A19D5160068F63E /* AAKDummyDatabaseWrapper.h */,
+				14EF9AB51A19D5160068F63E /* AAKDummyDatabaseWrapper.m */,
 				14EE65551A199AFD00FA0731 /* AAKASCIIArtDummyHistoryGroup.h */,
 				14EE65561A199AFD00FA0731 /* AAKASCIIArtDummyHistoryGroup.m */,
 				14B2751E1A0A15BF005BF3B1 /* Keyboard */,
@@ -1218,6 +1223,7 @@
 				14B275121A0A0DD2005BF3B1 /* AAKSharedKeyboardDataManager.m in Sources */,
 				1415289A1A18585600EB80AC /* NSString+MagicalDataImport.m in Sources */,
 				1415288E1A18585600EB80AC /* NSEntityDescription+MagicalDataImport.m in Sources */,
+				14EF9AB61A19D5160068F63E /* AAKDummyDatabaseWrapper.m in Sources */,
 				14F6F39D1A100DA900BEE8E2 /* UIColor+keyboard.m in Sources */,
 				141528B51A18585700EB80AC /* NSManagedObjectContext+MagicalThreading.m in Sources */,
 				14F6F3951A100D8600BEE8E2 /* AAKToolbarHeaderView.m in Sources */,
@@ -1322,6 +1328,126 @@
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
+		};
+		14EF9AB71A19D6880068F63E /* Debug - Disable App Groups  */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREFIX_HEADER = shared/AAKShared.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug - Disable App Groups ";
+		};
+		14EF9AB81A19D6880068F63E /* Debug - Disable App Groups  */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = AAKeyboardApp/AAKeyboardApp.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yuichi Yoshida (AK9FYY958C)";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					_DEBUG,
+				);
+				INFOPLIST_FILE = AAKeyboardApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "427c956d-7d2d-4171-b1a7-567383e53e4d";
+			};
+			name = "Debug - Disable App Groups ";
+		};
+		14EF9AB91A19D6880068F63E /* Debug - Disable App Groups  */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = AAKeyboardAppTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AAKeyboardApp.app/AAKeyboardApp";
+			};
+			name = "Debug - Disable App Groups ";
+		};
+		14EF9ABA1A19D6880068F63E /* Debug - Disable App Groups  */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = keyboard/keyboard.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yuichi Yoshida (AK9FYY958C)";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					_DEBUG,
+					TARGET_IS_EXTENSION,
+					DISABLED_APP_GROUPS,
+				);
+				INFOPLIST_FILE = keyboard/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "6b9a960b-927c-4c62-8fde-4077db76ca31";
+				SKIP_INSTALL = YES;
+			};
+			name = "Debug - Disable App Groups ";
+		};
+		14EF9ABB1A19D6880068F63E /* Debug - Disable App Groups  */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = register/register.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yuichi Yoshida (AK9FYY958C)";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					TARGET_IS_EXTENSION,
+					_DEBUG,
+				);
+				INFOPLIST_FILE = register/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5009c6e9-307b-4d6d-91c5-3a53d65285a1";
+				SKIP_INSTALL = YES;
+			};
+			name = "Debug - Disable App Groups ";
 		};
 		14FBD3C419E21213005FC38B /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1510,6 +1636,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				14A5138C19EC68530098C02C /* Debug */,
+				14EF9ABB1A19D6880068F63E /* Debug - Disable App Groups  */,
 				14A5138D19EC68530098C02C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1519,6 +1646,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				14FBD3C419E21213005FC38B /* Debug */,
+				14EF9AB71A19D6880068F63E /* Debug - Disable App Groups  */,
 				14FBD3C519E21213005FC38B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1528,6 +1656,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				14FBD3C719E21213005FC38B /* Debug */,
+				14EF9AB81A19D6880068F63E /* Debug - Disable App Groups  */,
 				14FBD3C819E21213005FC38B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1537,6 +1666,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				14FBD3CA19E21213005FC38B /* Debug */,
+				14EF9AB91A19D6880068F63E /* Debug - Disable App Groups  */,
 				14FBD3CB19E21213005FC38B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1546,6 +1676,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				14FBD3DB19E21263005FC38B /* Debug */,
+				14EF9ABA1A19D6880068F63E /* Debug - Disable App Groups  */,
 				14FBD3DC19E21263005FC38B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
