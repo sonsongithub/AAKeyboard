@@ -301,11 +301,12 @@
 		self.backgroundColor = [UIColor clearColor];
 		
 		NSMutableArray *temp = [NSMutableArray array];
-		NSArray *allgroups = [AAKASCIIArtGroup MR_findAll];
+		NSArray *allgroups = [AAKASCIIArtGroup MR_findAllSortedBy:@"order" ascending:YES];
 		
 		[temp addObject:[AAKASCIIArtDummyHistoryGroup historyGroup]];
 		
 		[temp addObjectsFromArray:allgroups];
+		
 		_groups = [NSArray arrayWithArray:temp];
 		
 		[self updateWithWidth:100];

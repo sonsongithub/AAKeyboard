@@ -139,7 +139,7 @@
 		_asciiarts = [AAKASCIIArt MR_executeFetchRequest:request];
 	}
 	else {
-		_asciiarts = [AAKASCIIArt MR_findAllWithPredicate:[NSPredicate predicateWithFormat: @"group == %@", _toolbar.currentGroup]];
+		_asciiarts = [AAKASCIIArt MR_findAllSortedBy:@"lastUsedTime" ascending:NO withPredicate:[NSPredicate predicateWithFormat: @"group == %@", _toolbar.currentGroup]];
 	}
 }
 
