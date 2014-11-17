@@ -9,7 +9,6 @@
 #import "AAKNotifyView.h"
 
 @interface AAKNotifyView() {
-	IBOutlet UILabel *_label;
 }
 @end
 

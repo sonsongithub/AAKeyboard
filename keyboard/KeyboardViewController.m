@@ -210,9 +210,14 @@
 																	  options:0 metrics:0 views:views]];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewDidCopyAAImageToPasteboard:) name:AAKTextViewDidCopyAAImageToPasteboard object:nil];
+	
+	if (![KeyboardViewController isOpenAccessGranted]) {
+		[self showNotifyWithMessage:NSLocalizedString(@"Please turn on \"full access\"\n in order to input other AAs.", nil)];
+	}
 }
 
-- (void)textViewDidCopyAAImageToPasteboard:(NSNotification*)notification {
+- (void)showNotifyWithMessage:(NSString*)message {
+	_notifyView.label.text = message;
 	_notifyView.hidden = NO;
 	_notifyView.alpha = 0;
 	[UIView animateWithDuration:0.4
@@ -228,6 +233,10 @@
 											  }];
 						 });
 					 }];
+}
+
+- (void)textViewDidCopyAAImageToPasteboard:(NSNotification*)notification {
+	[self showNotifyWithMessage:NSLocalizedString(@"Now, paste AA as image,\nin a message", nil)];
 }
 
 - (void)viewDidLoad {
