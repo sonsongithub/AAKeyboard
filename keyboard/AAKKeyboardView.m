@@ -133,13 +133,13 @@
  * アスキーアートオブジェクトの配列を現在選択中のグループに従ってアップデートする．
  **/
 - (void)updateASCIIArtsForCurrentGroup {
-	if (_toolbar.currentGroup) {
-		_asciiarts = [AAKASCIIArt MR_findAllWithPredicate:[NSPredicate predicateWithFormat: @"group == %@", _toolbar.currentGroup]];
-	}
-	else {
+	if (_toolbar.currentGroup.type == AAKASCIIArtHistoryGroup) {
 		NSFetchRequest *request = [AAKASCIIArt MR_requestAllSortedBy:@"lastUsedTime" ascending:NO];
 		[request setFetchLimit:20];
 		_asciiarts = [AAKASCIIArt MR_executeFetchRequest:request];
+	}
+	else {
+		_asciiarts = [AAKASCIIArt MR_findAllWithPredicate:[NSPredicate predicateWithFormat: @"group == %@", _toolbar.currentGroup]];
 	}
 }
 
@@ -191,7 +191,8 @@
 	DNSLogMethod
 	[collectionView deselectItemAtIndexPath:indexPath animated:YES];
 	AAKASCIIArt *source = _asciiarts[indexPath.item];
-//	[[AAKKeyboardDataManager defaultManager] insertHistoryASCIIArtKey:source.key];
+	[source updateLastUsedTime];
+	[[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
 	[self.delegate keyboardView:self willInsertString:source.text];
 }
 

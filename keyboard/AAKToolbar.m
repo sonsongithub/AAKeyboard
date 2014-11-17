@@ -10,6 +10,7 @@
 
 #import "AAKToolbarCell.h"
 #import "AAKToolbarHistoryCell.h"
+#import "AAKASCIIArtDummyHistoryGroup.h"
 
 @interface AAKToolbar() <UICollectionViewDataSource, UICollectionViewDelegate, AAKToolbarCellDelegate> {
 	UICollectionView			*_collectionView;
@@ -179,7 +180,7 @@
 	// まず，普通にすべてのグループについて幅を計算する．
 	NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:_fontSize]};
 	NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[_groups count]];
-	CGFloat sumation = 50;
+	CGFloat sumation = 0;
 	for (AAKASCIIArtGroup *group in _groups) {
 		CGSize s = [group.title sizeWithAttributes:attributes];
 		s.width = floor(s.width) + 20;
@@ -324,6 +325,9 @@
 		
 		NSMutableArray *temp = [NSMutableArray array];
 		NSArray *allgroups = [AAKASCIIArtGroup MR_findAll];
+		
+		[temp addObject:[AAKASCIIArtDummyHistoryGroup historyGroup]];
+		
 		[temp addObjectsFromArray:allgroups];
 		_groups = [NSArray arrayWithArray:temp];
 		_currentGroup = allgroups[0];
@@ -392,13 +396,8 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.row == 0) {
-		return CGSizeMake(50, _height);
-	}
-	else {
-		CGSize size =  [[_sizeOfCategories objectAtIndex:indexPath.item - 1] CGSizeValue];
-		return size;
-	}
+	CGSize size =  [[_sizeOfCategories objectAtIndex:indexPath.item] CGSizeValue];
+	return size;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -413,7 +412,7 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
-	return [_groups count] + 1;
+	return [_groups count];
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
@@ -441,19 +440,20 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
 	AAKToolbarCell *cell = nil;
 	
-	if (indexPath.row == 0) {
+	AAKASCIIArtGroup *group = [_groups objectAtIndex:indexPath.item];
+	
+	if (group.type == AAKASCIIArtHistoryGroup) {
 		cell = [cv dequeueReusableCellWithReuseIdentifier:@"AAKToolbarHistoryCell" forIndexPath:indexPath];
 	}
 	else {
-		AAKASCIIArtGroup *group = [_groups objectAtIndex:indexPath.item - 1];
 		cell = [cv dequeueReusableCellWithReuseIdentifier:@"AAKToolbarCell" forIndexPath:indexPath];
-		cell.group = group;
 	}
 	
+	cell.group = group;
 	cell.keyboardAppearance = _keyboardAppearance;
 	cell.delegate = self;
 	[cell setOriginalHighlighted:(cell.group == _currentGroup)];
-	cell.isTail = (indexPath.item == ([_groups count]));
+	cell.isTail = (indexPath.item == ([_groups count] - 1));
 	
 	return cell;
 }
