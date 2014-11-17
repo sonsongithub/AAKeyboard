@@ -23,9 +23,9 @@
 	UINavigationController *nav = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"AAKRegisterNavigationController"];
 	AAKRegisterViewController *con = (AAKRegisterViewController*)nav.topViewController;
 	
-	con.AATextView.text = decodedString;
-	
-	[self.window.rootViewController presentViewController:nav animated:YES completion:nil];
+	[self.window.rootViewController presentViewController:nav animated:YES completion:^{
+		con.AATextView.text = decodedString;
+	}];
 	
 	return YES;
 }

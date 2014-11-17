@@ -18,6 +18,6 @@
  * @param asciiart アスキーアートオブジェクト．
  * @return アスキーアートオブジェクトを保持するAAKAACollectionViewCellインスタンスを返す．
  **/
-- (id)cellForAsciiArt:(_AAKASCIIArt*)asciiart;
+- (id)cellForAsciiArt:(AAKASCIIArt*)asciiart;
 
 @end

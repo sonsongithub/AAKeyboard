@@ -31,6 +31,8 @@ typedef enum AAKASCIIArtGroupType_ {
 // Model
 #import "_AAKASCIIArt.h"
 #import "_AAKASCIIArtGroup.h"
+#import "AAKASCIIArt.h"
+#import "AAKASCIIArtGroup.h"
 #import "AAKAAGroupForCollection.h"
 
 // Databse

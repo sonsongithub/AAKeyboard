@@ -58,7 +58,7 @@ static NSInteger AAKCellButtonWidth = 96;						/** セルの複製，削除ボ�
  * @param tapPoint ジェスチャ中のタップの位置．
  **/
 - (void)gestureRecognizerStateBegan:(UISwipeGestureRecognizer*)gestureRecognizer {
-	DNSLogMainThread
+	DNSLogMethod
 	CGPoint translate = [gestureRecognizer locationInView:self];
 	_startPoint = translate;
 }
@@ -68,7 +68,7 @@ static NSInteger AAKCellButtonWidth = 96;						/** セルの複製，削除ボ�
  * @param tapPoint ジェスチャ中のタップの位置．
  **/
 - (void)gestureRecognizerStateChanged:(UISwipeGestureRecognizer*)gestureRecognizer {
-	DNSLogMainThread
+	DNSLogMethod
 	CGPoint translate = [gestureRecognizer locationInView:self];
 	CGFloat diff = _startPoint.x - translate.x;
 	if (_opened) {
@@ -98,7 +98,7 @@ static NSInteger AAKCellButtonWidth = 96;						/** セルの複製，削除ボ�
  * @param tapPoint ジェスチャ中のタップの位置．
  **/
 - (void)gestureRecognizerStateEnded:(UISwipeGestureRecognizer*)gestureRecognizer {
-	DNSLogMainThread
+	DNSLogMethod
 	CGPoint translate = [gestureRecognizer locationInView:self];
 	CGFloat diff = _startPoint.x - translate.x;
 	if (_movement + diff < AAKCellButtonWidth * 0.6) {

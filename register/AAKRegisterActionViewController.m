@@ -26,6 +26,7 @@
  **/
 - (IBAction)cancel:(id)sender {
 	// registerの処理コンテキストを終了する
+	[MagicalRecord cleanUp];
 	[self.extensionContext completeRequestReturningItems:nil completionHandler:nil];
 }
 
@@ -35,7 +36,13 @@
  **/
 - (IBAction)registerAA:(id)sender {
 	// AAを登録してから，registerの処理コンテキストを終了する
-//	[[AAKKeyboardDataManager defaultManager] insertNewASCIIArt:self.AATextView.text groupKey:self.group_.key];
+	AAKASCIIArt *newASCIIArt = [AAKASCIIArt MR_createEntity];
+	newASCIIArt.text = self.AATextView.text;
+	newASCIIArt.group = self.group;
+	[newASCIIArt updateLastUsedTime];
+	[newASCIIArt updateRatio];
+	[[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+	[MagicalRecord cleanUp];
 	[self.extensionContext completeRequestReturningItems:nil completionHandler:nil];
 }
 
@@ -97,7 +104,12 @@
 #pragma mark - Override
 
 - (void)viewDidLoad {
+	NSURL *containerURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.sonson.AAKeyboardApp"];
+	NSURL *fileURL = [containerURL URLByAppendingPathComponent:@"asciiart.db"];
+	[MagicalRecord setupCoreDataStackWithStoreAtURL:fileURL];
+	
 	[super viewDidLoad];
+	
 	[self extractSelectedText];
 }
 

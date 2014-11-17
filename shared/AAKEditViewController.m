@@ -63,13 +63,10 @@ UIView *topView(UIView *current) {
  * @param sender メッセージの送信元オブジェクト．
  **/
 - (IBAction)save:(id)sender {
-	AAKASCIIArt *newASCIIArt = [AAKASCIIArt MR_createEntity];
-	newASCIIArt.text = _AATextView.text;
-	newASCIIArt.group = self.group;
-	
-	[newASCIIArt updateLastUsedTime];
-	[newASCIIArt updateRatio];
-	
+	self.asciiart.text = _AATextView.text;
+	self.asciiart.group = self.group;
+	[self.asciiart updateLastUsedTime];
+	[self.asciiart updateRatio];
 	[[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
 	[[NSNotificationCenter defaultCenter] postNotificationName:AAKKeyboardDataManagerDidUpdateNotification object:nil userInfo:nil];
 	[self dismissViewControllerAnimated:YES completion:nil];
@@ -107,9 +104,8 @@ UIView *topView(UIView *current) {
 	
 	// UIを更新
 	_AATextView.font = [UIFont fontWithName:@"Mona" size:10];
-	if (self.asciiart) {
-		_AATextView.text = self.asciiart.text;
-	}
+	_AATextView.text = self.asciiart.text;
+	
 	// デフォルトグループを取得
 	self.group = [AAKASCIIArtGroup defaultGroup];
 	

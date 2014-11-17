@@ -10,11 +10,11 @@
 
 @implementation AAKAAGroupForCollection
 
-+ (instancetype)groupForCollectionWithGroup:(_AAKASCIIArtGroup*)group asciiarts:(NSArray*)array {
++ (instancetype)groupForCollectionWithGroup:(AAKASCIIArtGroup*)group asciiarts:(NSArray*)array {
 	return [[AAKAAGroupForCollection alloc] initWithGroup:group asciiarts:array];
 }
 
-- (instancetype)initWithGroup:(_AAKASCIIArtGroup*)group asciiarts:(NSArray*)array {
+- (instancetype)initWithGroup:(AAKASCIIArtGroup*)group asciiarts:(NSArray*)array {
 	self = [super init];
 	if (self) {
 		_group = group;
