@@ -15,7 +15,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>GIT_MARKETING_VERSION</string>
+	<key>CFBundleVersion</key>
+	<string>GIT_COMMIT_TIMES</string>
+	<key>GitRevision</key>
+	<string>GIT_REVISION</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>

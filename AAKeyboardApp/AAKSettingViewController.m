@@ -8,7 +8,19 @@
 
 #import "AAKSettingViewController.h"
 
-@interface AAKSettingViewController ()
+@interface AAKSettingViewController () {
+	IBOutlet UILabel *_versionLabel;
+	IBOutlet UILabel *_buildLabel;
+}
+@end
+
+@implementation NSBundle(Core2ch)
+
++ (id)infoValueFromMainBundleForKey:(NSString*)key {
+	if ([[[self mainBundle] localizedInfoDictionary] objectForKey:key])
+		return [[[self mainBundle] localizedInfoDictionary] objectForKey:key];
+	return [[[self mainBundle] infoDictionary] objectForKey:key];
+}
 
 @end
 
@@ -29,8 +41,30 @@
 	}
 }
 
+- (NSString*)version {
+	return [NSBundle infoValueFromMainBundleForKey:@"CFBundleShortVersionString"];
+}
+
+- (NSString*)versionAndBuildCondition {
+	NSString *buildCharacter = @"";
+#if defined(_TESTFLIGHT)
+	buildCharacter = @"(TestFlight)";
+#elif defined(_DEMO)
+	buildCharacter = @"(Demo)";
+#elif defined(_DEBUG)
+	buildCharacter = @"(Debug)";
+#endif
+	return [NSString stringWithFormat:@"%@%@", [NSBundle infoValueFromMainBundleForKey:@"CFBundleShortVersionString"], buildCharacter];
+}
+
+- (NSString*)revision {
+	return [NSBundle infoValueFromMainBundleForKey:@"GitRevision"];
+}
+
 - (void)viewDidLoad {
-    [super viewDidLoad];
+	[super viewDidLoad];
+	_versionLabel.text = [self versionAndBuildCondition];
+	_buildLabel.text = [self revision];
 }
 
 @end

@@ -857,6 +857,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 14FBD3C619E21213005FC38B /* Build configuration list for PBXNativeTarget "AAKeyboardApp" */;
 			buildPhases = (
+				14530C371A1BA72800B6BFFE /* ShellScript */,
+				14530C361A1BA71600B6BFFE /* ShellScript */,
 				14FBD39F19E21213005FC38B /* Sources */,
 				14FBD3A019E21213005FC38B /* Frameworks */,
 				14FBD3A119E21213005FC38B /* Resources */,
@@ -1024,6 +1026,35 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		14530C361A1BA71600B6BFFE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/sh\n\nGIT_MARKETING_VERSION=`git describe --abbrev=0 --tags`\nGIT_REVISION=`git rev-parse --short HEAD`\n\nGIT_COMMIT_TIMES_STRING=`git log --since=2000-01-01 --oneline --no-merges | wc -l`\n\nlet GIT_COMMIT_TIMES=GIT_COMMIT_TIMES_STRING\n\ncat > AAKeyboardApp/Info.prefix <<EOT\n#define GIT_MARKETING_VERSION ${GIT_MARKETING_VERSION}\n#define GIT_REVISION ${GIT_REVISION}\n#define GIT_COMMIT_TIMES ${GIT_COMMIT_TIMES}\nEOT\n    ";
+		};
+		14530C371A1BA72800B6BFFE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "touch AAKeyboardApp/Info.plist";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		14A5137A19EC68530098C02C /* Sources */ = {
@@ -1345,6 +1376,8 @@
 					_DEBUG,
 				);
 				INFOPLIST_FILE = AAKeyboardApp/Info.plist;
+				INFOPLIST_PREFIX_HEADER = AAKeyboardApp/Info.prefix;
+				INFOPLIST_PREPROCESS = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "108b613e-bdef-4d93-95bc-f99deefd382b";
@@ -1503,6 +1536,8 @@
 					_DEBUG,
 				);
 				INFOPLIST_FILE = AAKeyboardApp/Info.plist;
+				INFOPLIST_PREFIX_HEADER = AAKeyboardApp/Info.prefix;
+				INFOPLIST_PREPROCESS = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "108b613e-bdef-4d93-95bc-f99deefd382b";
@@ -1516,6 +1551,8 @@
 				CODE_SIGN_ENTITLEMENTS = AAKeyboardApp/AAKeyboardApp.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yuichi Yoshida (AK9FYY958C)";
 				INFOPLIST_FILE = AAKeyboardApp/Info.plist;
+				INFOPLIST_PREFIX_HEADER = AAKeyboardApp/Info.prefix;
+				INFOPLIST_PREPROCESS = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "108b613e-bdef-4d93-95bc-f99deefd382b";

@@ -161,6 +161,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="KVh-1i-g8j" kind="show" id="jrW-VC-kwd"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -179,10 +182,10 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="www-22-BN9" firstAttribute="leading" secondItem="tqo-YQ-Ihp" secondAttribute="leading" constant="8" id="066-Hr-vj2"/>
-                                                <constraint firstAttribute="trailing" secondItem="www-22-BN9" secondAttribute="trailing" constant="8" id="DCc-Ff-gyK"/>
-                                                <constraint firstItem="www-22-BN9" firstAttribute="top" secondItem="tqo-YQ-Ihp" secondAttribute="top" constant="11" id="FmE-8A-ELo"/>
-                                                <constraint firstAttribute="bottom" secondItem="www-22-BN9" secondAttribute="bottom" constant="11" id="ZwX-yH-1gk"/>
+                                                <constraint firstItem="www-22-BN9" firstAttribute="leading" secondItem="tqo-YQ-Ihp" secondAttribute="leadingMargin" id="AnI-4D-o62"/>
+                                                <constraint firstItem="www-22-BN9" firstAttribute="trailing" secondItem="tqo-YQ-Ihp" secondAttribute="trailingMargin" id="c2D-XK-T7Y"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="www-22-BN9" secondAttribute="bottom" constant="3" id="jfP-ms-Q91"/>
+                                                <constraint firstItem="www-22-BN9" firstAttribute="top" secondItem="tqo-YQ-Ihp" secondAttribute="topMargin" constant="3" id="znf-gr-kMK"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -201,10 +204,55 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="_buildLabel" destination="mLe-s9-1wa" id="kpi-9s-4eq"/>
+                        <outlet property="_versionLabel" destination="Xup-YV-jPj" id="cp8-ON-rgR"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g4O-xz-es9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="821" y="-1798"/>
+        </scene>
+        <!--License-->
+        <scene sceneID="toT-vM-n5y">
+            <objects>
+                <viewController title="License" id="KVh-1i-g8j" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mr2-DY-Zwp"/>
+                        <viewControllerLayoutGuide type="bottom" id="wIp-LJ-3e6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fVC-Qt-5wb">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LXJ-e4-WBl">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <mutableString key="text">*Included Software License and Copyrights
+
+*東雲フォントライセンス http://openlab.ring.gr.jp/efont/
+*モナーフォントライセンス http://monafont.sourceforge.net/
+
+このアーカイブにフォントデータ(mona.ttf)は，Public Domain で提供されています 。
+但し、日本に於いては現時点で著作権を放棄することは法律上不可能であり、AUTHORS に列挙されている作者がその権利を行使しないと宣言することで実質的な Public Domain であるとします。
+自由な改造、他フォーマットへの変換、組込み、再配布を行うことができます。同時に、これらはすべて完全に無保証です。
+</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wIp-LJ-3e6" firstAttribute="top" secondItem="LXJ-e4-WBl" secondAttribute="bottom" id="HUl-wW-g3s"/>
+                            <constraint firstItem="LXJ-e4-WBl" firstAttribute="top" secondItem="fVC-Qt-5wb" secondAttribute="top" id="IPw-Hf-2J2"/>
+                            <constraint firstItem="LXJ-e4-WBl" firstAttribute="leading" secondItem="fVC-Qt-5wb" secondAttribute="leading" id="nsq-6u-ilM"/>
+                            <constraint firstAttribute="trailing" secondItem="LXJ-e4-WBl" secondAttribute="trailing" id="tGc-gZ-Cmv"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4IT-yt-dRZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1514" y="-1798"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="EeR-2J-c1m">
@@ -220,7 +268,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hBc-SB-aj2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="145" y="-1796"/>
+            <point key="canvasLocation" x="145" y="-1798"/>
         </scene>
         <!--Preview Controller-->
         <scene sceneID="OG4-w6-iUm">
