@@ -8,6 +8,8 @@
 
 #import "AAKPreviewController.h"
 
+#import <AssetsLibrary/AssetsLibrary.h>
+
 @interface AAKPreviewController () {
 }
 
@@ -23,7 +25,29 @@
 
 - (IBAction)saveAsImage:(id)sender {
 	DNSLogMethod
-	// to be done
+	
+	UIImage *image = [self.textView imageForPasteBoard];
+	
+	ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+	[library writeImageToSavedPhotosAlbum:image.CGImage metadata:nil
+						  completionBlock:^(NSURL *assetURL, NSError *error){
+							  if (error) {
+								  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
+																					  message:[error localizedDescription]
+																					 delegate:nil
+																			cancelButtonTitle:nil
+																			otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
+								  [alertView show];
+							  }
+							  else {
+								  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"AAKeyboard", nil)
+																					  message:[NSString stringWithFormat:NSLocalizedString(@"Image has been saved.", nil)]
+																					 delegate:nil
+																			cancelButtonTitle:nil
+																			otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
+								  [alertView show];
+							  }
+						  }];
 }
 
 #pragma mark - Instance method
