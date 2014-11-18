@@ -1264,7 +1264,7 @@
 				INFOPLIST_FILE = register/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5009c6e9-307b-4d6d-91c5-3a53d65285a1";
+				PROVISIONING_PROFILE = "98463e43-b512-424d-8831-1bcfbc17308d";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -1278,7 +1278,7 @@
 				INFOPLIST_FILE = register/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5009c6e9-307b-4d6d-91c5-3a53d65285a1";
+				PROVISIONING_PROFILE = "98463e43-b512-424d-8831-1bcfbc17308d";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -1341,7 +1341,7 @@
 				INFOPLIST_FILE = AAKeyboardApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "427c956d-7d2d-4171-b1a7-567383e53e4d";
+				PROVISIONING_PROFILE = "108b613e-bdef-4d93-95bc-f99deefd382b";
 			};
 			name = "Debug - Disable App Groups ";
 		};
@@ -1379,7 +1379,7 @@
 				INFOPLIST_FILE = keyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6b9a960b-927c-4c62-8fde-4077db76ca31";
+				PROVISIONING_PROFILE = "7f2bc28a-f2c4-45c4-8a1e-5fb1ffc08058";
 				SKIP_INSTALL = YES;
 			};
 			name = "Debug - Disable App Groups ";
@@ -1398,7 +1398,7 @@
 				INFOPLIST_FILE = register/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5009c6e9-307b-4d6d-91c5-3a53d65285a1";
+				PROVISIONING_PROFILE = "98463e43-b512-424d-8831-1bcfbc17308d";
 				SKIP_INSTALL = YES;
 			};
 			name = "Debug - Disable App Groups ";
@@ -1499,7 +1499,7 @@
 				INFOPLIST_FILE = AAKeyboardApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "427c956d-7d2d-4171-b1a7-567383e53e4d";
+				PROVISIONING_PROFILE = "108b613e-bdef-4d93-95bc-f99deefd382b";
 			};
 			name = Debug;
 		};
@@ -1512,7 +1512,7 @@
 				INFOPLIST_FILE = AAKeyboardApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "427c956d-7d2d-4171-b1a7-567383e53e4d";
+				PROVISIONING_PROFILE = "108b613e-bdef-4d93-95bc-f99deefd382b";
 			};
 			name = Release;
 		};
@@ -1564,7 +1564,7 @@
 				INFOPLIST_FILE = keyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6b9a960b-927c-4c62-8fde-4077db76ca31";
+				PROVISIONING_PROFILE = "7f2bc28a-f2c4-45c4-8a1e-5fb1ffc08058";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -1578,7 +1578,7 @@
 				INFOPLIST_FILE = keyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6b9a960b-927c-4c62-8fde-4077db76ca31";
+				PROVISIONING_PROFILE = "7f2bc28a-f2c4-45c4-8a1e-5fb1ffc08058";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;

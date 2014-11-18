@@ -303,9 +303,14 @@
 		NSMutableArray *temp = [NSMutableArray array];
 		NSArray *allgroups = [AAKASCIIArtGroup MR_findAllSortedBy:@"order" ascending:YES];
 		
+		
 		[temp addObject:[AAKASCIIArtDummyHistoryGroup historyGroup]];
 		
-		[temp addObjectsFromArray:allgroups];
+		for (AAKASCIIArtGroup *group in allgroups) {
+			if ([AAKASCIIArt MR_countOfEntitiesWithPredicate:[NSPredicate predicateWithFormat:@"group == %@", group]]) {
+				[temp addObject:group];
+			}
+		}
 		
 		_groups = [NSArray arrayWithArray:temp];
 		
