@@ -8,8 +8,6 @@
 
 #import "AAKAAEditAnimatedTransitioning.h"
 
-#import "AAKShared.h"
-
 #import "AAKAACollectionViewController.h"
 #import "AAKAACollectionViewCell.h"
 #import "AAKPreviewController.h"

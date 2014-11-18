@@ -10,8 +10,6 @@
 #import "AAKToolbar.h"
 #import "AAKContentCell.h"
 
-#import "AAKShared.h"
-
 @interface AAKKeyboardView() <UICollectionViewDataSource, UICollectionViewDelegate, AAKToolbarDelegate> {
 	AAKToolbar					*_toolbar;
 	NSLayoutConstraint			*_toolbarHeightConstraint;
@@ -135,7 +133,14 @@
  * アスキーアートオブジェクトの配列を現在選択中のグループに従ってアップデートする．
  **/
 - (void)updateASCIIArtsForCurrentGroup {
-	_asciiarts = [_toolbar asciiArtsForCurrentGroup];
+	if (_toolbar.currentGroup.type == AAKASCIIArtHistoryGroup) {
+		NSFetchRequest *request = [AAKASCIIArt MR_requestAllSortedBy:@"lastUsedTime" ascending:NO];
+		[request setFetchLimit:20];
+		_asciiarts = [AAKASCIIArt MR_executeFetchRequest:request];
+	}
+	else {
+		_asciiarts = [AAKASCIIArt MR_findAllSortedBy:@"lastUsedTime" ascending:NO withPredicate:[NSPredicate predicateWithFormat: @"group == %@", _toolbar.currentGroup]];
+	}
 }
 
 /**
@@ -186,7 +191,8 @@
 	DNSLogMethod
 	[collectionView deselectItemAtIndexPath:indexPath animated:YES];
 	AAKASCIIArt *source = _asciiarts[indexPath.item];
-	[[AAKKeyboardDataManager defaultManager] insertHistoryASCIIArtKey:source.key];
+	[source updateLastUsedTime];
+	[[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
 	[self.delegate keyboardView:self willInsertString:source.text];
 }
 
@@ -218,7 +224,6 @@
 	cell.label.text = [NSString stringWithFormat:@"%ld", (long)indexPath.item];
 	CGFloat fontSize = 15;
 	AAKASCIIArt *source = _asciiarts[indexPath.item];
-	
 	
 	cell.isTail = ((_asciiarts.count - 1) == indexPath.item);
 	cell.keyboardAppearance = _keyboardAppearance;

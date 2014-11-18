@@ -8,8 +8,6 @@
 
 #import "AAKToolbarHeaderView.h"
 
-#import "AAKShared.h"
-
 @interface AAKToolbarHeaderView() {
 	IBOutlet UIImageView *_rightSeperatorImageView;
 }

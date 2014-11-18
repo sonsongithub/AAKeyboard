@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @class AAKTextView;
-@class AAKASCIIArt;
-@class AAKASCIIArtGroup;
+@class _AAKASCIIArt;
+@class _AAKASCIIArtGroup;
 @class AAKAACollectionViewCell;
 
 @protocol AAKAACollectionViewCellDelegate <NSObject>

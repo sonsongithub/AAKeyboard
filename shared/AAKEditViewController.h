@@ -12,15 +12,15 @@
 @class AAKASCIIArtGroup;
 
 @interface AAKEditViewController : UIViewController {
-	IBOutlet UISlider		*_fontSizeSlider;
-	IBOutlet UITableView	*_groupTableView;
+	IBOutlet UISlider			*_fontSizeSlider;
+	IBOutlet UITableView		*_groupTableView;
 	IBOutlet NSLayoutConstraint *_bottomTextViewMargin;
-	AAKASCIIArt				*_asciiart;
 }
-@property (nonatomic, strong) AAKASCIIArt *asciiart;
 @property (nonatomic, strong) IBOutlet UITextView *AATextView;
-@property (nonatomic, readonly) AAKASCIIArtGroup *group;
-- (void)setGroup:(AAKASCIIArtGroup *)group;
+
+@property (nonatomic, strong) AAKASCIIArt *asciiart;
+@property (nonatomic, strong) AAKASCIIArtGroup *group;
+
 - (IBAction)didChangeSlider:(id)sender;
 - (IBAction)save:(id)sender;
 - (IBAction)cancel:(id)sender;

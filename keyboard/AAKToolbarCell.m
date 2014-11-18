@@ -8,8 +8,6 @@
 
 #import "AAKToolbarCell.h"
 
-#import "AAKShared.h"
-
 @implementation AAKToolbarCell
 
 - (UIColor*)cellHighlightedBackgroundColor {

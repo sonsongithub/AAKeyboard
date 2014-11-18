@@ -1,13 +1,24 @@
 //
-//  AAKShared.h
+//  AAKShared.pch
 //  AAKeyboardApp
 //
-//  Created by sonson on 2014/11/05.
+//  Created by sonson on 2014/11/16.
 //  Copyright (c) 2014年 sonson. All rights reserved.
 //
 
-#ifndef AAKeyboardApp_AAKShared_h
-#define AAKeyboardApp_AAKShared_h
+#ifndef AAKeyboardApp_AAKShared_pch
+#define AAKeyboardApp_AAKShared_pch
+
+typedef enum AAKASCIIArtGroupType_ {
+	AAKASCIIArtDefaultGroup	= 0,
+	AAKASCIIArtNormalGroup	= 1,
+	AAKASCIIArtHistoryGroup	= 2,
+}AAKASCIIArtGroupType;
+
+// For CoreData, MagicalRecord
+#import <CoreData/CoreData.h>
+#import "CoreData+MagicalRecord.h"
+#import "AAKCoreDataStack.h"
 
 // Helper
 #import "AAKHelper.h"
@@ -22,9 +33,6 @@
 #import "AAKASCIIArt.h"
 #import "AAKASCIIArtGroup.h"
 #import "AAKAAGroupForCollection.h"
-
-// Databse
-#import "AAKKeyboardDataManager.h"
 
 // View controllers
 #import "AAKCreateNewGroupViewController.h"

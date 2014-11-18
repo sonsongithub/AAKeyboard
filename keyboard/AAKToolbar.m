@@ -10,8 +10,7 @@
 
 #import "AAKToolbarCell.h"
 #import "AAKToolbarHistoryCell.h"
-
-#import "AAKShared.h"
+#import "AAKASCIIArtDummyHistoryGroup.h"
 
 @interface AAKToolbar() <UICollectionViewDataSource, UICollectionViewDelegate, AAKToolbarCellDelegate> {
 	UICollectionView			*_collectionView;
@@ -58,33 +57,12 @@
 #pragma mark - Instance method
 
 /**
- * 現在，選択中のグループのアスキーアートオブジェクトの配列を返す．
- * @return AAKASCIIArtオブジェクトを含むNSArray，
- **/
-- (NSArray*)asciiArtsForCurrentGroup {
-	return [[AAKKeyboardDataManager defaultManager] asciiArtForGroup:_currentGroup];
-}
-
-/**
- * 指定されたキーを持つAAKASCIIArtGroupオブジェクトを_groupsの中から返す．
- * 指定されたキーを持つオブジェクトが存在しない場合は，先頭のオブジェクトを返す．
- * @return AAKASCIIArtオブジェクトを含むNSArray，
- **/
-- (AAKASCIIArtGroup*)groupForGroupKey:(NSInteger)key {
-	for (AAKASCIIArtGroup *group in _groups) {
-		if (group.key == key)
-			return group;
-	}
-	return _groups[0];
-}
-
-/**
  * ツールバーの選択状態になっているセルを更新する．
  * reloadDataだと色々問題が発生するため．
  **/
 - (void)updateSelectedCell {
 	for (AAKToolbarCell *cell in [_collectionView visibleCells]) {
-		[cell setOriginalHighlighted:(cell.group.key == _currentGroup.key)];
+		[cell setOriginalHighlighted:(cell.group == _currentGroup)];
 	}
 }
 
@@ -322,12 +300,34 @@
 		
 		self.backgroundColor = [UIColor clearColor];
 		
-		_groups = [[AAKKeyboardDataManager defaultManager] groups];
+		NSMutableArray *temp = [NSMutableArray array];
+		NSArray *allgroups = [AAKASCIIArtGroup MR_findAllSortedBy:@"order" ascending:YES];
+		
+		
+		[temp addObject:[AAKASCIIArtDummyHistoryGroup historyGroup]];
+		
+		for (AAKASCIIArtGroup *group in allgroups) {
+			if ([AAKASCIIArt MR_countOfEntitiesWithPredicate:[NSPredicate predicateWithFormat:@"group == %@", group]]) {
+				[temp addObject:group];
+			}
+		}
+		
+		_groups = [NSArray arrayWithArray:temp];
 		
 		[self updateWithWidth:100];
 		
-		NSInteger groupKey = [[NSUserDefaults standardUserDefaults] integerForKey:@"groupKey"];
-		_currentGroup = [self groupForGroupKey:groupKey];
+		
+		_currentGroup = _groups[0];
+		
+		NSString *saveID = [[NSUserDefaults standardUserDefaults] objectForKey:@"groupKey"];
+		for (AAKASCIIArtGroup *group in _groups) {
+			if ([group respondsToSelector:@selector(objectID)]) {
+				if ([group.objectID.URIRepresentation.absoluteString isEqualToString:saveID]) {
+					_currentGroup = group;
+					break;
+				}
+			}
+		}
 		
 		_height = 48;
 		_fontSize = 14;
@@ -369,8 +369,14 @@
 #pragma mark - Override
 
 - (void)dealloc {
-	[[NSUserDefaults standardUserDefaults] setInteger:_currentGroup.key forKey:@"groupKey"];
-	[[NSUserDefaults standardUserDefaults] synchronize];
+	if ([_currentGroup respondsToSelector:@selector(objectID)]) {
+		[[NSUserDefaults standardUserDefaults] setObject:_currentGroup.objectID.URIRepresentation.absoluteString forKey:@"groupKey"];
+		[[NSUserDefaults standardUserDefaults] synchronize];
+	}
+	else {
+		[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"groupKey"];
+		[[NSUserDefaults standardUserDefaults] synchronize];
+	}
 }
 
 #pragma mark - UICollectionViewDelegate, UICollectionViewDataSource
@@ -431,6 +437,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
 	AAKToolbarCell *cell = nil;
+	
 	AAKASCIIArtGroup *group = [_groups objectAtIndex:indexPath.item];
 	
 	if (group.type == AAKASCIIArtHistoryGroup) {
@@ -440,10 +447,10 @@
 		cell = [cv dequeueReusableCellWithReuseIdentifier:@"AAKToolbarCell" forIndexPath:indexPath];
 	}
 	
-	cell.keyboardAppearance = _keyboardAppearance;
 	cell.group = group;
+	cell.keyboardAppearance = _keyboardAppearance;
 	cell.delegate = self;
-	[cell setOriginalHighlighted:(cell.group.key == _currentGroup.key)];
+	[cell setOriginalHighlighted:(cell.group == _currentGroup)];
 	cell.isTail = (indexPath.item == ([_groups count] - 1));
 	
 	return cell;

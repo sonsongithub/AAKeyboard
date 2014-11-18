@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @class AAKToolbar;
-@class AAKASCIIArtGroup;
 
 @protocol AAKToolbarDelegate <NSObject>
 
@@ -40,12 +39,6 @@
 @property (nonatomic, assign) CGFloat height;
 @property (nonatomic, assign) CGFloat fontSize;
 @property (nonatomic, readonly) AAKASCIIArtGroup *currentGroup;
-
-/**
- * 現在，選択中のグループのアスキーアートオブジェクトの配列を返す．
- * @return AAKASCIIArtオブジェクトを含むNSArray，
- **/
-- (NSArray*)asciiArtsForCurrentGroup;
 
 /**
  * ツールバー全体をレイアウトする．

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class AAKASCIIArt;
+@class _AAKASCIIArt;
 
 @interface AAKAACollectionViewController : UICollectionViewController
 

@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @class AAKTextView;
-@class AAKASCIIArt;
-@class AAKASCIIArtGroup;
 
 @interface AAKPreviewController : UIViewController
 @property (nonatomic, strong) IBOutlet AAKTextView *textView;

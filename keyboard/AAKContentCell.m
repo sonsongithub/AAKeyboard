@@ -8,8 +8,6 @@
 
 #import "AAKContentCell.h"
 
-#import "AAKShared.h"
-
 @interface AAKContentCell() {
 	UILabel		*_label;
 	AAKTextView	*_textView;

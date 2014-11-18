@@ -9,7 +9,6 @@
 #import "AAKRegisterActionViewController.h"
 
 #import <MobileCoreServices/MobileCoreServices.h>
-#import "AAKShared.h"
 
 @interface AAKRegisterActionViewController ()
 
@@ -27,6 +26,7 @@
  **/
 - (IBAction)cancel:(id)sender {
 	// registerの処理コンテキストを終了する
+	[MagicalRecord cleanUp];
 	[self.extensionContext completeRequestReturningItems:nil completionHandler:nil];
 }
 
@@ -36,7 +36,13 @@
  **/
 - (IBAction)registerAA:(id)sender {
 	// AAを登録してから，registerの処理コンテキストを終了する
-	[[AAKKeyboardDataManager defaultManager] insertNewASCIIArt:self.AATextView.text groupKey:self.asciiart.group.key];
+	AAKASCIIArt *newASCIIArt = [AAKASCIIArt MR_createEntity];
+	newASCIIArt.text = self.AATextView.text;
+	newASCIIArt.group = self.group;
+	[newASCIIArt updateLastUsedTime];
+	[newASCIIArt updateRatio];
+	[[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+	[MagicalRecord cleanUp];
 	[self.extensionContext completeRequestReturningItems:nil completionHandler:nil];
 }
 
@@ -98,7 +104,10 @@
 #pragma mark - Override
 
 - (void)viewDidLoad {
+	[AAKCoreDataStack setupMagicalRecordForAppGroupsContainer];
+	
 	[super viewDidLoad];
+	
 	[self extractSelectedText];
 }
 

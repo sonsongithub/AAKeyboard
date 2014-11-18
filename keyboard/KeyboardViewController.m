@@ -8,14 +8,13 @@
 
 #import "KeyboardViewController.h"
 
-#import "AAKShared.h"
 #import "AAKKeyboardView.h"
 #import "AAKNotifyView.h"
 
 @interface KeyboardViewController () <AAKKeyboardViewDelegate> {
-	AAKKeyboardView *_keyboardView;
-	NSLayoutConstraint *_heightConstraint;
-	AAKNotifyView				*_notifyView;
+	AAKKeyboardView		*_keyboardView;
+	NSLayoutConstraint	*_heightConstraint;
+	AAKNotifyView		*_notifyView;
 }
 @end
 
@@ -30,7 +29,12 @@
 	DNSLogMethod
 	self = [super init];
 	if (self) {
-		[AAKKeyboardDataManager defaultManager];
+		if ([AAKCoreDataStack isOpenAccessGranted]) {
+			[AAKCoreDataStack setupMagicalRecordForAppGroupsContainer];
+		}
+		else {
+			[AAKCoreDataStack setupMagicalRecordForLocal];
+		}
 	}
 	return self;
 }
@@ -46,7 +50,6 @@
  * ビューコントローラのビューがlayoutSubviewsを実行した直後に呼ばれる，
  **/
 - (void)viewDidLayoutSubviews {
-	DNSLogMethod
 	[super viewDidLayoutSubviews];
 	
 	// キーボードビューをセットアップ
@@ -139,9 +142,14 @@
 																	  options:0 metrics:0 views:views]];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewDidCopyAAImageToPasteboard:) name:AAKTextViewDidCopyAAImageToPasteboard object:nil];
+	
+	if (![AAKCoreDataStack isOpenAccessGranted]) {
+		[self showNotifyWithMessage:NSLocalizedString(@"To use full functions,\nturn on full access in settings.", nil) duration:2];
+	}
 }
 
-- (void)textViewDidCopyAAImageToPasteboard:(NSNotification*)notification {
+- (void)showNotifyWithMessage:(NSString*)message duration:(CGFloat)duration {
+	_notifyView.label.text = message;
 	_notifyView.hidden = NO;
 	_notifyView.alpha = 0;
 	[UIView animateWithDuration:0.4
@@ -149,7 +157,7 @@
 						 _notifyView.alpha = 1;
 					 }
 					 completion:^(BOOL finished) {
-						 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+						 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 							 [UIView animateWithDuration:0.4
 											  animations:^{
 												  _notifyView.alpha = 0;
@@ -157,6 +165,15 @@
 											  }];
 						 });
 					 }];
+}
+
+- (void)textViewDidCopyAAImageToPasteboard:(NSNotification*)notification {
+	if ([AAKCoreDataStack isOpenAccessGranted]) {
+		[self showNotifyWithMessage:NSLocalizedString(@"Now, paste AA as image\nin a message", nil) duration:2];
+	}
+	else {
+		[self showNotifyWithMessage:NSLocalizedString(@"To copy AA as image,\nturn on full access in settings.", nil) duration:2];
+	}
 }
 
 - (void)viewDidLoad {

@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 
-#import "AAKShared.h"
+#import "AAKASCIIArtGroup.h"
 
 @interface AppDelegate ()
 
@@ -23,27 +23,36 @@
 	UINavigationController *nav = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"AAKRegisterNavigationController"];
 	AAKRegisterViewController *con = (AAKRegisterViewController*)nav.topViewController;
 	
-	AAKASCIIArt *asciiart = [[AAKASCIIArt alloc] init];
-	
-	asciiart.text = decodedString;
-	
-	con.asciiart = asciiart;
-	
-	[self.window.rootViewController presentViewController:nav animated:YES completion:nil];
+	[self.window.rootViewController presentViewController:nav animated:YES completion:^{
+		con.AATextView.text = decodedString;
+	}];
 	
 	return YES;
 }
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+-(void)applicationWillEnterForeground:(UIApplication *)application {
+	[AAKCoreDataStack setupMagicalRecordForAppGroupsContainer];
+}
 
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+	[MagicalRecord cleanUp];
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application {
+	[MagicalRecord cleanUp];
+}
+
+- (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+	[AAKCoreDataStack setupMagicalRecordForAppGroupsContainer];
+	return YES;
+}
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 #if TARGET_IPHONE_SIMULATOR
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
 	NSLog(@"%@", documentsDirectory);
 #endif
-	
-	[AAKKeyboardDataManager defaultManager];
-	
 	return YES;
 }
 

@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@class AAKASCIIArtGroup;
 @class AAKToolbarCell;
 
 @protocol AAKToolbarCellDelegate <NSObject>

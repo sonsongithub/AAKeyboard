@@ -9,10 +9,10 @@
 #import "AAKEditViewController.h"
 
 #import "AAKHelper.h"
+#import "AAKSelectGroupViewController.h"
+
 #import "AAKASCIIArt.h"
 #import "AAKASCIIArtGroup.h"
-#import "AAKSelectGroupViewController.h"
-#import "AAKKeyboardDataManager.h"
 
 @interface AAKEditViewController () <UITableViewDataSource, UITableViewDelegate>
 @end
@@ -28,28 +28,31 @@ UIView *topView(UIView *current) {
 
 @implementation AAKEditViewController
 
+- (void)setGroup:(AAKASCIIArtGroup *)group {
+	_group = group;
+	[_groupTableView reloadData];
+}
+
 #pragma mark - Instance method
 
-/**
- * セッター．アスキーアートが更新された時にグループの選択UIを更新するために実装．
- * @param asciiart アスキーアートオブジェクト．
- **/
-- (void)setAsciiart:(AAKASCIIArt *)art {
-	_asciiart = art;
-	[_groupTableView reloadData];
+- (CGFloat)getSpaceKeyboardRect:(CGRect)keyboardRect {
+#ifndef TARGET_IS_EXTENSION
+	UIView *rootView = [[UIApplication sharedApplication] keyWindow];
+	CGRect rect = [rootView convertRect:_AATextView.frame fromView:self.view];
+#else
+	UIView *rootView = topView(self.view);
+	CGRect rect = [rootView convertRect:_AATextView.frame fromView:self.view];
+	UIScreen *mainScreen = [UIScreen mainScreen];
+	rect.origin.x += floor((mainScreen.bounds.size.width - rootView.bounds.size.width)/2);
+	rect.origin.y += floor((mainScreen.bounds.size.height - rootView.bounds.size.height)/2);
+#endif
+	CGRect intersected = CGRectIntersection(keyboardRect, rect);
+	return intersected.size.height;
 }
 
-/**
- * セッター．アスキーアートが更新された時にグループの選択UIを更新するために実装．
- * @param group アスキーアートのグループオブジェクト．
- **/
-- (void)setGroup:(AAKASCIIArtGroup *)group {
-	_asciiart.group = group;
-	[_groupTableView reloadData];
-}
-
-- (AAKASCIIArtGroup*)group {
-	return _asciiart.group;
+- (void)keyboardWillChangeFrameNotification:(NSNotification*)notification {
+	CGRect rect = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+	_bottomTextViewMargin.constant = [self getSpaceKeyboardRect:rect];
 }
 
 #pragma mark - IBAction
@@ -59,8 +62,11 @@ UIView *topView(UIView *current) {
  * @param sender メッセージの送信元オブジェクト．
  **/
 - (IBAction)save:(id)sender {
-	_asciiart.text = _AATextView.text;
-	[[AAKKeyboardDataManager defaultManager] updateASCIIArt:_asciiart];
+	self.asciiart.text = _AATextView.text;
+	self.asciiart.group = self.group;
+	[self.asciiart updateLastUsedTime];
+	[self.asciiart updateRatio];
+	[[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
 	[[NSNotificationCenter defaultCenter] postNotificationName:AAKKeyboardDataManagerDidUpdateNotification object:nil userInfo:nil];
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -97,30 +103,15 @@ UIView *topView(UIView *current) {
 	
 	// UIを更新
 	_AATextView.font = [UIFont fontWithName:@"Mona" size:10];
-	_AATextView.text = _asciiart.text;
+	_AATextView.text = self.asciiart.text;
+	
+	// デフォルトグループを取得
+	self.group = [AAKASCIIArtGroup defaultGroup];
+	
 	[_groupTableView reloadData];
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hoge:) name:UIKeyboardWillChangeFrameNotification object:nil];
-}
-
-- (CGFloat)getSpaceKeyboardRect:(CGRect)keyboardRect {
-#ifndef TARGET_IS_EXTENSION
-	UIView *rootView = [[UIApplication sharedApplication] keyWindow];
-	CGRect rect = [rootView convertRect:_AATextView.frame fromView:self.view];
-#else
-	UIView *rootView = topView(self.view);
-	CGRect rect = [rootView convertRect:_AATextView.frame fromView:self.view];
-	UIScreen *mainScreen = [UIScreen mainScreen];
-	rect.origin.x += floor((mainScreen.bounds.size.width - rootView.bounds.size.width)/2);
-	rect.origin.y += floor((mainScreen.bounds.size.height - rootView.bounds.size.height)/2);
-#endif
-	CGRect intersected = CGRectIntersection(keyboardRect, rect);
-	return intersected.size.height;
-}
-
-- (void)hoge:(NSNotification*)notification {
-	CGRect rect = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-	_bottomTextViewMargin.constant = [self getSpaceKeyboardRect:rect];
+	// キーボードのサイズ変更
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrameNotification:) name:UIKeyboardWillChangeFrameNotification object:nil];
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
@@ -143,7 +134,7 @@ UIView *topView(UIView *current) {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-	cell.detailTextLabel.text = _asciiart.group.title;
+	cell.detailTextLabel.text = self.group.title;
 	return cell;
 }
 
