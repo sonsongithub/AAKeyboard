@@ -102,6 +102,7 @@
 		14527C111A11DB870019F93A /* UIImage+keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 14527C0E1A11DB870019F93A /* UIImage+keyboard.m */; };
 		14527C141A1207F10019F93A /* AAKNotifyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14527C131A1207F10019F93A /* AAKNotifyView.m */; };
 		14527C161A1208030019F93A /* AAKNotifyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14527C151A1208030019F93A /* AAKNotifyView.xib */; };
+		14530C351A1BA0AE00B6BFFE /* AAKSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14530C341A1BA0AE00B6BFFE /* AAKSettingViewController.m */; };
 		146EEB5519ED5CDE0032F6DE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */; };
 		146EEB5619ED5CE50032F6DE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */; };
 		146EEB5719ED5CEF0032F6DE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */; };
@@ -313,6 +314,8 @@
 		14527C121A1207F10019F93A /* AAKNotifyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKNotifyView.h; sourceTree = "<group>"; };
 		14527C131A1207F10019F93A /* AAKNotifyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKNotifyView.m; sourceTree = "<group>"; };
 		14527C151A1208030019F93A /* AAKNotifyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AAKNotifyView.xib; sourceTree = "<group>"; };
+		14530C331A1BA0AE00B6BFFE /* AAKSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKSettingViewController.h; sourceTree = "<group>"; };
+		14530C341A1BA0AE00B6BFFE /* AAKSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKSettingViewController.m; sourceTree = "<group>"; };
 		146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		14A5137E19EC68530098C02C /* register.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = register.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		14A5138119EC68530098C02C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -769,6 +772,8 @@
 				14B274DB1A0A0D83005BF3B1 /* AAKPreviewController.m */,
 				14FBD3AA19E21213005FC38B /* AppDelegate.h */,
 				14FBD3AB19E21213005FC38B /* AppDelegate.m */,
+				14530C331A1BA0AE00B6BFFE /* AAKSettingViewController.h */,
+				14530C341A1BA0AE00B6BFFE /* AAKSettingViewController.m */,
 				1402F1A01A0D29BF0000F269 /* Animation */,
 				1402F19F1A0D29A50000F269 /* UICollectionReusableView */,
 				14FBD3B019E21213005FC38B /* Main.storyboard */,
@@ -1097,6 +1102,7 @@
 				141528BA1A18585700EB80AC /* NSPersistentStore+MagicalRecord.m in Sources */,
 				14CB157C19EA328500D05E9C /* AAKToolbarHistoryCell.m in Sources */,
 				141528B11A18585600EB80AC /* NSManagedObjectContext+MagicalSaves.m in Sources */,
+				14530C351A1BA0AE00B6BFFE /* AAKSettingViewController.m in Sources */,
 				141528AE1A18585600EB80AC /* NSManagedObjectContext+MagicalRecord.m in Sources */,
 				14B274C11A0A0D6F005BF3B1 /* AAKRegisterViewController.m in Sources */,
 				141528D21A18585700EB80AC /* MagicalRecord.m in Sources */,
