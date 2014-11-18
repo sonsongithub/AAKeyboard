@@ -144,11 +144,11 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewDidCopyAAImageToPasteboard:) name:AAKTextViewDidCopyAAImageToPasteboard object:nil];
 	
 	if (![AAKCoreDataStack isOpenAccessGranted]) {
-		[self showNotifyWithMessage:NSLocalizedString(@"Please turn on \"full access\"\n in order to input other AAs.", nil)];
+		[self showNotifyWithMessage:NSLocalizedString(@"To use full functions,\nturn on full access in settings.", nil) duration:2];
 	}
 }
 
-- (void)showNotifyWithMessage:(NSString*)message {
+- (void)showNotifyWithMessage:(NSString*)message duration:(CGFloat)duration {
 	_notifyView.label.text = message;
 	_notifyView.hidden = NO;
 	_notifyView.alpha = 0;
@@ -157,7 +157,7 @@
 						 _notifyView.alpha = 1;
 					 }
 					 completion:^(BOOL finished) {
-						 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+						 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 							 [UIView animateWithDuration:0.4
 											  animations:^{
 												  _notifyView.alpha = 0;
@@ -168,7 +168,12 @@
 }
 
 - (void)textViewDidCopyAAImageToPasteboard:(NSNotification*)notification {
-	[self showNotifyWithMessage:NSLocalizedString(@"Now, paste AA as image,\nin a message", nil)];
+	if ([AAKCoreDataStack isOpenAccessGranted]) {
+		[self showNotifyWithMessage:NSLocalizedString(@"Now, paste AA as image\nin a message", nil) duration:2];
+	}
+	else {
+		[self showNotifyWithMessage:NSLocalizedString(@"To copy AA as image,\nturn on full access in settings.", nil) duration:2];
+	}
 }
 
 - (void)viewDidLoad {
