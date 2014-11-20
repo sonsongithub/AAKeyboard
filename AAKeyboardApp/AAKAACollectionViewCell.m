@@ -195,7 +195,7 @@ static NSInteger AAKCellButtonWidth = 96;						/** セルの複製，削除ボ�
 - (void)awakeFromNib {
 	[super awakeFromNib];
 
-#ifndef _DEBUG
+#if 1
 	[self.debugLabel removeFromSuperview];
 	self.debugLabel = nil;
 #endif

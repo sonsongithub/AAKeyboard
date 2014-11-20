@@ -19,7 +19,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qLy-UY-pmA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-567" y="-946"/>
+            <point key="canvasLocation" x="-639" y="-946"/>
         </scene>
         <!--AA List-->
         <scene sceneID="7ox-Rn-Nde">
@@ -42,16 +42,21 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="AA List" id="bOC-aV-MTB">
+                        <barButtonItem key="leftBarButtonItem" title="Help" id="3dm-5C-kaX">
+                            <connections>
+                                <segue destination="Z79-Qd-5o1" kind="presentation" modalPresentationStyle="formSheet" id="dU1-Bd-vIu"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Setting" id="887-C0-2df">
                             <connections>
-                                <segue destination="jJd-ke-GQn" kind="presentation" id="13l-2U-3uD"/>
+                                <segue destination="jJd-ke-GQn" kind="presentation" modalPresentationStyle="formSheet" id="13l-2U-3uD"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4mP-zJ-70F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="145" y="-946"/>
+            <point key="canvasLocation" x="107" y="-946"/>
         </scene>
         <!--Setting-->
         <scene sceneID="s1w-cl-srZ">
@@ -211,7 +216,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g4O-xz-es9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="821" y="-1798"/>
+            <point key="canvasLocation" x="1548" y="-1708"/>
         </scene>
         <!--License-->
         <scene sceneID="toT-vM-n5y">
@@ -228,7 +233,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LXJ-e4-WBl">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <mutableString key="text">*Included Software License and Copyrights
+                                <string key="text">*Included Software License and Copyrights
 
 *東雲フォントライセンス http://openlab.ring.gr.jp/efont/
 *モナーフォントライセンス http://monafont.sourceforge.net/
@@ -236,7 +241,7 @@
 このアーカイブにフォントデータ(mona.ttf)は，Public Domain で提供されています 。
 但し、日本に於いては現時点で著作権を放棄することは法律上不可能であり、AUTHORS に列挙されている作者がその権利を行使しないと宣言することで実質的な Public Domain であるとします。
 自由な改造、他フォーマットへの変換、組込み、再配布を行うことができます。同時に、これらはすべて完全に無保証です。
-</mutableString>
+</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -252,7 +257,49 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4IT-yt-dRZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1514" y="-1798"/>
+            <point key="canvasLocation" x="2285" y="-1708"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="aMD-Zi-o23">
+            <objects>
+                <navigationController id="Z79-Qd-5o1" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="sr4-K6-wlL">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="MmS-nb-bn2" kind="relationship" relationship="rootViewController" id="kV3-pN-zWj"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A2U-3t-EP0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="821" y="-2448"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="kWp-ZA-yNT">
+            <objects>
+                <viewController id="MmS-nb-bn2" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PYU-Ac-hUJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="8u1-NE-FAo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1fd-66-Rhi">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="zak-9b-Vfc">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="vIK-Ac-4qh">
+                            <connections>
+                                <segue destination="mj2-oN-gjA" kind="unwind" unwindAction="close:" id="KgL-HK-yWx"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZMj-O9-e31" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="mj2-oN-gjA" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1548" y="-2448"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="EeR-2J-c1m">
@@ -268,7 +315,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hBc-SB-aj2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="145" y="-1798"/>
+            <point key="canvasLocation" x="821" y="-1708"/>
         </scene>
         <!--Preview Controller-->
         <scene sceneID="OG4-w6-iUm">
@@ -373,7 +420,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BIf-kl-5lo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="145" y="488"/>
+            <point key="canvasLocation" x="107" y="488"/>
         </scene>
         <!--Register New AA-->
         <scene sceneID="tne-QT-ifu">

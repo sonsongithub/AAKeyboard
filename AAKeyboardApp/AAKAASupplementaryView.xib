@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="14B17" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
@@ -11,7 +11,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jjF-np-Ljh">
-                    <rect key="frame" x="1" y="1" width="497" height="42"/>
+                    <rect key="frame" x="0.0" y="1" width="499" height="42"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -21,9 +21,9 @@
             <color key="backgroundColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="jjF-np-Ljh" firstAttribute="top" secondItem="Rgq-bH-EtN" secondAttribute="top" constant="1" id="38T-Oi-bvK"/>
-                <constraint firstItem="jjF-np-Ljh" firstAttribute="leading" secondItem="Rgq-bH-EtN" secondAttribute="leading" constant="1" id="CZH-4i-rYY"/>
+                <constraint firstItem="jjF-np-Ljh" firstAttribute="leading" secondItem="Rgq-bH-EtN" secondAttribute="leading" id="CZH-4i-rYY"/>
                 <constraint firstAttribute="bottom" secondItem="jjF-np-Ljh" secondAttribute="bottom" constant="1" id="Jlw-oP-CW8"/>
-                <constraint firstAttribute="trailing" secondItem="jjF-np-Ljh" secondAttribute="trailing" constant="1" id="MfD-nM-CJu"/>
+                <constraint firstAttribute="trailing" secondItem="jjF-np-Ljh" secondAttribute="trailing" id="MfD-nM-CJu"/>
             </constraints>
             <connections>
                 <outlet property="label" destination="jjF-np-Ljh" id="9xv-11-Iqf"/>

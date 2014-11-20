@@ -24,6 +24,10 @@
 
 static NSString * const reuseIdentifier = @"Cell";
 
+- (IBAction)close:(UIStoryboardSegue*)segue {
+	
+}
+
 /**
  * 指定されたアスキーアートを含むセルを返す．
  * 見つからない場合は，nilを返す．
@@ -258,9 +262,31 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+	if (self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassRegular && self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular) {
+		if (collectionView.frame.size.width > collectionView.frame.size.height) {
+			CGFloat width = self.collectionView.frame.size.width / 6;
+			CGFloat height = 120;
+			return CGSizeMake(width, height);
+		}
+		else {
+			CGFloat width = self.collectionView.frame.size.width / 4;
+			CGFloat height = 120;
+			return CGSizeMake(width, height);
+		}
+	}
+	else {
+	}
 	CGFloat width = self.collectionView.frame.size.width / 2;
 	CGFloat height = width;
 	return CGSizeMake(width, height);
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+	[coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {
+	}
+								 completion:^(id<UIViewControllerTransitionCoordinatorContext> context) {
+									 [self.collectionView reloadData];
+								 }];
 }
 
 @end
