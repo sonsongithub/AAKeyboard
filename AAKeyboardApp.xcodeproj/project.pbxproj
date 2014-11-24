@@ -112,6 +112,8 @@
 		14A5139319EC85710098C02C /* UZCursorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CB155F19E935BB00D05E9C /* UZCursorView.m */; };
 		14A5139419EC85710098C02C /* UZLoupeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CB156119E935BB00D05E9C /* UZLoupeView.m */; };
 		14A5139519EC85710098C02C /* UZTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CB156319E935BB00D05E9C /* UZTextView.m */; };
+		14ADB61B1A23D76600DD7C87 /* AAKGroupRenameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14ADB61A1A23D76600DD7C87 /* AAKGroupRenameViewController.m */; };
+		14ADB61C1A23D76600DD7C87 /* AAKGroupRenameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14ADB61A1A23D76600DD7C87 /* AAKGroupRenameViewController.m */; };
 		14B2673E19E6BFD000C0321D /* AAKToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B2673D19E6BFD000C0321D /* AAKToolbar.m */; };
 		14B2674319E6BFE900C0321D /* AAKKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B2674119E6BFE900C0321D /* AAKKeyboardView.m */; };
 		14B2674A19E6CB2500C0321D /* AAKContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B2674919E6CB2500C0321D /* AAKContentCell.m */; };
@@ -321,6 +323,8 @@
 		14A5138119EC68530098C02C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14A5138519EC68530098C02C /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		14A5138F19EC75300098C02C /* extension_js.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = extension_js.js; sourceTree = "<group>"; };
+		14ADB6191A23D76600DD7C87 /* AAKGroupRenameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKGroupRenameViewController.h; sourceTree = "<group>"; };
+		14ADB61A1A23D76600DD7C87 /* AAKGroupRenameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKGroupRenameViewController.m; sourceTree = "<group>"; };
 		14B2673C19E6BFD000C0321D /* AAKToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKToolbar.h; sourceTree = "<group>"; };
 		14B2673D19E6BFD000C0321D /* AAKToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKToolbar.m; sourceTree = "<group>"; };
 		14B2674019E6BFE900C0321D /* AAKKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKKeyboardView.h; sourceTree = "<group>"; };
@@ -682,6 +686,8 @@
 				14B274AE1A0A0D6F005BF3B1 /* AAKSelectGroupViewController.m */,
 				14B274A61A0A0D6F005BF3B1 /* AAKCreateNewGroupViewController.h */,
 				14B274A71A0A0D6F005BF3B1 /* AAKCreateNewGroupViewController.m */,
+				14ADB6191A23D76600DD7C87 /* AAKGroupRenameViewController.h */,
+				14ADB61A1A23D76600DD7C87 /* AAKGroupRenameViewController.m */,
 			);
 			name = viewcontroller;
 			sourceTree = "<group>";
@@ -1083,6 +1089,7 @@
 				141528B01A18585600EB80AC /* NSManagedObjectContext+MagicalRecord.m in Sources */,
 				14B274C91A0A0D6F005BF3B1 /* AAKTextView.m in Sources */,
 				141B49591A192A7E00E7F877 /* AAKASCIIArtGroup.m in Sources */,
+				14ADB61C1A23D76600DD7C87 /* AAKGroupRenameViewController.m in Sources */,
 				14EE653E1A15ED6200FA0731 /* Model.xcdatamodeld in Sources */,
 				14A5139519EC85710098C02C /* UZTextView.m in Sources */,
 				14B274CC1A0A0D6F005BF3B1 /* NSParagraphStyle+keyboard.m in Sources */,
@@ -1136,6 +1143,7 @@
 				14530C351A1BA0AE00B6BFFE /* AAKSettingViewController.m in Sources */,
 				141528AE1A18585600EB80AC /* NSManagedObjectContext+MagicalRecord.m in Sources */,
 				14B274C11A0A0D6F005BF3B1 /* AAKRegisterViewController.m in Sources */,
+				14ADB61B1A23D76600DD7C87 /* AAKGroupRenameViewController.m in Sources */,
 				141528D21A18585700EB80AC /* MagicalRecord.m in Sources */,
 				14B2674A19E6CB2500C0321D /* AAKContentCell.m in Sources */,
 				14F6F38E1A100D8600BEE8E2 /* AAKToolbarFooterView.m in Sources */,

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14B23" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DB6-ec-K9M">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DB6-ec-K9M">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -76,7 +76,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="9" minValue="2" maxValue="16" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2N6-g0-FD7">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="9" minValue="2" maxValue="16" translatesAutoresizingMaskIntoConstraints="NO" id="2N6-g0-FD7">
                                 <rect key="frame" x="14" y="52" width="572" height="31"/>
                                 <connections>
                                     <action selector="didChangeSlider:" destination="BYZ-38-t0r" eventType="valueChanged" id="Oc0-WQ-x5G"/>
@@ -155,6 +155,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="hfo-PR-93K" kind="show" identifier="ToAAKGroupRenameViewController" id="Suv-ey-lY9"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pNS-bk-PVm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -218,6 +221,59 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xud-CV-zId" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3044" y="486"/>
+        </scene>
+        <!--Rename Group-->
+        <scene sceneID="kZ5-8z-YaU">
+            <objects>
+                <tableViewController id="hfo-PR-93K" customClass="AAKGroupRenameViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="0Xg-yn-dRc">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection id="Bjw-j0-JhT">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="44" id="1IX-8M-Cnj">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1IX-8M-Cnj" id="4IG-yZ-tR1">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="New group name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2s4-YK-1SI">
+                                                    <rect key="frame" x="8" y="1" width="584" height="41"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="2s4-YK-1SI" firstAttribute="leading" secondItem="4IG-yZ-tR1" secondAttribute="leading" constant="8" id="KDa-WL-q8x"/>
+                                                <constraint firstItem="2s4-YK-1SI" firstAttribute="top" secondItem="4IG-yZ-tR1" secondAttribute="top" constant="1" id="KPy-OA-cEN"/>
+                                                <constraint firstAttribute="bottom" secondItem="2s4-YK-1SI" secondAttribute="bottom" constant="1" id="Kyd-jn-Szj"/>
+                                                <constraint firstAttribute="trailing" secondItem="2s4-YK-1SI" secondAttribute="trailing" constant="8" id="pwI-gd-qlQ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="hfo-PR-93K" id="QDD-Dn-eTJ"/>
+                            <outlet property="delegate" destination="hfo-PR-93K" id="sGG-tS-QZf"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Rename Group" id="O8s-lf-cDJ">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="VUX-xX-8H6">
+                            <connections>
+                                <action selector="save:" destination="hfo-PR-93K" id="0MJ-MX-rq8"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="_renameField" destination="2s4-YK-1SI" id="5Es-zD-HGe"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yhb-6L-Cje" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2285" y="1232"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Pnw-N2-JdH">

@@ -9,6 +9,7 @@
 #import "AAKSelectGroupViewController.h"
 #import "AAKEditViewController.h"
 #import "AAKASCIIArtGroup.h"
+#import "AAKGroupRenameViewController.h"
 
 @interface AAKSelectGroupViewController () {
 	NSMutableArray *_groups;
@@ -18,14 +19,34 @@
 
 @implementation AAKSelectGroupViewController
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+	if ([segue.identifier isEqualToString:@"ToAAKGroupRenameViewController"]) {
+		AAKGroupRenameViewController *con = segue.destinationViewController;
+		NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+		AAKASCIIArtGroup *group = _groups[indexPath.row];
+		con.group = group;
+	}
+}
+
+- (IBAction)cancel:(id)sender {
+	[self dismissViewControllerAnimated:YES completion:^{
+	}];
+}
+
 - (void)viewDidLoad {
-    [super viewDidLoad];
-	_groups = [NSMutableArray arrayWithArray:[AAKASCIIArtGroup MR_findAll]];
+	[super viewDidLoad];
+	_groups = [NSMutableArray arrayWithArray:[AAKASCIIArtGroup MR_findAllSortedBy:@"order" ascending:YES]];
+	self.tableView.allowsSelectionDuringEditing = YES;
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDataManagerDidUpdateNotification:) name:AAKKeyboardDataManagerDidUpdateNotification object:nil];
+	
+	if (self.navigationController.viewControllers[0] == self) {
+		UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
+		self.navigationItem.leftBarButtonItem = button;
+	}
 }
 
 - (void)keyboardDataManagerDidUpdateNotification:(NSNotification*)notification {
-	_groups = [NSMutableArray arrayWithArray:[AAKASCIIArtGroup MR_findAll]];
+	_groups = [NSMutableArray arrayWithArray:[AAKASCIIArtGroup MR_findAllSortedBy:@"order" ascending:YES]];
 	[self.tableView reloadData];
 }
 
@@ -111,17 +132,35 @@
 	AAKASCIIArtGroup *group = _groups[indexPath.row];
 	cell.textLabel.text = group.title;
 	
+	// 通常時の右端のアクセサリ
 	if ([group isEqual:_editViewController.group])
 		cell.accessoryType = UITableViewCellAccessoryCheckmark;
 	else
 		cell.accessoryType = UITableViewCellAccessoryNone;
 	
+	// 編集時の右端のアクセサリ
+	if (group.type != AAKASCIIArtDefaultGroup)
+		cell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
+	else
+		cell.editingAccessoryType = UITableViewCellAccessoryNone;
+	
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	_editViewController.group = _groups[indexPath.row];
-	[self.navigationController popViewControllerAnimated:YES];
+	if (tableView.editing) {
+		AAKASCIIArtGroup *group = _groups[indexPath.row];
+		if (group.type != AAKASCIIArtDefaultGroup) {
+			[self performSegueWithIdentifier:@"ToAAKGroupRenameViewController" sender:self];
+		}
+		else {
+			[tableView deselectRowAtIndexPath:indexPath animated:YES];
+		}
+	}
+	else {
+		_editViewController.group = _groups[indexPath.row];
+		[self.navigationController popViewControllerAnimated:YES];
+	}
 }
 
 @end

@@ -11,5 +11,6 @@
 @interface AAKAASupplementaryView : UICollectionReusableView
 
 @property (nonatomic, strong) IBOutlet UILabel *label;
+@property (nonatomic, strong) IBOutlet UIButton *groupEditButton;
 
 @end
