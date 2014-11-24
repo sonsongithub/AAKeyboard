@@ -53,6 +53,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="O4B-Qe-w5U" kind="presentation" identifier="OpenAAKSelectGroupViewController" modalPresentationStyle="formSheet" id="oOC-Ok-6Q8"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4mP-zJ-70F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -420,7 +423,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BIf-kl-5lo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="107" y="488"/>
+            <point key="canvasLocation" x="107" y="1237"/>
         </scene>
         <!--Register New AA-->
         <scene sceneID="tne-QT-ifu">
@@ -477,7 +480,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="9" minValue="2" maxValue="16" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2N6-g0-FD7">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="9" minValue="2" maxValue="16" translatesAutoresizingMaskIntoConstraints="NO" id="2N6-g0-FD7">
                                 <rect key="frame" x="14" y="52" width="572" height="31"/>
                                 <connections>
                                     <action selector="didChangeSlider:" destination="BYZ-38-t0r" eventType="valueChanged" id="Oc0-WQ-x5G"/>
@@ -523,7 +526,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="821" y="488"/>
+            <point key="canvasLocation" x="821" y="1237"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="eeW-YD-pOV">
+            <objects>
+                <navigationController id="O4B-Qe-w5U" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yDw-bP-mF4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="sm6-r8-W3X" kind="relationship" relationship="rootViewController" id="QvQ-Kq-WNy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S3r-QA-SWb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="107" y="488"/>
         </scene>
         <!--Select Group-->
         <scene sceneID="Zdk-vG-HhJ">
@@ -555,6 +574,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="2J0-tg-joq" kind="show" identifier="ToAAKGroupRenameViewController" id="7iL-xI-dgf"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pNS-bk-PVm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -691,7 +713,7 @@
                                     <outlet property="delegate" destination="Hbq-Jc-XW8" id="82s-aX-fH1"/>
                                 </connections>
                             </tableView>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="9" minValue="2" maxValue="16" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8pP-1H-dU3">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="9" minValue="2" maxValue="16" translatesAutoresizingMaskIntoConstraints="NO" id="8pP-1H-dU3">
                                 <rect key="frame" x="14" y="52" width="572" height="31"/>
                                 <connections>
                                     <action selector="didChangeSlider:" destination="Hbq-Jc-XW8" eventType="valueChanged" id="8pe-VG-JEH"/>
@@ -738,12 +760,65 @@
             </objects>
             <point key="canvasLocation" x="1548" y="-240"/>
         </scene>
+        <!--Rename Group-->
+        <scene sceneID="tOs-Eu-RkH">
+            <objects>
+                <tableViewController id="2J0-tg-joq" customClass="AAKGroupRenameViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="LC8-y6-XOK">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection id="Xlk-2v-3Fy">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="44" id="h0i-7N-41b">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h0i-7N-41b" id="ssv-Em-IXv">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="New group name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z46-T6-edx">
+                                                    <rect key="frame" x="8" y="1" width="584" height="41"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="Z46-T6-edx" secondAttribute="bottom" constant="1" id="Q9H-ae-UUi"/>
+                                                <constraint firstItem="Z46-T6-edx" firstAttribute="leading" secondItem="ssv-Em-IXv" secondAttribute="leading" constant="8" id="duT-QB-FL2"/>
+                                                <constraint firstAttribute="trailing" secondItem="Z46-T6-edx" secondAttribute="trailing" constant="8" id="jU9-xs-IQc"/>
+                                                <constraint firstItem="Z46-T6-edx" firstAttribute="top" secondItem="ssv-Em-IXv" secondAttribute="top" constant="1" id="oDX-aP-EcW"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="2J0-tg-joq" id="wq9-Dl-46F"/>
+                            <outlet property="delegate" destination="2J0-tg-joq" id="C8M-qj-BFF"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Rename Group" id="K9g-6R-kkl">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="dQR-FG-7kg">
+                            <connections>
+                                <action selector="save:" destination="2J0-tg-joq" id="coi-iM-7A2"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="_renameField" destination="Z46-T6-edx" id="bWr-uz-xgL"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OI1-Zl-RUd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2285" y="1237"/>
+        </scene>
     </scenes>
     <resources>
         <image name="editIcon" width="32" height="32"/>
         <image name="photos" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="TvC-sY-SyO"/>
+        <segue reference="hLR-ag-K7X"/>
     </inferredMetricsTieBreakers>
 </document>

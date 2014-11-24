@@ -25,7 +25,10 @@
 static NSString * const reuseIdentifier = @"Cell";
 
 - (IBAction)close:(UIStoryboardSegue*)segue {
-	
+}
+
+- (IBAction)editGroup:(id)sender {
+	[self performSegueWithIdentifier:@"OpenAAKSelectGroupViewController" sender:nil];
 }
 
 /**
@@ -210,6 +213,7 @@ static NSString * const reuseIdentifier = @"Cell";
 																					withReuseIdentifier:@"AAKAASupplementaryView"
 																						   forIndexPath:indexPath];
 			headerView.label.text = collection.group.title;
+			[headerView.groupEditButton addTarget:self action:@selector(editGroup:) forControlEvents:UIControlEventTouchUpInside];
 			return headerView;
 		}
 		return nil;
