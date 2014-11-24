@@ -19,13 +19,14 @@
 @implementation AAKSelectGroupViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-	_groups = [NSMutableArray arrayWithArray:[AAKASCIIArtGroup MR_findAll]];
+	[super viewDidLoad];
+	_groups = [NSMutableArray arrayWithArray:[AAKASCIIArtGroup MR_findAllSortedBy:@"order" ascending:YES]];
+	self.tableView.allowsSelectionDuringEditing = YES;
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDataManagerDidUpdateNotification:) name:AAKKeyboardDataManagerDidUpdateNotification object:nil];
 }
 
 - (void)keyboardDataManagerDidUpdateNotification:(NSNotification*)notification {
-	_groups = [NSMutableArray arrayWithArray:[AAKASCIIArtGroup MR_findAll]];
+	_groups = [NSMutableArray arrayWithArray:[AAKASCIIArtGroup MR_findAllSortedBy:@"order" ascending:YES]];
 	[self.tableView reloadData];
 }
 

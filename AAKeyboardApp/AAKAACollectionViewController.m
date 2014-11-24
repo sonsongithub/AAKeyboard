@@ -61,7 +61,7 @@ static NSString * const reuseIdentifier = @"Cell";
  * AAKAAGroupForCollectionオブジェクトの配列ですべてのアスキーアートを列挙し，_groupsに保存する．
  **/
 - (void)updateCollections {
-	NSArray *temp = [AAKASCIIArtGroup MR_findAll];
+	NSArray *temp = [AAKASCIIArtGroup MR_findAllSortedBy:@"order" ascending:YES];
 	NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[temp count]];
 	for (AAKASCIIArtGroup *group in temp) {
 		NSArray *asciiarts = [AAKASCIIArt MR_findAllWithPredicate:[NSPredicate predicateWithFormat: @"group == %@", group]];
