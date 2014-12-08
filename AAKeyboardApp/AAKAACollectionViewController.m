@@ -267,7 +267,8 @@ static NSString * const reuseIdentifier = @"Cell";
 																					withReuseIdentifier:@"AAKAASupplementaryView"
 																						   forIndexPath:indexPath];
 			headerView.label.text = collection.group.title;
-			[headerView.groupEditButton addTarget:self action:@selector(editGroup:) forControlEvents:UIControlEventTouchUpInside];
+//			[headerView.groupAddButton addTarget:self action:@selector(editGroup:) forControlEvents:UIControlEventTouchUpInside];
+//			[headerView.groupAddButton addTarget:self action:@selector(editGroup:) forControlEvents:UIControlEventTouchUpInside];
 			return headerView;
 		}
 		return nil;
@@ -314,7 +315,7 @@ static NSString * const reuseIdentifier = @"Cell";
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
 	AAKAAGroupForCollection *collection = _groups[section];
 	if ([collection.asciiarts count] > 0) {
-		return CGSizeMake(320, 44);
+		return CGSizeMake(320, 50);
 	}
 	return CGSizeZero;
 }

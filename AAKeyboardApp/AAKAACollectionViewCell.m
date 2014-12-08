@@ -194,6 +194,10 @@ static NSInteger AAKCellButtonWidth = 96;						/** セルの複製，削除ボ�
 
 - (void)awakeFromNib {
 	[super awakeFromNib];
+	
+	UIImage *image = [UIImage imageNamed:@"AABackView"];
+	
+	self.backImageView.image = image;
 
 #if 1
 	[self.debugLabel removeFromSuperview];
