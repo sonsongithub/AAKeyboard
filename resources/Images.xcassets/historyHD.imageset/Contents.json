@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "delete.png"
+      "filename" : "historyHD.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "delete@2x.png"
+      "filename" : "historyHD@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "delete@3x.png"
+      "filename" : "historyHD@3x.png"
     }
   ],
   "info" : {
