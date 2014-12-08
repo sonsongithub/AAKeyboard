@@ -45,6 +45,8 @@
 								 previewController:(AAKPreviewController*)previewController {
 	// 画面全体のフレームを取得する．
 	CGRect containerViewFrame = [transitionContext containerView].frame;
+	
+	containerViewFrame = CGRectInset(containerViewFrame, 5, 5);
 
 	// aspect ratio
 	// コンテナビューとプレビューコントローラのサイズが同じなのでこれでよい
