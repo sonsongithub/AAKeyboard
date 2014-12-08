@@ -31,6 +31,26 @@ static NSString * const reuseIdentifier = @"Cell";
 	[self performSegueWithIdentifier:@"OpenAAKSelectGroupViewController" sender:nil];
 }
 
+- (IBAction)openGroupEditViewController:(id)sender {
+	UINavigationController *nav = (UINavigationController*)[self.storyboard instantiateViewControllerWithIdentifier:@"GroupEditNavigationController"];
+	
+	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+		nav.modalPresentationStyle = UIModalPresentationPopover;
+		nav.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+		nav.popoverPresentationController.barButtonItem = sender;
+		nav.popoverPresentationController.delegate = self;
+		[self presentViewController:nav animated:YES completion:nil];
+	}
+	else {
+		nav.modalPresentationStyle = UIModalPresentationCurrentContext;
+		[self presentViewController:nav animated:YES completion:nil];
+	}
+}
+
+- (IBAction)openSettingViewController:(id)sender {
+	[self performSegueWithIdentifier:@"OpenSettingNavigationController" sender:nil];
+}
+
 /**
  * 指定されたアスキーアートを含むセルを返す．
  * 見つからない場合は，nilを返す．
@@ -110,6 +130,11 @@ static NSString * const reuseIdentifier = @"Cell";
 	[self.collectionView registerNib:cellNib forCellWithReuseIdentifier:@"cvCell"];
 	UINib *nib = [UINib nibWithNibName:@"AAKAASupplementaryView" bundle:nil];
 	[self.collectionView registerNib:nib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"AAKAASupplementaryView"];
+	
+	// navigation bar buttons
+	UIBarButtonItem *list = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"list.png"] style:UIBarButtonItemStylePlain target:self action:@selector(openGroupEditViewController:)];
+	UIBarButtonItem *gear = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"gear.png"] style:UIBarButtonItemStylePlain target:self action:@selector(openSettingViewController:)];
+	self.navigationController.navigationBar.topItem.rightBarButtonItems = @[gear, list];
 	
 	[self updateCollections];
 }
