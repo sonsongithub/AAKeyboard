@@ -15,7 +15,7 @@
 #import "AAKAACollectionViewCell.h"
 #import "AAKPreviewController.h"
 
-@interface AAKAACollectionViewController () <AAKAACollectionViewCellDelegate, UIViewControllerTransitioningDelegate> {
+@interface AAKAACollectionViewController () <AAKAACollectionViewCellDelegate, UIViewControllerTransitioningDelegate, UIPopoverPresentationControllerDelegate> {
 	NSArray *_groups;	/** AAKAAGroupForCollectionオブジェクトの配列 */
 }
 @end
@@ -114,6 +114,23 @@ static NSString * const reuseIdentifier = @"Cell";
 	[self updateCollections];
 }
 
+#pragma mark -
+
+- (void)prepareForPopoverPresentation:(UIPopoverPresentationController *)popoverPresentationController {
+}
+
+- (BOOL)popoverPresentationControllerShouldDismissPopover:(UIPopoverPresentationController *)popoverPresentationController {
+	return YES;
+}
+
+- (void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController {
+}
+
+- (void)popoverPresentationController:(UIPopoverPresentationController *)popoverPresentationController
+		  willRepositionPopoverToRect:(inout CGRect *)rect
+							   inView:(inout UIView **)view {
+}
+
 #pragma mark - UIViewControllerTransitionDelegate
 
 - (UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented
@@ -140,12 +157,24 @@ static NSString * const reuseIdentifier = @"Cell";
  * @param cell メソッドをコールしたAAKAACollectionViewCellオブジェクト．
  **/
 - (void)didSelectCell:(AAKAACollectionViewCell*)cell {
-	AAKPreviewController *con = (AAKPreviewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"AAKPreviewController"];
+	UINavigationController *nav = (UINavigationController*)[self.storyboard instantiateViewControllerWithIdentifier:@"AAKPreviewNavigationController"];
+	AAKPreviewController *con = (AAKPreviewController*)nav.topViewController;
 	con.asciiart = cell.asciiart;
-	con.modalPresentationStyle = UIModalPresentationCustom;
-	con.transitioningDelegate = self;
 	
-	[self presentViewController:con animated:YES completion:nil];
+	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+		nav.modalPresentationStyle = UIModalPresentationPopover;
+		nav.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+		nav.popoverPresentationController.sourceRect = [self.view convertRect:cell.frame fromView:cell.superview];
+		nav.popoverPresentationController.sourceView = self.view;
+		nav.popoverPresentationController.delegate = self;
+		[self presentViewController:nav animated:YES completion:nil];
+	}
+	else {
+		nav.modalPresentationStyle = UIModalPresentationCustom;
+		nav.transitioningDelegate = self;
+		[self presentViewController:nav animated:YES completion:nil];
+	}
+	
 }
 
 /**

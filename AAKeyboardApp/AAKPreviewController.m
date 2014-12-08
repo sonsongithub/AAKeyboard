@@ -73,6 +73,16 @@
 
 #pragma mark - Override
 
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	self.navigationController.navigationBarHidden = YES;
+	self.navigationController.toolbarHidden = YES;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
+}
+
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -85,9 +95,8 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-	if ([segue.identifier isEqualToString:@"OpenAAKEditNavigationController"]) {
-		UINavigationController *nav = (UINavigationController*)segue.destinationViewController;
-		AAKEditViewController *vc = (AAKEditViewController*)nav.topViewController;
+	if ([segue.identifier isEqualToString:@"PushAAKEditController"]) {
+		AAKEditViewController *vc = (AAKEditViewController*)segue.destinationViewController;
 		vc.asciiart = self.asciiart;
 	}
 }

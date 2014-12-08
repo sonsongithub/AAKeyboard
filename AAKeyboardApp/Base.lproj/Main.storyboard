@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Kz7-TH-ldM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Kz7-TH-ldM">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -323,7 +323,7 @@
         <!--Preview Controller-->
         <scene sceneID="OG4-w6-iUm">
             <objects>
-                <viewController storyboardIdentifier="AAKPreviewController" id="6bA-Do-0CJ" customClass="AAKPreviewController" sceneMemberID="viewController">
+                <viewController id="6bA-Do-0CJ" customClass="AAKPreviewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lAJ-w0-1FP"/>
                         <viewControllerLayoutGuide type="bottom" id="4IR-HT-sky"/>
@@ -337,26 +337,26 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ya1-Nu-igY">
-                                <rect key="frame" x="548" y="548" width="32" height="32"/>
+                                <rect key="frame" x="548" y="548" width="24" height="24"/>
                                 <color key="backgroundColor" white="0.5" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="32" id="1pT-kq-BXq"/>
-                                    <constraint firstAttribute="height" constant="32" id="D9I-CT-LVO"/>
+                                    <constraint firstAttribute="width" constant="24" id="1pT-kq-BXq"/>
+                                    <constraint firstAttribute="height" constant="24" id="D9I-CT-LVO"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="editIcon">
+                                <state key="normal" backgroundImage="pen">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="xok-cl-QqD" kind="presentation" identifier="OpenAAKEditNavigationController" modalTransitionStyle="flipHorizontal" id="95G-MC-UQ3"/>
+                                    <segue destination="Hbq-Jc-XW8" kind="show" identifier="PushAAKEditController" id="1Xh-y1-2f2"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hAW-lw-gaM">
-                                <rect key="frame" x="20" y="548" width="32" height="32"/>
+                                <rect key="frame" x="20" y="548" width="24" height="24"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="32" id="3SL-Mn-SQa"/>
-                                    <constraint firstAttribute="height" constant="32" id="MoA-sd-0nH"/>
+                                    <constraint firstAttribute="width" constant="24" id="3SL-Mn-SQa"/>
+                                    <constraint firstAttribute="height" constant="24" id="MoA-sd-0nH"/>
                                 </constraints>
-                                <state key="normal" image="photos">
+                                <state key="normal" image="photoLibrary">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -368,11 +368,11 @@
                         <constraints>
                             <constraint firstItem="hAW-lw-gaM" firstAttribute="leading" secondItem="Ljy-z7-zrq" secondAttribute="leading" constant="20" id="f2W-wt-pbm"/>
                             <constraint firstItem="5HB-Xf-qhu" firstAttribute="top" secondItem="Ljy-z7-zrq" secondAttribute="top" id="hcA-l5-FhP"/>
-                            <constraint firstAttribute="trailing" secondItem="Ya1-Nu-igY" secondAttribute="trailing" constant="20" id="k3Z-kh-ju0"/>
+                            <constraint firstAttribute="trailing" secondItem="Ya1-Nu-igY" secondAttribute="trailing" constant="28" id="k3Z-kh-ju0"/>
                             <constraint firstItem="4IR-HT-sky" firstAttribute="top" secondItem="5HB-Xf-qhu" secondAttribute="bottom" id="meJ-QR-guM"/>
-                            <constraint firstItem="4IR-HT-sky" firstAttribute="top" secondItem="Ya1-Nu-igY" secondAttribute="bottom" constant="20" id="rFg-pd-tLC"/>
+                            <constraint firstItem="4IR-HT-sky" firstAttribute="top" secondItem="Ya1-Nu-igY" secondAttribute="bottom" constant="28" id="rFg-pd-tLC"/>
                             <constraint firstAttribute="trailing" secondItem="5HB-Xf-qhu" secondAttribute="trailing" id="scF-JU-UaZ"/>
-                            <constraint firstItem="4IR-HT-sky" firstAttribute="top" secondItem="hAW-lw-gaM" secondAttribute="bottom" constant="20" id="v2t-8I-1Of"/>
+                            <constraint firstItem="4IR-HT-sky" firstAttribute="top" secondItem="hAW-lw-gaM" secondAttribute="bottom" constant="28" id="v2t-8I-1Of"/>
                             <constraint firstItem="5HB-Xf-qhu" firstAttribute="leading" secondItem="Ljy-z7-zrq" secondAttribute="leading" id="yFM-PH-59d"/>
                         </constraints>
                     </view>
@@ -391,23 +391,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="glB-qA-LSY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="821" y="-940"/>
+            <point key="canvasLocation" x="1548" y="-946"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="WVd-tU-elE">
             <objects>
-                <navigationController storyboardIdentifier="AAKEditNavigationController" id="xok-cl-QqD" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="AAKPreviewNavigationController" id="xok-cl-QqD" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="zyl-yV-XBb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="Hbq-Jc-XW8" kind="relationship" relationship="rootViewController" id="eMy-gh-617"/>
+                        <segue destination="6bA-Do-0CJ" kind="relationship" relationship="rootViewController" id="sJ5-Wa-QWI"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wmn-9q-hzr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="821" y="-240"/>
+            <point key="canvasLocation" x="821" y="-946"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hmP-bk-uXG">
@@ -738,11 +738,6 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="Edit AA" id="ErX-k3-6Pi">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="6Y1-2O-g5U">
-                            <connections>
-                                <action selector="cancel:" destination="Hbq-Jc-XW8" id="fok-FP-5ud"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Save" style="done" id="807-jg-mUu">
                             <connections>
                                 <action selector="save:" destination="Hbq-Jc-XW8" id="fWd-s8-nQo"/>
@@ -815,10 +810,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="editIcon" width="32" height="32"/>
-        <image name="photos" width="32" height="32"/>
+        <image name="pen" width="24" height="24"/>
+        <image name="photoLibrary" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hLR-ag-K7X"/>
+        <segue reference="TvC-sY-SyO"/>
     </inferredMetricsTieBreakers>
 </document>
