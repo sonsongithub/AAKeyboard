@@ -17,6 +17,10 @@
 
 @implementation AAKPreviewController
 
++ (CGFloat)marginConstant {
+	return 30;
+}
+
 #pragma mark - IBAction
 
 - (IBAction)close:(id)sender {
@@ -89,6 +93,12 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	
+	_leftMarginConstraint.constant = [AAKPreviewController marginConstant];
+	_rightMarginConstraint.constant = [AAKPreviewController marginConstant];
+	_topMarginConstraint.constant = [AAKPreviewController marginConstant];
+	_bottomMarginConstraint.constant = [AAKPreviewController marginConstant];
+	
 	_textView.userInteractionEnabled = NO;
 	[self updateTextView];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDataManagerDidUpdateNotification:) name:AAKKeyboardDataManagerDidUpdateNotification object:nil];

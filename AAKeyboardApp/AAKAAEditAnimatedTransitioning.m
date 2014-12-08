@@ -46,7 +46,7 @@
 	// 画面全体のフレームを取得する．
 	CGRect containerViewFrame = [transitionContext containerView].frame;
 	
-	containerViewFrame = CGRectInset(containerViewFrame, 5, 5);
+	containerViewFrame = CGRectInset(containerViewFrame, [AAKPreviewController marginConstant], [AAKPreviewController marginConstant]);
 
 	// aspect ratio
 	// コンテナビューとプレビューコントローラのサイズが同じなのでこれでよい

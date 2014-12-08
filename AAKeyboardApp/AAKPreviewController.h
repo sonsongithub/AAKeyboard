@@ -12,7 +12,14 @@
 
 @interface AAKPreviewController : UIViewController
 @property (nonatomic, strong) IBOutlet AAKTextView *textView;
-@property (nonatomic, strong) IBOutlet NSLayoutConstraint *widthConstraint;
-@property (nonatomic, strong) IBOutlet NSLayoutConstraint *heightConstraint;
+
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint *topMarginConstraint;
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint *bottomMarginConstraint;
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint *rightMarginConstraint;
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint *leftMarginConstraint;
+
 @property (nonatomic, strong) AAKASCIIArt *asciiart;
+
++ (CGFloat)marginConstant;
+
 @end

@@ -333,7 +333,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5HB-Xf-qhu" customClass="AAKTextView">
-                                <rect key="frame" x="5" y="5" width="590" height="595"/>
+                                <rect key="frame" x="5" y="5" width="590" height="590"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ya1-Nu-igY">
@@ -369,7 +369,7 @@
                             <constraint firstItem="hAW-lw-gaM" firstAttribute="leading" secondItem="Ljy-z7-zrq" secondAttribute="leading" constant="20" id="f2W-wt-pbm"/>
                             <constraint firstItem="5HB-Xf-qhu" firstAttribute="top" secondItem="Ljy-z7-zrq" secondAttribute="top" constant="5" id="hcA-l5-FhP"/>
                             <constraint firstAttribute="trailing" secondItem="Ya1-Nu-igY" secondAttribute="trailing" constant="28" id="k3Z-kh-ju0"/>
-                            <constraint firstItem="4IR-HT-sky" firstAttribute="top" secondItem="5HB-Xf-qhu" secondAttribute="bottom" id="meJ-QR-guM"/>
+                            <constraint firstItem="4IR-HT-sky" firstAttribute="top" secondItem="5HB-Xf-qhu" secondAttribute="bottom" constant="5" id="meJ-QR-guM"/>
                             <constraint firstItem="4IR-HT-sky" firstAttribute="top" secondItem="Ya1-Nu-igY" secondAttribute="bottom" constant="28" id="rFg-pd-tLC"/>
                             <constraint firstAttribute="trailing" secondItem="5HB-Xf-qhu" secondAttribute="trailing" constant="5" id="scF-JU-UaZ"/>
                             <constraint firstItem="4IR-HT-sky" firstAttribute="top" secondItem="hAW-lw-gaM" secondAttribute="bottom" constant="28" id="v2t-8I-1Of"/>
@@ -386,7 +386,11 @@
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="Vuk-7m-Rao"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="bottomMarginConstraint" destination="meJ-QR-guM" id="Sv7-Zr-4ej"/>
+                        <outlet property="leftMarginConstraint" destination="yFM-PH-59d" id="f1g-BW-Cng"/>
+                        <outlet property="rightMarginConstraint" destination="scF-JU-UaZ" id="e4H-D9-USt"/>
                         <outlet property="textView" destination="5HB-Xf-qhu" id="VfY-Gy-WdA"/>
+                        <outlet property="topMarginConstraint" destination="hcA-l5-FhP" id="pMy-cX-NcB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="glB-qA-LSY" userLabel="First Responder" sceneMemberID="firstResponder"/>
