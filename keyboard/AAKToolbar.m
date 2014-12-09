@@ -267,7 +267,7 @@
 	NSDictionary *views = NSDictionaryOfVariableBindings(topBar);
 	topBar.translatesAutoresizingMaskIntoConstraints = NO;
 	[self addSubview:topBar];
-	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[topBar(==2)]-(>=0)-|"
+	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[topBar(==8)]-(>=0)-|"
 																 options:0 metrics:0 views:views]];
 	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[topBar(>=0)]-(==0)-|"
 																 options:0 metrics:0 views:views]];

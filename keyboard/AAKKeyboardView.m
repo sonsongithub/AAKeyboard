@@ -80,7 +80,7 @@
 	_collectionView.backgroundColor = [self cellBackgroundColor];
 	_collectionView.delegate = self;
 	_collectionView.dataSource = self;
-	_collectionView.contentInset = UIEdgeInsetsMake(0, -2, 0, -2);	// 端の線を常に表示させないためにヘッダとフッターを隠す
+	_collectionView.contentInset = UIEdgeInsetsMake(0, -8, 0, -8);	// 端の線を常に表示させないためにヘッダとフッターを隠す
 	[self addSubview:_collectionView];
 	
 	// supplementary
@@ -249,11 +249,11 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-	return CGSizeMake(2, _collectionView.frame.size.height);
+	return CGSizeMake(8, _collectionView.frame.size.height);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
-	return CGSizeMake(2, _collectionView.frame.size.height);
+	return CGSizeMake(8, _collectionView.frame.size.height);
 }
 
 @end

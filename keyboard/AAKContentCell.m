@@ -102,7 +102,7 @@
 
 - (void)layoutSubviews {
 	[super layoutSubviews];
-	_seperator.frame = CGRectMake(self.frame.size.width - 2, 0, 2, self.frame.size.height);
+	_seperator.frame = CGRectMake(self.frame.size.width - 8, 0, 8, self.frame.size.height);
 }
 
 - (id)initWithFrame:(CGRect)frame {
