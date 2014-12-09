@@ -50,15 +50,10 @@
 - (void)load;
 
 /**
- * キーボードを縦のときに合わせる．
- * ツールバーの高さやフォントサイズを変更する．
+ * キーボードのツールバーの高さやフォントサイズを変更する．
+ * @param toolbarHeight ツールバーの高さ．
+ * @param fontSize ツールバーのタイトルのフォントサイズ．
  **/
-- (void)setPortraitMode;
-
-/**
- * キーボードを縦のときに合わせる．
- * ツールバーの高さやフォントサイズを変更する．
- **/
-- (void)setLandscapeMode;
+- (void)setToolbarHeight:(CGFloat)toolbarHeight fontSize:(CGFloat)fontSize;
 
 @end

@@ -42,23 +42,14 @@
 }
 
 /**
- * キーボードを縦のときに合わせる．
- * ツールバーの高さやフォントサイズを変更する．
+ * キーボードのツールバーの高さやフォントサイズを変更する．
+ * @param toolbarHeight ツールバーの高さ．
+ * @param fontSize ツールバーのタイトルのフォントサイズ．
  **/
-- (void)setPortraitMode {
-	_toolbarHeightConstraint.constant = 48;
-	_toolbar.height = 48;
-	_toolbar.fontSize = 14;
-}
-
-/**
- * キーボードを縦のときに合わせる．
- * ツールバーの高さやフォントサイズを変更する．
- **/
-- (void)setLandscapeMode {
-	_toolbarHeightConstraint.constant = 30;
-	_toolbar.height = 30;
-	_toolbar.fontSize = 12;
+- (void)setToolbarHeight:(CGFloat)toolbarHeight fontSize:(CGFloat)fontSize {
+	_toolbarHeightConstraint.constant = toolbarHeight;
+	_toolbar.height = toolbarHeight;
+	_toolbar.fontSize = fontSize;
 }
 
 /**
