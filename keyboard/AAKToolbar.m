@@ -96,14 +96,25 @@
 		
 		_earthKey.backgroundColor = [self buttonBackgroundColor];
 		
-		if (_keyboardAppearance == UIKeyboardAppearanceDark) {
-			[_earthKey setImage:[UIImage imageNamed:@"earthHighlighted"] forState:UIControlStateNormal];
-			[_earthKey setImage:[UIImage imageNamed:@"earthHighlighted"] forState:UIControlStateHighlighted];
+		NSString *name = nil;
+		if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+			if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+				name = @"hglobalHD";
+			}
+			else {
+				name = @"globalHD";
+			}
 		}
 		else {
-			[_earthKey setImage:[UIImage imageNamed:@"earth"] forState:UIControlStateNormal];
-			[_earthKey setImage:[UIImage imageNamed:@"earth"] forState:UIControlStateHighlighted];
+			if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+				name = @"hglobal";
+			}
+			else {
+				name = @"global";
+			}
 		}
+		[_earthKey setImage:[UIImage imageNamed:name] forState:UIControlStateNormal];
+		[_earthKey setImage:[UIImage imageNamed:name] forState:UIControlStateHighlighted];
 		
 		UIImage *temp = [UIImage rightEdgeWithKeyboardAppearance:_keyboardAppearance];
 		[_earthKey setBackgroundImage:temp forState:UIControlStateNormal];
@@ -122,14 +133,26 @@
 		[_deleteKey setBackgroundImage:temp forState:UIControlStateNormal];
 		[_deleteKey setBackgroundImage:temp forState:UIControlStateHighlighted];
 		
-		if (_keyboardAppearance == UIKeyboardAppearanceDark) {
-			[_deleteKey setImage:[UIImage imageNamed:@"deleteHighlighted"] forState:UIControlStateNormal];
-			[_deleteKey setImage:[UIImage imageNamed:@"deleteHighlighted"] forState:UIControlStateHighlighted];
+		NSString *name = nil;
+		if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+			if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+				name = @"hdeleteHD";
+			}
+			else {
+				name = @"deleteHD";
+			}
 		}
 		else {
-			[_deleteKey setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
-			[_deleteKey setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateHighlighted];
+			if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+				name = @"hdelete";
+			}
+			else {
+				name = @"delete";
+			}
 		}
+		
+		[_deleteKey setImage:[UIImage imageNamed:name] forState:UIControlStateNormal];
+		[_deleteKey setImage:[UIImage imageNamed:name] forState:UIControlStateHighlighted];
 	}
 	[self addSubview:_earthKey];
 	[self addSubview:_deleteKey];
