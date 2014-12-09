@@ -78,7 +78,7 @@
 - (void)setGroup:(AAKASCIIArtGroup *)group {
 	_group = group;
 	_label.text = _group.title;
-	[_label sizeToFit];
+//	[_label sizeToFit];
 }
 
 /**
@@ -108,7 +108,7 @@
 	self.contentView.backgroundColor = [UIColor clearColor];
 	_label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
 	_label.textAlignment = NSTextAlignmentCenter;
-	_label.adjustsFontSizeToFitWidth = YES;
+//	_label.adjustsFontSizeToFitWidth = YES;
 	_label.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
 	[_label setFont:[UIFont systemFontOfSize:16]];
 	// 背景をセット
@@ -124,7 +124,8 @@
 - (void)layoutSubviews {
 	// タイトルラベルをセンタリング．
 	[super layoutSubviews];
-	_label.center = CGPointFloor(self.contentView.center);
+//	_label.center = CGPointFloor(self.contentView.center);
+	_label.frame = self.contentView.bounds;
 	_imageView.frame = self.contentView.bounds;
 }
 

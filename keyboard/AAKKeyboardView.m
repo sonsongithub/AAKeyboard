@@ -27,7 +27,7 @@
 		return [UIColor darkColorForDark];
 	}
 	else {
-		return [UIColor lightColorForDefault];
+		return [UIColor colorWithRed:207.0/255.0f green:212.0/255.0f blue:216.0/255.0f alpha:1];
 	}
 }
 
