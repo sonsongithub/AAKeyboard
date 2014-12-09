@@ -61,6 +61,7 @@ static NSInteger AAKCellButtonWidth = 96;						/** セルの複製，削除ボ�
 	DNSLogMethod
 	CGPoint translate = [gestureRecognizer locationInView:self];
 	_startPoint = translate;
+	[self.superview bringSubviewToFront:self];
 }
 
 /**
@@ -216,6 +217,9 @@ static NSInteger AAKCellButtonWidth = 96;						/** セルの複製，削除ボ�
 	// ボタンの大きさを０に修正しておく．
 	_duplicateButtonOnCellWidth.constant = 0;
 	_deleteButtonOnCellWidth.constant = 0;
+	
+	self.contentView.clipsToBounds = NO;
+	self.clipsToBounds = NO;
 }
 
 @end
