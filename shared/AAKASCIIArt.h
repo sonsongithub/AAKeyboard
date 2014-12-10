@@ -18,6 +18,8 @@
 @property (nonatomic, retain) NSString * text;
 @property (nonatomic, retain) AAKASCIIArtGroup *group;
 
+@property (nonatomic, assign) CGSize contentSize;
+
 - (void)updateLastUsedTime;
 
 - (void)updateRatio;

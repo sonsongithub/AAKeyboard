@@ -188,14 +188,22 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-	AAKASCIIArt *source = _asciiarts[indexPath.item];
-	CGFloat height = collectionView.frame.size.height;
-	CGFloat width = height * source.ratio;
+	
+	CGFloat height = _collectionView.frame.size.height / 2;
+	
+	AAKASCIIArt *asciiart = _asciiarts[indexPath.row];
+	CGFloat width = height * asciiart.ratio;
 	CGFloat constraintWidth = self.frame.size.width * 0.75;
 	if (width > constraintWidth) {
 		width = constraintWidth;
 	}
-	return CGSizeMake(floor(width), floor(height));
+	if (indexPath.row%2 == 1) {
+		AAKASCIIArt *prev = _asciiarts[indexPath.row-1];
+		CGFloat prevWidth = height * prev.ratio;
+		width = prevWidth;
+	}
+	
+	return CGSizeMake(width, height);
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
