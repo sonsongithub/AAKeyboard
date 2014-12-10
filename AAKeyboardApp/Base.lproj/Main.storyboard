@@ -335,6 +335,17 @@
                                 <rect key="frame" x="5" y="5" width="590" height="590"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eAA-ck-Eah">
+                                <rect key="frame" x="288" y="548" width="24" height="24"/>
+                                <color key="backgroundColor" white="0.5" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" id="Fza-xf-0Da"/>
+                                    <constraint firstAttribute="height" constant="24" id="q0J-bq-LVq"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="cloudUpload">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ya1-Nu-igY">
                                 <rect key="frame" x="548" y="548" width="24" height="24"/>
                                 <color key="backgroundColor" white="0.5" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -365,6 +376,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="4IR-HT-sky" firstAttribute="top" secondItem="eAA-ck-Eah" secondAttribute="bottom" constant="28" id="AAd-Ra-34y"/>
+                            <constraint firstAttribute="centerX" secondItem="eAA-ck-Eah" secondAttribute="centerX" id="FoJ-jS-Lrg"/>
                             <constraint firstItem="hAW-lw-gaM" firstAttribute="leading" secondItem="Ljy-z7-zrq" secondAttribute="leading" constant="20" id="f2W-wt-pbm"/>
                             <constraint firstItem="5HB-Xf-qhu" firstAttribute="top" secondItem="Ljy-z7-zrq" secondAttribute="top" constant="5" id="hcA-l5-FhP"/>
                             <constraint firstAttribute="trailing" secondItem="Ya1-Nu-igY" secondAttribute="trailing" constant="28" id="k3Z-kh-ju0"/>
@@ -813,6 +826,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="cloudUpload" width="26" height="25"/>
         <image name="gear" width="25" height="25"/>
         <image name="help" width="25" height="25"/>
         <image name="pen" width="24" height="24"/>
