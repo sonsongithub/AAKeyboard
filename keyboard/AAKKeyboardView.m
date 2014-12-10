@@ -17,6 +17,7 @@
 	UICollectionViewFlowLayout	*_collectionFlowLayout;
 	NSArray						*_asciiarts;
 	UIKeyboardAppearance		_keyboardAppearance;
+	NSInteger					_numberOfRow;
 }
 @end
 
@@ -143,6 +144,8 @@
 - (instancetype)initWithFrame:(CGRect)frame keyboardAppearance:(UIKeyboardAppearance)keyboardAppearance {
 	self = [super initWithFrame:frame];
 	if (self) {
+		_numberOfRow = 3;
+		
 		self.backgroundColor = [UIColor clearColor];
 		_keyboardAppearance = keyboardAppearance;
 		
@@ -188,8 +191,12 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+	CGFloat height = floor(_collectionView.frame.size.height / _numberOfRow);
 	
-	CGFloat height = _collectionView.frame.size.height / 2;
+	if (((_asciiarts.count - 1) / _numberOfRow) == (indexPath.item / _numberOfRow)) {
+		if (_asciiarts.count % _numberOfRow != 0)
+			height = (_collectionView.frame.size.height/(_asciiarts.count % _numberOfRow));
+	}
 	
 	AAKASCIIArt *asciiart = _asciiarts[indexPath.row];
 	CGFloat width = height * asciiart.ratio;
@@ -197,8 +204,8 @@
 	if (width > constraintWidth) {
 		width = constraintWidth;
 	}
-	if (indexPath.row%2 == 1) {
-		AAKASCIIArt *prev = _asciiarts[indexPath.row-1];
+	if (indexPath.row%_numberOfRow != 0) {
+		AAKASCIIArt *prev = _asciiarts[indexPath.row - indexPath.row%_numberOfRow];
 		CGFloat prevWidth = height * prev.ratio;
 		width = prevWidth;
 	}
@@ -224,7 +231,9 @@
 	CGFloat fontSize = 15;
 	AAKASCIIArt *source = _asciiarts[indexPath.item];
 	
-	cell.isTail = ((_asciiarts.count - 1) == indexPath.item);
+	cell.isTail = (indexPath.item/_numberOfRow == ((_asciiarts.count - 1)/_numberOfRow));
+	cell.isTop = (indexPath.item % _numberOfRow == 0);
+	
 	cell.keyboardAppearance = _keyboardAppearance;
 	NSParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyleWithFontSize:fontSize];
 	NSDictionary *attributes = @{NSForegroundColorAttributeName:[cell colorForAA], NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:[UIFont fontWithName:@"Mona" size:fontSize]};
