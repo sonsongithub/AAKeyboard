@@ -56,4 +56,9 @@
  **/
 - (void)setToolbarHeight:(CGFloat)toolbarHeight fontSize:(CGFloat)fontSize;
 
+/**
+ * AAのセルのサイズを計算する．
+ **/
+- (void)arrangeAsciiArtCells;
+
 @end

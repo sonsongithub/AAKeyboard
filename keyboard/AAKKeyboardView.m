@@ -133,6 +133,59 @@
 	else {
 		_asciiarts = [AAKASCIIArt MR_findAllSortedBy:@"lastUsedTime" ascending:NO withPredicate:[NSPredicate predicateWithFormat: @"group == %@", _toolbar.currentGroup]];
 	}
+	[self arrangeAsciiArtCells];
+}
+
+/**
+ * AAのセルのサイズを計算する．
+ **/
+- (void)arrangeAsciiArtCells {
+	NSInteger columns = (_asciiarts.count - 1) / _numberOfRow + 1;
+	
+	
+	for (int i = 0; i < columns; i++) {
+		if ( i < columns - 1) {
+			//
+			CGFloat height = floor(_collectionView.frame.size.height / _numberOfRow);
+			CGFloat maxWidth = 0;
+			CGFloat heightSum = 0;
+			for (int j = 0; j < _numberOfRow; j++) {
+				AAKASCIIArt *asciiart = _asciiarts[_numberOfRow * i + j];
+				CGFloat width = height * asciiart.ratio;
+				if (width > maxWidth)
+					maxWidth = width;
+				heightSum += height;
+			}
+			for (int j = 0; j < _numberOfRow; j++) {
+				AAKASCIIArt *asciiart = _asciiarts[_numberOfRow * i + j];
+				if (j == 0)
+					asciiart.contentSize = CGSizeMake(maxWidth, height + (_collectionView.frame.size.height - heightSum));
+				else
+					asciiart.contentSize = CGSizeMake(maxWidth, height);
+			}
+		}
+		else {
+			// 最終列
+			NSInteger remained = (_asciiarts.count % _numberOfRow == 0) ? _numberOfRow : (_asciiarts.count % _numberOfRow);
+			CGFloat height = floor(_collectionView.frame.size.height / remained);
+			CGFloat maxWidth = 0;
+			CGFloat heightSum = 0;
+			for (int j = 0; j < remained; j++) {
+				AAKASCIIArt *asciiart = _asciiarts[_numberOfRow * i + j];
+				CGFloat width = height * asciiart.ratio;
+				if (width > maxWidth)
+					maxWidth = width;
+				heightSum += height;
+			}
+			for (int j = 0; j < remained; j++) {
+				AAKASCIIArt *asciiart = _asciiarts[_numberOfRow * i + j];
+				if (j == 0)
+					asciiart.contentSize = CGSizeMake(maxWidth, height);// + (_collectionView.frame.size.height - heightSum));
+				else
+					asciiart.contentSize = CGSizeMake(maxWidth, height);
+			}
+		}
+	}
 }
 
 /**
@@ -144,7 +197,7 @@
 - (instancetype)initWithFrame:(CGRect)frame keyboardAppearance:(UIKeyboardAppearance)keyboardAppearance {
 	self = [super initWithFrame:frame];
 	if (self) {
-		_numberOfRow = 3;
+		_numberOfRow = 2;
 		
 		self.backgroundColor = [UIColor clearColor];
 		_keyboardAppearance = keyboardAppearance;
@@ -191,26 +244,8 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-	CGFloat height = floor(_collectionView.frame.size.height / _numberOfRow);
-	
-	if (((_asciiarts.count - 1) / _numberOfRow) == (indexPath.item / _numberOfRow)) {
-		if (_asciiarts.count % _numberOfRow != 0)
-			height = (_collectionView.frame.size.height/(_asciiarts.count % _numberOfRow));
-	}
-	
-	AAKASCIIArt *asciiart = _asciiarts[indexPath.row];
-	CGFloat width = height * asciiart.ratio;
-	CGFloat constraintWidth = self.frame.size.width * 0.75;
-	if (width > constraintWidth) {
-		width = constraintWidth;
-	}
-	if (indexPath.row%_numberOfRow != 0) {
-		AAKASCIIArt *prev = _asciiarts[indexPath.row - indexPath.row%_numberOfRow];
-		CGFloat prevWidth = height * prev.ratio;
-		width = prevWidth;
-	}
-	
-	return CGSizeMake(width, height);
+	AAKASCIIArt *asciiart = _asciiarts[indexPath.item];
+	return asciiart.contentSize;
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -232,7 +267,9 @@
 	AAKASCIIArt *source = _asciiarts[indexPath.item];
 	
 	cell.isTail = (indexPath.item/_numberOfRow == ((_asciiarts.count - 1)/_numberOfRow));
-	cell.isTop = (indexPath.item % _numberOfRow == 0);
+	
+	if (_numberOfRow > 1)
+		cell.isTop = (indexPath.item % _numberOfRow == 0);
 	
 	cell.keyboardAppearance = _keyboardAppearance;
 	NSParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyleWithFontSize:fontSize];

@@ -79,6 +79,7 @@
 	
 	_topEdgeSeperator = [[UIImageView alloc] initWithFrame:CGRectZero];
 	[self.contentView addSubview:_topEdgeSeperator];
+	_topEdgeSeperator.hidden = YES;
 	
 	// ジェスチャを設定
 	UILongPressGestureRecognizer * longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];

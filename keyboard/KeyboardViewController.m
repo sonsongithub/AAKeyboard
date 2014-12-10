@@ -167,7 +167,8 @@ typedef enum AAKUIOrientation_ {
 													multiplier:0.0
 													  constant:height];
 	[self.view addConstraint:_heightConstraint];
-
+	
+	[_keyboardView arrangeAsciiArtCells];
 	[_keyboardView load];
 }
 
@@ -226,6 +227,7 @@ typedef enum AAKUIOrientation_ {
 	if (![AAKCoreDataStack isOpenAccessGranted]) {
 		[self showNotifyWithMessage:NSLocalizedString(@"To use full functions,\nturn on full access in settings.", nil) duration:2];
 	}
+	
 }
 
 - (void)showNotifyWithMessage:(NSString*)message duration:(CGFloat)duration {
