@@ -31,6 +31,14 @@ static NSString * const reuseIdentifier = @"Cell";
 	[self performSegueWithIdentifier:@"OpenAAKSelectGroupViewController" sender:nil];
 }
 
+- (IBAction)registerNewAA:(id)sender {
+	UINavigationController *nav = (UINavigationController*)[self.storyboard instantiateViewControllerWithIdentifier:@"AAKRegisterNavigationController"];
+	[self presentViewController:nav animated:YES completion:nil];
+}
+
+- (IBAction)openCloud:(id)sender {
+}
+
 - (IBAction)openGroupEditViewController:(id)sender {
 	UINavigationController *nav = (UINavigationController*)[self.storyboard instantiateViewControllerWithIdentifier:@"GroupEditNavigationController"];
 	
@@ -267,8 +275,8 @@ static NSString * const reuseIdentifier = @"Cell";
 																					withReuseIdentifier:@"AAKAASupplementaryView"
 																						   forIndexPath:indexPath];
 			headerView.label.text = collection.group.title;
-//			[headerView.groupAddButton addTarget:self action:@selector(editGroup:) forControlEvents:UIControlEventTouchUpInside];
-//			[headerView.groupAddButton addTarget:self action:@selector(editGroup:) forControlEvents:UIControlEventTouchUpInside];
+			[headerView.groupAddButton addTarget:self action:@selector(registerNewAA:) forControlEvents:UIControlEventTouchUpInside];
+			[headerView.cloudAddButton addTarget:self action:@selector(openCloud:) forControlEvents:UIControlEventTouchUpInside];
 			return headerView;
 		}
 		return nil;
