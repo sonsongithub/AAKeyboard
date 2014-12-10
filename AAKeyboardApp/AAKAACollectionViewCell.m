@@ -11,6 +11,8 @@
 static NSInteger AAKSwipeDirectionThreadholdAsDegree = 20;		/** 斜めのスワイプを横方向へのスワイプと判定するための閾値 */
 static NSInteger AAKCellButtonWidth = 96;						/** セルの複製，削除ボタンの幅 */
 
+static NSString *AAKAACollectionViewCellWillTapNotification = @"AAKAACollectionViewCellWillTapNotification";
+
 @interface AAKAACollectionViewCell() <UIGestureRecognizerDelegate> {
 	CGPoint		_startPoint;	/** ジェスチャの開始点 */
 	CGFloat		_movement;		/** ジェスチャの移動量 */
@@ -50,6 +52,12 @@ static NSInteger AAKCellButtonWidth = 96;						/** セルの複製，削除ボ�
 						 animations:^{
 							 [_textBackView.superview layoutIfNeeded];
 						 }];
+	}
+}
+
+- (void)didCollectionViewCellWillTapNotification:(NSNotification*)notification {
+	if ([notification object] != self) {
+		[self closeAnimated:YES];
 	}
 }
 
@@ -154,6 +162,7 @@ static NSInteger AAKCellButtonWidth = 96;						/** セルの複製，削除ボ�
 			return NO;
 		}
 	}
+	[[NSNotificationCenter defaultCenter] postNotificationName:AAKAACollectionViewCellWillTapNotification object:self];
 	return YES;
 }
 
@@ -189,12 +198,15 @@ static NSInteger AAKCellButtonWidth = 96;						/** セルの複製，削除ボ�
 		[self closeAnimated:YES];
 	}
 	else {
+		[[NSNotificationCenter defaultCenter] postNotificationName:AAKAACollectionViewCellWillTapNotification object:self];
 		[_delegate didSelectCell:self];
 	}
 }
 
 - (void)awakeFromNib {
 	[super awakeFromNib];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didCollectionViewCellWillTapNotification:) name:AAKAACollectionViewCellWillTapNotification object:nil];
 	
 	UIImage *image = [UIImage imageNamed:@"AABackView"];
 	
