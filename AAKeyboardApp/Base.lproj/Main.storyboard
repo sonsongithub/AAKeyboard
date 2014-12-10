@@ -826,11 +826,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="cloudUpload" width="26" height="25"/>
-        <image name="gear" width="25" height="25"/>
-        <image name="help" width="25" height="25"/>
-        <image name="pen" width="24" height="24"/>
-        <image name="photoLibrary" width="25" height="25"/>
+        <image name="cloudUpload" width="32" height="32"/>
+        <image name="gear" width="32" height="32"/>
+        <image name="help" width="32" height="32"/>
+        <image name="pen" width="32" height="32"/>
+        <image name="photoLibrary" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="QvQ-Kq-WNy"/>

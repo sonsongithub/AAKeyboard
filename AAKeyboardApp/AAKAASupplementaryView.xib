@@ -33,9 +33,7 @@
                     <rect key="frame" x="405" y="14" width="32" height="32"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="32" id="6qZ-cd-TPA"/>
-                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="32" id="85f-ot-Ia8"/>
                         <constraint firstAttribute="width" constant="32" id="H01-XH-KCn"/>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="32" id="VLM-Fo-GH4"/>
                     </constraints>
                     <state key="normal" image="cloudDownload">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -62,12 +60,12 @@
                 <outlet property="groupAddButton" destination="55L-eb-X44" id="1JW-ek-2VH"/>
                 <outlet property="label" destination="375-8R-Vm7" id="fiY-yR-KHg"/>
             </connections>
-            <point key="canvasLocation" x="414" y="484"/>
+            <point key="canvasLocation" x="407" y="544"/>
         </collectionReusableView>
     </objects>
     <resources>
         <image name="AASectionBackView" width="21" height="21"/>
-        <image name="cloudDownload" width="26" height="26"/>
-        <image name="plus" width="21" height="21"/>
+        <image name="cloudDownload" width="32" height="32"/>
+        <image name="plus" width="32" height="32"/>
     </resources>
 </document>
