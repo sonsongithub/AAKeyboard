@@ -168,7 +168,12 @@ typedef enum AAKUIOrientation_ {
 													  constant:height];
 	[self.view addConstraint:_heightConstraint];
 	
-	[_keyboardView arrangeAsciiArtCells];
+	if (self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassRegular)
+		_keyboardView.numberOfRow = 2;
+	else
+		_keyboardView.numberOfRow = 1;
+	
+	[_keyboardView updateASCIIArtsForCurrentGroup];
 	[_keyboardView load];
 }
 

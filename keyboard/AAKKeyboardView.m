@@ -17,7 +17,6 @@
 	UICollectionViewFlowLayout	*_collectionFlowLayout;
 	NSArray						*_asciiarts;
 	UIKeyboardAppearance		_keyboardAppearance;
-	NSInteger					_numberOfRow;
 }
 @end
 
@@ -133,7 +132,6 @@
 	else {
 		_asciiarts = [AAKASCIIArt MR_findAllSortedBy:@"lastUsedTime" ascending:NO withPredicate:[NSPredicate predicateWithFormat: @"group == %@", _toolbar.currentGroup]];
 	}
-	[self arrangeAsciiArtCells];
 }
 
 /**
@@ -142,7 +140,8 @@
 - (void)arrangeAsciiArtCells {
 	NSInteger columns = (_asciiarts.count - 1) / _numberOfRow + 1;
 	
-	
+	CGFloat constraintWidth = self.frame.size.width * 0.5;
+
 	for (int i = 0; i < columns; i++) {
 		if ( i < columns - 1) {
 			//
@@ -152,6 +151,8 @@
 			for (int j = 0; j < _numberOfRow; j++) {
 				AAKASCIIArt *asciiart = _asciiarts[_numberOfRow * i + j];
 				CGFloat width = height * asciiart.ratio;
+				if (width > constraintWidth)
+					width = constraintWidth;
 				if (width > maxWidth)
 					maxWidth = width;
 				heightSum += height;
@@ -173,6 +174,8 @@
 			for (int j = 0; j < remained; j++) {
 				AAKASCIIArt *asciiart = _asciiarts[_numberOfRow * i + j];
 				CGFloat width = height * asciiart.ratio;
+				if (width > constraintWidth)
+					width = constraintWidth;
 				if (width > maxWidth)
 					maxWidth = width;
 				heightSum += height;
@@ -180,7 +183,7 @@
 			for (int j = 0; j < remained; j++) {
 				AAKASCIIArt *asciiart = _asciiarts[_numberOfRow * i + j];
 				if (j == 0)
-					asciiart.contentSize = CGSizeMake(maxWidth, height);// + (_collectionView.frame.size.height - heightSum));
+					asciiart.contentSize = CGSizeMake(maxWidth, height + (_collectionView.frame.size.height - heightSum));
 				else
 					asciiart.contentSize = CGSizeMake(maxWidth, height);
 			}
@@ -197,7 +200,7 @@
 - (instancetype)initWithFrame:(CGRect)frame keyboardAppearance:(UIKeyboardAppearance)keyboardAppearance {
 	self = [super initWithFrame:frame];
 	if (self) {
-		_numberOfRow = 2;
+		_numberOfRow = 1;
 		
 		self.backgroundColor = [UIColor clearColor];
 		_keyboardAppearance = keyboardAppearance;
@@ -207,8 +210,6 @@
 		[self prepareCollectionView];
 		
 		[self setupAutolayout];
-		
-		[self updateASCIIArtsForCurrentGroup];
 		
 		[self updateConstraints];
 	}
@@ -257,6 +258,9 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
+	if (view.frame.size.width > 0) {
+		[self arrangeAsciiArtCells];
+	}
 	return [_asciiarts count];
 }
 

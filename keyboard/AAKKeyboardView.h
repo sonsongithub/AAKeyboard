@@ -35,6 +35,7 @@
 
 @interface AAKKeyboardView : UIView
 @property (nonatomic, assign) id <AAKKeyboardViewDelegate> delegate;
+@property (nonatomic, assign) NSInteger numberOfRow;
 
 /**
  * AAKKeyboardViewクラスを初期化する．
@@ -60,5 +61,10 @@
  * AAのセルのサイズを計算する．
  **/
 - (void)arrangeAsciiArtCells;
+
+/**
+ * アスキーアートオブジェクトの配列を現在選択中のグループに従ってアップデートする．
+ **/
+- (void)updateASCIIArtsForCurrentGroup;
 
 @end
