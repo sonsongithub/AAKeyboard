@@ -161,7 +161,11 @@ static NSString * const reuseIdentifier = @"Cell";
 	UIBarButtonItem *gear = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"gear.png"] style:UIBarButtonItemStylePlain target:self action:@selector(openSettingViewController:)];
 	self.navigationController.navigationBar.topItem.rightBarButtonItems = @[gear, list];
 	
+	// データをCoreDataからフェッチ
 	[self updateCollections];
+	
+	// スプラッシュ用のビューを貼り付ける
+	[self showSplashView];
 }
 
 #pragma mark -
