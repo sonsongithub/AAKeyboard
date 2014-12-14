@@ -95,11 +95,28 @@ static NSString * const reuseIdentifier = @"Cell";
 	NSArray *temp = [AAKASCIIArtGroup MR_findAllSortedBy:@"order" ascending:YES];
 	NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[temp count]];
 	for (AAKASCIIArtGroup *group in temp) {
-		NSArray *asciiarts = [AAKASCIIArt MR_findAllWithPredicate:[NSPredicate predicateWithFormat: @"group == %@", group]];
+		NSArray *asciiarts = [AAKASCIIArt MR_findAllSortedBy:@"lastUsedTime" ascending:NO withPredicate:[NSPredicate predicateWithFormat: @"group == %@", group]];
 		AAKAAGroupForCollection *collection = [AAKAAGroupForCollection groupForCollectionWithGroup:group asciiarts:asciiarts];
 		[buf addObject:collection];
 	}
 	_groups = [NSArray arrayWithArray:buf];
+}
+
+/**
+ * LaunchScreenのスプラッシュをフェードアウトするためのビューを貼り付ける
+ **/
+- (void)showSplashView {
+	UINib *nib = [UINib nibWithNibName:@"LaunchScreen" bundle:nil];
+	UIView *view = [[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
+	[self.navigationController.view addSubview:view];
+	view.frame = view.superview.bounds;
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		[UIView animateWithDuration:0.3 animations:^{
+			view.alpha = 0;
+		} completion:^(BOOL finished) {
+			[view removeFromSuperview];
+		}];
+	});
 }
 
 #pragma mark - Notification
