@@ -107,12 +107,15 @@ UIView *topView(UIView *current) {
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
-	// UIを更新
+	// フォントとAAを設定
 	_AATextView.font = [UIFont fontWithName:@"Mona" size:10];
 	_AATextView.text = self.asciiart.text;
 	
-	// デフォルトグループを取得
-	self.group = [AAKASCIIArtGroup defaultGroup];
+	// グループを設定する
+	if (_asciiart)
+		self.group = _asciiart.group;
+	else
+		self.group = [AAKASCIIArtGroup defaultGroup];
 	
 	[_groupTableView reloadData];
 	
