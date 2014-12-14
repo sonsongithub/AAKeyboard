@@ -242,7 +242,7 @@ static NSString * const reuseIdentifier = @"Cell";
 	AAKASCIIArt *newASCIIArt = [AAKASCIIArt MR_createEntity];
 	newASCIIArt.text = obj.text;
 	newASCIIArt.group = obj.group;
-	[newASCIIArt updateLastUsedTime];
+	newASCIIArt.lastUsedTime = obj.lastUsedTime;
 	[newASCIIArt updateRatio];
 	[[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
 	
