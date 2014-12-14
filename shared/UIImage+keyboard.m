@@ -18,7 +18,7 @@
 	else {
 		temp = [UIImage imageNamed:@"rightEdge"];
 	}
-	return [temp stretchableImageWithLeftCapWidth:1 topCapHeight:1];
+	return [temp stretchableImageWithLeftCapWidth:2 topCapHeight:2];
 }
 
 + (UIImage*)leftEdgeWithKeyboardAppearance:(UIKeyboardAppearance)keyboardAppearance {
@@ -29,7 +29,7 @@
 	else {
 		temp = [UIImage imageNamed:@"leftEdge"];
 	}
-	return [temp stretchableImageWithLeftCapWidth:1 topCapHeight:1];
+	return [temp stretchableImageWithLeftCapWidth:2 topCapHeight:2];
 }
 
 + (UIImage*)topEdgeWithKeyboardAppearance:(UIKeyboardAppearance)keyboardAppearance {
@@ -40,7 +40,7 @@
 	else {
 		temp = [UIImage imageNamed:@"topEdge"];
 	}
-	return [temp stretchableImageWithLeftCapWidth:1 topCapHeight:1];
+	return [temp stretchableImageWithLeftCapWidth:0 topCapHeight:1];
 }
 
 @end

@@ -45,6 +45,8 @@
 								 previewController:(AAKPreviewController*)previewController {
 	// 画面全体のフレームを取得する．
 	CGRect containerViewFrame = [transitionContext containerView].frame;
+	
+	containerViewFrame = CGRectInset(containerViewFrame, [AAKPreviewController marginConstant], [AAKPreviewController marginConstant]);
 
 	// aspect ratio
 	// コンテナビューとプレビューコントローラのサイズが同じなのでこれでよい
@@ -119,11 +121,14 @@
  * @return 抽出したAAKPreviewControllerビューコントローラ．
  **/
 - (AAKPreviewController*)previewViewControllerFromViewController:(UIViewController*)viewController {
-	AAKPreviewController *previewController = nil;
-	if ([viewController isKindOfClass:[AAKPreviewController class]]) {
-		previewController = (AAKPreviewController*)viewController;
+	AAKPreviewController *outputViewController = nil;
+	if ([viewController isKindOfClass:[UINavigationController class]]) {
+		UINavigationController *nav = (UINavigationController*)viewController;
+		if ([nav.topViewController isKindOfClass:[AAKPreviewController class]]) {
+			outputViewController = (AAKPreviewController*)nav.topViewController;
+		}
 	}
-	return previewController;
+	return outputViewController;
 }
 
 /**

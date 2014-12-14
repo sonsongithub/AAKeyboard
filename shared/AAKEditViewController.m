@@ -68,7 +68,7 @@ UIView *topView(UIView *current) {
 	[self.asciiart updateRatio];
 	[[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
 	[[NSNotificationCenter defaultCenter] postNotificationName:AAKKeyboardDataManagerDidUpdateNotification object:nil userInfo:nil];
-	[self dismissViewControllerAnimated:YES completion:nil];
+	[self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 /**
@@ -88,6 +88,12 @@ UIView *topView(UIView *current) {
 }
 
 #pragma mark - Override
+
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	self.navigationController.navigationBarHidden = NO;
+	self.navigationController.toolbarHidden = YES;
+}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 	if ([segue.destinationViewController isKindOfClass:[AAKSelectGroupViewController class]]) {

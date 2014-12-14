@@ -17,6 +17,10 @@
 
 @implementation AAKPreviewController
 
++ (CGFloat)marginConstant {
+	return 30;
+}
+
 #pragma mark - IBAction
 
 - (IBAction)close:(id)sender {
@@ -73,21 +77,36 @@
 
 #pragma mark - Override
 
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	self.navigationController.navigationBarHidden = YES;
+	self.navigationController.toolbarHidden = YES;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
+}
+
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	
+	_leftMarginConstraint.constant = [AAKPreviewController marginConstant];
+	_rightMarginConstraint.constant = [AAKPreviewController marginConstant];
+	_topMarginConstraint.constant = [AAKPreviewController marginConstant];
+	_bottomMarginConstraint.constant = [AAKPreviewController marginConstant];
+	
 	_textView.userInteractionEnabled = NO;
 	[self updateTextView];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDataManagerDidUpdateNotification:) name:AAKKeyboardDataManagerDidUpdateNotification object:nil];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-	if ([segue.identifier isEqualToString:@"OpenAAKEditNavigationController"]) {
-		UINavigationController *nav = (UINavigationController*)segue.destinationViewController;
-		AAKEditViewController *vc = (AAKEditViewController*)nav.topViewController;
+	if ([segue.identifier isEqualToString:@"PushAAKEditController"]) {
+		AAKEditViewController *vc = (AAKEditViewController*)segue.destinationViewController;
 		vc.asciiart = self.asciiart;
 	}
 }

@@ -11,6 +11,8 @@
 static NSInteger AAKSwipeDirectionThreadholdAsDegree = 20;		/** 斜めのスワイプを横方向へのスワイプと判定するための閾値 */
 static NSInteger AAKCellButtonWidth = 96;						/** セルの複製，削除ボタンの幅 */
 
+static NSString *AAKAACollectionViewCellWillTapNotification = @"AAKAACollectionViewCellWillTapNotification";
+
 @interface AAKAACollectionViewCell() <UIGestureRecognizerDelegate> {
 	CGPoint		_startPoint;	/** ジェスチャの開始点 */
 	CGFloat		_movement;		/** ジェスチャの移動量 */
@@ -53,6 +55,12 @@ static NSInteger AAKCellButtonWidth = 96;						/** セルの複製，削除ボ�
 	}
 }
 
+- (void)didCollectionViewCellWillTapNotification:(NSNotification*)notification {
+	if ([notification object] != self) {
+		[self closeAnimated:YES];
+	}
+}
+
 /**
  * ジェスチャが開始されたタイミングの処理．
  * @param tapPoint ジェスチャ中のタップの位置．
@@ -61,6 +69,7 @@ static NSInteger AAKCellButtonWidth = 96;						/** セルの複製，削除ボ�
 	DNSLogMethod
 	CGPoint translate = [gestureRecognizer locationInView:self];
 	_startPoint = translate;
+	[self.superview bringSubviewToFront:self];
 }
 
 /**
@@ -153,6 +162,7 @@ static NSInteger AAKCellButtonWidth = 96;						/** セルの複製，削除ボ�
 			return NO;
 		}
 	}
+	[[NSNotificationCenter defaultCenter] postNotificationName:AAKAACollectionViewCellWillTapNotification object:self];
 	return YES;
 }
 
@@ -188,12 +198,19 @@ static NSInteger AAKCellButtonWidth = 96;						/** セルの複製，削除ボ�
 		[self closeAnimated:YES];
 	}
 	else {
+		[[NSNotificationCenter defaultCenter] postNotificationName:AAKAACollectionViewCellWillTapNotification object:self];
 		[_delegate didSelectCell:self];
 	}
 }
 
 - (void)awakeFromNib {
 	[super awakeFromNib];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didCollectionViewCellWillTapNotification:) name:AAKAACollectionViewCellWillTapNotification object:nil];
+	
+	UIImage *image = [UIImage imageNamed:@"AABackView"];
+	
+	self.backImageView.image = image;
 
 #if 1
 	[self.debugLabel removeFromSuperview];
@@ -212,6 +229,9 @@ static NSInteger AAKCellButtonWidth = 96;						/** セルの複製，削除ボ�
 	// ボタンの大きさを０に修正しておく．
 	_duplicateButtonOnCellWidth.constant = 0;
 	_deleteButtonOnCellWidth.constant = 0;
+	
+	self.contentView.clipsToBounds = NO;
+	self.clipsToBounds = NO;
 }
 
 @end

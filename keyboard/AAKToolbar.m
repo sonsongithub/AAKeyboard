@@ -96,14 +96,25 @@
 		
 		_earthKey.backgroundColor = [self buttonBackgroundColor];
 		
-		if (_keyboardAppearance == UIKeyboardAppearanceDark) {
-			[_earthKey setImage:[UIImage imageNamed:@"earthHighlighted"] forState:UIControlStateNormal];
-			[_earthKey setImage:[UIImage imageNamed:@"earthHighlighted"] forState:UIControlStateHighlighted];
+		NSString *name = nil;
+		if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+			if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+				name = @"hglobalHD";
+			}
+			else {
+				name = @"globalHD";
+			}
 		}
 		else {
-			[_earthKey setImage:[UIImage imageNamed:@"earth"] forState:UIControlStateNormal];
-			[_earthKey setImage:[UIImage imageNamed:@"earth"] forState:UIControlStateHighlighted];
+			if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+				name = @"hglobal";
+			}
+			else {
+				name = @"global";
+			}
 		}
+		[_earthKey setImage:[UIImage imageNamed:name] forState:UIControlStateNormal];
+		[_earthKey setImage:[UIImage imageNamed:name] forState:UIControlStateHighlighted];
 		
 		UIImage *temp = [UIImage rightEdgeWithKeyboardAppearance:_keyboardAppearance];
 		[_earthKey setBackgroundImage:temp forState:UIControlStateNormal];
@@ -122,14 +133,26 @@
 		[_deleteKey setBackgroundImage:temp forState:UIControlStateNormal];
 		[_deleteKey setBackgroundImage:temp forState:UIControlStateHighlighted];
 		
-		if (_keyboardAppearance == UIKeyboardAppearanceDark) {
-			[_deleteKey setImage:[UIImage imageNamed:@"deleteHighlighted"] forState:UIControlStateNormal];
-			[_deleteKey setImage:[UIImage imageNamed:@"deleteHighlighted"] forState:UIControlStateHighlighted];
+		NSString *name = nil;
+		if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+			if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+				name = @"hdeleteHD";
+			}
+			else {
+				name = @"deleteHD";
+			}
 		}
 		else {
-			[_deleteKey setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
-			[_deleteKey setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateHighlighted];
+			if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+				name = @"hdelete";
+			}
+			else {
+				name = @"delete";
+			}
 		}
+		
+		[_deleteKey setImage:[UIImage imageNamed:name] forState:UIControlStateNormal];
+		[_deleteKey setImage:[UIImage imageNamed:name] forState:UIControlStateHighlighted];
 	}
 	[self addSubview:_earthKey];
 	[self addSubview:_deleteKey];
@@ -220,7 +243,7 @@
 	_collectionView.backgroundColor = [self cellBackgroundColor];
 	_collectionView.delegate = self;
 	_collectionView.dataSource = self;
-	_collectionView.contentInset = UIEdgeInsetsMake(0, -2, 0, -2);	// 端の線を常に表示させないためにヘッダとフッターを隠す
+	_collectionView.contentInset = UIEdgeInsetsMake(0, -8, 0, -8);	// 端の線を常に表示させないためにヘッダとフッターを隠す
 	[self addSubview:_collectionView];
 	
 	// supplementary resources
@@ -244,7 +267,7 @@
 	NSDictionary *views = NSDictionaryOfVariableBindings(topBar);
 	topBar.translatesAutoresizingMaskIntoConstraints = NO;
 	[self addSubview:topBar];
-	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[topBar(==2)]-(>=0)-|"
+	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[topBar(==8)]-(>=0)-|"
 																 options:0 metrics:0 views:views]];
 	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[topBar(>=0)]-(==0)-|"
 																 options:0 metrics:0 views:views]];
@@ -329,8 +352,9 @@
 			}
 		}
 		
-		_height = 48;
-		_fontSize = 14;
+		_height = 48;		// dummyの初期値
+		_fontSize = 14;		// dummyの初期値
+		
 		[self prepareButton];
 		[self prepareCollectionView];
 		[self setupAutolayout];
@@ -457,11 +481,11 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-	return CGSizeMake(2, _height);
+	return CGSizeMake(8, _height);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
-	return CGSizeMake(2, _height);
+	return CGSizeMake(8, _height);
 }
 
 @end

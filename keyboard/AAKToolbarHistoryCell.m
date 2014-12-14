@@ -18,20 +18,40 @@
 #pragma mark - Instance method
 
 - (UIImage*)historyIcon {
-	if (self.keyboardAppearance == UIKeyboardAppearanceDark) {
-		return [UIImage imageNamed:@"historyHighlighted"];
+	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+		if (self.keyboardAppearance == UIKeyboardAppearanceDark) {
+			return [UIImage imageNamed:@"hhistoryHD"];
+		}
+		else {
+			return [UIImage imageNamed:@"historyHD"];
+		}
 	}
 	else {
-		return [UIImage imageNamed:@"history"];
+		if (self.keyboardAppearance == UIKeyboardAppearanceDark) {
+			return [UIImage imageNamed:@"hhistory"];
+		}
+		else {
+			return [UIImage imageNamed:@"history"];
+		}
 	}
 }
 
 - (UIImage*)highlightedHistoryIcon {
-	if (self.keyboardAppearance == UIKeyboardAppearanceDark) {
-		return [UIImage imageNamed:@"historyHighlighted"];
+	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+		if (self.keyboardAppearance == UIKeyboardAppearanceDark) {
+			return [UIImage imageNamed:@"hhistoryHD"];
+		}
+		else {
+			return [UIImage imageNamed:@"hhistoryHD"];
+		}
 	}
 	else {
-		return [UIImage imageNamed:@"historyHighlighted"];
+		if (self.keyboardAppearance == UIKeyboardAppearanceDark) {
+			return [UIImage imageNamed:@"hhistory"];
+		}
+		else {
+			return [UIImage imageNamed:@"hhistory"];
+		}
 	}
 }
 
@@ -57,7 +77,7 @@
 	[self setupVerticalSeperator];
 	self.backgroundColor = [UIColor clearColor];
 	self.contentView.backgroundColor = [UIColor clearColor];
-	_iconImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"history"]];
+	_iconImageView = [[UIImageView alloc] initWithImage:[self historyIcon]];
 	[self.contentView addSubview:_iconImageView];
 	self.selectedBackgroundView = [[UIView alloc] initWithFrame:self.frame];
 }

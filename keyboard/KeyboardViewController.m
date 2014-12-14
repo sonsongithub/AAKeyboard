@@ -11,6 +11,12 @@
 #import "AAKKeyboardView.h"
 #import "AAKNotifyView.h"
 
+typedef enum AAKUIOrientation_ {
+	AAKUIOrientationUnknown	= 0,
+	AAKUIPortrait			= 1,
+	AAKUILandscape			= 2,
+}AAKUIOrientation;
+
 @interface KeyboardViewController () <AAKKeyboardViewDelegate> {
 	AAKKeyboardView		*_keyboardView;
 	NSLayoutConstraint	*_heightConstraint;
@@ -47,6 +53,99 @@
 }
 
 /**
+ * キーボードの高さを返す
+ **/
+- (CGFloat)keyboardHeight {
+	
+	CGFloat smallFont = 16;
+	CGFloat largeFont = 18;
+	
+	AAKUIOrientation orientation = [self orientation];
+	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+		// iPad
+		[_keyboardView setToolbarHeight:54 fontSize:largeFont];
+		
+		if (orientation == AAKUIPortrait) {
+			return 264;
+		}
+		else {
+			return 352;
+		}
+	}
+	else {
+		CGRect screenBounds = [[UIScreen mainScreen] bounds];
+		CGFloat screenHeight = CGRectGetHeight(screenBounds);
+		if (orientation == AAKUIPortrait) {
+			if (screenHeight <= 480) {
+				// iPhone4 or prioir
+				[_keyboardView setToolbarHeight:54 fontSize:largeFont];
+				return 216;
+			}
+			else if (screenHeight <= 568) {
+				// iPhone5
+				[_keyboardView setToolbarHeight:54 fontSize:largeFont];
+				return 216;
+			}
+			else if (screenHeight <= 667) {
+				// iPhone6
+				[_keyboardView setToolbarHeight:47 fontSize:largeFont];
+				return 216;
+			}
+			else if (screenHeight <= 736) {
+				// iPhone6 plus
+				[_keyboardView setToolbarHeight:51 fontSize:largeFont];
+				return 226;
+			}
+			[_keyboardView setToolbarHeight:54 fontSize:largeFont];
+			return 216;
+		}
+		else if (orientation == AAKUILandscape) {
+			if (screenHeight <= 320) {
+				// iPhone5 or prioir
+				[_keyboardView setToolbarHeight:40 fontSize:smallFont];
+				return 162;
+			}
+			else if (screenHeight <= 375) {
+				// iPhone6
+				[_keyboardView setToolbarHeight:37 fontSize:smallFont];
+				return 162;
+			}
+			else if (screenHeight <= 414) {
+				// iPhone6 plus
+				[_keyboardView setToolbarHeight:37 fontSize:smallFont];
+				return 162;
+			}
+			[_keyboardView setToolbarHeight:54 fontSize:smallFont];
+			return 162;
+		}
+		else {
+			[_keyboardView setToolbarHeight:54 fontSize:smallFont];
+			return 216;
+		}
+	}
+}
+
+/**
+ * 回転方向を返す
+ **/
+- (AAKUIOrientation)orientation {
+	// このキーボードビューのサイズをautolayoutで指定する．
+	CGRect screenBounds = [[UIScreen mainScreen] bounds];
+	CGFloat screenWidth = CGRectGetWidth(screenBounds);
+	CGFloat screenHeight = CGRectGetHeight(screenBounds);
+	
+	// 方向を決める
+	if (screenWidth < screenHeight) {
+		// portrait
+		return AAKUIPortrait;
+	}
+	else {
+		// landscape
+		return AAKUILandscape;
+	}
+}
+
+/**
  * ビューコントローラのビューがlayoutSubviewsを実行した直後に呼ばれる，
  **/
 - (void)viewDidLayoutSubviews {
@@ -55,39 +154,26 @@
 	// キーボードビューをセットアップ
 	self.view.translatesAutoresizingMaskIntoConstraints = NO;
 	
-	// このキーボードビューのサイズをautolayoutで指定する．
-	CGRect screenBounds = [[UIScreen mainScreen] bounds];
-	CGFloat screenWidth = CGRectGetWidth(screenBounds);
-	CGFloat screenHeight = CGRectGetHeight(screenBounds);
-	
 	if (_heightConstraint)
 		[self.view removeConstraint:_heightConstraint];
 	
-	if (screenWidth < screenHeight) {
-		// 縦長の場合
-		_heightConstraint = [NSLayoutConstraint constraintWithItem:self.view
-														 attribute:NSLayoutAttributeHeight
-														 relatedBy:NSLayoutRelationEqual
-															toItem:nil
-														 attribute:NSLayoutAttributeNotAnAttribute
-														multiplier:0.0
-														  constant:216];
-		[self.view addConstraint:_heightConstraint];
-		[_keyboardView setPortraitMode];
-	}
-	else {
-		// 横長の場合
-		_heightConstraint = [NSLayoutConstraint constraintWithItem:self.view
-														 attribute:NSLayoutAttributeHeight
-														 relatedBy:NSLayoutRelationEqual
-															toItem:nil
-														 attribute:NSLayoutAttributeNotAnAttribute
-														multiplier:0.0
-														  constant:162];
-		[self.view addConstraint:_heightConstraint];
-		[_keyboardView setLandscapeMode];
-	}
+	CGFloat height = [self keyboardHeight];
 	
+	_heightConstraint = [NSLayoutConstraint constraintWithItem:self.view
+													 attribute:NSLayoutAttributeHeight
+													 relatedBy:NSLayoutRelationEqual
+														toItem:nil
+													 attribute:NSLayoutAttributeNotAnAttribute
+													multiplier:0.0
+													  constant:height];
+	[self.view addConstraint:_heightConstraint];
+	
+	if (self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassRegular)
+		_keyboardView.numberOfRow = 2;
+	else
+		_keyboardView.numberOfRow = 1;
+	
+	[_keyboardView updateASCIIArtsForCurrentGroup];
 	[_keyboardView load];
 }
 
@@ -146,6 +232,7 @@
 	if (![AAKCoreDataStack isOpenAccessGranted]) {
 		[self showNotifyWithMessage:NSLocalizedString(@"To use full functions,\nturn on full access in settings.", nil) duration:2];
 	}
+	
 }
 
 - (void)showNotifyWithMessage:(NSString*)message duration:(CGFloat)duration {

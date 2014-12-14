@@ -43,6 +43,7 @@
 @property (nonatomic, assign) IBOutlet UIButton *duplicateButtonOnCell;					/** 複製ボタン */
 @property (nonatomic, assign) IBOutlet UIButton *deleteButtonOnCell;					/** 削除ボタン */
 @property (nonatomic, assign) IBOutlet UILabel *debugLabel;								/** デバッグ用のラベル */
+@property (nonatomic, assign) IBOutlet UIImageView *backImageView;
 
 @property (nonatomic, assign) IBOutlet NSLayoutConstraint *leftMargin;					/** 背景のセルに対する左マージン */
 @property (nonatomic, assign) IBOutlet NSLayoutConstraint *rightMargin;					/** 背景のセルに対する右マージン */

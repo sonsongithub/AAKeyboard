@@ -28,7 +28,7 @@
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" id="vEr-kW-Jw9">
                         <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.83529411764705885" green="0.85098039215686272" blue="0.87450980392156863" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ZPP-fa-9ca">
                             <size key="itemSize" width="50" height="50"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -42,14 +42,14 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="AA List" id="bOC-aV-MTB">
-                        <barButtonItem key="leftBarButtonItem" title="Help" id="3dm-5C-kaX">
+                        <barButtonItem key="leftBarButtonItem" image="help" id="3dm-5C-kaX">
                             <connections>
                                 <segue destination="Z79-Qd-5o1" kind="presentation" modalPresentationStyle="formSheet" id="dU1-Bd-vIu"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Setting" id="887-C0-2df">
+                        <barButtonItem key="rightBarButtonItem" image="gear" id="887-C0-2df">
                             <connections>
-                                <segue destination="jJd-ke-GQn" kind="presentation" modalPresentationStyle="formSheet" id="13l-2U-3uD"/>
+                                <segue destination="jJd-ke-GQn" kind="presentation" identifier="OpenSettingNavigationController" modalPresentationStyle="formSheet" id="13l-2U-3uD"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -278,10 +278,10 @@
             </objects>
             <point key="canvasLocation" x="821" y="-2448"/>
         </scene>
-        <!--View Controller-->
+        <!--Help View Controller-->
         <scene sceneID="kWp-ZA-yNT">
             <objects>
-                <viewController id="MmS-nb-bn2" sceneMemberID="viewController">
+                <viewController id="MmS-nb-bn2" customClass="AAKHelpViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PYU-Ac-hUJ"/>
                         <viewControllerLayoutGuide type="bottom" id="8u1-NE-FAo"/>
@@ -294,13 +294,12 @@
                     <navigationItem key="navigationItem" id="zak-9b-Vfc">
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="vIK-Ac-4qh">
                             <connections>
-                                <segue destination="mj2-oN-gjA" kind="unwind" unwindAction="close:" id="KgL-HK-yWx"/>
+                                <action selector="close:" destination="MmS-nb-bn2" id="iqe-Uy-Ptg"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZMj-O9-e31" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="mj2-oN-gjA" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1548" y="-2448"/>
         </scene>
@@ -323,7 +322,7 @@
         <!--Preview Controller-->
         <scene sceneID="OG4-w6-iUm">
             <objects>
-                <viewController storyboardIdentifier="AAKPreviewController" id="6bA-Do-0CJ" customClass="AAKPreviewController" sceneMemberID="viewController">
+                <viewController id="6bA-Do-0CJ" customClass="AAKPreviewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lAJ-w0-1FP"/>
                         <viewControllerLayoutGuide type="bottom" id="4IR-HT-sky"/>
@@ -333,30 +332,41 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5HB-Xf-qhu" customClass="AAKTextView">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="5" y="5" width="590" height="590"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eAA-ck-Eah">
+                                <rect key="frame" x="284" y="540" width="32" height="32"/>
+                                <color key="backgroundColor" white="0.5" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="32" id="Fza-xf-0Da"/>
+                                    <constraint firstAttribute="height" constant="32" id="q0J-bq-LVq"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="cloudUpload">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ya1-Nu-igY">
-                                <rect key="frame" x="548" y="548" width="32" height="32"/>
+                                <rect key="frame" x="540" y="540" width="32" height="32"/>
                                 <color key="backgroundColor" white="0.5" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="32" id="1pT-kq-BXq"/>
                                     <constraint firstAttribute="height" constant="32" id="D9I-CT-LVO"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="editIcon">
+                                <state key="normal" backgroundImage="pen">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="xok-cl-QqD" kind="presentation" identifier="OpenAAKEditNavigationController" modalTransitionStyle="flipHorizontal" id="95G-MC-UQ3"/>
+                                    <segue destination="Hbq-Jc-XW8" kind="show" identifier="PushAAKEditController" id="1Xh-y1-2f2"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hAW-lw-gaM">
-                                <rect key="frame" x="20" y="548" width="32" height="32"/>
+                                <rect key="frame" x="20" y="540" width="32" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="32" id="3SL-Mn-SQa"/>
                                     <constraint firstAttribute="height" constant="32" id="MoA-sd-0nH"/>
                                 </constraints>
-                                <state key="normal" image="photos">
+                                <state key="normal" image="photoLibrary">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -366,14 +376,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="4IR-HT-sky" firstAttribute="top" secondItem="eAA-ck-Eah" secondAttribute="bottom" constant="28" id="AAd-Ra-34y"/>
+                            <constraint firstAttribute="centerX" secondItem="eAA-ck-Eah" secondAttribute="centerX" id="FoJ-jS-Lrg"/>
                             <constraint firstItem="hAW-lw-gaM" firstAttribute="leading" secondItem="Ljy-z7-zrq" secondAttribute="leading" constant="20" id="f2W-wt-pbm"/>
-                            <constraint firstItem="5HB-Xf-qhu" firstAttribute="top" secondItem="Ljy-z7-zrq" secondAttribute="top" id="hcA-l5-FhP"/>
-                            <constraint firstAttribute="trailing" secondItem="Ya1-Nu-igY" secondAttribute="trailing" constant="20" id="k3Z-kh-ju0"/>
-                            <constraint firstItem="4IR-HT-sky" firstAttribute="top" secondItem="5HB-Xf-qhu" secondAttribute="bottom" id="meJ-QR-guM"/>
-                            <constraint firstItem="4IR-HT-sky" firstAttribute="top" secondItem="Ya1-Nu-igY" secondAttribute="bottom" constant="20" id="rFg-pd-tLC"/>
-                            <constraint firstAttribute="trailing" secondItem="5HB-Xf-qhu" secondAttribute="trailing" id="scF-JU-UaZ"/>
-                            <constraint firstItem="4IR-HT-sky" firstAttribute="top" secondItem="hAW-lw-gaM" secondAttribute="bottom" constant="20" id="v2t-8I-1Of"/>
-                            <constraint firstItem="5HB-Xf-qhu" firstAttribute="leading" secondItem="Ljy-z7-zrq" secondAttribute="leading" id="yFM-PH-59d"/>
+                            <constraint firstItem="5HB-Xf-qhu" firstAttribute="top" secondItem="Ljy-z7-zrq" secondAttribute="top" constant="5" id="hcA-l5-FhP"/>
+                            <constraint firstAttribute="trailing" secondItem="Ya1-Nu-igY" secondAttribute="trailing" constant="28" id="k3Z-kh-ju0"/>
+                            <constraint firstItem="4IR-HT-sky" firstAttribute="top" secondItem="5HB-Xf-qhu" secondAttribute="bottom" constant="5" id="meJ-QR-guM"/>
+                            <constraint firstItem="4IR-HT-sky" firstAttribute="top" secondItem="Ya1-Nu-igY" secondAttribute="bottom" constant="28" id="rFg-pd-tLC"/>
+                            <constraint firstAttribute="trailing" secondItem="5HB-Xf-qhu" secondAttribute="trailing" constant="5" id="scF-JU-UaZ"/>
+                            <constraint firstItem="4IR-HT-sky" firstAttribute="top" secondItem="hAW-lw-gaM" secondAttribute="bottom" constant="28" id="v2t-8I-1Of"/>
+                            <constraint firstItem="5HB-Xf-qhu" firstAttribute="leading" secondItem="Ljy-z7-zrq" secondAttribute="leading" constant="5" id="yFM-PH-59d"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
@@ -386,28 +398,32 @@
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="Vuk-7m-Rao"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="bottomMarginConstraint" destination="meJ-QR-guM" id="Sv7-Zr-4ej"/>
+                        <outlet property="leftMarginConstraint" destination="yFM-PH-59d" id="f1g-BW-Cng"/>
+                        <outlet property="rightMarginConstraint" destination="scF-JU-UaZ" id="e4H-D9-USt"/>
                         <outlet property="textView" destination="5HB-Xf-qhu" id="VfY-Gy-WdA"/>
+                        <outlet property="topMarginConstraint" destination="hcA-l5-FhP" id="pMy-cX-NcB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="glB-qA-LSY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="821" y="-940"/>
+            <point key="canvasLocation" x="1548" y="-946"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="WVd-tU-elE">
             <objects>
-                <navigationController storyboardIdentifier="AAKEditNavigationController" id="xok-cl-QqD" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="AAKPreviewNavigationController" id="xok-cl-QqD" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="zyl-yV-XBb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="Hbq-Jc-XW8" kind="relationship" relationship="rootViewController" id="eMy-gh-617"/>
+                        <segue destination="6bA-Do-0CJ" kind="relationship" relationship="rootViewController" id="sJ5-Wa-QWI"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wmn-9q-hzr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="821" y="-240"/>
+            <point key="canvasLocation" x="821" y="-946"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hmP-bk-uXG">
@@ -531,7 +547,7 @@
         <!--Navigation Controller-->
         <scene sceneID="eeW-YD-pOV">
             <objects>
-                <navigationController id="O4B-Qe-w5U" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="GroupEditNavigationController" id="O4B-Qe-w5U" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="yDw-bP-mF4">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -569,7 +585,7 @@
                     <navigationItem key="navigationItem" title="Select Group" id="hsg-D1-gqr">
                         <barButtonItem key="rightBarButtonItem" title="Add" id="VbH-60-iED">
                             <connections>
-                                <segue destination="AlP-id-y7k" kind="presentation" modalTransitionStyle="flipHorizontal" id="vDG-SI-6q8"/>
+                                <segue destination="AlP-id-y7k" kind="presentation" id="vDG-SI-6q8"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -644,7 +660,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Pnw-N2-JdH">
             <objects>
-                <navigationController id="AlP-id-y7k" sceneMemberID="viewController">
+                <navigationController modalPresentationStyle="formSheet" id="AlP-id-y7k" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="infinite" id="wFP-Gv-Ggl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -738,11 +754,6 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="Edit AA" id="ErX-k3-6Pi">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="6Y1-2O-g5U">
-                            <connections>
-                                <action selector="cancel:" destination="Hbq-Jc-XW8" id="fok-FP-5ud"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Save" style="done" id="807-jg-mUu">
                             <connections>
                                 <action selector="save:" destination="Hbq-Jc-XW8" id="fWd-s8-nQo"/>
@@ -815,8 +826,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="editIcon" width="32" height="32"/>
-        <image name="photos" width="32" height="32"/>
+        <image name="cloudUpload" width="32" height="32"/>
+        <image name="gear" width="32" height="32"/>
+        <image name="help" width="32" height="32"/>
+        <image name="pen" width="32" height="32"/>
+        <image name="photoLibrary" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="hLR-ag-K7X"/>

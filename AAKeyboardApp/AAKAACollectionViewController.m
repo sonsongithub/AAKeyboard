@@ -14,8 +14,9 @@
 #import "AAKAAEditAnimatedTransitioning.h"
 #import "AAKAACollectionViewCell.h"
 #import "AAKPreviewController.h"
+#import "AAKDummyCollectionReusableView.h"
 
-@interface AAKAACollectionViewController () <AAKAACollectionViewCellDelegate, UIViewControllerTransitioningDelegate> {
+@interface AAKAACollectionViewController () <AAKAACollectionViewCellDelegate, UIViewControllerTransitioningDelegate, UIPopoverPresentationControllerDelegate> {
 	NSArray *_groups;	/** AAKAAGroupForCollectionオブジェクトの配列 */
 }
 @end
@@ -29,6 +30,34 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (IBAction)editGroup:(id)sender {
 	[self performSegueWithIdentifier:@"OpenAAKSelectGroupViewController" sender:nil];
+}
+
+- (IBAction)registerNewAA:(id)sender {
+	UINavigationController *nav = (UINavigationController*)[self.storyboard instantiateViewControllerWithIdentifier:@"AAKRegisterNavigationController"];
+	[self presentViewController:nav animated:YES completion:nil];
+}
+
+- (IBAction)openCloud:(id)sender {
+}
+
+- (IBAction)openGroupEditViewController:(id)sender {
+	UINavigationController *nav = (UINavigationController*)[self.storyboard instantiateViewControllerWithIdentifier:@"GroupEditNavigationController"];
+	
+	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+		nav.modalPresentationStyle = UIModalPresentationPopover;
+		nav.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+		nav.popoverPresentationController.barButtonItem = sender;
+		nav.popoverPresentationController.delegate = self;
+		[self presentViewController:nav animated:YES completion:nil];
+	}
+	else {
+		nav.modalPresentationStyle = UIModalPresentationCurrentContext;
+		[self presentViewController:nav animated:YES completion:nil];
+	}
+}
+
+- (IBAction)openSettingViewController:(id)sender {
+	[self performSegueWithIdentifier:@"OpenSettingNavigationController" sender:nil];
 }
 
 /**
@@ -67,11 +96,28 @@ static NSString * const reuseIdentifier = @"Cell";
 	NSArray *temp = [AAKASCIIArtGroup MR_findAllSortedBy:@"order" ascending:YES];
 	NSMutableArray *buf = [NSMutableArray arrayWithCapacity:[temp count]];
 	for (AAKASCIIArtGroup *group in temp) {
-		NSArray *asciiarts = [AAKASCIIArt MR_findAllWithPredicate:[NSPredicate predicateWithFormat: @"group == %@", group]];
+		NSArray *asciiarts = [AAKASCIIArt MR_findAllSortedBy:@"lastUsedTime" ascending:NO withPredicate:[NSPredicate predicateWithFormat: @"group == %@", group]];
 		AAKAAGroupForCollection *collection = [AAKAAGroupForCollection groupForCollectionWithGroup:group asciiarts:asciiarts];
 		[buf addObject:collection];
 	}
 	_groups = [NSArray arrayWithArray:buf];
+}
+
+/**
+ * LaunchScreenのスプラッシュをフェードアウトするためのビューを貼り付ける
+ **/
+- (void)showSplashView {
+	UINib *nib = [UINib nibWithNibName:@"LaunchScreen" bundle:nil];
+	UIView *view = [[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
+	[self.navigationController.view addSubview:view];
+	view.frame = view.superview.bounds;
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		[UIView animateWithDuration:0.3 animations:^{
+			view.alpha = 0;
+		} completion:^(BOOL finished) {
+			[view removeFromSuperview];
+		}];
+	});
 }
 
 #pragma mark - Notification
@@ -110,8 +156,35 @@ static NSString * const reuseIdentifier = @"Cell";
 	[self.collectionView registerNib:cellNib forCellWithReuseIdentifier:@"cvCell"];
 	UINib *nib = [UINib nibWithNibName:@"AAKAASupplementaryView" bundle:nil];
 	[self.collectionView registerNib:nib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"AAKAASupplementaryView"];
+	[self.collectionView registerClass:[AAKDummyCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"AAKDummyCollectionReusableView"];
 	
+	// navigation bar buttons
+	UIBarButtonItem *list = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"list.png"] style:UIBarButtonItemStylePlain target:self action:@selector(openGroupEditViewController:)];
+	UIBarButtonItem *gear = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"gear.png"] style:UIBarButtonItemStylePlain target:self action:@selector(openSettingViewController:)];
+	self.navigationController.navigationBar.topItem.rightBarButtonItems = @[gear, list];
+	
+	// データをCoreDataからフェッチ
 	[self updateCollections];
+	
+	// スプラッシュ用のビューを貼り付ける
+	[self showSplashView];
+}
+
+#pragma mark -
+
+- (void)prepareForPopoverPresentation:(UIPopoverPresentationController *)popoverPresentationController {
+}
+
+- (BOOL)popoverPresentationControllerShouldDismissPopover:(UIPopoverPresentationController *)popoverPresentationController {
+	return YES;
+}
+
+- (void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController {
+}
+
+- (void)popoverPresentationController:(UIPopoverPresentationController *)popoverPresentationController
+		  willRepositionPopoverToRect:(inout CGRect *)rect
+							   inView:(inout UIView **)view {
 }
 
 #pragma mark - UIViewControllerTransitionDelegate
@@ -140,12 +213,24 @@ static NSString * const reuseIdentifier = @"Cell";
  * @param cell メソッドをコールしたAAKAACollectionViewCellオブジェクト．
  **/
 - (void)didSelectCell:(AAKAACollectionViewCell*)cell {
-	AAKPreviewController *con = (AAKPreviewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"AAKPreviewController"];
+	UINavigationController *nav = (UINavigationController*)[self.storyboard instantiateViewControllerWithIdentifier:@"AAKPreviewNavigationController"];
+	AAKPreviewController *con = (AAKPreviewController*)nav.topViewController;
 	con.asciiart = cell.asciiart;
-	con.modalPresentationStyle = UIModalPresentationCustom;
-	con.transitioningDelegate = self;
 	
-	[self presentViewController:con animated:YES completion:nil];
+	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+		nav.modalPresentationStyle = UIModalPresentationPopover;
+		nav.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+		nav.popoverPresentationController.sourceRect = [self.view convertRect:cell.frame fromView:cell.superview];
+		nav.popoverPresentationController.sourceView = self.view;
+		nav.popoverPresentationController.delegate = self;
+		[self presentViewController:nav animated:YES completion:nil];
+	}
+	else {
+		nav.modalPresentationStyle = UIModalPresentationCustom;
+		nav.transitioningDelegate = self;
+		[self presentViewController:nav animated:YES completion:nil];
+	}
+	
 }
 
 /**
@@ -159,7 +244,7 @@ static NSString * const reuseIdentifier = @"Cell";
 	AAKASCIIArt *newASCIIArt = [AAKASCIIArt MR_createEntity];
 	newASCIIArt.text = obj.text;
 	newASCIIArt.group = obj.group;
-	[newASCIIArt updateLastUsedTime];
+	newASCIIArt.lastUsedTime = obj.lastUsedTime;
 	[newASCIIArt updateRatio];
 	[[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
 	
@@ -213,10 +298,18 @@ static NSString * const reuseIdentifier = @"Cell";
 																					withReuseIdentifier:@"AAKAASupplementaryView"
 																						   forIndexPath:indexPath];
 			headerView.label.text = collection.group.title;
-			[headerView.groupEditButton addTarget:self action:@selector(editGroup:) forControlEvents:UIControlEventTouchUpInside];
+			[headerView.groupAddButton addTarget:self action:@selector(registerNewAA:) forControlEvents:UIControlEventTouchUpInside];
+			[headerView.cloudAddButton addTarget:self action:@selector(openCloud:) forControlEvents:UIControlEventTouchUpInside];
 			return headerView;
 		}
-		return nil;
+		else {
+			// グループつまりセクションが空になったときにヘッダがなくなると，collection viewの削除アニメーションが例外を出すので，それの対策．
+			// サイズが０のヘッダを，ヘッダなしの代わりに表示する．
+			AAKDummyCollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+																					withReuseIdentifier:@"AAKDummyCollectionReusableView"
+																						   forIndexPath:indexPath];
+			return  headerView;
+		}
 	}
 	else {
 		return nil;
@@ -260,9 +353,9 @@ static NSString * const reuseIdentifier = @"Cell";
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
 	AAKAAGroupForCollection *collection = _groups[section];
 	if ([collection.asciiarts count] > 0) {
-		return CGSizeMake(320, 44);
+		return CGSizeMake(320, 50);
 	}
-	return CGSizeZero;
+	return CGSizeMake(320, 1);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {

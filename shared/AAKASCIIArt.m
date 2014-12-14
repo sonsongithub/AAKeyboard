@@ -17,6 +17,8 @@
 @dynamic text;
 @dynamic group;
 
+@synthesize contentSize;
+
 - (void)updateLastUsedTime {
 	self.lastUsedTime = [NSDate timeIntervalSinceReferenceDate];
 }

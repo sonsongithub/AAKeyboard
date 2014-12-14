@@ -13,7 +13,8 @@
 	AAKTextView	*_textView;
 	NSLayoutConstraint *_widthConstraint;
 	NSLayoutConstraint *_heightConstraint;
-	UIImageView *_seperator;
+	UIImageView *_rightEdgeSeperator;
+	UIImageView *_topEdgeSeperator;
 }
 @end
 
@@ -73,8 +74,12 @@
 	// 背景をセット
 	self.selectedBackgroundView = [[UIView alloc] initWithFrame:self.frame];
 	
-	_seperator = [[UIImageView alloc] initWithFrame:CGRectZero];
-	[self.contentView addSubview:_seperator];
+	_rightEdgeSeperator = [[UIImageView alloc] initWithFrame:CGRectZero];
+	[self.contentView addSubview:_rightEdgeSeperator];
+	
+	_topEdgeSeperator = [[UIImageView alloc] initWithFrame:CGRectZero];
+	[self.contentView addSubview:_topEdgeSeperator];
+	_topEdgeSeperator.hidden = YES;
 	
 	// ジェスチャを設定
 	UILongPressGestureRecognizer * longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
@@ -84,13 +89,18 @@
 
 - (void)setIsTail:(BOOL)isTail {
 	_isTail = isTail;
-	_seperator.hidden = _isTail;
+	_rightEdgeSeperator.hidden = _isTail;
+}
+
+- (void)setIsTop:(BOOL)isTop {
+	_topEdgeSeperator.hidden = isTop;
 }
 
 - (void)setKeyboardAppearance:(UIKeyboardAppearance)keyboardAppearance {
 	_keyboardAppearance = keyboardAppearance;
 	self.selectedBackgroundView.backgroundColor = [self cellHighlightedBackgroundColor];
-	_seperator.image = [UIImage rightEdgeWithKeyboardAppearance:_keyboardAppearance];
+	_rightEdgeSeperator.image = [UIImage rightEdgeWithKeyboardAppearance:_keyboardAppearance];
+	_topEdgeSeperator.image = [UIImage topEdgeWithKeyboardAppearance:_keyboardAppearance];
 }
 
 #pragma mark - Override
@@ -102,7 +112,8 @@
 
 - (void)layoutSubviews {
 	[super layoutSubviews];
-	_seperator.frame = CGRectMake(self.frame.size.width - 2, 0, 2, self.frame.size.height);
+	_rightEdgeSeperator.frame = CGRectMake(self.frame.size.width - 8, 0, 8, self.frame.size.height);
+	_topEdgeSeperator.frame = CGRectMake(0, 0, self.frame.size.width, 8);
 }
 
 - (id)initWithFrame:(CGRect)frame {

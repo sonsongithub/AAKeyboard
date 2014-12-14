@@ -27,7 +27,7 @@
 		return [UIColor darkColorForDark];
 	}
 	else {
-		return [UIColor lightColorForDefault];
+		return [UIColor colorWithRed:207.0/255.0f green:212.0/255.0f blue:216.0/255.0f alpha:1];
 	}
 }
 
@@ -42,23 +42,14 @@
 }
 
 /**
- * キーボードを縦のときに合わせる．
- * ツールバーの高さやフォントサイズを変更する．
+ * キーボードのツールバーの高さやフォントサイズを変更する．
+ * @param toolbarHeight ツールバーの高さ．
+ * @param fontSize ツールバーのタイトルのフォントサイズ．
  **/
-- (void)setPortraitMode {
-	_toolbarHeightConstraint.constant = 48;
-	_toolbar.height = 48;
-	_toolbar.fontSize = 14;
-}
-
-/**
- * キーボードを縦のときに合わせる．
- * ツールバーの高さやフォントサイズを変更する．
- **/
-- (void)setLandscapeMode {
-	_toolbarHeightConstraint.constant = 30;
-	_toolbar.height = 30;
-	_toolbar.fontSize = 12;
+- (void)setToolbarHeight:(CGFloat)toolbarHeight fontSize:(CGFloat)fontSize {
+	_toolbarHeightConstraint.constant = toolbarHeight;
+	_toolbar.height = toolbarHeight;
+	_toolbar.fontSize = fontSize;
 }
 
 /**
@@ -89,7 +80,7 @@
 	_collectionView.backgroundColor = [self cellBackgroundColor];
 	_collectionView.delegate = self;
 	_collectionView.dataSource = self;
-	_collectionView.contentInset = UIEdgeInsetsMake(0, -2, 0, -2);	// 端の線を常に表示させないためにヘッダとフッターを隠す
+	_collectionView.contentInset = UIEdgeInsetsMake(0, -8, 0, -8);	// 端の線を常に表示させないためにヘッダとフッターを隠す
 	[self addSubview:_collectionView];
 	
 	// supplementary
@@ -144,6 +135,63 @@
 }
 
 /**
+ * AAのセルのサイズを計算する．
+ **/
+- (void)arrangeAsciiArtCells {
+	NSInteger columns = (_asciiarts.count - 1) / _numberOfRow + 1;
+	
+	CGFloat constraintWidth = self.frame.size.width * 0.5;
+
+	for (int i = 0; i < columns; i++) {
+		if ( i < columns - 1) {
+			//
+			CGFloat height = floor(_collectionView.frame.size.height / _numberOfRow);
+			CGFloat maxWidth = 0;
+			CGFloat heightSum = 0;
+			for (int j = 0; j < _numberOfRow; j++) {
+				AAKASCIIArt *asciiart = _asciiarts[_numberOfRow * i + j];
+				CGFloat width = height * asciiart.ratio;
+				if (width > constraintWidth)
+					width = constraintWidth;
+				if (width > maxWidth)
+					maxWidth = width;
+				heightSum += height;
+			}
+			for (int j = 0; j < _numberOfRow; j++) {
+				AAKASCIIArt *asciiart = _asciiarts[_numberOfRow * i + j];
+				if (j == 0)
+					asciiart.contentSize = CGSizeMake(maxWidth, height + (_collectionView.frame.size.height - heightSum));
+				else
+					asciiart.contentSize = CGSizeMake(maxWidth, height);
+			}
+		}
+		else {
+			// 最終列
+			NSInteger remained = (_asciiarts.count % _numberOfRow == 0) ? _numberOfRow : (_asciiarts.count % _numberOfRow);
+			CGFloat height = floor(_collectionView.frame.size.height / remained);
+			CGFloat maxWidth = 0;
+			CGFloat heightSum = 0;
+			for (int j = 0; j < remained; j++) {
+				AAKASCIIArt *asciiart = _asciiarts[_numberOfRow * i + j];
+				CGFloat width = height * asciiart.ratio;
+				if (width > constraintWidth)
+					width = constraintWidth;
+				if (width > maxWidth)
+					maxWidth = width;
+				heightSum += height;
+			}
+			for (int j = 0; j < remained; j++) {
+				AAKASCIIArt *asciiart = _asciiarts[_numberOfRow * i + j];
+				if (j == 0)
+					asciiart.contentSize = CGSizeMake(maxWidth, height + (_collectionView.frame.size.height - heightSum));
+				else
+					asciiart.contentSize = CGSizeMake(maxWidth, height);
+			}
+		}
+	}
+}
+
+/**
  * AAKKeyboardViewクラスを初期化する．
  * @param frame ビューのframeを指定する．
  * @param keyboardAppearance 表示中のキーボードのアピアランス．
@@ -152,6 +200,8 @@
 - (instancetype)initWithFrame:(CGRect)frame keyboardAppearance:(UIKeyboardAppearance)keyboardAppearance {
 	self = [super initWithFrame:frame];
 	if (self) {
+		_numberOfRow = 1;
+		
 		self.backgroundColor = [UIColor clearColor];
 		_keyboardAppearance = keyboardAppearance;
 		
@@ -160,8 +210,6 @@
 		[self prepareCollectionView];
 		
 		[self setupAutolayout];
-		
-		[self updateASCIIArtsForCurrentGroup];
 		
 		[self updateConstraints];
 	}
@@ -197,14 +245,8 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-	AAKASCIIArt *source = _asciiarts[indexPath.item];
-	CGFloat height = collectionView.frame.size.height;
-	CGFloat width = height * source.ratio;
-	CGFloat constraintWidth = self.frame.size.width * 0.75;
-	if (width > constraintWidth) {
-		width = constraintWidth;
-	}
-	return CGSizeMake(floor(width), floor(height));
+	AAKASCIIArt *asciiart = _asciiarts[indexPath.item];
+	return asciiart.contentSize;
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -216,6 +258,9 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
+	if (view.frame.size.width > 0) {
+		[self arrangeAsciiArtCells];
+	}
 	return [_asciiarts count];
 }
 
@@ -225,7 +270,11 @@
 	CGFloat fontSize = 15;
 	AAKASCIIArt *source = _asciiarts[indexPath.item];
 	
-	cell.isTail = ((_asciiarts.count - 1) == indexPath.item);
+	cell.isTail = (indexPath.item/_numberOfRow == ((_asciiarts.count - 1)/_numberOfRow));
+	
+	if (_numberOfRow > 1)
+		cell.isTop = (indexPath.item % _numberOfRow == 0);
+	
 	cell.keyboardAppearance = _keyboardAppearance;
 	NSParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyleWithFontSize:fontSize];
 	NSDictionary *attributes = @{NSForegroundColorAttributeName:[cell colorForAA], NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:[UIFont fontWithName:@"Mona" size:fontSize]};
@@ -258,11 +307,11 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-	return CGSizeMake(2, _collectionView.frame.size.height);
+	return CGSizeMake(8, _collectionView.frame.size.height);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
-	return CGSizeMake(2, _collectionView.frame.size.height);
+	return CGSizeMake(8, _collectionView.frame.size.height);
 }
 
 @end

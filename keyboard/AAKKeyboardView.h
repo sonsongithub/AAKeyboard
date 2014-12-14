@@ -35,6 +35,7 @@
 
 @interface AAKKeyboardView : UIView
 @property (nonatomic, assign) id <AAKKeyboardViewDelegate> delegate;
+@property (nonatomic, assign) NSInteger numberOfRow;
 
 /**
  * AAKKeyboardViewクラスを初期化する．
@@ -50,15 +51,20 @@
 - (void)load;
 
 /**
- * キーボードを縦のときに合わせる．
- * ツールバーの高さやフォントサイズを変更する．
+ * キーボードのツールバーの高さやフォントサイズを変更する．
+ * @param toolbarHeight ツールバーの高さ．
+ * @param fontSize ツールバーのタイトルのフォントサイズ．
  **/
-- (void)setPortraitMode;
+- (void)setToolbarHeight:(CGFloat)toolbarHeight fontSize:(CGFloat)fontSize;
 
 /**
- * キーボードを縦のときに合わせる．
- * ツールバーの高さやフォントサイズを変更する．
+ * AAのセルのサイズを計算する．
  **/
-- (void)setLandscapeMode;
+- (void)arrangeAsciiArtCells;
+
+/**
+ * アスキーアートオブジェクトの配列を現在選択中のグループに従ってアップデートする．
+ **/
+- (void)updateASCIIArtsForCurrentGroup;
 
 @end

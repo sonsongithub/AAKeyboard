@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="14C81f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
@@ -7,41 +7,65 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Rgq-bH-EtN" customClass="AAKAASupplementaryView">
-            <rect key="frame" x="0.0" y="0.0" width="499" height="44"/>
+            <rect key="frame" x="0.0" y="0.0" width="500" height="60"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jjF-np-Ljh">
-                    <rect key="frame" x="0.0" y="1" width="499" height="42"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AASectionBackView" translatesAutoresizingMaskIntoConstraints="NO" id="8TY-ve-cKG">
+                    <rect key="frame" x="5" y="5" width="490" height="50"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="やる夫" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="375-8R-Vm7">
+                    <rect key="frame" x="15" y="22" width="422" height="17"/>
+                    <fontDescription key="fontDescription" name="HiraKakuProN-W6" family="Hiragino Kaku Gothic ProN" pointSize="17"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Vq-Xt-BcF">
-                    <rect key="frame" x="445" y="7" width="40" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="55L-eb-X44">
+                    <rect key="frame" x="445" y="14" width="32" height="32"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="30" id="YiT-WQ-pM5"/>
-                        <constraint firstAttribute="width" constant="40" id="ZVy-s7-bo8"/>
+                        <constraint firstAttribute="height" constant="32" id="5Ku-hh-99e"/>
+                        <constraint firstAttribute="width" constant="32" id="OsY-YS-HMb"/>
                     </constraints>
-                    <state key="normal" title="group">
+                    <state key="normal" image="plus">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="huO-Xv-ut8">
+                    <rect key="frame" x="405" y="14" width="32" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="32" id="6qZ-cd-TPA"/>
+                        <constraint firstAttribute="width" constant="32" id="H01-XH-KCn"/>
+                    </constraints>
+                    <state key="normal" image="cloudDownload">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.83529411764705885" green="0.85098039215686272" blue="0.87450980392156863" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="jjF-np-Ljh" firstAttribute="top" secondItem="Rgq-bH-EtN" secondAttribute="top" constant="1" id="38T-Oi-bvK"/>
-                <constraint firstAttribute="trailing" secondItem="5Vq-Xt-BcF" secondAttribute="trailing" constant="14" id="6sj-kX-JW4"/>
-                <constraint firstItem="jjF-np-Ljh" firstAttribute="leading" secondItem="Rgq-bH-EtN" secondAttribute="leading" id="CZH-4i-rYY"/>
-                <constraint firstAttribute="bottom" secondItem="jjF-np-Ljh" secondAttribute="bottom" constant="1" id="Jlw-oP-CW8"/>
-                <constraint firstAttribute="trailing" secondItem="jjF-np-Ljh" secondAttribute="trailing" id="MfD-nM-CJu"/>
-                <constraint firstAttribute="centerY" secondItem="5Vq-Xt-BcF" secondAttribute="centerY" id="gCs-b7-1M7"/>
+                <constraint firstItem="55L-eb-X44" firstAttribute="leading" secondItem="375-8R-Vm7" secondAttribute="trailing" constant="8" id="0BC-yz-J1g"/>
+                <constraint firstAttribute="bottom" secondItem="8TY-ve-cKG" secondAttribute="bottom" constant="5" id="ATw-od-OTc"/>
+                <constraint firstAttribute="centerY" secondItem="375-8R-Vm7" secondAttribute="centerY" id="Co2-GV-hHR"/>
+                <constraint firstItem="8TY-ve-cKG" firstAttribute="top" secondItem="Rgq-bH-EtN" secondAttribute="top" constant="5" id="P7D-Fe-Zzs"/>
+                <constraint firstAttribute="centerY" secondItem="huO-Xv-ut8" secondAttribute="centerY" id="RvM-bd-ieS"/>
+                <constraint firstAttribute="trailing" secondItem="8TY-ve-cKG" secondAttribute="trailing" constant="5" id="VOp-Ee-2Ff"/>
+                <constraint firstItem="55L-eb-X44" firstAttribute="leading" secondItem="375-8R-Vm7" secondAttribute="trailing" constant="8" id="WqX-3s-kM0"/>
+                <constraint firstItem="8TY-ve-cKG" firstAttribute="leading" secondItem="Rgq-bH-EtN" secondAttribute="leading" constant="5" id="hSW-s2-ckH"/>
+                <constraint firstAttribute="centerY" secondItem="55L-eb-X44" secondAttribute="centerY" id="imp-fx-XOn"/>
+                <constraint firstAttribute="trailing" secondItem="55L-eb-X44" secondAttribute="trailing" constant="23" id="kz3-cx-Ghk"/>
+                <constraint firstItem="55L-eb-X44" firstAttribute="leading" secondItem="huO-Xv-ut8" secondAttribute="trailing" constant="8" id="zMW-cg-i9d"/>
+                <constraint firstItem="375-8R-Vm7" firstAttribute="leading" secondItem="Rgq-bH-EtN" secondAttribute="leading" constant="15" id="zdi-JC-ZUq"/>
             </constraints>
             <connections>
-                <outlet property="groupEditButton" destination="5Vq-Xt-BcF" id="0fe-cc-ifX"/>
-                <outlet property="label" destination="jjF-np-Ljh" id="9xv-11-Iqf"/>
+                <outlet property="cloudAddButton" destination="huO-Xv-ut8" id="9aJ-up-dz5"/>
+                <outlet property="groupAddButton" destination="55L-eb-X44" id="1JW-ek-2VH"/>
+                <outlet property="label" destination="375-8R-Vm7" id="fiY-yR-KHg"/>
             </connections>
-            <point key="canvasLocation" x="414.5" y="472"/>
+            <point key="canvasLocation" x="407" y="544"/>
         </collectionReusableView>
     </objects>
+    <resources>
+        <image name="AASectionBackView" width="21" height="21"/>
+        <image name="cloudDownload" width="32" height="32"/>
+        <image name="plus" width="32" height="32"/>
+    </resources>
 </document>
