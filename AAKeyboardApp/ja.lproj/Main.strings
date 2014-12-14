@@ -1,0 +1,102 @@
+
+/* Class = "IBUINavigationItem"; title = "New Group"; ObjectID = "0vH-SE-vRz"; */
+"0vH-SE-vRz.title" = "New Group";
+
+/* Class = "IBUINavigationItem"; title = "Setting"; ObjectID = "1Yf-u0-2pq"; */
+"1Yf-u0-2pq.title" = "Setting";
+
+/* Class = "IBUITextField"; placeholder = "Name for new group"; ObjectID = "5pd-qr-5bb"; */
+"5pd-qr-5bb.placeholder" = "Name for new group";
+
+/* Class = "IBUIBarButtonItem"; title = "Close"; ObjectID = "7MU-72-weu"; */
+"7MU-72-weu.title" = "Close";
+
+/* Class = "IBUIBarButtonItem"; title = "Save"; ObjectID = "807-jg-mUu"; */
+"807-jg-mUu.title" = "Save";
+
+/* Class = "IBUILabel"; text = "AAKeyboard"; ObjectID = "D1w-yp-peN"; */
+"D1w-yp-peN.text" = "AAKeyboard";
+
+/* Class = "IBUILabel"; text = "Default"; ObjectID = "EFk-MH-hFS"; */
+"EFk-MH-hFS.text" = "Default";
+
+/* Class = "IBUINavigationItem"; title = "Edit AA"; ObjectID = "ErX-k3-6Pi"; */
+"ErX-k3-6Pi.title" = "Edit AA";
+
+/* Class = "IBUIBarButtonItem"; title = "Cancel"; ObjectID = "Fnu-mH-aFN"; */
+"Fnu-mH-aFN.title" = "Cancel";
+
+/* Class = "IBUINavigationItem"; title = "Rename Group"; ObjectID = "K9g-6R-kkl"; */
+"K9g-6R-kkl.title" = "Rename Group";
+
+/* Class = "IBUIViewController"; title = "License"; ObjectID = "KVh-1i-g8j"; */
+"KVh-1i-g8j.title" = "License";
+
+/* Class = "IBUILabel"; text = "Version"; ObjectID = "L4p-k8-sGf"; */
+"L4p-k8-sGf.text" = "Version";
+
+/* Class = "IBUITextView"; text = "*Included Software License and Copyrights\n\n*東雲フォントライセンス http://openlab.ring.gr.jp/efont/\n*モナーフォントライセンス http://monafont.sourceforge.net/\n\nこのアーカイブにフォントデータ(mona.ttf)は，Public Domain で提供されています 。\n但し、日本に於いては現時点で著作権を放棄することは法律上不可能であり、AUTHORS に列挙されている作者がその権利を行使しないと宣言することで実質的な Public Domain であるとします。\n自由な改造、他フォーマットへの変換、組込み、再配布を行うことができます。同時に、これらはすべて完全に無保証です。\n"; ObjectID = "LXJ-e4-WBl"; */
+"LXJ-e4-WBl.text" = "*Included Software License and Copyrights\n\n*東雲フォントライセンス http://openlab.ring.gr.jp/efont/\n*モナーフォントライセンス http://monafont.sourceforge.net/\n\nこのアーカイブにフォントデータ(mona.ttf)は，Public Domain で提供されています 。\n但し、日本に於いては現時点で著作権を放棄することは法律上不可能であり、AUTHORS に列挙されている作者がその権利を行使しないと宣言することで実質的な Public Domain であるとします。\n自由な改造、他フォーマットへの変換、組込み、再配布を行うことができます。同時に、これらはすべて完全に無保証です。\n";
+
+/* Class = "IBUILabel"; text = "Group"; ObjectID = "RCn-tt-4Kr"; */
+"RCn-tt-4Kr.text" = "Group";
+
+/* Class = "IBUIBarButtonItem"; title = "Add"; ObjectID = "VbH-60-iED"; */
+"VbH-60-iED.title" = "Add";
+
+/* Class = "IBUIBarButtonItem"; title = "Edit"; ObjectID = "Vuk-7m-Rao"; */
+"Vuk-7m-Rao.title" = "Edit";
+
+/* Class = "IBUILabel"; text = "1.0"; ObjectID = "Xup-YV-jPj"; */
+"Xup-YV-jPj.text" = "1.0";
+
+/* Class = "IBUITextField"; placeholder = "New group name"; ObjectID = "Z46-T6-edx"; */
+"Z46-T6-edx.placeholder" = "New group name";
+
+/* Class = "IBUINavigationItem"; title = "AA List"; ObjectID = "bOC-aV-MTB"; */
+"bOC-aV-MTB.title" = "AA List";
+
+/* Class = "IBUIBarButtonItem"; title = "Save"; ObjectID = "dQR-FG-7kg"; */
+"dQR-FG-7kg.title" = "Save";
+
+/* Class = "IBUILabel"; text = "Name"; ObjectID = "gkQ-qb-uQf"; */
+"gkQ-qb-uQf.text" = "Name";
+
+/* Class = "IBUINavigationItem"; title = "Select Group"; ObjectID = "hsg-D1-gqr"; */
+"hsg-D1-gqr.title" = "Select Group";
+
+/* Class = "IBUIBarButtonItem"; title = "Register"; ObjectID = "i0y-AE-WRK"; */
+"i0y-AE-WRK.title" = "Register";
+
+/* Class = "IBUIBarButtonItem"; title = "Create"; ObjectID = "jg4-1C-604"; */
+"jg4-1C-604.title" = "Create";
+
+/* Class = "IBUILabel"; text = "1234"; ObjectID = "mLe-s9-1wa"; */
+"mLe-s9-1wa.text" = "1234";
+
+/* Class = "IBUILabel"; text = "Group"; ObjectID = "n8M-nZ-nCW"; */
+"n8M-nZ-nCW.text" = "Group";
+
+/* Class = "IBUIBarButtonItem"; title = "Cancel"; ObjectID = "oRk-yK-R6v"; */
+"oRk-yK-R6v.title" = "Cancel";
+
+/* Class = "IBUILabel"; text = "Default"; ObjectID = "pi0-IE-LKy"; */
+"pi0-IE-LKy.text" = "Default";
+
+/* Class = "IBUINavigationItem"; title = "Register New AA"; ObjectID = "sQW-bK-dyU"; */
+"sQW-bK-dyU.title" = "Register New AA";
+
+/* Class = "IBUILabel"; text = "sonson"; ObjectID = "t9c-Dl-9Fk"; */
+"t9c-Dl-9Fk.text" = "sonson";
+
+/* Class = "IBUILabel"; text = "Build"; ObjectID = "ukR-ZQ-smF"; */
+"ukR-ZQ-smF.text" = "Build";
+
+/* Class = "IBUILabel"; text = "License"; ObjectID = "v2Y-YH-Nin"; */
+"v2Y-YH-Nin.text" = "License";
+
+/* Class = "IBUILabel"; text = "Open Settings"; ObjectID = "www-22-BN9"; */
+"www-22-BN9.text" = "Open Settings";
+
+/* Class = "IBUILabel"; text = "Copyright"; ObjectID = "x3w-c9-4Cm"; */
+"x3w-c9-4Cm.text" = "Copyright";
