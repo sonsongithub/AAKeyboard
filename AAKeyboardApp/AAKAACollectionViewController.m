@@ -14,6 +14,7 @@
 #import "AAKAAEditAnimatedTransitioning.h"
 #import "AAKAACollectionViewCell.h"
 #import "AAKPreviewController.h"
+#import "AAKDummyCollectionReusableView.h"
 
 @interface AAKAACollectionViewController () <AAKAACollectionViewCellDelegate, UIViewControllerTransitioningDelegate, UIPopoverPresentationControllerDelegate> {
 	NSArray *_groups;	/** AAKAAGroupForCollectionオブジェクトの配列 */
@@ -155,6 +156,7 @@ static NSString * const reuseIdentifier = @"Cell";
 	[self.collectionView registerNib:cellNib forCellWithReuseIdentifier:@"cvCell"];
 	UINib *nib = [UINib nibWithNibName:@"AAKAASupplementaryView" bundle:nil];
 	[self.collectionView registerNib:nib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"AAKAASupplementaryView"];
+	[self.collectionView registerClass:[AAKDummyCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"AAKDummyCollectionReusableView"];
 	
 	// navigation bar buttons
 	UIBarButtonItem *list = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"list.png"] style:UIBarButtonItemStylePlain target:self action:@selector(openGroupEditViewController:)];
@@ -300,7 +302,14 @@ static NSString * const reuseIdentifier = @"Cell";
 			[headerView.cloudAddButton addTarget:self action:@selector(openCloud:) forControlEvents:UIControlEventTouchUpInside];
 			return headerView;
 		}
-		return nil;
+		else {
+			// グループつまりセクションが空になったときにヘッダがなくなると，collection viewの削除アニメーションが例外を出すので，それの対策．
+			// サイズが０のヘッダを，ヘッダなしの代わりに表示する．
+			AAKDummyCollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+																					withReuseIdentifier:@"AAKDummyCollectionReusableView"
+																						   forIndexPath:indexPath];
+			return  headerView;
+		}
 	}
 	else {
 		return nil;
@@ -346,7 +355,7 @@ static NSString * const reuseIdentifier = @"Cell";
 	if ([collection.asciiarts count] > 0) {
 		return CGSizeMake(320, 50);
 	}
-	return CGSizeZero;
+	return CGSizeMake(320, 1);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {

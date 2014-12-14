@@ -154,6 +154,7 @@
 		14B2751A1A0A0DF3005BF3B1 /* mona.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14B275161A0A0DF3005BF3B1 /* mona.ttf */; };
 		14B2751B1A0A0DF3005BF3B1 /* mona.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14B275161A0A0DF3005BF3B1 /* mona.ttf */; };
 		14B2751C1A0A0DF3005BF3B1 /* mona.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14B275161A0A0DF3005BF3B1 /* mona.ttf */; };
+		14B67AEE1A3E1A49004DD95C /* AAKDummyCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B67AED1A3E1A49004DD95C /* AAKDummyCollectionReusableView.m */; };
 		14B73C6519E3C7CA0031DCB6 /* AAKToolbarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B73C6419E3C7CA0031DCB6 /* AAKToolbarCell.m */; };
 		14B73C6719E3C9060031DCB6 /* AAKToolbarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B73C6419E3C7CA0031DCB6 /* AAKToolbarCell.m */; };
 		14C7B0911A1A61160081FA5B /* AAKCoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C7B0901A1A61160081FA5B /* AAKCoreDataStack.m */; };
@@ -365,6 +366,8 @@
 		14B274DD1A0A0D83005BF3B1 /* AAKAASupplementaryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AAKAASupplementaryView.xib; sourceTree = "<group>"; };
 		14B275151A0A0DF3005BF3B1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		14B275161A0A0DF3005BF3B1 /* mona.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = mona.ttf; sourceTree = "<group>"; };
+		14B67AEC1A3E1A49004DD95C /* AAKDummyCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKDummyCollectionReusableView.h; sourceTree = "<group>"; };
+		14B67AED1A3E1A49004DD95C /* AAKDummyCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKDummyCollectionReusableView.m; sourceTree = "<group>"; };
 		14B73C6319E3C7CA0031DCB6 /* AAKToolbarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKToolbarCell.h; sourceTree = "<group>"; };
 		14B73C6419E3C7CA0031DCB6 /* AAKToolbarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKToolbarCell.m; sourceTree = "<group>"; };
 		14C7B08F1A1A61160081FA5B /* AAKCoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKCoreDataStack.h; sourceTree = "<group>"; };
@@ -455,6 +458,8 @@
 				14B274D41A0A0D83005BF3B1 /* AAKAASupplementaryView.h */,
 				14B274DA1A0A0D83005BF3B1 /* AAKAASupplementaryView.m */,
 				14B274DD1A0A0D83005BF3B1 /* AAKAASupplementaryView.xib */,
+				14B67AEC1A3E1A49004DD95C /* AAKDummyCollectionReusableView.h */,
+				14B67AED1A3E1A49004DD95C /* AAKDummyCollectionReusableView.m */,
 			);
 			name = UICollectionReusableView;
 			sourceTree = "<group>";
@@ -1174,6 +1179,7 @@
 				14B274CA1A0A0D6F005BF3B1 /* NSParagraphStyle+keyboard.m in Sources */,
 				141528C31A18585700EB80AC /* MagicalRecord+ErrorHandling.m in Sources */,
 				1415289F1A18585600EB80AC /* NSManagedObject+MagicalDataImport.m in Sources */,
+				14B67AEE1A3E1A49004DD95C /* AAKDummyCollectionReusableView.m in Sources */,
 				14CB156419E935BB00D05E9C /* UZCursorView.m in Sources */,
 				141528961A18585600EB80AC /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
 				14B274DE1A0A0D83005BF3B1 /* AAKAACollectionViewCell.m in Sources */,
