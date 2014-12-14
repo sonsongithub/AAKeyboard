@@ -15,6 +15,7 @@
 #import "AAKAACollectionViewCell.h"
 #import "AAKPreviewController.h"
 #import "AAKDummyCollectionReusableView.h"
+#import "AAKRegisterViewController.h"
 
 @interface AAKAACollectionViewController () <AAKAACollectionViewCellDelegate, UIViewControllerTransitioningDelegate, UIPopoverPresentationControllerDelegate> {
 	NSArray *_groups;	/** AAKAAGroupForCollectionオブジェクトの配列 */
@@ -25,19 +26,9 @@
 
 static NSString * const reuseIdentifier = @"Cell";
 
-- (IBAction)close:(UIStoryboardSegue*)segue {
-}
-
-- (IBAction)editGroup:(id)sender {
-	[self performSegueWithIdentifier:@"OpenAAKSelectGroupViewController" sender:nil];
-}
-
 - (IBAction)registerNewAA:(id)sender {
 	UINavigationController *nav = (UINavigationController*)[self.storyboard instantiateViewControllerWithIdentifier:@"AAKRegisterNavigationController"];
 	[self presentViewController:nav animated:YES completion:nil];
-}
-
-- (IBAction)openCloud:(id)sender {
 }
 
 - (IBAction)openGroupEditViewController:(id)sender {
@@ -107,6 +98,7 @@ static NSString * const reuseIdentifier = @"Cell";
  * LaunchScreenのスプラッシュをフェードアウトするためのビューを貼り付ける
  **/
 - (void)showSplashView {
+	[self.navigationController setToolbarHidden:NO animated:NO];
 	UINib *nib = [UINib nibWithNibName:@"LaunchScreen" bundle:nil];
 	UIView *view = [[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
 	[self.navigationController.view addSubview:view];
@@ -158,16 +150,15 @@ static NSString * const reuseIdentifier = @"Cell";
 	[self.collectionView registerNib:nib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"AAKAASupplementaryView"];
 	[self.collectionView registerClass:[AAKDummyCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"AAKDummyCollectionReusableView"];
 	
-	// navigation bar buttons
-	UIBarButtonItem *list = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"list.png"] style:UIBarButtonItemStylePlain target:self action:@selector(openGroupEditViewController:)];
-	UIBarButtonItem *gear = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"gear.png"] style:UIBarButtonItemStylePlain target:self action:@selector(openSettingViewController:)];
-	self.navigationController.navigationBar.topItem.rightBarButtonItems = @[gear, list];
-	
 	// データをCoreDataからフェッチ
 	[self updateCollections];
 	
 	// スプラッシュ用のビューを貼り付ける
 	[self showSplashView];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
 }
 
 #pragma mark -
@@ -297,9 +288,8 @@ static NSString * const reuseIdentifier = @"Cell";
 			AAKAASupplementaryView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
 																					withReuseIdentifier:@"AAKAASupplementaryView"
 																						   forIndexPath:indexPath];
-			headerView.label.text = collection.group.title;
-			[headerView.groupAddButton addTarget:self action:@selector(registerNewAA:) forControlEvents:UIControlEventTouchUpInside];
-			[headerView.cloudAddButton addTarget:self action:@selector(openCloud:) forControlEvents:UIControlEventTouchUpInside];
+			headerView.groupTitleLabel.text = collection.group.title;
+			headerView.numberOfAALabel.text = [NSString stringWithFormat:NSLocalizedString(@"%d", nil), collection.asciiarts.count];
 			return headerView;
 		}
 		else {

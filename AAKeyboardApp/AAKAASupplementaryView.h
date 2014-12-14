@@ -10,8 +10,7 @@
 
 @interface AAKAASupplementaryView : UICollectionReusableView
 
-@property (nonatomic, strong) IBOutlet UILabel *label;
-@property (nonatomic, strong) IBOutlet UIButton *groupAddButton;
-@property (nonatomic, strong) IBOutlet UIButton *cloudAddButton;
+@property (nonatomic, strong) IBOutlet UILabel *groupTitleLabel;
+@property (nonatomic, strong) IBOutlet UILabel *numberOfAALabel;
 
 @end

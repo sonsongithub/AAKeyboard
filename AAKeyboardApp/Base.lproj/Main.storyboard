@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Kz7-TH-ldM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14C81f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Kz7-TH-ldM">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -41,6 +41,19 @@
                             <outlet property="delegate" destination="8tx-kG-BsU" id="EfL-6M-cqx"/>
                         </connections>
                     </collectionView>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="dQz-QP-nHA"/>
+                        <barButtonItem image="plus" id="cuQ-Va-ivc">
+                            <connections>
+                                <action selector="registerNewAA:" destination="8tx-kG-BsU" id="9qK-en-QZW"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem image="list" id="3ML-Qe-ES6">
+                            <connections>
+                                <action selector="openGroupEditViewController:" destination="8tx-kG-BsU" id="xbW-JR-CcW"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="AA List" id="bOC-aV-MTB">
                         <barButtonItem key="leftBarButtonItem" image="help" id="3dm-5C-kaX">
                             <connections>
@@ -53,6 +66,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="O4B-Qe-w5U" kind="presentation" identifier="OpenAAKSelectGroupViewController" modalPresentationStyle="formSheet" id="oOC-Ok-6Q8"/>
                     </connections>
@@ -335,17 +349,6 @@
                                 <rect key="frame" x="5" y="5" width="590" height="590"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eAA-ck-Eah">
-                                <rect key="frame" x="284" y="540" width="32" height="32"/>
-                                <color key="backgroundColor" white="0.5" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="32" id="Fza-xf-0Da"/>
-                                    <constraint firstAttribute="height" constant="32" id="q0J-bq-LVq"/>
-                                </constraints>
-                                <state key="normal" backgroundImage="cloudUpload">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ya1-Nu-igY">
                                 <rect key="frame" x="540" y="540" width="32" height="32"/>
                                 <color key="backgroundColor" white="0.5" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -376,8 +379,6 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="4IR-HT-sky" firstAttribute="top" secondItem="eAA-ck-Eah" secondAttribute="bottom" constant="28" id="AAd-Ra-34y"/>
-                            <constraint firstAttribute="centerX" secondItem="eAA-ck-Eah" secondAttribute="centerX" id="FoJ-jS-Lrg"/>
                             <constraint firstItem="hAW-lw-gaM" firstAttribute="leading" secondItem="Ljy-z7-zrq" secondAttribute="leading" constant="20" id="f2W-wt-pbm"/>
                             <constraint firstItem="5HB-Xf-qhu" firstAttribute="top" secondItem="Ljy-z7-zrq" secondAttribute="top" constant="5" id="hcA-l5-FhP"/>
                             <constraint firstAttribute="trailing" secondItem="Ya1-Nu-igY" secondAttribute="trailing" constant="28" id="k3Z-kh-ju0"/>
@@ -826,11 +827,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="cloudUpload" width="32" height="32"/>
         <image name="gear" width="32" height="32"/>
         <image name="help" width="32" height="32"/>
+        <image name="list" width="32" height="32"/>
         <image name="pen" width="32" height="32"/>
         <image name="photoLibrary" width="32" height="32"/>
+        <image name="plus" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="hLR-ag-K7X"/>

@@ -14,58 +14,42 @@
                     <rect key="frame" x="5" y="5" width="490" height="50"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="やる夫" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="375-8R-Vm7">
-                    <rect key="frame" x="15" y="22" width="422" height="17"/>
+                    <rect key="frame" x="15" y="21" width="357" height="17"/>
                     <fontDescription key="fontDescription" name="HiraKakuProN-W6" family="Hiragino Kaku Gothic ProN" pointSize="17"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="55L-eb-X44">
-                    <rect key="frame" x="445" y="14" width="32" height="32"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j99-4b-v3S">
+                    <rect key="frame" x="380" y="21" width="100" height="17"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="32" id="5Ku-hh-99e"/>
-                        <constraint firstAttribute="width" constant="32" id="OsY-YS-HMb"/>
+                        <constraint firstAttribute="width" constant="100" id="Pic-Xl-j1b"/>
+                        <constraint firstAttribute="height" constant="17" id="hAa-qw-8cN"/>
                     </constraints>
-                    <state key="normal" image="plus">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="huO-Xv-ut8">
-                    <rect key="frame" x="405" y="14" width="32" height="32"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="32" id="6qZ-cd-TPA"/>
-                        <constraint firstAttribute="width" constant="32" id="H01-XH-KCn"/>
-                    </constraints>
-                    <state key="normal" image="cloudDownload">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
+                    <fontDescription key="fontDescription" name="HiraKakuProN-W3" family="Hiragino Kaku Gothic ProN" pointSize="15"/>
+                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="0.83529411764705885" green="0.85098039215686272" blue="0.87450980392156863" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="55L-eb-X44" firstAttribute="leading" secondItem="375-8R-Vm7" secondAttribute="trailing" constant="8" id="0BC-yz-J1g"/>
+                <constraint firstAttribute="trailing" secondItem="j99-4b-v3S" secondAttribute="trailing" constant="20" id="AE5-oc-e1J"/>
                 <constraint firstAttribute="bottom" secondItem="8TY-ve-cKG" secondAttribute="bottom" constant="5" id="ATw-od-OTc"/>
                 <constraint firstAttribute="centerY" secondItem="375-8R-Vm7" secondAttribute="centerY" id="Co2-GV-hHR"/>
                 <constraint firstItem="8TY-ve-cKG" firstAttribute="top" secondItem="Rgq-bH-EtN" secondAttribute="top" constant="5" id="P7D-Fe-Zzs"/>
-                <constraint firstAttribute="centerY" secondItem="huO-Xv-ut8" secondAttribute="centerY" id="RvM-bd-ieS"/>
                 <constraint firstAttribute="trailing" secondItem="8TY-ve-cKG" secondAttribute="trailing" constant="5" id="VOp-Ee-2Ff"/>
-                <constraint firstItem="55L-eb-X44" firstAttribute="leading" secondItem="375-8R-Vm7" secondAttribute="trailing" constant="8" id="WqX-3s-kM0"/>
+                <constraint firstAttribute="centerY" secondItem="j99-4b-v3S" secondAttribute="centerY" id="fhm-3B-3RS"/>
                 <constraint firstItem="8TY-ve-cKG" firstAttribute="leading" secondItem="Rgq-bH-EtN" secondAttribute="leading" constant="5" id="hSW-s2-ckH"/>
-                <constraint firstAttribute="centerY" secondItem="55L-eb-X44" secondAttribute="centerY" id="imp-fx-XOn"/>
-                <constraint firstAttribute="trailing" secondItem="55L-eb-X44" secondAttribute="trailing" constant="23" id="kz3-cx-Ghk"/>
-                <constraint firstItem="55L-eb-X44" firstAttribute="leading" secondItem="huO-Xv-ut8" secondAttribute="trailing" constant="8" id="zMW-cg-i9d"/>
+                <constraint firstItem="j99-4b-v3S" firstAttribute="leading" secondItem="375-8R-Vm7" secondAttribute="trailing" constant="8" id="o3z-b8-U2O"/>
                 <constraint firstItem="375-8R-Vm7" firstAttribute="leading" secondItem="Rgq-bH-EtN" secondAttribute="leading" constant="15" id="zdi-JC-ZUq"/>
             </constraints>
             <connections>
-                <outlet property="cloudAddButton" destination="huO-Xv-ut8" id="9aJ-up-dz5"/>
-                <outlet property="groupAddButton" destination="55L-eb-X44" id="1JW-ek-2VH"/>
-                <outlet property="label" destination="375-8R-Vm7" id="fiY-yR-KHg"/>
+                <outlet property="groupTitleLabel" destination="375-8R-Vm7" id="npl-yH-HmG"/>
+                <outlet property="numberOfAALabel" destination="j99-4b-v3S" id="uKa-gG-kjg"/>
             </connections>
             <point key="canvasLocation" x="407" y="544"/>
         </collectionReusableView>
     </objects>
     <resources>
         <image name="AASectionBackView" width="21" height="21"/>
-        <image name="cloudDownload" width="32" height="32"/>
-        <image name="plus" width="32" height="32"/>
     </resources>
 </document>
