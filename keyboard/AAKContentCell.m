@@ -133,12 +133,9 @@
  * 長押しジェスチャの状態変化を受け取るメソッド
  **/
 - (void)longPress:(UIGestureRecognizer*)gestureRecognizer {
-	DNSLogMethod
 	if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-		DNSLog(@"UIGestureRecognizerStateBegan");
 	}
 	else if (gestureRecognizer.state == UIGestureRecognizerStateChanged) {
-		DNSLog(@"UIGestureRecognizerStateChanged");
 	}
 	else if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
 		DNSLog(@"UIGestureRecognizerStateEnded");

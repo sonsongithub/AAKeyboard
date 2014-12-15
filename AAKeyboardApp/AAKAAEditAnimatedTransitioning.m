@@ -160,6 +160,7 @@
 	
 	
 	AAKTextView *textView = [cell textViewForAnimation];
+	textView.backgroundColor = [UIColor clearColor];
 	
 	// Magnify text view on cell keeping its aspect ratio.
 	CGRect frameOfStartTextView = [[transitionContext containerView] convertRect:cell.textView.bounds fromView:cell.textView];
@@ -174,6 +175,7 @@
 	previewController.view.alpha = 0;
 	previewController.textView.hidden = YES;
 	
+	cell.textView.hidden = YES;
 	
 	[UIView animateWithDuration:[self transitionDuration:transitionContext]
 					 animations:^{
@@ -186,6 +188,7 @@
 						 [textView removeFromSuperview];
 						 [transitionContext completeTransition:YES];
 						 previewController.textView.hidden = NO;
+						 cell.textView.hidden = NO;
 					 }];
 }
 
@@ -207,6 +210,7 @@
 	}
 	
 	AAKAACollectionViewCell *cell = [collectionViewController cellForAsciiArt:previewController.asciiart];
+	cell.textView.hidden = YES;
 	
 	CGSize toContentSize = [self AASizeForAACollectionViewControllerWithTransition:transitionContext
 																   previewController:previewController
@@ -215,9 +219,8 @@
 														previewController:previewController];
 	float scale = fromContentSize.width / toContentSize.width;
 	
-	cell.hidden = YES;
-	
 	AAKTextView *textView = [cell textViewForAnimation];
+	textView.backgroundColor = [UIColor clearColor];
 	[[transitionContext containerView] addSubview:textView];
 	
 	previewController.textView.hidden = YES;
@@ -235,7 +238,7 @@
 						 fromController.view.alpha = 0;
 					 } completion:^(BOOL finished) {
 						 [textView removeFromSuperview];
-						 cell.hidden = NO;
+						 cell.textView.hidden = NO;
 						 [transitionContext completeTransition:YES];
 					 }];
 }

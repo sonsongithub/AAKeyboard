@@ -33,7 +33,6 @@ static NSString *AAKAACollectionViewCellWillTapNotification = @"AAKAACollectionV
 	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:_asciiart.text attributes:attributes];
 	AAKTextView *textView = [[AAKTextView alloc] initWithFrame:self.textView.bounds];
 	textView.attributedString = string;
-	textView.backgroundColor = [UIColor whiteColor];
 	return textView;
 }
 
@@ -77,7 +76,6 @@ static NSString *AAKAACollectionViewCellWillTapNotification = @"AAKAACollectionV
  * @param tapPoint ジェスチャ中のタップの位置．
  **/
 - (void)gestureRecognizerStateChanged:(UISwipeGestureRecognizer*)gestureRecognizer {
-	DNSLogMethod
 	CGPoint translate = [gestureRecognizer locationInView:self];
 	CGFloat diff = _startPoint.x - translate.x;
 	if (_opened) {
