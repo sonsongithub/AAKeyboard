@@ -53,10 +53,17 @@
 @property (nonatomic, assign) id <AAKAACollectionViewCellDelegate> delegate;			/** 親のビューにコールバックするためのデリゲート */
 @property (nonatomic, strong) AAKASCIIArt *asciiart;									/** 表示するアスキーアート */
 
+@property (nonatomic, readonly) BOOL opened;
+
 /**
  * リストからAAをプレビューするアニメーションに使うテキストビューを作成する．
  * @return セルが表示中のAAがセットされたAAKTextViewオブジェクト．
  **/
 - (AAKTextView*)textViewForAnimation;
+
+/**
+ * 複製と削除ボタンを非表示にする．
+ **/
+- (void)closeAnimated:(BOOL)animated;
 
 @end

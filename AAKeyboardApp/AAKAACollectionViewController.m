@@ -227,6 +227,13 @@ static NSString * const reuseIdentifier = @"Cell";
  * @param cell メソッドをコールしたAAKAACollectionViewCellオブジェクト．
  **/
 - (void)didSelectCell:(AAKAACollectionViewCell*)cell {
+	for (AAKAACollectionViewCell *cell in self.collectionView.visibleCells) {
+		if (cell.opened) {
+			[cell closeAnimated:YES];
+			return;
+		}
+	}
+	
 	UINavigationController *nav = (UINavigationController*)[self.storyboard instantiateViewControllerWithIdentifier:@"AAKPreviewNavigationController"];
 	AAKPreviewController *con = (AAKPreviewController*)nav.topViewController;
 	con.asciiart = cell.asciiart;

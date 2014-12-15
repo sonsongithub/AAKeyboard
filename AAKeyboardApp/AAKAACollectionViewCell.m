@@ -196,7 +196,6 @@ static NSString *AAKAACollectionViewCellWillTapNotification = @"AAKAACollectionV
 		[self closeAnimated:YES];
 	}
 	else {
-		[[NSNotificationCenter defaultCenter] postNotificationName:AAKAACollectionViewCellWillTapNotification object:self];
 		[_delegate didSelectCell:self];
 	}
 }
