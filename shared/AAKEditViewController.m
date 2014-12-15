@@ -109,7 +109,8 @@ UIView *topView(UIView *current) {
 	
 	// フォントとAAを設定
 	_AATextView.font = [UIFont fontWithName:@"Mona" size:10];
-	_AATextView.text = self.asciiart.text;
+	if (self.asciiart.text.length > 0)
+		_AATextView.text = self.asciiart.text;
 	
 	// グループを設定する
 	if (_asciiart)

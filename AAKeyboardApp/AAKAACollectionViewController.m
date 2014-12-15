@@ -19,6 +19,7 @@
 
 @interface AAKAACollectionViewController () <AAKAACollectionViewCellDelegate, UIViewControllerTransitioningDelegate, UIPopoverPresentationControllerDelegate> {
 	NSArray *_groups;	/** AAKAAGroupForCollectionオブジェクトの配列 */
+	IBOutlet UIBarButtonItem *_pasteBoardBarButtonItem;
 }
 @end
 
@@ -28,7 +29,11 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (IBAction)registerNewAA:(id)sender {
 	UINavigationController *nav = (UINavigationController*)[self.storyboard instantiateViewControllerWithIdentifier:@"AAKRegisterNavigationController"];
-	[self presentViewController:nav animated:YES completion:nil];
+	AAKRegisterViewController *con = (AAKRegisterViewController*)nav.topViewController;
+	NSString *string = [[UIPasteboard generalPasteboard] valueForPasteboardType:@"public.text"];
+	[self presentViewController:nav animated:YES completion:^{
+		con.AATextView.text = string;
+	}];
 }
 
 - (IBAction)openGroupEditViewController:(id)sender {
@@ -134,6 +139,19 @@ static NSString * const reuseIdentifier = @"Cell";
 	[self.collectionView reloadData];
 }
 
+/**
+ * クリップボードの値が変更された時に来る通知．
+ * @param notifiation 通知オブジェクト．
+ **/
+- (void)pasteboardChangedNotification:(NSNotification*)notification {
+	[self checkPasteBoard];
+}
+
+- (void)checkPasteBoard {
+	NSString *s = [[UIPasteboard generalPasteboard] valueForPasteboardType:@"public.text"];
+	_pasteBoardBarButtonItem.enabled = ([s length] > 0);
+}
+
 #pragma mark - Override
 
 - (void)viewDidLoad {
@@ -142,6 +160,9 @@ static NSString * const reuseIdentifier = @"Cell";
 	// Notification
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForegroundNotification:) name:UIApplicationWillEnterForegroundNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didUpdateDatabaseNotification:) name:AAKKeyboardDataManagerDidUpdateNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pasteboardChangedNotification:) name:UIApplicationWillResignActiveNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pasteboardChangedNotification:) name:UIApplicationWillEnterForegroundNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pasteboardChangedNotification:) name:UIPasteboardChangedNotification object:nil];
 	
     // Register cell and supplemental classes to collection view
 	UINib *cellNib = [UINib nibWithNibName:@"AAKAACollectionViewCell" bundle:nil];
@@ -155,6 +176,8 @@ static NSString * const reuseIdentifier = @"Cell";
 	
 	// スプラッシュ用のビューを貼り付ける
 	[self showSplashView];
+	
+	[self checkPasteBoard];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

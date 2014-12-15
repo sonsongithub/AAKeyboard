@@ -43,7 +43,7 @@
                     </collectionView>
                     <toolbarItems>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="dQz-QP-nHA"/>
-                        <barButtonItem image="plus" id="cuQ-Va-ivc">
+                        <barButtonItem image="paste" id="cuQ-Va-ivc">
                             <connections>
                                 <action selector="registerNewAA:" destination="8tx-kG-BsU" id="9qK-en-QZW"/>
                             </connections>
@@ -68,6 +68,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="_pasteBoardBarButtonItem" destination="cuQ-Va-ivc" id="Ksw-kh-00D"/>
                         <segue destination="O4B-Qe-w5U" kind="presentation" identifier="OpenAAKSelectGroupViewController" modalPresentationStyle="formSheet" id="oOC-Ok-6Q8"/>
                     </connections>
                 </collectionViewController>
@@ -830,9 +831,9 @@
         <image name="gear" width="32" height="32"/>
         <image name="help" width="32" height="32"/>
         <image name="list" width="32" height="32"/>
+        <image name="paste" width="32" height="32"/>
         <image name="pen" width="32" height="32"/>
         <image name="photoLibrary" width="32" height="32"/>
-        <image name="plus" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="hLR-ag-K7X"/>
