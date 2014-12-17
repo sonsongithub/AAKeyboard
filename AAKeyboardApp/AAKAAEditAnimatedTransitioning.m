@@ -178,6 +178,12 @@
 	cell.textView.hidden = YES;
 	
 	[UIView animateWithDuration:[self transitionDuration:transitionContext]
+#ifdef _USING_SPRING_WITH_DAMPING
+						  delay:0
+		 usingSpringWithDamping:0.5
+		  initialSpringVelocity:0
+						options:UIViewAnimationOptionCurveEaseOut
+#endif
 					 animations:^{
 						 textView.frame = frameOfDestinationTextView;
 						 textView.center = CGPointMake(ceil([transitionContext containerView].center.x), ceil([transitionContext containerView].center.y));
@@ -232,6 +238,12 @@
 	textView.center = [[transitionContext containerView] convertPoint:previewController.textView.center fromView:previewController.textView.superview];
 	
 	[UIView animateWithDuration:[self transitionDuration:transitionContext]
+#ifdef _USING_SPRING_WITH_DAMPING
+						  delay:0
+		 usingSpringWithDamping:0.5
+		  initialSpringVelocity:0
+						options:UIViewAnimationOptionCurveEaseOut
+#endif
 					 animations:^{
 						 textView.alpha = 1;
 						 textView.frame = frameOfDestinationTextView;
@@ -256,7 +268,11 @@
 }
 
 - (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
+#ifdef _USING_SPRING_WITH_DAMPING
+	return 0.4;
+#else
 	return 0.2;
+#endif
 }
 
 @end

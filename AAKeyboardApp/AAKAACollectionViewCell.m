@@ -8,10 +8,11 @@
 
 #import "AAKAACollectionViewCell.h"
 
-static NSInteger AAKSwipeDirectionThreadholdAsDegree = 20;		/** 斜めのスワイプを横方向へのスワイプと判定するための閾値 */
-static NSInteger AAKCellButtonWidth = 96;						/** セルの複製，削除ボタンの幅 */
+#define _ANIMATION_BOUNCING
 
-static NSString *AAKAACollectionViewCellWillTapNotification = @"AAKAACollectionViewCellWillTapNotification";
+static NSInteger AAKSwipeDirectionThreadholdAsDegree = 20;														/** 斜めのスワイプを横方向へのスワイプと判定するための閾値 */
+static NSInteger AAKCellButtonWidth = 96;																		/** セルの複製，削除ボタンの幅 */
+static NSString *AAKAACollectionViewCellWillTapNotification = @"AAKAACollectionViewCellWillTapNotification";	/** セルのタップが始まる直前に通知されるNotification */
 
 @interface AAKAACollectionViewCell() <UIGestureRecognizerDelegate> {
 	CGPoint		_startPoint;	/** ジェスチャの開始点 */
@@ -48,9 +49,20 @@ static NSString *AAKAACollectionViewCellWillTapNotification = @"AAKAACollectionV
 	
 	if (animated) {
 		[UIView animateWithDuration:0.3
+#ifdef _USING_SPRING_WITH_DAMPING
+							  delay:0
+			 usingSpringWithDamping:0.5
+			  initialSpringVelocity:0
+							options:UIViewAnimationOptionCurveEaseOut
+#endif
 						 animations:^{
 							 [_textBackView.superview layoutIfNeeded];
+						 }
+						 completion:^(BOOL finished) {
 						 }];
+	}
+	else {
+		[_textBackView.superview layoutIfNeeded];
 	}
 }
 
@@ -122,9 +134,18 @@ static NSString *AAKAACollectionViewCellWillTapNotification = @"AAKAACollectionV
 		_duplicateButtonOnCellWidth.constant = AAKCellButtonWidth;
 		_deleteButtonOnCellWidth.constant = AAKCellButtonWidth;
 	}
+	
 	[UIView animateWithDuration:0.3
+#ifdef _USING_SPRING_WITH_DAMPING
+						  delay:0
+		 usingSpringWithDamping:0.5
+		  initialSpringVelocity:0
+						options:UIViewAnimationOptionCurveEaseOut
+#endif
 					 animations:^{
 						 [_textBackView.superview layoutIfNeeded];
+					 }
+					 completion:^(BOOL finished) {
 					 }];
 }
 
