@@ -177,25 +177,35 @@
 	
 	cell.textView.hidden = YES;
 	
-	[UIView animateWithDuration:[self transitionDuration:transitionContext]
-#ifdef _USING_SPRING_WITH_DAMPING
-						  delay:0
-		 usingSpringWithDamping:0.5
-		  initialSpringVelocity:0
-						options:UIViewAnimationOptionCurveEaseOut
-#endif
-					 animations:^{
-						 textView.frame = frameOfDestinationTextView;
-						 textView.center = CGPointMake(ceil([transitionContext containerView].center.x), ceil([transitionContext containerView].center.y));
-						 textView.alpha = 1;
-						 previewController.view.alpha = 1.0;
-					 } completion:^(BOOL finished) {
-						 previewController.view.alpha = 1.0;
-						 [textView removeFromSuperview];
-						 [transitionContext completeTransition:YES];
-						 previewController.textView.hidden = NO;
-						 cell.textView.hidden = NO;
-					 }];
+	void (^animations)(void) = ^void (void) {
+		textView.frame = frameOfDestinationTextView;
+		textView.center = CGPointMake(ceil([transitionContext containerView].center.x), ceil([transitionContext containerView].center.y));
+		textView.alpha = 1;
+		previewController.view.alpha = 1.0;
+	};
+	
+	void (^completion)(BOOL) = ^void (BOOL finished) {
+		previewController.view.alpha = 1.0;
+		[textView removeFromSuperview];
+		[transitionContext completeTransition:YES];
+		previewController.textView.hidden = NO;
+		cell.textView.hidden = NO;
+	};
+	
+	if ([self springsWithDamping]) {
+		[UIView animateWithDuration:[self transitionDuration:transitionContext]
+							  delay:0
+			 usingSpringWithDamping:0.5
+			  initialSpringVelocity:0
+							options:UIViewAnimationOptionCurveEaseOut
+						 animations:animations
+						 completion:completion];
+	}
+	else {
+		[UIView animateWithDuration:[self transitionDuration:transitionContext]
+						 animations:animations
+						 completion:completion];
+	}
 }
 
 /**
@@ -237,22 +247,36 @@
 	textView.frame = frameOfFromTextView;
 	textView.center = [[transitionContext containerView] convertPoint:previewController.textView.center fromView:previewController.textView.superview];
 	
-	[UIView animateWithDuration:[self transitionDuration:transitionContext]
-#ifdef _USING_SPRING_WITH_DAMPING
-						  delay:0
-		 usingSpringWithDamping:0.5
-		  initialSpringVelocity:0
-						options:UIViewAnimationOptionCurveEaseOut
-#endif
-					 animations:^{
-						 textView.alpha = 1;
-						 textView.frame = frameOfDestinationTextView;
-						 fromController.view.alpha = 0;
-					 } completion:^(BOOL finished) {
-						 [textView removeFromSuperview];
-						 cell.textView.hidden = NO;
-						 [transitionContext completeTransition:YES];
-					 }];
+	void (^animations)(void) = ^void (void) {
+		textView.alpha = 1;
+		textView.frame = frameOfDestinationTextView;
+		fromController.view.alpha = 0;
+	};
+	
+	void (^completion)(BOOL) = ^void (BOOL finished) {
+		[textView removeFromSuperview];
+		cell.textView.hidden = NO;
+		[transitionContext completeTransition:YES];
+	};
+	
+	if ([self springsWithDamping]) {
+		[UIView animateWithDuration:[self transitionDuration:transitionContext]
+							  delay:0
+			 usingSpringWithDamping:0.5
+			  initialSpringVelocity:0
+							options:UIViewAnimationOptionCurveEaseOut
+						 animations:animations
+						 completion:completion];
+	}
+	else {
+		[UIView animateWithDuration:[self transitionDuration:transitionContext]
+						 animations:animations
+						 completion:completion];
+	}
+}
+
+- (BOOL)springsWithDamping {
+	return NO;
 }
 
 #pragma mark - Override
@@ -268,11 +292,10 @@
 }
 
 - (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
-#ifdef _USING_SPRING_WITH_DAMPING
-	return 0.4;
-#else
-	return 0.2;
-#endif
+	if ([self springsWithDamping])
+		return 0.4;
+	else
+		return 0.2;
 }
 
 @end

@@ -15,9 +15,6 @@ typedef enum AAKASCIIArtGroupType_ {
 	AAKASCIIArtHistoryGroup	= 2,
 }AAKASCIIArtGroupType;
 
-// Enable or disable spring animation
-#define _USING_SPRING_WITH_DAMPING
-
 // For CoreData, MagicalRecord
 #import <CoreData/CoreData.h>
 #import "CoreData+MagicalRecord.h"
