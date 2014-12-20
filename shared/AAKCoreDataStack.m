@@ -42,6 +42,10 @@ NSString *const AAKKeyboardDataManagerDidUpdateNotification			= @"AAKKeyboardDat
 #endif
 }
 
+/**
+ * App Group containerにaccess.lockファイルがあるかを確認し，一度でもキーボードがフルアクセスで起動されたかを調べる．
+ * @return 一度でもキーボードがフルアクセスで起動されていればYESを返す．
+ **/
 + (BOOL)hasEverAccessGroupContainerByKeyboardApp {
 	NSFileManager *fm = [NSFileManager defaultManager];
 	NSString *containerPath = [[fm containerURLForSecurityApplicationGroupIdentifier:@"group.com.sonson.AAKeyboardApp"] path];
@@ -49,6 +53,9 @@ NSString *const AAKKeyboardDataManagerDidUpdateNotification			= @"AAKKeyboardDat
 	return [fm isReadableFileAtPath:accessLockPath];
 }
 
+/**
+ * 初回起動時のアスキーアートデータを生成し，CoreDataに入力する．
+ **/
 + (void)addDefaultData {
 	NSArray *array = [AAKASCIIArt MR_findAll];
 	if (array.count > 0)
@@ -81,6 +88,9 @@ NSString *const AAKKeyboardDataManagerDidUpdateNotification			= @"AAKKeyboardDat
 	[[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
 }
 
+/**
+ * App GroupsのコンテナにCoreDataファイルを作成し，それを開く．
+ **/
 + (void)setupMagicalRecordForAppGroupsContainer {
 	NSURL *containerURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.sonson.AAKeyboardApp"];
 	NSURL *fileURL = [containerURL URLByAppendingPathComponent:@"asciiart.db"];
@@ -90,6 +100,9 @@ NSString *const AAKKeyboardDataManagerDidUpdateNotification			= @"AAKKeyboardDat
 	[AAKCoreDataStack addDefaultData];
 }
 
+/**
+ * プロセスのもつサンドボックスのドキュメントパスにCoreDataファイルを作成し，それを開く．
+ **/
 + (void)setupMagicalRecordForLocal {
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *path = paths[0];
