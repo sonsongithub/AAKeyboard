@@ -38,11 +38,6 @@
 	_groups = [NSMutableArray arrayWithArray:[AAKASCIIArtGroup MR_findAllSortedBy:@"order" ascending:YES]];
 	self.tableView.allowsSelectionDuringEditing = YES;
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDataManagerDidUpdateNotification:) name:AAKKeyboardDataManagerDidUpdateNotification object:nil];
-	
-	if (self.navigationController.viewControllers[0] == self) {
-		UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
-		self.navigationItem.leftBarButtonItem = button;
-	}
 }
 
 - (void)keyboardDataManagerDidUpdateNotification:(NSNotification*)notification {
@@ -50,11 +45,20 @@
 	[self.tableView reloadData];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	if (self.navigationController.viewControllers[0] == self) {
+		UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
+		self.navigationItem.leftBarButtonItem = button;
+	}
+}
+
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	[self.navigationController setToolbarHidden:NO animated:YES];
 	self.toolbarItems = @[self.editButtonItem];
 	[self.tableView reloadData];
+	
 }
 
 #pragma mark - Table view data source
