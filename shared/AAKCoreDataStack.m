@@ -33,8 +33,20 @@ NSString *const AAKKeyboardDataManagerDidUpdateNotification			= @"AAKKeyboardDat
 	}
 	
 	DNSLog(@"Full Access On");
+	
+	NSString *accessLockPath = [containerPath stringByAppendingPathComponent:@"access.lock"];
+	if (![fm isReadableFileAtPath:accessLockPath])
+		[@"access" writeToFile:accessLockPath atomically:NO encoding:NSUTF8StringEncoding error:&error];
+	
 	return YES;
 #endif
+}
+
++ (BOOL)hasEverAccessGroupContainerByKeyboardApp {
+	NSFileManager *fm = [NSFileManager defaultManager];
+	NSString *containerPath = [[fm containerURLForSecurityApplicationGroupIdentifier:@"group.com.sonson.AAKeyboardApp"] path];
+	NSString *accessLockPath = [containerPath stringByAppendingPathComponent:@"access.lock"];
+	return [fm isReadableFileAtPath:accessLockPath];
 }
 
 + (void)addDefaultData {

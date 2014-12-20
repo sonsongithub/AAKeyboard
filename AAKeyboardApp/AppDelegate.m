@@ -30,8 +30,23 @@
 	return YES;
 }
 
--(void)applicationWillEnterForeground:(UIApplication *)application {
+- (void)showKeyboardGrantWarning {
+	if ([AAKCoreDataStack hasEverAccessGroupContainerByKeyboardApp]) {
+		UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Error", nil)
+																	   message:NSLocalizedString(@"You CANNOT input any ASCII arts using AAKeyboard because the keyboard has not been given full access. ", nil)
+																preferredStyle:UIAlertControllerStyleAlert];
+		UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK"
+														 style:UIAlertActionStyleDefault
+													   handler:^(UIAlertAction *action) {
+													   }];
+		[alert addAction:action];
+		[self.window.rootViewController presentViewController:alert animated:YES completion:nil];
+	}
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application {
 	[AAKCoreDataStack setupMagicalRecordForAppGroupsContainer];
+	[self showKeyboardGrantWarning];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -44,6 +59,7 @@
 
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	[AAKCoreDataStack setupMagicalRecordForAppGroupsContainer];
+	[self showKeyboardGrantWarning];
 	return YES;
 }
 

@@ -18,8 +18,11 @@ extern NSString *const AAKKeyboardDataManagerDidUpdateNotification;		/** デー�
  **/
 + (BOOL)isOpenAccessGranted;
 
++ (BOOL)hasEverAccessGroupContainerByKeyboardApp;
+
 + (void)addDefaultData;
 + (void)setupMagicalRecordForAppGroupsContainer;
 + (void)setupMagicalRecordForLocal;
+
 
 @end
