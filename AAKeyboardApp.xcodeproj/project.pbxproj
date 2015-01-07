@@ -149,8 +149,6 @@
 		14B274F01A0A0D83005BF3B1 /* AAKAACollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14B274DC1A0A0D83005BF3B1 /* AAKAACollectionViewCell.xib */; };
 		14B274F31A0A0D83005BF3B1 /* AAKAASupplementaryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14B274DD1A0A0D83005BF3B1 /* AAKAASupplementaryView.xib */; };
 		14B275171A0A0DF3005BF3B1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14B275151A0A0DF3005BF3B1 /* Images.xcassets */; };
-		14B275181A0A0DF3005BF3B1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14B275151A0A0DF3005BF3B1 /* Images.xcassets */; };
-		14B275191A0A0DF3005BF3B1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14B275151A0A0DF3005BF3B1 /* Images.xcassets */; };
 		14B2751A1A0A0DF3005BF3B1 /* mona.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14B275161A0A0DF3005BF3B1 /* mona.ttf */; };
 		14B2751B1A0A0DF3005BF3B1 /* mona.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14B275161A0A0DF3005BF3B1 /* mona.ttf */; };
 		14B2751C1A0A0DF3005BF3B1 /* mona.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14B275161A0A0DF3005BF3B1 /* mona.ttf */; };
@@ -1010,7 +1008,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14B275191A0A0DF3005BF3B1 /* Images.xcassets in Resources */,
 				14F6361B1A3E36BE0056C3F5 /* InfoPlist.strings in Resources */,
 				14A5139119EC75300098C02C /* extension_js.js in Resources */,
 				14C7B0951A1A62CB0081FA5B /* default.json in Resources */,
@@ -1051,7 +1048,6 @@
 			files = (
 				14527C161A1208030019F93A /* AAKNotifyView.xib in Resources */,
 				14F636221A3E370B0056C3F5 /* InfoPlist.strings in Resources */,
-				14B275181A0A0DF3005BF3B1 /* Images.xcassets in Resources */,
 				14F6F3981A100D8600BEE8E2 /* AAKToolbarHeaderView.xib in Resources */,
 				14DC6C9E1A1A410900450A0A /* default.json in Resources */,
 				14B2751B1A0A0DF3005BF3B1 /* mona.ttf in Resources */,
