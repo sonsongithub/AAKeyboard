@@ -20,7 +20,33 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+	
+	_scrollView.pagingEnabled = YES;
+	
+	
+	CGFloat offset = 10;
+	
+	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+		CGFloat contentWidth = 320 + offset * 2;
+		_width.constant = 320 + offset * 2;
+		_top.constant = -455;
+		{
+			UIImageView *v1 = [[UIImageView alloc] initWithFrame:CGRectMake(  0, 0, contentWidth, 427)];
+			v1.image = [UIImage imageNamed:@"app2tch_ipad001.png"];
+			v1.contentMode = UIViewContentModeCenter;
+			[_scrollView addSubview:v1];
+			UIImageView *v2 = [[UIImageView alloc] initWithFrame:CGRectMake(contentWidth, 0, contentWidth, 427)];
+			v2.image = [UIImage imageNamed:@"app2tch_ipad002.png"];
+			v2.contentMode = UIViewContentModeCenter;
+			[_scrollView addSubview:v2];
+			_scrollView.contentSize = CGSizeMake(contentWidth * 2, 427);
+		}
+		_scrollView.clipsToBounds = NO;
+	}
+	else {
+		_width.constant = 280;
+		_top.constant = -328;
+	}
 }
 
 - (void)didReceiveMemoryWarning {

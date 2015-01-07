@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AAKHelpViewController : UIViewController
-
+@interface AAKHelpViewController : UIViewController {
+	IBOutlet NSLayoutConstraint *_top;
+	IBOutlet NSLayoutConstraint *_width;
+	
+	IBOutlet UIScrollView *_scrollView;
+}
 @end
