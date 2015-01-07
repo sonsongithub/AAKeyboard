@@ -76,10 +76,10 @@
             </objects>
             <point key="canvasLocation" x="107" y="-946"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Help Select View Controller-->
         <scene sceneID="ivD-AO-EA5">
             <objects>
-                <tableViewController id="GGj-Eb-ume" sceneMemberID="viewController">
+                <tableViewController id="GGj-Eb-ume" customClass="AAKHelpSelectViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="q1h-nD-sG9">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -101,7 +101,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="cXs-Km-O4a" kind="presentation" id="Hxa-9d-e9C"/>
+                                            <segue destination="cXs-Km-O4a" kind="presentation" identifier="OpenHelpViewControllerSegue" id="xtX-zV-Ioc"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -121,6 +121,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="cXs-Km-O4a" kind="presentation" identifier="OpenHelpViewControllerSegue" id="80q-Bt-M4F"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="Uts-1b-ZVl" style="IBUITableViewCellStyleDefault" id="24d-Zo-2Ub">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -135,6 +138,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="cXs-Km-O4a" kind="presentation" identifier="OpenHelpViewControllerSegue" id="lXo-hW-MgS"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="FEh-6I-VvG" style="IBUITableViewCellStyleDefault" id="tq8-7j-zCa">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -149,6 +155,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="cXs-Km-O4a" kind="presentation" identifier="OpenHelpViewControllerSegue" id="wx4-TL-kxY"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -158,7 +167,13 @@
                             <outlet property="delegate" destination="GGj-Eb-ume" id="p76-2h-B1K"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="4Uf-tr-mzb"/>
+                    <navigationItem key="navigationItem" id="4Uf-tr-mzb">
+                        <barButtonItem key="leftBarButtonItem" title="Done" style="done" id="ynz-P0-bxh">
+                            <connections>
+                                <action selector="close:" destination="GGj-Eb-ume" id="978-F5-gAl"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JYG-uy-TmB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -214,7 +229,7 @@
                                 <rect key="frame" x="0.0" y="513" width="600" height="87"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is a description." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shJ-lo-Bpl">
-                                        <rect key="frame" x="221" y="32.5" width="158" height="20.5"/>
+                                        <rect key="frame" x="221" y="33" width="158" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -996,6 +1011,7 @@
         <image name="photoLibrary" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="wx4-TL-kxY"/>
         <segue reference="hLR-ag-K7X"/>
     </inferredMetricsTieBreakers>
 </document>

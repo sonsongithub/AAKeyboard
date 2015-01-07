@@ -11,7 +11,7 @@
 @interface AAKHelpViewController : UIViewController {
 	IBOutlet NSLayoutConstraint *_top;
 	IBOutlet NSLayoutConstraint *_width;
-	
 	IBOutlet UIScrollView *_scrollView;
 }
+@property (nonatomic, copy) NSString *helpIdentifier;
 @end

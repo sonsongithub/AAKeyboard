@@ -170,6 +170,7 @@
 		14CB157D19EA328500D05E9C /* AAKToolbarHistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CB157B19EA328500D05E9C /* AAKToolbarHistoryCell.m */; };
 		14D0D72F19FA13D900870C92 /* AAKRegisterActionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D0D72E19FA13D900870C92 /* AAKRegisterActionViewController.m */; };
 		14DC6C9E1A1A410900450A0A /* default.json in Resources */ = {isa = PBXBuildFile; fileRef = 14DC6C9C1A1A410700450A0A /* default.json */; };
+		14E8CAAE1A5D939600508CBA /* AAKHelpSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14E8CAAD1A5D939600508CBA /* AAKHelpSelectViewController.m */; };
 		14EE653C1A15ED6200FA0731 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 14EE653A1A15ED6200FA0731 /* Model.xcdatamodeld */; };
 		14EE653D1A15ED6200FA0731 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 14EE653A1A15ED6200FA0731 /* Model.xcdatamodeld */; };
 		14EE653E1A15ED6200FA0731 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 14EE653A1A15ED6200FA0731 /* Model.xcdatamodeld */; };
@@ -384,6 +385,8 @@
 		14D0D72D19FA13D900870C92 /* AAKRegisterActionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKRegisterActionViewController.h; sourceTree = "<group>"; };
 		14D0D72E19FA13D900870C92 /* AAKRegisterActionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKRegisterActionViewController.m; sourceTree = "<group>"; };
 		14DC6C9C1A1A410700450A0A /* default.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = default.json; sourceTree = "<group>"; };
+		14E8CAAC1A5D939600508CBA /* AAKHelpSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKHelpSelectViewController.h; sourceTree = "<group>"; };
+		14E8CAAD1A5D939600508CBA /* AAKHelpSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKHelpSelectViewController.m; sourceTree = "<group>"; };
 		14EE653B1A15ED6200FA0731 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		14EE653F1A15EEB700FA0731 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		14EE65551A199AFD00FA0731 /* AAKASCIIArtDummyHistoryGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKASCIIArtDummyHistoryGroup.h; sourceTree = "<group>"; };
@@ -800,6 +803,8 @@
 				14530C341A1BA0AE00B6BFFE /* AAKSettingViewController.m */,
 				1467A6B41A36DA8600F43B96 /* AAKHelpViewController.h */,
 				1467A6B51A36DA8600F43B96 /* AAKHelpViewController.m */,
+				14E8CAAC1A5D939600508CBA /* AAKHelpSelectViewController.h */,
+				14E8CAAD1A5D939600508CBA /* AAKHelpSelectViewController.m */,
 				1402F1A01A0D29BF0000F269 /* Animation */,
 				1402F19F1A0D29A50000F269 /* UICollectionReusableView */,
 				14FBD3B019E21213005FC38B /* Main.storyboard */,
@@ -1177,6 +1182,7 @@
 				14B274BB1A0A0D6F005BF3B1 /* AAKCreateNewGroupViewController.m in Sources */,
 				14FBD3A919E21213005FC38B /* main.m in Sources */,
 				1415288D1A18585600EB80AC /* NSEntityDescription+MagicalDataImport.m in Sources */,
+				14E8CAAE1A5D939600508CBA /* AAKHelpSelectViewController.m in Sources */,
 				14B274EA1A0A0D83005BF3B1 /* AAKAASupplementaryView.m in Sources */,
 				141528C61A18585700EB80AC /* MagicalRecord+iCloud.m in Sources */,
 				141528991A18585600EB80AC /* NSString+MagicalDataImport.m in Sources */,

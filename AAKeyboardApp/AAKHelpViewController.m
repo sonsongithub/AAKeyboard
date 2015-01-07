@@ -21,8 +21,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	_scrollView.pagingEnabled = YES;
+	NSInteger numberOfPages = 0;
 	
+	if ([self.helpIdentifier isEqualToString:@"setup"]) {
+		numberOfPages = 9;
+	}
+	if ([self.helpIdentifier isEqualToString:@"action"]) {
+		numberOfPages = 8;
+	}
+	if ([self.helpIdentifier isEqualToString:@"copy"]) {
+		numberOfPages = 6;
+	}
+	if ([self.helpIdentifier isEqualToString:@"app2tch"]) {
+		numberOfPages = 4;
+	}
+	
+	
+	_scrollView.pagingEnabled = YES;
+	self.view.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
 	
 	CGFloat offset = 10;
 	
@@ -30,22 +46,29 @@
 		CGFloat contentWidth = 320 + offset * 2;
 		_width.constant = 320 + offset * 2;
 		_top.constant = -455;
-		{
-			UIImageView *v1 = [[UIImageView alloc] initWithFrame:CGRectMake(  0, 0, contentWidth, 427)];
-			v1.image = [UIImage imageNamed:@"app2tch_ipad001.png"];
+		for (NSInteger i = 0; i < numberOfPages; i++) {
+			UIImageView *v1 = [[UIImageView alloc] initWithFrame:CGRectMake(contentWidth * i, 0, contentWidth, 427)];
+			NSString *name = [NSString stringWithFormat:@"%@_ipad%03ld.png", self.helpIdentifier, i + 1];
+			v1.image = [UIImage imageNamed:name];
 			v1.contentMode = UIViewContentModeCenter;
 			[_scrollView addSubview:v1];
-			UIImageView *v2 = [[UIImageView alloc] initWithFrame:CGRectMake(contentWidth, 0, contentWidth, 427)];
-			v2.image = [UIImage imageNamed:@"app2tch_ipad002.png"];
-			v2.contentMode = UIViewContentModeCenter;
-			[_scrollView addSubview:v2];
-			_scrollView.contentSize = CGSizeMake(contentWidth * 2, 427);
 		}
+		_scrollView.contentSize = CGSizeMake(contentWidth * numberOfPages, 427);
 		_scrollView.clipsToBounds = NO;
 	}
 	else {
-		_width.constant = 280;
+		CGFloat contentWidth = 240 + offset * 2;
+		_width.constant = contentWidth;
 		_top.constant = -328;
+		for (NSInteger i = 0; i < numberOfPages; i++) {
+			UIImageView *v1 = [[UIImageView alloc] initWithFrame:CGRectMake(contentWidth * i, 0, contentWidth, 427)];
+			NSString *name = [NSString stringWithFormat:@"%@%03ld.png", self.helpIdentifier, i + 1];
+			v1.image = [UIImage imageNamed:name];
+			v1.contentMode = UIViewContentModeCenter;
+			[_scrollView addSubview:v1];
+		}
+		_scrollView.contentSize = CGSizeMake(contentWidth * numberOfPages, 427);
+		_scrollView.clipsToBounds = NO;
 	}
 }
 
