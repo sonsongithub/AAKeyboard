@@ -23,9 +23,19 @@
 	UINavigationController *nav = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"AAKRegisterNavigationController"];
 	AAKRegisterViewController *con = (AAKRegisterViewController*)nav.topViewController;
 	
-	[self.window.rootViewController presentViewController:nav animated:YES completion:^{
-		con.AATextView.text = decodedString;
-	}];
+	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+		nav.modalPresentationStyle = UIModalPresentationFormSheet;
+		[self.window.rootViewController presentViewController:nav animated:YES completion:^{
+			con.AATextView.text = decodedString;
+		}];
+		
+	}
+	else {
+		nav.modalPresentationStyle = UIModalPresentationCurrentContext;
+		[self.window.rootViewController presentViewController:nav animated:YES completion:^{
+			con.AATextView.text = decodedString;
+		}];
+	}
 	
 	return YES;
 }

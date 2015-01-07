@@ -31,9 +31,22 @@ static NSString * const reuseIdentifier = @"Cell";
 	UINavigationController *nav = (UINavigationController*)[self.storyboard instantiateViewControllerWithIdentifier:@"AAKRegisterNavigationController"];
 	AAKRegisterViewController *con = (AAKRegisterViewController*)nav.topViewController;
 	NSString *string = [[UIPasteboard generalPasteboard] valueForPasteboardType:@"public.text"];
-	[self presentViewController:nav animated:YES completion:^{
-		con.AATextView.text = string;
-	}];
+	
+	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+		nav.modalPresentationStyle = UIModalPresentationPopover;
+		nav.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+		nav.popoverPresentationController.barButtonItem = sender;
+		nav.popoverPresentationController.delegate = self;
+		[self presentViewController:nav animated:YES completion:^{
+			con.AATextView.text = string;
+		}];
+	}
+	else {
+		nav.modalPresentationStyle = UIModalPresentationCurrentContext;
+		[self presentViewController:nav animated:YES completion:^{
+			con.AATextView.text = string;
+		}];
+	}
 }
 
 - (IBAction)openGroupEditViewController:(id)sender {
