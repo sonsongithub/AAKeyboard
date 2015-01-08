@@ -194,6 +194,8 @@
 		14F6F39C1A100DA900BEE8E2 /* UIColor+keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F6F39B1A100DA900BEE8E2 /* UIColor+keyboard.m */; };
 		14F6F39D1A100DA900BEE8E2 /* UIColor+keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F6F39B1A100DA900BEE8E2 /* UIColor+keyboard.m */; };
 		14F6F39E1A100DA900BEE8E2 /* UIColor+keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F6F39B1A100DA900BEE8E2 /* UIColor+keyboard.m */; };
+		14F7C2CC1A5E43A2004F73A6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14B275151A0A0DF3005BF3B1 /* Images.xcassets */; };
+		14F7C2CD1A5E43A3004F73A6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14B275151A0A0DF3005BF3B1 /* Images.xcassets */; };
 		14FBD3A919E21213005FC38B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 14FBD3A819E21213005FC38B /* main.m */; };
 		14FBD3B219E21213005FC38B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14FBD3B019E21213005FC38B /* Main.storyboard */; };
 		14FBD3B719E21213005FC38B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14FBD3B519E21213005FC38B /* LaunchScreen.xib */; };
@@ -1014,6 +1016,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14F6361B1A3E36BE0056C3F5 /* InfoPlist.strings in Resources */,
+				14F7C2CD1A5E43A3004F73A6 /* Images.xcassets in Resources */,
 				14A5139119EC75300098C02C /* extension_js.js in Resources */,
 				14C7B0951A1A62CB0081FA5B /* default.json in Resources */,
 				14A5138619EC68530098C02C /* MainInterface.storyboard in Resources */,
@@ -1053,6 +1056,7 @@
 			files = (
 				14527C161A1208030019F93A /* AAKNotifyView.xib in Resources */,
 				14F636221A3E370B0056C3F5 /* InfoPlist.strings in Resources */,
+				14F7C2CC1A5E43A2004F73A6 /* Images.xcassets in Resources */,
 				14F6F3981A100D8600BEE8E2 /* AAKToolbarHeaderView.xib in Resources */,
 				14DC6C9E1A1A410900450A0A /* default.json in Resources */,
 				14B2751B1A0A0DF3005BF3B1 /* mona.ttf in Resources */,
