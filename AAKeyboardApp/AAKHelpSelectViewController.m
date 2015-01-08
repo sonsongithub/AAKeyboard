@@ -54,6 +54,10 @@
 		if (indexPath.section == 1 && indexPath.row == 2) {
 			vc.helpIdentifier = @"app2tch";
 		}
+		if (indexPath.section == 2 && indexPath.row == 0) {
+			vc.helpIdentifier = @"copyAsImage";
+		}
+
 	}
 	
 	[self.tableView deselectRowAtIndexPath:indexPath animated:YES];

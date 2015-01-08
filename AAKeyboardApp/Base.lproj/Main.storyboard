@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14C81f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Kz7-TH-ldM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C94b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Kz7-TH-ldM">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -161,6 +161,27 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection id="AF7-zF-lOF">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="zTu-G4-5N5" style="IBUITableViewCellStyleDefault" id="OmI-e5-Kqg">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OmI-e5-Kqg" id="JMb-xa-NDN">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Input AA as an image from keyboard" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zTu-G4-5N5">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="cXs-Km-O4a" kind="presentation" identifier="OpenHelpViewControllerSegue" id="a7G-SO-0VC"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="GGj-Eb-ume" id="kSK-It-eVz"/>
@@ -191,6 +212,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZSg-ai-52n" customClass="AAKHelpDummyTapView">
+                                <rect key="frame" x="0.0" y="58" width="600" height="427"/>
+                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="targetView" destination="IWd-ja-U8c" id="CB1-ED-zSf"/>
+                                </connections>
+                            </view>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="7" translatesAutoresizingMaskIntoConstraints="NO" id="fbR-yQ-Jsc">
                                 <rect key="frame" x="180" y="13" width="240" height="37"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -198,7 +226,7 @@
                                     <constraint firstAttribute="width" constant="240" id="719-fj-fLe"/>
                                     <constraint firstAttribute="height" constant="37" id="yUe-Zg-dOU"/>
                                 </constraints>
-                                <color key="pageIndicatorTintColor" red="0.57230681179999998" green="0.57230681179999998" blue="0.57230681179999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="pageIndicatorTintColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <color key="currentPageIndicatorTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </pageControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kli-rs-NLz">
@@ -224,6 +252,9 @@
                                 <variation key="heightClass=compact-widthClass=compact" ambiguous="YES">
                                     <rect key="frame" x="80" y="58" width="240" height="427"/>
                                 </variation>
+                                <connections>
+                                    <outlet property="delegate" destination="cXs-Km-O4a" id="dQT-Kg-6Ir"/>
+                                </connections>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bGg-49-Oi5">
                                 <rect key="frame" x="0.0" y="513" width="600" height="87"/>
@@ -266,6 +297,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="_pageControl" destination="fbR-yQ-Jsc" id="409-aM-2PM"/>
                         <outlet property="_scrollView" destination="IWd-ja-U8c" id="Pme-Yp-kCO"/>
                         <outlet property="_top" destination="GnT-fV-9xe" id="MfF-14-Sa4"/>
                         <outlet property="_width" destination="jPr-Yf-bA6" id="naZ-l0-4Xj"/>
@@ -273,7 +305,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2o8-Jw-JHW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2284.5" y="-2448"/>
+            <point key="canvasLocation" x="2284" y="-2448"/>
         </scene>
         <!--Setting-->
         <scene sceneID="s1w-cl-srZ">
@@ -1011,7 +1043,7 @@
         <image name="photoLibrary" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="wx4-TL-kxY"/>
         <segue reference="hLR-ag-K7X"/>
+        <segue reference="a7G-SO-0VC"/>
     </inferredMetricsTieBreakers>
 </document>

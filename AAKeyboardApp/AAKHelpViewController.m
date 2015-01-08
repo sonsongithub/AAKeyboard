@@ -8,8 +8,9 @@
 
 #import "AAKHelpViewController.h"
 
-@interface AAKHelpViewController ()
-
+@interface AAKHelpViewController () {
+	CGFloat _contentWidth;
+}
 @end
 
 @implementation AAKHelpViewController
@@ -35,15 +36,19 @@
 	if ([self.helpIdentifier isEqualToString:@"app2tch"]) {
 		numberOfPages = 4;
 	}
-	
+	if ([self.helpIdentifier isEqualToString:@"copyAsImage"]) {
+		numberOfPages = 5;
+	}
 	
 	_scrollView.pagingEnabled = YES;
 	self.view.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
+	_pageControl.numberOfPages = numberOfPages;
 	
 	CGFloat offset = 10;
 	
 	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
 		CGFloat contentWidth = 320 + offset * 2;
+		_contentWidth = contentWidth;
 		_width.constant = 320 + offset * 2;
 		_top.constant = -455;
 		for (NSInteger i = 0; i < numberOfPages; i++) {
@@ -58,8 +63,9 @@
 	}
 	else {
 		CGFloat contentWidth = 240 + offset * 2;
+		_contentWidth = contentWidth;
 		_width.constant = contentWidth;
-		_top.constant = -328;
+		_top.constant = -455;
 		for (NSInteger i = 0; i < numberOfPages; i++) {
 			UIImageView *v1 = [[UIImageView alloc] initWithFrame:CGRectMake(contentWidth * i, 0, contentWidth, 427)];
 			NSString *name = [NSString stringWithFormat:@"%@%03ld.png", self.helpIdentifier, i + 1];
@@ -72,19 +78,8 @@
 	}
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+	_pageControl.currentPage = (NSInteger)scrollView.contentOffset.x / (NSInteger)_contentWidth;
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

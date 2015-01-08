@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AAKHelpDummyTapView : UIView
+@interface AAKHelpDummyTapView : UIView {
+	IBOutlet UIView *targetView;
+}
 
 @end

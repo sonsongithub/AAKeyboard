@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AAKHelpViewController : UIViewController {
+@interface AAKHelpViewController : UIViewController <UIScrollViewDelegate> {
 	IBOutlet NSLayoutConstraint *_top;
 	IBOutlet NSLayoutConstraint *_width;
 	IBOutlet UIScrollView *_scrollView;
+	IBOutlet UIPageControl *_pageControl;
 }
 @property (nonatomic, copy) NSString *helpIdentifier;
 @end
