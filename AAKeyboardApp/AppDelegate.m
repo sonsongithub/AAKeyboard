@@ -41,7 +41,7 @@
 }
 
 - (void)showKeyboardGrantWarning {
-	if ([AAKCoreDataStack hasEverAccessGroupContainerByKeyboardApp]) {
+	if (![AAKCoreDataStack hasEverAccessGroupContainerByKeyboardApp]) {
 		UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Error", nil)
 																	   message:NSLocalizedString(@"You CANNOT input any ASCII arts using AAKeyboard because the keyboard has not been given full access. ", nil)
 																preferredStyle:UIAlertControllerStyleAlert];
