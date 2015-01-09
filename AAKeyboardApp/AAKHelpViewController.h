@@ -13,6 +13,7 @@
 	IBOutlet NSLayoutConstraint *_width;
 	IBOutlet UIScrollView *_scrollView;
 	IBOutlet UIPageControl *_pageControl;
+	IBOutlet UILabel *_descriptionLabel;
 }
 @property (nonatomic, copy) NSString *helpIdentifier;
 @end

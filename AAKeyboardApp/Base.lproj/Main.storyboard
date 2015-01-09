@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C94b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Kz7-TH-ldM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C81f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Kz7-TH-ldM">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -76,7 +76,7 @@
             </objects>
             <point key="canvasLocation" x="107" y="-946"/>
         </scene>
-        <!--Help Select View Controller-->
+        <!--Help-->
         <scene sceneID="ivD-AO-EA5">
             <objects>
                 <tableViewController id="GGj-Eb-ume" customClass="AAKHelpSelectViewController" sceneMemberID="viewController">
@@ -188,7 +188,7 @@
                             <outlet property="delegate" destination="GGj-Eb-ume" id="p76-2h-B1K"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="4Uf-tr-mzb">
+                    <navigationItem key="navigationItem" title="Help" id="4Uf-tr-mzb">
                         <barButtonItem key="leftBarButtonItem" title="Done" style="done" id="ynz-P0-bxh">
                             <connections>
                                 <action selector="close:" destination="GGj-Eb-ume" id="978-F5-gAl"/>
@@ -229,25 +229,12 @@
                                 <color key="pageIndicatorTintColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <color key="currentPageIndicatorTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </pageControl>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kli-rs-NLz">
-                                <rect key="frame" x="16" y="20" width="24" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="24" id="NXv-1o-tad"/>
-                                    <constraint firstAttribute="height" constant="24" id="aUv-Pd-hRc"/>
-                                </constraints>
-                                <state key="normal" image="CloseButton">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="close:" destination="cXs-Km-O4a" eventType="touchUpInside" id="PAw-yU-Au1"/>
-                                </connections>
-                            </button>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IWd-ja-U8c">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IWd-ja-U8c">
                                 <rect key="frame" x="180" y="58" width="240" height="427"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="427" id="bsk-Sb-0Mj"/>
-                                    <constraint firstAttribute="width" constant="320" id="jPr-Yf-bA6"/>
+                                    <constraint firstAttribute="width" constant="240" id="jPr-Yf-bA6"/>
                                 </constraints>
                                 <variation key="heightClass=compact-widthClass=compact" ambiguous="YES">
                                     <rect key="frame" x="80" y="58" width="240" height="427"/>
@@ -280,6 +267,19 @@
                                     <rect key="frame" x="0.0" y="400" width="400" height="0.0"/>
                                 </variation>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kli-rs-NLz">
+                                <rect key="frame" x="16" y="12" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="NXv-1o-tad"/>
+                                    <constraint firstAttribute="height" constant="40" id="aUv-Pd-hRc"/>
+                                </constraints>
+                                <state key="normal" image="CloseButton">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="close:" destination="cXs-Km-O4a" eventType="touchUpInside" id="PAw-yU-Au1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -292,11 +292,12 @@
                             <constraint firstAttribute="centerX" secondItem="IWd-ja-U8c" secondAttribute="centerX" id="fs2-Cj-2wk"/>
                             <constraint firstItem="fbR-yQ-Jsc" firstAttribute="top" secondItem="wsr-5s-rK1" secondAttribute="bottom" constant="13" id="hru-Qq-xdh"/>
                             <constraint firstItem="IWd-ja-U8c" firstAttribute="top" secondItem="fbR-yQ-Jsc" secondAttribute="bottom" constant="8" id="huM-B9-SQC"/>
-                            <constraint firstItem="kli-rs-NLz" firstAttribute="top" secondItem="wsr-5s-rK1" secondAttribute="bottom" constant="20" id="kU9-4J-adY"/>
+                            <constraint firstItem="kli-rs-NLz" firstAttribute="top" secondItem="wsr-5s-rK1" secondAttribute="bottom" constant="12" id="kU9-4J-adY"/>
                             <constraint firstItem="3Gl-sn-Orj" firstAttribute="top" secondItem="bGg-49-Oi5" secondAttribute="bottom" id="mN0-6E-Ceg"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="_descriptionLabel" destination="shJ-lo-Bpl" id="Vgg-Ky-FQm"/>
                         <outlet property="_pageControl" destination="fbR-yQ-Jsc" id="409-aM-2PM"/>
                         <outlet property="_scrollView" destination="IWd-ja-U8c" id="Pme-Yp-kCO"/>
                         <outlet property="_top" destination="GnT-fV-9xe" id="MfF-14-Sa4"/>
@@ -1043,7 +1044,7 @@
         <image name="photoLibrary" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="wx4-TL-kxY"/>
         <segue reference="hLR-ag-K7X"/>
-        <segue reference="a7G-SO-0VC"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -19,6 +19,7 @@
 	UIImageView *_imageView3;
 	UIImageView *_imageView4;
 	NSArray	*_imageViews;
+	NSArray *_descriptions;
 }
 @end
 
@@ -43,38 +44,26 @@
 	if (_currentPage >= 0) {
 		if (currentPage > _currentPage) {
 			_imageView0.frame = CGRectMake(_contentWidth * (currentPage + 2), 0, _contentWidth, 427);
-			
-			UIImageView *tempImageView0 = _imageView0;
-			UIImageView *tempImageView1 = _imageView1;
-			UIImageView *tempImageView2 = _imageView2;
-			UIImageView *tempImageView3 = _imageView3;
-			UIImageView *tempImageView4 = _imageView4;
-			
-			_imageView0 = tempImageView1;
-			_imageView1 = tempImageView2;
-			_imageView2 = tempImageView3;
-			_imageView3 = tempImageView4;
-			_imageView4 = tempImageView0;
+			_imageView0 = _imageViews[1];
+			_imageView1 = _imageViews[2];
+			_imageView2 = _imageViews[3];
+			_imageView3 = _imageViews[4];
+			_imageView4 = _imageViews[0];
 			_imageView4.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%03ld.png", [self fileName], currentPage + 3]];
 		}
 		else {
 			_imageView4.frame = CGRectMake(_contentWidth * (currentPage - 2), 0, _contentWidth, 427);
-			
-			UIImageView *tempImageView0 = _imageView0;
-			UIImageView *tempImageView1 = _imageView1;
-			UIImageView *tempImageView2 = _imageView2;
-			UIImageView *tempImageView3 = _imageView3;
-			UIImageView *tempImageView4 = _imageView4;
-			
-			_imageView0 = tempImageView4;
-			_imageView1 = tempImageView0;
-			_imageView2 = tempImageView1;
-			_imageView3 = tempImageView2;
-			_imageView4 = tempImageView3;
+			_imageView0 = _imageViews[4];
+			_imageView1 = _imageViews[0];
+			_imageView2 = _imageViews[1];
+			_imageView3 = _imageViews[2];
+			_imageView4 = _imageViews[3];
 			_imageView0.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%03ld.png", [self fileName], currentPage - 1]];
 		}
 	}
 	_currentPage = currentPage;
+	
+	_descriptionLabel.text = _descriptions[_currentPage];
 	
 	_imageView0.hidden = (_currentPage - 2 < 0);
 	_imageView1.hidden = (_currentPage - 1 < 0);
@@ -117,10 +106,66 @@
 	return 0;
 }
 
+- (void)setupDescriptions {
+	if ([self.helpIdentifier isEqualToString:@"setup"]) {
+		_descriptions = @[
+						  NSLocalizedString(@"hoge", nil),
+						  NSLocalizedString(@"hoge", nil),
+						  NSLocalizedString(@"hoge", nil),
+						  NSLocalizedString(@"hoge", nil),
+						  NSLocalizedString(@"hoge", nil),
+						  NSLocalizedString(@"hoge", nil),
+						  NSLocalizedString(@"hoge", nil),
+						  NSLocalizedString(@"hoge", nil),
+						  NSLocalizedString(@"hoge", nil)
+						  ];
+	}
+	if ([self.helpIdentifier isEqualToString:@"action"]) {
+		_descriptions = @[
+						  NSLocalizedString(@"hoge", nil),
+						  NSLocalizedString(@"hoge", nil),
+						  NSLocalizedString(@"hoge", nil),
+						  NSLocalizedString(@"hoge", nil),
+						  NSLocalizedString(@"hoge", nil),
+						  NSLocalizedString(@"hoge", nil),
+						  NSLocalizedString(@"hoge", nil)
+						  ];
+	}
+	if ([self.helpIdentifier isEqualToString:@"copy"]) {
+		_descriptions = @[
+						  NSLocalizedString(@"hoge", nil),
+						  NSLocalizedString(@"hoge", nil),
+						  NSLocalizedString(@"hoge", nil),
+						  NSLocalizedString(@"hoge", nil),
+						  NSLocalizedString(@"hoge", nil),
+						  NSLocalizedString(@"hoge", nil)
+						  ];
+	}
+	if ([self.helpIdentifier isEqualToString:@"app2tch"]) {
+		_descriptions = @[
+						  NSLocalizedString(@"hoge", nil),
+						  NSLocalizedString(@"hoge", nil),
+						  NSLocalizedString(@"hoge", nil),
+						  NSLocalizedString(@"hoge", nil)
+						  ];
+	}
+	if ([self.helpIdentifier isEqualToString:@"copyAsImage"]) {
+		_descriptions = @[
+						  NSLocalizedString(@"hoge", nil),
+						  NSLocalizedString(@"hoge", nil),
+						  NSLocalizedString(@"hoge", nil),
+						  NSLocalizedString(@"hoge", nil),
+						  NSLocalizedString(@"hoge", nil)
+						  ];
+	}
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
 	_numberOfPages = [self helpPagesForHelpIndentifier];
+	
+	[self setupDescriptions];
 
 	_scrollView.pagingEnabled = YES;
 	self.view.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
@@ -170,6 +215,8 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 	_pageControl.currentPage = (NSInteger)scrollView.contentOffset.x / (NSInteger)_contentWidth;
 	[self updateTileWithPage:_pageControl.currentPage];
+	
+	
 	[self controlImageViewAlpha];
 }
 
