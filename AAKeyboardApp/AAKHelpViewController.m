@@ -18,6 +18,7 @@
 	UIImageView *_imageView2;
 	UIImageView *_imageView3;
 	UIImageView *_imageView4;
+	NSArray	*_imageViews;
 }
 @end
 
@@ -25,6 +26,14 @@
 
 - (IBAction)close:(id)sender {
 	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)controlImageViewAlpha {
+	CGPoint b = _scrollView.center;
+	for (UIImageView *v in _imageViews) {
+		CGPoint p = [_scrollView.superview convertPoint:v.center fromView:_scrollView];
+		v.alpha = 1 - pow(fabs(b.x - p.x)/350, 2);
+	}
 }
 
 - (void)updateTileWithPage:(NSInteger)currentPage {
@@ -72,6 +81,8 @@
 	_imageView2.hidden = NO;
 	_imageView3.hidden = (_currentPage + 1 >= _numberOfPages);
 	_imageView4.hidden = (_currentPage + 2 >= _numberOfPages);
+	
+	_imageViews = @[_imageView0, _imageView1, _imageView2, _imageView3, _imageView4];
 	
 	if (_imageView0.image == nil && _currentPage - 1 > 0)
 		_imageView0.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%03ld.png", [self fileName], _currentPage - 1]];
@@ -137,6 +148,8 @@
 	_imageView3 = [[UIImageView alloc] initWithFrame:CGRectMake(_contentWidth *  1, 0, _contentWidth, 427)];
 	_imageView4 = [[UIImageView alloc] initWithFrame:CGRectMake(_contentWidth *  2, 0, _contentWidth, 427)];
 	
+	_imageViews = @[_imageView0, _imageView1, _imageView2, _imageView3, _imageView4];
+	
 	_imageView0.contentMode = UIViewContentModeCenter;
 	_imageView1.contentMode = UIViewContentModeCenter;
 	_imageView2.contentMode = UIViewContentModeCenter;
@@ -151,11 +164,13 @@
 	
 	_currentPage = -1;
 	[self updateTileWithPage:0];
+	[self controlImageViewAlpha];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 	_pageControl.currentPage = (NSInteger)scrollView.contentOffset.x / (NSInteger)_contentWidth;
 	[self updateTileWithPage:_pageControl.currentPage];
+	[self controlImageViewAlpha];
 }
 
 @end
