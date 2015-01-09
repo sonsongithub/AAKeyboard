@@ -11,6 +11,7 @@
 @interface AAKHelpViewController () {
 	CGFloat _contentWidth;
 	NSInteger _numberOfPages;
+	NSInteger _currentPage;
 	
 	UIImageView *_imageView0;
 	UIImageView *_imageView1;
@@ -26,63 +27,90 @@
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)updateTileWithCurrentPage:(NSInteger)currentPage {
-	_imageView0.hidden = (currentPage - 2 < 0);
-	_imageView1.hidden = (currentPage - 1 < 0);
+- (void)updateTileWithPage:(NSInteger)currentPage {
+	
+	if (currentPage == _currentPage)
+		return;
+	if (_currentPage >= 0) {
+		if (currentPage > _currentPage) {
+			_imageView0.frame = CGRectMake(_contentWidth * (currentPage + 2), 0, _contentWidth, 427);
+			
+			UIImageView *tempImageView0 = _imageView0;
+			UIImageView *tempImageView1 = _imageView1;
+			UIImageView *tempImageView2 = _imageView2;
+			UIImageView *tempImageView3 = _imageView3;
+			UIImageView *tempImageView4 = _imageView4;
+			
+			_imageView0 = tempImageView1;
+			_imageView1 = tempImageView2;
+			_imageView2 = tempImageView3;
+			_imageView3 = tempImageView4;
+			_imageView4 = tempImageView0;
+			_imageView4.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%03ld.png", [self fileName], currentPage + 3]];
+		}
+		else {
+			_imageView4.frame = CGRectMake(_contentWidth * (currentPage - 2), 0, _contentWidth, 427);
+			
+			UIImageView *tempImageView0 = _imageView0;
+			UIImageView *tempImageView1 = _imageView1;
+			UIImageView *tempImageView2 = _imageView2;
+			UIImageView *tempImageView3 = _imageView3;
+			UIImageView *tempImageView4 = _imageView4;
+			
+			_imageView0 = tempImageView4;
+			_imageView1 = tempImageView0;
+			_imageView2 = tempImageView1;
+			_imageView3 = tempImageView2;
+			_imageView4 = tempImageView3;
+			_imageView0.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%03ld.png", [self fileName], currentPage - 1]];
+		}
+	}
+	_currentPage = currentPage;
+	
+	_imageView0.hidden = (_currentPage - 2 < 0);
+	_imageView1.hidden = (_currentPage - 1 < 0);
 	_imageView2.hidden = NO;
-	_imageView3.hidden = (currentPage + 1 >= _numberOfPages);
-	_imageView4.hidden = (currentPage + 2 >= _numberOfPages);
+	_imageView3.hidden = (_currentPage + 1 >= _numberOfPages);
+	_imageView4.hidden = (_currentPage + 2 >= _numberOfPages);
 	
-	if (currentPage - 2 >= 0) {
-		NSString *name = [NSString stringWithFormat:@"%@_ipad%03ld.png", self.helpIdentifier, currentPage - 2 + 1];
-		UIImage *image = [UIImage imageNamed:name];
-		_imageView0.image = image;
-	}
-	if (currentPage - 1 >= 0) {
-		NSString *name = [NSString stringWithFormat:@"%@_ipad%03ld.png", self.helpIdentifier, currentPage - 1 + 1];
-		UIImage *image = [UIImage imageNamed:name];
-		_imageView1.image = image;
-	}
-	if (currentPage - 0 >= 0) {
-		NSString *name = [NSString stringWithFormat:@"%@_ipad%03ld.png", self.helpIdentifier, currentPage + 0 + 1];
-		UIImage *image = [UIImage imageNamed:name];
-		_imageView2.image = image;
-	}
-	if (currentPage + 1 < _numberOfPages) {
-		NSString *name = [NSString stringWithFormat:@"%@_ipad%03ld.png", self.helpIdentifier, currentPage + 1 + 1];
-		UIImage *image = [UIImage imageNamed:name];
-		_imageView3.image = image;
-	}
-	if (currentPage + 2 < _numberOfPages) {
-		NSString *name = [NSString stringWithFormat:@"%@_ipad%03ld.png", self.helpIdentifier, currentPage + 2 + 1];
-		UIImage *image = [UIImage imageNamed:name];
-		_imageView4.image = image;
-	}
+	if (_imageView0.image == nil && _currentPage - 1 > 0)
+		_imageView0.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%03ld.png", [self fileName], _currentPage - 1]];
+	if (_imageView1.image == nil && _currentPage > 0)
+		_imageView1.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%03ld.png", [self fileName], _currentPage    ]];
+	if (_imageView2.image == nil && _currentPage + 1 > 0)
+		_imageView2.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%03ld.png", [self fileName], _currentPage + 1]];
+	if (_imageView3.image == nil && _currentPage + 2 > 0)
+		_imageView3.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%03ld.png", [self fileName], _currentPage + 2]];
+	if (_imageView4.image == nil && _currentPage + 3 > 0)
+		_imageView4.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%03ld.png", [self fileName], _currentPage + 3]];
+}
 
-	
+- (NSString*)fileName {
+	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
+		return [NSString stringWithFormat:@"%@_ipad", self.helpIdentifier];
+	else
+		return [NSString stringWithFormat:@"%@", self.helpIdentifier];
+}
+
+- (NSInteger)helpPagesForHelpIndentifier {
+	if ([self.helpIdentifier isEqualToString:@"setup"])
+		return 9;
+	if ([self.helpIdentifier isEqualToString:@"action"])
+		return 7;
+	if ([self.helpIdentifier isEqualToString:@"copy"])
+		return 6;
+	if ([self.helpIdentifier isEqualToString:@"app2tch"])
+		return 4;
+	if ([self.helpIdentifier isEqualToString:@"copyAsImage"])
+		return 5;
+	return 0;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	_numberOfPages = 0;
-	
-	if ([self.helpIdentifier isEqualToString:@"setup"]) {
-		_numberOfPages = 9;
-	}
-	if ([self.helpIdentifier isEqualToString:@"action"]) {
-		_numberOfPages = 8;
-	}
-	if ([self.helpIdentifier isEqualToString:@"copy"]) {
-		_numberOfPages = 6;
-	}
-	if ([self.helpIdentifier isEqualToString:@"app2tch"]) {
-		_numberOfPages = 4;
-	}
-	if ([self.helpIdentifier isEqualToString:@"copyAsImage"]) {
-		_numberOfPages = 5;
-	}
-	
+	_numberOfPages = [self helpPagesForHelpIndentifier];
+
 	_scrollView.pagingEnabled = YES;
 	self.view.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
 	_pageControl.numberOfPages = _numberOfPages;
@@ -93,32 +121,15 @@
 		_contentWidth = 320 + offset * 2;
 		_width.constant = 320 + offset * 2;
 		_top.constant = -455;
-		
-		
-//		for (NSInteger i = 0; i < numberOfPages; i++) {
-//			UIImageView *v1 = [[UIImageView alloc] initWithFrame:CGRectMake(contentWidth * i, 0, contentWidth, 427)];
-//			NSString *name = [NSString stringWithFormat:@"%@_ipad%03ld.png", self.helpIdentifier, i + 1];
-//			v1.image = [UIImage imageNamed:name];
-//			v1.contentMode = UIViewContentModeCenter;
-//			[_scrollView addSubview:v1];
-//		}
-		_scrollView.contentSize = CGSizeMake(_contentWidth * _numberOfPages, 427);
-		_scrollView.clipsToBounds = NO;
 	}
 	else {
 		_contentWidth = 240 + offset * 2;
 		_width.constant = _contentWidth;
 		_top.constant = -455;
-//		for (NSInteger i = 0; i < numberOfPages; i++) {
-//			UIImageView *v1 = [[UIImageView alloc] initWithFrame:CGRectMake(contentWidth * i, 0, contentWidth, 427)];
-//			NSString *name = [NSString stringWithFormat:@"%@%03ld.png", self.helpIdentifier, i + 1];
-//			v1.image = [UIImage imageNamed:name];
-//			v1.contentMode = UIViewContentModeCenter;
-//			[_scrollView addSubview:v1];
-//		}
-		_scrollView.contentSize = CGSizeMake(_contentWidth * _numberOfPages, 427);
-		_scrollView.clipsToBounds = NO;
 	}
+
+	_scrollView.contentSize = CGSizeMake(_contentWidth * _numberOfPages, 427);
+	_scrollView.clipsToBounds = NO;
 	
 	_imageView0 = [[UIImageView alloc] initWithFrame:CGRectMake(_contentWidth * -2, 0, _contentWidth, 427)];
 	_imageView1 = [[UIImageView alloc] initWithFrame:CGRectMake(_contentWidth * -1, 0, _contentWidth, 427)];
@@ -138,12 +149,13 @@
 	[_scrollView addSubview:_imageView3];
 	[_scrollView addSubview:_imageView4];
 	
-	[self updateTileWithCurrentPage:0];
+	_currentPage = -1;
+	[self updateTileWithPage:0];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 	_pageControl.currentPage = (NSInteger)scrollView.contentOffset.x / (NSInteger)_contentWidth;
-	[self updateTileWithCurrentPage:_pageControl.currentPage];
+	[self updateTileWithPage:_pageControl.currentPage];
 }
 
 @end
