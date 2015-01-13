@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C81f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Kz7-TH-ldM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C94b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Kz7-TH-ldM">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -246,8 +246,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bGg-49-Oi5">
                                 <rect key="frame" x="0.0" y="513" width="600" height="87"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is a description." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shJ-lo-Bpl">
-                                        <rect key="frame" x="221" y="33" width="158" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is a description." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shJ-lo-Bpl">
+                                        <rect key="frame" x="8" y="33" width="584" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -261,7 +261,9 @@
                                     <constraint firstAttribute="centerY" secondItem="shJ-lo-Bpl" secondAttribute="centerY" id="AJj-Zr-Uff"/>
                                     <constraint firstAttribute="centerY" secondItem="shJ-lo-Bpl" secondAttribute="centerY" id="Atr-E7-BQA"/>
                                     <constraint firstAttribute="centerX" secondItem="shJ-lo-Bpl" secondAttribute="centerX" id="Jzd-eQ-SS4"/>
+                                    <constraint firstAttribute="trailing" secondItem="shJ-lo-Bpl" secondAttribute="trailing" constant="8" id="TxR-5a-cnz"/>
                                     <constraint firstAttribute="centerX" secondItem="shJ-lo-Bpl" secondAttribute="centerX" id="ec8-TT-doO"/>
+                                    <constraint firstItem="shJ-lo-Bpl" firstAttribute="leading" secondItem="bGg-49-Oi5" secondAttribute="leading" constant="8" id="kMa-9v-dtm"/>
                                 </constraints>
                                 <variation key="heightClass=compact-widthClass=compact" ambiguous="YES">
                                     <rect key="frame" x="0.0" y="400" width="400" height="0.0"/>
