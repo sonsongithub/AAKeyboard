@@ -64,6 +64,8 @@
 	_currentPage = currentPage;
 	
 	_descriptionLabel.text = _descriptions[_currentPage];
+	_descriptionLabel.numberOfLines = 6;
+	_descriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;
 	
 	_imageView0.hidden = (_currentPage - 2 < 0);
 	_imageView1.hidden = (_currentPage - 1 < 0);
@@ -109,33 +111,33 @@
 - (void)setupDescriptions {
 	if ([self.helpIdentifier isEqualToString:@"setup"]) {
 		_descriptions = @[
-						  NSLocalizedString(@"hoge", nil),
-						  NSLocalizedString(@"hoge", nil),
-						  NSLocalizedString(@"hoge", nil),
-						  NSLocalizedString(@"hoge", nil),
-						  NSLocalizedString(@"hoge", nil),
-						  NSLocalizedString(@"hoge", nil),
-						  NSLocalizedString(@"hoge", nil),
-						  NSLocalizedString(@"hoge", nil),
-						  NSLocalizedString(@"hoge", nil)
+						  NSLocalizedString(@"At first, run Setting.app.", nil),
+						  NSLocalizedString(@"Tap 'General'.", nil),
+						  NSLocalizedString(@"Tap 'Keyboard'.", nil),
+						  NSLocalizedString(@"Tap 'Keyboard', again.", nil),
+						  NSLocalizedString(@"Tap 'Add neew keyboard...' if you have not added AAKeyboard into your keyboards.", nil),
+						  NSLocalizedString(@"Tap 'AAKeyboard' in order to enable to use AAKeyboard.", nil),
+						  NSLocalizedString(@"And then, turn on 'Full access' of AAKeyboard in order to handle all functions of AAKeyboard.app.", nil),
+						  NSLocalizedString(@"Turn on 'Full access' on this view for enabling all functions. AAKeyboard.app needs 'Full access' in order to save ascii art into the database. AAKeyboard.app does not access any other your private data.", nil),
+						  NSLocalizedString(@"After turning on it, confirm this alert message which will be shown. Anyway, you can use minimum functions without turning on it.", nil)
 						  ];
 	}
 	if ([self.helpIdentifier isEqualToString:@"action"]) {
 		_descriptions = @[
-						  NSLocalizedString(@"hoge", nil),
-						  NSLocalizedString(@"hoge", nil),
-						  NSLocalizedString(@"hoge", nil),
-						  NSLocalizedString(@"hoge", nil),
-						  NSLocalizedString(@"hoge", nil),
-						  NSLocalizedString(@"hoge", nil),
-						  NSLocalizedString(@"hoge", nil)
+						  NSLocalizedString(@"Let me give Safari.app as an example.", nil),
+						  NSLocalizedString(@"Select text you want to register as ascii art.", nil),
+						  NSLocalizedString(@"And then, tap action button on the bottom toolbar.", nil),
+						  NSLocalizedString(@"Tap 'other' since if you have never used this action.", nil),
+						  NSLocalizedString(@"Enable 'Register AA' among the list. And then, 'Register AA' item will be shown in the action list.", nil),
+						  NSLocalizedString(@"Tap 'Register AA'", nil),
+						  NSLocalizedString(@"The view to register your favorite AA will be opened.", nil)
 						  ];
 	}
 	if ([self.helpIdentifier isEqualToString:@"copy"]) {
 		_descriptions = @[
-						  NSLocalizedString(@"hoge", nil),
-						  NSLocalizedString(@"hoge", nil),
-						  NSLocalizedString(@"hoge", nil),
+						  NSLocalizedString(@"Let me give twinkle.app as an example, run twinkle.app.", nil),
+						  NSLocalizedString(@"Open the thread which contains your favorite AA. Long tap on the AA and then the view to select your action will be shown.", nil),
+						  NSLocalizedString(@"Select 'Copy body' and ", nil),
 						  NSLocalizedString(@"hoge", nil),
 						  NSLocalizedString(@"hoge", nil),
 						  NSLocalizedString(@"hoge", nil)
@@ -215,8 +217,6 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 	_pageControl.currentPage = (NSInteger)scrollView.contentOffset.x / (NSInteger)_contentWidth;
 	[self updateTileWithPage:_pageControl.currentPage];
-	
-	
 	[self controlImageViewAlpha];
 }
 
