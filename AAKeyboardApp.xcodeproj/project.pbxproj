@@ -340,7 +340,6 @@
 		14A5138F19EC75300098C02C /* extension_js.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = extension_js.js; sourceTree = "<group>"; };
 		14AD03B81A66D14A00A96DC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		14AD03B91A66D15A00A96DC1 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MainInterface.strings; sourceTree = "<group>"; };
-		14AD03C01A66D33300A96DC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = AAKeyboardApp/Base.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
 		14AD03C41A66D33E00A96DC1 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = AAKeyboardApp/ja.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
 		14ADB6191A23D76600DD7C87 /* AAKGroupRenameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKGroupRenameViewController.h; sourceTree = "<group>"; };
 		14ADB61A1A23D76600DD7C87 /* AAKGroupRenameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKGroupRenameViewController.m; sourceTree = "<group>"; };
@@ -1370,7 +1369,6 @@
 		14AD03BF1A66D33300A96DC1 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				14AD03C01A66D33300A96DC1 /* Base */,
 				14AD03C41A66D33E00A96DC1 /* ja */,
 			);
 			name = Localizable.strings;

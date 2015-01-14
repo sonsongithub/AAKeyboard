@@ -224,8 +224,8 @@ static NSString *AAKAACollectionViewCellWillTapNotification = @"AAKAACollectionV
 - (void)awakeFromNib {
 	[super awakeFromNib];
 	
-	_duplicateButtonOnCell.titleLabel.text = NSLocalizedString(@"Duplicate", nil);
-	_deleteButtonOnCell.titleLabel.text = NSLocalizedString(@"Delete", nil);
+	[_duplicateButtonOnCell setTitle:NSLocalizedString(@"Duplicate", nil) forState:UIControlStateNormal];
+	[_deleteButtonOnCell setTitle:NSLocalizedString(@"Delete", nil) forState:UIControlStateNormal];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didCollectionViewCellWillTapNotification:) name:AAKAACollectionViewCellWillTapNotification object:nil];
 	
