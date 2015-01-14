@@ -108,12 +108,15 @@
 		146EEB5619ED5CE50032F6DE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */; };
 		146EEB5719ED5CEF0032F6DE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */; };
 		14773DD31A5EEC0600BAF888 /* AAKHelpDummyTapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14773DD21A5EEC0600BAF888 /* AAKHelpDummyTapView.m */; };
-		14A5138619EC68530098C02C /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14A5138519EC68530098C02C /* MainInterface.storyboard */; };
 		14A5138919EC68530098C02C /* register.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 14A5137E19EC68530098C02C /* register.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		14A5139119EC75300098C02C /* extension_js.js in Resources */ = {isa = PBXBuildFile; fileRef = 14A5138F19EC75300098C02C /* extension_js.js */; };
 		14A5139319EC85710098C02C /* UZCursorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CB155F19E935BB00D05E9C /* UZCursorView.m */; };
 		14A5139419EC85710098C02C /* UZLoupeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CB156119E935BB00D05E9C /* UZLoupeView.m */; };
 		14A5139519EC85710098C02C /* UZTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CB156319E935BB00D05E9C /* UZTextView.m */; };
+		14AD03B51A66D13B00A96DC1 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14AD03B71A66D13B00A96DC1 /* MainInterface.storyboard */; };
+		14AD03C11A66D33300A96DC1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 14AD03BF1A66D33300A96DC1 /* Localizable.strings */; };
+		14AD03C21A66D33300A96DC1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 14AD03BF1A66D33300A96DC1 /* Localizable.strings */; };
+		14AD03C31A66D33300A96DC1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 14AD03BF1A66D33300A96DC1 /* Localizable.strings */; };
 		14ADB61B1A23D76600DD7C87 /* AAKGroupRenameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14ADB61A1A23D76600DD7C87 /* AAKGroupRenameViewController.m */; };
 		14ADB61C1A23D76600DD7C87 /* AAKGroupRenameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14ADB61A1A23D76600DD7C87 /* AAKGroupRenameViewController.m */; };
 		14B2673E19E6BFD000C0321D /* AAKToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B2673D19E6BFD000C0321D /* AAKToolbar.m */; };
@@ -334,8 +337,11 @@
 		14773DD21A5EEC0600BAF888 /* AAKHelpDummyTapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKHelpDummyTapView.m; sourceTree = "<group>"; };
 		14A5137E19EC68530098C02C /* register.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = register.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		14A5138119EC68530098C02C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		14A5138519EC68530098C02C /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		14A5138F19EC75300098C02C /* extension_js.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = extension_js.js; sourceTree = "<group>"; };
+		14AD03B81A66D14A00A96DC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		14AD03B91A66D15A00A96DC1 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MainInterface.strings; sourceTree = "<group>"; };
+		14AD03C01A66D33300A96DC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = AAKeyboardApp/Base.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
+		14AD03C41A66D33E00A96DC1 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = AAKeyboardApp/ja.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
 		14ADB6191A23D76600DD7C87 /* AAKGroupRenameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKGroupRenameViewController.h; sourceTree = "<group>"; };
 		14ADB61A1A23D76600DD7C87 /* AAKGroupRenameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKGroupRenameViewController.m; sourceTree = "<group>"; };
 		14B2673C19E6BFD000C0321D /* AAKToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKToolbar.h; sourceTree = "<group>"; };
@@ -601,7 +607,7 @@
 				14D0D72D19FA13D900870C92 /* AAKRegisterActionViewController.h */,
 				14D0D72E19FA13D900870C92 /* AAKRegisterActionViewController.m */,
 				14A5138F19EC75300098C02C /* extension_js.js */,
-				14A5138519EC68530098C02C /* MainInterface.storyboard */,
+				14AD03B71A66D13B00A96DC1 /* MainInterface.storyboard */,
 				14A5138019EC68530098C02C /* Supporting Files */,
 			);
 			path = register;
@@ -643,6 +649,7 @@
 		14B275141A0A0DF3005BF3B1 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				14AD03BF1A66D33300A96DC1 /* Localizable.strings */,
 				14B275151A0A0DF3005BF3B1 /* Images.xcassets */,
 				14B275161A0A0DF3005BF3B1 /* mona.ttf */,
 				14DC6C9C1A1A410700450A0A /* default.json */,
@@ -880,7 +887,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 14A5138E19EC68530098C02C /* Build configuration list for PBXNativeTarget "register" */;
 			buildPhases = (
-				14619FB01A6327DE00BC9404 /* ShellScript */,
+				14AD03BA1A66D1BF00A96DC1 /* Generate ja strings file for register */,
+				14619FB01A6327DE00BC9404 /* Generate ja strings file for App */,
 				14A5137A19EC68530098C02C /* Sources */,
 				14A5137B19EC68530098C02C /* Frameworks */,
 				14A5137C19EC68530098C02C /* Resources */,
@@ -1025,7 +1033,8 @@
 				14F7C2CD1A5E43A3004F73A6 /* Images.xcassets in Resources */,
 				14A5139119EC75300098C02C /* extension_js.js in Resources */,
 				14C7B0951A1A62CB0081FA5B /* default.json in Resources */,
-				14A5138619EC68530098C02C /* MainInterface.storyboard in Resources */,
+				14AD03C31A66D33300A96DC1 /* Localizable.strings in Resources */,
+				14AD03B51A66D13B00A96DC1 /* MainInterface.storyboard in Resources */,
 				14F6F3991A100D8600BEE8E2 /* AAKToolbarHeaderView.xib in Resources */,
 				14F6F3931A100D8600BEE8E2 /* AAKToolbarFooterView.xib in Resources */,
 				14B2751C1A0A0DF3005BF3B1 /* mona.ttf in Resources */,
@@ -1038,6 +1047,7 @@
 			files = (
 				14B274F01A0A0D83005BF3B1 /* AAKAACollectionViewCell.xib in Resources */,
 				14B275171A0A0DF3005BF3B1 /* Images.xcassets in Resources */,
+				14AD03C11A66D33300A96DC1 /* Localizable.strings in Resources */,
 				14F6F3911A100D8600BEE8E2 /* AAKToolbarFooterView.xib in Resources */,
 				14C7B0941A1A62CA0081FA5B /* default.json in Resources */,
 				14FBD3B219E21213005FC38B /* Main.storyboard in Resources */,
@@ -1065,6 +1075,7 @@
 				14F7C2CC1A5E43A2004F73A6 /* Images.xcassets in Resources */,
 				14F6F3981A100D8600BEE8E2 /* AAKToolbarHeaderView.xib in Resources */,
 				14DC6C9E1A1A410900450A0A /* default.json in Resources */,
+				14AD03C21A66D33300A96DC1 /* Localizable.strings in Resources */,
 				14B2751B1A0A0DF3005BF3B1 /* mona.ttf in Resources */,
 				14F6F3921A100D8600BEE8E2 /* AAKToolbarFooterView.xib in Resources */,
 			);
@@ -1099,18 +1110,33 @@
 			shellPath = /bin/sh;
 			shellScript = "touch AAKeyboardApp/Info.plist";
 		};
-		14619FB01A6327DE00BC9404 /* ShellScript */ = {
+		14619FB01A6327DE00BC9404 /* Generate ja strings file for App */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Generate ja strings file for App";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "ibtool --generate-stringsfile $SRCROOT/AAKeyboardApp/ja.lproj/Main.strings --import-strings-file $SRCROOT/AAKeyboardApp/ja.lproj/Main.strings $SRCROOT/AAKeyboardApp/Base.lproj/Main.storyboard";
+		};
+		14AD03BA1A66D1BF00A96DC1 /* Generate ja strings file for register */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate ja strings file for register";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "ibtool --generate-stringsfile $SRCROOT/register/ja.lproj/MainInterface.strings --import-strings-file $SRCROOT/register/ja.lproj/MainInterface.strings $SRCROOT/register/Base.lproj/MainInterface.storyboard";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1332,6 +1358,24 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		14AD03B71A66D13B00A96DC1 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				14AD03B81A66D14A00A96DC1 /* Base */,
+				14AD03B91A66D15A00A96DC1 /* ja */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+		14AD03BF1A66D33300A96DC1 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				14AD03C01A66D33300A96DC1 /* Base */,
+				14AD03C41A66D33E00A96DC1 /* ja */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		14F6361D1A3E36BE0056C3F5 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
