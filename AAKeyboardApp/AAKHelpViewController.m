@@ -130,34 +130,34 @@
 						  NSLocalizedString(@"Tap 'other' since if you have never used this action.", nil),
 						  NSLocalizedString(@"Enable 'Register AA' among the list. And then, 'Register AA' item will be shown in the action list.", nil),
 						  NSLocalizedString(@"Tap 'Register AA'", nil),
-						  NSLocalizedString(@"The view to register your favorite AA will be opened.", nil)
+						  NSLocalizedString(@"View to register your favorite AA will be opened.", nil)
 						  ];
 	}
 	if ([self.helpIdentifier isEqualToString:@"copy"]) {
 		_descriptions = @[
 						  NSLocalizedString(@"Let me give twinkle.app as an example, run twinkle.app.", nil),
-						  NSLocalizedString(@"Open the thread which contains your favorite AA. Long tap on the AA and then the view to select your action will be shown.", nil),
-						  NSLocalizedString(@"Select 'Copy body' and ", nil),
-						  NSLocalizedString(@"hoge", nil),
-						  NSLocalizedString(@"hoge", nil),
-						  NSLocalizedString(@"hoge", nil)
+						  NSLocalizedString(@"Open the thread which contains your favorite AA. Long tap on AA and then view to select your action will be shown.", nil),
+						  NSLocalizedString(@"Select 'Copy body' and quit twinkle.app.", nil),
+						  NSLocalizedString(@"Run AAKeyboard.app.", nil),
+						  NSLocalizedString(@"Tap 'clipboard' button on the bottom toolbar.", nil),
+						  NSLocalizedString(@"The view to register your favorite AA will be opened.", nil)
 						  ];
 	}
 	if ([self.helpIdentifier isEqualToString:@"app2tch"]) {
 		_descriptions = @[
-						  NSLocalizedString(@"hoge", nil),
-						  NSLocalizedString(@"hoge", nil),
-						  NSLocalizedString(@"hoge", nil),
-						  NSLocalizedString(@"hoge", nil)
+						  NSLocalizedString(@"Run 2tch.app.", nil),
+						  NSLocalizedString(@"Open the thread which contains your favorite AA. Tap the information area(red region).", nil),
+						  NSLocalizedString(@"Popup menu will be shown and then tap 'Register AA' item.", nil),
+						  NSLocalizedString(@"Automatically, AAKeyboard.app will be active instead of 2tch.app and view to register your favorite AA will be opened.", nil)
 						  ];
 	}
 	if ([self.helpIdentifier isEqualToString:@"copyAsImage"]) {
 		_descriptions = @[
-						  NSLocalizedString(@"hoge", nil),
-						  NSLocalizedString(@"hoge", nil),
-						  NSLocalizedString(@"hoge", nil),
-						  NSLocalizedString(@"hoge", nil),
-						  NSLocalizedString(@"hoge", nil)
+						  NSLocalizedString(@"Let me give Notes.app as an example.", nil),
+						  NSLocalizedString(@"Long tap on AA which you want to input.", nil),
+						  NSLocalizedString(@"And then, the message will be shown.", nil),
+						  NSLocalizedString(@"Open popup menu on Notes.app.", nil),
+						  NSLocalizedString(@"You can paste the image of AA to Notes.app. As well as Message.app, you can do it.", nil)
 						  ];
 	}
 }
