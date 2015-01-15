@@ -23,6 +23,25 @@
 
 #pragma mark - IBAction
 
+- (IBAction)upload:(id)sender {
+	UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"iCloud", nil)
+																   message:NSLocalizedString(@"Please input the title of AA.", nil)
+															preferredStyle:UIAlertControllerStyleAlert];
+	UIAlertAction *upload = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil)
+													 style:UIAlertActionStyleDefault
+												   handler:^(UIAlertAction *action) {
+												   }];
+	UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil)
+													 style:UIAlertActionStyleDefault
+												   handler:^(UIAlertAction *action) {
+												   }];
+	[alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+	}];
+	[alert addAction:upload];
+	[alert addAction:cancel];
+	[self presentViewController:alert animated:YES completion:nil];
+}
+
 - (IBAction)close:(id)sender {
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
