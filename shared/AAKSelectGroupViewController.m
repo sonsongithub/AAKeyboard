@@ -48,8 +48,9 @@
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	if (self.navigationController.viewControllers[0] == self) {
-		UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
+		UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(cancel:)];
 		self.navigationItem.leftBarButtonItem = button;
+		self.title = NSLocalizedString(@"Edit groups", nil);
 	}
 }
 

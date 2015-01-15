@@ -115,7 +115,7 @@
 						  NSLocalizedString(@"Tap 'General'.", nil),
 						  NSLocalizedString(@"Tap 'Keyboard'.", nil),
 						  NSLocalizedString(@"Tap 'Keyboard', again.", nil),
-						  NSLocalizedString(@"Tap 'Add neew keyboard...' if you have not added AAKeyboard into your keyboards.", nil),
+						  NSLocalizedString(@"Tap 'Add new keyboard...' if you have not added AAKeyboard into your keyboards.", nil),
 						  NSLocalizedString(@"Tap 'AAKeyboard' in order to enable to use AAKeyboard.", nil),
 						  NSLocalizedString(@"And then, turn on 'Full access' of AAKeyboard in order to handle all functions of AAKeyboard.app.", nil),
 						  NSLocalizedString(@"Turn on 'Full access' on this view for enabling all functions. AAKeyboard.app needs 'Full access' in order to save ascii art into the database. AAKeyboard.app does not access any other your private data.", nil),
@@ -127,7 +127,7 @@
 						  NSLocalizedString(@"Let me give Safari.app as an example.", nil),
 						  NSLocalizedString(@"Select text you want to register as ascii art.", nil),
 						  NSLocalizedString(@"And then, tap action button on the bottom toolbar.", nil),
-						  NSLocalizedString(@"Tap 'other' since if you have never used this action.", nil),
+						  NSLocalizedString(@"Tap 'other' if you have never used this action.", nil),
 						  NSLocalizedString(@"Enable 'Register AA' among the list. And then, 'Register AA' item will be shown in the action list.", nil),
 						  NSLocalizedString(@"Tap 'Register AA'", nil),
 						  NSLocalizedString(@"View to register your favorite AA will be opened.", nil)
@@ -140,7 +140,7 @@
 						  NSLocalizedString(@"Select 'Copy body' and quit twinkle.app.", nil),
 						  NSLocalizedString(@"Run AAKeyboard.app.", nil),
 						  NSLocalizedString(@"Tap 'clipboard' button on the bottom toolbar.", nil),
-						  NSLocalizedString(@"The view to register your favorite AA will be opened.", nil)
+						  NSLocalizedString(@"View to register your favorite AA will be opened.", nil)
 						  ];
 	}
 	if ([self.helpIdentifier isEqualToString:@"app2tch"]) {
@@ -155,7 +155,7 @@
 		_descriptions = @[
 						  NSLocalizedString(@"Let me give Notes.app as an example.", nil),
 						  NSLocalizedString(@"Long tap on AA which you want to input.", nil),
-						  NSLocalizedString(@"And then, the message will be shown.", nil),
+						  NSLocalizedString(@"AA is copied to clipboard, and then message will be shown over the keyboard.", nil),
 						  NSLocalizedString(@"Open popup menu on Notes.app.", nil),
 						  NSLocalizedString(@"You can paste the image of AA to Notes.app. As well as Message.app, you can do it.", nil)
 						  ];

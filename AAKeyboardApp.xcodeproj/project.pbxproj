@@ -159,6 +159,12 @@
 		14B67AEE1A3E1A49004DD95C /* AAKDummyCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B67AED1A3E1A49004DD95C /* AAKDummyCollectionReusableView.m */; };
 		14B73C6519E3C7CA0031DCB6 /* AAKToolbarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B73C6419E3C7CA0031DCB6 /* AAKToolbarCell.m */; };
 		14B73C6719E3C9060031DCB6 /* AAKToolbarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B73C6419E3C7CA0031DCB6 /* AAKToolbarCell.m */; };
+		14C1DEE81A67800300CC8DFA /* UIViewController+Rotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C1DEE71A67800300CC8DFA /* UIViewController+Rotate.m */; };
+		14C1DEE91A67800300CC8DFA /* UIViewController+Rotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C1DEE71A67800300CC8DFA /* UIViewController+Rotate.m */; };
+		14C1DEEA1A67800300CC8DFA /* UIViewController+Rotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C1DEE71A67800300CC8DFA /* UIViewController+Rotate.m */; };
+		14C1DEED1A67805200CC8DFA /* UINavigationController+Rotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C1DEEC1A67805200CC8DFA /* UINavigationController+Rotate.m */; };
+		14C1DEEE1A67805200CC8DFA /* UINavigationController+Rotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C1DEEC1A67805200CC8DFA /* UINavigationController+Rotate.m */; };
+		14C1DEEF1A67805200CC8DFA /* UINavigationController+Rotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C1DEEC1A67805200CC8DFA /* UINavigationController+Rotate.m */; };
 		14C7B0911A1A61160081FA5B /* AAKCoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C7B0901A1A61160081FA5B /* AAKCoreDataStack.m */; };
 		14C7B0921A1A61160081FA5B /* AAKCoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C7B0901A1A61160081FA5B /* AAKCoreDataStack.m */; };
 		14C7B0931A1A61160081FA5B /* AAKCoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C7B0901A1A61160081FA5B /* AAKCoreDataStack.m */; };
@@ -384,6 +390,10 @@
 		14B67AED1A3E1A49004DD95C /* AAKDummyCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKDummyCollectionReusableView.m; sourceTree = "<group>"; };
 		14B73C6319E3C7CA0031DCB6 /* AAKToolbarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKToolbarCell.h; sourceTree = "<group>"; };
 		14B73C6419E3C7CA0031DCB6 /* AAKToolbarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKToolbarCell.m; sourceTree = "<group>"; };
+		14C1DEE61A67800300CC8DFA /* UIViewController+Rotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Rotate.h"; sourceTree = "<group>"; };
+		14C1DEE71A67800300CC8DFA /* UIViewController+Rotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Rotate.m"; sourceTree = "<group>"; };
+		14C1DEEB1A67805200CC8DFA /* UINavigationController+Rotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Rotate.h"; sourceTree = "<group>"; };
+		14C1DEEC1A67805200CC8DFA /* UINavigationController+Rotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Rotate.m"; sourceTree = "<group>"; };
 		14C7B08F1A1A61160081FA5B /* AAKCoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKCoreDataStack.h; sourceTree = "<group>"; };
 		14C7B0901A1A61160081FA5B /* AAKCoreDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKCoreDataStack.m; sourceTree = "<group>"; };
 		14CB155E19E935BB00D05E9C /* UZCursorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UZCursorView.h; sourceTree = "<group>"; };
@@ -703,6 +713,10 @@
 				14527C0E1A11DB870019F93A /* UIImage+keyboard.m */,
 				14B274B31A0A0D6F005BF3B1 /* UITraitCollection+keyboard.h */,
 				14B274B41A0A0D6F005BF3B1 /* UITraitCollection+keyboard.m */,
+				14C1DEE61A67800300CC8DFA /* UIViewController+Rotate.h */,
+				14C1DEE71A67800300CC8DFA /* UIViewController+Rotate.m */,
+				14C1DEEB1A67805200CC8DFA /* UINavigationController+Rotate.h */,
+				14C1DEEC1A67805200CC8DFA /* UINavigationController+Rotate.m */,
 			);
 			name = category;
 			sourceTree = "<group>";
@@ -1171,12 +1185,14 @@
 				14A5139519EC85710098C02C /* UZTextView.m in Sources */,
 				14B274CC1A0A0D6F005BF3B1 /* NSParagraphStyle+keyboard.m in Sources */,
 				141528A41A18585600EB80AC /* NSManagedObject+MagicalFinders.m in Sources */,
+				14C1DEEA1A67800300CC8DFA /* UIViewController+Rotate.m in Sources */,
 				14B274C01A0A0D6F005BF3B1 /* AAKEditViewController.m in Sources */,
 				14C7B0931A1A61160081FA5B /* AAKCoreDataStack.m in Sources */,
 				141528B31A18585600EB80AC /* NSManagedObjectContext+MagicalSaves.m in Sources */,
 				1415289B1A18585600EB80AC /* NSString+MagicalDataImport.m in Sources */,
 				141528C21A18585700EB80AC /* MagicalRecord+Actions.m in Sources */,
 				141B495E1A192A8C00E7F877 /* AAKASCIIArt.m in Sources */,
+				14C1DEEF1A67805200CC8DFA /* UINavigationController+Rotate.m in Sources */,
 				141528921A18585600EB80AC /* NSNumber+MagicalDataImport.m in Sources */,
 				1415289E1A18585600EB80AC /* NSManagedObject+MagicalAggregation.m in Sources */,
 				14F6F3961A100D8600BEE8E2 /* AAKToolbarHeaderView.m in Sources */,
@@ -1236,10 +1252,12 @@
 				141528C61A18585700EB80AC /* MagicalRecord+iCloud.m in Sources */,
 				141528991A18585600EB80AC /* NSString+MagicalDataImport.m in Sources */,
 				141528C91A18585700EB80AC /* MagicalRecord+Options.m in Sources */,
+				14C1DEED1A67805200CC8DFA /* UINavigationController+Rotate.m in Sources */,
 				1402F1A61A0D3B430000F269 /* AAKAAGroupForCollection.m in Sources */,
 				14B274E41A0A0D83005BF3B1 /* AAKAAEditAnimatedTransitioning.m in Sources */,
 				14EE653C1A15ED6200FA0731 /* Model.xcdatamodeld in Sources */,
 				141528A21A18585600EB80AC /* NSManagedObject+MagicalFinders.m in Sources */,
+				14C1DEE81A67800300CC8DFA /* UIViewController+Rotate.m in Sources */,
 				141528871A18585600EB80AC /* MagicalImportFunctions.m in Sources */,
 				141528AB1A18585600EB80AC /* NSManagedObjectContext+MagicalObserving.m in Sources */,
 				14B274BE1A0A0D6F005BF3B1 /* AAKEditViewController.m in Sources */,
@@ -1289,7 +1307,9 @@
 				14B274CE1A0A0D6F005BF3B1 /* UITraitCollection+keyboard.m in Sources */,
 				141528A61A18585600EB80AC /* NSManagedObject+MagicalRecord.m in Sources */,
 				141528C71A18585700EB80AC /* MagicalRecord+iCloud.m in Sources */,
+				14C1DEEE1A67805200CC8DFA /* UINavigationController+Rotate.m in Sources */,
 				14EE65581A199BC200FA0731 /* AAKASCIIArtDummyHistoryGroup.m in Sources */,
+				14C1DEE91A67800300CC8DFA /* UIViewController+Rotate.m in Sources */,
 				141528CD1A18585700EB80AC /* MagicalRecord+Setup.m in Sources */,
 				141528911A18585600EB80AC /* NSNumber+MagicalDataImport.m in Sources */,
 				14C7B0921A1A61160081FA5B /* AAKCoreDataStack.m in Sources */,
