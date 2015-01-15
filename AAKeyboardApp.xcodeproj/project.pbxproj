@@ -165,6 +165,7 @@
 		14C1DEED1A67805200CC8DFA /* UINavigationController+Rotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C1DEEC1A67805200CC8DFA /* UINavigationController+Rotate.m */; };
 		14C1DEEE1A67805200CC8DFA /* UINavigationController+Rotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C1DEEC1A67805200CC8DFA /* UINavigationController+Rotate.m */; };
 		14C1DEEF1A67805200CC8DFA /* UINavigationController+Rotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C1DEEC1A67805200CC8DFA /* UINavigationController+Rotate.m */; };
+		14C1DEF11A67D33500CC8DFA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C1DEF01A67D33500CC8DFA /* CloudKit.framework */; };
 		14C7B0911A1A61160081FA5B /* AAKCoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C7B0901A1A61160081FA5B /* AAKCoreDataStack.m */; };
 		14C7B0921A1A61160081FA5B /* AAKCoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C7B0901A1A61160081FA5B /* AAKCoreDataStack.m */; };
 		14C7B0931A1A61160081FA5B /* AAKCoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C7B0901A1A61160081FA5B /* AAKCoreDataStack.m */; };
@@ -394,6 +395,7 @@
 		14C1DEE71A67800300CC8DFA /* UIViewController+Rotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Rotate.m"; sourceTree = "<group>"; };
 		14C1DEEB1A67805200CC8DFA /* UINavigationController+Rotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Rotate.h"; sourceTree = "<group>"; };
 		14C1DEEC1A67805200CC8DFA /* UINavigationController+Rotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Rotate.m"; sourceTree = "<group>"; };
+		14C1DEF01A67D33500CC8DFA /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		14C7B08F1A1A61160081FA5B /* AAKCoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKCoreDataStack.h; sourceTree = "<group>"; };
 		14C7B0901A1A61160081FA5B /* AAKCoreDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKCoreDataStack.m; sourceTree = "<group>"; };
 		14CB155E19E935BB00D05E9C /* UZCursorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UZCursorView.h; sourceTree = "<group>"; };
@@ -473,6 +475,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14C1DEF11A67D33500CC8DFA /* CloudKit.framework in Frameworks */,
 				141527091A1633AB00EB80AC /* CoreData.framework in Frameworks */,
 				146EEB5619ED5CE50032F6DE /* libsqlite3.dylib in Frameworks */,
 			);
@@ -635,6 +638,7 @@
 		14B2749C1A0A0A87005BF3B1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				14C1DEF01A67D33500CC8DFA /* CloudKit.framework */,
 				14EE653F1A15EEB700FA0731 /* CoreData.framework */,
 				146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */,
 			);
@@ -1009,6 +1013,9 @@
 						DevelopmentTeam = JP866VWWSD;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
 								enabled = 1;
 							};
 						};
