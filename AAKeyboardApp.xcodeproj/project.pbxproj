@@ -97,6 +97,9 @@
 		141B495C1A192A8C00E7F877 /* AAKASCIIArt.m in Sources */ = {isa = PBXBuildFile; fileRef = 141B495B1A192A8C00E7F877 /* AAKASCIIArt.m */; };
 		141B495D1A192A8C00E7F877 /* AAKASCIIArt.m in Sources */ = {isa = PBXBuildFile; fileRef = 141B495B1A192A8C00E7F877 /* AAKASCIIArt.m */; };
 		141B495E1A192A8C00E7F877 /* AAKASCIIArt.m in Sources */ = {isa = PBXBuildFile; fileRef = 141B495B1A192A8C00E7F877 /* AAKASCIIArt.m */; };
+		1449EBF31A6975B0009BDD34 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1449EBF21A6975B0009BDD34 /* CloudKit.framework */; };
+		1449EBF61A697FB6009BDD34 /* AAKCloudAAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1449EBF51A697FB6009BDD34 /* AAKCloudAAViewController.m */; };
+		1449EBF91A697FD8009BDD34 /* AAKCloudASCIIArt.m in Sources */ = {isa = PBXBuildFile; fileRef = 1449EBF81A697FD8009BDD34 /* AAKCloudASCIIArt.m */; };
 		14527C0F1A11DB870019F93A /* UIImage+keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 14527C0E1A11DB870019F93A /* UIImage+keyboard.m */; };
 		14527C101A11DB870019F93A /* UIImage+keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 14527C0E1A11DB870019F93A /* UIImage+keyboard.m */; };
 		14527C111A11DB870019F93A /* UIImage+keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 14527C0E1A11DB870019F93A /* UIImage+keyboard.m */; };
@@ -165,7 +168,6 @@
 		14C1DEED1A67805200CC8DFA /* UINavigationController+Rotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C1DEEC1A67805200CC8DFA /* UINavigationController+Rotate.m */; };
 		14C1DEEE1A67805200CC8DFA /* UINavigationController+Rotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C1DEEC1A67805200CC8DFA /* UINavigationController+Rotate.m */; };
 		14C1DEEF1A67805200CC8DFA /* UINavigationController+Rotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C1DEEC1A67805200CC8DFA /* UINavigationController+Rotate.m */; };
-		14C1DEF11A67D33500CC8DFA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C1DEF01A67D33500CC8DFA /* CloudKit.framework */; };
 		14C7B0911A1A61160081FA5B /* AAKCoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C7B0901A1A61160081FA5B /* AAKCoreDataStack.m */; };
 		14C7B0921A1A61160081FA5B /* AAKCoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C7B0901A1A61160081FA5B /* AAKCoreDataStack.m */; };
 		14C7B0931A1A61160081FA5B /* AAKCoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C7B0901A1A61160081FA5B /* AAKCoreDataStack.m */; };
@@ -328,6 +330,11 @@
 		1441E88119ECD7F300A4881F /* register.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = register.entitlements; sourceTree = "<group>"; };
 		1441E88219ECD7FF00A4881F /* keyboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = keyboard.entitlements; sourceTree = "<group>"; };
 		1441E88319ECD83C00A4881F /* AAKeyboardApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = AAKeyboardApp.entitlements; sourceTree = "<group>"; };
+		1449EBF21A6975B0009BDD34 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		1449EBF41A697FB6009BDD34 /* AAKCloudAAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKCloudAAViewController.h; sourceTree = "<group>"; };
+		1449EBF51A697FB6009BDD34 /* AAKCloudAAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKCloudAAViewController.m; sourceTree = "<group>"; };
+		1449EBF71A697FD8009BDD34 /* AAKCloudASCIIArt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKCloudASCIIArt.h; sourceTree = "<group>"; };
+		1449EBF81A697FD8009BDD34 /* AAKCloudASCIIArt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKCloudASCIIArt.m; sourceTree = "<group>"; };
 		14527C0D1A11DB870019F93A /* UIImage+keyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+keyboard.h"; sourceTree = "<group>"; };
 		14527C0E1A11DB870019F93A /* UIImage+keyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+keyboard.m"; sourceTree = "<group>"; };
 		14527C121A1207F10019F93A /* AAKNotifyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKNotifyView.h; sourceTree = "<group>"; };
@@ -395,7 +402,6 @@
 		14C1DEE71A67800300CC8DFA /* UIViewController+Rotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Rotate.m"; sourceTree = "<group>"; };
 		14C1DEEB1A67805200CC8DFA /* UINavigationController+Rotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Rotate.h"; sourceTree = "<group>"; };
 		14C1DEEC1A67805200CC8DFA /* UINavigationController+Rotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Rotate.m"; sourceTree = "<group>"; };
-		14C1DEF01A67D33500CC8DFA /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		14C7B08F1A1A61160081FA5B /* AAKCoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKCoreDataStack.h; sourceTree = "<group>"; };
 		14C7B0901A1A61160081FA5B /* AAKCoreDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKCoreDataStack.m; sourceTree = "<group>"; };
 		14CB155E19E935BB00D05E9C /* UZCursorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UZCursorView.h; sourceTree = "<group>"; };
@@ -459,6 +465,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1449EBF31A6975B0009BDD34 /* CloudKit.framework in Frameworks */,
 				1415270A1A1633B200EB80AC /* CoreData.framework in Frameworks */,
 				146EEB5719ED5CEF0032F6DE /* libsqlite3.dylib in Frameworks */,
 			);
@@ -475,7 +482,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14C1DEF11A67D33500CC8DFA /* CloudKit.framework in Frameworks */,
 				141527091A1633AB00EB80AC /* CoreData.framework in Frameworks */,
 				146EEB5619ED5CE50032F6DE /* libsqlite3.dylib in Frameworks */,
 			);
@@ -638,7 +644,7 @@
 		14B2749C1A0A0A87005BF3B1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				14C1DEF01A67D33500CC8DFA /* CloudKit.framework */,
+				1449EBF21A6975B0009BDD34 /* CloudKit.framework */,
 				14EE653F1A15EEB700FA0731 /* CoreData.framework */,
 				146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */,
 			);
@@ -700,6 +706,8 @@
 		14B275201A0A15DF005BF3B1 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				1449EBF71A697FD8009BDD34 /* AAKCloudASCIIArt.h */,
+				1449EBF81A697FD8009BDD34 /* AAKCloudASCIIArt.m */,
 				1402F1A41A0D3B430000F269 /* AAKAAGroupForCollection.h */,
 				1402F1A51A0D3B430000F269 /* AAKAAGroupForCollection.m */,
 			);
@@ -824,6 +832,8 @@
 			children = (
 				14B274D11A0A0D83005BF3B1 /* AAKAACollectionViewController.h */,
 				14B274D71A0A0D83005BF3B1 /* AAKAACollectionViewController.m */,
+				1449EBF41A697FB6009BDD34 /* AAKCloudAAViewController.h */,
+				1449EBF51A697FB6009BDD34 /* AAKCloudAAViewController.m */,
 				14B274D51A0A0D83005BF3B1 /* AAKPreviewController.h */,
 				14B274DB1A0A0D83005BF3B1 /* AAKPreviewController.m */,
 				14FBD3AA19E21213005FC38B /* AppDelegate.h */,
@@ -993,6 +1003,9 @@
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
 							};
+							com.apple.iCloud = {
+								enabled = 0;
+							};
 						};
 					};
 					14FBD3A219E21213005FC38B = {
@@ -1000,6 +1013,9 @@
 						DevelopmentTeam = JP866VWWSD;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
 								enabled = 1;
 							};
 						};
@@ -1016,7 +1032,7 @@
 								enabled = 1;
 							};
 							com.apple.iCloud = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -1253,6 +1269,7 @@
 				14B274BB1A0A0D6F005BF3B1 /* AAKCreateNewGroupViewController.m in Sources */,
 				14FBD3A919E21213005FC38B /* main.m in Sources */,
 				1415288D1A18585600EB80AC /* NSEntityDescription+MagicalDataImport.m in Sources */,
+				1449EBF61A697FB6009BDD34 /* AAKCloudAAViewController.m in Sources */,
 				14E8CAAE1A5D939600508CBA /* AAKHelpSelectViewController.m in Sources */,
 				14B274EA1A0A0D83005BF3B1 /* AAKAASupplementaryView.m in Sources */,
 				14773DD31A5EEC0600BAF888 /* AAKHelpDummyTapView.m in Sources */,
@@ -1279,6 +1296,7 @@
 				14B274DE1A0A0D83005BF3B1 /* AAKAACollectionViewCell.m in Sources */,
 				1415288A1A18585600EB80AC /* NSAttributeDescription+MagicalDataImport.m in Sources */,
 				141528D81A188FFD00EB80AC /* AppDelegate.m in Sources */,
+				1449EBF91A697FD8009BDD34 /* AAKCloudASCIIArt.m in Sources */,
 				14B274C41A0A0D6F005BF3B1 /* AAKSelectGroupViewController.m in Sources */,
 				14F6F3941A100D8600BEE8E2 /* AAKToolbarHeaderView.m in Sources */,
 				14CB156619E935BB00D05E9C /* UZLoupeView.m in Sources */,

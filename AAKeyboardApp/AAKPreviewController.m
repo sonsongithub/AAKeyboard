@@ -9,8 +9,53 @@
 #import "AAKPreviewController.h"
 
 #import <AssetsLibrary/AssetsLibrary.h>
+#import <CloudKit/CloudKit.h>
 
 @interface AAKPreviewController () {
+	NSOperationQueue *_queue;
+}
+
+@end
+
+@interface CKModifyRecordsOperation(test)
++ (instancetype)testModifyRecordsOperationWithRecordsToSave:(NSArray /* CKRecord */ *)records recordIDsToDelete:(NSArray /* CKRecordID */ *)recordIDs;
+@end
+
+@implementation CKModifyRecordsOperation(test)
+
++ (instancetype)testModifyRecordsOperationWithRecordsToSave:(NSArray /* CKRecord */ *)records recordIDsToDelete:(NSArray /* CKRecordID */ *)recordIDs {
+	//
+	// You have to set appropriate role at iCloud Dashboard in order to edit a property of your record.
+	//
+	CKModifyRecordsOperation *operation = [[CKModifyRecordsOperation alloc] initWithRecordsToSave:records recordIDsToDelete:recordIDs];
+	
+	//
+	// Save policy
+	//
+	operation.savePolicy = CKRecordSaveIfServerRecordUnchanged;
+	//	operation.savePolicy = CKRecordSaveAllKeys;
+	//	operation.savePolicy = CKRecordSaveChangedKeys;
+	
+	operation.completionBlock = ^(void) {
+	};
+	operation.modifyRecordsCompletionBlock = ^(NSArray *savedRecords, NSArray *deletedRecordIDs, NSError *error) {
+		if (error) {
+			DNSLog(@"%@-%@", error, [error localizedDescription]);
+		}
+		if ([savedRecords count]) {
+			DNSLog(@"savedRecords = %@", savedRecords);
+		}
+		if ([deletedRecordIDs count]) {
+			DNSLog(@"deletedRecordIDs = %@", deletedRecordIDs);
+		}
+	};
+	operation.perRecordCompletionBlock = ^(CKRecord *record, NSError *error) {
+		DNSLog(@"%@", error);
+	};
+	operation.perRecordProgressBlock = ^(CKRecord *record, double progress) {
+	};
+	
+	return operation;
 }
 
 @end
@@ -30,6 +75,23 @@
 	UIAlertAction *upload = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil)
 													 style:UIAlertActionStyleDefault
 												   handler:^(UIAlertAction *action) {
+													   
+													   UITextField *field = alert.textFields[0];
+													   
+													   CKDatabase *database = [[CKContainer defaultContainer] publicCloudDatabase];
+													   
+													   double refTime = [NSDate timeIntervalSinceReferenceDate];
+													   CKRecord *newRecord = [[CKRecord alloc] initWithRecordType:@"AAKCloudASCIIArt"];
+													   
+													   [newRecord setObject:_textView.attributedString.string forKey:@"ASCIIArt"];
+													   [newRecord setObject:@(refTime) forKey:@"time"];
+													   [newRecord setObject:@(0) forKey:@"downloads"];
+													   [newRecord setObject:@(0) forKey:@"bad"];
+													   [newRecord setObject:field.text forKey:@"title"];
+													   
+													   CKModifyRecordsOperation *operation = [CKModifyRecordsOperation testModifyRecordsOperationWithRecordsToSave:@[newRecord] recordIDsToDelete:@[]];
+													   operation.database = database;
+													   [_queue addOperation:operation];
 												   }];
 	UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil)
 													 style:UIAlertActionStyleDefault
@@ -37,8 +99,8 @@
 												   }];
 	[alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
 	}];
-	[alert addAction:upload];
 	[alert addAction:cancel];
+	[alert addAction:upload];
 	[self presentViewController:alert animated:YES completion:nil];
 }
 
@@ -112,6 +174,8 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	
+	_queue = [[NSOperationQueue alloc] init];
 	
 	_leftMarginConstraint.constant = [AAKPreviewController marginConstant];
 	_rightMarginConstraint.constant = [AAKPreviewController marginConstant];
