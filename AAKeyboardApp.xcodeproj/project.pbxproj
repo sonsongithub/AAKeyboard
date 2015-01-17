@@ -1482,7 +1482,7 @@
 				INFOPLIST_FILE = register/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "43b458fb-997d-4f53-9a12-ed64f109ee10";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -1497,7 +1497,7 @@
 				INFOPLIST_FILE = register/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "43b458fb-997d-4f53-9a12-ed64f109ee10";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -1562,7 +1562,7 @@
 				INFOPLIST_PREPROCESS = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9f6d9e32-0c35-4435-954a-aa9eb1a78480";
+				PROVISIONING_PROFILE = "";
 			};
 			name = "Debug - Disable App Groups ";
 		};
@@ -1600,7 +1600,7 @@
 				INFOPLIST_FILE = keyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0fc6a88a-e07e-4516-9625-6913bfd8fb8d";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = "Debug - Disable App Groups ";
@@ -1620,7 +1620,7 @@
 				INFOPLIST_FILE = register/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "43b458fb-997d-4f53-9a12-ed64f109ee10";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = "Debug - Disable App Groups ";
@@ -1723,7 +1723,7 @@
 				INFOPLIST_PREPROCESS = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9f6d9e32-0c35-4435-954a-aa9eb1a78480";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1738,7 +1738,7 @@
 				INFOPLIST_PREPROCESS = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9f6d9e32-0c35-4435-954a-aa9eb1a78480";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -1790,7 +1790,7 @@
 				INFOPLIST_FILE = keyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0fc6a88a-e07e-4516-9625-6913bfd8fb8d";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -1804,7 +1804,7 @@
 				INFOPLIST_FILE = keyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0fc6a88a-e07e-4516-9625-6913bfd8fb8d";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
