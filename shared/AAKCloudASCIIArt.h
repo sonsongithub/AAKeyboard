@@ -7,7 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CloudKit/CloudKit.h>
 
 @interface AAKCloudASCIIArt : NSObject
+
+@property (nonatomic, readonly) NSString *ASCIIArt;
+@property (nonatomic, readonly) NSString *title;
+@property (nonatomic, readonly) NSInteger downloads;
+@property (nonatomic, readonly) NSInteger reported;
+
++ (instancetype)cloudASCIIArtWithRecord:(CKRecord*)record;
 
 @end

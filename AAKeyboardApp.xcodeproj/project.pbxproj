@@ -183,6 +183,8 @@
 		14CB157D19EA328500D05E9C /* AAKToolbarHistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CB157B19EA328500D05E9C /* AAKToolbarHistoryCell.m */; };
 		14D0D72F19FA13D900870C92 /* AAKRegisterActionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D0D72E19FA13D900870C92 /* AAKRegisterActionViewController.m */; };
 		14DC6C9E1A1A410900450A0A /* default.json in Resources */ = {isa = PBXBuildFile; fileRef = 14DC6C9C1A1A410700450A0A /* default.json */; };
+		14E488AF1A6C604300C22A73 /* AAKAACloudCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14E488AE1A6C604300C22A73 /* AAKAACloudCollectionViewCell.m */; };
+		14E488B11A6C608600C22A73 /* AAKAACloudCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14E488B01A6C608600C22A73 /* AAKAACloudCollectionViewCell.xib */; };
 		14E8CAAE1A5D939600508CBA /* AAKHelpSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14E8CAAD1A5D939600508CBA /* AAKHelpSelectViewController.m */; };
 		14EE653C1A15ED6200FA0731 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 14EE653A1A15ED6200FA0731 /* Model.xcdatamodeld */; };
 		14EE653D1A15ED6200FA0731 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 14EE653A1A15ED6200FA0731 /* Model.xcdatamodeld */; };
@@ -415,6 +417,9 @@
 		14D0D72D19FA13D900870C92 /* AAKRegisterActionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKRegisterActionViewController.h; sourceTree = "<group>"; };
 		14D0D72E19FA13D900870C92 /* AAKRegisterActionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKRegisterActionViewController.m; sourceTree = "<group>"; };
 		14DC6C9C1A1A410700450A0A /* default.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = default.json; sourceTree = "<group>"; };
+		14E488AD1A6C604300C22A73 /* AAKAACloudCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKAACloudCollectionViewCell.h; sourceTree = "<group>"; };
+		14E488AE1A6C604300C22A73 /* AAKAACloudCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKAACloudCollectionViewCell.m; sourceTree = "<group>"; };
+		14E488B01A6C608600C22A73 /* AAKAACloudCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AAKAACloudCollectionViewCell.xib; sourceTree = "<group>"; };
 		14E8CAAC1A5D939600508CBA /* AAKHelpSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKHelpSelectViewController.h; sourceTree = "<group>"; };
 		14E8CAAD1A5D939600508CBA /* AAKHelpSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKHelpSelectViewController.m; sourceTree = "<group>"; };
 		14EE653B1A15ED6200FA0731 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -787,6 +792,31 @@
 			path = UZTextView;
 			sourceTree = "<group>";
 		};
+		14E488AB1A6B14BC00C22A73 /* Help */ = {
+			isa = PBXGroup;
+			children = (
+				1467A6B41A36DA8600F43B96 /* AAKHelpViewController.h */,
+				1467A6B51A36DA8600F43B96 /* AAKHelpViewController.m */,
+				14773DD11A5EEC0600BAF888 /* AAKHelpDummyTapView.h */,
+				14773DD21A5EEC0600BAF888 /* AAKHelpDummyTapView.m */,
+				14E8CAAC1A5D939600508CBA /* AAKHelpSelectViewController.h */,
+				14E8CAAD1A5D939600508CBA /* AAKHelpSelectViewController.m */,
+			);
+			name = Help;
+			sourceTree = "<group>";
+		};
+		14E488AC1A6B14D700C22A73 /* CloudKit */ = {
+			isa = PBXGroup;
+			children = (
+				1449EBF41A697FB6009BDD34 /* AAKCloudAAViewController.h */,
+				1449EBF51A697FB6009BDD34 /* AAKCloudAAViewController.m */,
+				14E488AD1A6C604300C22A73 /* AAKAACloudCollectionViewCell.h */,
+				14E488AE1A6C604300C22A73 /* AAKAACloudCollectionViewCell.m */,
+				14E488B01A6C608600C22A73 /* AAKAACloudCollectionViewCell.xib */,
+			);
+			name = CloudKit;
+			sourceTree = "<group>";
+		};
 		14EE65391A15ED4900FA0731 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -832,20 +862,14 @@
 			children = (
 				14B274D11A0A0D83005BF3B1 /* AAKAACollectionViewController.h */,
 				14B274D71A0A0D83005BF3B1 /* AAKAACollectionViewController.m */,
-				1449EBF41A697FB6009BDD34 /* AAKCloudAAViewController.h */,
-				1449EBF51A697FB6009BDD34 /* AAKCloudAAViewController.m */,
 				14B274D51A0A0D83005BF3B1 /* AAKPreviewController.h */,
 				14B274DB1A0A0D83005BF3B1 /* AAKPreviewController.m */,
 				14FBD3AA19E21213005FC38B /* AppDelegate.h */,
 				14FBD3AB19E21213005FC38B /* AppDelegate.m */,
 				14530C331A1BA0AE00B6BFFE /* AAKSettingViewController.h */,
 				14530C341A1BA0AE00B6BFFE /* AAKSettingViewController.m */,
-				1467A6B41A36DA8600F43B96 /* AAKHelpViewController.h */,
-				1467A6B51A36DA8600F43B96 /* AAKHelpViewController.m */,
-				14773DD11A5EEC0600BAF888 /* AAKHelpDummyTapView.h */,
-				14773DD21A5EEC0600BAF888 /* AAKHelpDummyTapView.m */,
-				14E8CAAC1A5D939600508CBA /* AAKHelpSelectViewController.h */,
-				14E8CAAD1A5D939600508CBA /* AAKHelpSelectViewController.m */,
+				14E488AC1A6B14D700C22A73 /* CloudKit */,
+				14E488AB1A6B14BC00C22A73 /* Help */,
 				1402F1A01A0D29BF0000F269 /* Animation */,
 				1402F19F1A0D29A50000F269 /* UICollectionReusableView */,
 				14FBD3B019E21213005FC38B /* Main.storyboard */,
@@ -1089,6 +1113,7 @@
 				14FBD3B219E21213005FC38B /* Main.storyboard in Resources */,
 				14B274F31A0A0D83005BF3B1 /* AAKAASupplementaryView.xib in Resources */,
 				14F6F3971A100D8600BEE8E2 /* AAKToolbarHeaderView.xib in Resources */,
+				14E488B11A6C608600C22A73 /* AAKAACloudCollectionViewCell.xib in Resources */,
 				14FBD3B719E21213005FC38B /* LaunchScreen.xib in Resources */,
 				14B2751A1A0A0DF3005BF3B1 /* mona.ttf in Resources */,
 				14F636251A3E37110056C3F5 /* InfoPlist.strings in Resources */,
@@ -1267,6 +1292,7 @@
 				14B274CD1A0A0D6F005BF3B1 /* UITraitCollection+keyboard.m in Sources */,
 				141528BD1A18585700EB80AC /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */,
 				14B274BB1A0A0D6F005BF3B1 /* AAKCreateNewGroupViewController.m in Sources */,
+				14E488AF1A6C604300C22A73 /* AAKAACloudCollectionViewCell.m in Sources */,
 				14FBD3A919E21213005FC38B /* main.m in Sources */,
 				1415288D1A18585600EB80AC /* NSEntityDescription+MagicalDataImport.m in Sources */,
 				1449EBF61A697FB6009BDD34 /* AAKCloudAAViewController.m in Sources */,

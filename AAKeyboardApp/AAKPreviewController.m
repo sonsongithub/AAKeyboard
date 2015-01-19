@@ -86,7 +86,7 @@
 													   [newRecord setObject:_textView.attributedString.string forKey:@"ASCIIArt"];
 													   [newRecord setObject:@(refTime) forKey:@"time"];
 													   [newRecord setObject:@(0) forKey:@"downloads"];
-													   [newRecord setObject:@(0) forKey:@"bad"];
+													   [newRecord setObject:@(0) forKey:@"reported"];
 													   [newRecord setObject:field.text forKey:@"title"];
 													   
 													   CKModifyRecordsOperation *operation = [CKModifyRecordsOperation testModifyRecordsOperationWithRecordsToSave:@[newRecord] recordIDsToDelete:@[]];
