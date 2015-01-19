@@ -46,7 +46,7 @@ static NSString * const reuseIdentifier = @"AAKAACloudCollectionViewCell";
 	CKQuery *query = [[CKQuery alloc] initWithRecordType:@"AAKCloudASCIIArt"
 											   predicate:predicate];
 	CKQueryOperation *op = [[CKQueryOperation alloc] initWithQuery:query];
-	//op.resultsLimit = 100;
+	op.resultsLimit = 6;
 	op.recordFetchedBlock = ^(CKRecord *record) {
 		DNSLog(@"%@", record);
 		AAKCloudASCIIArt *obj = [AAKCloudASCIIArt cloudASCIIArtWithRecord:record];
@@ -55,7 +55,10 @@ static NSString * const reuseIdentifier = @"AAKAACloudCollectionViewCell";
 	op.database = database;
 	op.queryCompletionBlock = ^(CKQueryCursor *record, NSError *error) {
 		DNSLog(@"%@", error);
-		[self.collectionView reloadData];
+		DNSLogMainThread
+		dispatch_async(dispatch_get_main_queue(), ^{
+			[self.collectionView reloadData];
+		});
 	};
 	[_queue addOperation:op];
 }
