@@ -20,7 +20,7 @@
                                 <rect key="frame" x="15" y="15" width="228" height="138"/>
                             </imageView>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="baH-ap-9lP" customClass="AAKTextView">
-                                <rect key="frame" x="20" y="20" width="218" height="128"/>
+                                <rect key="frame" x="20" y="38" width="218" height="110"/>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OTN-oU-KMt">
@@ -45,7 +45,7 @@
                             <constraint firstItem="WBa-rj-FIH" firstAttribute="leading" secondItem="WRX-t9-nf2" secondAttribute="leading" constant="15" id="gBK-Ag-YuZ"/>
                             <constraint firstItem="baH-ap-9lP" firstAttribute="leading" secondItem="WRX-t9-nf2" secondAttribute="leading" constant="20" id="hlX-YQ-ShC"/>
                             <constraint firstItem="OTN-oU-KMt" firstAttribute="leading" secondItem="WRX-t9-nf2" secondAttribute="leading" constant="24" id="knl-mU-yQ3"/>
-                            <constraint firstItem="baH-ap-9lP" firstAttribute="top" secondItem="WRX-t9-nf2" secondAttribute="top" constant="20" id="po6-yz-m96"/>
+                            <constraint firstItem="baH-ap-9lP" firstAttribute="top" secondItem="WRX-t9-nf2" secondAttribute="top" constant="38" id="po6-yz-m96"/>
                         </constraints>
                     </view>
                 </subviews>

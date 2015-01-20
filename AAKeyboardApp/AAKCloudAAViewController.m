@@ -15,6 +15,7 @@
 @interface AAKCloudAAViewController () {
 	NSMutableArray *_asciiarts;
 	NSOperationQueue *_queue;
+	CKQueryCursor *_currentCursor;
 }
 @end
 
@@ -26,26 +27,30 @@ static NSString * const reuseIdentifier = @"AAKAACloudCollectionViewCell";
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-	
-	// Register cell and supplemental classes to collection view
-	UINib *cellNib = [UINib nibWithNibName:@"AAKAACloudCollectionViewCell" bundle:nil];
-	[self.collectionView registerNib:cellNib forCellWithReuseIdentifier:reuseIdentifier];
-	
-	_queue = [[NSOperationQueue alloc] init];
-	_asciiarts = [NSMutableArray array];
-	
-	CKDatabase *database = nil;
-	NSMutableArray *target = nil;
-	
-	database = [[CKContainer defaultContainer] publicCloudDatabase];
+- (void)didFailCloudKitQuery {
+}
+
+- (void)didFinishCloudKitQuery {
+	[self.collectionView reloadData];
+}
+
+- (void)startQuery {
+	CKDatabase *database = [[CKContainer defaultContainer] publicCloudDatabase];
 	
 	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"TRUEPREDICATE"];
 	
-	CKQuery *query = [[CKQuery alloc] initWithRecordType:@"AAKCloudASCIIArt"
-											   predicate:predicate];
-	CKQueryOperation *op = [[CKQueryOperation alloc] initWithQuery:query];
+	 CKQueryOperation *op = nil;
+	
+	if (_currentCursor == nil) {
+		CKQuery *query = [[CKQuery alloc] initWithRecordType:@"AAKCloudASCIIArt"
+												   predicate:predicate];
+		query.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"time" ascending:NO]];
+		op = [[CKQueryOperation alloc] initWithQuery:query];
+	}
+	else {
+		op = [[CKQueryOperation alloc] initWithCursor:_currentCursor];
+		_currentCursor = nil;
+	}
 	op.resultsLimit = 6;
 	op.recordFetchedBlock = ^(CKRecord *record) {
 		DNSLog(@"%@", record);
@@ -53,14 +58,33 @@ static NSString * const reuseIdentifier = @"AAKAACloudCollectionViewCell";
 		[_asciiarts addObject:obj];
 	};
 	op.database = database;
-	op.queryCompletionBlock = ^(CKQueryCursor *record, NSError *error) {
-		DNSLog(@"%@", error);
-		DNSLogMainThread
+	op.queryCompletionBlock = ^(CKQueryCursor *cursor, NSError *error) {
 		dispatch_async(dispatch_get_main_queue(), ^{
-			[self.collectionView reloadData];
+			_currentCursor = cursor;
+			if (error) {
+				[self didFailCloudKitQuery];
+			}
+			else {
+				[self didFinishCloudKitQuery];
+			}
 		});
 	};
 	[_queue addOperation:op];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+	
+	// Register cell and supplemental classes to collection view
+	UINib *cellNib = [UINib nibWithNibName:@"AAKAACloudCollectionViewCell" bundle:nil];
+	[self.collectionView registerNib:cellNib forCellWithReuseIdentifier:reuseIdentifier];
+	
+	self.collectionView.alwaysBounceVertical = YES;
+	
+	_queue = [[NSOperationQueue alloc] init];
+	_asciiarts = [NSMutableArray array];
+	
+	[self startQuery];
 }
 
 #pragma mark <UICollectionViewDataSource>
@@ -102,6 +126,14 @@ static NSString * const reuseIdentifier = @"AAKAACloudCollectionViewCell";
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
 	return 0;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+	if (indexPath.row == _asciiarts.count - 1) {
+		if (_currentCursor) {
+			[self startQuery];
+		}
+	}
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
