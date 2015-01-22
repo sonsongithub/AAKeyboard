@@ -10,55 +10,36 @@
 
 #import "AAKCloudASCIIArt.h"
 #import "AAKAACloudCollectionViewCell.h"
-#import <CloudKit/CloudKit.h>
 
-@interface AAKCloudAAViewController () {
-	NSMutableArray *_asciiarts;
-	NSOperationQueue *_queue;
-	CKQueryCursor *_currentCursor;
-}
+@interface AAKCloudAAViewController ()
 @end
 
 @implementation AAKCloudAAViewController
 
 static NSString * const reuseIdentifier = @"AAKAACloudCollectionViewCell";
 
-- (IBAction)done:(id)sender {
-	[self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)didFailCloudKitQuery {
-}
-
-- (void)didFinishCloudKitQuery {
-	[self.collectionView reloadData];
-}
-
 - (void)startQuery {
 	CKDatabase *database = [[CKContainer defaultContainer] publicCloudDatabase];
-	
-	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"TRUEPREDICATE"];
 	
 	 CKQueryOperation *op = nil;
 	
 	if (_currentCursor == nil) {
-		CKQuery *query = [[CKQuery alloc] initWithRecordType:@"AAKCloudASCIIArt"
-												   predicate:predicate];
-		query.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"time" ascending:NO]];
-		op = [[CKQueryOperation alloc] initWithQuery:query];
+		op = [[CKQueryOperation alloc] initWithQuery:_query];
 	}
 	else {
 		op = [[CKQueryOperation alloc] initWithCursor:_currentCursor];
 		_currentCursor = nil;
 	}
-	op.resultsLimit = 6;
+	op.resultsLimit = 4;
 	op.recordFetchedBlock = ^(CKRecord *record) {
-		DNSLog(@"%@", record);
+//		DNSLog(@"%@", record);
 		AAKCloudASCIIArt *obj = [AAKCloudASCIIArt cloudASCIIArtWithRecord:record];
 		[_asciiarts addObject:obj];
 	};
 	op.database = database;
 	op.queryCompletionBlock = ^(CKQueryCursor *cursor, NSError *error) {
+		DNSLog(@"queryCompletionBlock");
+		DNSLog(@"%ld", _asciiarts.count);
 		dispatch_async(dispatch_get_main_queue(), ^{
 			_currentCursor = cursor;
 			if (error) {
@@ -72,6 +53,27 @@ static NSString * const reuseIdentifier = @"AAKAACloudCollectionViewCell";
 	[_queue addOperation:op];
 }
 
+#pragma mark <AAKCloudAAViewController>
+
+- (IBAction)done:(id)sender {
+	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark <AAKCloudAAViewController>
+
+- (void)didFailCloudKitQuery {
+}
+
+- (void)didFinishCloudKitQuery {
+	[self.collectionView reloadData];
+}
+
+#pragma mark <UIViewController>
+
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
@@ -83,8 +85,6 @@ static NSString * const reuseIdentifier = @"AAKAACloudCollectionViewCell";
 	
 	_queue = [[NSOperationQueue alloc] init];
 	_asciiarts = [NSMutableArray array];
-	
-	[self startQuery];
 }
 
 #pragma mark <UICollectionViewDataSource>
@@ -92,7 +92,6 @@ static NSString * const reuseIdentifier = @"AAKAACloudCollectionViewCell";
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
-
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
 	return [_asciiarts count];
@@ -152,9 +151,8 @@ static NSString * const reuseIdentifier = @"AAKAACloudCollectionViewCell";
 	else {
 	}
 	CGFloat width = self.collectionView.frame.size.width / 2;
-	CGFloat height = width;
+	CGFloat height = 400;
 	return CGSizeMake(width, height);
 }
-
 
 @end

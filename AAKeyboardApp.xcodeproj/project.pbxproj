@@ -111,6 +111,7 @@
 		146EEB5619ED5CE50032F6DE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */; };
 		146EEB5719ED5CEF0032F6DE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */; };
 		14773DD31A5EEC0600BAF888 /* AAKHelpDummyTapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14773DD21A5EEC0600BAF888 /* AAKHelpDummyTapView.m */; };
+		14A4771E1A719EB100CDA461 /* AAKCloudAASearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A4771D1A719EB100CDA461 /* AAKCloudAASearchViewController.m */; };
 		14A5138919EC68530098C02C /* register.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 14A5137E19EC68530098C02C /* register.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		14A5139119EC75300098C02C /* extension_js.js in Resources */ = {isa = PBXBuildFile; fileRef = 14A5138F19EC75300098C02C /* extension_js.js */; };
 		14A5139319EC85710098C02C /* UZCursorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CB155F19E935BB00D05E9C /* UZCursorView.m */; };
@@ -351,6 +352,8 @@
 		146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		14773DD11A5EEC0600BAF888 /* AAKHelpDummyTapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKHelpDummyTapView.h; sourceTree = "<group>"; };
 		14773DD21A5EEC0600BAF888 /* AAKHelpDummyTapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKHelpDummyTapView.m; sourceTree = "<group>"; };
+		14A4771C1A719EB100CDA461 /* AAKCloudAASearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKCloudAASearchViewController.h; sourceTree = "<group>"; };
+		14A4771D1A719EB100CDA461 /* AAKCloudAASearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKCloudAASearchViewController.m; sourceTree = "<group>"; };
 		14A5137E19EC68530098C02C /* register.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = register.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		14A5138119EC68530098C02C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14A5138F19EC75300098C02C /* extension_js.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = extension_js.js; sourceTree = "<group>"; };
@@ -810,6 +813,8 @@
 			children = (
 				1449EBF41A697FB6009BDD34 /* AAKCloudAAViewController.h */,
 				1449EBF51A697FB6009BDD34 /* AAKCloudAAViewController.m */,
+				14A4771C1A719EB100CDA461 /* AAKCloudAASearchViewController.h */,
+				14A4771D1A719EB100CDA461 /* AAKCloudAASearchViewController.m */,
 				14E488AD1A6C604300C22A73 /* AAKAACloudCollectionViewCell.h */,
 				14E488AE1A6C604300C22A73 /* AAKAACloudCollectionViewCell.m */,
 				14E488B01A6C608600C22A73 /* AAKAACloudCollectionViewCell.xib */,
@@ -1306,6 +1311,7 @@
 				1402F1A61A0D3B430000F269 /* AAKAAGroupForCollection.m in Sources */,
 				14B274E41A0A0D83005BF3B1 /* AAKAAEditAnimatedTransitioning.m in Sources */,
 				14EE653C1A15ED6200FA0731 /* Model.xcdatamodeld in Sources */,
+				14A4771E1A719EB100CDA461 /* AAKCloudAASearchViewController.m in Sources */,
 				141528A21A18585600EB80AC /* NSManagedObject+MagicalFinders.m in Sources */,
 				14C1DEE81A67800300CC8DFA /* UIViewController+Rotate.m in Sources */,
 				141528871A18585600EB80AC /* MagicalImportFunctions.m in Sources */,

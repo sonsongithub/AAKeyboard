@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C94b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Kz7-TH-ldM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C106a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Kz7-TH-ldM">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -1093,10 +1093,10 @@
             </objects>
             <point key="canvasLocation" x="2285" y="1237"/>
         </scene>
-        <!--CloudAA View Controller-->
+        <!--CloudAA Search View Controller-->
         <scene sceneID="xhs-z8-fkb">
             <objects>
-                <collectionViewController id="id4-Em-Neg" customClass="AAKCloudAAViewController" sceneMemberID="viewController">
+                <collectionViewController id="id4-Em-Neg" customClass="AAKCloudAASearchViewController" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="pVE-qo-EP2">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1159,10 +1159,10 @@
             </objects>
             <point key="canvasLocation" x="3853" y="486"/>
         </scene>
-        <!--CloudAA View Controller-->
+        <!--CloudAA Search View Controller-->
         <scene sceneID="2qt-LI-TzB">
             <objects>
-                <collectionViewController id="cOJ-z7-ioY" customClass="AAKCloudAAViewController" sceneMemberID="viewController">
+                <collectionViewController id="cOJ-z7-ioY" customClass="AAKCloudAASearchViewController" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="bB7-40-aAf">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
