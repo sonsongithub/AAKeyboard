@@ -112,6 +112,8 @@
 		146EEB5719ED5CEF0032F6DE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */; };
 		14773DD31A5EEC0600BAF888 /* AAKHelpDummyTapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14773DD21A5EEC0600BAF888 /* AAKHelpDummyTapView.m */; };
 		14A4771E1A719EB100CDA461 /* AAKCloudAASearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A4771D1A719EB100CDA461 /* AAKCloudAASearchViewController.m */; };
+		14A477211A72B13F00CDA461 /* AAKCloudAARankingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A477201A72B13F00CDA461 /* AAKCloudAARankingViewController.m */; };
+		14A477241A72B24100CDA461 /* AAKCloudRecentAAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A477231A72B24100CDA461 /* AAKCloudRecentAAViewController.m */; };
 		14A5138919EC68530098C02C /* register.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 14A5137E19EC68530098C02C /* register.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		14A5139119EC75300098C02C /* extension_js.js in Resources */ = {isa = PBXBuildFile; fileRef = 14A5138F19EC75300098C02C /* extension_js.js */; };
 		14A5139319EC85710098C02C /* UZCursorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CB155F19E935BB00D05E9C /* UZCursorView.m */; };
@@ -354,6 +356,10 @@
 		14773DD21A5EEC0600BAF888 /* AAKHelpDummyTapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKHelpDummyTapView.m; sourceTree = "<group>"; };
 		14A4771C1A719EB100CDA461 /* AAKCloudAASearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKCloudAASearchViewController.h; sourceTree = "<group>"; };
 		14A4771D1A719EB100CDA461 /* AAKCloudAASearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKCloudAASearchViewController.m; sourceTree = "<group>"; };
+		14A4771F1A72B13F00CDA461 /* AAKCloudAARankingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKCloudAARankingViewController.h; sourceTree = "<group>"; };
+		14A477201A72B13F00CDA461 /* AAKCloudAARankingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKCloudAARankingViewController.m; sourceTree = "<group>"; };
+		14A477221A72B24100CDA461 /* AAKCloudRecentAAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKCloudRecentAAViewController.h; sourceTree = "<group>"; };
+		14A477231A72B24100CDA461 /* AAKCloudRecentAAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKCloudRecentAAViewController.m; sourceTree = "<group>"; };
 		14A5137E19EC68530098C02C /* register.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = register.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		14A5138119EC68530098C02C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14A5138F19EC75300098C02C /* extension_js.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = extension_js.js; sourceTree = "<group>"; };
@@ -815,6 +821,10 @@
 				1449EBF51A697FB6009BDD34 /* AAKCloudAAViewController.m */,
 				14A4771C1A719EB100CDA461 /* AAKCloudAASearchViewController.h */,
 				14A4771D1A719EB100CDA461 /* AAKCloudAASearchViewController.m */,
+				14A4771F1A72B13F00CDA461 /* AAKCloudAARankingViewController.h */,
+				14A477201A72B13F00CDA461 /* AAKCloudAARankingViewController.m */,
+				14A477221A72B24100CDA461 /* AAKCloudRecentAAViewController.h */,
+				14A477231A72B24100CDA461 /* AAKCloudRecentAAViewController.m */,
 				14E488AD1A6C604300C22A73 /* AAKAACloudCollectionViewCell.h */,
 				14E488AE1A6C604300C22A73 /* AAKAACloudCollectionViewCell.m */,
 				14E488B01A6C608600C22A73 /* AAKAACloudCollectionViewCell.xib */,
@@ -1294,6 +1304,7 @@
 				1467A6B61A36DA8600F43B96 /* AAKHelpViewController.m in Sources */,
 				14B2674A19E6CB2500C0321D /* AAKContentCell.m in Sources */,
 				14F6F38E1A100D8600BEE8E2 /* AAKToolbarFooterView.m in Sources */,
+				14A477211A72B13F00CDA461 /* AAKCloudAARankingViewController.m in Sources */,
 				14B274CD1A0A0D6F005BF3B1 /* UITraitCollection+keyboard.m in Sources */,
 				141528BD1A18585700EB80AC /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */,
 				14B274BB1A0A0D6F005BF3B1 /* AAKCreateNewGroupViewController.m in Sources */,
@@ -1306,6 +1317,7 @@
 				14773DD31A5EEC0600BAF888 /* AAKHelpDummyTapView.m in Sources */,
 				141528C61A18585700EB80AC /* MagicalRecord+iCloud.m in Sources */,
 				141528991A18585600EB80AC /* NSString+MagicalDataImport.m in Sources */,
+				14A477241A72B24100CDA461 /* AAKCloudRecentAAViewController.m in Sources */,
 				141528C91A18585700EB80AC /* MagicalRecord+Options.m in Sources */,
 				14C1DEED1A67805200CC8DFA /* UINavigationController+Rotate.m in Sources */,
 				1402F1A61A0D3B430000F269 /* AAKAAGroupForCollection.m in Sources */,

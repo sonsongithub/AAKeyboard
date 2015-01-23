@@ -1159,10 +1159,10 @@
             </objects>
             <point key="canvasLocation" x="3853" y="486"/>
         </scene>
-        <!--CloudAA Search View Controller-->
+        <!--CloudAA Ranking View Controller-->
         <scene sceneID="2qt-LI-TzB">
             <objects>
-                <collectionViewController id="cOJ-z7-ioY" customClass="AAKCloudAASearchViewController" sceneMemberID="viewController">
+                <collectionViewController id="cOJ-z7-ioY" customClass="AAKCloudAARankingViewController" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="bB7-40-aAf">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1191,10 +1191,10 @@
             </objects>
             <point key="canvasLocation" x="4671" y="-200"/>
         </scene>
-        <!--CloudAA View Controller-->
+        <!--Cloud RecentAA View Controller-->
         <scene sceneID="ID9-kE-Inh">
             <objects>
-                <collectionViewController id="lef-YN-Kik" customClass="AAKCloudAAViewController" sceneMemberID="viewController">
+                <collectionViewController id="lef-YN-Kik" customClass="AAKCloudRecentAAViewController" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="ejy-br-0ig">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
