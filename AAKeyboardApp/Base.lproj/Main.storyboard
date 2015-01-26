@@ -42,9 +42,9 @@
                         </connections>
                     </collectionView>
                     <toolbarItems>
-                        <barButtonItem image="cloudDownload" id="IfF-Ls-obe">
+                        <barButtonItem image="help" id="IfF-Ls-obe">
                             <connections>
-                                <segue destination="wA6-vg-0cc" kind="presentation" id="cue-bX-1JM"/>
+                                <segue destination="Z79-Qd-5o1" kind="presentation" id="g6l-lY-s7H"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="dQz-QP-nHA"/>
@@ -60,9 +60,9 @@
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="AA List" id="bOC-aV-MTB">
-                        <barButtonItem key="leftBarButtonItem" image="help" id="3dm-5C-kaX">
+                        <barButtonItem key="leftBarButtonItem" image="cloudDownload" id="3dm-5C-kaX">
                             <connections>
-                                <segue destination="Z79-Qd-5o1" kind="presentation" modalPresentationStyle="formSheet" id="dU1-Bd-vIu"/>
+                                <segue destination="wA6-vg-0cc" kind="presentation" modalTransitionStyle="flipHorizontal" id="HUv-C1-PZ9"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="gear" id="887-C0-2df">
@@ -858,9 +858,9 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="tOB-Yf-7bJ" kind="relationship" relationship="viewControllers" id="JEj-Li-ojI"/>
-                        <segue destination="c4L-ZT-h20" kind="relationship" relationship="viewControllers" id="be7-xm-IcH"/>
-                        <segue destination="y0y-12-cBV" kind="relationship" relationship="viewControllers" id="YOc-bX-mhu"/>
+                        <segue destination="c4L-ZT-h20" kind="relationship" relationship="viewControllers" id="Qv6-Sq-nXa"/>
+                        <segue destination="y0y-12-cBV" kind="relationship" relationship="viewControllers" id="3uF-78-aJW"/>
+                        <segue destination="tOB-Yf-7bJ" kind="relationship" relationship="viewControllers" id="3cS-Wk-LaB"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2p5-Dr-kpo" userLabel="First Responder" sceneMemberID="firstResponder"/>

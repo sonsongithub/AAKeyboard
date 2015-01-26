@@ -22,6 +22,7 @@
 	
 	_searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 44, 300, 44)];
 	_searchBar.delegate = self;
+	_searchBar.placeholder = NSLocalizedString(@"Search AA", nil);
 	self.navigationItem.titleView = _searchBar;
 }
 
