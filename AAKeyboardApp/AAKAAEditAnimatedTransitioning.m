@@ -107,6 +107,15 @@
 			collectionViewController = (AAKSourceCollectionViewController*)nav.topViewController;
 		}
 	}
+	if ([viewController isKindOfClass:[UITabBarController class]]) {
+		UITabBarController *tab = (UITabBarController*)viewController;
+		if ([tab.selectedViewController isKindOfClass:[UINavigationController class]]) {
+			UINavigationController *nav = (UINavigationController*)tab.selectedViewController;
+			if ([nav.topViewController conformsToProtocol:@protocol(AAKSourceCollectionViewControllerProtocol)]) {
+				collectionViewController = (AAKSourceCollectionViewController*)nav.topViewController;
+			}
+		}
+	}
 	return collectionViewController;
 }
 

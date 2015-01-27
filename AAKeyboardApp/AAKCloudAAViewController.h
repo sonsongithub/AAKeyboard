@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <CloudKit/CloudKit.h>
+#import "AAKAAEditAnimatedTransitioning.h"
 
-@interface AAKCloudAAViewController : UICollectionViewController {
+@interface AAKCloudAAViewController : UICollectionViewController <AAKSourceCollectionViewControllerProtocol> {
 	NSMutableArray *_asciiarts;
 	NSOperationQueue *_queue;
 	CKQueryCursor *_currentCursor;

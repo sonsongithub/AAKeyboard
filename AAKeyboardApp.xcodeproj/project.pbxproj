@@ -97,6 +97,7 @@
 		141B495C1A192A8C00E7F877 /* AAKASCIIArt.m in Sources */ = {isa = PBXBuildFile; fileRef = 141B495B1A192A8C00E7F877 /* AAKASCIIArt.m */; };
 		141B495D1A192A8C00E7F877 /* AAKASCIIArt.m in Sources */ = {isa = PBXBuildFile; fileRef = 141B495B1A192A8C00E7F877 /* AAKASCIIArt.m */; };
 		141B495E1A192A8C00E7F877 /* AAKASCIIArt.m in Sources */ = {isa = PBXBuildFile; fileRef = 141B495B1A192A8C00E7F877 /* AAKASCIIArt.m */; };
+		1442B2AD1A77D042006D9AAF /* AAKCloudAAPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1442B2AC1A77D042006D9AAF /* AAKCloudAAPreviewController.m */; };
 		1449EBF31A6975B0009BDD34 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1449EBF21A6975B0009BDD34 /* CloudKit.framework */; };
 		1449EBF61A697FB6009BDD34 /* AAKCloudAAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1449EBF51A697FB6009BDD34 /* AAKCloudAAViewController.m */; };
 		1449EBF91A697FD8009BDD34 /* AAKCloudASCIIArt.m in Sources */ = {isa = PBXBuildFile; fileRef = 1449EBF81A697FD8009BDD34 /* AAKCloudASCIIArt.m */; };
@@ -335,6 +336,8 @@
 		1441E88119ECD7F300A4881F /* register.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = register.entitlements; sourceTree = "<group>"; };
 		1441E88219ECD7FF00A4881F /* keyboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = keyboard.entitlements; sourceTree = "<group>"; };
 		1441E88319ECD83C00A4881F /* AAKeyboardApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = AAKeyboardApp.entitlements; sourceTree = "<group>"; };
+		1442B2AB1A77D042006D9AAF /* AAKCloudAAPreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKCloudAAPreviewController.h; sourceTree = "<group>"; };
+		1442B2AC1A77D042006D9AAF /* AAKCloudAAPreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKCloudAAPreviewController.m; sourceTree = "<group>"; };
 		1449EBF21A6975B0009BDD34 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		1449EBF41A697FB6009BDD34 /* AAKCloudAAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKCloudAAViewController.h; sourceTree = "<group>"; };
 		1449EBF51A697FB6009BDD34 /* AAKCloudAAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKCloudAAViewController.m; sourceTree = "<group>"; };
@@ -819,6 +822,8 @@
 			children = (
 				1449EBF41A697FB6009BDD34 /* AAKCloudAAViewController.h */,
 				1449EBF51A697FB6009BDD34 /* AAKCloudAAViewController.m */,
+				1442B2AB1A77D042006D9AAF /* AAKCloudAAPreviewController.h */,
+				1442B2AC1A77D042006D9AAF /* AAKCloudAAPreviewController.m */,
 				14A4771D1A719EB100CDA461 /* AAKCloudAASearchViewController.m */,
 				14A4771F1A72B13F00CDA461 /* AAKCloudAARankingViewController.h */,
 				14A477201A72B13F00CDA461 /* AAKCloudAARankingViewController.m */,
@@ -1334,6 +1339,7 @@
 				14B274CA1A0A0D6F005BF3B1 /* NSParagraphStyle+keyboard.m in Sources */,
 				141528C31A18585700EB80AC /* MagicalRecord+ErrorHandling.m in Sources */,
 				1415289F1A18585600EB80AC /* NSManagedObject+MagicalDataImport.m in Sources */,
+				1442B2AD1A77D042006D9AAF /* AAKCloudAAPreviewController.m in Sources */,
 				14B67AEE1A3E1A49004DD95C /* AAKDummyCollectionReusableView.m in Sources */,
 				14CB156419E935BB00D05E9C /* UZCursorView.m in Sources */,
 				141528961A18585600EB80AC /* NSRelationshipDescription+MagicalDataImport.m in Sources */,

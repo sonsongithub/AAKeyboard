@@ -10,9 +10,11 @@
 
 #import "AAKCloudASCIIArt.h"
 #import "AAKAACloudCollectionViewCell.h"
-#import "AAKPreviewController.h"
+#import "AAKCloudAAPreviewController.h"
+#import "AAKAAEditAnimatedTransitioning.h"
+#import "AAKAAEditPresentationController.h"
 
-@interface AAKCloudAAViewController ()
+@interface AAKCloudAAViewController () <UIViewControllerTransitioningDelegate, UIPopoverPresentationControllerDelegate>
 @end
 
 @implementation AAKCloudAAViewController
@@ -54,6 +56,38 @@ static NSString * const reuseIdentifier = @"AAKAACloudCollectionViewCell";
 	[_queue addOperation:op];
 }
 
+
+/**
+ * 指定されたアスキーアートを含むセルのパスを返す．
+ * 見つからない場合は，nilを返す．
+ * @param asciiart アスキーアートオブジェクト．
+ * @return アスキーアートオブジェクトを保持するAAKAACollectionViewCellが持つはずであるNSIndexPathオブジェクト．
+ **/
+- (NSIndexPath*)indexPathForAsciiArt:(AAKCloudASCIIArt*)asciiart {
+	for (NSInteger i = 0; i < [_asciiarts count]; i++) {
+		AAKCloudASCIIArt *obj = [_asciiarts objectAtIndex:i];
+		if (obj == asciiart) {
+			return [NSIndexPath indexPathForItem:i inSection:0];
+		}
+	}
+	return nil;
+}
+
+/**
+ * 指定されたアスキーアートを含むセルを返す．
+ * 見つからない場合は，nilを返す．
+ * @param asciiart アスキーアートオブジェクト．
+ * @return アスキーアートオブジェクトを保持するAAKAACollectionViewCellインスタンスを返す．
+ **/
+- (id)cellForAsciiArt:(AAKCloudASCIIArt*)asciiart {
+	NSIndexPath *indexPath = [self indexPathForAsciiArt:asciiart];
+	return [self.collectionView cellForItemAtIndexPath:indexPath];
+}
+
+- (id)cellForContent:(id)content {
+	return [self cellForAsciiArt:content];
+}
+
 #pragma mark <AAKCloudAAViewController>
 
 - (IBAction)done:(id)sender {
@@ -88,29 +122,47 @@ static NSString * const reuseIdentifier = @"AAKAACloudCollectionViewCell";
 	_asciiarts = [NSMutableArray array];
 }
 
+#pragma mark - UIViewControllerTransitionDelegate
+
+- (UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented
+													  presentingViewController:(UIViewController *)presenting
+														  sourceViewController:(UIViewController *)source {
+	return [[AAKAAEditPresentationController alloc] initWithPresentedViewController:presented presentingViewController:presenting];
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
+																  presentingController:(UIViewController *)presenting
+																	  sourceController:(UIViewController *)source {
+	return [[AAKAAEditAnimatedTransitioning alloc] initWithPresentFlag:NO];
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+	return [[AAKAAEditAnimatedTransitioning alloc] initWithPresentFlag:YES];
+}
+
 #pragma mark <UICollectionViewDataSource>
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 	
-//	AAKAACloudCollectionViewCell *cell = (AAKAACloudCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
+	AAKAACloudCollectionViewCell *cell = (AAKAACloudCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
 	
-//	UINavigationController *nav = (UINavigationController*)[self.storyboard instantiateViewControllerWithIdentifier:@"AAKPreviewNavigationController"];
-//	AAKPreviewController *con = (AAKPreviewController*)nav.topViewController;
-//	con.asciiart = cell.asciiart;
-//	
-//	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+	UINavigationController *nav = (UINavigationController*)[self.storyboard instantiateViewControllerWithIdentifier:@"AAKCloudAAPreviewNavigationController"];
+	AAKCloudAAPreviewController *con = (AAKCloudAAPreviewController*)nav.topViewController;
+	con.asciiart = cell.asciiart;
+	
+	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
 //		nav.modalPresentationStyle = UIModalPresentationPopover;
 //		nav.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
 //		nav.popoverPresentationController.sourceRect = [self.view convertRect:cell.frame fromView:cell.superview];
 //		nav.popoverPresentationController.sourceView = self.view;
 //		nav.popoverPresentationController.delegate = self;
 //		[self presentViewController:nav animated:YES completion:nil];
-//	}
-//	else {
-//		nav.modalPresentationStyle = UIModalPresentationCustom;
-//		nav.transitioningDelegate = self;
-//		[self presentViewController:nav animated:YES completion:nil];
-//	}
+	}
+	else {
+		nav.modalPresentationStyle = UIModalPresentationCustom;
+		nav.transitioningDelegate = self;
+		[self presentViewController:nav animated:YES completion:nil];
+	}
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {

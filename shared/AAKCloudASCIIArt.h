@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <CloudKit/CloudKit.h>
+#import "AAKAAEditAnimatedTransitioning.h"
 
-@interface AAKCloudASCIIArt : NSObject
+@interface AAKCloudASCIIArt : NSObject <AAKContentProtocol>
 
 @property (nonatomic, readonly) NSString *ASCIIArt;
 @property (nonatomic, readonly) NSString *title;

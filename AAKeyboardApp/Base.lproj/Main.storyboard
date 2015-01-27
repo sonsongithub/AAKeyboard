@@ -1191,6 +1191,23 @@
             </objects>
             <point key="canvasLocation" x="4671" y="-200"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Ldi-y9-7OL">
+            <objects>
+                <navigationController storyboardIdentifier="AAKCloudAAPreviewNavigationController" navigationBarHidden="YES" id="rV9-ja-v6R" sceneMemberID="viewController">
+                    <nil key="simulatedTopBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ajS-dk-aui">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="deo-Zp-NRV" kind="relationship" relationship="rootViewController" id="PH1-Jq-uHS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1fo-W2-M3h" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5475" y="-946"/>
+        </scene>
         <!--Cloud RecentAA View Controller-->
         <scene sceneID="ID9-kE-Inh">
             <objects>
@@ -1222,6 +1239,97 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bfR-a1-5U2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4671" y="486"/>
+        </scene>
+        <!--CloudAA Preview Controller-->
+        <scene sceneID="BcL-gx-ThF">
+            <objects>
+                <viewController id="deo-Zp-NRV" customClass="AAKCloudAAPreviewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RK8-53-1v7"/>
+                        <viewControllerLayoutGuide type="bottom" id="t9X-v2-0dZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bIj-DU-x40">
+                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fLN-0X-21R" customClass="AAKTextView">
+                                <rect key="frame" x="5" y="5" width="590" height="590"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wGu-kY-oMB">
+                                <rect key="frame" x="540" y="540" width="32" height="32"/>
+                                <color key="backgroundColor" white="0.5" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="32" id="9HG-We-BeQ"/>
+                                    <constraint firstAttribute="height" constant="32" id="ZEH-X3-qMB"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="pen">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RXS-ZI-Tqf">
+                                <rect key="frame" x="284" y="540" width="32" height="32"/>
+                                <color key="backgroundColor" white="0.5" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="16r-b9-AJl"/>
+                                    <constraint firstAttribute="width" constant="32" id="eqh-bH-KiV"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="cloudUpload">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="upload:" destination="deo-Zp-NRV" eventType="touchUpInside" id="aSR-nm-jIp"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7FV-CW-hk0">
+                                <rect key="frame" x="20" y="540" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="BzJ-tf-KpD"/>
+                                    <constraint firstAttribute="width" constant="32" id="Inh-ZZ-1Uz"/>
+                                </constraints>
+                                <state key="normal" image="photoLibrary">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="saveAsImage:" destination="deo-Zp-NRV" eventType="touchUpInside" id="hcz-vJ-JWv"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="RXS-ZI-Tqf" secondAttribute="centerX" id="079-a1-Wqr"/>
+                            <constraint firstAttribute="trailing" secondItem="wGu-kY-oMB" secondAttribute="trailing" constant="28" id="JGW-qo-QMr"/>
+                            <constraint firstItem="t9X-v2-0dZ" firstAttribute="top" secondItem="7FV-CW-hk0" secondAttribute="bottom" constant="28" id="JTj-Jn-Jsc"/>
+                            <constraint firstAttribute="trailing" secondItem="fLN-0X-21R" secondAttribute="trailing" constant="5" id="M6H-FF-7qq"/>
+                            <constraint firstItem="t9X-v2-0dZ" firstAttribute="top" secondItem="RXS-ZI-Tqf" secondAttribute="bottom" constant="28" id="aCe-Uf-EC1"/>
+                            <constraint firstItem="fLN-0X-21R" firstAttribute="leading" secondItem="bIj-DU-x40" secondAttribute="leading" constant="5" id="c4e-RS-bah"/>
+                            <constraint firstItem="t9X-v2-0dZ" firstAttribute="top" secondItem="wGu-kY-oMB" secondAttribute="bottom" constant="28" id="gEg-ar-2BS"/>
+                            <constraint firstItem="t9X-v2-0dZ" firstAttribute="top" secondItem="fLN-0X-21R" secondAttribute="bottom" constant="5" id="tK8-V1-719"/>
+                            <constraint firstItem="7FV-CW-hk0" firstAttribute="leading" secondItem="bIj-DU-x40" secondAttribute="leading" constant="20" id="twz-gx-MEJ"/>
+                            <constraint firstItem="fLN-0X-21R" firstAttribute="top" secondItem="bIj-DU-x40" secondAttribute="top" constant="5" id="xDi-jx-XlV"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
+                    <navigationItem key="navigationItem" id="KfO-IC-3sH">
+                        <barButtonItem key="leftBarButtonItem" title="Close" id="Tib-pj-seR">
+                            <connections>
+                                <action selector="close:" destination="deo-Zp-NRV" id="Rcd-CF-IiO"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="EkH-SB-yoY"/>
+                    </navigationItem>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="bottomMarginConstraint" destination="tK8-V1-719" id="iJv-G8-4ox"/>
+                        <outlet property="leftMarginConstraint" destination="c4e-RS-bah" id="NlM-AW-rGs"/>
+                        <outlet property="rightMarginConstraint" destination="M6H-FF-7qq" id="TmV-s4-mHZ"/>
+                        <outlet property="textView" destination="fLN-0X-21R" id="J8q-GD-Psc"/>
+                        <outlet property="topMarginConstraint" destination="xDi-jx-XlV" id="7FM-7R-k8U"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MQw-Fh-e4i" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6204" y="-946"/>
         </scene>
     </scenes>
     <resources>
