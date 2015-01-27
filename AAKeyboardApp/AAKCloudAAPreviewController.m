@@ -33,6 +33,11 @@
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	self.titleLabel.text = _asciiart.title;
+}
+
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	

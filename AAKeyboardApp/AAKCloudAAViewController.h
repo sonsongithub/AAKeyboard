@@ -10,12 +10,15 @@
 #import <CloudKit/CloudKit.h>
 #import "AAKAAEditAnimatedTransitioning.h"
 
-@interface AAKCloudAAViewController : UICollectionViewController <AAKSourceCollectionViewControllerProtocol> {
+@interface AAKCloudAAViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, AAKSourceCollectionViewControllerProtocol> {
 	NSMutableArray *_asciiarts;
 	NSOperationQueue *_queue;
 	CKQueryCursor *_currentCursor;
 	CKQuery	*_query;
 }
+
+@property (nonatomic, strong) IBOutlet UICollectionView *collectionView;
+@property (nonatomic, strong) UIImage *backgroundImage;
 
 - (void)startQuery;
 

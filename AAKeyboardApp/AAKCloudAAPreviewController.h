@@ -18,6 +18,8 @@
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *rightMarginConstraint;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *leftMarginConstraint;
 
+@property (nonatomic, strong) IBOutlet UILabel *titleLabel;
+
 @property (nonatomic, strong) AAKCloudASCIIArt *asciiart;
 
 + (CGFloat)marginConstant;

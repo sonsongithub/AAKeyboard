@@ -820,10 +820,10 @@
 		14E488AC1A6B14D700C22A73 /* CloudKit */ = {
 			isa = PBXGroup;
 			children = (
-				1449EBF41A697FB6009BDD34 /* AAKCloudAAViewController.h */,
-				1449EBF51A697FB6009BDD34 /* AAKCloudAAViewController.m */,
 				1442B2AB1A77D042006D9AAF /* AAKCloudAAPreviewController.h */,
 				1442B2AC1A77D042006D9AAF /* AAKCloudAAPreviewController.m */,
+				1449EBF41A697FB6009BDD34 /* AAKCloudAAViewController.h */,
+				1449EBF51A697FB6009BDD34 /* AAKCloudAAViewController.m */,
 				14A4771D1A719EB100CDA461 /* AAKCloudAASearchViewController.m */,
 				14A4771F1A72B13F00CDA461 /* AAKCloudAARankingViewController.h */,
 				14A477201A72B13F00CDA461 /* AAKCloudAARankingViewController.m */,

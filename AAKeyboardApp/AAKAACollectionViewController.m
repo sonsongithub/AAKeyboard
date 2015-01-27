@@ -16,6 +16,7 @@
 #import "AAKPreviewController.h"
 #import "AAKDummyCollectionReusableView.h"
 #import "AAKRegisterViewController.h"
+#import "AAKCloudAAViewController.h"
 
 @interface AAKAACollectionViewController () <AAKAACollectionViewCellDelegate, UIViewControllerTransitioningDelegate, UIPopoverPresentationControllerDelegate> {
 	NSArray *_groups;	/** AAKAAGroupForCollectionオブジェクトの配列 */
@@ -199,6 +200,24 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//	UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, NO, 0);
+//	[self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+//	UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+//	UIGraphicsEndImageContext();
+//	if ([segue.identifier isEqualToString:@"OpenCloudTabController"]) {
+//		if ([segue.destinationViewController isKindOfClass:[UITabBarController class]]) {
+//			UITabBarController *tab = (UITabBarController*)segue.destinationViewController;
+//			for (id obj in tab.viewControllers) {
+//				if ([obj isKindOfClass:[AAKCloudAAViewController class]]) {
+//					AAKCloudAAViewController *con = (AAKCloudAAViewController*)obj;
+//					con.backgroundImage = image;
+//				}
+//			}
+//		}
+//	}
 }
 
 #pragma mark -
