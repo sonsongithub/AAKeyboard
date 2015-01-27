@@ -60,7 +60,7 @@
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="AA List" id="bOC-aV-MTB">
-                        <barButtonItem key="leftBarButtonItem" image="cloudDownload" id="3dm-5C-kaX">
+                        <barButtonItem key="leftBarButtonItem" image="cloud" id="3dm-5C-kaX">
                             <connections>
                                 <segue destination="wA6-vg-0cc" kind="presentation" modalTransitionStyle="flipHorizontal" id="HUv-C1-PZ9"/>
                             </connections>
@@ -224,7 +224,7 @@
                                     <outlet property="targetView" destination="IWd-ja-U8c" id="CB1-ED-zSf"/>
                                 </connections>
                             </view>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="7" translatesAutoresizingMaskIntoConstraints="NO" id="fbR-yQ-Jsc">
+                            <pageControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="7" translatesAutoresizingMaskIntoConstraints="NO" id="fbR-yQ-Jsc">
                                 <rect key="frame" x="180" y="13" width="240" height="37"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -234,7 +234,7 @@
                                 <color key="pageIndicatorTintColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <color key="currentPageIndicatorTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </pageControl>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IWd-ja-U8c">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IWd-ja-U8c">
                                 <rect key="frame" x="180" y="58" width="240" height="427"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -248,10 +248,10 @@
                                     <outlet property="delegate" destination="cXs-Km-O4a" id="dQT-Kg-6Ir"/>
                                 </connections>
                             </scrollView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bGg-49-Oi5">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bGg-49-Oi5">
                                 <rect key="frame" x="0.0" y="513" width="600" height="87"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is a description." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shJ-lo-Bpl">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="This is a description." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shJ-lo-Bpl">
                                         <rect key="frame" x="8" y="33" width="584" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -274,7 +274,7 @@
                                     <rect key="frame" x="0.0" y="400" width="400" height="0.0"/>
                                 </variation>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kli-rs-NLz">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kli-rs-NLz">
                                 <rect key="frame" x="16" y="12" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="NXv-1o-tad"/>
@@ -1114,7 +1114,7 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="hcB-yt-gbK">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="Q0T-e2-xNa">
+                        <barButtonItem key="leftBarButtonItem" image="iphone" id="Q0T-e2-xNa">
                             <connections>
                                 <action selector="done:" destination="id4-Em-Neg" id="hAr-Ks-1FW"/>
                             </connections>
@@ -1180,7 +1180,7 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="jgT-9c-rSD">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="XUT-6N-taR">
+                        <barButtonItem key="leftBarButtonItem" image="iphone" id="XUT-6N-taR">
                             <connections>
                                 <action selector="done:" destination="cOJ-z7-ioY" id="Y7s-Kz-iLR"/>
                             </connections>
@@ -1212,7 +1212,7 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="d4N-rF-TDv">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="h3U-of-l0Q">
+                        <barButtonItem key="leftBarButtonItem" image="iphone" id="h3U-of-l0Q">
                             <connections>
                                 <action selector="done:" destination="lef-YN-Kik" id="mvH-ru-uDo"/>
                             </connections>
@@ -1226,11 +1226,12 @@
     </scenes>
     <resources>
         <image name="CloseButton" width="24" height="24"/>
-        <image name="cloudDownload" width="32" height="32"/>
+        <image name="cloud" width="32" height="32"/>
         <image name="cloudUpload" width="32" height="32"/>
         <image name="gear" width="32" height="32"/>
         <image name="help" width="32" height="32"/>
         <image name="historyOnTab" width="30" height="30"/>
+        <image name="iphone" width="32" height="32"/>
         <image name="list" width="32" height="32"/>
         <image name="paste" width="32" height="32"/>
         <image name="pen" width="32" height="32"/>
