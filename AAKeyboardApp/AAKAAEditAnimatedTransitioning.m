@@ -47,7 +47,6 @@
 	// aspect ratio
 	// コンテナビューとプレビューコントローラのサイズが同じなのでこれでよい
 	CGFloat containerViewRatio = containerViewFrame.size.width / containerViewFrame.size.height;
-//	CGFloat asciiartRatio = previewController.asciiart.ratio;
 	CGFloat asciiartRatio = previewController.contentRatio;
 	
 	if (containerViewRatio >= asciiartRatio) {
@@ -75,13 +74,11 @@
 										  previewController:(AAKDestinationPreviewController*)previewController
 								   collectionViewController:(AAKSourceCollectionViewController*)collectionViewController {
 	
-//	AAKAACollectionViewCell *cell = [collectionViewController cellForAsciiArt:previewController.asciiart];
 	AAKSourceCollectionViewCell *cell = (AAKSourceCollectionViewCell*)[collectionViewController cellForContent:previewController.asciiart];
 	
 	// aspect ratio
 	// コンテナビューとプレビューコントローラのサイズが同じなのでこれでよい
 	CGFloat textViewOnCellRatio = cell.textView.frame.size.width / cell.textView.frame.size.height;
-//	CGFloat asciiartRatio = previewController.asciiart.ratio;
 	CGFloat asciiartRatio = previewController.contentRatio;
 	
 	if (textViewOnCellRatio >= asciiartRatio) {
@@ -148,7 +145,6 @@
 		return;
 	}
 
-//	AAKAACollectionViewCell *cell = [collectionViewController cellForAsciiArt:previewController.asciiart];
 	AAKSourceCollectionViewCell *cell = (AAKSourceCollectionViewCell*)[collectionViewController cellForContent:previewController.asciiart];
 	
 	CGSize fromContentSize = [self AASizeForAACollectionViewControllerWithTransition:transitionContext

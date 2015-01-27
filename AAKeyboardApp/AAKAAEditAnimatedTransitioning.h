@@ -12,24 +12,61 @@
 
 @protocol AAKSourceCollectionViewControllerProtocol <NSObject>
 @required
+/**
+ * contentを持つセルを返す．実装は，ビューコントローラに依存する．
+ *
+ * @param content コンテンツオブジェクト．AAKCloudASCIIArtあるいはAAKASCIIArtのオブジェクト．
+ * @return AAKSourceCollectionViewCellProtocolプロトコルをフォローするオブジェクト．
+ **/
 - (id)cellForContent:(id)content;
 @end
 
 @protocol AAKDestinationPreviewControllerProtocol <NSObject>
 @required
+/**
+ * プレビューで表示するテキストビュー．
+ * @return ビューコントローラが保持するAAKTextViewオブジェクト．
+ **/
 - (AAKTextView*)textView;
+
+/**
+ * プレビューで表示するAAのaspect ratio.
+ * @return AAのaspect ratio.
+ **/
 - (CGFloat)contentRatio;
-+ (CGFloat)marginConstant;
+
+/**
+ * プレビューが保持するアスキーアートのオブジェクトを返す．
+ * オブジェクトは，AAKCloudASCIIArtあるいはAAKASCIIArtクラス．
+ * @return AAのaspect ratio.
+ **/
 - (id)asciiart;
+
+/**
+ * プレビュー上のマージン．
+ * @return マージンの値．
+ **/
++ (CGFloat)marginConstant;
+
 @end
 
 @protocol AAKSourceCollectionViewCellProtocol <NSObject>
 @required
+/**
+ * セルで表示するテキストビュー．
+ * @return セルが保持するAAKTextViewオブジェクト．
+ **/
 - (AAKTextView*)textView;
+
+/**
+ * アニメーションに使うテキストビューを生成する．
+ * サイズや位置はセルに合わせて生成される．
+ * @return AAKTextViewオブジェクト．
+ **/
 - (AAKTextView*)textViewForAnimation;
 @end
 
-typedef UIViewController<AAKSourceCollectionViewControllerProtocol> AAKSourceCollectionViewController;
+typedef UICollectionViewController<AAKSourceCollectionViewControllerProtocol> AAKSourceCollectionViewController;
 typedef UIViewController<AAKDestinationPreviewControllerProtocol> AAKDestinationPreviewController;
 typedef UICollectionViewCell<AAKSourceCollectionViewCellProtocol> AAKSourceCollectionViewCell;
 
