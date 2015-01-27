@@ -8,6 +8,31 @@
 
 #import <UIKit/UIKit.h>
 
+@class AAKTextView;
+
+@protocol AAKSourceCollectionViewControllerProtocol <NSObject>
+@required
+- (id)cellForContent:(id)content;
+@end
+
+@protocol AAKDestinationPreviewControllerProtocol <NSObject>
+@required
+- (AAKTextView*)textView;
+- (CGFloat)contentRatio;
++ (CGFloat)marginConstant;
+- (id)asciiart;
+@end
+
+@protocol AAKSourceCollectionViewCellProtocol <NSObject>
+@required
+- (AAKTextView*)textView;
+- (AAKTextView*)textViewForAnimation;
+@end
+
+typedef UIViewController<AAKSourceCollectionViewControllerProtocol> AAKSourceCollectionViewController;
+typedef UIViewController<AAKDestinationPreviewControllerProtocol> AAKDestinationPreviewController;
+typedef UICollectionViewCell<AAKSourceCollectionViewCellProtocol> AAKSourceCollectionViewCell;
+
 @interface AAKAAEditAnimatedTransitioning : NSObject <UIViewControllerAnimatedTransitioning>
 
 /**

@@ -62,6 +62,14 @@
 
 @implementation AAKPreviewController
 
+- (CGFloat)contentRatio {
+	return self.asciiart.ratio;
+}
+
+- (id)asciiart {
+	return _asciiart;
+}
+
 + (CGFloat)marginConstant {
 	return 30;
 }

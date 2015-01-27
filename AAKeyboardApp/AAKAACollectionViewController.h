@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AAKAAEditAnimatedTransitioning.h"
 
 @class _AAKASCIIArt;
 
-@interface AAKAACollectionViewController : UICollectionViewController
+@interface AAKAACollectionViewController : UICollectionViewController <AAKSourceCollectionViewControllerProtocol>
 
 /**
  * 指定されたアスキーアートを含むセルを返す．

@@ -819,12 +819,12 @@
 			children = (
 				1449EBF41A697FB6009BDD34 /* AAKCloudAAViewController.h */,
 				1449EBF51A697FB6009BDD34 /* AAKCloudAAViewController.m */,
-				14A4771C1A719EB100CDA461 /* AAKCloudAASearchViewController.h */,
 				14A4771D1A719EB100CDA461 /* AAKCloudAASearchViewController.m */,
 				14A4771F1A72B13F00CDA461 /* AAKCloudAARankingViewController.h */,
 				14A477201A72B13F00CDA461 /* AAKCloudAARankingViewController.m */,
 				14A477221A72B24100CDA461 /* AAKCloudRecentAAViewController.h */,
 				14A477231A72B24100CDA461 /* AAKCloudRecentAAViewController.m */,
+				14A4771C1A719EB100CDA461 /* AAKCloudAASearchViewController.h */,
 				14E488AD1A6C604300C22A73 /* AAKAACloudCollectionViewCell.h */,
 				14E488AE1A6C604300C22A73 /* AAKAACloudCollectionViewCell.m */,
 				14E488B01A6C608600C22A73 /* AAKAACloudCollectionViewCell.xib */,

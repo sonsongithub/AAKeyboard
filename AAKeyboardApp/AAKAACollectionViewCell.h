@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AAKAAEditAnimatedTransitioning.h"
 
 @class AAKTextView;
 @class _AAKASCIIArt;
@@ -36,7 +37,7 @@
 
 @end
 
-@interface AAKAACollectionViewCell : UICollectionViewCell
+@interface AAKAACollectionViewCell : UICollectionViewCell <AAKSourceCollectionViewCellProtocol>
 
 @property (nonatomic, assign) IBOutlet AAKTextView *textView;							/** アスキーアートをレンダリングするビュー */
 @property (nonatomic, assign) IBOutlet UIView *textBackView;							/** テキストの背景ビュー */
