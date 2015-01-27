@@ -47,7 +47,7 @@
 	// aspect ratio
 	// コンテナビューとプレビューコントローラのサイズが同じなのでこれでよい
 	CGFloat containerViewRatio = containerViewFrame.size.width / containerViewFrame.size.height;
-	CGFloat asciiartRatio = previewController.contentRatio;
+	CGFloat asciiartRatio = previewController.content.ratio;
 	
 	if (containerViewRatio >= asciiartRatio) {
 		float w = containerViewFrame.size.height * asciiartRatio;
@@ -74,12 +74,12 @@
 										  previewController:(AAKDestinationPreviewController*)previewController
 								   collectionViewController:(AAKSourceCollectionViewController*)collectionViewController {
 	
-	AAKSourceCollectionViewCell *cell = (AAKSourceCollectionViewCell*)[collectionViewController cellForContent:previewController.asciiart];
+	AAKSourceCollectionViewCell *cell = (AAKSourceCollectionViewCell*)[collectionViewController cellForContent:previewController.content];
 	
 	// aspect ratio
 	// コンテナビューとプレビューコントローラのサイズが同じなのでこれでよい
 	CGFloat textViewOnCellRatio = cell.textView.frame.size.width / cell.textView.frame.size.height;
-	CGFloat asciiartRatio = previewController.contentRatio;
+	CGFloat asciiartRatio = previewController.content.ratio;
 	
 	if (textViewOnCellRatio >= asciiartRatio) {
 		float w = cell.textView.frame.size.height * asciiartRatio;
@@ -145,7 +145,7 @@
 		return;
 	}
 
-	AAKSourceCollectionViewCell *cell = (AAKSourceCollectionViewCell*)[collectionViewController cellForContent:previewController.asciiart];
+	AAKSourceCollectionViewCell *cell = (AAKSourceCollectionViewCell*)[collectionViewController cellForContent:previewController.content];
 	
 	CGSize fromContentSize = [self AASizeForAACollectionViewControllerWithTransition:transitionContext
 																   previewController:previewController
@@ -221,7 +221,7 @@
 		return;
 	}
 	
-	AAKSourceCollectionViewCell *cell = (AAKSourceCollectionViewCell*)[collectionViewController cellForContent:previewController.asciiart];
+	AAKSourceCollectionViewCell *cell = (AAKSourceCollectionViewCell*)[collectionViewController cellForContent:previewController.content];
 	cell.textView.hidden = YES;
 	
 	CGSize toContentSize = [self AASizeForAACollectionViewControllerWithTransition:transitionContext

@@ -62,11 +62,7 @@
 
 @implementation AAKPreviewController
 
-- (CGFloat)contentRatio {
-	return self.asciiart.ratio;
-}
-
-- (id)asciiart {
+- (AAKContent*)content {
 	return _asciiart;
 }
 

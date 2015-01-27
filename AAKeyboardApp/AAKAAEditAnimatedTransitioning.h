@@ -10,6 +10,11 @@
 
 @class AAKTextView;
 
+@protocol AAKContentProtocol <NSObject>
+- (CGFloat)ratio;
+@end
+typedef NSObject<AAKContentProtocol> AAKContent;
+
 @protocol AAKSourceCollectionViewControllerProtocol <NSObject>
 @required
 /**
@@ -20,6 +25,7 @@
  **/
 - (id)cellForContent:(id)content;
 @end
+typedef UICollectionViewController<AAKSourceCollectionViewControllerProtocol> AAKSourceCollectionViewController;
 
 @protocol AAKDestinationPreviewControllerProtocol <NSObject>
 @required
@@ -30,17 +36,11 @@
 - (AAKTextView*)textView;
 
 /**
- * プレビューで表示するAAのaspect ratio.
- * @return AAのaspect ratio.
- **/
-- (CGFloat)contentRatio;
-
-/**
  * プレビューが保持するアスキーアートのオブジェクトを返す．
  * オブジェクトは，AAKCloudASCIIArtあるいはAAKASCIIArtクラス．
  * @return AAのaspect ratio.
  **/
-- (id)asciiart;
+- (AAKContent*)content;
 
 /**
  * プレビュー上のマージン．
@@ -49,6 +49,7 @@
 + (CGFloat)marginConstant;
 
 @end
+typedef UIViewController<AAKDestinationPreviewControllerProtocol> AAKDestinationPreviewController;
 
 @protocol AAKSourceCollectionViewCellProtocol <NSObject>
 @required
@@ -65,9 +66,6 @@
  **/
 - (AAKTextView*)textViewForAnimation;
 @end
-
-typedef UICollectionViewController<AAKSourceCollectionViewControllerProtocol> AAKSourceCollectionViewController;
-typedef UIViewController<AAKDestinationPreviewControllerProtocol> AAKDestinationPreviewController;
 typedef UICollectionViewCell<AAKSourceCollectionViewCellProtocol> AAKSourceCollectionViewCell;
 
 @interface AAKAAEditAnimatedTransitioning : NSObject <UIViewControllerAnimatedTransitioning>
