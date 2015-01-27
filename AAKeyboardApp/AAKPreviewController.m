@@ -62,6 +62,10 @@
 
 @implementation AAKPreviewController
 
+- (AAKContent*)content {
+	return _asciiart;
+}
+
 + (CGFloat)marginConstant {
 	return 30;
 }

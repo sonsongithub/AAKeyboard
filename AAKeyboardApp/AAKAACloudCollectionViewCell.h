@@ -8,13 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+#import "AAKAACollectionViewCell.h"
+
 @class AAKCloudASCIIArt;
 
 @interface AAKAACloudCollectionViewCell : UICollectionViewCell
 
-@property (nonatomic, assign) IBOutlet AAKTextView *textView;			/** アスキーアートをレンダリングするビュー */
-@property (nonatomic, assign) IBOutlet UIView *textBackView;			/** テキストの背景ビュー */
-@property (nonatomic, assign) IBOutlet UILabel *titleLabel;				/** 名前用ラベル */
-@property (nonatomic, strong) AAKCloudASCIIArt *asciiart;				/** 表示するアスキーアート */
+@property (nonatomic, assign) IBOutlet AAKTextView *textView;					/** アスキーアートをレンダリングするビュー */
+@property (nonatomic, assign) IBOutlet UIView *textBackView;					/** テキストの背景ビュー */
+@property (nonatomic, assign) IBOutlet UILabel *titleLabel;						/** 名前用ラベル */
+@property (nonatomic, strong) AAKCloudASCIIArt *asciiart;						/** 表示するアスキーアート */
 
 @end

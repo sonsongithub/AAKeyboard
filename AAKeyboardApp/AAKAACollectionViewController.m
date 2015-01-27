@@ -80,6 +80,10 @@ static NSString * const reuseIdentifier = @"Cell";
 	return [self.collectionView cellForItemAtIndexPath:indexPath];
 }
 
+- (id)cellForContent:(id)content {
+	return [self cellForAsciiArt:content];
+}
+
 /**
  * 指定されたアスキーアートを含むセルのパスを返す．
  * 見つからない場合は，nilを返す．

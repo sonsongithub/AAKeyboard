@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AAKAAEditAnimatedTransitioning.h"
 
 @class AAKTextView;
 
-@interface AAKPreviewController : UIViewController
+@interface AAKPreviewController : UIViewController <AAKDestinationPreviewControllerProtocol>
 @property (nonatomic, strong) IBOutlet AAKTextView *textView;
 
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *topMarginConstraint;

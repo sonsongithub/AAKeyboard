@@ -27,7 +27,17 @@
 	_title = [title copy];
 	_downloads = downloads.integerValue;
 	_reported = reported.integerValue;
+	[self updateRatio];
 	return self;
+}
+
+- (void)updateRatio {
+	CGFloat fontSize = 15;
+	NSParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyleWithFontSize:fontSize];
+	NSDictionary *attributes = @{NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:[UIFont fontWithName:@"Mona" size:fontSize]};
+	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:self.ASCIIArt attributes:attributes];
+	CGSize size = [UZTextView sizeForAttributedString:string withBoundWidth:CGFLOAT_MAX margin:UIEdgeInsetsZero];
+	_ratio = size.width / size.height;
 }
 
 @end

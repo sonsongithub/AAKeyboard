@@ -10,6 +10,7 @@
 
 #import "AAKCloudASCIIArt.h"
 #import "AAKAACloudCollectionViewCell.h"
+#import "AAKPreviewController.h"
 
 @interface AAKCloudAAViewController ()
 @end
@@ -88,6 +89,29 @@ static NSString * const reuseIdentifier = @"AAKAACloudCollectionViewCell";
 }
 
 #pragma mark <UICollectionViewDataSource>
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+	
+//	AAKAACloudCollectionViewCell *cell = (AAKAACloudCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
+	
+//	UINavigationController *nav = (UINavigationController*)[self.storyboard instantiateViewControllerWithIdentifier:@"AAKPreviewNavigationController"];
+//	AAKPreviewController *con = (AAKPreviewController*)nav.topViewController;
+//	con.asciiart = cell.asciiart;
+//	
+//	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+//		nav.modalPresentationStyle = UIModalPresentationPopover;
+//		nav.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+//		nav.popoverPresentationController.sourceRect = [self.view convertRect:cell.frame fromView:cell.superview];
+//		nav.popoverPresentationController.sourceView = self.view;
+//		nav.popoverPresentationController.delegate = self;
+//		[self presentViewController:nav animated:YES completion:nil];
+//	}
+//	else {
+//		nav.modalPresentationStyle = UIModalPresentationCustom;
+//		nav.transitioningDelegate = self;
+//		[self presentViewController:nav animated:YES completion:nil];
+//	}
+}
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
