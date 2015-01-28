@@ -13,6 +13,7 @@
 + (instancetype)cloudASCIIArtWithRecord:(CKRecord*)record {
 	AAKCloudASCIIArt *obj = [[AAKCloudASCIIArt alloc] initWithASCIIArt:[record objectForKey:@"ASCIIArt"]
 																 title:[record objectForKey:@"title"]
+														   createdTime:[record objectForKey:@"time"]
 															 downloads:[record objectForKey:@"downloads"]
 															  reported:[record objectForKey:@"reported"]
 																  like:[record objectForKey:@"like"]
@@ -22,6 +23,7 @@
 
 - (instancetype)initWithASCIIArt:(NSString*)ASCIIArt
 						   title:(NSString*)title
+					 createdTime:(NSNumber*)createdTime
 					   downloads:(NSNumber*)downloads
 						reported:(NSNumber*)reported
 							like:(NSNumber*)like
@@ -29,6 +31,7 @@
 	self = [super init];
 	_ASCIIArt = [ASCIIArt copy];
 	_title = [title copy];
+	_createdTime = createdTime.doubleValue;
 	_downloads = downloads.integerValue;
 	_reported = reported.integerValue;
 	_like = like.integerValue;

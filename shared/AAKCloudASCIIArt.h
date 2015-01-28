@@ -18,6 +18,7 @@
 @property (nonatomic, readonly) NSInteger like;
 @property (nonatomic, readonly) NSInteger reported;
 @property (nonatomic, readonly) double ratio;
+@property (nonatomic, readonly) double createdTime;
 @property (nonatomic, readonly) CKRecordID *recordID;
 
 + (instancetype)cloudASCIIArtWithRecord:(CKRecord*)record;
