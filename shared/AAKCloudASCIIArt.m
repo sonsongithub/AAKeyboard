@@ -14,19 +14,25 @@
 	AAKCloudASCIIArt *obj = [[AAKCloudASCIIArt alloc] initWithASCIIArt:[record objectForKey:@"ASCIIArt"]
 																 title:[record objectForKey:@"title"]
 															 downloads:[record objectForKey:@"downloads"]
-															  reported:[record objectForKey:@"reported"]];
+															  reported:[record objectForKey:@"reported"]
+																  like:[record objectForKey:@"like"]
+															  recordID:record.recordID];
 	return obj;
 }
 
 - (instancetype)initWithASCIIArt:(NSString*)ASCIIArt
 						   title:(NSString*)title
 					   downloads:(NSNumber*)downloads
-						reported:(NSNumber*)reported {
+						reported:(NSNumber*)reported
+							like:(NSNumber*)like
+						recordID:(CKRecordID*)recordID {
 	self = [super init];
 	_ASCIIArt = [ASCIIArt copy];
 	_title = [title copy];
 	_downloads = downloads.integerValue;
 	_reported = reported.integerValue;
+	_like = like.integerValue;
+	_recordID = recordID;
 	[self updateRatio];
 	return self;
 }

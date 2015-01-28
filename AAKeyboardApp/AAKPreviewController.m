@@ -17,10 +17,6 @@
 
 @end
 
-@interface CKModifyRecordsOperation(test)
-+ (instancetype)testModifyRecordsOperationWithRecordsToSave:(NSArray /* CKRecord */ *)records recordIDsToDelete:(NSArray /* CKRecordID */ *)recordIDs;
-@end
-
 @implementation CKModifyRecordsOperation(test)
 
 + (instancetype)testModifyRecordsOperationWithRecordsToSave:(NSArray /* CKRecord */ *)records recordIDsToDelete:(NSArray /* CKRecordID */ *)recordIDs {
@@ -32,9 +28,9 @@
 	//
 	// Save policy
 	//
-	operation.savePolicy = CKRecordSaveIfServerRecordUnchanged;
+	//operation.savePolicy = CKRecordSaveIfServerRecordUnchanged;
 	//	operation.savePolicy = CKRecordSaveAllKeys;
-	//	operation.savePolicy = CKRecordSaveChangedKeys;
+	operation.savePolicy = CKRecordSaveChangedKeys;
 	
 	operation.completionBlock = ^(void) {
 	};

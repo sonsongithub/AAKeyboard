@@ -7,8 +7,26 @@
 //
 
 #import "AAKCloudAAPreviewController.h"
+#import "AAKPreviewController.h"
 
 @implementation AAKCloudAAPreviewController
+
+- (IBAction)like:(id)sender {
+	CKDatabase *database = [[CKContainer defaultContainer] publicCloudDatabase];
+	CKRecord *newRecord = [[CKRecord alloc] initWithRecordType:@"AAKCloudASCIIArt" recordID:_asciiart.recordID];
+	
+	double refTime = [NSDate timeIntervalSinceReferenceDate];
+	
+	[newRecord setObject:_asciiart.ASCIIArt forKey:@"ASCIIArt"];
+	[newRecord setObject:@(refTime) forKey:@"time"];
+	[newRecord setObject:@(_asciiart.downloads+1) forKey:@"downloads"];
+	[newRecord setObject:@(_asciiart.reported) forKey:@"reported"];
+	[newRecord setObject:_asciiart.title forKey:@"title"];
+	
+	CKModifyRecordsOperation *operation = [CKModifyRecordsOperation testModifyRecordsOperationWithRecordsToSave:@[newRecord] recordIDsToDelete:@[]];
+	operation.database = database;
+	[_queue addOperation:operation];
+}
 
 /**
  * テキストビューに再度AAを突っ込みコンテンツを最新のものに更新する．
@@ -40,6 +58,8 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	
+	_queue = [[NSOperationQueue alloc] init];
 	
 	_leftMarginConstraint.constant = [AAKCloudAAPreviewController marginConstant];
 	_rightMarginConstraint.constant = [AAKCloudAAPreviewController marginConstant];

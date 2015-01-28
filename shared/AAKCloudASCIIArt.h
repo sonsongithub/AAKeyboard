@@ -15,8 +15,10 @@
 @property (nonatomic, readonly) NSString *ASCIIArt;
 @property (nonatomic, readonly) NSString *title;
 @property (nonatomic, readonly) NSInteger downloads;
+@property (nonatomic, readonly) NSInteger like;
 @property (nonatomic, readonly) NSInteger reported;
 @property (nonatomic, readonly) double ratio;
+@property (nonatomic, readonly) CKRecordID *recordID;
 
 + (instancetype)cloudASCIIArtWithRecord:(CKRecord*)record;
 

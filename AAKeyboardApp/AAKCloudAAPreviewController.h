@@ -10,7 +10,9 @@
 #import "AAKAAEditAnimatedTransitioning.h"
 #import "AAKCloudASCIIArt.h"
 
-@interface AAKCloudAAPreviewController : UIViewController <AAKDestinationPreviewControllerProtocol>
+@interface AAKCloudAAPreviewController : UIViewController <AAKDestinationPreviewControllerProtocol> {
+	NSOperationQueue *_queue;
+}
 @property (nonatomic, strong) IBOutlet AAKTextView *textView;
 
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *topMarginConstraint;
