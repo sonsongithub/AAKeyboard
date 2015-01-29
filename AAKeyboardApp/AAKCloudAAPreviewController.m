@@ -9,8 +9,6 @@
 #import "AAKCloudAAPreviewController.h"
 #import "AAKPreviewController.h"
 
-#import "CKLikeCheckQueryOperation.h"
-
 @implementation AAKCloudAAPreviewController
 
 - (IBAction)like:(id)sender {
@@ -26,6 +24,24 @@
 			self.likeLabel.text = like.stringValue;
 		}
 	}];
+}
+
+- (IBAction)download:(id)sender {
+	[AAKCloudASCIIArt incrementDownloadCounter:_asciiart.recordID completionBlock:^(CKRecord *record, NSError *operationError) {
+	}];
+	AAKASCIIArt *newASCIIArt = [AAKASCIIArt MR_createEntity];
+	newASCIIArt.text = _asciiart.ASCIIArt;
+	newASCIIArt.group = [AAKASCIIArtGroup defaultGroup];
+	
+	[newASCIIArt updateLastUsedTime];
+	[newASCIIArt updateRatio];
+	
+	[[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:AAKKeyboardDataManagerDidUpdateNotification object:nil];
+}
+
+- (IBAction)sendReport:(id)sender {
 }
 
 /**

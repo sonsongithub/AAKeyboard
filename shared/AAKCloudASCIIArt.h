@@ -30,7 +30,7 @@
 + (void)incrementLikeCounter:(CKRecordID*)recordID completionBlock:(void (^)(CKRecord *record, NSError *operationError))completionBlock;
 
 // download
-+ (void)addDownloadedRecordIDToPrivateDatabase:(CKRecordID*)recordID;
++ (void)incrementDownloadCounter:(CKRecordID*)recordID completionBlock:(void (^)(CKRecord *record, NSError *operationError))completionBlock;
 
 
 @end

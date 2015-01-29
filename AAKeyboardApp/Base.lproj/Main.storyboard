@@ -1258,7 +1258,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="upload:" destination="deo-Zp-NRV" eventType="touchUpInside" id="aSR-nm-jIp"/>
+                                    <action selector="download:" destination="deo-Zp-NRV" eventType="touchUpInside" id="uZ1-tz-JuG"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dkh-08-WA3">
@@ -1272,7 +1272,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="upload:" destination="deo-Zp-NRV" eventType="touchUpInside" id="CS1-Lk-bwp"/>
+                                    <action selector="sendReport:" destination="deo-Zp-NRV" eventType="touchUpInside" id="Vny-Nq-1mz"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7FV-CW-hk0">
