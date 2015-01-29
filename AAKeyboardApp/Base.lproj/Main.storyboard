@@ -605,7 +605,7 @@
                                     <action selector="saveAsImage:" destination="6bA-Do-0CJ" eventType="touchUpInside" id="J3O-JX-Dg5"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o8U-2C-bcL">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o8U-2C-bcL">
                                 <rect key="frame" x="324" y="548" width="220" height="32"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -613,7 +613,7 @@
                                     <constraint firstAttribute="height" constant="32" id="cQN-CF-Tq3"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kOd-mu-1Mj">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kOd-mu-1Mj">
                                 <rect key="frame" x="56" y="548" width="220" height="32"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -1288,21 +1288,21 @@
                                     <action selector="saveAsImage:" destination="deo-Zp-NRV" eventType="touchUpInside" id="hcz-vJ-JWv"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qhp-eh-TwI">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qhp-eh-TwI">
                                 <rect key="frame" x="413" y="548" width="131" height="32"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="5QI-bD-GTx"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6FH-S8-Hpl">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6FH-S8-Hpl">
                                 <rect key="frame" x="235" y="548" width="130" height="32"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="rxw-Aq-eah"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ind-O6-9XB">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ind-O6-9XB">
                                 <rect key="frame" x="56" y="548" width="131" height="32"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -1322,7 +1322,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.72156862749999995" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="1" green="0.72156862749999995" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="75" id="Typ-nI-vyf"/>
                                     <constraint firstAttribute="height" constant="32" id="rkV-5c-tr3"/>
@@ -1379,6 +1379,7 @@
                     </navigationItem>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="baseLikeView" destination="W05-U5-DvB" id="PT3-As-Tv1"/>
                         <outlet property="bottomMarginConstraint" destination="tK8-V1-719" id="iJv-G8-4ox"/>
                         <outlet property="leftMarginConstraint" destination="c4e-RS-bah" id="NlM-AW-rGs"/>
                         <outlet property="likeButton" destination="wGu-kY-oMB" id="9Xl-sh-NfU"/>

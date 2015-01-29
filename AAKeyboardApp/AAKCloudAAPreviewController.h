@@ -10,7 +10,7 @@
 
 @interface AAKCloudAAPreviewController : UIViewController <AAKDestinationPreviewControllerProtocol> {
 	NSOperationQueue *_queue;
-	BOOL _likeHistory;
+	BOOL _didLikeEver;
 }
 @property (nonatomic, strong) IBOutlet AAKTextView *textView;
 
@@ -19,6 +19,7 @@
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *rightMarginConstraint;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *leftMarginConstraint;
 
+@property (nonatomic, strong) IBOutlet UIView *baseLikeView;
 @property (nonatomic, strong) IBOutlet UILabel *titleLabel;
 @property (nonatomic, strong) IBOutlet UILabel *likeLabel;
 @property (nonatomic, strong) IBOutlet UIButton *likeButton;

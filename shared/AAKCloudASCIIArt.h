@@ -25,4 +25,12 @@
 + (void)uploadAA:(NSString*)AA title:(NSString*)title;
 + (instancetype)cloudASCIIArtWithRecord:(CKRecord*)record;
 
+// like
++ (void)addLikedRecordIDToPrivateDatabase:(CKRecordID*)recordID;
++ (void)incrementLikeCounter:(CKRecordID*)recordID completionBlock:(void (^)(CKRecord *record, NSError *operationError))completionBlock;
+
+// download
++ (void)addDownloadedRecordIDToPrivateDatabase:(CKRecordID*)recordID;
+
+
 @end

@@ -9,43 +9,23 @@
 #import "AAKCloudAAPreviewController.h"
 #import "AAKPreviewController.h"
 
+#import "CKLikeCheckQueryOperation.h"
+
 @implementation AAKCloudAAPreviewController
 
 - (IBAction)like:(id)sender {
 	_likeButton.enabled = NO;
-	CKDatabase *database = [[CKContainer defaultContainer] publicCloudDatabase];
-	{
-		CKDatabase *privateCloudDatabase = [[CKContainer defaultContainer] privateCloudDatabase];
-		CKRecord *newRecord = [[CKRecord alloc] initWithRecordType:@"AAKCloudLikeHistory"];
-		
-		[newRecord setObject:_asciiart.recordID.recordName forKey:@"likedRecordID"];
-		
-		CKModifyRecordsOperation *operation = [CKModifyRecordsOperation testModifyRecordsOperationWithRecordsToSave:@[newRecord] recordIDsToDelete:@[]];
-		operation.database = privateCloudDatabase;
-		[_queue addOperation:operation];
-	}
-	[database fetchRecordWithID:_asciiart.recordID
-			  completionHandler:^(CKRecord *record, NSError *error) {
-				  dispatch_async(dispatch_get_main_queue(), ^{
-					  if (error == nil) {
-						  NSNumber *like = [record objectForKey:@"like"];
-						  [record setObject:@(like.integerValue + 1) forKey:@"like"];
-						  
-						  CKModifyRecordsOperation *operation = [CKModifyRecordsOperation testModifyRecordsOperationWithRecordsToSave:@[record] recordIDsToDelete:@[]];
-						  operation.database = database;
-						  operation.modifyRecordsCompletionBlock = ^ ( NSArray *savedRecords, NSArray *deletedRecordIDs, NSError *operationError) {
-							  if (error == nil) {
-								  dispatch_async(dispatch_get_main_queue(), ^{
-									  self.likeLabel.text = @(like.integerValue + 1).stringValue;
-								  });
-							  }
-						  };
-						  [_queue addOperation:operation];
-					  }
-					  else {
-					  }
-				  });
-			  }];
+	
+	// insert likedRecordID
+	[AAKCloudASCIIArt addLikedRecordIDToPrivateDatabase:_asciiart.recordID];
+	
+	// increment like counter
+	[AAKCloudASCIIArt incrementLikeCounter:_asciiart.recordID completionBlock:^(CKRecord *record, NSError *operationError) {
+		if (operationError == nil) {
+			NSNumber *like = [record objectForKey:@"like"];
+			self.likeLabel.text = like.stringValue;
+		}
+	}];
 }
 
 /**
@@ -71,12 +51,9 @@
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-	[super viewWillAppear:animated];
-	self.titleLabel.text = _asciiart.title;
-	self.likeLabel.text = @(_asciiart.like).stringValue;
-	_likeHistory = YES;
-	_likeButton.enabled = NO;
+- (void)queryCheckDidLikeEver {
+	_didLikeEver = NO;
+	
 	CKDatabase *privateCloudDatabase = [[CKContainer defaultContainer] privateCloudDatabase];
 	
 	NSString *temp = [NSString stringWithFormat:@"likedRecordID BEGINSWITH '%@'", _asciiart.recordID.recordName];
@@ -86,15 +63,26 @@
 	CKQueryOperation *op = [[CKQueryOperation alloc] initWithQuery:query];
 	op.resultsLimit = 1;
 	op.recordFetchedBlock = ^(CKRecord *record) {
-		_likeHistory = NO;
+		_didLikeEver = YES;
 	};
 	op.database = privateCloudDatabase;
 	op.queryCompletionBlock = ^(CKQueryCursor *cursor, NSError *error) {
 		dispatch_async(dispatch_get_main_queue(), ^{
-			_likeButton.enabled = _likeHistory;
+			self.likeButton.enabled = !_didLikeEver;
 		});
 	};
 	[_queue addOperation:op];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	self.titleLabel.text = _asciiart.title;
+	self.likeLabel.text = @(_asciiart.like).stringValue;
+
+	self.likeButton.enabled = NO;
+	self.likeButton.hidden = YES;
+	self.baseLikeView.hidden = YES;
+	//[self queryCheckDidLikeEver];
 }
 
 - (void)viewDidLoad {

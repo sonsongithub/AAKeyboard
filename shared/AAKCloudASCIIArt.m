@@ -19,6 +19,48 @@ static NSOperationQueue *sharedOperationQueue;
 	return sharedOperationQueue;
 }
 
++ (void)addDownloadedRecordIDToPrivateDatabase:(CKRecordID*)recordID {
+}
+
++ (void)addLikedRecordIDToPrivateDatabase:(CKRecordID*)recordID {
+	CKDatabase *privateCloudDatabase = [[CKContainer defaultContainer] privateCloudDatabase];
+	CKRecord *newRecord = [[CKRecord alloc] initWithRecordType:@"AAKCloudLikeHistory"];
+	
+	[newRecord setObject:recordID.recordName forKey:@"likedRecordID"];
+	
+	CKModifyRecordsOperation *operation = [CKModifyRecordsOperation testModifyRecordsOperationWithRecordsToSave:@[newRecord] recordIDsToDelete:@[]];
+	operation.database = privateCloudDatabase;
+	[[AAKCloudASCIIArt sharedQueue]  addOperation:operation];
+}
+
+//(void (^)(void))completion
+
++ (void)incrementLikeCounter:(CKRecordID*)recordID completionBlock:(void (^)(CKRecord *record, NSError *operationError))completionBlock {
+	CKDatabase *database = [[CKContainer defaultContainer] publicCloudDatabase];
+	[database fetchRecordWithID:recordID
+			  completionHandler:^(CKRecord *record, NSError *error) {
+				  dispatch_async(dispatch_get_main_queue(), ^{
+					  if (error == nil) {
+						  NSNumber *like = [record objectForKey:@"like"];
+						  [record setObject:@(like.integerValue + 1) forKey:@"like"];
+						  
+						  CKModifyRecordsOperation *operation = [CKModifyRecordsOperation testModifyRecordsOperationWithRecordsToSave:@[record] recordIDsToDelete:@[]];
+						  operation.database = database;
+						  operation.modifyRecordsCompletionBlock = ^ ( NSArray *savedRecords, NSArray *deletedRecordIDs, NSError *operationError) {
+							  if (error == nil) {
+								  dispatch_async(dispatch_get_main_queue(), ^{
+									  completionBlock(record, error);
+								  });
+							  }
+						  };
+						  [[AAKCloudASCIIArt sharedQueue] addOperation:operation];
+					  }
+					  else {
+					  }
+				  });
+			  }];
+}
+
 + (void)uploadAA:(NSString*)AA title:(NSString*)title {
 	CKDatabase *database = [[CKContainer defaultContainer] publicCloudDatabase];
 	
