@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AAKAAEditAnimatedTransitioning.h"
 
 @class _AAKASCIIArt;
 

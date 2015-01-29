@@ -7,8 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AAKAAEditAnimatedTransitioning.h"
-#import "AAKCloudASCIIArt.h"
 
 @interface AAKCloudAAPreviewController : UIViewController <AAKDestinationPreviewControllerProtocol> {
 	NSOperationQueue *_queue;

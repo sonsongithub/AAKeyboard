@@ -8,7 +8,33 @@
 
 #import "AAKCloudASCIIArt.h"
 
+static NSOperationQueue *sharedOperationQueue;
+
 @implementation AAKCloudASCIIArt
+
++ (NSOperationQueue*)sharedQueue {
+	if (sharedOperationQueue == nil) {
+		sharedOperationQueue = [[NSOperationQueue alloc] init];
+	}
+	return sharedOperationQueue;
+}
+
++ (void)uploadAA:(NSString*)AA title:(NSString*)title {
+	CKDatabase *database = [[CKContainer defaultContainer] publicCloudDatabase];
+	
+	double refTime = [NSDate timeIntervalSinceReferenceDate];
+	CKRecord *newRecord = [[CKRecord alloc] initWithRecordType:@"AAKCloudASCIIArt"];
+	
+	[newRecord setObject:AA forKey:@"ASCIIArt"];
+	[newRecord setObject:@(refTime) forKey:@"time"];
+	[newRecord setObject:@(0) forKey:@"downloads"];
+	[newRecord setObject:@(0) forKey:@"reported"];
+	[newRecord setObject:title forKey:@"title"];
+	
+	CKModifyRecordsOperation *operation = [CKModifyRecordsOperation testModifyRecordsOperationWithRecordsToSave:@[newRecord] recordIDsToDelete:@[]];
+	operation.database = database;
+	[[AAKCloudASCIIArt sharedQueue] addOperation:operation];
+}
 
 + (instancetype)cloudASCIIArtWithRecord:(CKRecord*)record {
 	AAKCloudASCIIArt *obj = [[AAKCloudASCIIArt alloc] initWithASCIIArt:[record objectForKey:@"ASCIIArt"]

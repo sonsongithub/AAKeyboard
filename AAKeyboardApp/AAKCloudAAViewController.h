@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <CloudKit/CloudKit.h>
-#import "AAKAAEditAnimatedTransitioning.h"
 
 @interface AAKCloudAAViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, AAKSourceCollectionViewControllerProtocol> {
 	NSMutableArray *_asciiarts;

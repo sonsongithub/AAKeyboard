@@ -21,6 +21,8 @@
 @property (nonatomic, readonly) double createdTime;
 @property (nonatomic, readonly) CKRecordID *recordID;
 
++ (NSOperationQueue*)sharedQueue;
++ (void)uploadAA:(NSString*)AA title:(NSString*)title;
 + (instancetype)cloudASCIIArtWithRecord:(CKRecord*)record;
 
 @end

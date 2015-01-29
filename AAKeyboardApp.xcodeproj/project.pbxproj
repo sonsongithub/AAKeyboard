@@ -112,6 +112,7 @@
 		146EEB5619ED5CE50032F6DE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */; };
 		146EEB5719ED5CEF0032F6DE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */; };
 		14773DD31A5EEC0600BAF888 /* AAKHelpDummyTapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14773DD21A5EEC0600BAF888 /* AAKHelpDummyTapView.m */; };
+		1497FCB11A7A705100FC5A85 /* CKModifyRecordsOperation+AA.m in Sources */ = {isa = PBXBuildFile; fileRef = 1497FCB01A7A705100FC5A85 /* CKModifyRecordsOperation+AA.m */; };
 		14A4771E1A719EB100CDA461 /* AAKCloudAASearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A4771D1A719EB100CDA461 /* AAKCloudAASearchViewController.m */; };
 		14A477211A72B13F00CDA461 /* AAKCloudAARankingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A477201A72B13F00CDA461 /* AAKCloudAARankingViewController.m */; };
 		14A477241A72B24100CDA461 /* AAKCloudRecentAAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A477231A72B24100CDA461 /* AAKCloudRecentAAViewController.m */; };
@@ -357,6 +358,8 @@
 		146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		14773DD11A5EEC0600BAF888 /* AAKHelpDummyTapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKHelpDummyTapView.h; sourceTree = "<group>"; };
 		14773DD21A5EEC0600BAF888 /* AAKHelpDummyTapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKHelpDummyTapView.m; sourceTree = "<group>"; };
+		1497FCAF1A7A705100FC5A85 /* CKModifyRecordsOperation+AA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CKModifyRecordsOperation+AA.h"; sourceTree = "<group>"; };
+		1497FCB01A7A705100FC5A85 /* CKModifyRecordsOperation+AA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CKModifyRecordsOperation+AA.m"; sourceTree = "<group>"; };
 		14A4771C1A719EB100CDA461 /* AAKCloudAASearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKCloudAASearchViewController.h; sourceTree = "<group>"; };
 		14A4771D1A719EB100CDA461 /* AAKCloudAASearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKCloudAASearchViewController.m; sourceTree = "<group>"; };
 		14A4771F1A72B13F00CDA461 /* AAKCloudAARankingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKCloudAARankingViewController.h; sourceTree = "<group>"; };
@@ -727,6 +730,8 @@
 				1449EBF81A697FD8009BDD34 /* AAKCloudASCIIArt.m */,
 				1402F1A41A0D3B430000F269 /* AAKAAGroupForCollection.h */,
 				1402F1A51A0D3B430000F269 /* AAKAAGroupForCollection.m */,
+				1497FCAF1A7A705100FC5A85 /* CKModifyRecordsOperation+AA.h */,
+				1497FCB01A7A705100FC5A85 /* CKModifyRecordsOperation+AA.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -1336,6 +1341,7 @@
 				14B274BE1A0A0D6F005BF3B1 /* AAKEditViewController.m in Sources */,
 				141528B41A18585700EB80AC /* NSManagedObjectContext+MagicalThreading.m in Sources */,
 				141528A81A18585600EB80AC /* NSManagedObject+MagicalRequests.m in Sources */,
+				1497FCB11A7A705100FC5A85 /* CKModifyRecordsOperation+AA.m in Sources */,
 				14B274CA1A0A0D6F005BF3B1 /* NSParagraphStyle+keyboard.m in Sources */,
 				141528C31A18585700EB80AC /* MagicalRecord+ErrorHandling.m in Sources */,
 				1415289F1A18585600EB80AC /* NSManagedObject+MagicalDataImport.m in Sources */,

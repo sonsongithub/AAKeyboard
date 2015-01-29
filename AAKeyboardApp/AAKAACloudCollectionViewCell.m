@@ -7,7 +7,6 @@
 //
 
 #import "AAKAACloudCollectionViewCell.h"
-#import "AAKCloudASCIIArt.h"
 
 @implementation AAKAACloudCollectionViewCell
 

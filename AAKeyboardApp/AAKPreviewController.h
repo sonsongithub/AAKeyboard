@@ -7,13 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AAKAAEditAnimatedTransitioning.h"
 #import <CloudKit/CloudKit.h>
-
-@interface CKModifyRecordsOperation(test)
-+ (instancetype)testModifyRecordsOperationWithRecordsToSave:(NSArray /* CKRecord */ *)records recordIDsToDelete:(NSArray /* CKRecordID */ *)recordIDs;
-@end
-
 
 @class AAKTextView;
 

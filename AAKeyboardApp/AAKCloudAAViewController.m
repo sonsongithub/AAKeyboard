@@ -8,10 +8,8 @@
 
 #import "AAKCloudAAViewController.h"
 
-#import "AAKCloudASCIIArt.h"
 #import "AAKAACloudCollectionViewCell.h"
 #import "AAKCloudAAPreviewController.h"
-#import "AAKAAEditAnimatedTransitioning.h"
 #import "AAKAAEditPresentationController.h"
 
 @interface AAKCloudAAViewController () <UIViewControllerTransitioningDelegate, UIPopoverPresentationControllerDelegate>

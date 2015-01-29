@@ -34,6 +34,15 @@ typedef enum AAKASCIIArtGroupType_ {
 #import "AAKASCIIArtGroup.h"
 #import "AAKAAGroupForCollection.h"
 
+// CloudKit - Model
+#import "AAKCloudASCIIArt.h"
+#import "CKModifyRecordsOperation+AA.h"
+
+// Animation model
+#ifdef TARGET_IS_EXTENSION
+#import "AAKAAEditAnimatedTransitioning.h"
+#endif
+
 // View controllers
 #import "AAKCreateNewGroupViewController.h"
 #import "AAKEditViewController.h"

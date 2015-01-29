@@ -11,7 +11,6 @@
 #import "AAKAACollectionViewCell.h"
 #import "AAKAASupplementaryView.h"
 #import "AAKAAEditPresentationController.h"
-#import "AAKAAEditAnimatedTransitioning.h"
 #import "AAKAACollectionViewCell.h"
 #import "AAKPreviewController.h"
 #import "AAKDummyCollectionReusableView.h"
