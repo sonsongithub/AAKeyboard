@@ -186,6 +186,7 @@
 		14CB156919E935BB00D05E9C /* UZTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CB156319E935BB00D05E9C /* UZTextView.m */; };
 		14CB157C19EA328500D05E9C /* AAKToolbarHistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CB157B19EA328500D05E9C /* AAKToolbarHistoryCell.m */; };
 		14CB157D19EA328500D05E9C /* AAKToolbarHistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CB157B19EA328500D05E9C /* AAKToolbarHistoryCell.m */; };
+		14CC83AC1A7D39DB0025E250 /* AAKCloudSendReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CC83AB1A7D39DB0025E250 /* AAKCloudSendReportViewController.m */; };
 		14D0D72F19FA13D900870C92 /* AAKRegisterActionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D0D72E19FA13D900870C92 /* AAKRegisterActionViewController.m */; };
 		14DC6C9E1A1A410900450A0A /* default.json in Resources */ = {isa = PBXBuildFile; fileRef = 14DC6C9C1A1A410700450A0A /* default.json */; };
 		14E488AF1A6C604300C22A73 /* AAKAACloudCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14E488AE1A6C604300C22A73 /* AAKAACloudCollectionViewCell.m */; };
@@ -429,6 +430,8 @@
 		14CB156319E935BB00D05E9C /* UZTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UZTextView.m; sourceTree = "<group>"; };
 		14CB157A19EA328500D05E9C /* AAKToolbarHistoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKToolbarHistoryCell.h; sourceTree = "<group>"; };
 		14CB157B19EA328500D05E9C /* AAKToolbarHistoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKToolbarHistoryCell.m; sourceTree = "<group>"; };
+		14CC83AA1A7D39DB0025E250 /* AAKCloudSendReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKCloudSendReportViewController.h; sourceTree = "<group>"; };
+		14CC83AB1A7D39DB0025E250 /* AAKCloudSendReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKCloudSendReportViewController.m; sourceTree = "<group>"; };
 		14D0D72D19FA13D900870C92 /* AAKRegisterActionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKRegisterActionViewController.h; sourceTree = "<group>"; };
 		14D0D72E19FA13D900870C92 /* AAKRegisterActionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKRegisterActionViewController.m; sourceTree = "<group>"; };
 		14DC6C9C1A1A410700450A0A /* default.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = default.json; sourceTree = "<group>"; };
@@ -836,6 +839,8 @@
 				14A477201A72B13F00CDA461 /* AAKCloudAARankingViewController.m */,
 				14A477221A72B24100CDA461 /* AAKCloudRecentAAViewController.h */,
 				14A477231A72B24100CDA461 /* AAKCloudRecentAAViewController.m */,
+				14CC83AA1A7D39DB0025E250 /* AAKCloudSendReportViewController.h */,
+				14CC83AB1A7D39DB0025E250 /* AAKCloudSendReportViewController.m */,
 				14E488AD1A6C604300C22A73 /* AAKAACloudCollectionViewCell.h */,
 				14E488AE1A6C604300C22A73 /* AAKAACloudCollectionViewCell.m */,
 				14E488B01A6C608600C22A73 /* AAKAACloudCollectionViewCell.xib */,
@@ -1331,6 +1336,7 @@
 				14A477241A72B24100CDA461 /* AAKCloudRecentAAViewController.m in Sources */,
 				141528C91A18585700EB80AC /* MagicalRecord+Options.m in Sources */,
 				14C1DEED1A67805200CC8DFA /* UINavigationController+Rotate.m in Sources */,
+				14CC83AC1A7D39DB0025E250 /* AAKCloudSendReportViewController.m in Sources */,
 				1402F1A61A0D3B430000F269 /* AAKAAGroupForCollection.m in Sources */,
 				14B274E41A0A0D83005BF3B1 /* AAKAAEditAnimatedTransitioning.m in Sources */,
 				14EE653C1A15ED6200FA0731 /* Model.xcdatamodeld in Sources */,

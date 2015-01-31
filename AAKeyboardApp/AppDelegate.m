@@ -70,6 +70,8 @@
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	[AAKCoreDataStack setupMagicalRecordForAppGroupsContainer];
 	[self showKeyboardGrantWarning];
+	
+	
 	return YES;
 }
 
