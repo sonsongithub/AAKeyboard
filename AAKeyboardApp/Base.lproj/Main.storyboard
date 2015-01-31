@@ -460,7 +460,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Setting" id="1Yf-u0-2pq">
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="uN7-cg-fRX">
+                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="done" id="uN7-cg-fRX">
                             <connections>
                                 <action selector="done:" destination="mzS-s2-QyG" id="bum-bp-yOS"/>
                             </connections>
@@ -1261,20 +1261,6 @@
                                     <action selector="download:" destination="deo-Zp-NRV" eventType="touchUpInside" id="uZ1-tz-JuG"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dkh-08-WA3">
-                                <rect key="frame" x="552" y="548" width="32" height="32"/>
-                                <color key="backgroundColor" white="0.5" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="32" id="0Hm-1m-3nx"/>
-                                    <constraint firstAttribute="width" constant="32" id="Wpp-8t-kKC"/>
-                                </constraints>
-                                <state key="normal" backgroundImage="report">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="sendReport:" destination="deo-Zp-NRV" eventType="touchUpInside" id="Vny-Nq-1mz"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7FV-CW-hk0">
                                 <rect key="frame" x="16" y="548" width="32" height="32"/>
                                 <constraints>
@@ -1337,6 +1323,21 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dkh-08-WA3">
+                                <rect key="frame" x="552" y="548" width="32" height="32"/>
+                                <color key="backgroundColor" white="0.5" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="0Hm-1m-3nx"/>
+                                    <constraint firstAttribute="width" constant="32" id="Wpp-8t-kKC"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="report">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="sendReport:" destination="deo-Zp-NRV" eventType="touchUpInside" id="Vny-Nq-1mz"/>
+                                    <segue destination="rRK-s3-nYv" kind="presentation" id="ewG-lR-fkC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1393,6 +1394,116 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MQw-Fh-e4i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6204" y="-946"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="G85-Vj-Kss">
+            <objects>
+                <navigationController id="rRK-s3-nYv" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cAu-h8-tsw">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="xMR-Tk-Jrz" kind="relationship" relationship="rootViewController" id="Kbg-ip-FwA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sny-cl-ikz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6982" y="-946"/>
+        </scene>
+        <!--Send report-->
+        <scene sceneID="Wd3-ke-J8B">
+            <objects>
+                <tableViewController id="xMR-Tk-Jrz" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="6Tg-JX-2eS">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection id="4Py-VT-I0y">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="120" id="T8D-4f-Qe8">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="T8D-4f-Qe8" id="vAC-5L-3Jn">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="73y-2K-hgu" customClass="AAKTextView">
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="119"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="73y-2K-hgu" secondAttribute="bottom" id="1Zc-G9-e8H"/>
+                                                <constraint firstItem="73y-2K-hgu" firstAttribute="top" secondItem="vAC-5L-3Jn" secondAttribute="top" id="RuW-sJ-nzO"/>
+                                                <constraint firstItem="73y-2K-hgu" firstAttribute="leading" secondItem="vAC-5L-3Jn" secondAttribute="leading" id="dBA-E0-bOo"/>
+                                                <constraint firstAttribute="trailing" secondItem="73y-2K-hgu" secondAttribute="trailing" id="khV-51-Xou"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="USx-m5-dkB">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="HIq-IG-bc5">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HIq-IG-bc5" id="fiI-ie-lqs">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your e-mail" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H86-4i-g0c">
+                                                    <rect key="frame" x="8" y="0.0" width="584" height="43"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="H86-4i-g0c" secondAttribute="bottom" id="5fg-VY-yRG"/>
+                                                <constraint firstAttribute="trailing" secondItem="H86-4i-g0c" secondAttribute="trailing" constant="8" id="NY3-2z-trV"/>
+                                                <constraint firstItem="H86-4i-g0c" firstAttribute="leading" secondItem="fiI-ie-lqs" secondAttribute="leading" constant="8" id="gXo-aw-WDK"/>
+                                                <constraint firstItem="H86-4i-g0c" firstAttribute="top" secondItem="fiI-ie-lqs" secondAttribute="top" id="nSH-gD-mgT"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Comment" id="Z9A-6S-o60">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="191" id="ato-5O-In4">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ato-5O-In4" id="0IM-mg-Kgd">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tls-pZ-AtT">
+                                                    <rect key="frame" x="1" y="1" width="598" height="188"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="tls-pZ-AtT" firstAttribute="leading" secondItem="0IM-mg-Kgd" secondAttribute="leading" constant="1" id="BDz-nA-Tcn"/>
+                                                <constraint firstAttribute="bottom" secondItem="tls-pZ-AtT" secondAttribute="bottom" constant="1" id="SdP-gN-wqJ"/>
+                                                <constraint firstAttribute="trailing" secondItem="tls-pZ-AtT" secondAttribute="trailing" constant="1" id="W0f-mE-bkO"/>
+                                                <constraint firstItem="tls-pZ-AtT" firstAttribute="top" secondItem="0IM-mg-Kgd" secondAttribute="top" constant="1" id="zpu-wz-bOK"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="xMR-Tk-Jrz" id="3XW-Ia-FWe"/>
+                            <outlet property="delegate" destination="xMR-Tk-Jrz" id="asy-UH-Hdp"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Send report" id="x6Q-YD-Gjn">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="hzS-ax-svu"/>
+                        <barButtonItem key="rightBarButtonItem" title="Send" style="done" id="xcQ-aK-A3l"/>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bRM-an-jaQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7752" y="-946"/>
         </scene>
         <!--CloudAA Ranking View Controller-->
         <scene sceneID="15B-Wp-Jvq">

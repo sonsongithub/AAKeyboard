@@ -225,7 +225,7 @@ static NSString * const reuseIdentifier = @"AAKAACloudCollectionViewCell";
 	else {
 	}
 	CGFloat width = self.collectionView.frame.size.width / 2;
-	CGFloat height = 400;
+	CGFloat height = width;
 	return CGSizeMake(width, height);
 }
 

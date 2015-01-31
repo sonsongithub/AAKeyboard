@@ -41,8 +41,8 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName:AAKKeyboardDataManagerDidUpdateNotification object:nil];
 }
 
-- (IBAction)sendReport:(id)sender {
-}
+//- (IBAction)sendReport:(id)sender {
+//}
 
 /**
  * テキストビューに再度AAを突っ込みコンテンツを最新のものに更新する．

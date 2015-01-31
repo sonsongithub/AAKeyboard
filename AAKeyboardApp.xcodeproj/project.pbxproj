@@ -791,12 +791,12 @@
 			isa = PBXGroup;
 			children = (
 				141528491A18585600EB80AC /* MagicalRecord */,
-				14CB155D19E935BB00D05E9C /* UZTextView */,
+				14CB155D19E935BB00D05E9C /* AAKTe */,
 			);
 			path = vendor;
 			sourceTree = "<group>";
 		};
-		14CB155D19E935BB00D05E9C /* UZTextView */ = {
+		14CB155D19E935BB00D05E9C /* AAKTe */ = {
 			isa = PBXGroup;
 			children = (
 				14CB155E19E935BB00D05E9C /* UZCursorView.h */,
@@ -806,6 +806,7 @@
 				14CB156219E935BB00D05E9C /* UZTextView.h */,
 				14CB156319E935BB00D05E9C /* UZTextView.m */,
 			);
+			name = AAKTe;
 			path = UZTextView;
 			sourceTree = "<group>";
 		};
