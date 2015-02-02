@@ -15,7 +15,11 @@ typedef enum AAKASCIIArtGroupType_ {
 	AAKASCIIArtHistoryGroup	= 2,
 }AAKASCIIArtGroupType;
 
-#define TEST_CLOUDKIT_REPORTING 1
+#define ENABLE_CLOUDKIT 0
+
+#if ENABLE_CLOUDKIT
+	#define TEST_CLOUDKIT_REPORTING 0
+#endif
 
 // For CoreData, MagicalRecord
 #import <CoreData/CoreData.h>

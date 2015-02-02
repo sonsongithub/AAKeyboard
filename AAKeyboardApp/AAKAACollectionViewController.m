@@ -188,6 +188,11 @@ static NSString * const reuseIdentifier = @"Cell";
 	[self.collectionView registerNib:nib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"AAKAASupplementaryView"];
 	[self.collectionView registerClass:[AAKDummyCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"AAKDummyCollectionReusableView"];
 	
+	// UI for CloudKit
+#if !ENABLE_CLOUDKIT
+	self.navigationItem.leftBarButtonItem = nil;
+#endif
+	
 	// データをCoreDataからフェッチ
 	[self updateCollections];
 	

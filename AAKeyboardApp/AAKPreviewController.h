@@ -19,6 +19,11 @@
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *rightMarginConstraint;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *leftMarginConstraint;
 
+@property (nonatomic, strong) IBOutlet UIButton *pictureSaveButton;
+@property (nonatomic, strong) IBOutlet UIButton *uploadButton;
+@property (nonatomic, strong) IBOutlet UIButton *editButton;
+
+
 @property (nonatomic, strong) AAKASCIIArt *asciiart;
 
 + (CGFloat)marginConstant;

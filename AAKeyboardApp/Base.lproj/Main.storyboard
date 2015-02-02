@@ -653,10 +653,13 @@
                     </navigationItem>
                     <connections>
                         <outlet property="bottomMarginConstraint" destination="meJ-QR-guM" id="Sv7-Zr-4ej"/>
+                        <outlet property="editButton" destination="Ya1-Nu-igY" id="PZ2-IM-8O2"/>
                         <outlet property="leftMarginConstraint" destination="yFM-PH-59d" id="f1g-BW-Cng"/>
+                        <outlet property="pictureSaveButton" destination="hAW-lw-gaM" id="Ntg-1X-8pz"/>
                         <outlet property="rightMarginConstraint" destination="scF-JU-UaZ" id="e4H-D9-USt"/>
                         <outlet property="textView" destination="5HB-Xf-qhu" id="VfY-Gy-WdA"/>
                         <outlet property="topMarginConstraint" destination="hcA-l5-FhP" id="pMy-cX-NcB"/>
+                        <outlet property="uploadButton" destination="uFF-Zx-PJQ" id="03R-mS-COU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="glB-qA-LSY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1298,7 +1301,7 @@
                                     <constraint firstAttribute="height" constant="32" id="5QI-bD-GTx"/>
                                 </constraints>
                             </view>
-                            <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6FH-S8-Hpl">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6FH-S8-Hpl">
                                 <rect key="frame" x="235" y="548" width="130" height="32"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>

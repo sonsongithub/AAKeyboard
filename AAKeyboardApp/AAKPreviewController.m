@@ -115,6 +115,11 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
+	// UI for CloudKit
+#if !ENABLE_CLOUDKIT
+	self.uploadButton.hidden = YES;
+#endif
+	
 	_leftMarginConstraint.constant = [AAKPreviewController marginConstant];
 	_rightMarginConstraint.constant = [AAKPreviewController marginConstant];
 	_topMarginConstraint.constant = [AAKPreviewController marginConstant];
