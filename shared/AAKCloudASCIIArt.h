@@ -34,4 +34,7 @@
 
 + (void)start;
 
+// Report
++ (void)incrementReportedCounter:(CKRecordID*)recordID completionBlock:(void (^)(CKRecord *record, NSError *operationError))completionBlock;
+
 @end

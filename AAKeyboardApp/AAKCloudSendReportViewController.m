@@ -29,7 +29,7 @@
 	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:self.asciiart.ASCIIArt attributes:attributes];
 	self.aaTextView.attributedString = string;
 	
-#if 1
+#if TEST_CLOUDKIT_REPORTING
 	self.emailTextField.text = @"hoge@hoge.com";
 #endif
 }
@@ -52,9 +52,17 @@
 	[newRecord setObject:@(refTime) forKey:@"time"];
 	[newRecord setObject:@(self.selectedIndexPath.row) forKey:@"type"];
 	
-	CKModifyRecordsOperation *operation = [CKModifyRecordsOperation testModifyRecordsOperationWithRecordsToSave:@[newRecord] recordIDsToDelete:@[]];
-	operation.database = database;
-	[[AAKCloudASCIIArt sharedQueue] addOperation:operation];
+	
+	[AAKCloudASCIIArt incrementReportedCounter:_asciiart.recordID completionBlock:^(CKRecord *record, NSError *operationError) {
+		if (operationError == nil) {
+			CKModifyRecordsOperation *operation = [CKModifyRecordsOperation testModifyRecordsOperationWithRecordsToSave:@[newRecord] recordIDsToDelete:@[]];
+			operation.database = database;
+			[[AAKCloudASCIIArt sharedQueue] addOperation:operation];
+		}
+		else {
+			
+		}
+	}];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

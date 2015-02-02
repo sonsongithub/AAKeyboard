@@ -40,6 +40,32 @@ static NSOperationQueue *sharedOperationQueue;
 	return sharedOperationQueue;
 }
 
++ (void)incrementReportedCounter:(CKRecordID*)recordID completionBlock:(void (^)(CKRecord *record, NSError *operationError))completionBlock {
+	CKDatabase *database = [[CKContainer defaultContainer] publicCloudDatabase];
+	[database fetchRecordWithID:recordID
+			  completionHandler:^(CKRecord *record, NSError *error) {
+				  dispatch_async(dispatch_get_main_queue(), ^{
+					  if (error == nil) {
+						  NSNumber *like = [record objectForKey:@"reported"];
+						  [record setObject:@(like.integerValue + 1) forKey:@"reported"];
+						  
+						  CKModifyRecordsOperation *operation = [CKModifyRecordsOperation testModifyRecordsOperationWithRecordsToSave:@[record] recordIDsToDelete:@[]];
+						  operation.database = database;
+						  operation.modifyRecordsCompletionBlock = ^ ( NSArray *savedRecords, NSArray *deletedRecordIDs, NSError *operationError) {
+							  if (error == nil) {
+								  dispatch_async(dispatch_get_main_queue(), ^{
+									  completionBlock(record, error);
+								  });
+							  }
+						  };
+						  [[AAKCloudASCIIArt sharedQueue] addOperation:operation];
+					  }
+					  else {
+					  }
+				  });
+			  }];
+}
+
 + (void)incrementDownloadCounter:(CKRecordID*)recordID completionBlock:(void (^)(CKRecord *record, NSError *operationError))completionBlock {
 	CKDatabase *database = [[CKContainer defaultContainer] publicCloudDatabase];
 	[database fetchRecordWithID:recordID

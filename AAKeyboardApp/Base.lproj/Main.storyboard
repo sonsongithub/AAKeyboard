@@ -1298,7 +1298,7 @@
                                     <constraint firstAttribute="height" constant="32" id="5QI-bD-GTx"/>
                                 </constraints>
                             </view>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6FH-S8-Hpl">
+                            <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6FH-S8-Hpl">
                                 <rect key="frame" x="235" y="548" width="130" height="32"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>

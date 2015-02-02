@@ -204,7 +204,7 @@ static NSString * const reuseIdentifier = @"Cell";
 	[self presentViewController:con animated:YES completion:nil];
 #endif
 	
-#if 1
+#if TEST_CLOUDKIT_REPORTING
 	[self performSegueWithIdentifier:@"OpenCloudTabController" sender:nil];
 #endif
 }

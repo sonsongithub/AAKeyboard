@@ -100,7 +100,7 @@ static NSString * const reuseIdentifier = @"AAKAACloudCollectionViewCell";
 - (void)didFinishCloudKitQuery {
 	[self.collectionView reloadData];
 	
-#if 1
+#if TEST_CLOUDKIT_REPORTING
 	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 		AAKAACloudCollectionViewCell *cell = (AAKAACloudCollectionViewCell*)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
 		

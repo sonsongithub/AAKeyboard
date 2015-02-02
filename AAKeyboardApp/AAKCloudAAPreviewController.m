@@ -109,7 +109,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-#if 1
+#if TEST_CLOUDKIT_REPORTING
 	[self performSegueWithIdentifier:@"OpenAAKCloudSendReportNavigationController" sender:nil];
 #endif
 }

@@ -233,10 +233,8 @@ static NSString *AAKAACollectionViewCellWillTapNotification = @"AAKAACollectionV
 	
 	self.backImageView.image = image;
 
-#if 1
 	[self.debugLabel removeFromSuperview];
 	self.debugLabel = nil;
-#endif
 	
 	// ジェスチャを設定
 	UIPanGestureRecognizer * swipeleft = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(swipeleft:)];
