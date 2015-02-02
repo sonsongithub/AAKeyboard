@@ -129,6 +129,9 @@
 		[request setFetchLimit:20];
 		_asciiarts = [AAKASCIIArt MR_executeFetchRequest:request];
 	}
+	else if ([_toolbar.currentGroup.title isEqualToString:@"0-9"]) {
+		_asciiarts = [AAKASCIIArt MR_findAllSortedBy:@"text" ascending:YES withPredicate:[NSPredicate predicateWithFormat: @"group == %@", _toolbar.currentGroup]];
+	}
 	else {
 		_asciiarts = [AAKASCIIArt MR_findAllSortedBy:@"lastUsedTime" ascending:NO withPredicate:[NSPredicate predicateWithFormat: @"group == %@", _toolbar.currentGroup]];
 	}
