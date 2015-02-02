@@ -19,12 +19,6 @@ extern NSString *const AAKKeyboardDataManagerDidUpdateNotification;		/** デー�
 + (BOOL)isOpenAccessGranted;
 
 /**
- * App Group containerにaccess.lockファイルがあるかを確認し，一度でもキーボードがフルアクセスで起動されたかを調べる．
- * @return 一度でもキーボードがフルアクセスで起動されていればYESを返す．
- **/
-+ (BOOL)hasEverAccessGroupContainerByKeyboardApp;
-
-/**
  * 初回起動時のアスキーアートデータを生成し，CoreDataに入力する．
  **/
 + (void)addDefaultData;

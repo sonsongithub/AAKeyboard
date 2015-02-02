@@ -40,23 +40,8 @@
 	return YES;
 }
 
-- (void)showKeyboardGrantWarning {
-//	if (![AAKCoreDataStack hasEverAccessGroupContainerByKeyboardApp]) {
-//		UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Error", nil)
-//																	   message:NSLocalizedString(@"It couldn't be done because AAKeyboard has not been given 'Full access'. ", nil)
-//																preferredStyle:UIAlertControllerStyleAlert];
-//		UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK"
-//														 style:UIAlertActionStyleDefault
-//													   handler:^(UIAlertAction *action) {
-//													   }];
-//		[alert addAction:action];
-//		[self.window.rootViewController presentViewController:alert animated:YES completion:nil];
-//	}
-}
-
 - (void)applicationWillEnterForeground:(UIApplication *)application {
 	[AAKCoreDataStack setupMagicalRecordForAppGroupsContainer];
-	[self showKeyboardGrantWarning];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -69,12 +54,6 @@
 
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	[AAKCoreDataStack setupMagicalRecordForAppGroupsContainer];
-	[self showKeyboardGrantWarning];
-	
-	
-	[AAKCloudASCIIArt start];
-	
-	
 	return YES;
 }
 

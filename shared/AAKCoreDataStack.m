@@ -43,17 +43,6 @@ NSString *const AAKKeyboardDataManagerDidUpdateNotification			= @"AAKKeyboardDat
 }
 
 /**
- * App Group containerにaccess.lockファイルがあるかを確認し，一度でもキーボードがフルアクセスで起動されたかを調べる．
- * @return 一度でもキーボードがフルアクセスで起動されていればYESを返す．
- **/
-+ (BOOL)hasEverAccessGroupContainerByKeyboardApp {
-	NSFileManager *fm = [NSFileManager defaultManager];
-	NSString *containerPath = [[fm containerURLForSecurityApplicationGroupIdentifier:@"group.com.sonson.AAKeyboardApp"] path];
-	NSString *accessLockPath = [containerPath stringByAppendingPathComponent:@"access.lock"];
-	return [fm isReadableFileAtPath:accessLockPath];
-}
-
-/**
  * 初回起動時のアスキーアートデータを生成し，CoreDataに入力する．
  **/
 + (void)addDefaultData {
