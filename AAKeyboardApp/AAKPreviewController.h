@@ -7,16 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CloudKit/CloudKit.h>
 
 @class AAKTextView;
 
-@interface AAKPreviewController : UIViewController
+@interface AAKPreviewController : UIViewController <AAKDestinationPreviewControllerProtocol>
 @property (nonatomic, strong) IBOutlet AAKTextView *textView;
 
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *topMarginConstraint;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *bottomMarginConstraint;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *rightMarginConstraint;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *leftMarginConstraint;
+
+@property (nonatomic, strong) IBOutlet UIButton *pictureSaveButton;
+@property (nonatomic, strong) IBOutlet UIButton *uploadButton;
+@property (nonatomic, strong) IBOutlet UIButton *editButton;
+
 
 @property (nonatomic, strong) AAKASCIIArt *asciiart;
 

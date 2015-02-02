@@ -97,6 +97,10 @@
 		141B495C1A192A8C00E7F877 /* AAKASCIIArt.m in Sources */ = {isa = PBXBuildFile; fileRef = 141B495B1A192A8C00E7F877 /* AAKASCIIArt.m */; };
 		141B495D1A192A8C00E7F877 /* AAKASCIIArt.m in Sources */ = {isa = PBXBuildFile; fileRef = 141B495B1A192A8C00E7F877 /* AAKASCIIArt.m */; };
 		141B495E1A192A8C00E7F877 /* AAKASCIIArt.m in Sources */ = {isa = PBXBuildFile; fileRef = 141B495B1A192A8C00E7F877 /* AAKASCIIArt.m */; };
+		1442B2AD1A77D042006D9AAF /* AAKCloudAAPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1442B2AC1A77D042006D9AAF /* AAKCloudAAPreviewController.m */; };
+		1449EBF31A6975B0009BDD34 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1449EBF21A6975B0009BDD34 /* CloudKit.framework */; };
+		1449EBF61A697FB6009BDD34 /* AAKCloudAAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1449EBF51A697FB6009BDD34 /* AAKCloudAAViewController.m */; };
+		1449EBF91A697FD8009BDD34 /* AAKCloudASCIIArt.m in Sources */ = {isa = PBXBuildFile; fileRef = 1449EBF81A697FD8009BDD34 /* AAKCloudASCIIArt.m */; };
 		14527C0F1A11DB870019F93A /* UIImage+keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 14527C0E1A11DB870019F93A /* UIImage+keyboard.m */; };
 		14527C101A11DB870019F93A /* UIImage+keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 14527C0E1A11DB870019F93A /* UIImage+keyboard.m */; };
 		14527C111A11DB870019F93A /* UIImage+keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 14527C0E1A11DB870019F93A /* UIImage+keyboard.m */; };
@@ -108,6 +112,10 @@
 		146EEB5619ED5CE50032F6DE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */; };
 		146EEB5719ED5CEF0032F6DE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */; };
 		14773DD31A5EEC0600BAF888 /* AAKHelpDummyTapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14773DD21A5EEC0600BAF888 /* AAKHelpDummyTapView.m */; };
+		1497FCB11A7A705100FC5A85 /* CKModifyRecordsOperation+AA.m in Sources */ = {isa = PBXBuildFile; fileRef = 1497FCB01A7A705100FC5A85 /* CKModifyRecordsOperation+AA.m */; };
+		14A4771E1A719EB100CDA461 /* AAKCloudAASearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A4771D1A719EB100CDA461 /* AAKCloudAASearchViewController.m */; };
+		14A477211A72B13F00CDA461 /* AAKCloudAARankingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A477201A72B13F00CDA461 /* AAKCloudAARankingViewController.m */; };
+		14A477241A72B24100CDA461 /* AAKCloudRecentAAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A477231A72B24100CDA461 /* AAKCloudRecentAAViewController.m */; };
 		14A5138919EC68530098C02C /* register.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 14A5137E19EC68530098C02C /* register.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		14A5139119EC75300098C02C /* extension_js.js in Resources */ = {isa = PBXBuildFile; fileRef = 14A5138F19EC75300098C02C /* extension_js.js */; };
 		14A5139319EC85710098C02C /* UZCursorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CB155F19E935BB00D05E9C /* UZCursorView.m */; };
@@ -178,8 +186,11 @@
 		14CB156919E935BB00D05E9C /* UZTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CB156319E935BB00D05E9C /* UZTextView.m */; };
 		14CB157C19EA328500D05E9C /* AAKToolbarHistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CB157B19EA328500D05E9C /* AAKToolbarHistoryCell.m */; };
 		14CB157D19EA328500D05E9C /* AAKToolbarHistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CB157B19EA328500D05E9C /* AAKToolbarHistoryCell.m */; };
+		14CC83AC1A7D39DB0025E250 /* AAKCloudSendReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CC83AB1A7D39DB0025E250 /* AAKCloudSendReportViewController.m */; };
 		14D0D72F19FA13D900870C92 /* AAKRegisterActionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D0D72E19FA13D900870C92 /* AAKRegisterActionViewController.m */; };
 		14DC6C9E1A1A410900450A0A /* default.json in Resources */ = {isa = PBXBuildFile; fileRef = 14DC6C9C1A1A410700450A0A /* default.json */; };
+		14E488AF1A6C604300C22A73 /* AAKAACloudCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14E488AE1A6C604300C22A73 /* AAKAACloudCollectionViewCell.m */; };
+		14E488B11A6C608600C22A73 /* AAKAACloudCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14E488B01A6C608600C22A73 /* AAKAACloudCollectionViewCell.xib */; };
 		14E8CAAE1A5D939600508CBA /* AAKHelpSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14E8CAAD1A5D939600508CBA /* AAKHelpSelectViewController.m */; };
 		14EE653C1A15ED6200FA0731 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 14EE653A1A15ED6200FA0731 /* Model.xcdatamodeld */; };
 		14EE653D1A15ED6200FA0731 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 14EE653A1A15ED6200FA0731 /* Model.xcdatamodeld */; };
@@ -327,6 +338,13 @@
 		1441E88119ECD7F300A4881F /* register.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = register.entitlements; sourceTree = "<group>"; };
 		1441E88219ECD7FF00A4881F /* keyboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = keyboard.entitlements; sourceTree = "<group>"; };
 		1441E88319ECD83C00A4881F /* AAKeyboardApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = AAKeyboardApp.entitlements; sourceTree = "<group>"; };
+		1442B2AB1A77D042006D9AAF /* AAKCloudAAPreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKCloudAAPreviewController.h; sourceTree = "<group>"; };
+		1442B2AC1A77D042006D9AAF /* AAKCloudAAPreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKCloudAAPreviewController.m; sourceTree = "<group>"; };
+		1449EBF21A6975B0009BDD34 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		1449EBF41A697FB6009BDD34 /* AAKCloudAAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKCloudAAViewController.h; sourceTree = "<group>"; };
+		1449EBF51A697FB6009BDD34 /* AAKCloudAAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKCloudAAViewController.m; sourceTree = "<group>"; };
+		1449EBF71A697FD8009BDD34 /* AAKCloudASCIIArt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKCloudASCIIArt.h; sourceTree = "<group>"; };
+		1449EBF81A697FD8009BDD34 /* AAKCloudASCIIArt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKCloudASCIIArt.m; sourceTree = "<group>"; };
 		14527C0D1A11DB870019F93A /* UIImage+keyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+keyboard.h"; sourceTree = "<group>"; };
 		14527C0E1A11DB870019F93A /* UIImage+keyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+keyboard.m"; sourceTree = "<group>"; };
 		14527C121A1207F10019F93A /* AAKNotifyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKNotifyView.h; sourceTree = "<group>"; };
@@ -341,6 +359,14 @@
 		146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		14773DD11A5EEC0600BAF888 /* AAKHelpDummyTapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKHelpDummyTapView.h; sourceTree = "<group>"; };
 		14773DD21A5EEC0600BAF888 /* AAKHelpDummyTapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKHelpDummyTapView.m; sourceTree = "<group>"; };
+		1497FCAF1A7A705100FC5A85 /* CKModifyRecordsOperation+AA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CKModifyRecordsOperation+AA.h"; sourceTree = "<group>"; };
+		1497FCB01A7A705100FC5A85 /* CKModifyRecordsOperation+AA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CKModifyRecordsOperation+AA.m"; sourceTree = "<group>"; };
+		14A4771C1A719EB100CDA461 /* AAKCloudAASearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKCloudAASearchViewController.h; sourceTree = "<group>"; };
+		14A4771D1A719EB100CDA461 /* AAKCloudAASearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKCloudAASearchViewController.m; sourceTree = "<group>"; };
+		14A4771F1A72B13F00CDA461 /* AAKCloudAARankingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKCloudAARankingViewController.h; sourceTree = "<group>"; };
+		14A477201A72B13F00CDA461 /* AAKCloudAARankingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKCloudAARankingViewController.m; sourceTree = "<group>"; };
+		14A477221A72B24100CDA461 /* AAKCloudRecentAAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKCloudRecentAAViewController.h; sourceTree = "<group>"; };
+		14A477231A72B24100CDA461 /* AAKCloudRecentAAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKCloudRecentAAViewController.m; sourceTree = "<group>"; };
 		14A5137E19EC68530098C02C /* register.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = register.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		14A5138119EC68530098C02C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14A5138F19EC75300098C02C /* extension_js.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = extension_js.js; sourceTree = "<group>"; };
@@ -404,9 +430,14 @@
 		14CB156319E935BB00D05E9C /* UZTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UZTextView.m; sourceTree = "<group>"; };
 		14CB157A19EA328500D05E9C /* AAKToolbarHistoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKToolbarHistoryCell.h; sourceTree = "<group>"; };
 		14CB157B19EA328500D05E9C /* AAKToolbarHistoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKToolbarHistoryCell.m; sourceTree = "<group>"; };
+		14CC83AA1A7D39DB0025E250 /* AAKCloudSendReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKCloudSendReportViewController.h; sourceTree = "<group>"; };
+		14CC83AB1A7D39DB0025E250 /* AAKCloudSendReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKCloudSendReportViewController.m; sourceTree = "<group>"; };
 		14D0D72D19FA13D900870C92 /* AAKRegisterActionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKRegisterActionViewController.h; sourceTree = "<group>"; };
 		14D0D72E19FA13D900870C92 /* AAKRegisterActionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKRegisterActionViewController.m; sourceTree = "<group>"; };
 		14DC6C9C1A1A410700450A0A /* default.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = default.json; sourceTree = "<group>"; };
+		14E488AD1A6C604300C22A73 /* AAKAACloudCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKAACloudCollectionViewCell.h; sourceTree = "<group>"; };
+		14E488AE1A6C604300C22A73 /* AAKAACloudCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKAACloudCollectionViewCell.m; sourceTree = "<group>"; };
+		14E488B01A6C608600C22A73 /* AAKAACloudCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AAKAACloudCollectionViewCell.xib; sourceTree = "<group>"; };
 		14E8CAAC1A5D939600508CBA /* AAKHelpSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKHelpSelectViewController.h; sourceTree = "<group>"; };
 		14E8CAAD1A5D939600508CBA /* AAKHelpSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKHelpSelectViewController.m; sourceTree = "<group>"; };
 		14EE653B1A15ED6200FA0731 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -457,6 +488,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1449EBF31A6975B0009BDD34 /* CloudKit.framework in Frameworks */,
 				1415270A1A1633B200EB80AC /* CoreData.framework in Frameworks */,
 				146EEB5719ED5CEF0032F6DE /* libsqlite3.dylib in Frameworks */,
 			);
@@ -635,6 +667,7 @@
 		14B2749C1A0A0A87005BF3B1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1449EBF21A6975B0009BDD34 /* CloudKit.framework */,
 				14EE653F1A15EEB700FA0731 /* CoreData.framework */,
 				146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */,
 			);
@@ -696,8 +729,12 @@
 		14B275201A0A15DF005BF3B1 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				1449EBF71A697FD8009BDD34 /* AAKCloudASCIIArt.h */,
+				1449EBF81A697FD8009BDD34 /* AAKCloudASCIIArt.m */,
 				1402F1A41A0D3B430000F269 /* AAKAAGroupForCollection.h */,
 				1402F1A51A0D3B430000F269 /* AAKAAGroupForCollection.m */,
+				1497FCAF1A7A705100FC5A85 /* CKModifyRecordsOperation+AA.h */,
+				1497FCB01A7A705100FC5A85 /* CKModifyRecordsOperation+AA.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -757,12 +794,12 @@
 			isa = PBXGroup;
 			children = (
 				141528491A18585600EB80AC /* MagicalRecord */,
-				14CB155D19E935BB00D05E9C /* UZTextView */,
+				14CB155D19E935BB00D05E9C /* AAKTe */,
 			);
 			path = vendor;
 			sourceTree = "<group>";
 		};
-		14CB155D19E935BB00D05E9C /* UZTextView */ = {
+		14CB155D19E935BB00D05E9C /* AAKTe */ = {
 			isa = PBXGroup;
 			children = (
 				14CB155E19E935BB00D05E9C /* UZCursorView.h */,
@@ -772,7 +809,43 @@
 				14CB156219E935BB00D05E9C /* UZTextView.h */,
 				14CB156319E935BB00D05E9C /* UZTextView.m */,
 			);
+			name = AAKTe;
 			path = UZTextView;
+			sourceTree = "<group>";
+		};
+		14E488AB1A6B14BC00C22A73 /* Help */ = {
+			isa = PBXGroup;
+			children = (
+				1467A6B41A36DA8600F43B96 /* AAKHelpViewController.h */,
+				1467A6B51A36DA8600F43B96 /* AAKHelpViewController.m */,
+				14773DD11A5EEC0600BAF888 /* AAKHelpDummyTapView.h */,
+				14773DD21A5EEC0600BAF888 /* AAKHelpDummyTapView.m */,
+				14E8CAAC1A5D939600508CBA /* AAKHelpSelectViewController.h */,
+				14E8CAAD1A5D939600508CBA /* AAKHelpSelectViewController.m */,
+			);
+			name = Help;
+			sourceTree = "<group>";
+		};
+		14E488AC1A6B14D700C22A73 /* CloudKit */ = {
+			isa = PBXGroup;
+			children = (
+				1442B2AB1A77D042006D9AAF /* AAKCloudAAPreviewController.h */,
+				1442B2AC1A77D042006D9AAF /* AAKCloudAAPreviewController.m */,
+				1449EBF41A697FB6009BDD34 /* AAKCloudAAViewController.h */,
+				1449EBF51A697FB6009BDD34 /* AAKCloudAAViewController.m */,
+				14A4771C1A719EB100CDA461 /* AAKCloudAASearchViewController.h */,
+				14A4771D1A719EB100CDA461 /* AAKCloudAASearchViewController.m */,
+				14A4771F1A72B13F00CDA461 /* AAKCloudAARankingViewController.h */,
+				14A477201A72B13F00CDA461 /* AAKCloudAARankingViewController.m */,
+				14A477221A72B24100CDA461 /* AAKCloudRecentAAViewController.h */,
+				14A477231A72B24100CDA461 /* AAKCloudRecentAAViewController.m */,
+				14CC83AA1A7D39DB0025E250 /* AAKCloudSendReportViewController.h */,
+				14CC83AB1A7D39DB0025E250 /* AAKCloudSendReportViewController.m */,
+				14E488AD1A6C604300C22A73 /* AAKAACloudCollectionViewCell.h */,
+				14E488AE1A6C604300C22A73 /* AAKAACloudCollectionViewCell.m */,
+				14E488B01A6C608600C22A73 /* AAKAACloudCollectionViewCell.xib */,
+			);
+			name = CloudKit;
 			sourceTree = "<group>";
 		};
 		14EE65391A15ED4900FA0731 /* CoreData */ = {
@@ -826,12 +899,8 @@
 				14FBD3AB19E21213005FC38B /* AppDelegate.m */,
 				14530C331A1BA0AE00B6BFFE /* AAKSettingViewController.h */,
 				14530C341A1BA0AE00B6BFFE /* AAKSettingViewController.m */,
-				1467A6B41A36DA8600F43B96 /* AAKHelpViewController.h */,
-				1467A6B51A36DA8600F43B96 /* AAKHelpViewController.m */,
-				14773DD11A5EEC0600BAF888 /* AAKHelpDummyTapView.h */,
-				14773DD21A5EEC0600BAF888 /* AAKHelpDummyTapView.m */,
-				14E8CAAC1A5D939600508CBA /* AAKHelpSelectViewController.h */,
-				14E8CAAD1A5D939600508CBA /* AAKHelpSelectViewController.m */,
+				14E488AC1A6B14D700C22A73 /* CloudKit */,
+				14E488AB1A6B14BC00C22A73 /* Help */,
 				1402F1A01A0D29BF0000F269 /* Animation */,
 				1402F19F1A0D29A50000F269 /* UICollectionReusableView */,
 				14FBD3B019E21213005FC38B /* Main.storyboard */,
@@ -989,6 +1058,9 @@
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
 							};
+							com.apple.iCloud = {
+								enabled = 0;
+							};
 						};
 					};
 					14FBD3A219E21213005FC38B = {
@@ -996,6 +1068,9 @@
 						DevelopmentTeam = JP866VWWSD;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
 								enabled = 1;
 							};
 						};
@@ -1010,6 +1085,9 @@
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 0;
 							};
 						};
 					};
@@ -1066,6 +1144,7 @@
 				14FBD3B219E21213005FC38B /* Main.storyboard in Resources */,
 				14B274F31A0A0D83005BF3B1 /* AAKAASupplementaryView.xib in Resources */,
 				14F6F3971A100D8600BEE8E2 /* AAKToolbarHeaderView.xib in Resources */,
+				14E488B11A6C608600C22A73 /* AAKAACloudCollectionViewCell.xib in Resources */,
 				14FBD3B719E21213005FC38B /* LaunchScreen.xib in Resources */,
 				14B2751A1A0A0DF3005BF3B1 /* mona.ttf in Resources */,
 				14F636251A3E37110056C3F5 /* InfoPlist.strings in Resources */,
@@ -1241,21 +1320,27 @@
 				1467A6B61A36DA8600F43B96 /* AAKHelpViewController.m in Sources */,
 				14B2674A19E6CB2500C0321D /* AAKContentCell.m in Sources */,
 				14F6F38E1A100D8600BEE8E2 /* AAKToolbarFooterView.m in Sources */,
+				14A477211A72B13F00CDA461 /* AAKCloudAARankingViewController.m in Sources */,
 				14B274CD1A0A0D6F005BF3B1 /* UITraitCollection+keyboard.m in Sources */,
 				141528BD1A18585700EB80AC /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */,
 				14B274BB1A0A0D6F005BF3B1 /* AAKCreateNewGroupViewController.m in Sources */,
+				14E488AF1A6C604300C22A73 /* AAKAACloudCollectionViewCell.m in Sources */,
 				14FBD3A919E21213005FC38B /* main.m in Sources */,
 				1415288D1A18585600EB80AC /* NSEntityDescription+MagicalDataImport.m in Sources */,
+				1449EBF61A697FB6009BDD34 /* AAKCloudAAViewController.m in Sources */,
 				14E8CAAE1A5D939600508CBA /* AAKHelpSelectViewController.m in Sources */,
 				14B274EA1A0A0D83005BF3B1 /* AAKAASupplementaryView.m in Sources */,
 				14773DD31A5EEC0600BAF888 /* AAKHelpDummyTapView.m in Sources */,
 				141528C61A18585700EB80AC /* MagicalRecord+iCloud.m in Sources */,
 				141528991A18585600EB80AC /* NSString+MagicalDataImport.m in Sources */,
+				14A477241A72B24100CDA461 /* AAKCloudRecentAAViewController.m in Sources */,
 				141528C91A18585700EB80AC /* MagicalRecord+Options.m in Sources */,
 				14C1DEED1A67805200CC8DFA /* UINavigationController+Rotate.m in Sources */,
+				14CC83AC1A7D39DB0025E250 /* AAKCloudSendReportViewController.m in Sources */,
 				1402F1A61A0D3B430000F269 /* AAKAAGroupForCollection.m in Sources */,
 				14B274E41A0A0D83005BF3B1 /* AAKAAEditAnimatedTransitioning.m in Sources */,
 				14EE653C1A15ED6200FA0731 /* Model.xcdatamodeld in Sources */,
+				14A4771E1A719EB100CDA461 /* AAKCloudAASearchViewController.m in Sources */,
 				141528A21A18585600EB80AC /* NSManagedObject+MagicalFinders.m in Sources */,
 				14C1DEE81A67800300CC8DFA /* UIViewController+Rotate.m in Sources */,
 				141528871A18585600EB80AC /* MagicalImportFunctions.m in Sources */,
@@ -1263,15 +1348,18 @@
 				14B274BE1A0A0D6F005BF3B1 /* AAKEditViewController.m in Sources */,
 				141528B41A18585700EB80AC /* NSManagedObjectContext+MagicalThreading.m in Sources */,
 				141528A81A18585600EB80AC /* NSManagedObject+MagicalRequests.m in Sources */,
+				1497FCB11A7A705100FC5A85 /* CKModifyRecordsOperation+AA.m in Sources */,
 				14B274CA1A0A0D6F005BF3B1 /* NSParagraphStyle+keyboard.m in Sources */,
 				141528C31A18585700EB80AC /* MagicalRecord+ErrorHandling.m in Sources */,
 				1415289F1A18585600EB80AC /* NSManagedObject+MagicalDataImport.m in Sources */,
+				1442B2AD1A77D042006D9AAF /* AAKCloudAAPreviewController.m in Sources */,
 				14B67AEE1A3E1A49004DD95C /* AAKDummyCollectionReusableView.m in Sources */,
 				14CB156419E935BB00D05E9C /* UZCursorView.m in Sources */,
 				141528961A18585600EB80AC /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
 				14B274DE1A0A0D83005BF3B1 /* AAKAACollectionViewCell.m in Sources */,
 				1415288A1A18585600EB80AC /* NSAttributeDescription+MagicalDataImport.m in Sources */,
 				141528D81A188FFD00EB80AC /* AppDelegate.m in Sources */,
+				1449EBF91A697FD8009BDD34 /* AAKCloudASCIIArt.m in Sources */,
 				14B274C41A0A0D6F005BF3B1 /* AAKSelectGroupViewController.m in Sources */,
 				14F6F3941A100D8600BEE8E2 /* AAKToolbarHeaderView.m in Sources */,
 				14CB156619E935BB00D05E9C /* UZLoupeView.m in Sources */,
@@ -1457,7 +1545,7 @@
 				INFOPLIST_FILE = register/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "43b458fb-997d-4f53-9a12-ed64f109ee10";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -1472,7 +1560,7 @@
 				INFOPLIST_FILE = register/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "43b458fb-997d-4f53-9a12-ed64f109ee10";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -1537,7 +1625,7 @@
 				INFOPLIST_PREPROCESS = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9f6d9e32-0c35-4435-954a-aa9eb1a78480";
+				PROVISIONING_PROFILE = "";
 			};
 			name = "Debug - Disable App Groups ";
 		};
@@ -1575,7 +1663,7 @@
 				INFOPLIST_FILE = keyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0fc6a88a-e07e-4516-9625-6913bfd8fb8d";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = "Debug - Disable App Groups ";
@@ -1595,7 +1683,7 @@
 				INFOPLIST_FILE = register/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "43b458fb-997d-4f53-9a12-ed64f109ee10";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = "Debug - Disable App Groups ";
@@ -1698,7 +1786,7 @@
 				INFOPLIST_PREPROCESS = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9f6d9e32-0c35-4435-954a-aa9eb1a78480";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1713,7 +1801,7 @@
 				INFOPLIST_PREPROCESS = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9f6d9e32-0c35-4435-954a-aa9eb1a78480";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -1765,7 +1853,7 @@
 				INFOPLIST_FILE = keyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0fc6a88a-e07e-4516-9625-6913bfd8fb8d";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -1779,7 +1867,7 @@
 				INFOPLIST_FILE = keyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0fc6a88a-e07e-4516-9625-6913bfd8fb8d";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;

@@ -49,7 +49,7 @@
 	[super viewWillAppear:animated];
 	if (self.navigationController.viewControllers[0] == self) {
 		UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(cancel:)];
-		self.navigationItem.leftBarButtonItem = button;
+		self.navigationItem.rightBarButtonItem = button;
 		self.title = NSLocalizedString(@"Edit groups", nil);
 	}
 }
@@ -60,6 +60,21 @@
 	self.toolbarItems = @[self.editButtonItem];
 	[self.tableView reloadData];
 	
+}
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+	[super setEditing:editing animated:animated];
+	
+	NSIndexPath *addCellIndexPath = [NSIndexPath indexPathForRow:_groups.count inSection:0];
+	
+	[self.tableView beginUpdates];
+	
+	if (self.editing)
+		[self.tableView insertRowsAtIndexPaths:@[addCellIndexPath] withRowAnimation:UITableViewRowAnimationTop];
+	else
+		[self.tableView deleteRowsAtIndexPaths:@[addCellIndexPath] withRowAnimation:UITableViewRowAnimationTop];
+	
+	[self.tableView endUpdates];
 }
 
 #pragma mark - Table view data source
@@ -78,6 +93,8 @@
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+	if (indexPath.row == _groups.count)
+		return UITableViewCellEditingStyleNone;
 	AAKASCIIArtGroup *group = _groups[indexPath.row];
 	if (group.type == AAKASCIIArtDefaultGroup)
 		return UITableViewCellEditingStyleNone;
@@ -108,11 +125,17 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName:AAKKeyboardDataManagerDidUpdateNotification object:nil userInfo:nil];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	return 44;
+}
+
 /**
  * セルの移動が可能かを返す．
  * 履歴などの固定セルは移動できないようにする．
  **/
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+	if (indexPath.row == _groups.count)
+		return NO;
 	return YES;
 }
 
@@ -129,42 +152,56 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	return [_groups count];
+	if (self.editing)
+		return [_groups count] + 1;
+	else
+		return [_groups count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-	AAKASCIIArtGroup *group = _groups[indexPath.row];
-	cell.textLabel.text = group.title;
-	
-	// 通常時の右端のアクセサリ
-	if ([group isEqual:_editViewController.group])
-		cell.accessoryType = UITableViewCellAccessoryCheckmark;
-	else
-		cell.accessoryType = UITableViewCellAccessoryNone;
-	
-	// 編集時の右端のアクセサリ
-	if (group.type != AAKASCIIArtDefaultGroup)
-		cell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
-	else
-		cell.editingAccessoryType = UITableViewCellAccessoryNone;
-	
+	UITableViewCell *cell = nil;
+ 
+	if (indexPath.row < _groups.count) {
+		cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+		AAKASCIIArtGroup *group = _groups[indexPath.row];
+		cell.textLabel.text = group.title;
+		
+		// 通常時の右端のアクセサリ
+		if ([group isEqual:_editViewController.group])
+			cell.accessoryType = UITableViewCellAccessoryCheckmark;
+		else
+			cell.accessoryType = UITableViewCellAccessoryNone;
+		
+		// 編集時の右端のアクセサリ
+		if (group.type != AAKASCIIArtDefaultGroup)
+			cell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
+		else
+			cell.editingAccessoryType = UITableViewCellAccessoryNone;
+	}
+	else {
+		cell = [tableView dequeueReusableCellWithIdentifier:@"AddCell" forIndexPath:indexPath];
+	}
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (tableView.editing) {
-		AAKASCIIArtGroup *group = _groups[indexPath.row];
-		if (group.type != AAKASCIIArtDefaultGroup) {
-			[self performSegueWithIdentifier:@"ToAAKGroupRenameViewController" sender:self];
+	if (indexPath.row < _groups.count)  {
+		if (tableView.editing) {
+			AAKASCIIArtGroup *group = _groups[indexPath.row];
+			if (group.type != AAKASCIIArtDefaultGroup) {
+				[self performSegueWithIdentifier:@"ToAAKGroupRenameViewController" sender:self];
+			}
+			else {
+				[tableView deselectRowAtIndexPath:indexPath animated:YES];
+			}
 		}
 		else {
-			[tableView deselectRowAtIndexPath:indexPath animated:YES];
+			_editViewController.group = _groups[indexPath.row];
+			[self.navigationController popViewControllerAnimated:YES];
 		}
 	}
 	else {
-		_editViewController.group = _groups[indexPath.row];
-		[self.navigationController popViewControllerAnimated:YES];
+		[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 	}
 }
 

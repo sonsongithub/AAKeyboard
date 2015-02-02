@@ -11,11 +11,11 @@
 #import "AAKAACollectionViewCell.h"
 #import "AAKAASupplementaryView.h"
 #import "AAKAAEditPresentationController.h"
-#import "AAKAAEditAnimatedTransitioning.h"
 #import "AAKAACollectionViewCell.h"
 #import "AAKPreviewController.h"
 #import "AAKDummyCollectionReusableView.h"
 #import "AAKRegisterViewController.h"
+#import "AAKCloudAAViewController.h"
 
 @interface AAKAACollectionViewController () <AAKAACollectionViewCellDelegate, UIViewControllerTransitioningDelegate, UIPopoverPresentationControllerDelegate> {
 	NSArray *_groups;	/** AAKAAGroupForCollectionオブジェクトの配列 */
@@ -78,6 +78,10 @@ static NSString * const reuseIdentifier = @"Cell";
 - (id)cellForAsciiArt:(AAKASCIIArt*)asciiart {
 	NSIndexPath *indexPath = [self indexPathForAsciiArt:asciiart];
 	return [self.collectionView cellForItemAtIndexPath:indexPath];
+}
+
+- (id)cellForContent:(id)content {
+	return [self cellForAsciiArt:content];
 }
 
 /**
@@ -184,6 +188,11 @@ static NSString * const reuseIdentifier = @"Cell";
 	[self.collectionView registerNib:nib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"AAKAASupplementaryView"];
 	[self.collectionView registerClass:[AAKDummyCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"AAKDummyCollectionReusableView"];
 	
+	// UI for CloudKit
+#if !ENABLE_CLOUDKIT
+	self.navigationItem.leftBarButtonItem = nil;
+#endif
+	
 	// データをCoreDataからフェッチ
 	[self updateCollections];
 	
@@ -195,6 +204,32 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
+#if 0
+	UIViewController *con = [self.storyboard instantiateViewControllerWithIdentifier:@"AAKCloudSendReportNavigationController"];
+	[self presentViewController:con animated:YES completion:nil];
+#endif
+	
+#if TEST_CLOUDKIT_REPORTING
+	[self performSegueWithIdentifier:@"OpenCloudTabController" sender:nil];
+#endif
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//	UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, NO, 0);
+//	[self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+//	UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+//	UIGraphicsEndImageContext();
+//	if ([segue.identifier isEqualToString:@"OpenCloudTabController"]) {
+//		if ([segue.destinationViewController isKindOfClass:[UITabBarController class]]) {
+//			UITabBarController *tab = (UITabBarController*)segue.destinationViewController;
+//			for (id obj in tab.viewControllers) {
+//				if ([obj isKindOfClass:[AAKCloudAAViewController class]]) {
+//					AAKCloudAAViewController *con = (AAKCloudAAViewController*)obj;
+//					con.backgroundImage = image;
+//				}
+//			}
+//		}
+//	}
 }
 
 #pragma mark -

@@ -8,10 +8,6 @@
 
 #import "AAKAAEditAnimatedTransitioning.h"
 
-#import "AAKAACollectionViewController.h"
-#import "AAKAACollectionViewCell.h"
-#import "AAKPreviewController.h"
-
 @interface AAKAAEditAnimatedTransitioning() {
 	BOOL _isPresent;	/** 表示中であるかのフラグ．このフラグがYESのときは，すでに表示中を意味する． */
 }
@@ -42,16 +38,16 @@
  * @return プレビューコントローラ上のtextviewでレンダリングされるAAのサイズ．
  **/
 - (CGSize)AASizeForPreviewControllerWithTransition:(id<UIViewControllerContextTransitioning>)transitionContext
-								 previewController:(AAKPreviewController*)previewController {
+								 previewController:(AAKDestinationPreviewController*)previewController {
 	// 画面全体のフレームを取得する．
 	CGRect containerViewFrame = [transitionContext containerView].frame;
 	
-	containerViewFrame = CGRectInset(containerViewFrame, [AAKPreviewController marginConstant], [AAKPreviewController marginConstant]);
+	containerViewFrame = CGRectInset(containerViewFrame, [[previewController class] marginConstant], [[previewController class] marginConstant]);
 
 	// aspect ratio
 	// コンテナビューとプレビューコントローラのサイズが同じなのでこれでよい
 	CGFloat containerViewRatio = containerViewFrame.size.width / containerViewFrame.size.height;
-	CGFloat asciiartRatio = previewController.asciiart.ratio;
+	CGFloat asciiartRatio = previewController.content.ratio;
 	
 	if (containerViewRatio >= asciiartRatio) {
 		float w = containerViewFrame.size.height * asciiartRatio;
@@ -75,15 +71,15 @@
  * @return コレクションコントローラ上のセルのtextviewでレンダリングされるAAのサイズ．
  **/
 - (CGSize)AASizeForAACollectionViewControllerWithTransition:(id<UIViewControllerContextTransitioning>)transitionContext
-										  previewController:(AAKPreviewController*)previewController
-								   collectionViewController:(AAKAACollectionViewController*)collectionViewController {
+										  previewController:(AAKDestinationPreviewController*)previewController
+								   collectionViewController:(AAKSourceCollectionViewController*)collectionViewController {
 	
-	AAKAACollectionViewCell *cell = [collectionViewController cellForAsciiArt:previewController.asciiart];
+	AAKSourceCollectionViewCell *cell = (AAKSourceCollectionViewCell*)[collectionViewController cellForContent:previewController.content];
 	
 	// aspect ratio
 	// コンテナビューとプレビューコントローラのサイズが同じなのでこれでよい
 	CGFloat textViewOnCellRatio = cell.textView.frame.size.width / cell.textView.frame.size.height;
-	CGFloat asciiartRatio = previewController.asciiart.ratio;
+	CGFloat asciiartRatio = previewController.content.ratio;
 	
 	if (textViewOnCellRatio >= asciiartRatio) {
 		float w = cell.textView.frame.size.height * asciiartRatio;
@@ -103,12 +99,21 @@
  * @param viewController ビューコントローラ．
  * @return 抽出したAAKAACollectionViewControllerビューコントローラ．
  **/
-- (AAKAACollectionViewController*)collectionViewControllerFromViewController:(UIViewController*)viewController {
-	AAKAACollectionViewController *collectionViewController = nil;
+- (AAKSourceCollectionViewController*)collectionViewControllerFromViewController:(UIViewController*)viewController {
+	AAKSourceCollectionViewController *collectionViewController = nil;
 	if ([viewController isKindOfClass:[UINavigationController class]]) {
 		UINavigationController *nav = (UINavigationController*)viewController;
-		if ([nav.topViewController isKindOfClass:[AAKAACollectionViewController class]]) {
-			collectionViewController = (AAKAACollectionViewController*)nav.topViewController;
+		if ([nav.topViewController conformsToProtocol:@protocol(AAKSourceCollectionViewControllerProtocol)]) {
+			collectionViewController = (AAKSourceCollectionViewController*)nav.topViewController;
+		}
+	}
+	if ([viewController isKindOfClass:[UITabBarController class]]) {
+		UITabBarController *tab = (UITabBarController*)viewController;
+		if ([tab.selectedViewController isKindOfClass:[UINavigationController class]]) {
+			UINavigationController *nav = (UINavigationController*)tab.selectedViewController;
+			if ([nav.topViewController conformsToProtocol:@protocol(AAKSourceCollectionViewControllerProtocol)]) {
+				collectionViewController = (AAKSourceCollectionViewController*)nav.topViewController;
+			}
 		}
 	}
 	return collectionViewController;
@@ -120,12 +125,12 @@
  * @param viewController ビューコントローラ．
  * @return 抽出したAAKPreviewControllerビューコントローラ．
  **/
-- (AAKPreviewController*)previewViewControllerFromViewController:(UIViewController*)viewController {
-	AAKPreviewController *outputViewController = nil;
+- (AAKDestinationPreviewController*)previewViewControllerFromViewController:(UIViewController*)viewController {
+	AAKDestinationPreviewController *outputViewController = nil;
 	if ([viewController isKindOfClass:[UINavigationController class]]) {
 		UINavigationController *nav = (UINavigationController*)viewController;
-		if ([nav.topViewController isKindOfClass:[AAKPreviewController class]]) {
-			outputViewController = (AAKPreviewController*)nav.topViewController;
+		if ([nav.topViewController conformsToProtocol:@protocol(AAKDestinationPreviewControllerProtocol)]) {
+			outputViewController = (AAKDestinationPreviewController*)nav.topViewController;
 		}
 	}
 	return outputViewController;
@@ -139,8 +144,8 @@
 	UIViewController *fromController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
 	UIViewController *toController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
 
-	AAKAACollectionViewController *collectionViewController = [self collectionViewControllerFromViewController:fromController];
-	AAKPreviewController *previewController = [self previewViewControllerFromViewController:toController];
+	AAKSourceCollectionViewController *collectionViewController = [self collectionViewControllerFromViewController:fromController];
+	AAKDestinationPreviewController *previewController = [self previewViewControllerFromViewController:toController];
 	
 	// for error case
 	if (previewController == nil || collectionViewController == nil) {
@@ -149,7 +154,7 @@
 		return;
 	}
 
-	AAKAACollectionViewCell *cell = [collectionViewController cellForAsciiArt:previewController.asciiart];
+	AAKSourceCollectionViewCell *cell = (AAKSourceCollectionViewCell*)[collectionViewController cellForContent:previewController.content];
 	
 	CGSize fromContentSize = [self AASizeForAACollectionViewControllerWithTransition:transitionContext
 																   previewController:previewController
@@ -216,8 +221,8 @@
 	UIViewController *fromController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
 	UIViewController *toController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
 
-	AAKAACollectionViewController *collectionViewController = [self collectionViewControllerFromViewController:toController];
-	AAKPreviewController *previewController = [self previewViewControllerFromViewController:fromController];
+	AAKSourceCollectionViewController *collectionViewController = [self collectionViewControllerFromViewController:toController];
+	AAKDestinationPreviewController *previewController = [self previewViewControllerFromViewController:fromController];
 	
 	// for error case
 	if (previewController == nil || collectionViewController == nil) {
@@ -225,7 +230,7 @@
 		return;
 	}
 	
-	AAKAACollectionViewCell *cell = [collectionViewController cellForAsciiArt:previewController.asciiart];
+	AAKSourceCollectionViewCell *cell = (AAKSourceCollectionViewCell*)[collectionViewController cellForContent:previewController.content];
 	cell.textView.hidden = YES;
 	
 	CGSize toContentSize = [self AASizeForAACollectionViewControllerWithTransition:transitionContext

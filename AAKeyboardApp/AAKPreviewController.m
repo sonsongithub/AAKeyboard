@@ -17,11 +17,34 @@
 
 @implementation AAKPreviewController
 
+- (AAKContent*)content {
+	return _asciiart;
+}
+
 + (CGFloat)marginConstant {
 	return 30;
 }
 
 #pragma mark - IBAction
+
+- (IBAction)upload:(id)sender {
+	UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"iCloud", nil)
+																   message:NSLocalizedString(@"Please input the title of AA.", nil)
+															preferredStyle:UIAlertControllerStyleAlert];
+	UIAlertAction *upload = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil)
+													 style:UIAlertActionStyleDefault
+												   handler:^(UIAlertAction *action) {
+													   UITextField *field = alert.textFields[0];
+													   [AAKCloudASCIIArt uploadAA:_asciiart.text title:field.text];
+												   }];
+	UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil)
+													 style:UIAlertActionStyleDefault
+												   handler:nil];
+	[alert addTextFieldWithConfigurationHandler:nil];
+	[alert addAction:cancel];
+	[alert addAction:upload];
+	[self presentViewController:alert animated:YES completion:nil];
+}
 
 - (IBAction)close:(id)sender {
 	[self dismissViewControllerAnimated:YES completion:nil];
@@ -29,9 +52,7 @@
 
 - (IBAction)saveAsImage:(id)sender {
 	DNSLogMethod
-	
 	UIImage *image = [self.textView imageForPasteBoard];
-	
 	ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
 	[library writeImageToSavedPhotosAlbum:image.CGImage metadata:nil
 						  completionBlock:^(NSURL *assetURL, NSError *error){
@@ -93,6 +114,11 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	
+	// UI for CloudKit
+#if !ENABLE_CLOUDKIT
+	self.uploadButton.hidden = YES;
+#endif
 	
 	_leftMarginConstraint.constant = [AAKPreviewController marginConstant];
 	_rightMarginConstraint.constant = [AAKPreviewController marginConstant];

@@ -8,14 +8,16 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "AAKAAEditAnimatedTransitioning.h"
 
 @class AAKASCIIArtGroup;
 
-@interface AAKASCIIArt : NSManagedObject
+@interface AAKASCIIArt : NSManagedObject <AAKContentProtocol>
 
 @property (nonatomic) double lastUsedTime;
 @property (nonatomic) double ratio;
 @property (nonatomic, retain) NSString * text;
+@property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) AAKASCIIArtGroup *group;
 
 @property (nonatomic, assign) CGSize contentSize;

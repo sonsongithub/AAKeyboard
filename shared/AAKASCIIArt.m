@@ -16,6 +16,7 @@
 @dynamic ratio;
 @dynamic text;
 @dynamic group;
+@dynamic title;
 
 @synthesize contentSize;
 

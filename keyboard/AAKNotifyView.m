@@ -45,7 +45,7 @@
 }
 
 - (void)drawRect:(CGRect)rect {
-	CGSize rectSize = CGSizeMake(260, 120);
+	CGSize rectSize = CGSizeMake(300, 120);
 	CGFloat x = (self.frame.size.width - rectSize.width)/2;
 	CGFloat y = (self.frame.size.height - rectSize.height)/2;
 	CGContextRef context = UIGraphicsGetCurrentContext();

@@ -15,6 +15,12 @@ typedef enum AAKASCIIArtGroupType_ {
 	AAKASCIIArtHistoryGroup	= 2,
 }AAKASCIIArtGroupType;
 
+#define ENABLE_CLOUDKIT 0
+
+#if ENABLE_CLOUDKIT
+	#define TEST_CLOUDKIT_REPORTING 0
+#endif
+
 // For CoreData, MagicalRecord
 #import <CoreData/CoreData.h>
 #import "CoreData+MagicalRecord.h"
@@ -33,6 +39,15 @@ typedef enum AAKASCIIArtGroupType_ {
 #import "AAKASCIIArt.h"
 #import "AAKASCIIArtGroup.h"
 #import "AAKAAGroupForCollection.h"
+
+// CloudKit - Model
+#import "AAKCloudASCIIArt.h"
+#import "CKModifyRecordsOperation+AA.h"
+
+// Animation model
+#ifdef TARGET_IS_EXTENSION
+#import "AAKAAEditAnimatedTransitioning.h"
+#endif
 
 // View controllers
 #import "AAKCreateNewGroupViewController.h"
