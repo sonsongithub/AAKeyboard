@@ -106,7 +106,10 @@
  * 履歴などの固定セルがある場合は，そのindex値を返さないにする．
  **/
 - (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath {
-	return proposedDestinationIndexPath;
+	if (proposedDestinationIndexPath.row < _groups.count)
+		return proposedDestinationIndexPath;
+	else
+		return [NSIndexPath indexPathForRow:_groups.count - 1 inSection:0];
 }
 
 /**
