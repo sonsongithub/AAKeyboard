@@ -16,6 +16,7 @@
 #import "AAKDummyCollectionReusableView.h"
 #import "AAKRegisterViewController.h"
 #import "AAKCloudAAViewController.h"
+#import "AAKHelpViewController.h"
 
 @interface AAKAACollectionViewController () <AAKAACollectionViewCellDelegate, UIViewControllerTransitioningDelegate, UIPopoverPresentationControllerDelegate> {
 	NSArray *_groups;	/** AAKAAGroupForCollectionオブジェクトの配列 */
@@ -204,6 +205,24 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
+	
+	if (![[NSUserDefaults standardUserDefaults] boolForKey:@"AAKHasEverLaunched"]) {
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AAKHasEverLaunched"];
+		[[NSUserDefaults standardUserDefaults] synchronize];
+		
+		UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"AAKeyboard", nil)
+																	   message:NSLocalizedString(@"Let's try to setup AAKeyboard on your device!", nil)
+																preferredStyle:UIAlertControllerStyleAlert];
+		UIAlertAction *action = [UIAlertAction actionWithTitle:NSLocalizedString(@"Open help", nil)
+														 style:UIAlertActionStyleDefault
+													   handler:^(UIAlertAction *action) {
+														   AAKHelpViewController *con = [self.storyboard instantiateViewControllerWithIdentifier:@"AAKHelpViewController"];
+														   con.helpIdentifier = @"setup";
+														   [self presentViewController:con animated:YES completion:nil];
+													   }];
+		[alert addAction:action];
+		[self presentViewController:alert animated:YES completion:nil];
+	}
 #if 0
 	UIViewController *con = [self.storyboard instantiateViewControllerWithIdentifier:@"AAKCloudSendReportNavigationController"];
 	[self presentViewController:con animated:YES completion:nil];
