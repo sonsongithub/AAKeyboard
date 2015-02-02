@@ -72,6 +72,9 @@
 	[self showKeyboardGrantWarning];
 	
 	
+	[AAKCloudASCIIArt start];
+	
+	
 	return YES;
 }
 

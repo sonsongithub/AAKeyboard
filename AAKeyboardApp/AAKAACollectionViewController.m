@@ -199,8 +199,14 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
+#if 0
 	UIViewController *con = [self.storyboard instantiateViewControllerWithIdentifier:@"AAKCloudSendReportNavigationController"];
 	[self presentViewController:con animated:YES completion:nil];
+#endif
+	
+#if 1
+	[self performSegueWithIdentifier:@"OpenCloudTabController" sender:nil];
+#endif
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

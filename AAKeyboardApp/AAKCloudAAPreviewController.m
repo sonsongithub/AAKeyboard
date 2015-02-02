@@ -8,6 +8,7 @@
 
 #import "AAKCloudAAPreviewController.h"
 #import "AAKPreviewController.h"
+#import "AAKCloudSendReportViewController.h"
 
 @implementation AAKCloudAAPreviewController
 
@@ -40,9 +41,6 @@
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:AAKKeyboardDataManagerDidUpdateNotification object:nil];
 }
-
-//- (IBAction)sendReport:(id)sender {
-//}
 
 /**
  * テキストビューに再度AAを突っ込みコンテンツを最新のものに更新する．
@@ -90,6 +88,14 @@
 	[_queue addOperation:op];
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+	if ([segue.identifier isEqualToString:@"OpenAAKCloudSendReportNavigationController"]) {
+		UINavigationController *nav = (UINavigationController*)segue.destinationViewController;
+		AAKCloudSendReportViewController *con = (AAKCloudSendReportViewController*)nav.topViewController;
+		con.asciiart = self.asciiart;
+	}
+}
+
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	self.titleLabel.text = _asciiart.title;
@@ -99,6 +105,13 @@
 	self.likeButton.hidden = YES;
 	self.baseLikeView.hidden = YES;
 	//[self queryCheckDidLikeEver];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+#if 1
+	[self performSegueWithIdentifier:@"OpenAAKCloudSendReportNavigationController" sender:nil];
+#endif
 }
 
 - (void)viewDidLoad {

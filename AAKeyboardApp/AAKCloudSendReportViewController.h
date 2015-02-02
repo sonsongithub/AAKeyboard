@@ -10,4 +10,6 @@
 
 @interface AAKCloudSendReportViewController : UITableViewController
 
+@property (nonatomic, strong) AAKCloudASCIIArt *asciiart;
+
 @end

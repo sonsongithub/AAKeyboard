@@ -24,10 +24,11 @@
 #pragma mark <AAKCloudAAViewController>
 
 - (void)didFailCloudKitQuery {
+	[super didFailCloudKitQuery];
 }
 
 - (void)didFinishCloudKitQuery {
-	[self.collectionView reloadData];
+	[super didFinishCloudKitQuery];
 }
 
 @end

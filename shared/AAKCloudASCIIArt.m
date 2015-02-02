@@ -12,6 +12,27 @@ static NSOperationQueue *sharedOperationQueue;
 
 @implementation AAKCloudASCIIArt
 
++ (void)start {
+	CKContainer *defaultContainer =[CKContainer defaultContainer];
+	CKDatabase *publicDB = [defaultContainer publicCloudDatabase];
+	[defaultContainer fetchUserRecordIDWithCompletionHandler:^(CKRecordID *recordID, NSError *error) {
+		if(error){
+			NSLog(@"%@", [error localizedDescription]);
+		}
+		else{
+			NSLog(@"%@", recordID);
+			[publicDB fetchRecordWithID:recordID completionHandler:^(CKRecord *record, NSError *error) {
+				if(error){
+					NSLog(@"%@", [error localizedDescription]);
+				}
+				else {
+					NSLog(@"%@", record);
+				}
+			}];
+		}
+	}];
+}
+
 + (NSOperationQueue*)sharedQueue {
 	if (sharedOperationQueue == nil) {
 		sharedOperationQueue = [[NSOperationQueue alloc] init];

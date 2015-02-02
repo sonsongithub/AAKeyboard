@@ -32,5 +32,6 @@
 // download
 + (void)incrementDownloadCounter:(CKRecordID*)recordID completionBlock:(void (^)(CKRecord *record, NSError *operationError))completionBlock;
 
++ (void)start;
 
 @end

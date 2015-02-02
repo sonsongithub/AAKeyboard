@@ -29,12 +29,13 @@
 #pragma mark <AAKCloudAAViewController>
 
 - (void)didFailCloudKitQuery {
+	[super didFailCloudKitQuery];
 	[_searchBar setShowsCancelButton:NO animated:YES];
 }
 
 - (void)didFinishCloudKitQuery {
+	[super didFinishCloudKitQuery];
 	[_searchBar setShowsCancelButton:YES animated:YES];
-	[self.collectionView reloadData];
 }
 
 #pragma mark <UISearchBarDelegate>

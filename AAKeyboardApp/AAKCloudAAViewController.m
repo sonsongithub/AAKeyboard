@@ -31,7 +31,7 @@ static NSString * const reuseIdentifier = @"AAKAACloudCollectionViewCell";
 		op = [[CKQueryOperation alloc] initWithCursor:_currentCursor];
 		_currentCursor = nil;
 	}
-	op.resultsLimit = 4;
+	op.resultsLimit = 10;
 	op.recordFetchedBlock = ^(CKRecord *record) {
 //		DNSLog(@"%@", record);
 		AAKCloudASCIIArt *obj = [AAKCloudASCIIArt cloudASCIIArtWithRecord:record];
@@ -99,6 +99,30 @@ static NSString * const reuseIdentifier = @"AAKAACloudCollectionViewCell";
 
 - (void)didFinishCloudKitQuery {
 	[self.collectionView reloadData];
+	
+#if 1
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		AAKAACloudCollectionViewCell *cell = (AAKAACloudCollectionViewCell*)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
+		
+		UINavigationController *nav = (UINavigationController*)[self.storyboard instantiateViewControllerWithIdentifier:@"AAKCloudAAPreviewNavigationController"];
+		AAKCloudAAPreviewController *con = (AAKCloudAAPreviewController*)nav.topViewController;
+		con.asciiart = cell.asciiart;
+		
+		if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+			//		nav.modalPresentationStyle = UIModalPresentationPopover;
+			//		nav.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+			//		nav.popoverPresentationController.sourceRect = [self.view convertRect:cell.frame fromView:cell.superview];
+			//		nav.popoverPresentationController.sourceView = self.view;
+			//		nav.popoverPresentationController.delegate = self;
+			//		[self presentViewController:nav animated:YES completion:nil];
+		}
+		else {
+			nav.modalPresentationStyle = UIModalPresentationCustom;
+			nav.transitioningDelegate = self;
+			[self presentViewController:nav animated:YES completion:nil];
+		}
+	});
+#endif
 }
 
 #pragma mark <UIViewController>
