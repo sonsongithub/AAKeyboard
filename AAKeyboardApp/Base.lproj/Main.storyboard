@@ -579,7 +579,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uFF-Zx-PJQ">
-                                <rect key="frame" x="194" y="548" width="32" height="32"/>
+                                <rect key="frame" x="195" y="548" width="32" height="32"/>
                                 <color key="backgroundColor" white="0.5" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="UiH-4w-ZYn"/>
@@ -627,14 +627,14 @@
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kOd-mu-1Mj">
-                                <rect key="frame" x="56" y="548" width="130.5" height="32"/>
+                                <rect key="frame" x="56" y="548" width="131" height="32"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="28f-p9-CyA"/>
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GQY-QR-5D2">
-                                <rect key="frame" x="234" y="548" width="131" height="32"/>
+                                <rect key="frame" x="235" y="548" width="130" height="32"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="urA-HW-XqD"/>
@@ -1327,7 +1327,7 @@
                                     <constraint firstAttribute="height" constant="32" id="5QI-bD-GTx"/>
                                 </constraints>
                             </view>
-                            <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6FH-S8-Hpl">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6FH-S8-Hpl">
                                 <rect key="frame" x="235" y="548" width="130" height="32"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>

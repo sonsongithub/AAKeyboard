@@ -988,6 +988,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 14FBD3C619E21213005FC38B /* Build configuration list for PBXNativeTarget "AAKeyboardApp" */;
 			buildPhases = (
+				1447CDBC1A812C6D00671ECE /* ShellScript */,
 				14530C371A1BA72800B6BFFE /* ShellScript */,
 				14530C361A1BA71600B6BFFE /* ShellScript */,
 				14FBD39F19E21213005FC38B /* Sources */,
@@ -1176,6 +1177,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1447CDBC1A812C6D00671ECE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "ibtool --generate-stringsfile $SRCROOT/AAKeyboardApp/ja.lproj/Main.strings --import-strings-file $SRCROOT/AAKeyboardApp/ja.lproj/Main.strings $SRCROOT/AAKeyboardApp/Base.lproj/Main.storyboard\n";
+		};
 		14530C361A1BA71600B6BFFE /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
