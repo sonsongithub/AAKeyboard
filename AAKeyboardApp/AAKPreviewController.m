@@ -50,6 +50,15 @@
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (IBAction)delete:(id)sender {
+	AAKASCIIArt *obj = self.asciiart;
+	[obj MR_deleteEntity];
+	[[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+	self.asciiart = nil;
+	[[NSNotificationCenter defaultCenter] postNotificationName:AAKKeyboardDataManagerDidUpdateNotification object:nil userInfo:nil];
+	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (IBAction)saveAsImage:(id)sender {
 	DNSLogMethod
 	UIImage *image = [self.textView imageForPasteBoard];
@@ -81,11 +90,13 @@
  * テキストビューに再度AAを突っ込みコンテンツを最新のものに更新する．
  **/
 - (void)updateTextView {
-	CGFloat fontSize = 15;
-	NSParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyleWithFontSize:fontSize];
-	NSDictionary *attributes = @{NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:[UIFont fontWithName:@"Mona" size:fontSize]};
-	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:_asciiart.text attributes:attributes];
-	_textView.attributedString = string;
+	if ([self.asciiart.text length]) {
+		CGFloat fontSize = 15;
+		NSParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyleWithFontSize:fontSize];
+		NSDictionary *attributes = @{NSParagraphStyleAttributeName:paragraphStyle, NSFontAttributeName:[UIFont fontWithName:@"Mona" size:fontSize]};
+		NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:_asciiart.text attributes:attributes];
+		_textView.attributedString = string;
+	}
 }
 
 /**

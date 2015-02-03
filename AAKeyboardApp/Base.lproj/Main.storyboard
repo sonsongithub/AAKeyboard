@@ -602,6 +602,9 @@
                                 <state key="normal" backgroundImage="trash">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="delete:" destination="6bA-Do-0CJ" eventType="touchUpInside" id="K9U-bi-fNO"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hAW-lw-gaM">
                                 <rect key="frame" x="16" y="548" width="32" height="32"/>
