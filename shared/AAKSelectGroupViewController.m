@@ -13,6 +13,7 @@
 
 @interface AAKSelectGroupViewController () {
 	NSMutableArray *_groups;
+	BOOL			_editOnly;
 }
 
 @end
@@ -47,34 +48,40 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	if (self.navigationController.viewControllers[0] == self) {
+	_editOnly = (self.navigationController.viewControllers[0] == self);
+	if (_editOnly) {
 		UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(cancel:)];
 		self.navigationItem.rightBarButtonItem = button;
 		self.title = NSLocalizedString(@"Edit groups", nil);
+		[self.navigationController setToolbarHidden:YES animated:NO];
+		self.editing = YES;
 	}
 }
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	[self.navigationController setToolbarHidden:NO animated:YES];
-	self.toolbarItems = @[self.editButtonItem];
+	if (!_editOnly) {
+		[self.navigationController setToolbarHidden:NO animated:YES];
+		self.toolbarItems = @[self.editButtonItem];
+	}
 	[self.tableView reloadData];
-	
 }
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
 	[super setEditing:editing animated:animated];
 	
-	NSIndexPath *addCellIndexPath = [NSIndexPath indexPathForRow:_groups.count inSection:0];
-	
-	[self.tableView beginUpdates];
-	
-	if (self.editing)
-		[self.tableView insertRowsAtIndexPaths:@[addCellIndexPath] withRowAnimation:UITableViewRowAnimationTop];
-	else
-		[self.tableView deleteRowsAtIndexPaths:@[addCellIndexPath] withRowAnimation:UITableViewRowAnimationTop];
-	
-	[self.tableView endUpdates];
+	if (!_editOnly) {
+		NSIndexPath *addCellIndexPath = [NSIndexPath indexPathForRow:_groups.count inSection:0];
+		
+		[self.tableView beginUpdates];
+		
+		if (self.editing)
+			[self.tableView insertRowsAtIndexPaths:@[addCellIndexPath] withRowAnimation:UITableViewRowAnimationTop];
+		else
+			[self.tableView deleteRowsAtIndexPaths:@[addCellIndexPath] withRowAnimation:UITableViewRowAnimationTop];
+		
+		[self.tableView endUpdates];
+	}
 }
 
 #pragma mark - Table view data source
