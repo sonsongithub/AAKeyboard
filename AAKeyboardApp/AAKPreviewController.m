@@ -51,12 +51,21 @@
 }
 
 - (IBAction)delete:(id)sender {
-	AAKASCIIArt *obj = self.asciiart;
-	[obj MR_deleteEntity];
-	[[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
-	self.asciiart = nil;
-	[[NSNotificationCenter defaultCenter] postNotificationName:AAKKeyboardDataManagerDidUpdateNotification object:nil userInfo:nil];
-	[self dismissViewControllerAnimated:YES completion:nil];
+	[UIView animateWithDuration:0.3
+					 animations:^{
+						 _textView.alpha = 0;
+						 _textView.transform = CGAffineTransformMakeScale(0.1, 0.1);
+					 }
+					 completion:^(BOOL finished) {
+						 AAKASCIIArt *obj = self.asciiart;
+						 [obj MR_deleteEntity];
+						 [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+						 self.asciiart = nil;
+						 [[NSNotificationCenter defaultCenter] postNotificationName:AAKKeyboardDataManagerDidUpdateNotification object:nil userInfo:nil];
+						 [self dismissViewControllerAnimated:YES completion:nil];
+					 }];
+	
+	
 }
 
 - (IBAction)saveAsImage:(id)sender {
