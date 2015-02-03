@@ -21,6 +21,7 @@
 
 @property (nonatomic, strong) IBOutlet UIButton *pictureSaveButton;
 @property (nonatomic, strong) IBOutlet UIButton *uploadButton;
+@property (nonatomic, strong) IBOutlet UIButton *trashButton;
 @property (nonatomic, strong) IBOutlet UIButton *editButton;
 
 
