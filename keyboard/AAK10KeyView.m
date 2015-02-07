@@ -13,9 +13,26 @@
 
 @implementation AAK10KeyBoarderView
 
+- (IBAction)up:(id)sender {
+	UIButton *b = sender;
+	b.backgroundColor = [UIColor clearColor];
+}
+
+- (IBAction)down:(id)sender {
+	UIButton *b = sender;
+	b.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.5];
+}
+
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
 	self = [super initWithCoder:aDecoder];
 	self.backgroundColor = [UIColor clearColor];
+	
+	for (UIButton *b in self.subviews) {
+		[b addTarget:self action:@selector(up:) forControlEvents:UIControlEventTouchUpInside];
+		[b addTarget:self action:@selector(down:) forControlEvents:UIControlEventTouchDown];
+		[b addTarget:self action:@selector(up:) forControlEvents:UIControlEventTouchUpOutside];
+	}
+	
 	return self;
 }
 
@@ -57,6 +74,12 @@
 @end
 
 @implementation AAK10KeyView
+
+- (IBAction)didPushKey:(id)sender {
+	DNSLogMethod
+	UIButton *b = sender;
+	[self.delegate didPush10KeyView:self key:b.titleLabel.text];
+}
 
 + (instancetype)viewFromNib {
 	// 通知ビューを貼り付ける

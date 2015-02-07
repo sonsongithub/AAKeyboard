@@ -11,7 +11,7 @@
 #import "AAKContentCell.h"
 #import "AAK10KeyView.h"
 
-@interface AAKKeyboardView() <UICollectionViewDataSource, UICollectionViewDelegate, AAKToolbarDelegate> {
+@interface AAKKeyboardView() <UICollectionViewDataSource, UICollectionViewDelegate, AAKToolbarDelegate, AAK10KeyViewDelegate> {
 	AAKToolbar					*_toolbar;
 	NSLayoutConstraint			*_toolbarHeightConstraint;
 	UICollectionView			*_collectionView;
@@ -100,7 +100,7 @@
 	}
 	
 	_numberKeyboardView = [AAK10KeyView viewFromNib];
-	_numberKeyboardView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+	_numberKeyboardView.delegate = self;
 	[self addSubview:_numberKeyboardView];
 	
 	_numberKeyboardView.hidden = YES;
@@ -258,6 +258,12 @@
 	_numberKeyboardView.hidden = !_numberKeyboardView.hidden;
 	_collectionView.hidden = !_numberKeyboardView.hidden;
 	[_numberKeyboardView setNeedsDisplay];
+}
+
+#pragma mark - AAK10KeyViewDelegate
+
+- (void)didPush10KeyView:(AAK10KeyView*)view key:(NSString*)key {
+	[self.delegate keyboardView:self willInsertString:key];
 }
 
 #pragma mark - UICollectionViewDelegate, UICollectionViewDataSource
