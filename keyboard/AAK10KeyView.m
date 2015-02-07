@@ -9,6 +9,7 @@
 #import "AAK10KeyView.h"
 
 @interface AAK10KeyBoarderView : UIView
+@property (nonatomic, assign) UIKeyboardAppearance keyboardAppearance;
 @end
 
 @implementation AAK10KeyBoarderView
@@ -41,19 +42,26 @@
 	
 	CGContextSetLineWidth(context, 0.5);
 	
-	[[UIColor whiteColor] setStroke];
+	UIColor *textColor = nil;
+	
+	if (_keyboardAppearance == UIKeyboardAppearanceDark)
+		textColor = [UIColor whiteColor];
+	else
+		textColor = [UIColor blackColor];
+	
+	[textColor setStroke];
 	
 	CGFloat widthBlock = rect.size.width / 3;
 	CGFloat heightBlock = rect.size.height / 4;
 	
-	CGContextMoveToPoint(context, 0, 0);
-	CGContextAddLineToPoint(context, 0, rect.size.height);
+	CGContextMoveToPoint(context, 0.5, 0);
+	CGContextAddLineToPoint(context, 0.5, rect.size.height);
 	CGContextMoveToPoint(context, widthBlock, 0);
 	CGContextAddLineToPoint(context, widthBlock, rect.size.height);
 	CGContextMoveToPoint(context, 2*widthBlock, 0);
 	CGContextAddLineToPoint(context, 2*widthBlock, rect.size.height);
-	CGContextMoveToPoint(context, 3*widthBlock, 0);
-	CGContextAddLineToPoint(context, 3*widthBlock, rect.size.height);
+	CGContextMoveToPoint(context, 3*widthBlock-0.5, 0);
+	CGContextAddLineToPoint(context, 3*widthBlock-0.5, rect.size.height);
 	
 	CGContextMoveToPoint(context, 0.5, heightBlock);
 	CGContextAddLineToPoint(context, rect.size.width - 0.5, heightBlock);
@@ -65,6 +73,23 @@
 	CGContextStrokePath(context);
 }
 
+- (void)setKeyboardAppearance:(UIKeyboardAppearance)keyboardAppearance {
+	_keyboardAppearance = keyboardAppearance;
+	
+	UIColor *textColor = nil;
+	
+	if (_keyboardAppearance == UIKeyboardAppearanceDark)
+		textColor = [UIColor whiteColor];
+	else
+		textColor = [UIColor blackColor];
+	
+	for (UIButton *b in self.subviews) {
+		[b setTitleColor:textColor forState:UIControlStateNormal];
+	}
+	
+	[self setNeedsDisplay];
+}
+
 @end
 
 @interface AAK10KeyView() {
@@ -74,6 +99,11 @@
 @end
 
 @implementation AAK10KeyView
+
+- (void)setKeyboardAppearance:(UIKeyboardAppearance)keyboardAppearance {
+	_keyboardAppearance = keyboardAppearance;
+	_10KeyBoarderView.keyboardAppearance = keyboardAppearance;
+}
 
 - (IBAction)didPushKey:(id)sender {
 	DNSLogMethod

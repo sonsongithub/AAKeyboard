@@ -102,7 +102,7 @@
 	_numberKeyboardView = [AAK10KeyView viewFromNib];
 	_numberKeyboardView.delegate = self;
 	[self addSubview:_numberKeyboardView];
-	
+	_numberKeyboardView.keyboardAppearance = _keyboardAppearance;
 	_numberKeyboardView.hidden = YES;
 }
 

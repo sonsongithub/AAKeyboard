@@ -22,5 +22,6 @@
 - (void)setWidth:(CGFloat)width;
 
 @property (nonatomic, assign) id<AAK10KeyViewDelegate> delegate;
+@property (nonatomic, assign) UIKeyboardAppearance keyboardAppearance;
 
 @end
