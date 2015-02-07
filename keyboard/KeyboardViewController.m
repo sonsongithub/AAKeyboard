@@ -208,8 +208,7 @@ typedef enum AAKUIOrientation_ {
 	[self.view addSubview:_keyboardView];
 	
 	// 通知ビューを貼り付ける
-	UINib *nib = [UINib nibWithNibName:@"AAKNotifyView" bundle:nil];
-	_notifyView = [[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
+	_notifyView = [AAKNotifyView viewFromNib];
 	_notifyView.translatesAutoresizingMaskIntoConstraints = NO;
 	_notifyView.userInteractionEnabled = NO;
 	_notifyView.hidden = YES;

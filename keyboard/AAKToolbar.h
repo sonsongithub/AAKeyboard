@@ -32,6 +32,8 @@
  **/
 - (void)toolbar:(AAKToolbar*)toolbar didPushDeleteButton:(UIButton*)button;
 
+- (void)toolbar:(AAKToolbar*)toolbar didPushNumberButton:(UIButton*)button;
+
 @end
 
 @interface AAKToolbar : UIView

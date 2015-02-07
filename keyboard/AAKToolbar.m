@@ -18,9 +18,11 @@
 	NSArray						*_sizeOfCategories;
 	UIButton					*_earthKey;
 	UIButton					*_deleteKey;
+	UIButton					*_numberKey;
 	NSArray						*_groups;
 	NSLayoutConstraint			*_earthKeyWidthConstraint;
 	NSLayoutConstraint			*_deleteKeyWidthConstraint;
+	NSLayoutConstraint			*_numberKeyWidthConstraint;
 	UIKeyboardAppearance		_keyboardAppearance;
 }
 @end
@@ -154,6 +156,41 @@
 		[_deleteKey setImage:[UIImage imageNamed:name] forState:UIControlStateNormal];
 		[_deleteKey setImage:[UIImage imageNamed:name] forState:UIControlStateHighlighted];
 	}
+	{
+		_numberKey = [[UIButton alloc] initWithFrame:CGRectZero];
+		
+		_numberKey.backgroundColor = [self buttonBackgroundColor];
+		
+		[_numberKey addTarget:self action:@selector(pushNumberKey:) forControlEvents:UIControlEventTouchUpInside];
+		[_numberKey addTarget:self action:@selector(buttonHighlight:) forControlEvents:UIControlEventTouchDown];
+		[_numberKey addTarget:self action:@selector(buttonStopHighlight:) forControlEvents:UIControlEventTouchUpOutside];
+		
+		UIImage *temp = [UIImage rightEdgeWithKeyboardAppearance:_keyboardAppearance];
+		[_numberKey setBackgroundImage:temp forState:UIControlStateNormal];
+		[_numberKey setBackgroundImage:temp forState:UIControlStateHighlighted];
+		
+		NSString *name = nil;
+		if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+			if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+				name = @"hglobalHD";
+			}
+			else {
+				name = @"globalHD";
+			}
+		}
+		else {
+			if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+				name = @"hglobal";
+			}
+			else {
+				name = @"global";
+			}
+		}
+		
+		[_numberKey setImage:[UIImage imageNamed:name] forState:UIControlStateNormal];
+		[_numberKey setImage:[UIImage imageNamed:name] forState:UIControlStateHighlighted];
+	}
+	[self addSubview:_numberKey];
 	[self addSubview:_earthKey];
 	[self addSubview:_deleteKey];
 }
@@ -280,8 +317,9 @@
 	_collectionView.translatesAutoresizingMaskIntoConstraints = NO;
 	_earthKey.translatesAutoresizingMaskIntoConstraints = NO;
 	_deleteKey.translatesAutoresizingMaskIntoConstraints = NO;
+	_numberKey.translatesAutoresizingMaskIntoConstraints = NO;
 
-	NSDictionary *views = NSDictionaryOfVariableBindings(_collectionView, _earthKey, _deleteKey);
+	NSDictionary *views = NSDictionaryOfVariableBindings(_collectionView, _earthKey, _deleteKey, _numberKey);
 	
 	_earthKeyWidthConstraint = [NSLayoutConstraint constraintWithItem:_earthKey
 															attribute:NSLayoutAttributeWidth
@@ -299,12 +337,22 @@
 															multiplier:1
 															  constant:_height];
 	[self addConstraint:_deleteKeyWidthConstraint];
+	_numberKeyWidthConstraint = [NSLayoutConstraint constraintWithItem:_numberKey
+															 attribute:NSLayoutAttributeWidth
+															 relatedBy:NSLayoutRelationEqual
+																toItem:nil
+															 attribute:NSLayoutAttributeNotAnAttribute
+															multiplier:1
+															  constant:_height];
+	[self addConstraint:_numberKeyWidthConstraint];
 	
-	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_earthKey]-0-[_collectionView(>=0)]-0-[_deleteKey]-(==0)-|"
+	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_earthKey]-0-[_numberKey]-0-[_collectionView(>=0)]-0-[_deleteKey]-(==0)-|"
 																 options:0 metrics:0 views:views]];
 	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_collectionView(>=0)]-(==0)-|"
 																 options:0 metrics:0 views:views]];
 	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_earthKey(>=0)]-(==0)-|"
+																 options:0 metrics:0 views:views]];
+	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_numberKey(>=0)]-(==0)-|"
 																 options:0 metrics:0 views:views]];
 	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_deleteKey(>=0)]-(==0)-|"
 																 options:0 metrics:0 views:views]];
@@ -373,6 +421,11 @@
 - (IBAction)pushDeleteKey:(UIButton*)sender {
 	sender.backgroundColor = [self buttonBackgroundColor];
 	[self.delegate toolbar:self didPushDeleteButton:sender];
+}
+
+- (IBAction)pushNumberKey:(UIButton*)sender {
+	sender.backgroundColor = [self buttonBackgroundColor];
+	[self.delegate toolbar:self didPushNumberButton:sender];
 }
 
 #pragma mark - Setter

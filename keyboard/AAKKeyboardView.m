@@ -9,6 +9,7 @@
 #import "AAKKeyboardView.h"
 #import "AAKToolbar.h"
 #import "AAKContentCell.h"
+#import "AAK10KeyView.h"
 
 @interface AAKKeyboardView() <UICollectionViewDataSource, UICollectionViewDelegate, AAKToolbarDelegate> {
 	AAKToolbar					*_toolbar;
@@ -17,6 +18,7 @@
 	UICollectionViewFlowLayout	*_collectionFlowLayout;
 	NSArray						*_asciiarts;
 	UIKeyboardAppearance		_keyboardAppearance;
+	AAK10KeyView				*_numberKeyboardView;
 }
 @end
 
@@ -39,6 +41,9 @@
 - (void)load {
  	[_collectionFlowLayout invalidateLayout];
 	[_toolbar layout];
+	
+	CGFloat w = (self.superview.frame.size.width > 480) ? 480 : self.superview.frame.size.width;
+	[_numberKeyboardView setWidth:w];
 }
 
 /**
@@ -93,6 +98,12 @@
 		UINib *nib = [UINib nibWithNibName:@"AAKToolbarFooterView" bundle:nil];
 		[_collectionView registerNib:nib forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"AAKToolbarFooterView"];
 	}
+	
+	_numberKeyboardView = [AAK10KeyView viewFromNib];
+	_numberKeyboardView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+	[self addSubview:_numberKeyboardView];
+	
+	_numberKeyboardView.hidden = YES;
 }
 
 /**
@@ -102,14 +113,21 @@
 	
 	_toolbar.translatesAutoresizingMaskIntoConstraints = NO;
 	_collectionView.translatesAutoresizingMaskIntoConstraints = NO;
+	_numberKeyboardView.translatesAutoresizingMaskIntoConstraints = NO;
 	
-	NSDictionary *views = NSDictionaryOfVariableBindings(_toolbar, _collectionView);
+	NSDictionary *views = NSDictionaryOfVariableBindings(_toolbar, _collectionView, _numberKeyboardView);
 	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_toolbar]-0-|"
 																 options:0 metrics:0 views:views]];
 	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_collectionView]-0-|"
 																 options:0 metrics:0 views:views]];
 	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_collectionView]-0-[_toolbar]-0-|"
 																 options:0 metrics:0 views:views]];
+	
+	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_numberKeyboardView]-0-|"
+																 options:0 metrics:0 views:views]];
+	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_numberKeyboardView]-0-[_toolbar]-0-|"
+																 options:0 metrics:0 views:views]];
+	
 	_toolbarHeightConstraint = [NSLayoutConstraint constraintWithItem:_toolbar
 															attribute:NSLayoutAttributeHeight
 															relatedBy:NSLayoutRelationEqual
@@ -234,6 +252,11 @@
 
 - (void)toolbar:(AAKToolbar*)toolbar didPushDeleteButton:(UIButton*)button {
 	[self.delegate keyboardViewDidPushDeleteButton:self];
+}
+
+- (void)toolbar:(AAKToolbar*)toolbar didPushNumberButton:(UIButton*)button {
+	_numberKeyboardView.hidden = !_numberKeyboardView.hidden;
+	_collectionView.hidden = !_numberKeyboardView.hidden;
 }
 
 #pragma mark - UICollectionViewDelegate, UICollectionViewDataSource

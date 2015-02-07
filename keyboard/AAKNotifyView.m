@@ -14,6 +14,12 @@
 
 @implementation AAKNotifyView
 
++ (instancetype)viewFromNib {
+	// 通知ビューを貼り付ける
+	UINib *nib = [UINib nibWithNibName:@"AAKNotifyView" bundle:nil];
+	return [[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
+}
+
 - (void)layoutSubviews {
 	[super layoutSubviews];
 	[self setNeedsDisplay];
