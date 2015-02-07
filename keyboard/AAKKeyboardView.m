@@ -257,6 +257,7 @@
 - (void)toolbar:(AAKToolbar*)toolbar didPushNumberButton:(UIButton*)button {
 	_numberKeyboardView.hidden = !_numberKeyboardView.hidden;
 	_collectionView.hidden = !_numberKeyboardView.hidden;
+	[_numberKeyboardView setNeedsDisplay];
 }
 
 #pragma mark - UICollectionViewDelegate, UICollectionViewDataSource
