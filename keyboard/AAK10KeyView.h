@@ -19,7 +19,7 @@
 @interface AAK10KeyView : UIView
 
 + (instancetype)viewFromNib;
-- (void)setWidth:(CGFloat)width;
+- (void)setBaseViewWidth:(CGFloat)width;
 
 @property (nonatomic, assign) id<AAK10KeyViewDelegate> delegate;
 @property (nonatomic, assign) UIKeyboardAppearance keyboardAppearance;

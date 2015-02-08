@@ -41,9 +41,6 @@
 - (void)load {
  	[_collectionFlowLayout invalidateLayout];
 	[_toolbar layout];
-	
-	CGFloat w = (self.superview.frame.size.width > 480) ? 480 : self.superview.frame.size.width;
-	[_numberKeyboardView setWidth:w];
 }
 
 /**
@@ -98,12 +95,6 @@
 		UINib *nib = [UINib nibWithNibName:@"AAKToolbarFooterView" bundle:nil];
 		[_collectionView registerNib:nib forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"AAKToolbarFooterView"];
 	}
-	
-	_numberKeyboardView = [AAK10KeyView viewFromNib];
-	_numberKeyboardView.delegate = self;
-	[self addSubview:_numberKeyboardView];
-	_numberKeyboardView.keyboardAppearance = _keyboardAppearance;
-	_numberKeyboardView.hidden = YES;
 }
 
 /**
@@ -113,19 +104,13 @@
 	
 	_toolbar.translatesAutoresizingMaskIntoConstraints = NO;
 	_collectionView.translatesAutoresizingMaskIntoConstraints = NO;
-	_numberKeyboardView.translatesAutoresizingMaskIntoConstraints = NO;
 	
-	NSDictionary *views = NSDictionaryOfVariableBindings(_toolbar, _collectionView, _numberKeyboardView);
+	NSDictionary *views = NSDictionaryOfVariableBindings(_toolbar, _collectionView);
 	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_toolbar]-0-|"
 																 options:0 metrics:0 views:views]];
 	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_collectionView]-0-|"
 																 options:0 metrics:0 views:views]];
 	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_collectionView]-0-[_toolbar]-0-|"
-																 options:0 metrics:0 views:views]];
-	
-	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_numberKeyboardView]-0-|"
-																 options:0 metrics:0 views:views]];
-	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_numberKeyboardView]-0-[_toolbar]-0-|"
 																 options:0 metrics:0 views:views]];
 	
 	_toolbarHeightConstraint = [NSLayoutConstraint constraintWithItem:_toolbar
@@ -237,12 +222,20 @@
 	return self;
 }
 
+- (void)toggle10KeyView {
+	_numberKeyboardView.hidden = !_numberKeyboardView.hidden;
+	_collectionView.hidden = !_numberKeyboardView.hidden;
+	[_numberKeyboardView setNeedsDisplay];
+}
+
 #pragma mark - AAKToolbarDelegate
 
 - (void)didSelectGroupToolbar:(AAKToolbar*)toolbar {
 	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 		[self updateASCIIArtsForCurrentGroup];
 		[_collectionView reloadData];
+		_numberKeyboardView.hidden = YES;
+		_collectionView.hidden = NO;
 	});
 }
 
@@ -255,9 +248,26 @@
 }
 
 - (void)toolbar:(AAKToolbar*)toolbar didPushNumberButton:(UIButton*)button {
-	_numberKeyboardView.hidden = !_numberKeyboardView.hidden;
-	_collectionView.hidden = !_numberKeyboardView.hidden;
-	[_numberKeyboardView setNeedsDisplay];
+	if (_numberKeyboardView == nil) {
+		_numberKeyboardView = [AAK10KeyView viewFromNib];
+		_numberKeyboardView.delegate = self;
+		[self addSubview:_numberKeyboardView];
+		_numberKeyboardView.keyboardAppearance = _keyboardAppearance;
+		_numberKeyboardView.hidden = YES;
+		_numberKeyboardView.translatesAutoresizingMaskIntoConstraints = NO;
+		[_numberKeyboardView setBaseViewWidth:self.superview.frame.size.width];
+		
+		NSDictionary *views = NSDictionaryOfVariableBindings(_toolbar, _collectionView, _numberKeyboardView);
+		
+		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_numberKeyboardView]-0-|"
+																	 options:0 metrics:0 views:views]];
+		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_numberKeyboardView]-0-[_toolbar]-0-|"
+																	 options:0 metrics:0 views:views]];
+		[_numberKeyboardView setNeedsUpdateConstraints];
+		[_numberKeyboardView setNeedsLayout];
+	}
+	
+	[self toggle10KeyView];
 }
 
 #pragma mark - AAK10KeyViewDelegate

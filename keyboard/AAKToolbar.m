@@ -12,6 +12,11 @@
 #import "AAKToolbarHistoryCell.h"
 #import "AAKASCIIArtDummyHistoryGroup.h"
 
+typedef enum AAKToolbarButtonStatus_ {
+	AAKToolbarNumberButtonStatus	= 0,
+	AAKToolbarASCIIArtButtonStatus	= 1,
+}AAKToolbarButtonStatus;
+
 @interface AAKToolbar() <UICollectionViewDataSource, UICollectionViewDelegate, AAKToolbarCellDelegate> {
 	UICollectionView			*_collectionView;
 	UICollectionViewFlowLayout	*_collectionFlowLayout;
@@ -24,6 +29,7 @@
 	NSLayoutConstraint			*_deleteKeyWidthConstraint;
 	NSLayoutConstraint			*_numberKeyWidthConstraint;
 	UIKeyboardAppearance		_keyboardAppearance;
+	AAKToolbarButtonStatus		_status;
 }
 @end
 
@@ -172,18 +178,18 @@
 		NSString *name = nil;
 		if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
 			if (_keyboardAppearance == UIKeyboardAppearanceDark) {
-				name = @"hglobalHD";
+				name = @"hnumberKeyHD";
 			}
 			else {
-				name = @"globalHD";
+				name = @"numberKeyHD";
 			}
 		}
 		else {
 			if (_keyboardAppearance == UIKeyboardAppearanceDark) {
-				name = @"hglobal";
+				name = @"hnumberKey";
 			}
 			else {
-				name = @"global";
+				name = @"numberKey";
 			}
 		}
 		
@@ -426,6 +432,52 @@
 - (IBAction)pushNumberKey:(UIButton*)sender {
 	sender.backgroundColor = [self buttonBackgroundColor];
 	[self.delegate toolbar:self didPushNumberButton:sender];
+	
+	if (_status == AAKToolbarASCIIArtButtonStatus) {
+		NSString *name = nil;
+		if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+			if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+				name = @"hnumberKeyHD";
+			}
+			else {
+				name = @"numberKeyHD";
+			}
+		}
+		else {
+			if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+				name = @"hnumberKey";
+			}
+			else {
+				name = @"numberKey";
+			}
+		}
+		_status = AAKToolbarNumberButtonStatus;
+		[_numberKey setImage:[UIImage imageNamed:name] forState:UIControlStateNormal];
+		[_numberKey setImage:[UIImage imageNamed:name] forState:UIControlStateHighlighted];
+	}
+	else {
+		NSString *name = nil;
+		if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+			if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+				name = @"hasciiartHD";
+			}
+			else {
+				name = @"asciiartHD";
+			}
+		}
+		else {
+			if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+				name = @"hasciiart";
+			}
+			else {
+				name = @"asciiart";
+			}
+		}
+		_status = AAKToolbarASCIIArtButtonStatus;
+		[_numberKey setImage:[UIImage imageNamed:name] forState:UIControlStateNormal];
+		[_numberKey setImage:[UIImage imageNamed:name] forState:UIControlStateHighlighted];
+	}
+	
 }
 
 #pragma mark - Setter
