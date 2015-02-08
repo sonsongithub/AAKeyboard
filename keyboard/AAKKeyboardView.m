@@ -231,12 +231,10 @@
 #pragma mark - AAKToolbarDelegate
 
 - (void)didSelectGroupToolbar:(AAKToolbar*)toolbar {
-	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-		[self updateASCIIArtsForCurrentGroup];
-		[_collectionView reloadData];
-		_numberKeyboardView.hidden = YES;
-		_collectionView.hidden = NO;
-	});
+	[self updateASCIIArtsForCurrentGroup];
+	[_collectionView reloadData];
+	_numberKeyboardView.hidden = YES;
+	_collectionView.hidden = NO;
 }
 
 - (void)toolbar:(AAKToolbar*)toolbar didPushEarthButton:(UIButton*)button {
