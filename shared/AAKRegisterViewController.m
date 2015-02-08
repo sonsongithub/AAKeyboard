@@ -33,12 +33,28 @@
 	
 	[self dismissViewControllerAnimated:YES completion:nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:AAKKeyboardDataManagerDidUpdateNotification object:nil userInfo:nil];
+	
+	if (![self.group.objectID isTemporaryID]) {
+		// Save to sharedDefaults
+		NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.com.sonson.AAKeyboardApp"];
+		[sharedDefaults setObject:self.group.title forKey:@"AAKLastRegisteredGroupTitle"];
+		[sharedDefaults synchronize];
+	}
 }
 
 #pragma mark - Override
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.com.sonson.AAKeyboardApp"];
+	NSURL *groupTitle = [sharedDefaults objectForKey:@"AAKLastRegisteredGroupTitle"];
+	
+	NSArray *groups = [AAKASCIIArtGroup MR_findAllWithPredicate:[NSPredicate predicateWithFormat: @"title == %@", groupTitle]];
+	if (groups.count > 0) {
+		self.group = groups[0];
+		[_groupTableView reloadData];
+	}
 }
 
 @end
