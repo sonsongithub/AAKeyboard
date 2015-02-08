@@ -12,16 +12,24 @@
 #import "AAKToolbarHistoryCell.h"
 #import "AAKASCIIArtDummyHistoryGroup.h"
 
+typedef enum AAKToolbarButtonStatus_ {
+	AAKToolbarNumberButtonStatus	= 0,
+	AAKToolbarASCIIArtButtonStatus	= 1,
+}AAKToolbarButtonStatus;
+
 @interface AAKToolbar() <UICollectionViewDataSource, UICollectionViewDelegate, AAKToolbarCellDelegate> {
 	UICollectionView			*_collectionView;
 	UICollectionViewFlowLayout	*_collectionFlowLayout;
 	NSArray						*_sizeOfCategories;
 	UIButton					*_earthKey;
 	UIButton					*_deleteKey;
+	UIButton					*_numberKey;
 	NSArray						*_groups;
 	NSLayoutConstraint			*_earthKeyWidthConstraint;
 	NSLayoutConstraint			*_deleteKeyWidthConstraint;
+	NSLayoutConstraint			*_numberKeyWidthConstraint;
 	UIKeyboardAppearance		_keyboardAppearance;
+	AAKToolbarButtonStatus		_status;
 }
 @end
 
@@ -88,74 +96,58 @@
  * 両脇のボタンを初期化，配置する．
  **/
 - (void)prepareButton {
-	{
-		_earthKey = [[UIButton alloc] initWithFrame:CGRectZero];
-		[_earthKey addTarget:self action:@selector(pushEarthKey:) forControlEvents:UIControlEventTouchUpInside];
-		[_earthKey addTarget:self action:@selector(buttonHighlight:) forControlEvents:UIControlEventTouchDown];
-		[_earthKey addTarget:self action:@selector(buttonStopHighlight:) forControlEvents:UIControlEventTouchUpOutside];
-		
-		_earthKey.backgroundColor = [self buttonBackgroundColor];
-		
-		NSString *name = nil;
-		if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-			if (_keyboardAppearance == UIKeyboardAppearanceDark) {
-				name = @"hglobalHD";
-			}
-			else {
-				name = @"globalHD";
-			}
-		}
-		else {
-			if (_keyboardAppearance == UIKeyboardAppearanceDark) {
-				name = @"hglobal";
-			}
-			else {
-				name = @"global";
-			}
-		}
-		[_earthKey setImage:[UIImage imageNamed:name] forState:UIControlStateNormal];
-		[_earthKey setImage:[UIImage imageNamed:name] forState:UIControlStateHighlighted];
-		
-		UIImage *temp = [UIImage rightEdgeWithKeyboardAppearance:_keyboardAppearance];
-		[_earthKey setBackgroundImage:temp forState:UIControlStateNormal];
-		[_earthKey setBackgroundImage:temp forState:UIControlStateHighlighted];
-	}
-	{
-		_deleteKey = [[UIButton alloc] initWithFrame:CGRectZero];
-		
-		_deleteKey.backgroundColor = [self buttonBackgroundColor];
-		
-		[_deleteKey addTarget:self action:@selector(pushDeleteKey:) forControlEvents:UIControlEventTouchUpInside];
-		[_deleteKey addTarget:self action:@selector(buttonHighlight:) forControlEvents:UIControlEventTouchDown];
-		[_deleteKey addTarget:self action:@selector(buttonStopHighlight:) forControlEvents:UIControlEventTouchUpOutside];
-
-		UIImage *temp = [UIImage leftEdgeWithKeyboardAppearance:_keyboardAppearance];
-		[_deleteKey setBackgroundImage:temp forState:UIControlStateNormal];
-		[_deleteKey setBackgroundImage:temp forState:UIControlStateHighlighted];
-		
-		NSString *name = nil;
-		if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-			if (_keyboardAppearance == UIKeyboardAppearanceDark) {
-				name = @"hdeleteHD";
-			}
-			else {
-				name = @"deleteHD";
-			}
-		}
-		else {
-			if (_keyboardAppearance == UIKeyboardAppearanceDark) {
-				name = @"hdelete";
-			}
-			else {
-				name = @"delete";
-			}
-		}
-		
-		[_deleteKey setImage:[UIImage imageNamed:name] forState:UIControlStateNormal];
-		[_deleteKey setImage:[UIImage imageNamed:name] forState:UIControlStateHighlighted];
-	}
+	_earthKey = [self parepareEachButtonWithImageName:@"global" directionIsRight:YES action:@selector(pushEarthKey:)];
+	_numberKey = [self parepareEachButtonWithImageName:@"numberKey" directionIsRight:YES action:@selector(pushNumberKey:)];
+	_deleteKey = [self parepareEachButtonWithImageName:@"delete" directionIsRight:NO action:@selector(pushDeleteKey:)];
+	[self addSubview:_numberKey];
 	[self addSubview:_earthKey];
 	[self addSubview:_deleteKey];
+}
+
+- (UIButton*)parepareEachButtonWithImageName:(NSString*)imageName directionIsRight:(BOOL)isRight action:(SEL)action {
+	UIButton *button = [[UIButton alloc] initWithFrame:CGRectZero];
+	[button addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+	[self attachActionToButton:button];
+	[self setEdgeBackgroundImageToButton:button directionIsRight:isRight];
+	[self setButtonIconTo:button imageName:imageName];
+	return button;
+}
+
+- (void)attachActionToButton:(UIButton*)button {
+	[button addTarget:self action:@selector(buttonHighlight:) forControlEvents:UIControlEventTouchDown];
+	[button addTarget:self action:@selector(buttonStopHighlight:) forControlEvents:UIControlEventTouchUpOutside];
+}
+
+- (void)setEdgeBackgroundImageToButton:(UIButton*)button directionIsRight:(BOOL)isRight {
+	button.backgroundColor = [self buttonBackgroundColor];
+	if (isRight) {
+		UIImage *temp = [UIImage rightEdgeWithKeyboardAppearance:_keyboardAppearance];
+		[button setBackgroundImage:temp forState:UIControlStateNormal];
+		[button setBackgroundImage:temp forState:UIControlStateHighlighted];
+	}
+	else {
+		UIImage *temp = [UIImage leftEdgeWithKeyboardAppearance:_keyboardAppearance];
+		[button setBackgroundImage:temp forState:UIControlStateNormal];
+		[button setBackgroundImage:temp forState:UIControlStateHighlighted];
+	}
+}
+
+- (void)setButtonIconTo:(UIButton*)button imageName:(NSString*)imageName {
+	NSString *name = nil;
+	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+		if (_keyboardAppearance == UIKeyboardAppearanceDark)
+			name = [NSString stringWithFormat:@"h%@HD", imageName];
+		else
+			name = [NSString stringWithFormat:@"%@HD", imageName];
+	}
+	else {
+		if (_keyboardAppearance == UIKeyboardAppearanceDark)
+			name = [NSString stringWithFormat:@"h%@", imageName];
+		else
+			name = [NSString stringWithFormat:@"%@", imageName];
+	}
+	[button setImage:[UIImage imageNamed:name] forState:UIControlStateNormal];
+	[button setImage:[UIImage imageNamed:name] forState:UIControlStateHighlighted];
 }
 
 /**
@@ -280,8 +272,9 @@
 	_collectionView.translatesAutoresizingMaskIntoConstraints = NO;
 	_earthKey.translatesAutoresizingMaskIntoConstraints = NO;
 	_deleteKey.translatesAutoresizingMaskIntoConstraints = NO;
+	_numberKey.translatesAutoresizingMaskIntoConstraints = NO;
 
-	NSDictionary *views = NSDictionaryOfVariableBindings(_collectionView, _earthKey, _deleteKey);
+	NSDictionary *views = NSDictionaryOfVariableBindings(_collectionView, _earthKey, _deleteKey, _numberKey);
 	
 	_earthKeyWidthConstraint = [NSLayoutConstraint constraintWithItem:_earthKey
 															attribute:NSLayoutAttributeWidth
@@ -299,12 +292,22 @@
 															multiplier:1
 															  constant:_height];
 	[self addConstraint:_deleteKeyWidthConstraint];
+	_numberKeyWidthConstraint = [NSLayoutConstraint constraintWithItem:_numberKey
+															 attribute:NSLayoutAttributeWidth
+															 relatedBy:NSLayoutRelationEqual
+																toItem:nil
+															 attribute:NSLayoutAttributeNotAnAttribute
+															multiplier:1
+															  constant:_height];
+	[self addConstraint:_numberKeyWidthConstraint];
 	
-	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_earthKey]-0-[_collectionView(>=0)]-0-[_deleteKey]-(==0)-|"
+	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(==0)-[_earthKey]-0-[_numberKey]-0-[_collectionView(>=0)]-0-[_deleteKey]-(==0)-|"
 																 options:0 metrics:0 views:views]];
 	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_collectionView(>=0)]-(==0)-|"
 																 options:0 metrics:0 views:views]];
 	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_earthKey(>=0)]-(==0)-|"
+																 options:0 metrics:0 views:views]];
+	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_numberKey(>=0)]-(==0)-|"
 																 options:0 metrics:0 views:views]];
 	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==0)-[_deleteKey(>=0)]-(==0)-|"
 																 options:0 metrics:0 views:views]];
@@ -375,6 +378,19 @@
 	[self.delegate toolbar:self didPushDeleteButton:sender];
 }
 
+- (IBAction)pushNumberKey:(UIButton*)sender {
+	sender.backgroundColor = [self buttonBackgroundColor];
+	[self.delegate toolbar:self didPushNumberButton:sender];
+	if (_status == AAKToolbarASCIIArtButtonStatus) {
+		[self setButtonIconTo:_numberKey imageName:@"numberKey"];
+		_status = AAKToolbarNumberButtonStatus;
+	}
+	else {
+		[self setButtonIconTo:_numberKey imageName:@"asciiart"];
+		_status = AAKToolbarASCIIArtButtonStatus;
+	}
+}
+
 #pragma mark - Setter
 
 - (void)setCurrentGroup:(AAKASCIIArtGroup *)currentGroup {
@@ -388,6 +404,8 @@
 	_currentGroup = cell.group;
 	[self updateSelectedCell];
 	[self.delegate didSelectGroupToolbar:self];
+	[self setButtonIconTo:_numberKey imageName:@"numberKey"];
+	_status = AAKToolbarNumberButtonStatus;
 }
 
 #pragma mark - Override

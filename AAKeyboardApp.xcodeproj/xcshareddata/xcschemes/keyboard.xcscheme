@@ -66,6 +66,10 @@
       allowLocationSimulation = "YES"
       language = "ja"
       region = "JP">
+      <IDERemoteRunnable
+         RemotePath = "/Today-View"
+         BundleIdentifier = "/Today-View">
+      </IDERemoteRunnable>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"

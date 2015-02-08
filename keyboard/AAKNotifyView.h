@@ -11,4 +11,5 @@
 @interface AAKNotifyView : UIView
 @property (nonatomic, assign) UIKeyboardAppearance keyboardAppearance;
 @property (nonatomic, strong) IBOutlet UILabel *label;
++ (instancetype)viewFromNib;
 @end

@@ -98,6 +98,8 @@
 		141B495D1A192A8C00E7F877 /* AAKASCIIArt.m in Sources */ = {isa = PBXBuildFile; fileRef = 141B495B1A192A8C00E7F877 /* AAKASCIIArt.m */; };
 		141B495E1A192A8C00E7F877 /* AAKASCIIArt.m in Sources */ = {isa = PBXBuildFile; fileRef = 141B495B1A192A8C00E7F877 /* AAKASCIIArt.m */; };
 		1442B2AD1A77D042006D9AAF /* AAKCloudAAPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1442B2AC1A77D042006D9AAF /* AAKCloudAAPreviewController.m */; };
+		1447CDBF1A860CC100671ECE /* AAK10KeyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1447CDBE1A860CC100671ECE /* AAK10KeyView.m */; };
+		1447CDC11A860CDA00671ECE /* AAK10KeyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1447CDC01A860CDA00671ECE /* AAK10KeyView.xib */; };
 		1449EBF31A6975B0009BDD34 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1449EBF21A6975B0009BDD34 /* CloudKit.framework */; };
 		1449EBF61A697FB6009BDD34 /* AAKCloudAAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1449EBF51A697FB6009BDD34 /* AAKCloudAAViewController.m */; };
 		1449EBF91A697FD8009BDD34 /* AAKCloudASCIIArt.m in Sources */ = {isa = PBXBuildFile; fileRef = 1449EBF81A697FD8009BDD34 /* AAKCloudASCIIArt.m */; };
@@ -340,6 +342,9 @@
 		1441E88319ECD83C00A4881F /* AAKeyboardApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = AAKeyboardApp.entitlements; sourceTree = "<group>"; };
 		1442B2AB1A77D042006D9AAF /* AAKCloudAAPreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKCloudAAPreviewController.h; sourceTree = "<group>"; };
 		1442B2AC1A77D042006D9AAF /* AAKCloudAAPreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKCloudAAPreviewController.m; sourceTree = "<group>"; };
+		1447CDBD1A860CC100671ECE /* AAK10KeyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAK10KeyView.h; sourceTree = "<group>"; };
+		1447CDBE1A860CC100671ECE /* AAK10KeyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAK10KeyView.m; sourceTree = "<group>"; };
+		1447CDC01A860CDA00671ECE /* AAK10KeyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AAK10KeyView.xib; sourceTree = "<group>"; };
 		1449EBF21A6975B0009BDD34 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		1449EBF41A697FB6009BDD34 /* AAKCloudAAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKCloudAAViewController.h; sourceTree = "<group>"; };
 		1449EBF51A697FB6009BDD34 /* AAKCloudAAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKCloudAAViewController.m; sourceTree = "<group>"; };
@@ -722,6 +727,9 @@
 				14527C121A1207F10019F93A /* AAKNotifyView.h */,
 				14527C131A1207F10019F93A /* AAKNotifyView.m */,
 				14527C151A1208030019F93A /* AAKNotifyView.xib */,
+				1447CDBD1A860CC100671ECE /* AAK10KeyView.h */,
+				1447CDBE1A860CC100671ECE /* AAK10KeyView.m */,
+				1447CDC01A860CDA00671ECE /* AAK10KeyView.xib */,
 			);
 			name = Keyboard;
 			sourceTree = "<group>";
@@ -1163,6 +1171,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14527C161A1208030019F93A /* AAKNotifyView.xib in Resources */,
+				1447CDC11A860CDA00671ECE /* AAK10KeyView.xib in Resources */,
 				14F636221A3E370B0056C3F5 /* InfoPlist.strings in Resources */,
 				14F7C2CC1A5E43A2004F73A6 /* Images.xcassets in Resources */,
 				14F6F3981A100D8600BEE8E2 /* AAKToolbarHeaderView.xib in Resources */,
@@ -1405,6 +1414,7 @@
 				14CB156519E935BB00D05E9C /* UZCursorView.m in Sources */,
 				141528A31A18585600EB80AC /* NSManagedObject+MagicalFinders.m in Sources */,
 				14CB156719E935BB00D05E9C /* UZLoupeView.m in Sources */,
+				1447CDBF1A860CC100671ECE /* AAK10KeyView.m in Sources */,
 				14B274CE1A0A0D6F005BF3B1 /* UITraitCollection+keyboard.m in Sources */,
 				141528A61A18585600EB80AC /* NSManagedObject+MagicalRecord.m in Sources */,
 				141528C71A18585700EB80AC /* MagicalRecord+iCloud.m in Sources */,

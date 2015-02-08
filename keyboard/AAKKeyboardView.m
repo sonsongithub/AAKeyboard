@@ -9,14 +9,16 @@
 #import "AAKKeyboardView.h"
 #import "AAKToolbar.h"
 #import "AAKContentCell.h"
+#import "AAK10KeyView.h"
 
-@interface AAKKeyboardView() <UICollectionViewDataSource, UICollectionViewDelegate, AAKToolbarDelegate> {
+@interface AAKKeyboardView() <UICollectionViewDataSource, UICollectionViewDelegate, AAKToolbarDelegate, AAK10KeyViewDelegate> {
 	AAKToolbar					*_toolbar;
 	NSLayoutConstraint			*_toolbarHeightConstraint;
 	UICollectionView			*_collectionView;
 	UICollectionViewFlowLayout	*_collectionFlowLayout;
 	NSArray						*_asciiarts;
 	UIKeyboardAppearance		_keyboardAppearance;
+	AAK10KeyView				*_numberKeyboardView;
 }
 @end
 
@@ -110,6 +112,7 @@
 																 options:0 metrics:0 views:views]];
 	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_collectionView]-0-[_toolbar]-0-|"
 																 options:0 metrics:0 views:views]];
+	
 	_toolbarHeightConstraint = [NSLayoutConstraint constraintWithItem:_toolbar
 															attribute:NSLayoutAttributeHeight
 															relatedBy:NSLayoutRelationEqual
@@ -219,13 +222,19 @@
 	return self;
 }
 
+- (void)toggle10KeyView {
+	_numberKeyboardView.hidden = !_numberKeyboardView.hidden;
+	_collectionView.hidden = !_numberKeyboardView.hidden;
+	[_numberKeyboardView setNeedsDisplay];
+}
+
 #pragma mark - AAKToolbarDelegate
 
 - (void)didSelectGroupToolbar:(AAKToolbar*)toolbar {
-	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-		[self updateASCIIArtsForCurrentGroup];
-		[_collectionView reloadData];
-	});
+	[self updateASCIIArtsForCurrentGroup];
+	[_collectionView reloadData];
+	_numberKeyboardView.hidden = YES;
+	_collectionView.hidden = NO;
 }
 
 - (void)toolbar:(AAKToolbar*)toolbar didPushEarthButton:(UIButton*)button {
@@ -234,6 +243,35 @@
 
 - (void)toolbar:(AAKToolbar*)toolbar didPushDeleteButton:(UIButton*)button {
 	[self.delegate keyboardViewDidPushDeleteButton:self];
+}
+
+- (void)toolbar:(AAKToolbar*)toolbar didPushNumberButton:(UIButton*)button {
+	if (_numberKeyboardView == nil) {
+		_numberKeyboardView = [AAK10KeyView viewFromNib];
+		_numberKeyboardView.delegate = self;
+		[self addSubview:_numberKeyboardView];
+		_numberKeyboardView.keyboardAppearance = _keyboardAppearance;
+		_numberKeyboardView.hidden = YES;
+		_numberKeyboardView.translatesAutoresizingMaskIntoConstraints = NO;
+		[_numberKeyboardView setBaseViewWidth:self.superview.frame.size.width];
+		
+		NSDictionary *views = NSDictionaryOfVariableBindings(_toolbar, _collectionView, _numberKeyboardView);
+		
+		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_numberKeyboardView]-0-|"
+																	 options:0 metrics:0 views:views]];
+		[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_numberKeyboardView]-0-[_toolbar]-0-|"
+																	 options:0 metrics:0 views:views]];
+		[_numberKeyboardView setNeedsUpdateConstraints];
+		[_numberKeyboardView setNeedsLayout];
+	}
+	
+	[self toggle10KeyView];
+}
+
+#pragma mark - AAK10KeyViewDelegate
+
+- (void)didPush10KeyView:(AAK10KeyView*)view key:(NSString*)key {
+	[self.delegate keyboardView:self willInsertString:key];
 }
 
 #pragma mark - UICollectionViewDelegate, UICollectionViewDataSource
