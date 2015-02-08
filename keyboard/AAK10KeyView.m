@@ -46,7 +46,9 @@
 - (void)drawRect:(CGRect)rect {
 	CGContextRef context = UIGraphicsGetCurrentContext();
 	
-	CGContextSetLineWidth(context, 0.5);
+	CGFloat lineWidth = 0.25;
+	
+	CGContextSetLineWidth(context, lineWidth);
 	
 	UIColor *textColor = nil;
 	
@@ -61,21 +63,23 @@
 	CGFloat heightBlock = rect.size.height / 4;
 
 	if (self.needsOutsideFrame) {
-		CGContextMoveToPoint(context, 0.5, 0);
-		CGContextAddLineToPoint(context, 0.5, rect.size.height);
+		CGContextMoveToPoint(context, lineWidth, 0);
+		CGContextAddLineToPoint(context, lineWidth, rect.size.height);
 		CGContextMoveToPoint(context, floor(widthBlock), 0);
 		CGContextAddLineToPoint(context, floor(widthBlock), rect.size.height);
 		CGContextMoveToPoint(context, floor(2*widthBlock), 0);
 		CGContextAddLineToPoint(context, floor(2*widthBlock), rect.size.height);
-		CGContextMoveToPoint(context, floor(3*widthBlock)-0.5, 0);
-		CGContextAddLineToPoint(context, floor(3*widthBlock)-0.5, rect.size.height);
+		CGContextMoveToPoint(context, floor(3*widthBlock) - lineWidth, 0);
+		CGContextAddLineToPoint(context, floor(3*widthBlock) - lineWidth, rect.size.height);
 		
-		CGContextMoveToPoint(context, 0.5, floor(heightBlock));
-		CGContextAddLineToPoint(context, rect.size.width - 0.5, floor(heightBlock));
-		CGContextMoveToPoint(context, 0.5, floor(heightBlock*2));
-		CGContextAddLineToPoint(context, rect.size.width - 0.5, floor(heightBlock*2));
-		CGContextMoveToPoint(context, 0.5, floor(heightBlock*3));
-		CGContextAddLineToPoint(context, rect.size.width - 0.5, floor(heightBlock*3));
+		CGContextMoveToPoint(context, lineWidth, lineWidth);
+		CGContextAddLineToPoint(context, rect.size.width - lineWidth, lineWidth);
+		CGContextMoveToPoint(context, lineWidth, floor(heightBlock));
+		CGContextAddLineToPoint(context, rect.size.width - lineWidth, floor(heightBlock));
+		CGContextMoveToPoint(context, lineWidth, floor(heightBlock*2));
+		CGContextAddLineToPoint(context, rect.size.width - lineWidth, floor(heightBlock*2));
+		CGContextMoveToPoint(context, lineWidth, floor(heightBlock*3));
+		CGContextAddLineToPoint(context, rect.size.width - lineWidth, floor(heightBlock*3));
 	}
 	else {
 		CGContextMoveToPoint(context, floor(widthBlock), 0);
