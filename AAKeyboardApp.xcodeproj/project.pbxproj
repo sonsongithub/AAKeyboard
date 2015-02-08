@@ -100,7 +100,6 @@
 		1442B2AD1A77D042006D9AAF /* AAKCloudAAPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1442B2AC1A77D042006D9AAF /* AAKCloudAAPreviewController.m */; };
 		1447CDBF1A860CC100671ECE /* AAK10KeyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1447CDBE1A860CC100671ECE /* AAK10KeyView.m */; };
 		1447CDC11A860CDA00671ECE /* AAK10KeyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1447CDC01A860CDA00671ECE /* AAK10KeyView.xib */; };
-		1449EBF31A6975B0009BDD34 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1449EBF21A6975B0009BDD34 /* CloudKit.framework */; };
 		1449EBF61A697FB6009BDD34 /* AAKCloudAAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1449EBF51A697FB6009BDD34 /* AAKCloudAAViewController.m */; };
 		1449EBF91A697FD8009BDD34 /* AAKCloudASCIIArt.m in Sources */ = {isa = PBXBuildFile; fileRef = 1449EBF81A697FD8009BDD34 /* AAKCloudASCIIArt.m */; };
 		14527C0F1A11DB870019F93A /* UIImage+keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 14527C0E1A11DB870019F93A /* UIImage+keyboard.m */; };
@@ -345,7 +344,6 @@
 		1447CDBD1A860CC100671ECE /* AAK10KeyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAK10KeyView.h; sourceTree = "<group>"; };
 		1447CDBE1A860CC100671ECE /* AAK10KeyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAK10KeyView.m; sourceTree = "<group>"; };
 		1447CDC01A860CDA00671ECE /* AAK10KeyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AAK10KeyView.xib; sourceTree = "<group>"; };
-		1449EBF21A6975B0009BDD34 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		1449EBF41A697FB6009BDD34 /* AAKCloudAAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKCloudAAViewController.h; sourceTree = "<group>"; };
 		1449EBF51A697FB6009BDD34 /* AAKCloudAAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKCloudAAViewController.m; sourceTree = "<group>"; };
 		1449EBF71A697FD8009BDD34 /* AAKCloudASCIIArt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKCloudASCIIArt.h; sourceTree = "<group>"; };
@@ -493,7 +491,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1449EBF31A6975B0009BDD34 /* CloudKit.framework in Frameworks */,
 				1415270A1A1633B200EB80AC /* CoreData.framework in Frameworks */,
 				146EEB5719ED5CEF0032F6DE /* libsqlite3.dylib in Frameworks */,
 			);
@@ -672,7 +669,6 @@
 		14B2749C1A0A0A87005BF3B1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1449EBF21A6975B0009BDD34 /* CloudKit.framework */,
 				14EE653F1A15EEB700FA0731 /* CoreData.framework */,
 				146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */,
 			);
@@ -1079,7 +1075,7 @@
 								enabled = 1;
 							};
 							com.apple.iCloud = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -1558,7 +1554,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = ExtensionIcon;
 				CODE_SIGN_ENTITLEMENTS = register/register.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yuichi Yoshida (AK9FYY958C)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1578,7 +1575,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = ExtensionIcon;
 				CODE_SIGN_ENTITLEMENTS = register/register.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Yuichi Yoshida (JP866VWWSD)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREPROCESSOR_DEFINITIONS = TARGET_IS_EXTENSION;
 				INFOPLIST_FILE = register/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -1637,7 +1635,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = AAKeyboardApp/AAKeyboardApp.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yuichi Yoshida (AK9FYY958C)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1697,7 +1696,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = ExtensionIcon;
 				CODE_SIGN_ENTITLEMENTS = register/register.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yuichi Yoshida (AK9FYY958C)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1799,7 +1799,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = AAKeyboardApp/AAKeyboardApp.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yuichi Yoshida (AK9FYY958C)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1819,7 +1820,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = AAKeyboardApp/AAKeyboardApp.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Yuichi Yoshida (JP866VWWSD)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = AAKeyboardApp/Info.plist;
 				INFOPLIST_PREFIX_HEADER = AAKeyboardApp/Info.prefix;
 				INFOPLIST_PREPROCESS = YES;
@@ -1887,8 +1889,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = keyboard/keyboard.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREPROCESSOR_DEFINITIONS = TARGET_IS_EXTENSION;
 				INFOPLIST_FILE = keyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";

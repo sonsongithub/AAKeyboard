@@ -49,7 +49,7 @@
 			_imageView2 = _imageViews[3];
 			_imageView3 = _imageViews[4];
 			_imageView4 = _imageViews[0];
-			_imageView4.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%03ld.png", [self fileName], currentPage + 3]];
+			_imageView4.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%03ld.png", [self fileName], (long)(currentPage + 3)]];
 		}
 		else {
 			_imageView4.frame = CGRectMake(_contentWidth * (currentPage - 2), 0, _contentWidth, 427);
@@ -58,7 +58,7 @@
 			_imageView2 = _imageViews[1];
 			_imageView3 = _imageViews[2];
 			_imageView4 = _imageViews[3];
-			_imageView0.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%03ld.png", [self fileName], currentPage - 1]];
+			_imageView0.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%03ld.png", [self fileName], (long)(currentPage - 1)]];
 		}
 	}
 	_currentPage = currentPage;
@@ -76,15 +76,15 @@
 	_imageViews = @[_imageView0, _imageView1, _imageView2, _imageView3, _imageView4];
 	
 	if (_imageView0.image == nil && _currentPage - 1 > 0)
-		_imageView0.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%03ld.png", [self fileName], _currentPage - 1]];
+		_imageView0.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%03ld.png", [self fileName], (long)(_currentPage - 1)]];
 	if (_imageView1.image == nil && _currentPage > 0)
-		_imageView1.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%03ld.png", [self fileName], _currentPage    ]];
+		_imageView1.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%03ld.png", [self fileName], (long)(_currentPage    )]];
 	if (_imageView2.image == nil && _currentPage + 1 > 0)
-		_imageView2.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%03ld.png", [self fileName], _currentPage + 1]];
+		_imageView2.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%03ld.png", [self fileName], (long)(_currentPage + 1)]];
 	if (_imageView3.image == nil && _currentPage + 2 > 0)
-		_imageView3.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%03ld.png", [self fileName], _currentPage + 2]];
+		_imageView3.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%03ld.png", [self fileName], (long)(_currentPage + 2)]];
 	if (_imageView4.image == nil && _currentPage + 3 > 0)
-		_imageView4.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%03ld.png", [self fileName], _currentPage + 3]];
+		_imageView4.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%03ld.png", [self fileName], (long)(_currentPage + 3)]];
 }
 
 - (NSString*)fileName {
