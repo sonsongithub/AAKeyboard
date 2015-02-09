@@ -40,7 +40,7 @@ static NSString * const reuseIdentifier = @"AAKAACloudCollectionViewCell";
 	op.database = database;
 	op.queryCompletionBlock = ^(CKQueryCursor *cursor, NSError *error) {
 		DNSLog(@"queryCompletionBlock");
-		DNSLog(@"%ld", _asciiarts.count);
+		DNSLog(@"%ld", (long)_asciiarts.count);
 		dispatch_async(dispatch_get_main_queue(), ^{
 			_currentCursor = cursor;
 			if (error) {

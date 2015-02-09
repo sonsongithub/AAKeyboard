@@ -44,6 +44,8 @@
 	[[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
 	[MagicalRecord cleanUp];
 	[self.extensionContext completeRequestReturningItems:nil completionHandler:nil];
+	
+	[self saveCurrentGroup];
 }
 
 #pragma mark - Instance method
@@ -107,6 +109,8 @@
 	[AAKCoreDataStack setupMagicalRecordForAppGroupsContainer];
 	
 	[super viewDidLoad];
+	
+	[self restoreCurrentGroup];
 	
 	[self extractSelectedText];
 }

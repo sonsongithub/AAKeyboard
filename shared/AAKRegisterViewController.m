@@ -18,6 +18,35 @@
 @implementation AAKRegisterViewController
 
 /**
+ * 現在選択されているグループオブジェクトの識別子をApp GroupのUserDefaultに保存する．
+ **/
+- (void)saveCurrentGroup {
+	if (![self.group.objectID isTemporaryID]) {
+		// Save to sharedDefaults
+		NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.com.sonson.AAKeyboardApp"];
+		[sharedDefaults setObject:self.group.objectID.URIRepresentation.absoluteString forKey:@"AAKLastRegisteredGroupURIRepresentation"];
+		[sharedDefaults synchronize];
+	}
+}
+
+/**
+ * 最後に選択されたグループを取りだし，現在の保存先グループとしてセットする．
+ **/
+- (void)restoreCurrentGroup {
+	NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.com.sonson.AAKeyboardApp"];
+	NSURL *url = [NSURL URLWithString:[sharedDefaults objectForKey:@"AAKLastRegisteredGroupURIRepresentation"]];
+	if (url) {
+		NSManagedObjectID *objectID = [[[NSManagedObjectContext MR_defaultContext] persistentStoreCoordinator] managedObjectIDForURIRepresentation:url];
+		id obj = [[NSManagedObjectContext MR_defaultContext] objectWithID:objectID];
+		if ([obj isKindOfClass:[AAKASCIIArtGroup class]]) {
+			AAKASCIIArtGroup *group = (AAKASCIIArtGroup*)obj;
+			self.group = group;
+			[_groupTableView reloadData];
+		}
+	}
+}
+
+/**
  * 登録ボタンを押したときのイベント処理．
  * @param sender メッセージの送信元オブジェクト．
  **/
@@ -34,27 +63,14 @@
 	[self dismissViewControllerAnimated:YES completion:nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:AAKKeyboardDataManagerDidUpdateNotification object:nil userInfo:nil];
 	
-	if (![self.group.objectID isTemporaryID]) {
-		// Save to sharedDefaults
-		NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.com.sonson.AAKeyboardApp"];
-		[sharedDefaults setObject:self.group.title forKey:@"AAKLastRegisteredGroupTitle"];
-		[sharedDefaults synchronize];
-	}
+	[self saveCurrentGroup];
 }
 
 #pragma mark - Override
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	
-	NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.com.sonson.AAKeyboardApp"];
-	NSURL *groupTitle = [sharedDefaults objectForKey:@"AAKLastRegisteredGroupTitle"];
-	
-	NSArray *groups = [AAKASCIIArtGroup MR_findAllWithPredicate:[NSPredicate predicateWithFormat: @"title == %@", groupTitle]];
-	if (groups.count > 0) {
-		self.group = groups[0];
-		[_groupTableView reloadData];
-	}
+	[self restoreCurrentGroup];
 }
 
 @end
