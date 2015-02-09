@@ -18,6 +18,21 @@
 @implementation AAKRegisterViewController
 
 /**
+ * キャンセルボタンを押したときのイベント処理．
+ * @param sender メッセージの送信元オブジェクト．
+ **/
+- (IBAction)cancel:(id)sender {
+	[self dismissViewControllerAnimated:YES completion:nil];
+	if (self.callbackSchemeURL != nil) {
+#ifdef TARGET_IS_EXTENSION
+		[self.extensionContext openURL:self.callbackSchemeURL completionHandler:nil];
+#else
+		[[UIApplication sharedApplication] openURL:self.callbackSchemeURL];
+#endif
+	}
+}
+
+/**
  * 現在選択されているグループオブジェクトの識別子をApp GroupのUserDefaultに保存する．
  **/
 - (void)saveCurrentGroup {
