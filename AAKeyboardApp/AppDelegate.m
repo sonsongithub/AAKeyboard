@@ -17,8 +17,16 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-	NSString *body = [url.absoluteString stringByReplacingOccurrencesOfString:@"aakeyboard://app?register=" withString:@""];
-	NSString *decodedString = [body stringByRemovingPercentEncoding];
+	NSURLComponents *components = [NSURLComponents componentsWithString:url.absoluteString];
+	NSMutableDictionary *params = [NSMutableDictionary dictionary];
+	for (NSURLQueryItem *item in components.queryItems) {
+		params[item.name] = item.value;
+	}
+	
+	if (params[@"register"] == nil)
+		return NO;
+
+	NSString *decodedString = [params[@"register"] stringByRemovingPercentEncoding];
 	
 	UINavigationController *nav = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"AAKRegisterNavigationController"];
 	AAKRegisterViewController *con = (AAKRegisterViewController*)nav.topViewController;
@@ -27,6 +35,8 @@
 		nav.modalPresentationStyle = UIModalPresentationFormSheet;
 		[self.window.rootViewController presentViewController:nav animated:YES completion:^{
 			con.AATextView.text = decodedString;
+			if (params[@"callback"] != nil)
+				con.callbackSchemeURL = [NSURL URLWithString:[params[@"callback"] stringByRemovingPercentEncoding]];
 		}];
 		
 	}
@@ -34,6 +44,8 @@
 		nav.modalPresentationStyle = UIModalPresentationCurrentContext;
 		[self.window.rootViewController presentViewController:nav animated:YES completion:^{
 			con.AATextView.text = decodedString;
+			if (params[@"callback"] != nil)
+				con.callbackSchemeURL = [NSURL URLWithString:[params[@"callback"] stringByRemovingPercentEncoding]];
 		}];
 	}
 	

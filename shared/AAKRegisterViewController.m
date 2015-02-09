@@ -64,6 +64,14 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName:AAKKeyboardDataManagerDidUpdateNotification object:nil userInfo:nil];
 	
 	[self saveCurrentGroup];
+	
+	if (self.callbackSchemeURL != nil) {
+#ifdef TARGET_IS_EXTENSION
+		[self.extensionContext openURL:self.callbackSchemeURL completionHandler:nil];
+#else
+		[[UIApplication sharedApplication] openURL:self.callbackSchemeURL];
+#endif
+	}
 }
 
 #pragma mark - Override

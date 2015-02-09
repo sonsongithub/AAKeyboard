@@ -20,4 +20,6 @@
  **/
 - (void)restoreCurrentGroup;
 
+@property (nonatomic, copy) NSURL *callbackSchemeURL;
+
 @end
