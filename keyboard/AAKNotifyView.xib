@@ -28,7 +28,7 @@
             <connections>
                 <outlet property="label" destination="H4X-Ij-ttM" id="rCG-0U-hMp"/>
             </connections>
-            <point key="canvasLocation" x="590.5" y="512.5"/>
+            <point key="canvasLocation" x="487" y="342"/>
         </view>
     </objects>
 </document>

@@ -207,34 +207,40 @@ typedef enum AAKUIOrientation_ {
 	_keyboardView.delegate = self;
 	[self.view addSubview:_keyboardView];
 	
-	// 通知ビューを貼り付ける
-	_notifyView = [AAKNotifyView viewFromNib];
-	_notifyView.translatesAutoresizingMaskIntoConstraints = NO;
-	_notifyView.userInteractionEnabled = NO;
-	_notifyView.hidden = YES;
-	_notifyView.keyboardAppearance = self.textDocumentProxy.keyboardAppearance;
-	[self.view addSubview:_notifyView];
-	
 	// キーボードビューも通知ビューも，このビューコントローラにぴっちり貼り付ける
-	NSDictionary *views = NSDictionaryOfVariableBindings(_keyboardView, _notifyView);
+	NSDictionary *views = NSDictionaryOfVariableBindings(_keyboardView);
 	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_keyboardView]-0-|"
 																	  options:0 metrics:0 views:views]];
 	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_keyboardView]-0-|"
 																	  options:0 metrics:0 views:views]];
-	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_notifyView]-0-|"
-																	  options:0 metrics:0 views:views]];
-	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_notifyView]-0-|"
-																	  options:0 metrics:0 views:views]];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewDidCopyAAImageToPasteboard:) name:AAKTextViewDidCopyAAImageToPasteboard object:nil];
 	
-	if (![AAKCoreDataStack isOpenAccessGranted]) {
-		[self showNotifyWithMessage:NSLocalizedString(@"To use full functions,\nturn on full access in settings.", nil) duration:2];
-	}
 	
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+	//	if (![AAKCoreDataStack isOpenAccessGranted]) {
+			[self showNotifyWithMessage:NSLocalizedString(@"To use full functions,\nturn on full access in settings.", nil) duration:2];
+	//	}
+	});
 }
 
 - (void)showNotifyWithMessage:(NSString*)message duration:(CGFloat)duration {
+	if (_notifyView == nil) {
+		// 通知ビューを貼り付ける
+		_notifyView = [AAKNotifyView viewFromNib];
+		_notifyView.translatesAutoresizingMaskIntoConstraints = NO;
+		_notifyView.userInteractionEnabled = NO;
+		_notifyView.hidden = YES;
+		_notifyView.keyboardAppearance = self.textDocumentProxy.keyboardAppearance;
+		NSDictionary *views = NSDictionaryOfVariableBindings(_notifyView);
+		[self.view addSubview:_notifyView];
+		[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_notifyView]-0-|"
+																		  options:0 metrics:0 views:views]];
+		[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_notifyView]-0-|"
+																		  options:0 metrics:0 views:views]];
+		[self.view setNeedsLayout];
+	}
+	
 	_notifyView.label.text = message;
 	_notifyView.hidden = NO;
 	_notifyView.alpha = 0;
