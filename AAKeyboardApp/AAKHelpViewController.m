@@ -12,6 +12,14 @@
 	CGFloat _contentWidth;
 	NSInteger _numberOfPages;
 	NSInteger _currentPage;
+
+	CGSize _imageSize;
+	
+	IBOutlet NSLayoutConstraint *_imageWidth;
+	IBOutlet NSLayoutConstraint *_imageHeight;
+	IBOutlet UIScrollView *_scrollView;
+	IBOutlet UIPageControl *_pageControl;
+	IBOutlet UILabel *_descriptionLabel;
 	
 	UIImageView *_imageView0;
 	UIImageView *_imageView1;
@@ -43,7 +51,7 @@
 		return;
 	if (_currentPage >= 0) {
 		if (currentPage > _currentPage) {
-			_imageView0.frame = CGRectMake(_contentWidth * (currentPage + 2), 0, _contentWidth, 427);
+			_imageView0.frame = CGRectMake(_contentWidth * (currentPage + 2), 0, _contentWidth, _imageSize.height);
 			_imageView0 = _imageViews[1];
 			_imageView1 = _imageViews[2];
 			_imageView2 = _imageViews[3];
@@ -52,7 +60,7 @@
 			_imageView4.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%03ld.png", [self fileName], (long)(currentPage + 3)]];
 		}
 		else {
-			_imageView4.frame = CGRectMake(_contentWidth * (currentPage - 2), 0, _contentWidth, 427);
+			_imageView4.frame = CGRectMake(_contentWidth * (currentPage - 2), 0, _contentWidth, _imageSize.height);
 			_imageView0 = _imageViews[4];
 			_imageView1 = _imageViews[0];
 			_imageView2 = _imageViews[1];
@@ -165,35 +173,32 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
+	// setup help pages
 	_numberOfPages = [self helpPagesForHelpIndentifier];
 	
+	// get descriptions for each page
 	[self setupDescriptions];
 
 	_scrollView.pagingEnabled = YES;
 	self.view.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
 	_pageControl.numberOfPages = _numberOfPages;
 	
-	CGFloat offset = 10;
+	// get image size
+	UIImage *sample = [UIImage imageNamed:[NSString stringWithFormat:@"%@%03ld.png", [self fileName], (long)1]];
 	
-	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-		_contentWidth = 320 + offset * 2;
-		_width.constant = 320 + offset * 2;
-		_top.constant = -455;
-	}
-	else {
-		_contentWidth = 240 + offset * 2;
-		_width.constant = _contentWidth;
-		_top.constant = -455;
-	}
-
-	_scrollView.contentSize = CGSizeMake(_contentWidth * _numberOfPages, 427);
+	CGFloat offset = 10;
+	_imageSize = sample.size;
+	_imageHeight.constant = _imageSize.height;
+	_imageWidth.constant = _imageSize.width + offset * 2;
+	_contentWidth = _imageSize.width + offset * 2;
+	_scrollView.contentSize = CGSizeMake(_contentWidth * _numberOfPages, _imageSize.height);
 	_scrollView.clipsToBounds = NO;
 	
-	_imageView0 = [[UIImageView alloc] initWithFrame:CGRectMake(_contentWidth * -2, 0, _contentWidth, 427)];
-	_imageView1 = [[UIImageView alloc] initWithFrame:CGRectMake(_contentWidth * -1, 0, _contentWidth, 427)];
-	_imageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(_contentWidth *  0, 0, _contentWidth, 427)];
-	_imageView3 = [[UIImageView alloc] initWithFrame:CGRectMake(_contentWidth *  1, 0, _contentWidth, 427)];
-	_imageView4 = [[UIImageView alloc] initWithFrame:CGRectMake(_contentWidth *  2, 0, _contentWidth, 427)];
+	_imageView0 = [[UIImageView alloc] initWithFrame:CGRectMake(_contentWidth * -2, 0, _contentWidth, _imageSize.height)];
+	_imageView1 = [[UIImageView alloc] initWithFrame:CGRectMake(_contentWidth * -1, 0, _contentWidth, _imageSize.height)];
+	_imageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(_contentWidth *  0, 0, _contentWidth, _imageSize.height)];
+	_imageView3 = [[UIImageView alloc] initWithFrame:CGRectMake(_contentWidth *  1, 0, _contentWidth, _imageSize.height)];
+	_imageView4 = [[UIImageView alloc] initWithFrame:CGRectMake(_contentWidth *  2, 0, _contentWidth, _imageSize.height)];
 	
 	_imageViews = @[_imageView0, _imageView1, _imageView2, _imageView3, _imageView4];
 	
