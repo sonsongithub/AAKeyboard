@@ -11,7 +11,35 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchAppIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Zlm-7u-Kq8">
-                    <rect key="frame" x="112" y="112" width="256" height="256"/>
+                    <rect key="frame" x="176" y="176" width="128" height="128"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="128" id="8Sc-he-1OQ"/>
+                        <constraint firstAttribute="height" constant="128" id="FNb-0N-gKq"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="128" id="LHw-Fp-Mz0"/>
+                        <constraint firstAttribute="height" constant="64" id="RdX-fO-lu0"/>
+                        <constraint firstAttribute="width" constant="64" id="VOR-Js-rLH"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="128" id="Zmm-mV-bNk"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="LHw-Fp-Mz0"/>
+                            <exclude reference="RdX-fO-lu0"/>
+                            <exclude reference="VOR-Js-rLH"/>
+                            <exclude reference="Zmm-mV-bNk"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=compact-widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="RdX-fO-lu0"/>
+                            <include reference="VOR-Js-rLH"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=regular">
+                        <mask key="constraints">
+                            <include reference="LHw-Fp-Mz0"/>
+                            <include reference="Zmm-mV-bNk"/>
+                        </mask>
+                    </variation>
                 </imageView>
             </subviews>
             <color key="backgroundColor" red="0.81960784313725488" green="0.83921568627450982" blue="0.85882352941176465" alpha="1" colorSpace="calibratedRGB"/>
