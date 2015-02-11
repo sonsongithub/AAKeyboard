@@ -20,6 +20,8 @@
 	IBOutlet UIScrollView *_scrollView;
 	IBOutlet UIPageControl *_pageControl;
 	IBOutlet UILabel *_descriptionLabel;
+	IBOutlet NSLayoutConstraint *_scrollViewWidth;
+	IBOutlet NSLayoutConstraint *_scrollViewHeight;
 	
 	UIImageView *_imageView0;
 	UIImageView *_imageView1;
@@ -72,8 +74,9 @@
 	_currentPage = currentPage;
 	
 	_descriptionLabel.text = _descriptions[_currentPage];
-	_descriptionLabel.numberOfLines = 6;
+	_descriptionLabel.numberOfLines = 5;
 	_descriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;
+	_descriptionLabel.font = [UIFont systemFontOfSize:12];
 	
 	_imageView0.hidden = (_currentPage - 2 < 0);
 	_imageView1.hidden = (_currentPage - 1 < 0);
@@ -188,6 +191,12 @@
 	
 	CGFloat offset = 10;
 	_imageSize = sample.size;
+	
+	if (_imageSize.height > self.view.frame.size.height - 150) {
+		_imageSize.width = floor(_imageSize.width * (self.view.frame.size.height - 150) / _imageSize.height);
+		_imageSize.height = floor(self.view.frame.size.height - 150);
+	}
+	
 	_imageHeight.constant = _imageSize.height;
 	_imageWidth.constant = _imageSize.width + offset * 2;
 	_contentWidth = _imageSize.width + offset * 2;
@@ -202,11 +211,8 @@
 	
 	_imageViews = @[_imageView0, _imageView1, _imageView2, _imageView3, _imageView4];
 	
-	_imageView0.contentMode = UIViewContentModeCenter;
-	_imageView1.contentMode = UIViewContentModeCenter;
-	_imageView2.contentMode = UIViewContentModeCenter;
-	_imageView3.contentMode = UIViewContentModeCenter;
-	_imageView4.contentMode = UIViewContentModeCenter;
+	for (UIImageView *v in _imageViews)
+		v.contentMode = UIViewContentModeScaleAspectFit;
 	
 	[_scrollView addSubview:_imageView0];
 	[_scrollView addSubview:_imageView1];
