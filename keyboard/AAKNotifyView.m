@@ -8,16 +8,93 @@
 
 #import "AAKNotifyView.h"
 
+@interface AAKNotifyBackView : UIView
+@property (nonatomic, assign) UIKeyboardAppearance keyboardAppearance;
+@end
+
+@implementation AAKNotifyBackView
+
+- (instancetype)initWithFrame:(CGRect)frame {
+	self = [super initWithFrame:frame];
+	self.backgroundColor = [UIColor clearColor];
+	return self;
+}
+
+- (void)setPathRoundCornerRect:(CGRect)rect radius:(float)radius {
+	CGContextRef context = UIGraphicsGetCurrentContext();
+	
+	CGFloat minx = CGRectGetMinX(rect), midx = CGRectGetMidX(rect), maxx = CGRectGetMaxX(rect);
+	CGFloat miny = CGRectGetMinY(rect), midy = CGRectGetMidY(rect), maxy = CGRectGetMaxY(rect);
+	
+	CGContextMoveToPoint(context, minx, midy);
+	CGContextAddArcToPoint(context, minx, miny, midx, miny, radius);
+	CGContextAddArcToPoint(context, maxx, miny, maxx, midy, radius);
+	CGContextAddArcToPoint(context, maxx, maxy, midx, maxy, radius);
+	CGContextAddArcToPoint(context, minx, maxy, minx, midy, radius);
+	CGContextClosePath(context);
+}
+
+- (void)drawRect:(CGRect)rect {
+	CGContextRef context = UIGraphicsGetCurrentContext();
+	if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+		[[[UIColor whiteColor] colorWithAlphaComponent:0.8] setFill];
+	}
+	else {
+		[[[UIColor blackColor] colorWithAlphaComponent:0.5] setFill];
+	}
+	[self setPathRoundCornerRect:CGRectMake(0, 0, rect.size.width, rect.size.height) radius:5];
+	CGContextFillPath(context);
+}
+
+@end
+
 @interface AAKNotifyView() {
 }
+@property (nonatomic, strong) AAKNotifyBackView *backView;
+@property (nonatomic, strong) UILabel *label;
+@property (nonatomic, assign) UIKeyboardAppearance keyboardAppearance;
 @end
 
 @implementation AAKNotifyView
 
-+ (instancetype)viewFromNib {
-	// 通知ビューを貼り付ける
-	UINib *nib = [UINib nibWithNibName:@"AAKNotifyView" bundle:nil];
-	return [[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
+- (instancetype)initWithMarginSize:(CGSize)marginSize keyboardAppearance:(UIKeyboardAppearance)keyboardAppearance {
+	self = [super initWithFrame:CGRectZero];
+	self.backgroundColor = [UIColor clearColor];
+	AAKNotifyBackView *backView = [[AAKNotifyBackView alloc] initWithFrame:CGRectZero];
+	backView.translatesAutoresizingMaskIntoConstraints = NO;
+	self.keyboardAppearance = keyboardAppearance;
+	backView.keyboardAppearance = keyboardAppearance;
+	self.backView = backView;
+	
+	UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+	label.translatesAutoresizingMaskIntoConstraints = NO;
+	self.label = label;
+	self.label.backgroundColor = [UIColor clearColor];
+	self.label.textAlignment = NSTextAlignmentCenter;
+	self.label.numberOfLines = 4;
+	self.label.font = [UIFont systemFontOfSize:14];
+	
+	if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+		self.label.textColor = [UIColor blackColor];
+	}
+	else {
+		self.label.textColor = [UIColor whiteColor];
+	}
+	
+	NSDictionary *views = NSDictionaryOfVariableBindings(backView, label);
+	[self addSubview:backView];
+	[self addSubview:label];
+	
+	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"H:|-%d-[backView]-%d-|", (int)marginSize.width, (int)marginSize.width]
+																 options:0 metrics:0 views:views]];
+	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-%d-[backView]-%d-|", (int)marginSize.height, (int)marginSize.height]
+																 options:0 metrics:0 views:views]];
+	
+	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"H:|-%d-[label]-%d-|", (int)marginSize.width+8, (int)marginSize.width+8]
+																 options:0 metrics:0 views:views]];
+	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-%d-[label]-%d-|", (int)marginSize.height+8, (int)marginSize.height+8]
+																 options:0 metrics:0 views:views]];
+	return self;
 }
 
 - (void)layoutSubviews {
@@ -35,34 +112,9 @@
 	}
 }
 
-// draw round corner rect
-- (void)setPathRoundCornerRect:(CGRect)rect radius:(float)radius {
-	CGContextRef context = UIGraphicsGetCurrentContext();
-	
-	CGFloat minx = CGRectGetMinX(rect), midx = CGRectGetMidX(rect), maxx = CGRectGetMaxX(rect);
-	CGFloat miny = CGRectGetMinY(rect), midy = CGRectGetMidY(rect), maxy = CGRectGetMaxY(rect);
-	
-	CGContextMoveToPoint(context, minx, midy);
-	CGContextAddArcToPoint(context, minx, miny, midx, miny, radius);
-	CGContextAddArcToPoint(context, maxx, miny, maxx, midy, radius);
-	CGContextAddArcToPoint(context, maxx, maxy, midx, maxy, radius);
-	CGContextAddArcToPoint(context, minx, maxy, minx, midy, radius);
-	CGContextClosePath(context);
-}
 
-- (void)drawRect:(CGRect)rect {
-	CGSize rectSize = CGSizeMake(300, 120);
-	CGFloat x = (self.frame.size.width - rectSize.width)/2;
-	CGFloat y = (self.frame.size.height - rectSize.height)/2;
-	CGContextRef context = UIGraphicsGetCurrentContext();
-	if (_keyboardAppearance == UIKeyboardAppearanceDark) {
-		[[[UIColor whiteColor] colorWithAlphaComponent:0.8] setFill];
-	}
-	else {
-		[[[UIColor blackColor] colorWithAlphaComponent:0.5] setFill];
-	}
-	[self setPathRoundCornerRect:CGRectMake(x, y, rectSize.width, rectSize.height) radius:5];
-	CGContextFillPath(context);
+- (void)setText:(NSString*)text {
+	self.label.text = text;
 }
 
 @end

@@ -218,20 +218,27 @@ typedef enum AAKUIOrientation_ {
 	
 	
 	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-	//	if (![AAKCoreDataStack isOpenAccessGranted]) {
+		if (![AAKCoreDataStack isOpenAccessGranted]) {
 			[self showNotifyWithMessage:NSLocalizedString(@"To use full functions,\nturn on full access in settings.", nil) duration:2];
-	//	}
+		}
 	});
 }
 
 - (void)showNotifyWithMessage:(NSString*)message duration:(CGFloat)duration {
 	if (_notifyView == nil) {
 		// 通知ビューを貼り付ける
-		_notifyView = [AAKNotifyView viewFromNib];
+		CGSize maxNotifySize = CGSizeMake(400,180);
+		CGSize marginSize = CGSizeMake(30, 50);
+		if (self.view.frame.size.width - marginSize.width * 2 > maxNotifySize.width) {
+			marginSize.width = floor((self.view.frame.size.width - maxNotifySize.width) / 2);
+		}
+		if (self.view.frame.size.height - marginSize.height * 2 > maxNotifySize.height) {
+			marginSize.height = floor((self.view.frame.size.height - maxNotifySize.height) / 2);
+		}
+		_notifyView = [[AAKNotifyView alloc] initWithMarginSize:marginSize keyboardAppearance:self.textDocumentProxy.keyboardAppearance];
 		_notifyView.translatesAutoresizingMaskIntoConstraints = NO;
 		_notifyView.userInteractionEnabled = NO;
 		_notifyView.hidden = YES;
-		_notifyView.keyboardAppearance = self.textDocumentProxy.keyboardAppearance;
 		NSDictionary *views = NSDictionaryOfVariableBindings(_notifyView);
 		[self.view addSubview:_notifyView];
 		[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_notifyView]-0-|"
@@ -241,7 +248,7 @@ typedef enum AAKUIOrientation_ {
 		[self.view setNeedsLayout];
 	}
 	
-	_notifyView.label.text = message;
+	[_notifyView setText:message];
 	_notifyView.hidden = NO;
 	_notifyView.alpha = 0;
 	[UIView animateWithDuration:0.4

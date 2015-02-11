@@ -106,7 +106,6 @@
 		14527C101A11DB870019F93A /* UIImage+keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 14527C0E1A11DB870019F93A /* UIImage+keyboard.m */; };
 		14527C111A11DB870019F93A /* UIImage+keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 14527C0E1A11DB870019F93A /* UIImage+keyboard.m */; };
 		14527C141A1207F10019F93A /* AAKNotifyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14527C131A1207F10019F93A /* AAKNotifyView.m */; };
-		14527C161A1208030019F93A /* AAKNotifyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14527C151A1208030019F93A /* AAKNotifyView.xib */; };
 		14530C351A1BA0AE00B6BFFE /* AAKSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14530C341A1BA0AE00B6BFFE /* AAKSettingViewController.m */; };
 		1467A6B61A36DA8600F43B96 /* AAKHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1467A6B51A36DA8600F43B96 /* AAKHelpViewController.m */; };
 		146EEB5519ED5CDE0032F6DE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */; };
@@ -352,7 +351,6 @@
 		14527C0E1A11DB870019F93A /* UIImage+keyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+keyboard.m"; sourceTree = "<group>"; };
 		14527C121A1207F10019F93A /* AAKNotifyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKNotifyView.h; sourceTree = "<group>"; };
 		14527C131A1207F10019F93A /* AAKNotifyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKNotifyView.m; sourceTree = "<group>"; };
-		14527C151A1208030019F93A /* AAKNotifyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AAKNotifyView.xib; sourceTree = "<group>"; };
 		14530C331A1BA0AE00B6BFFE /* AAKSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKSettingViewController.h; sourceTree = "<group>"; };
 		14530C341A1BA0AE00B6BFFE /* AAKSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKSettingViewController.m; sourceTree = "<group>"; };
 		14619FB51A63286F00BC9404 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -722,7 +720,6 @@
 				14B2674919E6CB2500C0321D /* AAKContentCell.m */,
 				14527C121A1207F10019F93A /* AAKNotifyView.h */,
 				14527C131A1207F10019F93A /* AAKNotifyView.m */,
-				14527C151A1208030019F93A /* AAKNotifyView.xib */,
 				1447CDBD1A860CC100671ECE /* AAK10KeyView.h */,
 				1447CDBE1A860CC100671ECE /* AAK10KeyView.m */,
 				1447CDC01A860CDA00671ECE /* AAK10KeyView.xib */,
@@ -1166,7 +1163,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14527C161A1208030019F93A /* AAKNotifyView.xib in Resources */,
 				1447CDC11A860CDA00671ECE /* AAK10KeyView.xib in Resources */,
 				14F636221A3E370B0056C3F5 /* InfoPlist.strings in Resources */,
 				14F7C2CC1A5E43A2004F73A6 /* Images.xcassets in Resources */,

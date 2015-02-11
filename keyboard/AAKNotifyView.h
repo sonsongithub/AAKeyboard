@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface AAKNotifyView : UIView
-@property (nonatomic, assign) UIKeyboardAppearance keyboardAppearance;
-@property (nonatomic, strong) IBOutlet UILabel *label;
-+ (instancetype)viewFromNib;
+- (instancetype)initWithMarginSize:(CGSize)marginSize keyboardAppearance:(UIKeyboardAppearance)keyboardAppearance;
+- (void)setText:(NSString*)text;
 @end
