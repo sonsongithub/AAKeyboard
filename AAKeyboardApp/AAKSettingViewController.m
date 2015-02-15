@@ -8,13 +8,16 @@
 
 #import "AAKSettingViewController.h"
 
-@interface AAKSettingViewController () {
+#import <MessageUI/MessageUI.h>
+#import <MessageUI/MFMailComposeViewController.h>
+
+@interface AAKSettingViewController () <MFMailComposeViewControllerDelegate> {
 	IBOutlet UILabel *_versionLabel;
 	IBOutlet UILabel *_buildLabel;
 }
 @end
 
-@implementation NSBundle(Core2ch)
+@implementation NSBundle(AAKSettingViewController)
 
 + (id)infoValueFromMainBundleForKey:(NSString*)key {
 	if ([[[self mainBundle] localizedInfoDictionary] objectForKey:key])
@@ -26,6 +29,57 @@
 
 @implementation AAKSettingViewController
 
+- (NSString*)mailInformation {
+	return [NSString stringWithFormat:NSLocalizedString(@"\n\nYour system's information ----------\n%@ %@.%@.%@\niOS %@\n Device %@", nil),
+			[self name],
+			[self versionAndBuildCondition],
+			[self build],
+			[self revision],
+			[UIDevice currentDevice].systemVersion,
+			[UIDeviceUtil hardwareDescription]];
+}
+
+- (NSString*)name {
+	return [NSBundle infoValueFromMainBundleForKey:@"CFBundleDisplayName"];
+}
+
+- (NSString*)build {
+	return [NSBundle infoValueFromMainBundleForKey:@"CFBundleVersion"];
+}
+
+- (void)sendFeedbackMail {
+	if ([MFMailComposeViewController canSendMail]) {
+		MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+		picker.mailComposeDelegate = self;
+		
+		[picker setSubject:[NSString stringWithFormat:NSLocalizedString(@"[%@ contact] ", nil), [NSBundle infoValueFromMainBundleForKey:@"CFBundleName"]]];
+		[picker setToRecipients:[NSArray arrayWithObject:[NSBundle infoValueFromMainBundleForKey:@"SupportMailAddress"]]];
+		
+		NSString *body = [self mailInformation];
+		[picker setMessageBody:body isHTML:NO];
+		
+		if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
+			picker.modalPresentationStyle = UIModalPresentationFormSheet;
+		[self presentViewController:picker animated:YES completion:^(void){}];
+	}
+	else {
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Mail error", nil)
+														message:[NSString stringWithFormat:NSLocalizedString(@"%@ needs a mail account in order to send your report.", nil), [NSBundle infoValueFromMainBundleForKey:@"CFBundleName"]]
+													   delegate:nil
+											  cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+											  otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
+		[alert show];
+	}
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+#if defined(_DEBUG)
+	return 3;
+#else
+	return 2;
+#endif
+}
+
 - (IBAction)done:(id)sender {
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -36,7 +90,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
-	if (indexPath.section == 2) {
+	if (indexPath.section == 0 && indexPath.row == 5) {
+		[self sendFeedbackMail];
+	}
+	if (indexPath.section == 1 && indexPath.row == 0) {
 		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
 	}
 }
@@ -47,11 +104,7 @@
 
 - (NSString*)versionAndBuildCondition {
 	NSString *buildCharacter = @"";
-#if defined(_TESTFLIGHT)
-	buildCharacter = @"(TestFlight)";
-#elif defined(_DEMO)
-	buildCharacter = @"(Demo)";
-#elif defined(_DEBUG)
+#if defined(_DEBUG)
 	buildCharacter = @"(Debug)";
 #endif
 	return [NSString stringWithFormat:@"%@%@", [NSBundle infoValueFromMainBundleForKey:@"CFBundleShortVersionString"], buildCharacter];
@@ -65,6 +118,12 @@
 	[super viewDidLoad];
 	_versionLabel.text = [self versionAndBuildCondition];
 	_buildLabel.text = [self revision];
+}
+
+#pragma mark - MFMailComposeViewControllerDelegate
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error  {
+	[self dismissViewControllerAnimated:YES completion:^(void){}];
 }
 
 @end

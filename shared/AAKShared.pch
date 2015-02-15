@@ -34,6 +34,7 @@ typedef enum AAKASCIIArtGroupType_ {
 #import "UIColor+keyboard.h"
 #import "UIImage+keyboard.h"
 #import "UITraitCollection+keyboard.h"
+#import "UIDeviceUtil.h"
 
 // Model
 #import "AAKASCIIArt.h"

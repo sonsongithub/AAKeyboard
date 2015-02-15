@@ -111,6 +111,7 @@
 		146EEB5519ED5CDE0032F6DE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */; };
 		146EEB5619ED5CE50032F6DE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */; };
 		146EEB5719ED5CEF0032F6DE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */; };
+		147600DA1A914D0C001493E3 /* UIDeviceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 147600D91A914D0C001493E3 /* UIDeviceUtil.m */; };
 		14773DD31A5EEC0600BAF888 /* AAKHelpDummyTapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14773DD21A5EEC0600BAF888 /* AAKHelpDummyTapView.m */; };
 		1497FCB11A7A705100FC5A85 /* CKModifyRecordsOperation+AA.m in Sources */ = {isa = PBXBuildFile; fileRef = 1497FCB01A7A705100FC5A85 /* CKModifyRecordsOperation+AA.m */; };
 		14A4771E1A719EB100CDA461 /* AAKCloudAASearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A4771D1A719EB100CDA461 /* AAKCloudAASearchViewController.m */; };
@@ -358,6 +359,8 @@
 		1467A6B41A36DA8600F43B96 /* AAKHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKHelpViewController.h; sourceTree = "<group>"; };
 		1467A6B51A36DA8600F43B96 /* AAKHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKHelpViewController.m; sourceTree = "<group>"; };
 		146EEB5419ED5CDE0032F6DE /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		147600D81A914D0C001493E3 /* UIDeviceUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIDeviceUtil.h; path = UIDeviceUtil/UIDeviceUtil.h; sourceTree = "<group>"; };
+		147600D91A914D0C001493E3 /* UIDeviceUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIDeviceUtil.m; path = UIDeviceUtil/UIDeviceUtil.m; sourceTree = "<group>"; };
 		14773DD11A5EEC0600BAF888 /* AAKHelpDummyTapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAKHelpDummyTapView.h; sourceTree = "<group>"; };
 		14773DD21A5EEC0600BAF888 /* AAKHelpDummyTapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAKHelpDummyTapView.m; sourceTree = "<group>"; };
 		1497FCAF1A7A705100FC5A85 /* CKModifyRecordsOperation+AA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CKModifyRecordsOperation+AA.h"; sourceTree = "<group>"; };
@@ -642,6 +645,15 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
+		147600DB1A914D0F001493E3 /* UIDeviceUtil */ = {
+			isa = PBXGroup;
+			children = (
+				147600D81A914D0C001493E3 /* UIDeviceUtil.h */,
+				147600D91A914D0C001493E3 /* UIDeviceUtil.m */,
+			);
+			name = UIDeviceUtil;
+			sourceTree = "<group>";
+		};
 		14A5137F19EC68530098C02C /* register */ = {
 			isa = PBXGroup;
 			children = (
@@ -794,6 +806,7 @@
 		14CB155C19E935BB00D05E9C /* vendor */ = {
 			isa = PBXGroup;
 			children = (
+				147600DB1A914D0F001493E3 /* UIDeviceUtil */,
 				141528491A18585600EB80AC /* MagicalRecord */,
 				14CB155D19E935BB00D05E9C /* UZTextView */,
 			);
@@ -1324,6 +1337,7 @@
 				141528A51A18585600EB80AC /* NSManagedObject+MagicalRecord.m in Sources */,
 				14F6F39C1A100DA900BEE8E2 /* UIColor+keyboard.m in Sources */,
 				141528BA1A18585700EB80AC /* NSPersistentStore+MagicalRecord.m in Sources */,
+				147600DA1A914D0C001493E3 /* UIDeviceUtil.m in Sources */,
 				14CB157C19EA328500D05E9C /* AAKToolbarHistoryCell.m in Sources */,
 				141528B11A18585600EB80AC /* NSManagedObjectContext+MagicalSaves.m in Sources */,
 				14530C351A1BA0AE00B6BFFE /* AAKSettingViewController.m in Sources */,

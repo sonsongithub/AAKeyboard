@@ -1,0 +1,3 @@
+[submodule "vendor/UIDeviceUtil"]
+	path = vendor/UIDeviceUtil
+	url = https://github.com/sonsongithub/UIDeviceUtil.git

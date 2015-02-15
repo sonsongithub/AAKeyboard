@@ -20,8 +20,6 @@
 	<string>GIT_COMMIT_TIMES</string>
 	<key>GitRevision</key>
 	<string>GIT_REVISION</string>
-	<key>CFBundleVersion</key>
-	<string>GIT_COMMIT_TIMES</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -30,6 +28,8 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>SupportMailAddress</key>
+	<string>yoshida.yuichi+aakeyboard@gmail.com</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>mona.ttf</string>
