@@ -29,6 +29,8 @@
 
 @implementation AAKSettingViewController
 
+#pragma mark - Version informatin
+
 - (NSString*)mailInformation {
 	return [NSString stringWithFormat:NSLocalizedString(@"\n\nYour system's information ----------\n%@ %@.%@.%@\niOS %@\n Device %@", nil),
 			[self name],
@@ -37,6 +39,22 @@
 			[self revision],
 			[UIDevice currentDevice].systemVersion,
 			[UIDeviceUtil hardwareDescription]];
+}
+
+- (NSString*)version {
+	return [NSBundle infoValueFromMainBundleForKey:@"CFBundleShortVersionString"];
+}
+
+- (NSString*)versionAndBuildCondition {
+	NSString *buildCharacter = @"";
+#if defined(_DEBUG)
+	buildCharacter = @"(Debug)";
+#endif
+	return [NSString stringWithFormat:@"%@%@", [NSBundle infoValueFromMainBundleForKey:@"CFBundleShortVersionString"], buildCharacter];
+}
+
+- (NSString*)revision {
+	return [NSBundle infoValueFromMainBundleForKey:@"GitRevision"];
 }
 
 - (NSString*)name {
@@ -72,20 +90,24 @@
 	}
 }
 
+#pragma mark - IBAction
+
+- (IBAction)done:(id)sender {
+	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)openSettingApp:(id)sender {
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=General&path=Keyboard"]];
+}
+
+#pragma mark - UITableViewDelegate, UITableViewDataSource
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 #if defined(_DEBUG)
 	return 3;
 #else
 	return 2;
 #endif
-}
-
-- (IBAction)done:(id)sender {
-	[self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (IBAction)openSettingApp:(id)sender {
-	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=General&path=Keyboard"]];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -98,21 +120,7 @@
 	}
 }
 
-- (NSString*)version {
-	return [NSBundle infoValueFromMainBundleForKey:@"CFBundleShortVersionString"];
-}
-
-- (NSString*)versionAndBuildCondition {
-	NSString *buildCharacter = @"";
-#if defined(_DEBUG)
-	buildCharacter = @"(Debug)";
-#endif
-	return [NSString stringWithFormat:@"%@%@", [NSBundle infoValueFromMainBundleForKey:@"CFBundleShortVersionString"], buildCharacter];
-}
-
-- (NSString*)revision {
-	return [NSBundle infoValueFromMainBundleForKey:@"GitRevision"];
-}
+#pragma mark - UIViewController
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
