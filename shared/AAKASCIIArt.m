@@ -33,4 +33,33 @@
 	self.ratio = size.width / size.height;
 }
 
++ (NSArray*)getAllArts {
+	NSArray *results = [AAKASCIIArt MR_findAllWithPredicate:[NSPredicate predicateWithFormat: @"TRUEPREDICATE"]];
+	NSMutableArray *groups = [NSMutableArray array];
+	for (AAKASCIIArt *art in results) {
+		NSMutableDictionary *targetGroup = nil;
+		for (NSMutableDictionary *group in groups) {
+			if ([group[@"name"] isEqualToString:art.group.title]) {
+				targetGroup = group;
+				break;
+			}
+		}
+		if (targetGroup == nil) {
+			targetGroup = [NSMutableDictionary dictionary];
+			targetGroup[@"name"] = art.group.title;
+			targetGroup[@"aa"] = [NSMutableArray array];
+			[groups addObject:targetGroup];
+		}
+		[targetGroup[@"aa"] addObject:art.text];
+	}
+	return [NSArray arrayWithArray:groups];
+}
+
++ (NSData*)dataForJsonAllData {
+	NSArray *array = [self getAllArts];
+	NSData *data = [NSJSONSerialization dataWithJSONObject:array options:0 error:nil];
+//	NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+	return data;
+}
+
 @end

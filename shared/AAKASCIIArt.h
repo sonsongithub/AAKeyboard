@@ -26,4 +26,6 @@
 
 - (void)updateRatio;
 
++ (NSData*)dataForJsonAllData;
+
 @end

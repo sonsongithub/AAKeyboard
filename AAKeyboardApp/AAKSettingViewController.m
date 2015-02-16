@@ -118,6 +118,13 @@
 	if (indexPath.section == 1 && indexPath.row == 0) {
 		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
 	}
+	if (indexPath.section == 2 && indexPath.row == 0) {
+		NSData *data = [AAKASCIIArt dataForJsonAllData];
+		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+		NSString *documentsDirectory = [paths objectAtIndex:0];
+		NSString *outputPath = [documentsDirectory stringByAppendingPathComponent:@"export_aa.json"];
+		[data writeToFile:outputPath atomically:NO];
+	}
 }
 
 #pragma mark - UIViewController
