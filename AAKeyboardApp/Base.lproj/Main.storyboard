@@ -525,8 +525,8 @@
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="sij-1R-AE2"/>
                                                     <exclude reference="Aaw-XL-lq8"/>
+                                                    <exclude reference="sij-1R-AE2"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
