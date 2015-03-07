@@ -3,17 +3,15 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "copy_ipad006.png"
+      "filename" : "copy_ipad006.jpeg"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "copy_ipad006@2x.png"
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "copy_ipad006@3x.png"
+      "scale" : "3x"
     }
   ],
   "info" : {

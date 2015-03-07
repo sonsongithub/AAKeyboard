@@ -8,6 +8,9 @@
 
 #import "AAKContentCell.h"
 
+#import "UIColor+keyboard.h"
+#import "UIImage+keyboard.h"
+
 @interface AAKContentCell() {
 	UILabel		*_label;
 	AAKTextView	*_textView;

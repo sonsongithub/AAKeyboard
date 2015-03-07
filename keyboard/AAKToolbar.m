@@ -12,6 +12,9 @@
 #import "AAKToolbarHistoryCell.h"
 #import "AAKASCIIArtDummyHistoryGroup.h"
 
+#import "UIColor+keyboard.h"
+#import "UIImage+keyboard.h"
+
 typedef enum AAKToolbarButtonStatus_ {
 	AAKToolbarNumberButtonStatus	= 0,
 	AAKToolbarASCIIArtButtonStatus	= 1,

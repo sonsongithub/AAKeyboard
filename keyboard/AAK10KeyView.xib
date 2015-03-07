@@ -223,11 +223,11 @@
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="oCG-hi-4Kg"/>
-                            <exclude reference="5rj-rD-bDf"/>
                             <exclude reference="ECv-lj-FUJ"/>
+                            <exclude reference="5rj-rD-bDf"/>
                             <exclude reference="dIN-eh-9J8"/>
-                            <exclude reference="fxV-Rr-4NI"/>
                             <exclude reference="8sZ-an-xcJ"/>
+                            <exclude reference="fxV-Rr-4NI"/>
                             <exclude reference="QHU-jT-hRK"/>
                             <exclude reference="2Tt-11-vbZ"/>
                             <exclude reference="WVP-dx-s0l"/>

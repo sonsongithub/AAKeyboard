@@ -8,6 +8,8 @@
 
 #import "AAKCloudSendReportViewController.h"
 
+#import "CKModifyRecordsOperation+AA.h"
+
 @interface AAKCloudSendReportViewController() <UITextViewDelegate>
 
 @property (nonatomic, strong) IBOutlet UITextView *commentTextView;

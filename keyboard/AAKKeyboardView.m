@@ -10,6 +10,7 @@
 #import "AAKToolbar.h"
 #import "AAKContentCell.h"
 #import "AAK10KeyView.h"
+#import "UIColor+keyboard.h"
 
 @interface AAKKeyboardView() <UICollectionViewDataSource, UICollectionViewDelegate, AAKToolbarDelegate, AAK10KeyViewDelegate> {
 	AAKToolbar					*_toolbar;

@@ -17,6 +17,7 @@
 #import "AAKRegisterViewController.h"
 #import "AAKCloudAAViewController.h"
 #import "AAKHelpViewController.h"
+#import "AAKAAGroupForCollection.h"
 
 @interface AAKAACollectionViewController () <AAKAACollectionViewCellDelegate, UIViewControllerTransitioningDelegate, UIPopoverPresentationControllerDelegate> {
 	NSArray *_groups;	/** AAKAAGroupForCollectionオブジェクトの配列 */
