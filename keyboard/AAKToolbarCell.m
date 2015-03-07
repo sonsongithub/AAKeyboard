@@ -10,49 +10,146 @@
 
 @implementation AAKToolbarCell
 
-- (void)privateInit {
-	self.backgroundColor = [UIColor blueColor];
-	self.contentView.backgroundColor = [UIColor clearColor];
-	_label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-	_label.textColor = [UIColor colorWithRed:0 green:120.0/255.0f blue:255.0/255.0f alpha:1];
-	_label.textColor = [UIColor blackColor];
-	_label.textAlignment = NSTextAlignmentCenter;
-	_label.adjustsFontSizeToFitWidth = YES;
-	_label.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
-	[_label setFont:[UIFont systemFontOfSize:16]];
-	[self.contentView addSubview:_label];
-	
-#if 0
-	NSDictionary *views = NSDictionaryOfVariableBindings(_label);
-	_label.translatesAutoresizingMaskIntoConstraints = NO;
-	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_label]-0-|"
-																 options:0 metrics:0 views:views]];
-	[self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_label]-0-|"
-																 options:0 metrics:0 views:views]];
-#endif
-	
-	self.selectedBackgroundView = [[UIView alloc] initWithFrame:self.frame];
-	self.selectedBackgroundView.backgroundColor = [UIColor colorWithRed:203/255.0f green:203/255.0f blue:203/255.0f alpha:1];
+- (UIColor*)cellHighlightedBackgroundColor {
+	if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+		return [UIColor lightColorForDark];
+	}
+	else {
+		return [UIColor darkColorForDefault];
+	}
 }
 
+- (UIColor*)textColor {
+	if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+		return [UIColor whiteColor];
+	}
+	else {
+		return [UIColor blackColor];
+	}
+}
+
+- (UIColor*)highlightedTextColor {
+	if (_keyboardAppearance == UIKeyboardAppearanceDark) {
+		return [UIColor whiteColor];
+	}
+	else {
+		return [UIColor whiteColor];
+	}
+}
+
+#pragma mark - Setter
+
+/**
+ * セルがセクションの末尾にあるかのフラグ．
+ * 末尾にある場合は，枠線を表示しない．
+ * @param isTail
+ **/
+- (void)setIsTail:(BOOL)isTail {
+	_isTail = isTail;
+	_imageView.hidden = _isTail;
+}
+
+- (void)setKeyboardAppearance:(UIKeyboardAppearance)keyboardAppearance {
+	_keyboardAppearance = keyboardAppearance;
+	_imageView.image = [UIImage rightEdgeWithKeyboardAppearance:_keyboardAppearance];
+}
+
+#pragma mark - Instance method
+
+/**
+ * セルが現在選択中のグループだった場合にハイライトさせるためのメソッド．
+ * @param highlighted ハイライトさせるかのフラグ．
+ **/
+- (void)setOriginalHighlighted:(BOOL)highlighted {
+	[super setHighlighted:highlighted];
+	self.selectedBackgroundView.backgroundColor = [self cellHighlightedBackgroundColor];
+	if (highlighted) {
+		_label.textColor = [self highlightedTextColor];
+	}
+	else {
+		_label.textColor = [self textColor];
+	}
+}
+
+/**
+ * セルに表示させるグループを入力する．
+ * @param group AAKASCIIArtGroupオブジェクト．
+ **/
+- (void)setGroup:(AAKASCIIArtGroup *)group {
+	_group = group;
+	_label.text = _group.title;
+//	[_label sizeToFit];
+}
+
+/**
+ * グループのタイトルを表示するラベルのフォントサイズを指定する．
+ * 画面の回転によってフォントサイズが変更されるために，このメソッドが必要．
+ * @param fontSize グループのタイトルを表示するラベルのフォントサイズ．
+ **/
+- (void)setFontSize:(CGFloat)fontSize {
+	_fontSize = fontSize;
+	_label.font = [UIFont systemFontOfSize:_fontSize];
+}
+
+/**
+ * セルの右端に配置する縦線をセットアップする．
+ **/
+- (void)setupVerticalSeperator {
+	_imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+	[self.contentView addSubview:_imageView];
+}
+
+/**
+ * セルを初期化する．
+ * テキストビューの生成，レイアウト，背景色の設定，ジェスチャのアタッチを行う．
+ **/
+- (void)privateInit {
+	self.backgroundColor = [UIColor clearColor];
+	self.contentView.backgroundColor = [UIColor clearColor];
+	_label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+	_label.textAlignment = NSTextAlignmentCenter;
+//	_label.adjustsFontSizeToFitWidth = YES;
+	_label.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
+	[_label setFont:[UIFont systemFontOfSize:16]];
+	// 背景をセット
+	self.selectedBackgroundView = [[UIView alloc] initWithFrame:self.frame];
+	
+	[self.contentView addSubview:_label];
+
+	[self setupVerticalSeperator];
+}
+
+#pragma mark - Override
+
 - (void)layoutSubviews {
-	NSLog(@"AAKToolbarCell= layoutSubviews");
-	_label.center = self.contentView.center;
+	// タイトルラベルをセンタリング．
+	[super layoutSubviews];
+//	_label.center = CGPointFloor(self.contentView.center);
+	_label.frame = self.contentView.bounds;
+	_imageView.frame = self.contentView.bounds;
 }
 
 - (void)setBounds:(CGRect)bounds {
+	// iOS8？向けのバグ回避？
 	[super setBounds:bounds];
 	self.contentView.frame = bounds;
 }
 
-- (void)updateConstraints {
-	[super updateConstraints];
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+	// タップしたら，親のビューにイベントをコールバックする．
+	[self.delegate didSelectToolbarCell:self];
+}
+
+- (void)setHighlighted:(BOOL)highlighted {
+}
+
+- (void)setSelected:(BOOL)selected {
 }
 
 - (void)prepareForReuse {
 	[super prepareForReuse];
 	[self setNeedsDisplay];
-	self.isHead = NO;
+	self.isTail = NO;
 }
 
 - (id)initWithFrame:(CGRect)frame {
@@ -64,18 +161,6 @@
 - (void)awakeFromNib {
 	[super awakeFromNib];
 	[self privateInit];
-}
-
-- (void)drawRect:(CGRect)rect {
-	CGContextRef context = UIGraphicsGetCurrentContext();
-	[[UIColor colorWithRed:254.0/255.0f green:254.0/255.0f blue:254.0/255.0f alpha:1] setFill];
-	CGContextFillRect(context, rect);
-	[[UIColor colorWithRed:203.0/255.0f green:203.0/255.0f blue:203.0/255.0f alpha:1] setFill];
-//	CGContextFillRect(context, CGRectMake(0, 0, rect.size.width, 0.5));
-	CGContextFillRect(context, CGRectMake(rect.size.width - 0.5, 0, 0.5, rect.size.height));
-	if (self.isHead)
-		CGContextFillRect(context, CGRectMake(0, 0, 0.5, rect.size.height));
-//	CGContextFillRect(context, CGRectMake(0, rect.size.height - 0.5, rect.size.width, 0.5));
 }
 
 @end

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C94b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Rgq-bH-EtN" customClass="AAKAASupplementaryView">
+            <rect key="frame" x="0.0" y="0.0" width="500" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AASectionBackView" translatesAutoresizingMaskIntoConstraints="NO" id="8TY-ve-cKG">
+                    <rect key="frame" x="5" y="5" width="490" height="50"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="やる夫" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="375-8R-Vm7">
+                    <rect key="frame" x="15" y="21" width="357" height="17"/>
+                    <fontDescription key="fontDescription" name="HiraKakuProN-W6" family="Hiragino Kaku Gothic ProN" pointSize="17"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j99-4b-v3S">
+                    <rect key="frame" x="380" y="21" width="100" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="Pic-Xl-j1b"/>
+                        <constraint firstAttribute="height" constant="17" id="hAa-qw-8cN"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HiraKakuProN-W3" family="Hiragino Kaku Gothic ProN" pointSize="15"/>
+                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="0.83529411764705885" green="0.85098039215686272" blue="0.87450980392156863" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="j99-4b-v3S" secondAttribute="trailing" constant="20" id="AE5-oc-e1J"/>
+                <constraint firstAttribute="bottom" secondItem="8TY-ve-cKG" secondAttribute="bottom" constant="5" id="ATw-od-OTc"/>
+                <constraint firstAttribute="centerY" secondItem="375-8R-Vm7" secondAttribute="centerY" id="Co2-GV-hHR"/>
+                <constraint firstItem="8TY-ve-cKG" firstAttribute="top" secondItem="Rgq-bH-EtN" secondAttribute="top" constant="5" id="P7D-Fe-Zzs"/>
+                <constraint firstAttribute="trailing" secondItem="8TY-ve-cKG" secondAttribute="trailing" constant="5" id="VOp-Ee-2Ff"/>
+                <constraint firstAttribute="centerY" secondItem="j99-4b-v3S" secondAttribute="centerY" id="fhm-3B-3RS"/>
+                <constraint firstItem="8TY-ve-cKG" firstAttribute="leading" secondItem="Rgq-bH-EtN" secondAttribute="leading" constant="5" id="hSW-s2-ckH"/>
+                <constraint firstItem="j99-4b-v3S" firstAttribute="leading" secondItem="375-8R-Vm7" secondAttribute="trailing" constant="8" id="o3z-b8-U2O"/>
+                <constraint firstItem="375-8R-Vm7" firstAttribute="leading" secondItem="Rgq-bH-EtN" secondAttribute="leading" constant="15" id="zdi-JC-ZUq"/>
+            </constraints>
+            <connections>
+                <outlet property="groupTitleLabel" destination="375-8R-Vm7" id="npl-yH-HmG"/>
+                <outlet property="numberOfAALabel" destination="j99-4b-v3S" id="uKa-gG-kjg"/>
+            </connections>
+            <point key="canvasLocation" x="407" y="544"/>
+        </collectionReusableView>
+    </objects>
+    <resources>
+        <image name="AASectionBackView" width="21" height="21"/>
+    </resources>
+</document>

@@ -45,10 +45,6 @@
 			</dict>
 			<key>NSExtensionJavaScriptPreprocessingFile</key>
 			<string>extension_js</string>
-			<key>NSExtensionPointVersion</key>
-			<string>1.0</string>
-			<key>NSExtensionPointName</key>
-			<string>com.apple.ui-services</string>
 		</dict>
 		<key>NSExtensionMainStoryboard</key>
 		<string>MainInterface</string>

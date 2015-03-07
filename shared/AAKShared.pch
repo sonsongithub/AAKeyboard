@@ -1,0 +1,64 @@
+//
+//  AAKShared.pch
+//  AAKeyboardApp
+//
+//  Created by sonson on 2014/11/16.
+//  Copyright (c) 2014年 sonson. All rights reserved.
+//
+
+#ifndef AAKeyboardApp_AAKShared_pch
+#define AAKeyboardApp_AAKShared_pch
+
+typedef enum AAKASCIIArtGroupType_ {
+	AAKASCIIArtDefaultGroup	= 0,
+	AAKASCIIArtNormalGroup	= 1,
+	AAKASCIIArtHistoryGroup	= 2,
+}AAKASCIIArtGroupType;
+
+#define ENABLE_CLOUDKIT 0
+
+#if ENABLE_CLOUDKIT
+	#define TEST_CLOUDKIT_REPORTING 0
+#endif
+
+// For CoreData, MagicalRecord
+#import <CoreData/CoreData.h>
+#import "CoreData+MagicalRecord.h"
+#import "AAKCoreDataStack.h"
+
+// Helper
+#import "AAKHelper.h"
+
+// Category
+#import "NSParagraphStyle+keyboard.h"
+#import "UIColor+keyboard.h"
+#import "UIImage+keyboard.h"
+#import "UITraitCollection+keyboard.h"
+#import "UIDeviceUtil.h"
+
+// Model
+#import "AAKASCIIArt.h"
+#import "AAKASCIIArtGroup.h"
+#import "AAKAAGroupForCollection.h"
+
+// CloudKit - Model
+#import "AAKCloudASCIIArt.h"
+#import "CKModifyRecordsOperation+AA.h"
+
+// Animation model
+#ifdef TARGET_IS_EXTENSION
+#import "AAKAAEditAnimatedTransitioning.h"
+#endif
+
+// View controllers
+#import "AAKCreateNewGroupViewController.h"
+#import "AAKEditViewController.h"
+#import "AAKRegisterViewController.h"
+#import "AAKSelectGroupViewController.h"
+
+// View
+#import "AAKTextView.h"
+#import "AAKToolbarHeaderView.h"
+#import "AAKToolbarFooterView.h"
+
+#endif
