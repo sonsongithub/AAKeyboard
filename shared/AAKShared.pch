@@ -54,7 +54,5 @@ typedef enum AAKASCIIArtGroupType_ {
 
 // View
 #import "AAKTextView.h"
-#import "AAKToolbarHeaderView.h"
-#import "AAKToolbarFooterView.h"
 
 #endif

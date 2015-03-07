@@ -14,6 +14,8 @@
 
 #import "UIColor+keyboard.h"
 #import "UIImage+keyboard.h"
+#import "AAKToolbarFooterView.h"
+#import "AAKToolbarHeaderView.h"
 
 typedef enum AAKToolbarButtonStatus_ {
 	AAKToolbarNumberButtonStatus	= 0,

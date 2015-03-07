@@ -1,61 +1,19 @@
 {
   "images" : [
     {
-      "resizing" : {
-        "mode" : "9-part",
-        "center" : {
-          "mode" : "fill",
-          "width" : 1,
-          "height" : 1
-        },
-        "capInsets" : {
-          "bottom" : 22,
-          "top" : 9,
-          "right" : 22,
-          "left" : 9
-        }
-      },
       "idiom" : "universal",
-      "filename" : "AASectionBackView.png",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "AASectionBackView.png"
     },
     {
-      "resizing" : {
-        "mode" : "9-part",
-        "center" : {
-          "mode" : "fill",
-          "width" : 1,
-          "height" : 1
-        },
-        "capInsets" : {
-          "bottom" : 22,
-          "top" : 10,
-          "right" : 22,
-          "left" : 10
-        }
-      },
       "idiom" : "universal",
-      "filename" : "AASectionBackView@2x.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "AASectionBackView@2x.png"
     },
     {
-      "resizing" : {
-        "mode" : "9-part",
-        "center" : {
-          "mode" : "fill",
-          "width" : 1,
-          "height" : 1
-        },
-        "capInsets" : {
-          "bottom" : 22,
-          "top" : 10,
-          "right" : 22,
-          "left" : 10
-        }
-      },
       "idiom" : "universal",
-      "filename" : "AASectionBackView@3x.png",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "AASectionBackView@3x.png"
     }
   ],
   "info" : {

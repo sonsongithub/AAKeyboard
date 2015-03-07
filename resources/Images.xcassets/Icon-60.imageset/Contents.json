@@ -2,18 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "AABackView.png"
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "AABackView@2x.png"
+      "filename" : "Icon-60@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "AABackView@3x.png"
+      "filename" : "Icon-60@3x.png"
     }
   ],
   "info" : {

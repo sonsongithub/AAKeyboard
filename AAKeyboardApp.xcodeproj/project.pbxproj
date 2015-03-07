@@ -94,6 +94,7 @@
 		141B495C1A192A8C00E7F877 /* AAKASCIIArt.m in Sources */ = {isa = PBXBuildFile; fileRef = 141B495B1A192A8C00E7F877 /* AAKASCIIArt.m */; };
 		141B495D1A192A8C00E7F877 /* AAKASCIIArt.m in Sources */ = {isa = PBXBuildFile; fileRef = 141B495B1A192A8C00E7F877 /* AAKASCIIArt.m */; };
 		141B495E1A192A8C00E7F877 /* AAKASCIIArt.m in Sources */ = {isa = PBXBuildFile; fileRef = 141B495B1A192A8C00E7F877 /* AAKASCIIArt.m */; };
+		1435C2411AAAD82200CD9606 /* AAKToolbarHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D5E0E61AA9F4B1000F4EF5 /* AAKToolbarHeaderView.m */; };
 		1442B2AD1A77D042006D9AAF /* AAKCloudAAPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1442B2AC1A77D042006D9AAF /* AAKCloudAAPreviewController.m */; };
 		1447CDBF1A860CC100671ECE /* AAK10KeyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1447CDBE1A860CC100671ECE /* AAK10KeyView.m */; };
 		1447CDC11A860CDA00671ECE /* AAK10KeyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1447CDC01A860CDA00671ECE /* AAK10KeyView.xib */; };
@@ -178,7 +179,6 @@
 		14D5E0D81AA9E38B000F4EF5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14B275151A0A0DF3005BF3B1 /* Images.xcassets */; };
 		14D5E0E81AA9F4B1000F4EF5 /* AAKToolbarFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D5E0E31AA9F4B1000F4EF5 /* AAKToolbarFooterView.m */; };
 		14D5E0E91AA9F4B1000F4EF5 /* AAKToolbarFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14D5E0E41AA9F4B1000F4EF5 /* AAKToolbarFooterView.xib */; };
-		14D5E0EA1AA9F4B1000F4EF5 /* AAKToolbarHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D5E0E61AA9F4B1000F4EF5 /* AAKToolbarHeaderView.m */; };
 		14D5E0EB1AA9F4B1000F4EF5 /* AAKToolbarHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14D5E0E71AA9F4B1000F4EF5 /* AAKToolbarHeaderView.xib */; };
 		14D5E0F01AA9F4B8000F4EF5 /* UIColor+keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D5E0ED1AA9F4B8000F4EF5 /* UIColor+keyboard.m */; };
 		14D5E0F11AA9F4B8000F4EF5 /* UIImage+keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D5E0EF1AA9F4B8000F4EF5 /* UIImage+keyboard.m */; };
@@ -1374,6 +1374,7 @@
 				14EE653D1A15ED6200FA0731 /* Model.xcdatamodeld in Sources */,
 				141B495D1A192A8C00E7F877 /* AAKASCIIArt.m in Sources */,
 				14B274C51A0A0D6F005BF3B1 /* AAKSelectGroupViewController.m in Sources */,
+				1435C2411AAAD82200CD9606 /* AAKToolbarHeaderView.m in Sources */,
 				141528881A18585600EB80AC /* MagicalImportFunctions.m in Sources */,
 				14CB156519E935BB00D05E9C /* UZCursorView.m in Sources */,
 				141528A31A18585600EB80AC /* NSManagedObject+MagicalFinders.m in Sources */,
@@ -1407,7 +1408,6 @@
 				14B274C81A0A0D6F005BF3B1 /* AAKTextView.m in Sources */,
 				14B274BF1A0A0D6F005BF3B1 /* AAKEditViewController.m in Sources */,
 				141528D31A18585700EB80AC /* MagicalRecord.m in Sources */,
-				14D5E0EA1AA9F4B1000F4EF5 /* AAKToolbarHeaderView.m in Sources */,
 				141528AC1A18585600EB80AC /* NSManagedObjectContext+MagicalObserving.m in Sources */,
 				141528C41A18585700EB80AC /* MagicalRecord+ErrorHandling.m in Sources */,
 				14B2673E19E6BFD000C0321D /* AAKToolbar.m in Sources */,
