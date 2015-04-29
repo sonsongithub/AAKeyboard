@@ -1173,7 +1173,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "ibtool --generate-stringsfile $SRCROOT/AAKeyboardApp/ja.lproj/Main.strings --import-strings-file $SRCROOT/AAKeyboardApp/ja.lproj/Main.strings $SRCROOT/AAKeyboardApp/Base.lproj/Main.storyboard\n";
+			shellScript = "#ibtool --generate-stringsfile $SRCROOT/AAKeyboardApp/ja.lproj/Main.strings --import-strings-file $SRCROOT/AAKeyboardApp/ja.lproj/Main.strings $SRCROOT/AAKeyboardApp/Base.lproj/Main.storyboard\n";
 		};
 		14530C361A1BA71600B6BFFE /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1650,6 +1650,7 @@
 					DISABLED_APP_GROUPS,
 				);
 				INFOPLIST_FILE = keyboard/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1844,6 +1845,7 @@
 					TARGET_IS_EXTENSION,
 				);
 				INFOPLIST_FILE = keyboard/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1859,6 +1861,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREPROCESSOR_DEFINITIONS = TARGET_IS_EXTENSION;
 				INFOPLIST_FILE = keyboard/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
