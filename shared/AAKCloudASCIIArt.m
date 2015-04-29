@@ -8,6 +8,8 @@
 
 #import "AAKCloudASCIIArt.h"
 
+#import "CKModifyRecordsOperation+AA.h"
+
 static NSOperationQueue *sharedOperationQueue;
 
 @implementation AAKCloudASCIIArt

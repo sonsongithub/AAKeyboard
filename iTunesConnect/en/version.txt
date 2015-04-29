@@ -1,0 +1,2 @@
+・Fixed some bugs.
+・Replaced some image resources.

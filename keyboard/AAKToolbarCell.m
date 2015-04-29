@@ -8,6 +8,9 @@
 
 #import "AAKToolbarCell.h"
 
+#import "UIColor+keyboard.h"
+#import "UIImage+keyboard.h"
+
 @implementation AAKToolbarCell
 
 - (UIColor*)cellHighlightedBackgroundColor {

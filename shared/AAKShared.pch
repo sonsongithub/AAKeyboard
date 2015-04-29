@@ -31,19 +31,15 @@ typedef enum AAKASCIIArtGroupType_ {
 
 // Category
 #import "NSParagraphStyle+keyboard.h"
-#import "UIColor+keyboard.h"
-#import "UIImage+keyboard.h"
 #import "UITraitCollection+keyboard.h"
 #import "UIDeviceUtil.h"
 
 // Model
 #import "AAKASCIIArt.h"
 #import "AAKASCIIArtGroup.h"
-#import "AAKAAGroupForCollection.h"
 
 // CloudKit - Model
 #import "AAKCloudASCIIArt.h"
-#import "CKModifyRecordsOperation+AA.h"
 
 // Animation model
 #ifdef TARGET_IS_EXTENSION
@@ -58,7 +54,5 @@ typedef enum AAKASCIIArtGroupType_ {
 
 // View
 #import "AAKTextView.h"
-#import "AAKToolbarHeaderView.h"
-#import "AAKToolbarFooterView.h"
 
 #endif
