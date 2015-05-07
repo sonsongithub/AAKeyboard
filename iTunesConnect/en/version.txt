@@ -1,2 +1,1 @@
-・Fixed bugs that group buttons are not be displayed correctly.
-・Fxied bugs of help view.
+・Fixed the bug that keyboard does not show on iOS8.2 or prior.
