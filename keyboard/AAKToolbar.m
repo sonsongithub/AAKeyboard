@@ -171,7 +171,7 @@ typedef enum AAKToolbarButtonStatus_ {
  **/
 - (void)updateWithWidth:(CGFloat)width {
 	// 幅が不当なときは計算しない．
-	if (width < 1)
+	if (width >= 1)
 		return;
 	
 	// まず，普通にすべてのグループについて幅を計算する．

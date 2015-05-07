@@ -191,8 +191,15 @@
 	
 	CGFloat offset = 10;
 	_imageSize = sample.size;
-	
-	if (_imageSize.height > self.view.frame.size.height - 150) {
+
+    // ios8.3から発症したレイアウトが狂うバグをこれで回避．
+    // 根本的ではないため，なんとか修正する必要はあるけど・・・・．
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        _imageSize.width *= 0.5;
+        _imageSize.height *= 0.5;
+    }
+
+    if (_imageSize.height > self.view.frame.size.height - 150) {
 		_imageSize.width = floor(_imageSize.width * (self.view.frame.size.height - 150) / _imageSize.height);
 		_imageSize.height = floor(self.view.frame.size.height - 150);
 	}
