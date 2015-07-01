@@ -5,7 +5,7 @@ AAKeyboard is an universla applcation, runs on iPhone as well as iPad.
 User can input any ASCI Art using AAKeyboard.
 User may edit ASCI Arts which are included by AAKeyboard.app.
 
-<img src="https://cloud.githubusercontent.com/assets/33768/8452195/c558def6-2023-11e5-927e-9be855c3897e.jpg" width="240"/> <img src="https://cloud.githubusercontent.com/assets/33768/8452199/c6356a6a-2023-11e5-85cd-fc1bf33a487c.jpg" width="240"/> <img src="https://cloud.githubusercontent.com/assets/33768/8452199/c6356a6a-2023-11e5-85cd-fc1bf33a487c.jpg" width="240"/>
+<img src="https://cloud.githubusercontent.com/assets/33768/8452195/c558def6-2023-11e5-927e-9be855c3897e.jpg" width="200"/> <img src="https://cloud.githubusercontent.com/assets/33768/8452199/c6356a6a-2023-11e5-85cd-fc1bf33a487c.jpg" width="200"/> <img src="https://cloud.githubusercontent.com/assets/33768/8452199/c6356a6a-2023-11e5-85cd-fc1bf33a487c.jpg" width="200"/>
 
 ### Extension
 AAKeyboard has a couple of extensions.
