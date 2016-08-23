@@ -1,9 +1,9 @@
 ### AAKeyboard
-ASCI Art Keyboard for iOS
+ASCII Art Keyboard for iOS
 
-AAKeyboard is an universla applcation, runs on iPhone as well as iPad.
-User can input any ASCI Art using AAKeyboard.
-User may edit ASCI Arts which are included by AAKeyboard.app.
+AAKeyboard is an universal application. It runs on iPhone as well as iPad.
+User can input any ASCII Art using AAKeyboard.
+User may edit ASCII Art which are included by AAKeyboard.app.
 
 <img src="https://cloud.githubusercontent.com/assets/33768/8452195/c558def6-2023-11e5-927e-9be855c3897e.jpg" width="200"/> <img src="https://cloud.githubusercontent.com/assets/33768/8452199/c6356a6a-2023-11e5-85cd-fc1bf33a487c.jpg" width="200"/> <img src="https://cloud.githubusercontent.com/assets/33768/8452203/c8f54cfc-2023-11e5-9f75-e61011a5aabc.jpg" width="200"/>
 
@@ -23,7 +23,7 @@ If you want to just use it on your device, please [purchase](https://itunes.appl
 2. Update each identifier with new your own one on Xcode.
 
 ### Donation
-Instead of donation, I'm so glad that you purchase this application via [AppStore](https://itunes.apple.com/jp/app/aa-keyboard/id964182815?l=en&mt=8).
+Instead of donating, please purchase this application via [AppStore](https://itunes.apple.com/jp/app/aa-keyboard/id964182815?l=en&mt=8).
 
 ### License
 MIT License. In the detail, see [LICENSE](https://github.com/sonsongithub/AAKeyboard/blob/master/LICENSE.md).
